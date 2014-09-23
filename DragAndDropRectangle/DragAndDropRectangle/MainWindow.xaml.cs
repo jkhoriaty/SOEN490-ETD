@@ -67,8 +67,8 @@ namespace DragAndDropRectangle
 		{
 			string server = "localhost";
 			string database = "test";
-			string uid = "user";
-			string password = "password";
+			string uid = "csharp";
+			string password = "csharp";
 
 			string connectionString = "SERVER=" + server + ";DATABASE=" + database + ";UID=" + uid + ";PASSWORD=" + password + ";";
 
