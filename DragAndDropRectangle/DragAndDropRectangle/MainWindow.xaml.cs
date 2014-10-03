@@ -34,14 +34,15 @@ namespace DragAndDropRectangle
         private bool _isRectDragInProg;
         private void rect_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            _isRectDragInProg = true;
-            rect.CaptureMouse();
+            Rectangle r = sender as Rectangle;
+            _isRectDragInProg = r.CaptureMouse();
         }
 
         private void rect_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
+            Rectangle r = sender as Rectangle;
+            r.ReleaseMouseCapture();
             _isRectDragInProg = false;
-			rect.ReleaseMouseCapture();
         }
 
         private void rect_MouseMove(object sender, MouseEventArgs e)
@@ -50,17 +51,18 @@ namespace DragAndDropRectangle
 
             // get the position of the mouse relative to the Canvas
             var mousePos = e.GetPosition(canvas);
+            Rectangle r = sender as Rectangle;
 
             // center the rect on the mouse
-            double left = mousePos.X - (rect.ActualWidth / 2);
-            double top = mousePos.Y - (rect.ActualHeight / 2);
+            double left = mousePos.X - (r.ActualWidth / 2);
+            double top = mousePos.Y - (r.ActualHeight / 2);
 
 			if(left > 150 || top > 150 || left < 0 || top < 0)
 			{
 				return;
 			}
-            Canvas.SetLeft(rect, left);
-            Canvas.SetTop(rect, top);
+            Canvas.SetLeft(r, left);
+            Canvas.SetTop(r, top);
         }
 
 		private void Button_Click(object sender, RoutedEventArgs e)

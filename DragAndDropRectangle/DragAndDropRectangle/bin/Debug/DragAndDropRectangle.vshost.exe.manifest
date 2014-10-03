@@ -42,14 +42,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="DragAndDropRectangle.exe" size="11776">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="DragAndDropRectangle.exe" size="12288">
       <assemblyIdentity name="DragAndDropRectangle" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>WAmxvvilj0lp0riXyLoYz09+qfpH6mMwk+BZFQnCI9M=</dsig:DigestValue>
+        <dsig:DigestValue>Kbk7ZGBbO6GQ48HX0Yyb0W9GNdKXZUUy9sy0KIim9N4=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

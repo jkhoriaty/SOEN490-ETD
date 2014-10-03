@@ -9,14 +9,38 @@
                     Name="rect"
                     Width="50"
                     Height="50"
-                    Canvas.Left="0"
-                    Canvas.Top="0"
+                    Canvas.Left="50"
+                    Canvas.Top="120"
                     Fill="Red"
                     MouseLeftButtonDown="rect_MouseLeftButtonDown"
                     MouseLeftButtonUp="rect_MouseLeftButtonUp"
                     MouseMove="rect_MouseMove"
                     />
-			</Canvas>
+
+                <Rectangle
+                    Name="rect2"
+                    Width="50"
+                    Height="50"
+                    Canvas.Left="120"
+                    Canvas.Top="70"
+                    Fill="Green"
+                    MouseLeftButtonDown="rect_MouseLeftButtonDown"
+                    MouseLeftButtonUp="rect_MouseLeftButtonUp"
+                    MouseMove="rect_MouseMove"
+                    />
+
+                <Rectangle
+                    Name="rect3"
+                    Width="50"
+                    Height="50"
+                    Canvas.Left="0"
+                    Canvas.Top="0"
+                    Fill="Blue"
+                    MouseLeftButtonDown="rect_MouseLeftButtonDown"
+                    MouseLeftButtonUp="rect_MouseLeftButtonUp"
+                    MouseMove="rect_MouseMove"
+                    />
+            </Canvas>
 		</Border>
 		<Button Content="Click to display text from database" HorizontalAlignment="Left" VerticalAlignment="Top" Width="Auto" Click="Button_Click"/>
 		<TextBlock Name="box" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Default Text" VerticalAlignment="Top" Margin="0,24,0,0"/>
