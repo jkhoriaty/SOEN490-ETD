@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MySql.Data.MySqlClient;
+using System.Drawing;
 
 namespace DragAndDropRectangle
 {
@@ -43,11 +44,14 @@ namespace DragAndDropRectangle
             Rectangle r = sender as Rectangle;
             r.ReleaseMouseCapture();
             _isRectDragInProg = false;
+
+           
         }
 
         private void rect_MouseMove(object sender, MouseEventArgs e)
         {
 			if (!_isRectDragInProg) return;
+            
 
             // get the position of the mouse relative to the Canvas
             var mousePos = e.GetPosition(canvas);
@@ -61,8 +65,31 @@ namespace DragAndDropRectangle
 			{
 				return;
 			}
+
+            /////////////////////CODE FOR COLLISION DETECTION NOT WORKING PROPERLY AT THE MOMENT////////////////////////
+            ///Comment out the section if you want to use it without the collision detection///////////////////////////
+            Rect r1 = new Rect(Canvas.GetLeft(r), Canvas.GetTop(r), r.Width, r.Height);
+
+
+            var rectangles = canvas.Children.OfType<Rectangle>().ToList();
+
+            foreach (var rectangle in rectangles)
+            {
+                Rect r2 = new Rect(Canvas.GetLeft(rectangle), Canvas.GetTop(rectangle), rect2.Width, rect2.Height);
+                if (r2 != r1)
+                {
+                    Rect inter = Rect.Intersect(r1, r2);
+                    if (!inter.IsEmpty)
+                    {
+                        return;
+                    }
+                }
+            }
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
             Canvas.SetLeft(r, left);
             Canvas.SetTop(r, top);
+
         }
 
 		private void Button_Click(object sender, RoutedEventArgs e)
