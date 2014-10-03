@@ -57,7 +57,7 @@ namespace DragAndDropRectangle
             double left = mousePos.X - (r.ActualWidth / 2);
             double top = mousePos.Y - (r.ActualHeight / 2);
 
-			if(left > 150 || top > 150 || left < 0 || top < 0)
+            if (left > canvas.ActualWidth - 50 || top > canvas.ActualHeight - 50 || left < 0 || top < 0)
 			{
 				return;
 			}
@@ -122,5 +122,23 @@ namespace DragAndDropRectangle
 				MessageBox.Show("Something has failed! " + ex.Message);
 			}
 		}
+
+        private void Generate_rectangle(object sender, RoutedEventArgs e)
+        {
+            Rectangle r = new Rectangle();
+            r.Width = 50;
+            r.Height = 50;
+            r.Stroke = new SolidColorBrush(Colors.Black);
+            r.Fill = new SolidColorBrush(Colors.GreenYellow);
+            r.MouseLeftButtonDown += new MouseButtonEventHandler(rect_MouseLeftButtonDown);
+            r.MouseLeftButtonUp += new MouseButtonEventHandler(rect_MouseLeftButtonUp);
+            r.MouseMove += new MouseEventHandler(rect_MouseMove);
+            Canvas.SetTop(r, 0);
+            Canvas.SetLeft(r, 0);
+            canvas.Children.Add(r);
+
+            box.Text = "succ";
+
+        }
     }
 }

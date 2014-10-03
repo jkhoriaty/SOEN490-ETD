@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow" Height="454.8" Width="853">
 	<Grid>
-		<Border BorderBrush="Black" BorderThickness="1" Width="200" Height="200">
+		<Border BorderBrush="Black" BorderThickness="1" Width="400" Height="400">
 			<Canvas Name="canvas">
 				<Rectangle
                     Name="rect"
@@ -44,5 +44,6 @@
 		</Border>
 		<Button Content="Click to display text from database" HorizontalAlignment="Left" VerticalAlignment="Top" Width="Auto" Click="Button_Click"/>
 		<TextBlock Name="box" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Default Text" VerticalAlignment="Top" Margin="0,24,0,0"/>
-	</Grid>
+        <Button Content="Generate Rectangle" HorizontalAlignment="Left" VerticalAlignment="Top" Width="Auto" Click="Generate_rectangle" Margin="0,73,0,0"/>
+    </Grid>
 </Window>
