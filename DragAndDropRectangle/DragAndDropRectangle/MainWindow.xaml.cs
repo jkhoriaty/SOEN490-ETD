@@ -25,41 +25,40 @@ namespace DragAndDropRectangle
         public MainWindow()
         {
             InitializeComponent();
-			/*ImageBrush imageBrush = new ImageBrush();
-			Uri uri = new Uri(@"/DragAndDropRectangle/resources/back.jpg", UriKind.Relative);
-			MessageBox.Show(uri.ToString());
-			imageBrush.ImageSource = new BitmapImage(uri);
-			canvas.Background = imageBrush;*/
         }
 
         private bool _isRectDragInProg;
-        private double oldLeft;
-        private double oldTop;
+		String movingRectangle;
+		int shapeRadius = 25;
 
         private void rect_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             Rectangle r = sender as Rectangle;
             _isRectDragInProg = r.CaptureMouse();
-            oldLeft = Canvas.GetLeft(r);
-            oldTop = Canvas.GetTop(r);
+			movingRectangle = r.Name;
         }
 
         private void rect_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             Rectangle r = sender as Rectangle;
+
+			if(!r.Name.Equals(movingRectangle))
+			{
+				return;
+			}
+
             r.ReleaseMouseCapture();
             _isRectDragInProg = false;
 
 			var mousePos = e.GetPosition(canvas);
-			double horizontalDrop = mousePos.X;
-			double verticalDrop = mousePos.Y;
+			double horizontalDropped = mousePos.X;
+			double verticalDropped = mousePos.Y;
 
-			//Gathering all rectangles to search for collision
-			var rectangles = canvas.Children.OfType<Rectangle>().ToList();
+			bool collisionDetected = true;
 
-			//Iterating throught them
-			foreach (var rectangle in rectangles)
+			while(collisionDetected == true)
 			{
+<<<<<<< HEAD
 				//Avoiding detecting a collision with itself
 				if (rectangle != r)
 				{
@@ -70,67 +69,130 @@ namespace DragAndDropRectangle
 
 					//If the dropped rectangle is within the bounds of any other rectangle, collision is detected
 					if (verticalDrop > (verticalPos - 50) && verticalDrop < (verticalPos + 50) && horizontalDrop > (horizontalPos - 50) && horizontalDrop < (horizontalPos + 50))
+=======
+				collisionDetected = false;
+
+				//Gathering all rectangles to search for collision
+				var rectangles = canvas.Children.OfType<Rectangle>().ToList();
+
+				//Iterating throught them
+				foreach (var rectangle in rectangles)
+				{
+					//Avoiding detecting a collision with itself
+					if (rectangle != r)
+>>>>>>> a9b161c4203bc8388142424597d2423010e90708
 					{
-						box.Text = "horDrop: " + horizontalDrop + "; verDrop: " + verticalDrop;
-						box2.Text = "horPos: " + horizontalPos + "; verPos: " + verticalPos;
-						MessageBox.Show("Collision");
+						//Getting the position of where the rectangle has been dropped
+						int horizontalFixed = ((int)Canvas.GetLeft(rectangle)) + shapeRadius;
+						int verticalFixed = ((int)Canvas.GetTop(rectangle)) + shapeRadius;
+
+						//Variables for possible collision resolution
+						double horizontalDifference;
+						double verticalDifference;
+						double differenceRatio = 0.1;
+
+						//Checking if the dropped rectangle is within the bounds of any other rectangle
+						while (horizontalDropped > (horizontalFixed - (shapeRadius * 2)) && horizontalDropped < (horizontalFixed + (shapeRadius * 2)) && verticalDropped > (verticalFixed - (shapeRadius * 2)) && verticalDropped < (verticalFixed + (shapeRadius * 2)))
+						{
+							collisionDetected = true;
+
+							//Collision detected, resolution by shifting the rectangle in the same direction that it has been dropped
+							box.Text = "horDrop: " + horizontalDropped + "; verDrop: " + verticalDropped;
+							box2.Text = "horPos: " + horizontalFixed + "; verPos: " + verticalFixed;
+
+							//Finding out how much is the dropped rectangle covering the fixed one
+							horizontalDifference = horizontalDropped - horizontalFixed;
+							verticalDifference = verticalDropped - verticalFixed;
+
+							bool moved = false;
+
+							//Don't move horizontally if there are no difference and avoiding division by 0
+							if (horizontalDifference != 0)
+							{
+								//Finding the ratio at which we should increase the values to put them side by side but in the same direction as it was dropped
+								differenceRatio = (Math.Abs(verticalDifference) / Math.Abs(horizontalDifference)) / 10;
+
+								//Shifting horizontally in the correct direction, if it is not colliding with the map border
+								if (horizontalDropped > shapeRadius && horizontalDropped < (canvas.ActualWidth - shapeRadius))
+								{
+									if (horizontalDifference < 0)
+									{
+										horizontalDropped -= 0.1;
+										moved = true;
+									}
+									else
+									{
+										horizontalDropped += 0.1;
+										moved = true;
+									}
+								}
+							}
+
+							//Don't move vertically if there are no difference
+							if (verticalDifference != 0)
+							{
+								//Shifting vertically in the correct direction, if it is not colliding with the map border
+								if (verticalDropped > shapeRadius && verticalDropped < (canvas.ActualHeight - shapeRadius))
+								{
+									if (verticalDifference < 0)
+									{
+										verticalDropped -= differenceRatio;
+										moved = true;
+									}
+									else
+									{
+										verticalDropped += differenceRatio;
+										moved = true;
+									}
+								}
+							}
+
+							//Handling corner situation
+							if(moved == false)
+							{
+								MessageBox.Show("There's not enough space in the corner for this item. Replacing it in the center for you to replace it elsewhere.");
+								horizontalDropped = (canvas.ActualWidth / 2) - shapeRadius;
+								verticalDropped = (canvas.ActualHeight / 2) - shapeRadius;
+								Canvas.SetLeft(r, horizontalDropped);
+								Canvas.SetTop(r, verticalDropped);
+
+								//Uncomment following line if we decide to place the item in the perfect middle without collision detection for the user to move it
+								//return;
+							}
+						}
 					}
 				}
 			}
 
-            /*////////////////////CODE FOR COLLISION DETECTION NOT WORKING PROPERLY AT THE MOMENT////////////////////////
-            ///Comment out the section if you want to use it without the collision detection///////////////////////////
-            Rect r1 = new Rect(Canvas.GetLeft(r), Canvas.GetTop(r), r.Width, r.Height);
-
-
-            var rectangles = canvas.Children.OfType<Rectangle>().ToList();
-
-            foreach (var rectangle in rectangles)
-            {
-                Rect r2 = new Rect(Canvas.GetLeft(rectangle), Canvas.GetTop(rectangle), rect2.Width, rect2.Height);
-                if (r2 != r1)
-                {
-                    Rect inter = Rect.Intersect(r1, r2);
-                    if (inter.IsEmpty)
-                    {
-                        Canvas.SetLeft(r, oldLeft);
-                        Canvas.SetTop(r, oldTop);
-                        //Canvas.SetLeft(r, oldLeft);
-                        //Canvas.SetTop(r, oldTop);
-                        return;
-                    }
-                }
-            }
-            ////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
-
-           
+			//Drop the rectangle if there are not collision or after resolution of collision
+			Canvas.SetLeft(r, (horizontalDropped - shapeRadius));
+			Canvas.SetTop(r, (verticalDropped - shapeRadius));
         }
 
+		//Method to visually drag the item selected and insuring it doesn't go outside of the map
         private void rect_MouseMove(object sender, MouseEventArgs e)
         {
+			//If no rectangle are clicked, exit method
 			if (!_isRectDragInProg) return;
-
-
-			
-            
 			
             // get the position of the mouse relative to the Canvas
             var mousePos = e.GetPosition(canvas);
             Rectangle r = sender as Rectangle;
 
-            // center the rect on the mouse
-            double left = mousePos.X - (r.ActualWidth / 2);
-            double top = mousePos.Y - (r.ActualHeight / 2);
-
-            if (left > canvas.ActualWidth - 50 || top > canvas.ActualHeight - 50 || left < 0 || top < 0)
+			//Handling exception where fixed rectangle gets moved when another rectangle is dropped on it
+			if (!r.Name.Equals(movingRectangle))
 			{
 				return;
 			}
 
-            Canvas.SetLeft(r, left);
-            Canvas.SetTop(r, top);
-			
-			
+			//Making sure it is not dragged out of bounds
+			if (mousePos.X > (canvas.ActualWidth - shapeRadius) || mousePos.Y > (canvas.ActualHeight - shapeRadius) || mousePos.X < shapeRadius || mousePos.Y < shapeRadius)
+			{
+				return;
+			}
+
+            Canvas.SetLeft(r, (mousePos.X - shapeRadius));
+            Canvas.SetTop(r, (mousePos.Y - shapeRadius));
         }
 
 		private void Button_Click(object sender, RoutedEventArgs e)
@@ -194,8 +256,8 @@ namespace DragAndDropRectangle
         private void Generate_rectangle(object sender, RoutedEventArgs e)
         {
             Rectangle r = new Rectangle();
-            r.Width = 50;
-            r.Height = 50;
+            r.Width = shapeRadius * 2;
+            r.Height = shapeRadius * 2;
             r.Stroke = new SolidColorBrush(Colors.Black);
             r.Fill = new SolidColorBrush(Colors.GreenYellow);
             r.MouseLeftButtonDown += new MouseButtonEventHandler(rect_MouseLeftButtonDown);
