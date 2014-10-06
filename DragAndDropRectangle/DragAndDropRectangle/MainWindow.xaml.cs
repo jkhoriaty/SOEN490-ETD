@@ -33,10 +33,15 @@ namespace DragAndDropRectangle
         }
 
         private bool _isRectDragInProg;
+        private double oldLeft;
+        private double oldTop;
+
         private void rect_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             Rectangle r = sender as Rectangle;
             _isRectDragInProg = r.CaptureMouse();
+            oldLeft = Canvas.GetLeft(r);
+            oldTop = Canvas.GetTop(r);
         }
 
         private void rect_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -45,14 +50,77 @@ namespace DragAndDropRectangle
             r.ReleaseMouseCapture();
             _isRectDragInProg = false;
 
+			var mousePos = e.GetPosition(canvas);
+			double horizontalDrop = mousePos.X;
+			double verticalDrop = mousePos.Y;
+
+			//Gathering all rectangles to search for collision
+			var rectangles = canvas.Children.OfType<Rectangle>().ToList();
+
+			//Iterating throught them
+			foreach (var rectangle in rectangles)
+			{
+				//Avoiding detecting a collision with itself
+				if (rectangle != r)
+				{
+<<<<<<< HEAD
+					//Getting the position of where the rectangle has been dropped
+					int verticalPos = ((int)Canvas.GetTop(rectangle)) + 25;
+					int horizontalPos = ((int)Canvas.GetLeft(rectangle)) + 25;
+
+					//If the dropped rectangle is within the bounds of any other rectangle, collision is detected
+					if (verticalDrop > (verticalPos - 50) && verticalDrop < (verticalPos + 50) && horizontalDrop > (horizontalPos - 50) && horizontalDrop < (horizontalPos + 50))
+=======
+					int verticalPos = ((int)Canvas.GetTop(rectangle));
+					int horizontalPos = ((int)Canvas.GetLeft(rectangle));
+
+
+					if ((verticalDrop > (verticalPos - 50) && verticalDrop < (verticalPos + 50)) && (horizontalDrop > (horizontalPos - 50) && horizontalDrop < (horizontalPos + 50)))
+>>>>>>> 1e18a68be3baf4d8d208a62dcb656c7c6b1b9e34
+					{
+						box.Text = "horDrop: " + horizontalDrop + "; verDrop: " + verticalDrop;
+						box2.Text = "horPos: " + horizontalPos + "; verPos: " + verticalPos;
+						MessageBox.Show("Collision");
+					}
+				}
+			}
+
+            /*////////////////////CODE FOR COLLISION DETECTION NOT WORKING PROPERLY AT THE MOMENT////////////////////////
+            ///Comment out the section if you want to use it without the collision detection///////////////////////////
+            Rect r1 = new Rect(Canvas.GetLeft(r), Canvas.GetTop(r), r.Width, r.Height);
+
+
+            var rectangles = canvas.Children.OfType<Rectangle>().ToList();
+
+            foreach (var rectangle in rectangles)
+            {
+                Rect r2 = new Rect(Canvas.GetLeft(rectangle), Canvas.GetTop(rectangle), rect2.Width, rect2.Height);
+                if (r2 != r1)
+                {
+                    Rect inter = Rect.Intersect(r1, r2);
+                    if (inter.IsEmpty)
+                    {
+                        Canvas.SetLeft(r, oldLeft);
+                        Canvas.SetTop(r, oldTop);
+                        //Canvas.SetLeft(r, oldLeft);
+                        //Canvas.SetTop(r, oldTop);
+                        return;
+                    }
+                }
+            }
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
            
         }
 
         private void rect_MouseMove(object sender, MouseEventArgs e)
         {
 			if (!_isRectDragInProg) return;
-            
 
+
+			
+            
+			
             // get the position of the mouse relative to the Canvas
             var mousePos = e.GetPosition(canvas);
             Rectangle r = sender as Rectangle;
@@ -66,30 +134,10 @@ namespace DragAndDropRectangle
 				return;
 			}
 
-            /////////////////////CODE FOR COLLISION DETECTION NOT WORKING PROPERLY AT THE MOMENT////////////////////////
-            ///Comment out the section if you want to use it without the collision detection///////////////////////////
-            Rect r1 = new Rect(Canvas.GetLeft(r), Canvas.GetTop(r), r.Width, r.Height);
-
-
-            var rectangles = canvas.Children.OfType<Rectangle>().ToList();
-
-            foreach (var rectangle in rectangles)
-            {
-                Rect r2 = new Rect(Canvas.GetLeft(rectangle), Canvas.GetTop(rectangle), rect2.Width, rect2.Height);
-                if (r2 != r1)
-                {
-                    Rect inter = Rect.Intersect(r1, r2);
-                    if (!inter.IsEmpty)
-                    {
-                        return;
-                    }
-                }
-            }
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
             Canvas.SetLeft(r, left);
             Canvas.SetTop(r, top);
-
+			
+			
         }
 
 		private void Button_Click(object sender, RoutedEventArgs e)
