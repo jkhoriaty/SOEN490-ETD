@@ -58,18 +58,6 @@ namespace DragAndDropRectangle
 
 			while(collisionDetected == true)
 			{
-<<<<<<< HEAD
-				//Avoiding detecting a collision with itself
-				if (rectangle != r)
-				{
-
-					//Getting the position of where the rectangle has been dropped
-					int verticalPos = ((int)Canvas.GetTop(rectangle)) + 25;
-					int horizontalPos = ((int)Canvas.GetLeft(rectangle)) + 25;
-
-					//If the dropped rectangle is within the bounds of any other rectangle, collision is detected
-					if (verticalDrop > (verticalPos - 50) && verticalDrop < (verticalPos + 50) && horizontalDrop > (horizontalPos - 50) && horizontalDrop < (horizontalPos + 50))
-=======
 				collisionDetected = false;
 
 				//Gathering all rectangles to search for collision
@@ -80,7 +68,6 @@ namespace DragAndDropRectangle
 				{
 					//Avoiding detecting a collision with itself
 					if (rectangle != r)
->>>>>>> a9b161c4203bc8388142424597d2423010e90708
 					{
 						//Getting the position of where the rectangle has been dropped
 						int horizontalFixed = ((int)Canvas.GetLeft(rectangle)) + shapeRadius;
