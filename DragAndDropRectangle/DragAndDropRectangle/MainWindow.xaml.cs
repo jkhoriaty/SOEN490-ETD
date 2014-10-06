@@ -33,10 +33,14 @@ namespace DragAndDropRectangle
         }
 
         private bool _isRectDragInProg;
+        private double oldLeft;
+        private double oldTop;
         private void rect_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             Rectangle r = sender as Rectangle;
             _isRectDragInProg = r.CaptureMouse();
+            oldLeft = Canvas.GetLeft(r);
+            oldTop = Canvas.GetTop(r);
         }
 
         private void rect_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -44,6 +48,31 @@ namespace DragAndDropRectangle
             Rectangle r = sender as Rectangle;
             r.ReleaseMouseCapture();
             _isRectDragInProg = false;
+
+            /////////////////////CODE FOR COLLISION DETECTION NOT WORKING PROPERLY AT THE MOMENT////////////////////////
+            ///Comment out the section if you want to use it without the collision detection///////////////////////////
+            Rect r1 = new Rect(Canvas.GetLeft(r), Canvas.GetTop(r), r.Width, r.Height);
+
+
+            var rectangles = canvas.Children.OfType<Rectangle>().ToList();
+
+            foreach (var rectangle in rectangles)
+            {
+                Rect r2 = new Rect(Canvas.GetLeft(rectangle), Canvas.GetTop(rectangle), rect2.Width, rect2.Height);
+                if (r2 != r1)
+                {
+                    Rect inter = Rect.Intersect(r1, r2);
+                    if (!inter.IsEmpty)
+                    {
+                        Canvas.SetLeft(r, oldLeft);
+                        Canvas.SetTop(r, oldTop);
+                        //Canvas.SetLeft(r, oldLeft);
+                        //Canvas.SetTop(r, oldTop);
+                        return;
+                    }
+                }
+            }
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
            
         }
@@ -66,26 +95,6 @@ namespace DragAndDropRectangle
 				return;
 			}
 
-            /////////////////////CODE FOR COLLISION DETECTION NOT WORKING PROPERLY AT THE MOMENT////////////////////////
-            ///Comment out the section if you want to use it without the collision detection///////////////////////////
-            Rect r1 = new Rect(Canvas.GetLeft(r), Canvas.GetTop(r), r.Width, r.Height);
-
-
-            var rectangles = canvas.Children.OfType<Rectangle>().ToList();
-
-            foreach (var rectangle in rectangles)
-            {
-                Rect r2 = new Rect(Canvas.GetLeft(rectangle), Canvas.GetTop(rectangle), rect2.Width, rect2.Height);
-                if (r2 != r1)
-                {
-                    Rect inter = Rect.Intersect(r1, r2);
-                    if (!inter.IsEmpty)
-                    {
-                        return;
-                    }
-                }
-            }
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
             Canvas.SetLeft(r, left);
             Canvas.SetTop(r, top);
