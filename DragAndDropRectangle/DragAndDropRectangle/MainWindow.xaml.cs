@@ -63,12 +63,20 @@ namespace DragAndDropRectangle
 				//Avoiding detecting a collision with itself
 				if (rectangle != r)
 				{
+<<<<<<< HEAD
 					//Getting the position of where the rectangle has been dropped
 					int verticalPos = ((int)Canvas.GetTop(rectangle)) + 25;
 					int horizontalPos = ((int)Canvas.GetLeft(rectangle)) + 25;
 
 					//If the dropped rectangle is within the bounds of any other rectangle, collision is detected
 					if (verticalDrop > (verticalPos - 50) && verticalDrop < (verticalPos + 50) && horizontalDrop > (horizontalPos - 50) && horizontalDrop < (horizontalPos + 50))
+=======
+					int verticalPos = ((int)Canvas.GetTop(rectangle));
+					int horizontalPos = ((int)Canvas.GetLeft(rectangle));
+
+
+					if ((verticalDrop > (verticalPos - 50) && verticalDrop < (verticalPos + 50)) && (horizontalDrop > (horizontalPos - 50) && horizontalDrop < (horizontalPos + 50)))
+>>>>>>> 1e18a68be3baf4d8d208a62dcb656c7c6b1b9e34
 					{
 						box.Text = "horDrop: " + horizontalDrop + "; verDrop: " + verticalDrop;
 						box2.Text = "horPos: " + horizontalPos + "; verPos: " + verticalPos;
