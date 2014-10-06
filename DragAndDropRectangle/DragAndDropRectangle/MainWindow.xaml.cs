@@ -35,8 +35,6 @@ namespace DragAndDropRectangle
         private bool _isRectDragInProg;
         private double oldLeft;
         private double oldTop;
-		private double horizontalDrop = -1;
-		private double verticalDrop  = -1;
 
         private void rect_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -53,23 +51,24 @@ namespace DragAndDropRectangle
             _isRectDragInProg = false;
 
 			var mousePos = e.GetPosition(canvas);
-			horizontalDrop = mousePos.X;
-			verticalDrop = mousePos.Y;
+			double horizontalDrop = mousePos.X;
+			double verticalDrop = mousePos.Y;
 
 			//Gathering all rectangles to search for collision
 			var rectangles = canvas.Children.OfType<Rectangle>().ToList();
-			MessageBox.Show("" + rectangles.Count);
 
 			//Iterating throught them
 			foreach (var rectangle in rectangles)
 			{
+				//Avoiding detecting a collision with itself
 				if (rectangle != r)
 				{
-					int verticalPos = ((int)Canvas.GetTop(rectangle)) + 50;
-					int horizontalPos = ((int)Canvas.GetLeft(rectangle)) + 50;
+					//Getting the position of where the rectangle has been dropped
+					int verticalPos = ((int)Canvas.GetTop(rectangle)) + 25;
+					int horizontalPos = ((int)Canvas.GetLeft(rectangle)) + 25;
 
-
-					if ((verticalDrop > (verticalPos - 100) && verticalDrop < (verticalPos + 100)) && (horizontalDrop > (horizontalPos - 100) && horizontalDrop < (horizontalPos + 100)))
+					//If the dropped rectangle is within the bounds of any other rectangle, collision is detected
+					if (verticalDrop > (verticalPos - 50) && verticalDrop < (verticalPos + 50) && horizontalDrop > (horizontalPos - 50) && horizontalDrop < (horizontalPos + 50))
 					{
 						box.Text = "horDrop: " + horizontalDrop + "; verDrop: " + verticalDrop;
 						box2.Text = "horPos: " + horizontalPos + "; verPos: " + verticalPos;
