@@ -65,11 +65,11 @@ namespace DragAndDropRectangle
 			{
 				if (rectangle != r)
 				{
-					int verticalPos = ((int)Canvas.GetTop(rectangle)) + 50;
-					int horizontalPos = ((int)Canvas.GetLeft(rectangle)) + 50;
+					int verticalPos = ((int)Canvas.GetTop(rectangle));
+					int horizontalPos = ((int)Canvas.GetLeft(rectangle));
 
 
-					if ((verticalDrop > (verticalPos - 100) && verticalDrop < (verticalPos + 100)) && (horizontalDrop > (horizontalPos - 100) && horizontalDrop < (horizontalPos + 100)))
+					if ((verticalDrop > (verticalPos - 50) && verticalDrop < (verticalPos + 50)) && (horizontalDrop > (horizontalPos - 50) && horizontalDrop < (horizontalPos + 50)))
 					{
 						box.Text = "horDrop: " + horizontalDrop + "; verDrop: " + verticalDrop;
 						box2.Text = "horPos: " + horizontalPos + "; verPos: " + verticalPos;
