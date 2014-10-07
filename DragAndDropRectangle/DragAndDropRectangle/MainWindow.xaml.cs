@@ -55,10 +55,12 @@ namespace DragAndDropRectangle
 			double verticalDropped = mousePos.Y;
 
 			bool collisionDetected = true;
+			int verifications = 0;
 
 			while(collisionDetected == true)
 			{
 				collisionDetected = false;
+				verifications++;
 
 				//Gathering all rectangles to search for collision
 				var rectangles = canvas.Children.OfType<Rectangle>().ToList();
@@ -132,6 +134,16 @@ namespace DragAndDropRectangle
 										moved = true;
 									}
 								}
+							}
+
+							//Handling situation where object is dropped between two others and is just bouncing around.
+							if(verifications > 100)
+							{
+								MessageBox.Show("The dropepd object is dropped between two objects and is bouncing around with no progress. Resetting it.");
+								horizontalDropped = (canvas.ActualWidth / 2) - shapeRadius;
+								verticalDropped = (canvas.ActualHeight / 2) - shapeRadius;
+								Canvas.SetLeft(r, horizontalDropped);
+								Canvas.SetTop(r, verticalDropped);
 							}
 
 							//Handling corner situation
