@@ -55,6 +55,12 @@ namespace DragAndDropRectangle
 			double horizontalDropped = mousePos.X;
 			double verticalDropped = mousePos.Y;
 
+			//Calling collision detection and resolution for the dropped object
+			collisionDetection(r, horizontalDropped, verticalDropped);
+		}
+
+		private void collisionDetection(Rectangle r, double horizontalDropped, double verticalDropped)
+		{
 			//Replacing item within horizontal bounds
 			if (horizontalDropped > (canvas.ActualWidth - shapeRadius)) //Right
 			{
@@ -75,18 +81,13 @@ namespace DragAndDropRectangle
 				verticalDropped = shapeRadius;
 			}
 
-			//Calling collision detection and resolution for the dropped object
-			collisionDetection(r, horizontalDropped, verticalDropped);
-		}
-
-		private void collisionDetection(Rectangle r, double horizontalDropped, double verticalDropped)
-		{
 			bool collisionDetected = true;
 			int verificationCount = 0;
 
 			//Loop to make sure that last verification ensures no collision with any object
 			while(collisionDetected == true)
 			{
+				
 				collisionDetected = false;
 				verificationCount++;
 
@@ -132,8 +133,8 @@ namespace DragAndDropRectangle
 								//Finding the ratio at which we should increase the values to put the objects side by side but in the same direction as it was dropped
 								differenceRatio = Math.Round(((Math.Abs(verticalDifference) / Math.Abs(horizontalDifference)) / 10), 3);
 
-								//Shifting horizontally in the correct direction
-								if (horizontalDropped > shapeRadius)
+								//Shifting horizontally in the correct direction, if not at the border
+								if (shapeRadius < horizontalDropped  && horizontalDropped < (canvas.ActualWidth - shapeRadius))
 								{
 									if (horizontalDifference < 0)
 									{
@@ -152,7 +153,7 @@ namespace DragAndDropRectangle
 							if (verticalDifference != 0)
 							{
 								//Shifting vertically in the correct direction
-								if (verticalDropped > shapeRadius)
+								if (shapeRadius < verticalDropped && verticalDropped < (canvas.ActualHeight - shapeRadius))
 								{
 									if (verticalDifference < 0)
 									{
@@ -167,25 +168,54 @@ namespace DragAndDropRectangle
 								}
 							}
 
-
 							//Handling situation where object is dropped between two others and is just bouncing around, placing object in the middle
 							if (verificationCount > 100)
 							{
-								MessageBox.Show("The dropepd object is dropped between two objects and is bouncing around with no progress. Resetting it.");
-								horizontalDropped = (canvas.ActualWidth / 2) - shapeRadius;
-								verticalDropped = (canvas.ActualHeight / 2) - shapeRadius;
-								Canvas.SetLeft(r, horizontalDropped);
-								Canvas.SetTop(r, verticalDropped);
+								
+								MessageBox.Show("The droppd object is dropped between two objects and is bouncing around with no progress. Resetting it.");
+								horizontalDropped = (canvas.ActualWidth / 2);
+								verticalDropped = (canvas.ActualHeight / 2);
+								verificationCount = 0;
+							}
+
+							//Handling case of perfect superposition
+							if(horizontalDropped == horizontalFixed && verticalDropped == verticalFixed)
+							{
+								MessageBox.Show("Perfect superposition");
+								horizontalDropped = horizontalDropped + (2 * shapeRadius);
+								moved = true;
 							}
 
 							//Handling corner situation, placing object back in the middle
 							if (moved == false)
 							{
 								MessageBox.Show("There's not enough space in the corner for this item. Replacing it in the center for you to replace it elsewhere.");
-								horizontalDropped = (canvas.ActualWidth / 2) - shapeRadius;
-								verticalDropped = (canvas.ActualHeight / 2) - shapeRadius;
-								Canvas.SetLeft(r, horizontalDropped);
-								Canvas.SetTop(r, verticalDropped);
+								
+								double horizontalToBorder = Math.Min(horizontalFixed, (canvas.ActualWidth - horizontalFixed));
+								double verticalToBorder = Math.Min(verticalFixed, (canvas.ActualHeight - verticalFixed));
+
+								if(horizontalToBorder <= verticalToBorder) //Need horizontal mvoement
+								{
+									if(horizontalDropped <= shapeRadius) //Left
+									{
+										horizontalDropped = horizontalFixed + (shapeRadius * 2);
+									}
+									else //Right
+									{
+										horizontalDropped = horizontalFixed - (shapeRadius * 2);
+									}
+								}
+								else //Need vertical mvoement
+								{
+									if (verticalDropped <= shapeRadius) //Left
+									{
+										verticalDropped = verticalFixed + (shapeRadius * 2);
+									}
+									else //Right
+									{
+										verticalDropped = verticalFixed - (shapeRadius * 2);
+									}
+								}
 							}
 						}
 					}
