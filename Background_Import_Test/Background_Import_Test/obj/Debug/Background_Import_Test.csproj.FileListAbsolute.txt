@@ -1,0 +1,13 @@
+E:\Users\Nez\My Documents\Programming Work\Background_Import_Test\Background_Import_Test\bin\Debug\Background_Import_Test.exe.config
+E:\Users\Nez\My Documents\Programming Work\Background_Import_Test\Background_Import_Test\obj\Debug\Background_Import_Test.csprojResolveAssemblyReference.cache
+E:\Users\Nez\My Documents\Programming Work\Background_Import_Test\Background_Import_Test\obj\Debug\MainWindow.baml
+E:\Users\Nez\My Documents\Programming Work\Background_Import_Test\Background_Import_Test\obj\Debug\MainWindow.g.cs
+E:\Users\Nez\My Documents\Programming Work\Background_Import_Test\Background_Import_Test\obj\Debug\App.g.cs
+E:\Users\Nez\My Documents\Programming Work\Background_Import_Test\Background_Import_Test\obj\Debug\Background_Import_Test_MarkupCompile.cache
+E:\Users\Nez\My Documents\Programming Work\Background_Import_Test\Background_Import_Test\obj\Debug\Background_Import_Test.g.resources
+E:\Users\Nez\My Documents\Programming Work\Background_Import_Test\Background_Import_Test\obj\Debug\Background_Import_Test.Properties.Resources.resources
+E:\Users\Nez\My Documents\Programming Work\Background_Import_Test\Background_Import_Test\obj\Debug\Background_Import_Test.csproj.GenerateResource.Cache
+E:\Users\Nez\My Documents\Programming Work\Background_Import_Test\Background_Import_Test\bin\Debug\Background_Import_Test.exe
+E:\Users\Nez\My Documents\Programming Work\Background_Import_Test\Background_Import_Test\bin\Debug\Background_Import_Test.pdb
+E:\Users\Nez\My Documents\Programming Work\Background_Import_Test\Background_Import_Test\obj\Debug\Background_Import_Test.exe
+E:\Users\Nez\My Documents\Programming Work\Background_Import_Test\Background_Import_Test\obj\Debug\Background_Import_Test.pdb
