@@ -11,3 +11,6 @@ E:\Users\Nez\My Documents\Programming Work\Background_Import_Test\Background_Imp
 E:\Users\Nez\My Documents\Programming Work\Background_Import_Test\Background_Import_Test\bin\Debug\Background_Import_Test.pdb
 E:\Users\Nez\My Documents\Programming Work\Background_Import_Test\Background_Import_Test\obj\Debug\Background_Import_Test.exe
 E:\Users\Nez\My Documents\Programming Work\Background_Import_Test\Background_Import_Test\obj\Debug\Background_Import_Test.pdb
+D:\Users\jadk9_000\Desktop\Dropbox\Concordia - Fall 2014\SOEN 490\Project Repository\Background_Import_Test\Background_Import_Test\bin\Debug\Background_Import_Test.exe.config
+D:\Users\jadk9_000\Desktop\Dropbox\Concordia - Fall 2014\SOEN 490\Project Repository\Background_Import_Test\Background_Import_Test\obj\Debug\Background_Import_Test.exe
+D:\Users\jadk9_000\Desktop\Dropbox\Concordia - Fall 2014\SOEN 490\Project Repository\Background_Import_Test\Background_Import_Test\obj\Debug\Background_Import_Test.pdb

@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MySql.Data.MySqlClient;
 using System.Drawing;
+using Microsoft.Win32;
 
 namespace DragAndDropRectangle
 {
@@ -328,5 +329,16 @@ namespace DragAndDropRectangle
             box.Text = "succ";
 
         }
+
+		private void Map_Load(object sender, RoutedEventArgs e)
+		{
+			OpenFileDialog openFileDialog = new OpenFileDialog();
+
+			if (openFileDialog.ShowDialog() == true)
+			{
+				System.IO.FileInfo File = new System.IO.FileInfo(openFileDialog.FileName);
+				canvas.Background = new ImageBrush(new BitmapImage(new Uri(openFileDialog.FileName)));
+			}
+		}
     }
 }
