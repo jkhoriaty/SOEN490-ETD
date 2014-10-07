@@ -42,6 +42,7 @@ namespace DragAndDropRectangle
         {
             Rectangle r = sender as Rectangle;
 
+			//Avoid in having method called on object being collided with
 			if(!r.Name.Equals(movingRectangle))
 			{
 				return;
@@ -51,16 +52,43 @@ namespace DragAndDropRectangle
             _isRectDragInProg = false;
 
 			var mousePos = e.GetPosition(canvas);
-			double horizontalDropped = Math.Round(mousePos.X, 3);
-			double verticalDropped = Math.Round(mousePos.Y, 3);
+			double horizontalDropped = mousePos.X;
+			double verticalDropped = mousePos.Y;
 
+			//Replacing item within horizontal bounds
+			if (horizontalDropped > (canvas.ActualWidth - shapeRadius)) //Right
+			{
+				horizontalDropped = canvas.ActualWidth - shapeRadius;
+			}
+			else if(horizontalDropped < shapeRadius) //Left
+			{
+				horizontalDropped = shapeRadius;
+			}
+
+			//Replacing item within vertical bounds
+			if(verticalDropped > (canvas.ActualHeight  - shapeRadius)) //Bottom
+			{
+				verticalDropped = canvas.ActualHeight - shapeRadius;
+			}
+			else if(verticalDropped < shapeRadius)
+			{
+				verticalDropped = shapeRadius;
+			}
+
+			//Calling collision detection and resolution for the dropped object
+			collisionDetection(r, horizontalDropped, verticalDropped);
+		}
+
+		private void collisionDetection(Rectangle r, double horizontalDropped, double verticalDropped)
+		{
 			bool collisionDetected = true;
-			int verifications = 0;
+			int verificationCount = 0;
 
+			//Loop to make sure that last verification ensures no collision with any object
 			while(collisionDetected == true)
 			{
 				collisionDetected = false;
-				verifications++;
+				verificationCount++;
 
 				//Gathering all rectangles to search for collision
 				var rectangles = canvas.Children.OfType<Rectangle>().ToList();
@@ -68,44 +96,44 @@ namespace DragAndDropRectangle
 				//Iterating throught them
 				foreach (var rectangle in rectangles)
 				{
-					//Avoiding detecting a collision with itself
+					//Skipping collision-detection with itself
 					if (rectangle != r)
 					{
 						//Getting the position of where the rectangle has been dropped
 						double horizontalFixed = Math.Round((((double)Canvas.GetLeft(rectangle)) + shapeRadius), 3);
 						double verticalFixed = Math.Round((((double)Canvas.GetTop(rectangle)) + shapeRadius), 3);
 
-						//Variables for possible collision resolution
-						double horizontalDifference;
-						double verticalDifference;
-						double differenceRatio = 0.1;
-
 						//Checking if the dropped rectangle is within the bounds of any other rectangle
 						while (horizontalDropped > (horizontalFixed - (shapeRadius * 2)) && horizontalDropped < (horizontalFixed + (shapeRadius * 2)) && verticalDropped > (verticalFixed - (shapeRadius * 2)) && verticalDropped < (verticalFixed + (shapeRadius * 2)))
 						{
+							//Collision detected, resolution by shifting the rectangle in the same direction that it has been dropped
 							collisionDetected = true;
 
-							//Collision detected, resolution by shifting the rectangle in the same direction that it has been dropped
-							box.Text = "horDrop: " + horizontalDropped + "; verDrop: " + verticalDropped;
-							box2.Text = "horPos: " + horizontalFixed + "; verPos: " + verticalFixed;
+							//Rounding values to avoid ratio division by tiny number creating a huge ratio
+							horizontalDropped = Math.Round(horizontalDropped, 3);
+							verticalDropped = Math.Round(verticalDropped, 3);
 
 							//Finding out how much is the dropped rectangle covering the fixed one
-							horizontalDifference = Math.Round((horizontalDropped - horizontalFixed), 3);
-							verticalDifference = Math.Round((verticalDropped - verticalFixed), 3);
+							double horizontalDifference = Math.Round((horizontalDropped - horizontalFixed), 3);
+							double verticalDifference = Math.Round((verticalDropped - verticalFixed), 3);
+							double differenceRatio = 0.1;
+							bool moved = false;
 
+							//////////////////////////////////////////DEBUGGING CODE/////////////////////////////////////
+							box.Text = "horDrop: " + horizontalDropped + "; verDrop: " + verticalDropped;
+							box2.Text = "horPos: " + horizontalFixed + "; verPos: " + verticalFixed;
 							box3.Text = "horDifference: " + horizontalDifference;
 							box4.Text = "verDifference: " + verticalDifference;
-
-							bool moved = false;
+							/////////////////////////////////////////////////////////////////////////////////////////////
 
 							//Don't move horizontally if there are no difference and avoiding division by 0
 							if (horizontalDifference != 0)
 							{
-								//Finding the ratio at which we should increase the values to put them side by side but in the same direction as it was dropped
+								//Finding the ratio at which we should increase the values to put the objects side by side but in the same direction as it was dropped
 								differenceRatio = Math.Round(((Math.Abs(verticalDifference) / Math.Abs(horizontalDifference)) / 10), 3);
 
-								//Shifting horizontally in the correct direction, if it is not colliding with the map border
-								if (horizontalDropped > shapeRadius && horizontalDropped < (canvas.ActualWidth - shapeRadius))
+								//Shifting horizontally in the correct direction
+								if (horizontalDropped > shapeRadius)
 								{
 									if (horizontalDifference < 0)
 									{
@@ -123,8 +151,8 @@ namespace DragAndDropRectangle
 							//Don't move vertically if there are no difference
 							if (verticalDifference != 0)
 							{
-								//Shifting vertically in the correct direction, if it is not colliding with the map border
-								if (verticalDropped > shapeRadius && verticalDropped < (canvas.ActualHeight - shapeRadius))
+								//Shifting vertically in the correct direction
+								if (verticalDropped > shapeRadius)
 								{
 									if (verticalDifference < 0)
 									{
@@ -139,12 +167,9 @@ namespace DragAndDropRectangle
 								}
 							}
 
-							//Rounding values
-							horizontalDropped = Math.Round(horizontalDropped, 3);
-							verticalDropped = Math.Round(verticalDropped, 3);
 
-							//Handling situation where object is dropped between two others and is just bouncing around.
-							if(verifications > 100)
+							//Handling situation where object is dropped between two others and is just bouncing around, placing object in the middle
+							if (verificationCount > 100)
 							{
 								MessageBox.Show("The dropepd object is dropped between two objects and is bouncing around with no progress. Resetting it.");
 								horizontalDropped = (canvas.ActualWidth / 2) - shapeRadius;
@@ -153,17 +178,14 @@ namespace DragAndDropRectangle
 								Canvas.SetTop(r, verticalDropped);
 							}
 
-							//Handling corner situation
-							if(moved == false)
+							//Handling corner situation, placing object back in the middle
+							if (moved == false)
 							{
 								MessageBox.Show("There's not enough space in the corner for this item. Replacing it in the center for you to replace it elsewhere.");
 								horizontalDropped = (canvas.ActualWidth / 2) - shapeRadius;
 								verticalDropped = (canvas.ActualHeight / 2) - shapeRadius;
 								Canvas.SetLeft(r, horizontalDropped);
 								Canvas.SetTop(r, verticalDropped);
-
-								//Uncomment following line if we decide to place the item in the perfect middle without collision detection for the user to move it
-								//return;
 							}
 						}
 					}
