@@ -34,14 +34,14 @@ namespace DragAndDropRectangle
 
         private void rect_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            Rectangle r = sender as Rectangle;
+            System.Windows.Shapes.Rectangle r = sender as System.Windows.Shapes.Rectangle;
             _isRectDragInProg = r.CaptureMouse();
 			movingRectangle = r.Name;
         }
 
         private void rect_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            Rectangle r = sender as Rectangle;
+            System.Windows.Shapes.Rectangle r = sender as System.Windows.Shapes.Rectangle;
 
 			//Avoid in having method called on object being collided with
 			if(!r.Name.Equals(movingRectangle))
@@ -60,7 +60,7 @@ namespace DragAndDropRectangle
 			collisionDetection(r, horizontalDropped, verticalDropped);
 		}
 
-		private void collisionDetection(Rectangle r, double horizontalDropped, double verticalDropped)
+		private void collisionDetection(System.Windows.Shapes.Rectangle r, double horizontalDropped, double verticalDropped)
 		{
 			//Replacing item within horizontal bounds
 			if (horizontalDropped > (canvas.ActualWidth - shapeRadius)) //Right
@@ -93,7 +93,7 @@ namespace DragAndDropRectangle
 				verificationCount++;
 
 				//Gathering all rectangles to search for collision
-				var rectangles = canvas.Children.OfType<Rectangle>().ToList();
+				var rectangles = canvas.Children.OfType<System.Windows.Shapes.Rectangle>().ToList();
 
 				//Iterating throught them
 				foreach (var rectangle in rectangles)
@@ -236,7 +236,7 @@ namespace DragAndDropRectangle
 			
             // get the position of the mouse relative to the Canvas
             var mousePos = e.GetPosition(canvas);
-            Rectangle r = sender as Rectangle;
+            System.Windows.Shapes.Rectangle r = sender as System.Windows.Shapes.Rectangle;
 
 			//Handling exception where fixed rectangle gets moved when another rectangle is dropped on it
 			if (!r.Name.Equals(movingRectangle))
@@ -314,7 +314,7 @@ namespace DragAndDropRectangle
 
         private void Generate_rectangle(object sender, RoutedEventArgs e)
         {
-            Rectangle r = new Rectangle();
+            System.Windows.Shapes.Rectangle r = new System.Windows.Shapes.Rectangle();
             r.Width = shapeRadius * 2;
             r.Height = shapeRadius * 2;
             r.Stroke = new SolidColorBrush(Colors.Black);
@@ -325,6 +325,8 @@ namespace DragAndDropRectangle
             Canvas.SetTop(r, 0);
             Canvas.SetLeft(r, 0);
             canvas.Children.Add(r);
+            CreateTeamForm Ctf = new CreateTeamForm();
+            Ctf.Show();
 
             box.Text = "succ";
 
