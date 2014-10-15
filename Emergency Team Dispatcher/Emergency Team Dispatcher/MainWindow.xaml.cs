@@ -54,9 +54,12 @@ namespace Emergency_Team_Dispatcher
             Application.Current.Shutdown();
         }
 
+		private int rectangleCtr = 1;
+
         private void Team_MenuItem_Click(object sender, RoutedEventArgs e)
         {
             System.Windows.Shapes.Rectangle r = new System.Windows.Shapes.Rectangle();
+			r.Name = "team_" + rectangleCtr++;
             r.Width = shapeRadius * 2;
             r.Height = shapeRadius * 2;
             r.Stroke = new SolidColorBrush(Colors.Black);
