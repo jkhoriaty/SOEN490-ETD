@@ -1,13 +1,3 @@
-DragAndDropRectangle/DragAndDropRectangle.v12.suo
-DragAndDropRectangle/DragAndDropRectangle/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
-DragAndDropRectangle/DragAndDropRectangle/obj/Debug/DragAndDropRectangle.csproj.FileListAbsolute.txt
-DragAndDropRectangle/DragAndDropRectangle/obj/Debug/DragAndDropRectangle_MarkupCompile.i.cache
 Emergency Team Dispatcher/Emergency Team Dispatcher.v12.suo
-DragAndDropRectangle/DragAndDropRectangle/bin/Debug/DragAndDropRectangle.vshost.exe
-<<<<<<< HEAD
-=======
-DragAndDropRectangle/DragAndDropRectangle/obj/Debug/MainWindow.g.i.cs
->>>>>>> 082fbdee4c316e63d6d0365c99a549c50fdd98b1
-DragAndDropRectangle/DragAndDropRectangle/bin/Debug/DragAndDropRectangle.application
-DragAndDropRectangle/DragAndDropRectangle/bin/Debug/
-DragAndDropRectangle/DragAndDropRectangle/obj/Debug/
+Emergency Team Dispatcher/Emergency Team Dispatcher/bin/Debug/
+Emergency Team Dispatcher/Emergency Team Dispatcher/obj/Debug/
