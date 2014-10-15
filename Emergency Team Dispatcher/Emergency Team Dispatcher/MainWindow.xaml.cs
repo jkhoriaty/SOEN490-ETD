@@ -28,7 +28,7 @@ namespace Emergency_Team_Dispatcher
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            
+
         }
 
         private void NewEvent_MenuItem_Click(object sender, RoutedEventArgs e)
