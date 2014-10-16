@@ -39,6 +39,14 @@ namespace Emergency_Team_Dispatcher
             return false;
         }
 
+        public void setName(String name)
+        {
+            this.name = name;
+        }
+        public String getName()
+        {
+            return this.name;
+        }
         //Generate shape to represent team on screen
         public void draw()
         {
