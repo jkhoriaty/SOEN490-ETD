@@ -67,8 +67,8 @@ namespace Emergency_Team_Dispatcher
             Canvas.SetTop(r, 0);
             Canvas.SetLeft(r, 0);
             canvas.Children.Add(r);
-            //CreateTeamForm Ctf = new CreateTeamForm();
-            //Ctf.Show();
+            CreateTeamForm Ctf = new CreateTeamForm();
+            Ctf.Show();
 
             //box.Text = "succ";
         }
