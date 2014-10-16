@@ -13,7 +13,6 @@ namespace Emergency_Team_Dispatcher
         int trainingLevel = 0; //0: First Aid, 1: First Responder, 2: Medicine
         TeamMember[] members;
         int memberCount = 0;
-        DateTime departure;
 
         public Team()
         {
@@ -32,8 +31,6 @@ namespace Emergency_Team_Dispatcher
                 memberCount++;
                 if(this.trainingLevel < mem.trainingLevel)
                     this.trainingLevel = mem.trainingLevel;
-                if(this.departure.CompareTo(mem.departure) > 0)
-                    this.departure = mem.departure;
                 return true;
             }
             return false;
@@ -48,6 +45,12 @@ namespace Emergency_Team_Dispatcher
             return this.name;
         }
         //Generate shape to represent team on screen
+
+        public bool addToDB()
+        {
+            return false;
+        }
+
         public void draw()
         {
 
