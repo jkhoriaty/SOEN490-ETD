@@ -115,6 +115,7 @@
             this.radioDeparture.Name = "radioDeparture";
             this.radioDeparture.Size = new System.Drawing.Size(100, 20);
             this.radioDeparture.TabIndex = 7;
+            this.radioDeparture.Text = "hh:mm";
             // 
             // radioLevelOfTraining
             // 
@@ -146,6 +147,7 @@
             this.fAidDeparture.Name = "fAidDeparture";
             this.fAidDeparture.Size = new System.Drawing.Size(100, 20);
             this.fAidDeparture.TabIndex = 14;
+            this.fAidDeparture.Text = "hh:mm";
             // 
             // firstAidName
             // 

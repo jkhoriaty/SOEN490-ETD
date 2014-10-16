@@ -50,7 +50,7 @@ namespace Emergency_Team_Dispatcher
                 return;
             }
 
-            Regex timeRgx = new Regex(@"^[a-zA-Z0-9]{2,50}$");
+            Regex timeRgx = new Regex(@"^[0-2][0-4]:[0-5][0-9]$");
             if(!timeRgx.IsMatch(radioDeparture.Text))
             {
                 MessageBox.Show("Radio time of departure is invalid.");
@@ -64,47 +64,6 @@ namespace Emergency_Team_Dispatcher
             }
 
             Team team = new Team(teamName.Text);
-
-            //Convert level of training to int
-            int rTraining = -1;
-            
-            if(radioLevelOfTraining.Text == "General First Aid")
-            {
-                rTraining = 0;
-            }
-            else if(radioLevelOfTraining.Text == "First Responder")
-            {
-                rTraining = 1;
-            }
-            else if(radioLevelOfTraining.Text == "Medicine")
-            {
-                rTraining = 2;
-            }
-
-            int fTraining = -1;
-            if (firstAidLevelOfTraining.Text == "General First Aid")
-            {
-                fTraining = 0;
-            }
-            else if (firstAidLevelOfTraining.Text == "First Responder")
-            {
-                fTraining = 1;
-            }
-            else if (firstAidLevelOfTraining.Text == "Medicine")
-            {
-                fTraining = 2;
-            }
-
-
-            TeamMember radioMember = new TeamMember(radioName.Text, rTraining, radioDeparture.Text);
-            TeamMember firstAidMember = new TeamMember(firstAidName.Text, fTraining, fAidDeparture.Text);
-
-            team.addMember(radioMember);
-            team.addMember(firstAidMember);
-
-            //team.addToDB;
-            
-
             MessageBox.Show(team.getName());
             
         }
