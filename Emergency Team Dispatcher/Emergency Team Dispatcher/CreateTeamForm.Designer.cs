@@ -34,12 +34,12 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.teamName = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.radioName = new System.Windows.Forms.TextBox();
+            this.radioDeparture = new System.Windows.Forms.TextBox();
+            this.radioLevelOfTraining = new System.Windows.Forms.ComboBox();
+            this.firstAidLevelOfTraining = new System.Windows.Forms.ComboBox();
+            this.fAidDeparture = new System.Windows.Forms.TextBox();
+            this.firstAidName = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -102,57 +102,59 @@
             this.teamName.Size = new System.Drawing.Size(100, 20);
             this.teamName.TabIndex = 5;
             // 
-            // textBox2
+            // radioName
             // 
-            this.textBox2.Location = new System.Drawing.Point(253, 86);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
-            this.textBox2.TabIndex = 6;
+            this.radioName.Location = new System.Drawing.Point(253, 86);
+            this.radioName.Name = "radioName";
+            this.radioName.Size = new System.Drawing.Size(100, 20);
+            this.radioName.TabIndex = 6;
             // 
-            // textBox3
+            // radioDeparture
             // 
-            this.textBox3.Location = new System.Drawing.Point(253, 120);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 20);
-            this.textBox3.TabIndex = 7;
+            this.radioDeparture.Location = new System.Drawing.Point(253, 120);
+            this.radioDeparture.Name = "radioDeparture";
+            this.radioDeparture.Size = new System.Drawing.Size(100, 20);
+            this.radioDeparture.TabIndex = 7;
+            this.radioDeparture.Text = "hh:mm";
             // 
-            // comboBox1
+            // radioLevelOfTraining
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.radioLevelOfTraining.FormattingEnabled = true;
+            this.radioLevelOfTraining.Items.AddRange(new object[] {
             "General First Aid",
             "First Responder",
             "Medicine"});
-            this.comboBox1.Location = new System.Drawing.Point(253, 152);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 8;
+            this.radioLevelOfTraining.Location = new System.Drawing.Point(253, 152);
+            this.radioLevelOfTraining.Name = "radioLevelOfTraining";
+            this.radioLevelOfTraining.Size = new System.Drawing.Size(121, 21);
+            this.radioLevelOfTraining.TabIndex = 8;
             // 
-            // comboBox2
+            // firstAidLevelOfTraining
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Items.AddRange(new object[] {
+            this.firstAidLevelOfTraining.FormattingEnabled = true;
+            this.firstAidLevelOfTraining.Items.AddRange(new object[] {
             "General First Aid",
             "First Responder",
             "Medicine"});
-            this.comboBox2.Location = new System.Drawing.Point(253, 288);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(121, 21);
-            this.comboBox2.TabIndex = 15;
+            this.firstAidLevelOfTraining.Location = new System.Drawing.Point(253, 288);
+            this.firstAidLevelOfTraining.Name = "firstAidLevelOfTraining";
+            this.firstAidLevelOfTraining.Size = new System.Drawing.Size(121, 21);
+            this.firstAidLevelOfTraining.TabIndex = 15;
             // 
-            // textBox4
+            // fAidDeparture
             // 
-            this.textBox4.Location = new System.Drawing.Point(253, 256);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(100, 20);
-            this.textBox4.TabIndex = 14;
+            this.fAidDeparture.Location = new System.Drawing.Point(253, 256);
+            this.fAidDeparture.Name = "fAidDeparture";
+            this.fAidDeparture.Size = new System.Drawing.Size(100, 20);
+            this.fAidDeparture.TabIndex = 14;
+            this.fAidDeparture.Text = "hh:mm";
             // 
-            // textBox5
+            // firstAidName
             // 
-            this.textBox5.Location = new System.Drawing.Point(253, 222);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(100, 20);
-            this.textBox5.TabIndex = 13;
+            this.firstAidName.Location = new System.Drawing.Point(253, 222);
+            this.firstAidName.Name = "firstAidName";
+            this.firstAidName.Size = new System.Drawing.Size(100, 20);
+            this.firstAidName.TabIndex = 13;
             // 
             // label6
             // 
@@ -217,16 +219,16 @@
             this.ClientSize = new System.Drawing.Size(422, 394);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.comboBox2);
-            this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.textBox5);
+            this.Controls.Add(this.firstAidLevelOfTraining);
+            this.Controls.Add(this.fAidDeparture);
+            this.Controls.Add(this.firstAidName);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label9);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.radioLevelOfTraining);
+            this.Controls.Add(this.radioDeparture);
+            this.Controls.Add(this.radioName);
             this.Controls.Add(this.teamName);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
@@ -248,12 +250,12 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox teamName;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox radioName;
+        private System.Windows.Forms.TextBox radioDeparture;
+        private System.Windows.Forms.ComboBox radioLevelOfTraining;
+        private System.Windows.Forms.ComboBox firstAidLevelOfTraining;
+        private System.Windows.Forms.TextBox fAidDeparture;
+        private System.Windows.Forms.TextBox firstAidName;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
