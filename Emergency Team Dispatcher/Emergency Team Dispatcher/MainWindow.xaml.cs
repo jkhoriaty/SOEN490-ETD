@@ -13,6 +13,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Drawing;
+
+
+
 
 namespace Emergency_Team_Dispatcher
 {
@@ -21,6 +25,14 @@ namespace Emergency_Team_Dispatcher
 	/// </summary>
 	public partial class MainWindow : Window
 	{
+
+        //variable initialization
+        private bool _isRectDragInProg;
+        String movingRectangle;
+        int shapeRadius = 25;
+        int TeamNumberPosition = 0;
+        int TeamLabelPosition = 0;
+
 		public MainWindow()
 		{
 			InitializeComponent();
@@ -56,26 +68,46 @@ namespace Emergency_Team_Dispatcher
 
         private void Team_MenuItem_Click(object sender, RoutedEventArgs e)
         {
+            Random random = new Random();
+            byte[] colorBytes = new byte[3];
+            random.NextBytes(colorBytes);
+            System.Windows.Media.Color randomColor = System.Windows.Media.Color.FromRgb(colorBytes[0], colorBytes[1], colorBytes[2]);
             System.Windows.Shapes.Rectangle r = new System.Windows.Shapes.Rectangle();
             r.Width = shapeRadius * 2;
             r.Height = shapeRadius * 2;
             r.Stroke = new SolidColorBrush(Colors.Black);
-            r.Fill = new SolidColorBrush(Colors.GreenYellow);
+            r.Fill = new SolidColorBrush(randomColor);
             r.MouseLeftButtonDown += new MouseButtonEventHandler(team_MouseLeftButtonDown);
             r.MouseLeftButtonUp += new MouseButtonEventHandler(team_MouseLeftButtonUp);
             r.MouseMove += new MouseEventHandler(team_MouseMove);
             Canvas.SetTop(r, 0);
             Canvas.SetLeft(r, 0);
             canvas.Children.Add(r);
+
+            //display team name
+            string TeamName = "Team ";
+            string[] TeamNumber = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "ALPHA", "BETA", "THETA" };
+            
+            Label dynamicLabel = new Label();
+            dynamicLabel.Name = "Label";
+            dynamicLabel.Width = 100;
+            dynamicLabel.Height = 30;
+            dynamicLabel.Content = TeamName + TeamNumber[TeamNumberPosition];
+            dynamicLabel.Foreground = new SolidColorBrush(Colors.White);
+            dynamicLabel.Background = new SolidColorBrush(Colors.Black);
+            dynamicLabel.BorderBrush = Brushes.Black;
+            Canvas.SetLeft(dynamicLabel,0);
+            Canvas.SetTop(dynamicLabel, TeamLabelPosition);
+            Team_display.Children.Add(dynamicLabel);
+            TeamLabelPosition += 60;
+            TeamNumberPosition++;
+
             //CreateTeamForm Ctf = new CreateTeamForm();
             //Ctf.Show();
 
             //box.Text = "succ";
         }
 
-        private bool _isRectDragInProg;
-        String movingRectangle;
-        int shapeRadius = 25;
 
         private void team_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -300,5 +332,6 @@ namespace Emergency_Team_Dispatcher
         }
 
 
+      
 	}
 }
