@@ -18,10 +18,9 @@
         </DockPanel>
         <Border BorderBrush="Black" BorderThickness="1" Margin="0,20,670,125">
             <Canvas Name="Team_display" Margin="0,0,0,0">
-                
-              
-                
-             
+
+               
+
             </Canvas>
         </Border>
 

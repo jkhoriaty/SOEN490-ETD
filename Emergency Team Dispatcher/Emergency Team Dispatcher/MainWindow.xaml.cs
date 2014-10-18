@@ -84,23 +84,11 @@ namespace Emergency_Team_Dispatcher
             Canvas.SetLeft(r, 0);
             canvas.Children.Add(r);
 
-            //display team name
-            string TeamName = "Team ";
-            string[] TeamNumber = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "ALPHA", "BETA", "THETA" };
-            
-            Label dynamicLabel = new Label();
-            dynamicLabel.Name = "Label";
-            dynamicLabel.Width = 100;
-            dynamicLabel.Height = 30;
-            dynamicLabel.Content = TeamName + TeamNumber[TeamNumberPosition];
-            dynamicLabel.Foreground = new SolidColorBrush(Colors.White);
-            dynamicLabel.Background = new SolidColorBrush(Colors.Black);
-            dynamicLabel.BorderBrush = Brushes.Black;
-            Canvas.SetLeft(dynamicLabel,0);
-            Canvas.SetTop(dynamicLabel, TeamLabelPosition);
-            Team_display.Children.Add(dynamicLabel);
-            TeamLabelPosition += 60;
-            TeamNumberPosition++;
+            //create team
+            Teamformation(sender, e);
+
+            //add equipment 
+            label_Click(sender, e);
 
             //CreateTeamForm Ctf = new CreateTeamForm();
             //Ctf.Show();
@@ -331,7 +319,70 @@ namespace Emergency_Team_Dispatcher
             Canvas.SetTop(r, (mousePos.Y - shapeRadius));
         }
 
+        //assign and display team name
+        private void Teamformation(object sender, EventArgs e)
+        {
+           
+            string TeamName = "Team ";
+            string[] TeamNumber = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "ALPHA", "BETA", "THETA" };
 
-      
+            Label dynamicLabel = new Label();
+            dynamicLabel.Name = "Label";
+            dynamicLabel.Width = 100;
+            dynamicLabel.Height = 30;
+            dynamicLabel.Content = TeamName + TeamNumber[TeamNumberPosition];
+            dynamicLabel.Foreground = new SolidColorBrush(Colors.White);
+            dynamicLabel.Background = new SolidColorBrush(Colors.Black);
+            dynamicLabel.BorderBrush = Brushes.Black;
+
+            Canvas.SetLeft(dynamicLabel, 0);
+            Canvas.SetTop(dynamicLabel, TeamLabelPosition);
+            Team_display.Children.Add(dynamicLabel);
+            TeamLabelPosition += 60;
+            TeamNumberPosition++;
+
+        }
+
+        //assign equipment to teams
+        private void label_Click(object sender, EventArgs e)
+        {
+          
+            Label clickedLabel = sender as Label;
+
+            //add equipment by right clicking
+            ContextMenu mnuContextMenu = new ContextMenu();
+            this.ContextMenu = mnuContextMenu;
+         
+            mnuContextMenu.Width = 200;
+            mnuContextMenu.Height = 130;
+            MenuItem AmbulanceCart = new MenuItem();
+            MenuItem MountedStretcher = new MenuItem();
+            MenuItem SittingCart = new MenuItem();
+            MenuItem TransportStretcher = new MenuItem();
+            MenuItem WheelChair = new MenuItem();
+
+            AmbulanceCart.Tag = "Ambulance_Cart";
+            AmbulanceCart.Header = "Add Ambulance Cart";
+
+            MountedStretcher.Tag = "Mounted_stretcher";
+            MountedStretcher.Header = "Add Mounted stretcher";
+
+            SittingCart.Tag = "Sitting_Cart";
+            SittingCart.Header = "Add Sitting Cart";
+
+            TransportStretcher.Tag = "Transport_Stretcher";
+            TransportStretcher.Header = "Add Transport Stretcher";
+
+            WheelChair.Tag = "WheelChair";
+            WheelChair.Header = "Add WheelChair";
+
+            mnuContextMenu.Items.Add(AmbulanceCart);
+            mnuContextMenu.Items.Add(MountedStretcher);
+            mnuContextMenu.Items.Add(SittingCart);
+            mnuContextMenu.Items.Add(TransportStretcher);
+            mnuContextMenu.Items.Add(WheelChair);
+        }
+
+        
 	}
 }
