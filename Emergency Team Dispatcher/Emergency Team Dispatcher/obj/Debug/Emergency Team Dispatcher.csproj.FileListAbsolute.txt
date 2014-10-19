@@ -38,3 +38,17 @@ C:\Users\Sahil\Documents\GitHub\SOEN490-ETD\Emergency Team Dispatcher\Emergency 
 C:\Users\Sahil\Documents\GitHub\SOEN490-ETD\Emergency Team Dispatcher\Emergency Team Dispatcher\obj\Debug\Emergency_Team_Dispatcher.Properties.Resources.resources
 C:\Users\Sahil\Documents\GitHub\SOEN490-ETD\Emergency Team Dispatcher\Emergency Team Dispatcher\obj\Debug\Emergency Team Dispatcher.csproj.GenerateResource.Cache
 C:\Users\Sahil\Documents\GitHub\SOEN490-ETD\Emergency Team Dispatcher\Emergency Team Dispatcher\obj\Debug\Emergency_Team_Dispatcher.CreateTeamForm.resources
+\\psf\Home\Documents\GitHub\SOEN490-ETD\Emergency Team Dispatcher\Emergency Team Dispatcher\obj\Debug\Emergency Team Dispatcher.csprojResolveAssemblyReference.cache
+\\psf\Home\Documents\GitHub\SOEN490-ETD\Emergency Team Dispatcher\Emergency Team Dispatcher\obj\Debug\MainWindow.baml
+\\psf\Home\Documents\GitHub\SOEN490-ETD\Emergency Team Dispatcher\Emergency Team Dispatcher\obj\Debug\MainWindow.g.cs
+\\psf\Home\Documents\GitHub\SOEN490-ETD\Emergency Team Dispatcher\Emergency Team Dispatcher\obj\Debug\App.g.cs
+\\psf\Home\Documents\GitHub\SOEN490-ETD\Emergency Team Dispatcher\Emergency Team Dispatcher\obj\Debug\Emergency Team Dispatcher_MarkupCompile.cache
+\\psf\Home\Documents\GitHub\SOEN490-ETD\Emergency Team Dispatcher\Emergency Team Dispatcher\obj\Debug\Emergency Team Dispatcher.g.resources
+\\psf\Home\Documents\GitHub\SOEN490-ETD\Emergency Team Dispatcher\Emergency Team Dispatcher\obj\Debug\Emergency_Team_Dispatcher.CreateTeamForm.resources
+\\psf\Home\Documents\GitHub\SOEN490-ETD\Emergency Team Dispatcher\Emergency Team Dispatcher\obj\Debug\Emergency_Team_Dispatcher.Properties.Resources.resources
+\\psf\Home\Documents\GitHub\SOEN490-ETD\Emergency Team Dispatcher\Emergency Team Dispatcher\obj\Debug\Emergency Team Dispatcher.csproj.GenerateResource.Cache
+\\psf\Home\Documents\GitHub\SOEN490-ETD\Emergency Team Dispatcher\Emergency Team Dispatcher\obj\Debug\Emergency Team Dispatcher.exe
+\\psf\Home\Documents\GitHub\SOEN490-ETD\Emergency Team Dispatcher\Emergency Team Dispatcher\bin\Debug\Emergency Team Dispatcher.exe.config
+\\psf\Home\Documents\GitHub\SOEN490-ETD\Emergency Team Dispatcher\Emergency Team Dispatcher\bin\Debug\Emergency Team Dispatcher.exe
+\\psf\Home\Documents\GitHub\SOEN490-ETD\Emergency Team Dispatcher\Emergency Team Dispatcher\bin\Debug\Emergency Team Dispatcher.pdb
+\\psf\Home\Documents\GitHub\SOEN490-ETD\Emergency Team Dispatcher\Emergency Team Dispatcher\obj\Debug\Emergency Team Dispatcher.pdb

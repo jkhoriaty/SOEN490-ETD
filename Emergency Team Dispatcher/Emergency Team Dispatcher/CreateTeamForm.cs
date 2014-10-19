@@ -50,7 +50,7 @@ namespace Emergency_Team_Dispatcher
                 return;
             }
 
-            Regex timeRgx = new Regex(@"^[a-zA-Z0-9]{2,50}$");
+            Regex timeRgx = new Regex(@"^[a-zA-Z0-9]{2,32}$");
             if(!timeRgx.IsMatch(radioDeparture.Text))
             {
                 MessageBox.Show("Radio time of departure is invalid.");
