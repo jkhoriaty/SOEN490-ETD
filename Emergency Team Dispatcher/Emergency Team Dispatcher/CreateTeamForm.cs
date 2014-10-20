@@ -38,19 +38,19 @@ namespace Emergency_Team_Dispatcher
                 return;
             }
 
-            if (!(radioLevelOfTraining.Text == "General First Aid" || radioLevelOfTraining.Text == "First Responder" || radioLevelOfTraining.Text == "Medicine"))
+            if(!radioLevelOfTraining.Items.Contains(radioLevelOfTraining.Text))
             {
                 MessageBox.Show("Radio level of training invalid.");
                 return;
             }
 
-            if (!(firstAidLevelOfTraining.Text == "General First Aid" || radioLevelOfTraining.Text == "First Responder" || radioLevelOfTraining.Text == "Medicine"))
+            if (!firstAidLevelOfTraining.Items.Contains(firstAidLevelOfTraining.Text))
             {
                 MessageBox.Show("First aid level of training invalid.");
                 return;
             }
 
-            Regex timeRgx = new Regex(@"^[a-zA-Z0-9]{2,32}$");
+            Regex timeRgx = new Regex(@"^[a-zA-Z0-9 ]{2,32}$");
             if(!timeRgx.IsMatch(radioDeparture.Text))
             {
                 MessageBox.Show("Radio time of departure is invalid.");
