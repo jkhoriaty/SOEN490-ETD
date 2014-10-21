@@ -13,6 +13,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Drawing;
+
+
+
 
 namespace Emergency_Team_Dispatcher
 {
@@ -21,6 +25,16 @@ namespace Emergency_Team_Dispatcher
 	/// </summary>
 	public partial class MainWindow : Window
 	{
+
+        //variable initialization
+        private bool _isRectDragInProg;
+        String movingRectangle;
+        int shapeRadius = 25;
+        int TeamNumberPosition = 0;
+        int TeamLabelPosition = 0;
+        int TeamEquipPositionTop =31;
+        int iconPositionLeft = 0;
+
 		public MainWindow()
 		{
 			InitializeComponent();
@@ -31,7 +45,7 @@ namespace Emergency_Team_Dispatcher
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            
+
         }
 
         private void NewEvent_MenuItem_Click(object sender, RoutedEventArgs e)
@@ -57,28 +71,39 @@ namespace Emergency_Team_Dispatcher
             Application.Current.Shutdown();
         }
 
+		private int rectangleCtr = 1;
+
         private void Team_MenuItem_Click(object sender, RoutedEventArgs e)
         {
+            Random random = new Random();
+            byte[] colorBytes = new byte[3];
+            random.NextBytes(colorBytes);
+            System.Windows.Media.Color randomColor = System.Windows.Media.Color.FromRgb(colorBytes[0], colorBytes[1], colorBytes[2]);
             System.Windows.Shapes.Rectangle r = new System.Windows.Shapes.Rectangle();
+			r.Name = "team_" + rectangleCtr++;
             r.Width = shapeRadius * 2;
             r.Height = shapeRadius * 2;
             r.Stroke = new SolidColorBrush(Colors.Black);
-            r.Fill = new SolidColorBrush(Colors.GreenYellow);
+            r.Fill = new SolidColorBrush(randomColor);
             r.MouseLeftButtonDown += new MouseButtonEventHandler(team_MouseLeftButtonDown);
             r.MouseLeftButtonUp += new MouseButtonEventHandler(team_MouseLeftButtonUp);
             r.MouseMove += new MouseEventHandler(team_MouseMove);
             Canvas.SetTop(r, 0);
             Canvas.SetLeft(r, 0);
             canvas.Children.Add(r);
-            //CreateTeamForm Ctf = new CreateTeamForm();
-            //Ctf.Show();
+
+            //create team
+            Teamformation(sender, e);
+
+            //add equipment 
+            label_Click(sender, e);
+
+            CreateTeamForm Ctf = new CreateTeamForm();
+            Ctf.Show();
 
             //box.Text = "succ";
         }
 
-        private bool _isRectDragInProg;
-        String movingRectangle;
-        int shapeRadius = 25;
 
         private void team_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -312,6 +337,206 @@ namespace Emergency_Team_Dispatcher
             LanguageSelector.changeLanguage(this, "en");
         }
 
+        //Assign and display team name
+        private void Teamformation(object sender, EventArgs e)
+        {
+           
+            string TeamName = "Team ";
+            string[] TeamNumber = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "ALPHA", "BETA", "THETA" };
+
+            Label dynamicLabel = new Label();
+            dynamicLabel.Name = "Label";
+            dynamicLabel.Width = 100;
+            dynamicLabel.Height = 30;
+            dynamicLabel.Content = TeamName + TeamNumber[TeamNumberPosition];
+            dynamicLabel.Foreground = new SolidColorBrush(Colors.White);
+            dynamicLabel.Background = new SolidColorBrush(Colors.Black);
+            dynamicLabel.BorderBrush = System.Windows.Media.Brushes.Black;
+
+            Canvas.SetLeft(dynamicLabel, 0);
+            Canvas.SetTop(dynamicLabel, TeamLabelPosition);
+            Team_display.Children.Add(dynamicLabel);
+            TeamLabelPosition += 60;
+            TeamNumberPosition++;
+
+        }
+
+        //Add equipment menu
+        private void label_Click(object sender, RoutedEventArgs e)
+        {
+          
+            //add equipment by right clicking
+            ContextMenu mnuContextMenu = new ContextMenu();
+            this.ContextMenu = mnuContextMenu;
+         
+            mnuContextMenu.Width = 200;
+            mnuContextMenu.Height = 130;
+            MenuItem AmbulanceCart = new MenuItem();
+            MenuItem MountedStretcher = new MenuItem();
+            MenuItem SittingCart = new MenuItem();
+            MenuItem TransportStretcher = new MenuItem();
+            MenuItem WheelChair = new MenuItem();
+
+            AmbulanceCart.Tag = "Ambulance_Cart";
+            AmbulanceCart.Header = "Add Ambulance Cart";
+
+            MountedStretcher.Tag = "Mounted_stretcher";
+            MountedStretcher.Header = "Add Mounted stretcher";
+
+            SittingCart.Tag = "Sitting_Cart";
+            SittingCart.Header = "Add Sitting Cart";
+
+            TransportStretcher.Tag = "Transport_Stretcher";
+            TransportStretcher.Header = "Add Transport Stretcher";
+
+            WheelChair.Tag = "WheelChair";
+            WheelChair.Header = "Add WheelChair";
+
+            mnuContextMenu.Items.Add(AmbulanceCart);
+            mnuContextMenu.Items.Add(MountedStretcher);
+            mnuContextMenu.Items.Add(SittingCart);
+            mnuContextMenu.Items.Add(TransportStretcher);
+            mnuContextMenu.Items.Add(WheelChair);
+
+            //test display icon
+            //to be refactored and put into their own command method
+            loadTransportStretcher(sender, e);
+            loadWheelChair(sender, e);
+            loadAmbulanceCart(sender, e);
+            loadSittingCart(sender, e);
+            loadMountedStretcher(sender, e);
+           
+            //reset icon position for the next team to be created
+            iconPositionLeft = 0;
+
+            //place icon under current team
+            TeamEquipPositionTop += 60;
+
+        
+        }
+
+        //Displaying Equipment(to be refactored)
+        void loadWheelChair(object sender, RoutedEventArgs e)
+        {
+
+            // Create Image Element
+            System.Windows.Controls.Image myImage = new System.Windows.Controls.Image();
+            myImage.Width = 25;
+            myImage.Height = 23;
+            
+            //position icon
+            Canvas.SetLeft(myImage, iconPositionLeft);
+            Canvas.SetTop(myImage, TeamEquipPositionTop);
+        
+            // Create image source
+            BitmapImage myBitmapImage = new BitmapImage();
+            myBitmapImage.BeginInit();
+            myBitmapImage.UriSource = new Uri(@"C:\Soen 490\Icons\WheelChair2.png");
+            myBitmapImage.DecodePixelWidth = 25;
+            myBitmapImage.EndInit();
+            myImage.Source = myBitmapImage;
+            Team_display.Children.Add(myImage);
+            iconPositionLeft += 26;
+        }
+
+        void loadAmbulanceCart(object sender, RoutedEventArgs e)
+        {
+
+
+            // Create Image Element
+            System.Windows.Controls.Image myImage = new System.Windows.Controls.Image();
+            myImage.Width = 25;
+            myImage.Height = 23;
+
+            //position icon
+            Canvas.SetLeft(myImage, iconPositionLeft);
+            Canvas.SetTop(myImage, TeamEquipPositionTop);
+
+            // Create image source
+            BitmapImage myBitmapImage = new BitmapImage();
+            myBitmapImage.BeginInit();
+            myBitmapImage.UriSource = new Uri(@"C:\Soen 490\Icons\AmbulanceCart2.png");
+            myBitmapImage.DecodePixelWidth = 25;
+            myBitmapImage.EndInit();
+            myImage.Source = myBitmapImage;
+            Team_display.Children.Add(myImage);
+
+            iconPositionLeft += 26;
+        }
+
+        void loadSittingCart(object sender, RoutedEventArgs e)
+        {
+
+
+            // Create Image Element
+            System.Windows.Controls.Image myImage = new System.Windows.Controls.Image();
+            myImage.Width = 25;
+            myImage.Height = 23;
+
+            //position icon
+            Canvas.SetLeft(myImage, iconPositionLeft);
+            Canvas.SetTop(myImage, TeamEquipPositionTop);
+
+            // Create image source
+            BitmapImage myBitmapImage = new BitmapImage();
+            myBitmapImage.BeginInit();
+            myBitmapImage.UriSource = new Uri(@"C:\Soen 490\Icons\SittingCart2.png");
+            myBitmapImage.DecodePixelWidth = 25;
+            myBitmapImage.EndInit();
+            myImage.Source = myBitmapImage;
+            Team_display.Children.Add(myImage);
+
+            iconPositionLeft += 26;
+        }
+
+        void loadMountedStretcher(object sender, RoutedEventArgs e)
+        {
+
+            // Create Image Element
+            System.Windows.Controls.Image myImage = new System.Windows.Controls.Image();
+            myImage.Width = 25;
+            myImage.Height = 23;
+
+            //position icon
+            Canvas.SetLeft(myImage, iconPositionLeft);
+            Canvas.SetTop(myImage, TeamEquipPositionTop);
+
+            // Create image source
+            BitmapImage myBitmapImage = new BitmapImage();
+            myBitmapImage.BeginInit();
+            myBitmapImage.UriSource = new Uri(@"C:\Soen 490\Icons\MountedStretcher2.png");
+            myBitmapImage.DecodePixelWidth = 25;
+            myBitmapImage.EndInit();
+            myImage.Source = myBitmapImage;
+            Team_display.Children.Add(myImage);
+            iconPositionLeft += 26;
+        }
+
+        void loadTransportStretcher(object sender, RoutedEventArgs e)
+        {
+
+            // Create Image Element
+            System.Windows.Controls.Image myImage = new System.Windows.Controls.Image();
+            myImage.Width = 25;
+            myImage.Height = 23;
+
+            //position icon
+            Canvas.SetLeft(myImage, iconPositionLeft);
+            Canvas.SetTop(myImage, TeamEquipPositionTop);
+
+            // Create image source
+            BitmapImage myBitmapImage = new BitmapImage();
+            myBitmapImage.BeginInit();
+            myBitmapImage.UriSource = new Uri(@"C:\Soen 490\Icons\TransportStretcher2.png");
+            myBitmapImage.DecodePixelWidth = 25;
+            myBitmapImage.EndInit();
+            myImage.Source = myBitmapImage;
+            Team_display.Children.Add(myImage);
+            iconPositionLeft += 26;
+        }
+
 
 	}
+
+
 }
