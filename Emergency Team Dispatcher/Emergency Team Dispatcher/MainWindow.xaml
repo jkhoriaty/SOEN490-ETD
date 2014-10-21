@@ -12,8 +12,14 @@
                 <MenuItem Name="_File" Header="_File">
                     <MenuItem Name="_NewEvent" Header="_New Event" Click="NewEvent_MenuItem_Click"/>
                     <MenuItem Name="_LoadMap" Header="_Load Map" Click="Map_MenuItem_Click"/>
-                    <MenuItem Name="_CreateTeam" Header="Create Team" Click="Team_MenuItem_Click"/>
-                    <MenuItem Name="_Exit" Header="_Exit" Click="Exit_MenuItem_Click"/>
+                    <MenuItem Name="_CreateTeam" Header="_Create Team" Click="Team_MenuItem_Click"/>
+                    <MenuItem Name="_Quit" Header="_Quit" Click="Exit_MenuItem_Click"/>
+                </MenuItem>
+                <MenuItem Name="_Tools" Header="_Tools">
+                    <MenuItem Name="_Language" Header="Change _Language">
+                        <MenuItem Name="French" Header="_Français" Click="French_Click" />
+                        <MenuItem Name="English" Header="_English" Click="_English_Click"/>
+                    </MenuItem>
                 </MenuItem>
             </Menu>
             <StackPanel>
