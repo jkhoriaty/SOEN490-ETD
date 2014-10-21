@@ -39,7 +39,7 @@ namespace Emergency_Team_Dispatcher
         private void Map_MenuItem_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Image Files (*.bmp, *.jpg, *.png, *.gif)|*.bmp;*.jpg; *.png, *.gif";
+            openFileDialog.Filter = "Image Files (*.bmp, *.jpg, *.png, *.gif)|*.bmp;*.jpg; *.png; *.gif";
             openFileDialog.FilterIndex = 1;
 
             if (openFileDialog.ShowDialog() == true)
