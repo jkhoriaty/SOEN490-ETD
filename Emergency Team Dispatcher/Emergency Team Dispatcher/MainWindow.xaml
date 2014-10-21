@@ -11,6 +11,7 @@
             <Menu DockPanel.Dock="Top">
                 <MenuItem Name="_File" Header="_File">
                     <MenuItem Name="_NewEvent" Header="_New Event" Click="NewEvent_MenuItem_Click"/>
+                    <MenuItem Name="_GetTimerTest" Header="_Timer Test" Click="TimeTest_MenuItem_Click"/>
                     <MenuItem Name="_LoadMap" Header="_Load Map" Click="Map_MenuItem_Click"/>
                     <MenuItem Name="_CreateTeam" Header="_Create Team" Click="Team_MenuItem_Click"/>
                     <MenuItem Name="_Quit" Header="_Quit" Click="Exit_MenuItem_Click"/>
@@ -27,10 +28,9 @@
             </StackPanel>
         </DockPanel>
         <Border BorderBrush="Black" BorderThickness="1" Margin="0,20,650,125">
-            <Canvas Name="Team_display" Margin="0,0,0,0">
-
-               
-
+            <Canvas Name="Team_display" Margin="0,0,0,0"></Canvas>
+            <Canvas Name="canvas" Margin="1,-1,-1,1">
+                <TextBox Name="timer" Width="213" Canvas.Left="203" Canvas.Top="424"></TextBox>               
             </Canvas>
         </Border>
 
