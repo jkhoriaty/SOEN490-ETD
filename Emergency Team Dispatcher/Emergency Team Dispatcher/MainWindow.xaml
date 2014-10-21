@@ -3,7 +3,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Emergency Team Dispatcher" Height="600" Width="800" WindowStartupLocation="CenterScreen" WindowState="Maximized">
     <Grid>
-        <DockPanel>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="267*"/>
+            <ColumnDefinition Width="527*"/>
+        </Grid.ColumnDefinitions>
+        <DockPanel Grid.ColumnSpan="2">
             <Menu DockPanel.Dock="Top">
                 <MenuItem Name="_File" Header="_File">
                     <MenuItem Name="_NewEvent" Header="_New Event" Click="NewEvent_MenuItem_Click"/>
