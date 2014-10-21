@@ -24,6 +24,9 @@ namespace Emergency_Team_Dispatcher
 		public MainWindow()
 		{
 			InitializeComponent();
+            LanguageSelector.loadVocabulary();
+            //Put preferred default language
+            LanguageSelector.changeLanguage(this, "en");
 		}
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
@@ -297,6 +300,16 @@ namespace Emergency_Team_Dispatcher
 
             Canvas.SetLeft(r, (mousePos.X - shapeRadius));
             Canvas.SetTop(r, (mousePos.Y - shapeRadius));
+        }
+
+        private void French_Click(object sender, RoutedEventArgs e)
+        {
+            LanguageSelector.changeLanguage(this, "fr");
+        }
+
+        private void _English_Click(object sender, RoutedEventArgs e)
+        {
+            LanguageSelector.changeLanguage(this, "en");
         }
 
 

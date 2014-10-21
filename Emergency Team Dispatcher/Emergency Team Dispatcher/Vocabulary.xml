@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<Vocabulary>
+  <control name="_File" type="MenuItem">
+    <fr>_Fichier</fr>
+    <en>_File</en>
+  </control>
+  <control name="_NewEvent" type="MenuItem">
+    <fr>_Nouveau Événement</fr>
+    <en>_New Event</en>
+  </control>
+  <control name="_LoadMap" type="MenuItem">
+    <fr>_Choisir Carte</fr>
+    <en>_Choose Map</en>
+  </control>
+  <control name="_CreateTeam" type="MenuItem">
+    <fr>_Créer Équipe</fr>
+    <en>_Create Team</en>
+  </control>
+  <control name="_Quit" type="MenuItem">
+    <fr>_Quitter</fr>
+    <en>_Quit</en>
+  </control>
+  <control name="_Tools" type="MenuItem">
+    <fr>Ou_tils</fr>
+    <en>_Tools</en>
+  </control>
+  <control name="_Language" type="MenuItem">
+    <fr>_Langage</fr>
+    <en>_Language</en>
+  </control>
+</Vocabulary>
