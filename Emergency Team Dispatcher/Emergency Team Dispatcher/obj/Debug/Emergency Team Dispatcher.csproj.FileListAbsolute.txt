@@ -24,3 +24,16 @@ C:\Users\Kaos\Documents\SOEN490-ETD\Emergency Team Dispatcher\Emergency Team Dis
 C:\Users\Kaos\Documents\SOEN490-ETD\Emergency Team Dispatcher\Emergency Team Dispatcher\obj\Debug\Emergency Team Dispatcher.g.resources
 C:\Users\Kaos\Documents\SOEN490-ETD\Emergency Team Dispatcher\Emergency Team Dispatcher\obj\Debug\Emergency_Team_Dispatcher.Properties.Resources.resources
 C:\Users\Kaos\Documents\SOEN490-ETD\Emergency Team Dispatcher\Emergency Team Dispatcher\obj\Debug\Emergency Team Dispatcher.csproj.GenerateResource.Cache
+C:\Workspace\SOEN490-ETD\Emergency Team Dispatcher\Emergency Team Dispatcher\bin\Debug\Emergency Team Dispatcher.exe.config
+C:\Workspace\SOEN490-ETD\Emergency Team Dispatcher\Emergency Team Dispatcher\obj\Debug\Emergency Team Dispatcher.exe
+C:\Workspace\SOEN490-ETD\Emergency Team Dispatcher\Emergency Team Dispatcher\obj\Debug\Emergency Team Dispatcher.pdb
+C:\Workspace\SOEN490-ETD\Emergency Team Dispatcher\Emergency Team Dispatcher\bin\Debug\Emergency Team Dispatcher.exe
+C:\Workspace\SOEN490-ETD\Emergency Team Dispatcher\Emergency Team Dispatcher\bin\Debug\Emergency Team Dispatcher.pdb
+C:\Workspace\SOEN490-ETD\Emergency Team Dispatcher\Emergency Team Dispatcher\obj\Debug\Emergency Team Dispatcher.csprojResolveAssemblyReference.cache
+C:\Workspace\SOEN490-ETD\Emergency Team Dispatcher\Emergency Team Dispatcher\obj\Debug\MainWindow.baml
+C:\Workspace\SOEN490-ETD\Emergency Team Dispatcher\Emergency Team Dispatcher\obj\Debug\MainWindow.g.cs
+C:\Workspace\SOEN490-ETD\Emergency Team Dispatcher\Emergency Team Dispatcher\obj\Debug\App.g.cs
+C:\Workspace\SOEN490-ETD\Emergency Team Dispatcher\Emergency Team Dispatcher\obj\Debug\Emergency Team Dispatcher_MarkupCompile.cache
+C:\Workspace\SOEN490-ETD\Emergency Team Dispatcher\Emergency Team Dispatcher\obj\Debug\Emergency Team Dispatcher.g.resources
+C:\Workspace\SOEN490-ETD\Emergency Team Dispatcher\Emergency Team Dispatcher\obj\Debug\Emergency_Team_Dispatcher.Properties.Resources.resources
+C:\Workspace\SOEN490-ETD\Emergency Team Dispatcher\Emergency Team Dispatcher\obj\Debug\Emergency Team Dispatcher.csproj.GenerateResource.Cache
