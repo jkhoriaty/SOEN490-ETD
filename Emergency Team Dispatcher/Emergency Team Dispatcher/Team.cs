@@ -9,19 +9,19 @@ namespace Emergency_Team_Dispatcher
     class Team
     {
         String name;
-
-        int trainingLevel = 0; //0: First Aid, 1: First Responder, 2: Medicine
         TeamMember[] members;
         int memberCount = 0;
-        DateTime departure;
+        String departure;
 
         public Team()
         {
             name = "Alpha";
+            members = new TeamMember[400];
         }
         public Team(String name)
         {
             this.name = name;
+            members = new TeamMember[400];
         }
 
         public bool addMember(TeamMember mem)
@@ -30,15 +30,19 @@ namespace Emergency_Team_Dispatcher
             {
                 members[memberCount] = mem;
                 memberCount++;
-                if(this.trainingLevel < mem.trainingLevel)
-                    this.trainingLevel = mem.trainingLevel;
-                if(this.departure.CompareTo(mem.departure) > 0)
-                    this.departure = mem.departure;
                 return true;
             }
             return false;
         }
 
+        public void setName(String name)
+        {
+            this.name = name;
+        }
+        public String getName()
+        {
+            return this.name;
+        }
         //Generate shape to represent team on screen
         public void draw()
         {

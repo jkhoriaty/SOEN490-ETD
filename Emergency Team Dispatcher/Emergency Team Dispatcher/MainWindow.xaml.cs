@@ -43,7 +43,7 @@ namespace Emergency_Team_Dispatcher
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            
+
         }
 
         private void NewEvent_MenuItem_Click(object sender, RoutedEventArgs e)
@@ -90,14 +90,16 @@ namespace Emergency_Team_Dispatcher
             Canvas.SetLeft(r, 0);
             canvas.Children.Add(r);
 
+
             //create team
             Teamformation(sender, e);
 
             //add equipment 
             label_Click(sender, e);
 
-            //CreateTeamForm Ctf = new CreateTeamForm();
-            //Ctf.Show();
+            CreateTeamForm Ctf = new CreateTeamForm();
+            Ctf.Show();
+
 
             //box.Text = "succ";
         }
@@ -339,7 +341,7 @@ namespace Emergency_Team_Dispatcher
             dynamicLabel.Content = TeamName + TeamNumber[TeamNumberPosition];
             dynamicLabel.Foreground = new SolidColorBrush(Colors.White);
             dynamicLabel.Background = new SolidColorBrush(Colors.Black);
-            dynamicLabel.BorderBrush = Brushes.Black;
+            dynamicLabel.BorderBrush = System.Windows.Media.Brushes.Black;
 
             Canvas.SetLeft(dynamicLabel, 0);
             Canvas.SetTop(dynamicLabel, TeamLabelPosition);
@@ -408,7 +410,7 @@ namespace Emergency_Team_Dispatcher
         {
 
             // Create Image Element
-            Image myImage = new Image();
+            System.Windows.Controls.Image myImage = new System.Windows.Controls.Image();
             myImage.Width = 25;
             myImage.Height = 23;
             
@@ -419,7 +421,7 @@ namespace Emergency_Team_Dispatcher
             // Create image source
             BitmapImage myBitmapImage = new BitmapImage();
             myBitmapImage.BeginInit();
-            myBitmapImage.UriSource = new Uri(@"C:\Users\Suke\Downloads\school\SOEN 490\SOEN490-ETD\Emergency Team Dispatcher\Emergency Team Dispatcher\Icons\WheelChair2.png");
+            myBitmapImage.UriSource = new Uri(@"C:\Soen 490\Icons\WheelChair2.png");
             myBitmapImage.DecodePixelWidth = 25;
             myBitmapImage.EndInit();
             myImage.Source = myBitmapImage;
@@ -432,7 +434,7 @@ namespace Emergency_Team_Dispatcher
 
 
             // Create Image Element
-            Image myImage = new Image();
+            System.Windows.Controls.Image myImage = new System.Windows.Controls.Image();
             myImage.Width = 25;
             myImage.Height = 23;
 
@@ -443,7 +445,7 @@ namespace Emergency_Team_Dispatcher
             // Create image source
             BitmapImage myBitmapImage = new BitmapImage();
             myBitmapImage.BeginInit();
-            myBitmapImage.UriSource = new Uri(@"C:\Users\Suke\Downloads\school\SOEN 490\SOEN490-ETD\Emergency Team Dispatcher\Emergency Team Dispatcher\Icons\AmbulanceCart2.png");
+            myBitmapImage.UriSource = new Uri(@"C:\Soen 490\Icons\AmbulanceCart2.png");
             myBitmapImage.DecodePixelWidth = 25;
             myBitmapImage.EndInit();
             myImage.Source = myBitmapImage;
@@ -457,7 +459,7 @@ namespace Emergency_Team_Dispatcher
 
 
             // Create Image Element
-            Image myImage = new Image();
+            System.Windows.Controls.Image myImage = new System.Windows.Controls.Image();
             myImage.Width = 25;
             myImage.Height = 23;
 
@@ -468,7 +470,7 @@ namespace Emergency_Team_Dispatcher
             // Create image source
             BitmapImage myBitmapImage = new BitmapImage();
             myBitmapImage.BeginInit();
-            myBitmapImage.UriSource = new Uri(@"C:\Users\Suke\Downloads\school\SOEN 490\SOEN490-ETD\Emergency Team Dispatcher\Emergency Team Dispatcher\Icons\SittingCart2.png");
+            myBitmapImage.UriSource = new Uri(@"C:\Soen 490\Icons\SittingCart2.png");
             myBitmapImage.DecodePixelWidth = 25;
             myBitmapImage.EndInit();
             myImage.Source = myBitmapImage;
@@ -481,7 +483,7 @@ namespace Emergency_Team_Dispatcher
         {
 
             // Create Image Element
-            Image myImage = new Image();
+            System.Windows.Controls.Image myImage = new System.Windows.Controls.Image();
             myImage.Width = 25;
             myImage.Height = 23;
 
@@ -492,7 +494,7 @@ namespace Emergency_Team_Dispatcher
             // Create image source
             BitmapImage myBitmapImage = new BitmapImage();
             myBitmapImage.BeginInit();
-            myBitmapImage.UriSource = new Uri(@"C:\Users\Suke\Downloads\school\SOEN 490\SOEN490-ETD\Emergency Team Dispatcher\Emergency Team Dispatcher\Icons\MountedStretcher2.png");
+            myBitmapImage.UriSource = new Uri(@"C:\Soen 490\Icons\MountedStretcher2.png");
             myBitmapImage.DecodePixelWidth = 25;
             myBitmapImage.EndInit();
             myImage.Source = myBitmapImage;
@@ -504,7 +506,7 @@ namespace Emergency_Team_Dispatcher
         {
 
             // Create Image Element
-            Image myImage = new Image();
+            System.Windows.Controls.Image myImage = new System.Windows.Controls.Image();
             myImage.Width = 25;
             myImage.Height = 23;
 
@@ -515,21 +517,12 @@ namespace Emergency_Team_Dispatcher
             // Create image source
             BitmapImage myBitmapImage = new BitmapImage();
             myBitmapImage.BeginInit();
-            myBitmapImage.UriSource = new Uri(@"C:\Users\Suke\Downloads\school\SOEN 490\SOEN490-ETD\Emergency Team Dispatcher\Emergency Team Dispatcher\Icons\TransportStretcher2.png");
+            myBitmapImage.UriSource = new Uri(@"C:\Soen 490\Icons\TransportStretcher2.png");
             myBitmapImage.DecodePixelWidth = 25;
             myBitmapImage.EndInit();
             myImage.Source = myBitmapImage;
             Team_display.Children.Add(myImage);
             iconPositionLeft += 26;
         }
-
-
-
-
-
-
-
 	}
-
-
 }
