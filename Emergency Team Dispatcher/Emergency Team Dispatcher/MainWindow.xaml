@@ -12,9 +12,19 @@
                     <MenuItem Name="_Exit" Header="_Exit" Click="Exit_MenuItem_Click"/>
                 </MenuItem>
             </Menu>
-            <StackPanel></StackPanel>
+            <StackPanel>
+
+            </StackPanel>
         </DockPanel>
-        <Border BorderBrush="Black" BorderThickness="1" Margin="125,20,0,125">
+        <Border BorderBrush="Black" BorderThickness="1" Margin="0,20,650,125">
+            <Canvas Name="Team_display" Margin="0,0,0,0">
+
+               
+
+            </Canvas>
+        </Border>
+
+        <Border BorderBrush="Black" BorderThickness="1" Margin="140,20,0,125">
             <Canvas Name="canvas" Margin="0,0,0,0">
 
             </Canvas>
