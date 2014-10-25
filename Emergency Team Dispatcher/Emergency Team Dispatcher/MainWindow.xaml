@@ -28,16 +28,15 @@
             </StackPanel>
         </DockPanel>
         <Border BorderBrush="Black" BorderThickness="1" Margin="0,20,650,125">
-            <Canvas Name="Team_display" Margin="0,0,0,0"></Canvas>
             <Canvas Name="canvas" Margin="1,-1,-1,1">
-                <TextBox Name="timer" Width="213" Canvas.Left="203" Canvas.Top="424"></TextBox>               
+                <TextBox Name="timer" Width="213" Canvas.Left="203" Canvas.Top="424"></TextBox>
             </Canvas>
         </Border>
 
-        <Border BorderBrush="Black" BorderThickness="1" Margin="140,20,0,125">
-            <Canvas Name="canvas" Margin="0,0,0,0">
+                
 
-            </Canvas>
+        <Border BorderBrush="Black" BorderThickness="1" Margin="140,20,0,125">
+            <Canvas Name="Team_display" Margin="0,0,0,0"></Canvas>
         </Border>
     </Grid>
 </Window>
