@@ -105,8 +105,14 @@ namespace Emergency_Team_Dispatcher
             //team.addToDB;
             
 
-            MessageBox.Show(team.getName());
+            MessageBox.Show("Success");
+            this.Close();
             
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
