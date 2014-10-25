@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Drawing;
+using System.Diagnostics;
 
 
 
@@ -38,7 +39,9 @@ namespace Emergency_Team_Dispatcher
 		public MainWindow()
 		{
 			InitializeComponent();
-
+           		LanguageSelector.loadVocabulary();
+            		//Put preferred default language
+            		LanguageSelector.changeLanguage(this, "en");
 		}
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
@@ -46,8 +49,40 @@ namespace Emergency_Team_Dispatcher
 
         }
 
+        private void TimeTest_MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            //This Method currently returns the timer of the last queue'd timer.
+            //Once the intervention creation interface is completed, it will be a trivial
+            //matter to select which intervention from the dictionary you would like to retrieve the time from.
+            //It is important to note, that in this current function, the timer keeps going even after you poll
+            //it for its value. I left this in intentionally to prove that my function for retrieving didn't break
+            //the stopwatch's functionality. This could be extremely useful if we wanted to keep a running display of
+            //the time taken for each portion of each intervention.
+            if (Globals.timers.ContainsKey(Globals.currentIntervention - 1))
+            {
+                TimeSpan elapsed = Globals.timers[Globals.currentIntervention - 1].Elapsed;
+                timer.Text = elapsed.TotalSeconds.ToString();                               //Converts the total time on the stopwatch into an amount of seconds.
+
+                Globals.interventionTime.Add(Globals.currentIntervention - 1, elapsed);     //Saves it to a second dictionary, this one only stores the elapsed times, this will be pushed to DB.
+            }
+        }
+
         private void NewEvent_MenuItem_Click(object sender, RoutedEventArgs e)
         {
+
+            //Menu item that initialises the timer and saves it to a dictionary with an incrementing index.
+            //This index represents the ID of the intervention. It's currently simply the numbers from 1-X because
+            //I didn't have out naming convention for interventions on hand. It is a trivial matter to change the index
+            //to be anything we want, very little would have to be adjusted.
+            int temp = Globals.currentIntervention;
+            Stopwatch interventionTimer = new Stopwatch();
+            interventionTimer.Start();
+
+            Globals.timers.Add(temp, interventionTimer);
+
+            Globals.currentIntervention += 1;
+
+            timer.Text = Globals.currentIntervention.ToString();
 
         }
 
@@ -90,7 +125,6 @@ namespace Emergency_Team_Dispatcher
             Canvas.SetLeft(r, 0);
             canvas.Children.Add(r);
 
-
             //create team
             Teamformation(sender, e);
 
@@ -99,7 +133,6 @@ namespace Emergency_Team_Dispatcher
 
             CreateTeamForm Ctf = new CreateTeamForm();
             Ctf.Show();
-
 
             //box.Text = "succ";
         }
@@ -325,6 +358,16 @@ namespace Emergency_Team_Dispatcher
 
             Canvas.SetLeft(r, (mousePos.X - shapeRadius));
             Canvas.SetTop(r, (mousePos.Y - shapeRadius));
+        }
+
+        private void French_Click(object sender, RoutedEventArgs e)
+        {
+            LanguageSelector.changeLanguage(this, "fr");
+        }
+
+        private void _English_Click(object sender, RoutedEventArgs e)
+        {
+            LanguageSelector.changeLanguage(this, "en");
         }
 
         //Assign and display team name

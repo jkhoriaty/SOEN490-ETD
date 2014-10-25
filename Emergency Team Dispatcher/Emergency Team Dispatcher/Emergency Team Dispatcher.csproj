@@ -55,6 +55,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Globals.cs" />
+    <Compile Include="LanguageSelector.cs" />
     <Compile Include="CreateTeamForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -107,7 +109,12 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Icons\" />
+      <Folder Include="Icons\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Vocabulary.xml">
+      <SubType>Designer</SubType>
+    </Resource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

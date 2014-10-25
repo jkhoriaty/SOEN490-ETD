@@ -5,21 +5,17 @@ using System.Text;
 
 namespace Emergency_Team_Dispatcher
 {
-    class TeamMember
+    public class TeamMember
     {
-        String name;
+        public String name;
         public int trainingLevel; //0: First Aid, 1: First Responder, 2: Medicine
-        public String departure;
+        public string departure;
 
-        public TeamMember(String name, int training, String dep)
+        public TeamMember(String name, int training, string departure)
         {
             this.name = name;
             this.trainingLevel = training;
-            this.departure = dep;
-            //departure.AddHours(23-departure.Hour);
-            //departure.AddMinutes(59 - departure.Minute);
-            //departure.AddSeconds(59 - departure.Second);
-
+            this.departure = departure;
         }
     }
 }

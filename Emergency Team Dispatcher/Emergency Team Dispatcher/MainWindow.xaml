@@ -11,9 +11,16 @@
             <Menu DockPanel.Dock="Top">
                 <MenuItem Name="_File" Header="_File">
                     <MenuItem Name="_NewEvent" Header="_New Event" Click="NewEvent_MenuItem_Click"/>
+                    <MenuItem Name="_GetTimerTest" Header="_Timer Test" Click="TimeTest_MenuItem_Click"/>
                     <MenuItem Name="_LoadMap" Header="_Load Map" Click="Map_MenuItem_Click"/>
-                    <MenuItem Name="_CreateTeam" Header="Create Team" Click="Team_MenuItem_Click"/>
-                    <MenuItem Name="_Exit" Header="_Exit" Click="Exit_MenuItem_Click"/>
+                    <MenuItem Name="_CreateTeam" Header="_Create Team" Click="Team_MenuItem_Click"/>
+                    <MenuItem Name="_Quit" Header="_Quit" Click="Exit_MenuItem_Click"/>
+                </MenuItem>
+                <MenuItem Name="_Tools" Header="_Tools">
+                    <MenuItem Name="_Language" Header="Change _Language">
+                        <MenuItem Name="French" Header="_Français" Click="French_Click" />
+                        <MenuItem Name="English" Header="_English" Click="_English_Click"/>
+                    </MenuItem>
                 </MenuItem>
             </Menu>
             <StackPanel>
@@ -21,14 +28,14 @@
             </StackPanel>
         </DockPanel>
         <Border BorderBrush="Black" BorderThickness="1" Margin="0,20,650,125">
-            <Canvas Name="Team_display" Margin="0,0,0,0">
-		
+            <Canvas Name="canvas" Margin="1,-1,-1,1">
+                <TextBox Name="timer" Width="213" Canvas.Left="203" Canvas.Top="424"></TextBox>
             </Canvas>
         </Border>
-        <Border BorderBrush="Black" BorderThickness="1" Margin="140,20,0,125">
-            <Canvas Name="canvas" Margin="0,0,0,0">
+                
 
-            </Canvas>
+        <Border BorderBrush="Black" BorderThickness="1" Margin="140,20,0,125">
+            <Canvas Name="Team_display" Margin="0,0,0,0"></Canvas>
         </Border>
     </Grid>
 </Window>
