@@ -418,8 +418,8 @@ namespace Emergency_Team_Dispatcher
             ContextMenu mnuContextMenu = new ContextMenu();
             this.ContextMenu = mnuContextMenu;
          
-            mnuContextMenu.Width = 200;
-            mnuContextMenu.Height = 130;
+            mnuContextMenu.Width = 205;
+            mnuContextMenu.Height = 150;
             MenuItem AmbulanceCart = new MenuItem();
             MenuItem MountedStretcher = new MenuItem();
             MenuItem SittingCart = new MenuItem();
@@ -499,32 +499,32 @@ namespace Emergency_Team_Dispatcher
                 //AmbulanceCart
                 if (AmbulanceCart.Name == "Ambulance_Cart")
                 {
-                    myBitmapImage.UriSource = new Uri(@"C:\Users\Suke\Downloads\school\SOEN 490\SOEN490-ETD\Icons\AmbulanceCart3.png");
+                    myBitmapImage.UriSource = new Uri(@"C:\SOEN490-ETD\Icons\AmbulanceCart3.png");
                 }
 
                 //SittingCart
                 if (SittingCart.Name == "Sitting_Cart")
                 {
-                    myBitmapImage.UriSource = new Uri(@"C:\Users\Suke\Downloads\school\SOEN 490\SOEN490-ETD\Icons\SittingCart3.png");
+                    myBitmapImage.UriSource = new Uri(@"C:\SOEN490-ETD\Icons\SittingCart3.png");
                 }
 
 
                 //MountedStretcher
                 if (MountedStretcher.Name == "Mounted_stretcher")
                 {
-                    myBitmapImage.UriSource = new Uri(@"C:\Users\Suke\Downloads\school\SOEN 490\SOEN490-ETD\Icons\MountedStretcher3.png");
+                    myBitmapImage.UriSource = new Uri(@"C:\SOEN490-ETD\Icons\MountedStretcher3.png");
                 }
 
                 //TransportStretcher
                 if (TransportStretcher.Name == "Transport_Stretcher")
                 {
-                    myBitmapImage.UriSource = new Uri(@"C:\Users\Suke\Downloads\school\SOEN 490\SOEN490-ETD\Icons\TransportStretcher2.png");
+                    myBitmapImage.UriSource = new Uri(@"C:\SOEN490-ETD\Icons\TransportStretcher2.png");
                 }
 
                 //WheelChair
                 if (WheelChair.Name == "WheelChair")
                 {
-                    myBitmapImage.UriSource = new Uri(@"C:\Users\Suke\Downloads\school\SOEN 490\SOEN490-ETD\Icons\WheelChair2.png");
+                    myBitmapImage.UriSource = new Uri(@"C:\SOEN490-ETD\Icons\WheelChair2.png");
                 }
 
                 myBitmapImage.DecodePixelWidth = 25;

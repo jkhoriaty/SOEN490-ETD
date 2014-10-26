@@ -12,6 +12,8 @@ namespace Emergency_Team_Dispatcher
         
             public static Dictionary<int, Stopwatch> timers = new Dictionary<int, Stopwatch>();
             public static Dictionary<int, TimeSpan> interventionTime = new Dictionary<int, TimeSpan>();
+            public static Dictionary<int, Team> listOfTeams = new Dictionary<int, Team>();
             public static int currentIntervention = 0;
+            public static int currentTeam = 0;
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Emergency_Team_Dispatcher
 {
-    class Team
+    public partial class Team
     {
         String name;
         TeamMember[] members;

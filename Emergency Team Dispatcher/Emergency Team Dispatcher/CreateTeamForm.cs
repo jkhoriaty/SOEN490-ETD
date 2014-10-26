@@ -101,7 +101,10 @@ namespace Emergency_Team_Dispatcher
 
             team.addMember(radioMember);
             team.addMember(firstAidMember);
+            Globals.listOfTeams.Add(Globals.currentTeam, team);
+            Globals.currentTeam++;
 
+            MessageBox.Show(Globals.listOfTeams[0].getName());
             //team.addToDB;
             
 
