@@ -99,7 +99,7 @@ namespace Emergency_Team_Dispatcher
             if (openFileDialog.ShowDialog() == true)
             {
                 System.IO.FileInfo File = new System.IO.FileInfo(openFileDialog.FileName);
-                canvas.Background = new ImageBrush(new BitmapImage(new Uri(openFileDialog.FileName)));
+                Map.Background = new ImageBrush(new BitmapImage(new Uri(openFileDialog.FileName)));
             }
         }
 
@@ -127,7 +127,7 @@ namespace Emergency_Team_Dispatcher
             r.MouseMove += new MouseEventHandler(team_MouseMove);
             Canvas.SetTop(r, 0);
             Canvas.SetLeft(r, 0);
-            canvas.Children.Add(r);
+            Map.Children.Add(r);
 
        
             if (TeamCount/(TeamCount-i)==TeamCount && TeamCount!=1)
@@ -172,7 +172,7 @@ namespace Emergency_Team_Dispatcher
             r.ReleaseMouseCapture();
             _isRectDragInProg = false;
 
-            var mousePos = e.GetPosition(canvas);
+            var mousePos = e.GetPosition(Map);
             double horizontalDropped = mousePos.X;
             double verticalDropped = mousePos.Y;
 
@@ -183,9 +183,9 @@ namespace Emergency_Team_Dispatcher
         private void collisionDetection(System.Windows.Shapes.Rectangle r, double horizontalDropped, double verticalDropped)
         {
             //Replacing item within horizontal bounds
-            if (horizontalDropped > (canvas.ActualWidth - shapeRadius)) //Right
+            if (horizontalDropped > (Map.ActualWidth - shapeRadius)) //Right
             {
-                horizontalDropped = canvas.ActualWidth - shapeRadius;
+                horizontalDropped = Map.ActualWidth - shapeRadius;
             }
             else if (horizontalDropped < shapeRadius) //Left
             {
@@ -193,9 +193,9 @@ namespace Emergency_Team_Dispatcher
             }
 
             //Replacing item within vertical bounds
-            if (verticalDropped > (canvas.ActualHeight - shapeRadius)) //Bottom
+            if (verticalDropped > (Map.ActualHeight - shapeRadius)) //Bottom
             {
-                verticalDropped = canvas.ActualHeight - shapeRadius;
+                verticalDropped = Map.ActualHeight - shapeRadius;
             }
             else if (verticalDropped < shapeRadius)
             {
@@ -213,7 +213,7 @@ namespace Emergency_Team_Dispatcher
                 verificationCount++;
 
                 //Gathering all rectangles to search for collision
-                var rectangles = canvas.Children.OfType<System.Windows.Shapes.Rectangle>().ToList();
+                var rectangles = Map.Children.OfType<System.Windows.Shapes.Rectangle>().ToList();
 
                 //Iterating throught them
                 foreach (var rectangle in rectangles)
@@ -255,7 +255,7 @@ namespace Emergency_Team_Dispatcher
                                 differenceRatio = Math.Round(((Math.Abs(verticalDifference) / Math.Abs(horizontalDifference)) / 10), 3);
 
                                 //Shifting horizontally in the correct direction, if not at the border
-                                if (shapeRadius < horizontalDropped && horizontalDropped < (canvas.ActualWidth - shapeRadius))
+                                if (shapeRadius < horizontalDropped && horizontalDropped < (Map.ActualWidth - shapeRadius))
                                 {
                                     if (horizontalDifference < 0)
                                     {
@@ -274,7 +274,7 @@ namespace Emergency_Team_Dispatcher
                             if (verticalDifference != 0)
                             {
                                 //Shifting vertically in the correct direction
-                                if (shapeRadius < verticalDropped && verticalDropped < (canvas.ActualHeight - shapeRadius))
+                                if (shapeRadius < verticalDropped && verticalDropped < (Map.ActualHeight - shapeRadius))
                                 {
                                     if (verticalDifference < 0)
                                     {
@@ -294,8 +294,8 @@ namespace Emergency_Team_Dispatcher
                             {
 
                                 MessageBox.Show("The droppd object is dropped between two objects and is bouncing around with no progress. Resetting it.");
-                                horizontalDropped = (canvas.ActualWidth / 2);
-                                verticalDropped = (canvas.ActualHeight / 2);
+                                horizontalDropped = (Map.ActualWidth / 2);
+                                verticalDropped = (Map.ActualHeight / 2);
                                 verificationCount = 0;
                             }
 
@@ -312,8 +312,8 @@ namespace Emergency_Team_Dispatcher
                             {
                                 MessageBox.Show("There's not enough space in the corner for this item. Replacing it in the center for you to replace it elsewhere.");
 
-                                double horizontalToBorder = Math.Min(horizontalFixed, (canvas.ActualWidth - horizontalFixed));
-                                double verticalToBorder = Math.Min(verticalFixed, (canvas.ActualHeight - verticalFixed));
+                                double horizontalToBorder = Math.Min(horizontalFixed, (Map.ActualWidth - horizontalFixed));
+                                double verticalToBorder = Math.Min(verticalFixed, (Map.ActualHeight - verticalFixed));
 
                                 if (horizontalToBorder <= verticalToBorder) //Need horizontal mvoement
                                 {
@@ -355,7 +355,7 @@ namespace Emergency_Team_Dispatcher
             if (!_isRectDragInProg) return;
 
             // get the position of the mouse relative to the Canvas
-            var mousePos = e.GetPosition(canvas);
+            var mousePos = e.GetPosition(Map);
             System.Windows.Shapes.Rectangle r = sender as System.Windows.Shapes.Rectangle;
 
             //Handling exception where fixed rectangle gets moved when another rectangle is dropped on it
@@ -365,7 +365,7 @@ namespace Emergency_Team_Dispatcher
             }
 
             //Making sure it is not dragged out of bounds
-            if (mousePos.X > (canvas.ActualWidth - shapeRadius) || mousePos.Y > (canvas.ActualHeight - shapeRadius) || mousePos.X < shapeRadius || mousePos.Y < shapeRadius)
+            if (mousePos.X > (Map.ActualWidth - shapeRadius) || mousePos.Y > (Map.ActualHeight - shapeRadius) || mousePos.X < shapeRadius || mousePos.Y < shapeRadius)
             {
                 return;
             }
