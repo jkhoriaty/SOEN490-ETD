@@ -26,7 +26,7 @@ namespace Emergency_Team_Dispatcher
                 return;
             }
 
-            Regex memberNameRgx = new Regex(@"^[a-zA-Z0-9]{2,10}$");
+            Regex memberNameRgx = new Regex(@"^[a-zA-Z0-9]{2,}$");
             if (!memberNameRgx.IsMatch(radioName.Text))
             {
                 MessageBox.Show("Radio member name is invalid.");
@@ -107,7 +107,6 @@ namespace Emergency_Team_Dispatcher
 
             MessageBox.Show("Success");
             this.Close();
-            
         }
 
         private void button2_Click(object sender, EventArgs e)
