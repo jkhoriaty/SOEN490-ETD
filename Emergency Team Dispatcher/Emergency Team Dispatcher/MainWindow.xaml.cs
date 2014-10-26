@@ -35,6 +35,10 @@ namespace Emergency_Team_Dispatcher
         int TeamLabelPosition = 0;
         int TeamEquipPositionTop =31;
         int iconPositionLeft = 0;
+        int NumberOfEquipment = 0;
+        int TeamCount = 1;
+        int i = 0;
+      
 
 		public MainWindow()
 		{
@@ -125,18 +129,28 @@ namespace Emergency_Team_Dispatcher
             Canvas.SetLeft(r, 0);
             canvas.Children.Add(r);
 
+       
+            if (TeamCount/(TeamCount-i)==TeamCount && TeamCount!=1)
+            {
+
+                iconPositionLeft = 0;
+                TeamEquipPositionTop += 60;
+                NumberOfEquipment = 0;
+                e.Handled = true;
+
+            }
+
+            i++;
+            TeamCount++;
+   
             //create team
             Teamformation(sender, e);
-
-            //add equipment 
-            label_Click(sender, e);
-
+            
             CreateTeamForm Ctf = new CreateTeamForm();
             Ctf.Show();
 
             //box.Text = "succ";
         }
-
 
         private void team_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -391,13 +405,15 @@ namespace Emergency_Team_Dispatcher
             Team_display.Children.Add(dynamicLabel);
             TeamLabelPosition += 60;
             TeamNumberPosition++;
+          
+            label_Click();
 
         }
 
         //Add equipment menu
-        private void label_Click(object sender, RoutedEventArgs e)
+        private void label_Click()
         {
-          
+
             //add equipment by right clicking
             ContextMenu mnuContextMenu = new ContextMenu();
             this.ContextMenu = mnuContextMenu;
@@ -410,18 +426,30 @@ namespace Emergency_Team_Dispatcher
             MenuItem TransportStretcher = new MenuItem();
             MenuItem WheelChair = new MenuItem();
 
+
+            AmbulanceCart.Click += new RoutedEventHandler(loadEquipment);
+            AmbulanceCart.Name = "Ambulance_Cart";
             AmbulanceCart.Tag = "Ambulance_Cart";
             AmbulanceCart.Header = "Add Ambulance Cart";
 
+
+            MountedStretcher.Click += new RoutedEventHandler(loadEquipment);
+            MountedStretcher.Name = "Mounted_stretcher";
             MountedStretcher.Tag = "Mounted_stretcher";
             MountedStretcher.Header = "Add Mounted stretcher";
 
+            SittingCart.Click += new RoutedEventHandler(loadEquipment);
+            SittingCart.Name = "Sitting_Cart";
             SittingCart.Tag = "Sitting_Cart";
             SittingCart.Header = "Add Sitting Cart";
 
+            TransportStretcher.Click += new RoutedEventHandler(loadEquipment);
+            TransportStretcher.Name = "Transport_Stretcher";
             TransportStretcher.Tag = "Transport_Stretcher";
             TransportStretcher.Header = "Add Transport Stretcher";
 
+            WheelChair.Click += new RoutedEventHandler(loadEquipment);
+            WheelChair.Name = "WheelChair";
             WheelChair.Tag = "WheelChair";
             WheelChair.Header = "Add WheelChair";
 
@@ -431,141 +459,80 @@ namespace Emergency_Team_Dispatcher
             mnuContextMenu.Items.Add(TransportStretcher);
             mnuContextMenu.Items.Add(WheelChair);
 
-            //test display icon
-            //to be refactored and put into their own command method
-            loadTransportStretcher(sender, e);
-            loadWheelChair(sender, e);
-            loadAmbulanceCart(sender, e);
-            loadSittingCart(sender, e);
-            loadMountedStretcher(sender, e);
-           
-            //reset icon position for the next team to be created
-            iconPositionLeft = 0;
+           // if (NumberOfEquipment > 4)
+        //    {
+        //        MessageBox.Show("A Team can only hold 5 types of equipment!");
+        //        AmbulanceCart.IsEnabled = false;
+        ////        MountedStretcher.IsEnabled = false;
+        //        WheelChair.IsEnabled = false;
+          //      TransportStretcher.IsEnabled = false;
+         //       SittingCart.IsEnabled = false;
 
-            //place icon under current team
-            TeamEquipPositionTop += 60;
+         //   }
 
-        
         }
 
-        //Displaying Equipment(to be refactored)
-        void loadWheelChair(object sender, RoutedEventArgs e)
+
+        //Displaying Equipment
+        void loadEquipment(object sender, RoutedEventArgs e)
         {
 
-            // Create Image Element
+            MenuItem AmbulanceCart = (MenuItem)sender;
+            MenuItem MountedStretcher = (MenuItem)sender;
+            MenuItem WheelChair = (MenuItem)sender;
+            MenuItem TransportStretcher = (MenuItem)sender;
+            MenuItem SittingCart = (MenuItem)sender;
+
+                // Create Image Element
             System.Windows.Controls.Image myImage = new System.Windows.Controls.Image();
-            myImage.Width = 25;
-            myImage.Height = 23;
-            
-            //position icon
-            Canvas.SetLeft(myImage, iconPositionLeft);
-            Canvas.SetTop(myImage, TeamEquipPositionTop);
-        
-            // Create image source
-            BitmapImage myBitmapImage = new BitmapImage();
-            myBitmapImage.BeginInit();
-            myBitmapImage.UriSource = new Uri(@"C:\Soen 490\Icons\WheelChair2.png");
-            myBitmapImage.DecodePixelWidth = 25;
-            myBitmapImage.EndInit();
-            myImage.Source = myBitmapImage;
-            Team_display.Children.Add(myImage);
-            iconPositionLeft += 26;
-        }
+                myImage.Width = 25;
+                myImage.Height = 23;
 
-        void loadAmbulanceCart(object sender, RoutedEventArgs e)
-        {
+                //position icon
+                Canvas.SetLeft(myImage, iconPositionLeft);
+                Canvas.SetTop(myImage, TeamEquipPositionTop);
 
+                // Create image source
+                BitmapImage myBitmapImage = new BitmapImage();
+                myBitmapImage.BeginInit();
 
-            // Create Image Element
-            System.Windows.Controls.Image myImage = new System.Windows.Controls.Image();
-            myImage.Width = 25;
-            myImage.Height = 23;
+                //AmbulanceCart
+                if (AmbulanceCart.Name == "Ambulance_Cart")
+                {
+                    myBitmapImage.UriSource = new Uri(@"C:\Users\Suke\Downloads\school\SOEN 490\SOEN490-ETD\Icons\AmbulanceCart3.png");
+                }
 
-            //position icon
-            Canvas.SetLeft(myImage, iconPositionLeft);
-            Canvas.SetTop(myImage, TeamEquipPositionTop);
-
-            // Create image source
-            BitmapImage myBitmapImage = new BitmapImage();
-            myBitmapImage.BeginInit();
-            myBitmapImage.UriSource = new Uri(@"C:\Soen 490\Icons\AmbulanceCart2.png");
-            myBitmapImage.DecodePixelWidth = 25;
-            myBitmapImage.EndInit();
-            myImage.Source = myBitmapImage;
-            Team_display.Children.Add(myImage);
-
-            iconPositionLeft += 26;
-        }
-
-        void loadSittingCart(object sender, RoutedEventArgs e)
-        {
+                //SittingCart
+                if (SittingCart.Name == "Sitting_Cart")
+                {
+                    myBitmapImage.UriSource = new Uri(@"C:\Users\Suke\Downloads\school\SOEN 490\SOEN490-ETD\Icons\SittingCart3.png");
+                }
 
 
-            // Create Image Element
-            System.Windows.Controls.Image myImage = new System.Windows.Controls.Image();
-            myImage.Width = 25;
-            myImage.Height = 23;
+                //MountedStretcher
+                if (MountedStretcher.Name == "Mounted_stretcher")
+                {
+                    myBitmapImage.UriSource = new Uri(@"C:\Users\Suke\Downloads\school\SOEN 490\SOEN490-ETD\Icons\MountedStretcher3.png");
+                }
 
-            //position icon
-            Canvas.SetLeft(myImage, iconPositionLeft);
-            Canvas.SetTop(myImage, TeamEquipPositionTop);
+                //TransportStretcher
+                if (TransportStretcher.Name == "Transport_Stretcher")
+                {
+                    myBitmapImage.UriSource = new Uri(@"C:\Users\Suke\Downloads\school\SOEN 490\SOEN490-ETD\Icons\TransportStretcher2.png");
+                }
 
-            // Create image source
-            BitmapImage myBitmapImage = new BitmapImage();
-            myBitmapImage.BeginInit();
-            myBitmapImage.UriSource = new Uri(@"C:\Soen 490\Icons\SittingCart2.png");
-            myBitmapImage.DecodePixelWidth = 25;
-            myBitmapImage.EndInit();
-            myImage.Source = myBitmapImage;
-            Team_display.Children.Add(myImage);
+                //WheelChair
+                if (WheelChair.Name == "WheelChair")
+                {
+                    myBitmapImage.UriSource = new Uri(@"C:\Users\Suke\Downloads\school\SOEN 490\SOEN490-ETD\Icons\WheelChair2.png");
+                }
 
-            iconPositionLeft += 26;
-        }
-
-        void loadMountedStretcher(object sender, RoutedEventArgs e)
-        {
-
-            // Create Image Element
-            System.Windows.Controls.Image myImage = new System.Windows.Controls.Image();
-            myImage.Width = 25;
-            myImage.Height = 23;
-
-            //position icon
-            Canvas.SetLeft(myImage, iconPositionLeft);
-            Canvas.SetTop(myImage, TeamEquipPositionTop);
-
-            // Create image source
-            BitmapImage myBitmapImage = new BitmapImage();
-            myBitmapImage.BeginInit();
-            myBitmapImage.UriSource = new Uri(@"C:\Soen 490\Icons\MountedStretcher2.png");
-            myBitmapImage.DecodePixelWidth = 25;
-            myBitmapImage.EndInit();
-            myImage.Source = myBitmapImage;
-            Team_display.Children.Add(myImage);
-            iconPositionLeft += 26;
-        }
-
-        void loadTransportStretcher(object sender, RoutedEventArgs e)
-        {
-
-            // Create Image Element
-            System.Windows.Controls.Image myImage = new System.Windows.Controls.Image();
-            myImage.Width = 25;
-            myImage.Height = 23;
-
-            //position icon
-            Canvas.SetLeft(myImage, iconPositionLeft);
-            Canvas.SetTop(myImage, TeamEquipPositionTop);
-
-            // Create image source
-            BitmapImage myBitmapImage = new BitmapImage();
-            myBitmapImage.BeginInit();
-            myBitmapImage.UriSource = new Uri(@"C:\Soen 490\Icons\TransportStretcher2.png");
-            myBitmapImage.DecodePixelWidth = 25;
-            myBitmapImage.EndInit();
-            myImage.Source = myBitmapImage;
-            Team_display.Children.Add(myImage);
-            iconPositionLeft += 26;
+                myBitmapImage.DecodePixelWidth = 25;
+                myBitmapImage.EndInit();
+                myImage.Source = myBitmapImage;
+                Team_display.Children.Add(myImage);
+                iconPositionLeft += 26;
+                NumberOfEquipment++;
         }
 	}
 }
