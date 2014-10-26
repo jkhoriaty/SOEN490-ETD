@@ -13,6 +13,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Drawing;
+using System.Diagnostics;
+
+
+
 
 namespace Emergency_Team_Dispatcher
 {
@@ -21,25 +26,74 @@ namespace Emergency_Team_Dispatcher
 	/// </summary>
 	public partial class MainWindow : Window
 	{
+
+        //variable initialization
+        private bool _isRectDragInProg;
+        String movingRectangle;
+        int shapeRadius = 25;
+        int TeamNumberPosition = 0;
+        int TeamLabelPosition = 0;
+        int TeamEquipPositionTop =31;
+        int iconPositionLeft = 0;
+        int NumberOfEquipment = 0;
+        int TeamCount = 1;
+        int i = 0;
+      
+
 		public MainWindow()
 		{
 			InitializeComponent();
+           		LanguageSelector.loadVocabulary();
+            		//Put preferred default language
+            		LanguageSelector.changeLanguage(this, "en");
 		}
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            
+
+        }
+
+        private void TimeTest_MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            //This Method currently returns the timer of the last queue'd timer.
+            //Once the intervention creation interface is completed, it will be a trivial
+            //matter to select which intervention from the dictionary you would like to retrieve the time from.
+            //It is important to note, that in this current function, the timer keeps going even after you poll
+            //it for its value. I left this in intentionally to prove that my function for retrieving didn't break
+            //the stopwatch's functionality. This could be extremely useful if we wanted to keep a running display of
+            //the time taken for each portion of each intervention.
+            if (Globals.timers.ContainsKey(Globals.currentIntervention - 1))
+            {
+                TimeSpan elapsed = Globals.timers[Globals.currentIntervention - 1].Elapsed;
+                timer.Text = elapsed.TotalSeconds.ToString();                               //Converts the total time on the stopwatch into an amount of seconds.
+
+                Globals.interventionTime.Add(Globals.currentIntervention - 1, elapsed);     //Saves it to a second dictionary, this one only stores the elapsed times, this will be pushed to DB.
+            }
         }
 
         private void NewEvent_MenuItem_Click(object sender, RoutedEventArgs e)
         {
+
+            //Menu item that initialises the timer and saves it to a dictionary with an incrementing index.
+            //This index represents the ID of the intervention. It's currently simply the numbers from 1-X because
+            //I didn't have out naming convention for interventions on hand. It is a trivial matter to change the index
+            //to be anything we want, very little would have to be adjusted.
+            int temp = Globals.currentIntervention;
+            Stopwatch interventionTimer = new Stopwatch();
+            interventionTimer.Start();
+
+            Globals.timers.Add(temp, interventionTimer);
+
+            Globals.currentIntervention += 1;
+
+            timer.Text = Globals.currentIntervention.ToString();
 
         }
 
         private void Map_MenuItem_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Image Files (*.bmp, *.jpg, *.png, *.gif)|*.bmp;*.jpg; *.png, *.gif";
+            openFileDialog.Filter = "Image Files (*.bmp, *.jpg, *.png, *.gif)|*.bmp;*.jpg; *.png; *.gif";
             openFileDialog.FilterIndex = 1;
 
             if (openFileDialog.ShowDialog() == true)
@@ -54,28 +108,49 @@ namespace Emergency_Team_Dispatcher
             Application.Current.Shutdown();
         }
 
+		private int rectangleCtr = 1;
+
         private void Team_MenuItem_Click(object sender, RoutedEventArgs e)
         {
+            Random random = new Random();
+            byte[] colorBytes = new byte[3];
+            random.NextBytes(colorBytes);
+            System.Windows.Media.Color randomColor = System.Windows.Media.Color.FromRgb(colorBytes[0], colorBytes[1], colorBytes[2]);
             System.Windows.Shapes.Rectangle r = new System.Windows.Shapes.Rectangle();
+			r.Name = "team_" + rectangleCtr++;
             r.Width = shapeRadius * 2;
             r.Height = shapeRadius * 2;
             r.Stroke = new SolidColorBrush(Colors.Black);
-            r.Fill = new SolidColorBrush(Colors.GreenYellow);
+            r.Fill = new SolidColorBrush(randomColor);
             r.MouseLeftButtonDown += new MouseButtonEventHandler(team_MouseLeftButtonDown);
             r.MouseLeftButtonUp += new MouseButtonEventHandler(team_MouseLeftButtonUp);
             r.MouseMove += new MouseEventHandler(team_MouseMove);
             Canvas.SetTop(r, 0);
             Canvas.SetLeft(r, 0);
             canvas.Children.Add(r);
-            //CreateTeamForm Ctf = new CreateTeamForm();
-            //Ctf.Show();
+
+       
+            if (TeamCount/(TeamCount-i)==TeamCount && TeamCount!=1)
+            {
+
+                iconPositionLeft = 0;
+                TeamEquipPositionTop += 60;
+                NumberOfEquipment = 0;
+                e.Handled = true;
+
+            }
+
+            i++;
+            TeamCount++;
+   
+            //create team
+            Teamformation(sender, e);
+            
+            CreateTeamForm Ctf = new CreateTeamForm();
+            Ctf.Show();
 
             //box.Text = "succ";
         }
-
-        private bool _isRectDragInProg;
-        String movingRectangle;
-        int shapeRadius = 25;
 
         private void team_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -299,6 +374,165 @@ namespace Emergency_Team_Dispatcher
             Canvas.SetTop(r, (mousePos.Y - shapeRadius));
         }
 
+        private void French_Click(object sender, RoutedEventArgs e)
+        {
+            LanguageSelector.changeLanguage(this, "fr");
+        }
 
+        private void _English_Click(object sender, RoutedEventArgs e)
+        {
+            LanguageSelector.changeLanguage(this, "en");
+        }
+
+        //Assign and display team name
+        private void Teamformation(object sender, EventArgs e)
+        {
+           
+            string TeamName = "Team ";
+            string[] TeamNumber = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "ALPHA", "BETA", "THETA" };
+
+            Label dynamicLabel = new Label();
+            dynamicLabel.Name = "Label";
+            dynamicLabel.Width = 100;
+            dynamicLabel.Height = 30;
+            dynamicLabel.Content = TeamName + TeamNumber[TeamNumberPosition];
+            dynamicLabel.Foreground = new SolidColorBrush(Colors.White);
+            dynamicLabel.Background = new SolidColorBrush(Colors.Black);
+            dynamicLabel.BorderBrush = System.Windows.Media.Brushes.Black;
+
+            Canvas.SetLeft(dynamicLabel, 0);
+            Canvas.SetTop(dynamicLabel, TeamLabelPosition);
+            Team_display.Children.Add(dynamicLabel);
+            TeamLabelPosition += 60;
+            TeamNumberPosition++;
+          
+            label_Click();
+
+        }
+
+        //Add equipment menu
+        private void label_Click()
+        {
+
+            //add equipment by right clicking
+            ContextMenu mnuContextMenu = new ContextMenu();
+            this.ContextMenu = mnuContextMenu;
+         
+            mnuContextMenu.Width = 200;
+            mnuContextMenu.Height = 130;
+            MenuItem AmbulanceCart = new MenuItem();
+            MenuItem MountedStretcher = new MenuItem();
+            MenuItem SittingCart = new MenuItem();
+            MenuItem TransportStretcher = new MenuItem();
+            MenuItem WheelChair = new MenuItem();
+
+
+            AmbulanceCart.Click += new RoutedEventHandler(loadEquipment);
+            AmbulanceCart.Name = "Ambulance_Cart";
+            AmbulanceCart.Tag = "Ambulance_Cart";
+            AmbulanceCart.Header = "Add Ambulance Cart";
+
+
+            MountedStretcher.Click += new RoutedEventHandler(loadEquipment);
+            MountedStretcher.Name = "Mounted_stretcher";
+            MountedStretcher.Tag = "Mounted_stretcher";
+            MountedStretcher.Header = "Add Mounted stretcher";
+
+            SittingCart.Click += new RoutedEventHandler(loadEquipment);
+            SittingCart.Name = "Sitting_Cart";
+            SittingCart.Tag = "Sitting_Cart";
+            SittingCart.Header = "Add Sitting Cart";
+
+            TransportStretcher.Click += new RoutedEventHandler(loadEquipment);
+            TransportStretcher.Name = "Transport_Stretcher";
+            TransportStretcher.Tag = "Transport_Stretcher";
+            TransportStretcher.Header = "Add Transport Stretcher";
+
+            WheelChair.Click += new RoutedEventHandler(loadEquipment);
+            WheelChair.Name = "WheelChair";
+            WheelChair.Tag = "WheelChair";
+            WheelChair.Header = "Add WheelChair";
+
+            mnuContextMenu.Items.Add(AmbulanceCart);
+            mnuContextMenu.Items.Add(MountedStretcher);
+            mnuContextMenu.Items.Add(SittingCart);
+            mnuContextMenu.Items.Add(TransportStretcher);
+            mnuContextMenu.Items.Add(WheelChair);
+
+           // if (NumberOfEquipment > 4)
+        //    {
+        //        MessageBox.Show("A Team can only hold 5 types of equipment!");
+        //        AmbulanceCart.IsEnabled = false;
+        ////        MountedStretcher.IsEnabled = false;
+        //        WheelChair.IsEnabled = false;
+          //      TransportStretcher.IsEnabled = false;
+         //       SittingCart.IsEnabled = false;
+
+         //   }
+
+        }
+
+
+        //Displaying Equipment
+        void loadEquipment(object sender, RoutedEventArgs e)
+        {
+
+            MenuItem AmbulanceCart = (MenuItem)sender;
+            MenuItem MountedStretcher = (MenuItem)sender;
+            MenuItem WheelChair = (MenuItem)sender;
+            MenuItem TransportStretcher = (MenuItem)sender;
+            MenuItem SittingCart = (MenuItem)sender;
+
+                // Create Image Element
+            System.Windows.Controls.Image myImage = new System.Windows.Controls.Image();
+                myImage.Width = 25;
+                myImage.Height = 23;
+
+                //position icon
+                Canvas.SetLeft(myImage, iconPositionLeft);
+                Canvas.SetTop(myImage, TeamEquipPositionTop);
+
+                // Create image source
+                BitmapImage myBitmapImage = new BitmapImage();
+                myBitmapImage.BeginInit();
+
+                //AmbulanceCart
+                if (AmbulanceCart.Name == "Ambulance_Cart")
+                {
+                    myBitmapImage.UriSource = new Uri(@"C:\Users\Suke\Downloads\school\SOEN 490\SOEN490-ETD\Icons\AmbulanceCart3.png");
+                }
+
+                //SittingCart
+                if (SittingCart.Name == "Sitting_Cart")
+                {
+                    myBitmapImage.UriSource = new Uri(@"C:\Users\Suke\Downloads\school\SOEN 490\SOEN490-ETD\Icons\SittingCart3.png");
+                }
+
+
+                //MountedStretcher
+                if (MountedStretcher.Name == "Mounted_stretcher")
+                {
+                    myBitmapImage.UriSource = new Uri(@"C:\Users\Suke\Downloads\school\SOEN 490\SOEN490-ETD\Icons\MountedStretcher3.png");
+                }
+
+                //TransportStretcher
+                if (TransportStretcher.Name == "Transport_Stretcher")
+                {
+                    myBitmapImage.UriSource = new Uri(@"C:\Users\Suke\Downloads\school\SOEN 490\SOEN490-ETD\Icons\TransportStretcher2.png");
+                }
+
+                //WheelChair
+                if (WheelChair.Name == "WheelChair")
+                {
+                    myBitmapImage.UriSource = new Uri(@"C:\Users\Suke\Downloads\school\SOEN 490\SOEN490-ETD\Icons\WheelChair2.png");
+                }
+
+                myBitmapImage.DecodePixelWidth = 25;
+                myBitmapImage.EndInit();
+                myImage.Source = myBitmapImage;
+                Team_display.Children.Add(myImage);
+                iconPositionLeft += 26;
+                NumberOfEquipment++;
+        }
 	}
 }
