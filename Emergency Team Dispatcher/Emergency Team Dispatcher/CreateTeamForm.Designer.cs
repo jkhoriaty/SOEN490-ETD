@@ -118,6 +118,7 @@
             // 
             // radioLevelOfTraining
             // 
+            this.radioLevelOfTraining.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.radioLevelOfTraining.FormattingEnabled = true;
             this.radioLevelOfTraining.Items.AddRange(new object[] {
             "General First Aid",
@@ -130,6 +131,7 @@
             // 
             // firstAidLevelOfTraining
             // 
+            this.firstAidLevelOfTraining.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.firstAidLevelOfTraining.FormattingEnabled = true;
             this.firstAidLevelOfTraining.Items.AddRange(new object[] {
             "General First Aid",
