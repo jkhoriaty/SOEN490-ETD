@@ -462,7 +462,7 @@ namespace Emergency_Team_Dispatcher
             ContextMenu mnuContextMenu = new ContextMenu();
             this.ContextMenu = mnuContextMenu;
          
-            mnuContextMenu.Width = 200;
+            mnuContextMenu.Width = 205;
             mnuContextMenu.Height = 150;
             MenuItem AmbulanceCart = new MenuItem();
             MenuItem MountedStretcher = new MenuItem();

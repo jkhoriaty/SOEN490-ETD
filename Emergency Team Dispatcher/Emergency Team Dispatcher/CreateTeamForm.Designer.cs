@@ -35,10 +35,9 @@
             this.label5 = new System.Windows.Forms.Label();
             this.teamName = new System.Windows.Forms.TextBox();
             this.radioName = new System.Windows.Forms.TextBox();
-            this.radioDeparture = new System.Windows.Forms.TextBox();
+            this.radioDeparturehh = new System.Windows.Forms.TextBox();
             this.radioLevelOfTraining = new System.Windows.Forms.ComboBox();
             this.firstAidLevelOfTraining = new System.Windows.Forms.ComboBox();
-            this.fAidDeparture = new System.Windows.Forms.TextBox();
             this.firstAidName = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -46,6 +45,9 @@
             this.label9 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.radioDeparturemm = new System.Windows.Forms.TextBox();
+            this.fAidmm = new System.Windows.Forms.TextBox();
+            this.fAidhh = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label1
@@ -109,12 +111,13 @@
             this.radioName.Size = new System.Drawing.Size(100, 20);
             this.radioName.TabIndex = 6;
             // 
-            // radioDeparture
+            // radioDeparturehh
             // 
-            this.radioDeparture.Location = new System.Drawing.Point(253, 120);
-            this.radioDeparture.Name = "radioDeparture";
-            this.radioDeparture.Size = new System.Drawing.Size(100, 20);
-            this.radioDeparture.TabIndex = 7;
+            this.radioDeparturehh.Location = new System.Drawing.Point(253, 120);
+            this.radioDeparturehh.Name = "radioDeparturehh";
+            this.radioDeparturehh.Size = new System.Drawing.Size(22, 20);
+            this.radioDeparturehh.TabIndex = 7;
+            this.radioDeparturehh.Text = "hh";
             // 
             // radioLevelOfTraining
             // 
@@ -141,13 +144,6 @@
             this.firstAidLevelOfTraining.Name = "firstAidLevelOfTraining";
             this.firstAidLevelOfTraining.Size = new System.Drawing.Size(121, 21);
             this.firstAidLevelOfTraining.TabIndex = 15;
-            // 
-            // fAidDeparture
-            // 
-            this.fAidDeparture.Location = new System.Drawing.Point(253, 256);
-            this.fAidDeparture.Name = "fAidDeparture";
-            this.fAidDeparture.Size = new System.Drawing.Size(100, 20);
-            this.fAidDeparture.TabIndex = 14;
             // 
             // firstAidName
             // 
@@ -213,22 +209,48 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // radioDeparturemm
+            // 
+            this.radioDeparturemm.Location = new System.Drawing.Point(281, 120);
+            this.radioDeparturemm.Name = "radioDeparturemm";
+            this.radioDeparturemm.Size = new System.Drawing.Size(22, 20);
+            this.radioDeparturemm.TabIndex = 18;
+            this.radioDeparturemm.Text = "mm";
+            // 
+            // fAidmm
+            // 
+            this.fAidmm.Location = new System.Drawing.Point(280, 256);
+            this.fAidmm.Name = "fAidmm";
+            this.fAidmm.Size = new System.Drawing.Size(22, 20);
+            this.fAidmm.TabIndex = 20;
+            this.fAidmm.Text = "mm";
+            // 
+            // fAidhh
+            // 
+            this.fAidhh.Location = new System.Drawing.Point(252, 256);
+            this.fAidhh.Name = "fAidhh";
+            this.fAidhh.Size = new System.Drawing.Size(22, 20);
+            this.fAidhh.TabIndex = 19;
+            this.fAidhh.Text = "hh";
+            // 
             // CreateTeamForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(422, 394);
+            this.Controls.Add(this.fAidmm);
+            this.Controls.Add(this.fAidhh);
+            this.Controls.Add(this.radioDeparturemm);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.firstAidLevelOfTraining);
-            this.Controls.Add(this.fAidDeparture);
             this.Controls.Add(this.firstAidName);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.radioLevelOfTraining);
-            this.Controls.Add(this.radioDeparture);
+            this.Controls.Add(this.radioDeparturehh);
             this.Controls.Add(this.radioName);
             this.Controls.Add(this.teamName);
             this.Controls.Add(this.label5);
@@ -252,10 +274,9 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox teamName;
         private System.Windows.Forms.TextBox radioName;
-        private System.Windows.Forms.TextBox radioDeparture;
+        private System.Windows.Forms.TextBox radioDeparturehh;
         private System.Windows.Forms.ComboBox radioLevelOfTraining;
         private System.Windows.Forms.ComboBox firstAidLevelOfTraining;
-        private System.Windows.Forms.TextBox fAidDeparture;
         private System.Windows.Forms.TextBox firstAidName;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
@@ -263,5 +284,8 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.TextBox radioDeparturemm;
+        private System.Windows.Forms.TextBox fAidmm;
+        private System.Windows.Forms.TextBox fAidhh;
     }
 }

@@ -19,14 +19,14 @@ namespace Emergency_Team_Dispatcher
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Regex nameRgx = new Regex(@"^[a-zA-Z0-9]$");
+            Regex nameRgx = new Regex(@"^[a-zA-Z]{1,5}$");
             if(!nameRgx.IsMatch(teamName.Text))
             {
                 MessageBox.Show("Team name is invalid.");
                 return;
             }
 
-            Regex memberNameRgx = new Regex(@"^[a-zA-Z0-9]{2,}$");
+            Regex memberNameRgx = new Regex(@"^[a-zA-Z0-9]{2,30}$");
             if (!memberNameRgx.IsMatch(radioName.Text))
             {
                 MessageBox.Show("Radio member name is invalid.");
@@ -50,14 +50,14 @@ namespace Emergency_Team_Dispatcher
                 return;
             }
 
-            Regex timeRgx = new Regex(@"^[a-zA-Z0-9 ]{2,32}$");
-            if(!timeRgx.IsMatch(radioDeparture.Text))
+            Regex timeRgx = new Regex(@"^"); //needs to be done
+            if(!timeRgx.IsMatch(radioDeparturehh.Text))
             {
                 MessageBox.Show("Radio time of departure is invalid.");
                 return;
             }
 
-            if (!timeRgx.IsMatch(fAidDeparture.Text))
+            if (!timeRgx.IsMatch(fAidhh.Text))
             {
                 MessageBox.Show("First aid time of departure is invalid.");
                 return;
@@ -96,12 +96,15 @@ namespace Emergency_Team_Dispatcher
             }
 
 
-            TeamMember radioMember = new TeamMember(radioName.Text, rTraining, radioDeparture.Text);
-            TeamMember firstAidMember = new TeamMember(firstAidName.Text, fTraining, fAidDeparture.Text);
+            TeamMember radioMember = new TeamMember(radioName.Text, rTraining, radioDeparturehh.Text);
+            TeamMember firstAidMember = new TeamMember(firstAidName.Text, fTraining, fAidhh.Text);
 
             team.addMember(radioMember);
             team.addMember(firstAidMember);
+            Globals.listOfTeams.Add(Globals.currentTeam, team);
+            Globals.currentTeam++;
 
+            MessageBox.Show(Globals.listOfTeams[0].getName());
             //team.addToDB;
             
 
