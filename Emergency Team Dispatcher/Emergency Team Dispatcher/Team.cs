@@ -11,7 +11,6 @@ namespace Emergency_Team_Dispatcher
         String name;
         TeamMember[] members;
         int memberCount = 0;
-        String departure;
 
         public Team()
         {

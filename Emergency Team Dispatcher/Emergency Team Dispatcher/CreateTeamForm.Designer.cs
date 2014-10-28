@@ -74,9 +74,9 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(55, 123);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(92, 13);
+            this.label3.Size = new System.Drawing.Size(151, 13);
             this.label3.TabIndex = 2;
-            this.label3.Text = "Time of Departure";
+            this.label3.Text = "Time of Departure (24h format)";
             // 
             // label4
             // 
@@ -102,21 +102,21 @@
             this.teamName.Location = new System.Drawing.Point(253, 19);
             this.teamName.Name = "teamName";
             this.teamName.Size = new System.Drawing.Size(100, 20);
-            this.teamName.TabIndex = 5;
+            this.teamName.TabIndex = 0;
             // 
             // radioName
             // 
             this.radioName.Location = new System.Drawing.Point(253, 86);
             this.radioName.Name = "radioName";
             this.radioName.Size = new System.Drawing.Size(100, 20);
-            this.radioName.TabIndex = 6;
+            this.radioName.TabIndex = 1;
             // 
             // radioDeparturehh
             // 
             this.radioDeparturehh.Location = new System.Drawing.Point(253, 120);
             this.radioDeparturehh.Name = "radioDeparturehh";
             this.radioDeparturehh.Size = new System.Drawing.Size(22, 20);
-            this.radioDeparturehh.TabIndex = 7;
+            this.radioDeparturehh.TabIndex = 2;
             this.radioDeparturehh.Text = "hh";
             // 
             // radioLevelOfTraining
@@ -130,7 +130,7 @@
             this.radioLevelOfTraining.Location = new System.Drawing.Point(253, 152);
             this.radioLevelOfTraining.Name = "radioLevelOfTraining";
             this.radioLevelOfTraining.Size = new System.Drawing.Size(121, 21);
-            this.radioLevelOfTraining.TabIndex = 8;
+            this.radioLevelOfTraining.TabIndex = 4;
             // 
             // firstAidLevelOfTraining
             // 
@@ -143,14 +143,14 @@
             this.firstAidLevelOfTraining.Location = new System.Drawing.Point(253, 288);
             this.firstAidLevelOfTraining.Name = "firstAidLevelOfTraining";
             this.firstAidLevelOfTraining.Size = new System.Drawing.Size(121, 21);
-            this.firstAidLevelOfTraining.TabIndex = 15;
+            this.firstAidLevelOfTraining.TabIndex = 8;
             // 
             // firstAidName
             // 
             this.firstAidName.Location = new System.Drawing.Point(253, 222);
             this.firstAidName.Name = "firstAidName";
             this.firstAidName.Size = new System.Drawing.Size(100, 20);
-            this.firstAidName.TabIndex = 13;
+            this.firstAidName.TabIndex = 5;
             // 
             // label6
             // 
@@ -176,9 +176,9 @@
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(55, 259);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(92, 13);
+            this.label8.Size = new System.Drawing.Size(151, 13);
             this.label8.TabIndex = 10;
-            this.label8.Text = "Time of Departure";
+            this.label8.Text = "Time of Departure (24h format)";
             // 
             // label9
             // 
@@ -194,7 +194,7 @@
             this.button1.Location = new System.Drawing.Point(117, 349);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 16;
+            this.button1.TabIndex = 9;
             this.button1.Text = "Confirm";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -204,7 +204,7 @@
             this.button2.Location = new System.Drawing.Point(227, 349);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 17;
+            this.button2.TabIndex = 10;
             this.button2.Text = "Cancel";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
@@ -214,7 +214,7 @@
             this.radioDeparturemm.Location = new System.Drawing.Point(281, 120);
             this.radioDeparturemm.Name = "radioDeparturemm";
             this.radioDeparturemm.Size = new System.Drawing.Size(22, 20);
-            this.radioDeparturemm.TabIndex = 18;
+            this.radioDeparturemm.TabIndex = 3;
             this.radioDeparturemm.Text = "mm";
             // 
             // fAidmm
@@ -222,7 +222,7 @@
             this.fAidmm.Location = new System.Drawing.Point(280, 256);
             this.fAidmm.Name = "fAidmm";
             this.fAidmm.Size = new System.Drawing.Size(22, 20);
-            this.fAidmm.TabIndex = 20;
+            this.fAidmm.TabIndex = 7;
             this.fAidmm.Text = "mm";
             // 
             // fAidhh
@@ -230,7 +230,7 @@
             this.fAidhh.Location = new System.Drawing.Point(252, 256);
             this.fAidhh.Name = "fAidhh";
             this.fAidhh.Size = new System.Drawing.Size(22, 20);
-            this.fAidhh.TabIndex = 19;
+            this.fAidhh.TabIndex = 6;
             this.fAidhh.Text = "hh";
             // 
             // CreateTeamForm
