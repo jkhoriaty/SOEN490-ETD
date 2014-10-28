@@ -41,14 +41,16 @@ namespace Emergency_Team_Dispatcher
         int LevelofTrainingPositionLeft = 150;
         int TeamCount = 1;
         int i = 0;
+		String AbsolutePath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase);
       
 
 		public MainWindow()
 		{
 			InitializeComponent();
-           		LanguageSelector.loadVocabulary();
-            		//Put preferred default language
-            		LanguageSelector.changeLanguage(this, "en");
+           	LanguageSelector.loadVocabulary();
+            //Put preferred default language
+            LanguageSelector.changeLanguage(this, "en");
+			AbsolutePath = AbsolutePath.Substring(6) + @"\";
 		}
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
@@ -515,7 +517,6 @@ namespace Emergency_Team_Dispatcher
         //Displaying Equipment
         void loadEquipment(object sender, RoutedEventArgs e)
         {
-
             MenuItem AmbulanceCart = (MenuItem)sender;
             MenuItem MountedStretcher = (MenuItem)sender;
             MenuItem WheelChair = (MenuItem)sender;
@@ -553,39 +554,39 @@ namespace Emergency_Team_Dispatcher
                 //AmbulanceCart
                 if (AmbulanceCart.Name == "Ambulance_Cart")
                 {
-                    myBitmapImage.UriSource = new Uri(@"C:\Users\Suke\Downloads\school\SOEN 490\SOEN490-ETD\Icons\AmbulanceCart.png");
+                    myBitmapImage.UriSource = new Uri(AbsolutePath + @"Icons\AmbulanceCart.png");
                 }
 
                 //SittingCart
                 if (SittingCart.Name == "Sitting_Cart")
                 {
-                    myBitmapImage.UriSource = new Uri(@"C:\Users\Suke\Downloads\school\SOEN 490\SOEN490-ETD\Icons\SittingCart.png");
+					myBitmapImage.UriSource = new Uri(AbsolutePath + @"Icons\SittingCart.png");
                 }
 
 
                 //MountedStretcher
                 if (MountedStretcher.Name == "Mounted_stretcher")
                 {
-                    myBitmapImage.UriSource = new Uri(@"C:\Users\Suke\Downloads\school\SOEN 490\SOEN490-ETD\Icons\MountedStretcher.png");
+					myBitmapImage.UriSource = new Uri(AbsolutePath + @"Icons\MountedStretcher.png");
                 }
 
                 //TransportStretcher
                 if (TransportStretcher.Name == "Transport_Stretcher")
                 {
-                    myBitmapImage.UriSource = new Uri(@"C:\Users\Suke\Downloads\school\SOEN 490\SOEN490-ETD\Icons\TransportStretcher.png");
+					myBitmapImage.UriSource = new Uri(AbsolutePath + @"Icons\TransportStretcher.png");
                 }
 
                 //WheelChair
                 if (WheelChair.Name == "WheelChair")
                 {
-                    myBitmapImage.UriSource = new Uri(@"C:\Users\Suke\Downloads\school\SOEN 490\SOEN490-ETD\Icons\WheelChair.png");
+					myBitmapImage.UriSource = new Uri(AbsolutePath + @"Icons\WheelChair.png");
                 }
 
 
                 //epipen
                 if (Epipen.Name == "Epipen")
                 {
-                    myBitmapImage.UriSource = new Uri(@"C:\Users\Suke\Downloads\school\SOEN 490\SOEN490-ETD\Icons\Epipen.png");
+					myBitmapImage.UriSource = new Uri(AbsolutePath + @"Icons\Epipen.png");
                 }
 
                 myBitmapImage.DecodePixelWidth = 25;
@@ -595,7 +596,7 @@ namespace Emergency_Team_Dispatcher
                 iconPositionLeft += 26;
                 NumberOfEquipment++;
             }
-
+			
 
 
         }
@@ -622,7 +623,7 @@ namespace Emergency_Team_Dispatcher
             //first aid
             if (TeamMember.Tag.ToString() == "first_aid")
             {
-                myBitmapImage.UriSource = new Uri(@"C:\Users\Suke\Downloads\school\SOEN 490\SOEN490-ETD\Icons\First_Aid.png");
+				myBitmapImage.UriSource = new Uri(AbsolutePath + @"Icons\First_Aid.png");
                 if (TeamMember.Name == "TeamMember1")
                 {
                     Canvas.SetTop(myImage, TeamMember1Position);
@@ -636,7 +637,7 @@ namespace Emergency_Team_Dispatcher
             //first responder
             if (TeamMember.Tag.ToString() == "first_responder")
             {
-                myBitmapImage.UriSource = new Uri(@"C:\Users\Suke\Downloads\school\SOEN 490\SOEN490-ETD\Icons\First_Responder.png");
+				myBitmapImage.UriSource = new Uri(AbsolutePath + @"Icons\First_Responder.png");
                 if (TeamMember.Name == "TeamMember1")
                 {
                     Canvas.SetTop(myImage, TeamMember1Position);
@@ -650,7 +651,7 @@ namespace Emergency_Team_Dispatcher
             //Medicine
             if (TeamMember.Tag.ToString() == "Medicine")
             {
-                myBitmapImage.UriSource = new Uri(@"C:\Users\Suke\Downloads\school\SOEN 490\SOEN490-ETD\Icons\Medicine.png");
+				myBitmapImage.UriSource = new Uri(AbsolutePath + @"Icons\Medicine.png");
                 if (TeamMember.Name == "TeamMember1")
                 {
                     Canvas.SetTop(myImage, TeamMember1Position);
@@ -664,7 +665,7 @@ namespace Emergency_Team_Dispatcher
             myBitmapImage.EndInit();
             myImage.Source = myBitmapImage;
             Team_display.Children.Add(myImage);
-
+			
         }
 
 
