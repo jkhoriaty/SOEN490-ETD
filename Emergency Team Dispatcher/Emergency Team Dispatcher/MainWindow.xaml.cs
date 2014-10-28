@@ -134,7 +134,7 @@ namespace Emergency_Team_Dispatcher
             {
 
                 iconPositionLeft = 0;
-                TeamEquipPositionTop += 60;
+                TeamEquipPositionTop += 180;
                 NumberOfEquipment = 0;
                 e.Handled = true;
 
@@ -142,12 +142,12 @@ namespace Emergency_Team_Dispatcher
 
             i++;
             TeamCount++;
-   
-            //create team
-            Teamformation(sender, e);
             
             CreateTeamForm Ctf = new CreateTeamForm();
             Ctf.Show();
+
+            //create team should display team name ,  team members and their level of training
+            Teamformation(sender, e);
 
             //box.Text = "succ";
         }
@@ -393,7 +393,7 @@ namespace Emergency_Team_Dispatcher
 
             Label dynamicLabel = new Label();
             dynamicLabel.Name = "Label";
-            dynamicLabel.Width = 100;
+            dynamicLabel.Width = 180;
             dynamicLabel.Height = 30;
             dynamicLabel.Content = TeamName + TeamNumber[TeamNumberPosition];
             dynamicLabel.Foreground = new SolidColorBrush(Colors.White);
@@ -403,7 +403,7 @@ namespace Emergency_Team_Dispatcher
             Canvas.SetLeft(dynamicLabel, 0);
             Canvas.SetTop(dynamicLabel, TeamLabelPosition);
             Team_display.Children.Add(dynamicLabel);
-            TeamLabelPosition += 60;
+            TeamLabelPosition += 180;
             TeamNumberPosition++;
           
             label_Click();
@@ -419,12 +419,13 @@ namespace Emergency_Team_Dispatcher
             this.ContextMenu = mnuContextMenu;
          
             mnuContextMenu.Width = 200;
-            mnuContextMenu.Height = 130;
+            mnuContextMenu.Height = 150;
             MenuItem AmbulanceCart = new MenuItem();
             MenuItem MountedStretcher = new MenuItem();
             MenuItem SittingCart = new MenuItem();
             MenuItem TransportStretcher = new MenuItem();
             MenuItem WheelChair = new MenuItem();
+            MenuItem Epipen = new MenuItem();
 
 
             AmbulanceCart.Click += new RoutedEventHandler(loadEquipment);
@@ -453,22 +454,17 @@ namespace Emergency_Team_Dispatcher
             WheelChair.Tag = "WheelChair";
             WheelChair.Header = "Add WheelChair";
 
+            Epipen.Click += new RoutedEventHandler(loadEquipment);
+            Epipen.Name = "Epipen";
+            Epipen.Tag = "Epipen";
+            Epipen.Header = "Add Epipen";
+
             mnuContextMenu.Items.Add(AmbulanceCart);
             mnuContextMenu.Items.Add(MountedStretcher);
             mnuContextMenu.Items.Add(SittingCart);
             mnuContextMenu.Items.Add(TransportStretcher);
             mnuContextMenu.Items.Add(WheelChair);
-
-           // if (NumberOfEquipment > 4)
-        //    {
-        //        MessageBox.Show("A Team can only hold 5 types of equipment!");
-        //        AmbulanceCart.IsEnabled = false;
-        ////        MountedStretcher.IsEnabled = false;
-        //        WheelChair.IsEnabled = false;
-          //      TransportStretcher.IsEnabled = false;
-         //       SittingCart.IsEnabled = false;
-
-         //   }
+            mnuContextMenu.Items.Add(Epipen);
 
         }
 
@@ -482,9 +478,24 @@ namespace Emergency_Team_Dispatcher
             MenuItem WheelChair = (MenuItem)sender;
             MenuItem TransportStretcher = (MenuItem)sender;
             MenuItem SittingCart = (MenuItem)sender;
+            MenuItem Epipen = (MenuItem)sender;
 
+            //limits the number of equipments the user can add
+            if (NumberOfEquipment > 5)
+            {
+                MessageBox.Show("A Team can only hold 6 types of equipment!");
+                AmbulanceCart.IsEnabled = false;
+                MountedStretcher.IsEnabled = false;
+                WheelChair.IsEnabled = false;
+                TransportStretcher.IsEnabled = false;
+                SittingCart.IsEnabled = false;
+
+            }
+
+            else
+            {
                 // Create Image Element
-            System.Windows.Controls.Image myImage = new System.Windows.Controls.Image();
+                System.Windows.Controls.Image myImage = new System.Windows.Controls.Image();
                 myImage.Width = 25;
                 myImage.Height = 23;
 
@@ -499,32 +510,39 @@ namespace Emergency_Team_Dispatcher
                 //AmbulanceCart
                 if (AmbulanceCart.Name == "Ambulance_Cart")
                 {
-                    myBitmapImage.UriSource = new Uri(@"C:\Users\Suke\Downloads\school\SOEN 490\SOEN490-ETD\Icons\AmbulanceCart3.png");
+                    myBitmapImage.UriSource = new Uri(@"C:\Users\Suke\Downloads\school\SOEN 490\SOEN490-ETD\Icons\AmbulanceCart.png");
                 }
 
                 //SittingCart
                 if (SittingCart.Name == "Sitting_Cart")
                 {
-                    myBitmapImage.UriSource = new Uri(@"C:\Users\Suke\Downloads\school\SOEN 490\SOEN490-ETD\Icons\SittingCart3.png");
+                    myBitmapImage.UriSource = new Uri(@"C:\Users\Suke\Downloads\school\SOEN 490\SOEN490-ETD\Icons\SittingCart.png");
                 }
 
 
                 //MountedStretcher
                 if (MountedStretcher.Name == "Mounted_stretcher")
                 {
-                    myBitmapImage.UriSource = new Uri(@"C:\Users\Suke\Downloads\school\SOEN 490\SOEN490-ETD\Icons\MountedStretcher3.png");
+                    myBitmapImage.UriSource = new Uri(@"C:\Users\Suke\Downloads\school\SOEN 490\SOEN490-ETD\Icons\MountedStretcher.png");
                 }
 
                 //TransportStretcher
                 if (TransportStretcher.Name == "Transport_Stretcher")
                 {
-                    myBitmapImage.UriSource = new Uri(@"C:\Users\Suke\Downloads\school\SOEN 490\SOEN490-ETD\Icons\TransportStretcher2.png");
+                    myBitmapImage.UriSource = new Uri(@"C:\Users\Suke\Downloads\school\SOEN 490\SOEN490-ETD\Icons\TransportStretcher.png");
                 }
 
                 //WheelChair
                 if (WheelChair.Name == "WheelChair")
                 {
-                    myBitmapImage.UriSource = new Uri(@"C:\Users\Suke\Downloads\school\SOEN 490\SOEN490-ETD\Icons\WheelChair2.png");
+                    myBitmapImage.UriSource = new Uri(@"C:\Users\Suke\Downloads\school\SOEN 490\SOEN490-ETD\Icons\WheelChair.png");
+                }
+
+
+                //epipen
+                if (Epipen.Name == "Epipen")
+                {
+                    myBitmapImage.UriSource = new Uri(@"C:\Users\Suke\Downloads\school\SOEN 490\SOEN490-ETD\Icons\Epipen.png");
                 }
 
                 myBitmapImage.DecodePixelWidth = 25;
@@ -533,6 +551,15 @@ namespace Emergency_Team_Dispatcher
                 Team_display.Children.Add(myImage);
                 iconPositionLeft += 26;
                 NumberOfEquipment++;
+            }
+
+
+
         }
+
+
+
+
+
 	}
 }
