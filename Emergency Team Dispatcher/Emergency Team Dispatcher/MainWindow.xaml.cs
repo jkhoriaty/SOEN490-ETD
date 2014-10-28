@@ -32,10 +32,13 @@ namespace Emergency_Team_Dispatcher
         String movingRectangle;
         int shapeRadius = 25;
         int TeamNumberPosition = 0;
-        int TeamLabelPosition = 0;
+        int TeamNameLabelPosition = 0;
         int TeamEquipPositionTop =31;
+        int TeamMember1Position = 60;
+        int TeamMember2Position = 90;
         int iconPositionLeft = 0;
         int NumberOfEquipment = 0;
+        int LevelofTrainingPositionLeft = 150;
         int TeamCount = 1;
         int i = 0;
       
@@ -134,7 +137,7 @@ namespace Emergency_Team_Dispatcher
             {
 
                 iconPositionLeft = 0;
-                TeamEquipPositionTop += 180;
+                TeamEquipPositionTop += 150;
                 NumberOfEquipment = 0;
                 e.Handled = true;
 
@@ -388,24 +391,65 @@ namespace Emergency_Team_Dispatcher
         private void Teamformation(object sender, EventArgs e)
         {
            
+            //team Name label
             string TeamName = "Team ";
             string[] TeamNumber = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "ALPHA", "BETA", "THETA" };
 
-            Label dynamicLabel = new Label();
-            dynamicLabel.Name = "Label";
-            dynamicLabel.Width = 180;
-            dynamicLabel.Height = 30;
-            dynamicLabel.Content = TeamName + TeamNumber[TeamNumberPosition];
-            dynamicLabel.Foreground = new SolidColorBrush(Colors.White);
-            dynamicLabel.Background = new SolidColorBrush(Colors.Black);
-            dynamicLabel.BorderBrush = System.Windows.Media.Brushes.Black;
+            Label TeamNameLabel = new Label();
+            TeamNameLabel.Name = "TeamNameLabel";
+            TeamNameLabel.Width = 180;
+            TeamNameLabel.Height = 30;
+            TeamNameLabel.Content = TeamName + TeamNumber[TeamNumberPosition];
+            TeamNameLabel.Foreground = new SolidColorBrush(Colors.White);
+            TeamNameLabel.Background = new SolidColorBrush(Colors.Black);
+            TeamNameLabel.BorderBrush = System.Windows.Media.Brushes.Black;
 
-            Canvas.SetLeft(dynamicLabel, 0);
-            Canvas.SetTop(dynamicLabel, TeamLabelPosition);
-            Team_display.Children.Add(dynamicLabel);
-            TeamLabelPosition += 180;
+            Canvas.SetLeft(TeamNameLabel, 0);
+            Canvas.SetTop(TeamNameLabel, TeamNameLabelPosition);
+            Team_display.Children.Add(TeamNameLabel);
+
+            //Team members
+
+            //team member1
+            Label TeamMember1 = new Label();
+            //level of training
+            TeamMember1.Tag = "first_aid";
+            TeamMember1.Name = "TeamMember1";
+            TeamMember1.Width = 150;
+            TeamMember1.Height = 30;
+            TeamMember1.Content = "TeamMember1";
+            TeamMember1.Foreground = new SolidColorBrush(Colors.Black);
+            TeamMember1.Background = new SolidColorBrush(Colors.Aqua);
+            TeamMember1.BorderBrush = System.Windows.Media.Brushes.Black;
+
+            Canvas.SetLeft(TeamMember1, 0);
+            Canvas.SetTop(TeamMember1, TeamMember1Position);
+            Team_display.Children.Add(TeamMember1);
+
+            //team member2
+            Label TeamMember2 = new Label();
+            //level of training
+            TeamMember2.Tag = "first_responder";
+            TeamMember2.Name = "TeamMember2";
+            TeamMember2.Width = 150;
+            TeamMember2.Height = 30;
+            TeamMember2.Content = "TeamMember2";
+            TeamMember2.Foreground = new SolidColorBrush(Colors.Black);
+            TeamMember2.Background = new SolidColorBrush(Colors.Beige);
+            TeamMember2.BorderBrush = System.Windows.Media.Brushes.Black;
+
+            Canvas.SetLeft(TeamMember2, 0);
+            Canvas.SetTop(TeamMember2, TeamMember2Position);
+            Team_display.Children.Add(TeamMember2);
+
+            LevelOfTraining(TeamMember1);
+            LevelOfTraining(TeamMember2);
+
+            TeamMember1Position += 150;
+            TeamMember2Position += 150;
+            TeamNameLabelPosition += 150;
             TeamNumberPosition++;
-          
+
             label_Click();
 
         }
@@ -467,7 +511,6 @@ namespace Emergency_Team_Dispatcher
             mnuContextMenu.Items.Add(Epipen);
 
         }
-
 
         //Displaying Equipment
         void loadEquipment(object sender, RoutedEventArgs e)
@@ -557,7 +600,72 @@ namespace Emergency_Team_Dispatcher
 
         }
 
+        //display level of training
+        void LevelOfTraining(Label Member)
+        {
+            
+            Label TeamMember= new Label();
+            TeamMember = Member;
 
+            // Create Image Element
+            System.Windows.Controls.Image myImage = new System.Windows.Controls.Image();
+            myImage.Width = 13;
+            myImage.Height = 12;
+
+            //position icon
+            Canvas.SetLeft(myImage, LevelofTrainingPositionLeft);
+
+            // Create image source
+            BitmapImage myBitmapImage = new BitmapImage();
+            myBitmapImage.BeginInit();
+
+            //first aid
+            if (TeamMember.Tag.ToString() == "first_aid")
+            {
+                myBitmapImage.UriSource = new Uri(@"C:\Users\Suke\Downloads\school\SOEN 490\SOEN490-ETD\Icons\First_Aid.png");
+                if (TeamMember.Name == "TeamMember1")
+                {
+                    Canvas.SetTop(myImage, TeamMember1Position);
+                }
+                else if (TeamMember.Name == "TeamMember2")
+                {
+                    Canvas.SetTop(myImage, TeamMember2Position);
+                }
+            }
+
+            //first responder
+            if (TeamMember.Tag.ToString() == "first_responder")
+            {
+                myBitmapImage.UriSource = new Uri(@"C:\Users\Suke\Downloads\school\SOEN 490\SOEN490-ETD\Icons\First_Responder.png");
+                if (TeamMember.Name == "TeamMember1")
+                {
+                    Canvas.SetTop(myImage, TeamMember1Position);
+                }
+                else if (TeamMember.Name == "TeamMember2")
+                {
+                    Canvas.SetTop(myImage, TeamMember2Position);
+                }
+            }
+
+            //Medicine
+            if (TeamMember.Tag.ToString() == "Medicine")
+            {
+                myBitmapImage.UriSource = new Uri(@"C:\Users\Suke\Downloads\school\SOEN 490\SOEN490-ETD\Icons\Medicine.png");
+                if (TeamMember.Name == "TeamMember1")
+                {
+                    Canvas.SetTop(myImage, TeamMember1Position);
+                }
+                else if (TeamMember.Name == "TeamMember2")
+                {
+                    Canvas.SetTop(myImage, TeamMember2Position);
+                }
+            }
+            myBitmapImage.DecodePixelWidth = 13;
+            myBitmapImage.EndInit();
+            myImage.Source = myBitmapImage;
+            Team_display.Children.Add(myImage);
+
+        }
 
 
 
