@@ -114,10 +114,12 @@
             // radioDeparturehh
             // 
             this.radioDeparturehh.Location = new System.Drawing.Point(253, 120);
+            this.radioDeparturehh.MaxLength = 2;
             this.radioDeparturehh.Name = "radioDeparturehh";
             this.radioDeparturehh.Size = new System.Drawing.Size(22, 20);
             this.radioDeparturehh.TabIndex = 2;
             this.radioDeparturehh.Text = "hh";
+            this.radioDeparturehh.Click += new System.EventHandler(this.time_Click);
             // 
             // radioLevelOfTraining
             // 
@@ -212,26 +214,32 @@
             // radioDeparturemm
             // 
             this.radioDeparturemm.Location = new System.Drawing.Point(281, 120);
+            this.radioDeparturemm.MaxLength = 2;
             this.radioDeparturemm.Name = "radioDeparturemm";
             this.radioDeparturemm.Size = new System.Drawing.Size(22, 20);
             this.radioDeparturemm.TabIndex = 3;
             this.radioDeparturemm.Text = "mm";
+            this.radioDeparturemm.Click += new System.EventHandler(this.time_Click);
             // 
             // fAidmm
             // 
             this.fAidmm.Location = new System.Drawing.Point(280, 256);
+            this.fAidmm.MaxLength = 2;
             this.fAidmm.Name = "fAidmm";
             this.fAidmm.Size = new System.Drawing.Size(22, 20);
             this.fAidmm.TabIndex = 7;
             this.fAidmm.Text = "mm";
+            this.fAidmm.Click += new System.EventHandler(this.time_Click);
             // 
             // fAidhh
             // 
             this.fAidhh.Location = new System.Drawing.Point(252, 256);
+            this.fAidhh.MaxLength = 2;
             this.fAidhh.Name = "fAidhh";
             this.fAidhh.Size = new System.Drawing.Size(22, 20);
             this.fAidhh.TabIndex = 6;
             this.fAidhh.Text = "hh";
+            this.fAidhh.Click += new System.EventHandler(this.time_Click);
             // 
             // CreateTeamForm
             // 

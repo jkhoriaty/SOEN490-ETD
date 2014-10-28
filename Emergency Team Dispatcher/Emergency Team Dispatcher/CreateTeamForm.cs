@@ -156,5 +156,11 @@ namespace Emergency_Team_Dispatcher
         {
             this.Close();
         }
+
+        private void time_Click(object sender, EventArgs e)
+        {
+            TextBox tb = (TextBox)sender;
+            tb.Text = "";
+        }
     }
 }
