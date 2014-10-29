@@ -17,14 +17,5 @@ namespace Emergency_Team_Dispatcher
             this.trainingLevel = training;
             this.departure = departure;
         }
-
-        public String getName()
-        {
-            return this.name;
-        }
-        public int getTrainingLevel()
-        {
-            return this.trainingLevel;
-        }
     }
 }

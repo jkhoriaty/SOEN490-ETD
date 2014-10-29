@@ -12,10 +12,8 @@ namespace Emergency_Team_Dispatcher
 {
     public partial class CreateTeamForm : Form
     {
-        MainWindow parent;
-        public CreateTeamForm(MainWindow parent)
+        public CreateTeamForm()
         {
-            this.parent = parent;
             InitializeComponent();
         }
 
@@ -111,7 +109,6 @@ namespace Emergency_Team_Dispatcher
             
 
             MessageBox.Show("Success");
-            parent.Teamformation();
             this.Close();
         }
 

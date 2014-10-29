@@ -148,10 +148,11 @@ namespace Emergency_Team_Dispatcher
             i++;
             TeamCount++;
             
-            CreateTeamForm Ctf = new CreateTeamForm(this);
+            CreateTeamForm Ctf = new CreateTeamForm();
             Ctf.Show();
 
-            
+            //create team should display team name ,  team members and their level of training
+            Teamformation(sender, e);
 
             //box.Text = "succ";
         }
@@ -389,69 +390,69 @@ namespace Emergency_Team_Dispatcher
         }
 
         //Assign and display team name
-        public void Teamformation()
+        private void Teamformation(object sender, EventArgs e)
         {
+           
+            //team Name label
+            string TeamName = "Team ";
+            string[] TeamNumber = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "ALPHA", "BETA", "THETA" };
 
-                //team Name label
-                string TeamName = "Team ";
-                Label TeamNameLabel = new Label();
-                TeamNameLabel.Name = "TeamNameLabel";
-                TeamNameLabel.Width = 180;
-                TeamNameLabel.Height = 30;
-                TeamNameLabel.Content = TeamName + Globals.listOfTeams[0].getName();
-                TeamNameLabel.Foreground = new SolidColorBrush(Colors.White);
-                TeamNameLabel.Background = new SolidColorBrush(Colors.Black);
-                TeamNameLabel.BorderBrush = System.Windows.Media.Brushes.Black;
+            Label TeamNameLabel = new Label();
+            TeamNameLabel.Name = "TeamNameLabel";
+            TeamNameLabel.Width = 180;
+            TeamNameLabel.Height = 30;
+            TeamNameLabel.Content = TeamName + TeamNumber[TeamNumberPosition];
+            TeamNameLabel.Foreground = new SolidColorBrush(Colors.White);
+            TeamNameLabel.Background = new SolidColorBrush(Colors.Black);
+            TeamNameLabel.BorderBrush = System.Windows.Media.Brushes.Black;
 
-                Canvas.SetLeft(TeamNameLabel, 0);
-                Canvas.SetTop(TeamNameLabel, TeamNameLabelPosition);
-                Team_display.Children.Add(TeamNameLabel);
+            Canvas.SetLeft(TeamNameLabel, 0);
+            Canvas.SetTop(TeamNameLabel, TeamNameLabelPosition);
+            Team_display.Children.Add(TeamNameLabel);
 
-                //Team members
+            //Team members
 
-                //team member1
-                Label TeamMember1 = new Label();
-                //level of training
-                TeamMember1.Tag = "first_aid";
-                int training = 0;
-                TeamMember1.Name = "";
-                TeamMember1.Width = 150;
-                TeamMember1.Height = 30;
-                TeamMember1.Content = "test";//Globals.listOfTeams[0].getMember(training).getName();
-                TeamMember1.Foreground = new SolidColorBrush(Colors.Black);
-                TeamMember1.Background = new SolidColorBrush(Colors.Aqua);
-                TeamMember1.BorderBrush = System.Windows.Media.Brushes.Black;
+            //team member1
+            Label TeamMember1 = new Label();
+            //level of training
+            TeamMember1.Tag = "first_aid";
+            TeamMember1.Name = "TeamMember1";
+            TeamMember1.Width = 150;
+            TeamMember1.Height = 30;
+            TeamMember1.Content = "TeamMember1";
+            TeamMember1.Foreground = new SolidColorBrush(Colors.Black);
+            TeamMember1.Background = new SolidColorBrush(Colors.Aqua);
+            TeamMember1.BorderBrush = System.Windows.Media.Brushes.Black;
 
-                Canvas.SetLeft(TeamMember1, 0);
-                Canvas.SetTop(TeamMember1, TeamMember1Position);
-                Team_display.Children.Add(TeamMember1);
+            Canvas.SetLeft(TeamMember1, 0);
+            Canvas.SetTop(TeamMember1, TeamMember1Position);
+            Team_display.Children.Add(TeamMember1);
 
-                //team member2
-                Label TeamMember2 = new Label();
-                //level of training
-                TeamMember2.Tag = "first_responder";
-                training = 1;
-                TeamMember2.Name = Globals.listOfTeams[0].getMember(training).getName(); ;
-                TeamMember2.Width = 150;
-                TeamMember2.Height = 30;
-                TeamMember2.Content = "TeamMember2";
-                TeamMember2.Foreground = new SolidColorBrush(Colors.Black);
-                TeamMember2.Background = new SolidColorBrush(Colors.Beige);
-                TeamMember2.BorderBrush = System.Windows.Media.Brushes.Black;
+            //team member2
+            Label TeamMember2 = new Label();
+            //level of training
+            TeamMember2.Tag = "first_responder";
+            TeamMember2.Name = "TeamMember2";
+            TeamMember2.Width = 150;
+            TeamMember2.Height = 30;
+            TeamMember2.Content = "TeamMember2";
+            TeamMember2.Foreground = new SolidColorBrush(Colors.Black);
+            TeamMember2.Background = new SolidColorBrush(Colors.Beige);
+            TeamMember2.BorderBrush = System.Windows.Media.Brushes.Black;
 
-                Canvas.SetLeft(TeamMember2, 0);
-                Canvas.SetTop(TeamMember2, TeamMember2Position);
-                Team_display.Children.Add(TeamMember2);
+            Canvas.SetLeft(TeamMember2, 0);
+            Canvas.SetTop(TeamMember2, TeamMember2Position);
+            Team_display.Children.Add(TeamMember2);
 
-                LevelOfTraining(TeamMember1);
-                LevelOfTraining(TeamMember2);
+            LevelOfTraining(TeamMember1);
+            LevelOfTraining(TeamMember2);
 
-                TeamMember1Position += 150;
-                TeamMember2Position += 150;
-                TeamNameLabelPosition += 150;
-                TeamNumberPosition++;
+            TeamMember1Position += 150;
+            TeamMember2Position += 150;
+            TeamNameLabelPosition += 150;
+            TeamNumberPosition++;
 
-                label_Click();
+            label_Click();
 
         }
 
