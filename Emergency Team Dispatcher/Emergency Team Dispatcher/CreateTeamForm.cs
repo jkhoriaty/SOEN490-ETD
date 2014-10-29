@@ -106,7 +106,6 @@ namespace Emergency_Team_Dispatcher
             Globals.listOfTeams.Add(Globals.currentTeam, team);
             Globals.currentTeam++;
 
-            MessageBox.Show(Globals.listOfTeams[0].getName());
             //team.addToDB;
             
 
@@ -115,6 +114,11 @@ namespace Emergency_Team_Dispatcher
             this.Close();
         }
 
+        private void time_Click(object sender, EventArgs e)
+        {
+            TextBox tb = (TextBox)sender;
+            tb.Text = "";
+        }
         private void button2_Click(object sender, EventArgs e)
         {
             this.Close();

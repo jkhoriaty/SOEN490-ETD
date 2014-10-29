@@ -11,7 +11,7 @@ namespace Emergency_Team_Dispatcher
         String name;
         TeamMember[] members;
         int memberCount = 0;
-        String departure;
+        System.Windows.Shapes.Rectangle rectangle;
 
         public Team()
         {
@@ -22,6 +22,11 @@ namespace Emergency_Team_Dispatcher
         {
             this.name = name;
             members = new TeamMember[400];
+        }
+
+        public void setRectangle(System.Windows.Shapes.Rectangle rect)
+        {
+            this.rectangle = rect;
         }
 
         public bool addMember(TeamMember mem)
