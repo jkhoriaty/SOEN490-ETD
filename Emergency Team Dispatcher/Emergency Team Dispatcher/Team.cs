@@ -11,7 +11,7 @@ namespace Emergency_Team_Dispatcher
         String name;
         TeamMember[] members;
         int memberCount = 0;
-        String departure;
+        System.Windows.Shapes.Rectangle rectangle;
 
         public Team()
         {
@@ -24,6 +24,11 @@ namespace Emergency_Team_Dispatcher
             members = new TeamMember[400];
         }
 
+        public void setRectangle(System.Windows.Shapes.Rectangle rect)
+        {
+            this.rectangle = rect;
+        }
+
         public bool addMember(TeamMember mem)
         {
             if(memberCount < 2)
@@ -33,6 +38,21 @@ namespace Emergency_Team_Dispatcher
                 return true;
             }
             return false;
+        }
+        public TeamMember getMember(int tr)
+        {
+            foreach(TeamMember tm in this.members)
+            {
+                if (tm != null)
+                {
+                    if (tm.getTrainingLevel() == tr)
+                    {
+
+                        return tm;
+                    }
+                }
+            }
+            return null;
         }
 
         public void setName(String name)

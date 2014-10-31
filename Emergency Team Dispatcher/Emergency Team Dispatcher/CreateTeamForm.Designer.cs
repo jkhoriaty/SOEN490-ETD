@@ -57,7 +57,6 @@
             this.label1.Location = new System.Drawing.Point(25, 19);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(95, 20);
-            this.label1.TabIndex = 0;
             this.label1.Text = "Team Name";
             // 
             // label2
@@ -66,7 +65,6 @@
             this.label2.Location = new System.Drawing.Point(55, 89);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(35, 13);
-            this.label2.TabIndex = 1;
             this.label2.Text = "Name";
             // 
             // label3
@@ -74,9 +72,8 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(55, 123);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(92, 13);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Time of Departure";
+            this.label3.Size = new System.Drawing.Size(151, 13);
+            this.label3.Text = "Time of Departure (24h format)";
             // 
             // label4
             // 
@@ -85,7 +82,6 @@
             this.label4.Location = new System.Drawing.Point(25, 54);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(167, 20);
-            this.label4.TabIndex = 3;
             this.label4.Text = "Team Member (Radio)";
             // 
             // label5
@@ -94,7 +90,6 @@
             this.label5.Location = new System.Drawing.Point(55, 155);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(88, 13);
-            this.label5.TabIndex = 4;
             this.label5.Text = "Level Of Training";
             // 
             // teamName
@@ -102,22 +97,24 @@
             this.teamName.Location = new System.Drawing.Point(253, 19);
             this.teamName.Name = "teamName";
             this.teamName.Size = new System.Drawing.Size(100, 20);
-            this.teamName.TabIndex = 5;
+            this.teamName.TabIndex = 0;
             // 
             // radioName
             // 
             this.radioName.Location = new System.Drawing.Point(253, 86);
             this.radioName.Name = "radioName";
             this.radioName.Size = new System.Drawing.Size(100, 20);
-            this.radioName.TabIndex = 6;
+            this.radioName.TabIndex = 1;
             // 
             // radioDeparturehh
             // 
             this.radioDeparturehh.Location = new System.Drawing.Point(253, 120);
+            this.radioDeparturehh.MaxLength = 2;
             this.radioDeparturehh.Name = "radioDeparturehh";
             this.radioDeparturehh.Size = new System.Drawing.Size(22, 20);
-            this.radioDeparturehh.TabIndex = 7;
+            this.radioDeparturehh.TabIndex = 2;
             this.radioDeparturehh.Text = "hh";
+            this.radioDeparturehh.Click += new System.EventHandler(this.time_Click);
             // 
             // radioLevelOfTraining
             // 
@@ -130,7 +127,7 @@
             this.radioLevelOfTraining.Location = new System.Drawing.Point(253, 152);
             this.radioLevelOfTraining.Name = "radioLevelOfTraining";
             this.radioLevelOfTraining.Size = new System.Drawing.Size(121, 21);
-            this.radioLevelOfTraining.TabIndex = 8;
+            this.radioLevelOfTraining.TabIndex = 4;
             // 
             // firstAidLevelOfTraining
             // 
@@ -143,14 +140,14 @@
             this.firstAidLevelOfTraining.Location = new System.Drawing.Point(253, 288);
             this.firstAidLevelOfTraining.Name = "firstAidLevelOfTraining";
             this.firstAidLevelOfTraining.Size = new System.Drawing.Size(121, 21);
-            this.firstAidLevelOfTraining.TabIndex = 15;
+            this.firstAidLevelOfTraining.TabIndex = 8;
             // 
             // firstAidName
             // 
             this.firstAidName.Location = new System.Drawing.Point(253, 222);
             this.firstAidName.Name = "firstAidName";
             this.firstAidName.Size = new System.Drawing.Size(100, 20);
-            this.firstAidName.TabIndex = 13;
+            this.firstAidName.TabIndex = 5;
             // 
             // label6
             // 
@@ -158,7 +155,6 @@
             this.label6.Location = new System.Drawing.Point(55, 291);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(88, 13);
-            this.label6.TabIndex = 12;
             this.label6.Text = "Level Of Training";
             // 
             // label7
@@ -168,7 +164,6 @@
             this.label7.Location = new System.Drawing.Point(25, 190);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(205, 20);
-            this.label7.TabIndex = 11;
             this.label7.Text = "Team Member (First Aid Kit)";
             // 
             // label8
@@ -176,9 +171,8 @@
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(55, 259);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(92, 13);
-            this.label8.TabIndex = 10;
-            this.label8.Text = "Time of Departure";
+            this.label8.Size = new System.Drawing.Size(151, 13);
+            this.label8.Text = "Time of Departure (24h format)";
             // 
             // label9
             // 
@@ -186,7 +180,6 @@
             this.label9.Location = new System.Drawing.Point(55, 225);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(35, 13);
-            this.label9.TabIndex = 9;
             this.label9.Text = "Name";
             // 
             // button1
@@ -194,7 +187,7 @@
             this.button1.Location = new System.Drawing.Point(117, 349);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 16;
+            this.button1.TabIndex = 9;
             this.button1.Text = "Confirm";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -204,7 +197,7 @@
             this.button2.Location = new System.Drawing.Point(227, 349);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 17;
+            this.button2.TabIndex = 10;
             this.button2.Text = "Cancel";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
@@ -212,26 +205,32 @@
             // radioDeparturemm
             // 
             this.radioDeparturemm.Location = new System.Drawing.Point(281, 120);
+            this.radioDeparturemm.MaxLength = 2;
             this.radioDeparturemm.Name = "radioDeparturemm";
             this.radioDeparturemm.Size = new System.Drawing.Size(22, 20);
-            this.radioDeparturemm.TabIndex = 18;
+            this.radioDeparturemm.TabIndex = 3;
             this.radioDeparturemm.Text = "mm";
+            this.radioDeparturemm.Click += new System.EventHandler(this.time_Click);
             // 
             // fAidmm
             // 
             this.fAidmm.Location = new System.Drawing.Point(280, 256);
+            this.fAidmm.MaxLength = 2;
             this.fAidmm.Name = "fAidmm";
             this.fAidmm.Size = new System.Drawing.Size(22, 20);
-            this.fAidmm.TabIndex = 20;
+            this.fAidmm.TabIndex = 7;
             this.fAidmm.Text = "mm";
+            this.fAidmm.Click += new System.EventHandler(this.time_Click);
             // 
             // fAidhh
             // 
             this.fAidhh.Location = new System.Drawing.Point(252, 256);
+            this.fAidhh.MaxLength = 2;
             this.fAidhh.Name = "fAidhh";
             this.fAidhh.Size = new System.Drawing.Size(22, 20);
-            this.fAidhh.TabIndex = 19;
+            this.fAidhh.TabIndex = 6;
             this.fAidhh.Text = "hh";
+            this.fAidhh.Click += new System.EventHandler(this.time_Click);
             // 
             // CreateTeamForm
             // 

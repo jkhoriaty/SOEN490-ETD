@@ -12,8 +12,10 @@ namespace Emergency_Team_Dispatcher
 {
     public partial class CreateTeamForm : Form
     {
-        public CreateTeamForm()
+        MainWindow parent;
+        public CreateTeamForm(MainWindow parent)
         {
+            this.parent = parent;
             InitializeComponent();
         }
 
@@ -50,18 +52,52 @@ namespace Emergency_Team_Dispatcher
                 return;
             }
 
-            Regex timeRgx = new Regex(@"^"); //needs to be done
+            Regex timeRgx = new Regex(@"^[0-9][0-9]$"); 
             if(!timeRgx.IsMatch(radioDeparturehh.Text))
             {
                 MessageBox.Show("Radio time of departure is invalid.");
                 return;
             }
 
+
+            //Check if the hours are between 0 to 24
+            int radioDepInt = Convert.ToInt32(radioDeparturehh.Text);
+            radioDepInt = int.Parse(radioDeparturehh.Text);
+            if(radioDepInt > 23 || radioDepInt < 0)
+            {
+                MessageBox.Show("Radio time of departure is invalid.");
+                return;
+            }
+
+
             if (!timeRgx.IsMatch(fAidhh.Text))
             {
                 MessageBox.Show("First aid time of departure is invalid.");
                 return;
             }
+
+            int fAidInt = Convert.ToInt32(fAidhh.Text);
+            fAidInt = int.Parse(fAidhh.Text);
+            if (fAidInt > 23 || fAidInt < 0)
+            {
+                MessageBox.Show("First aid time of departure is invalid.");
+                return;
+            }
+
+            Regex timeMinutesRgx = new Regex(@"^[0-5][0-9]$");
+            if (!timeMinutesRgx.IsMatch(radioDeparturehh.Text))
+            {
+                MessageBox.Show("Radio time of departure is invalid.");
+                return;
+            }
+
+            if (!timeMinutesRgx.IsMatch(fAidhh.Text))
+            {
+                MessageBox.Show("First aid time of departure is invalid.");
+                return;
+            }
+
+
 
             Team team = new Team(teamName.Text);
 
@@ -95,23 +131,34 @@ namespace Emergency_Team_Dispatcher
                 fTraining = 2;
             }
 
-
-            TeamMember radioMember = new TeamMember(radioName.Text, rTraining, radioDeparturehh.Text);
-            TeamMember firstAidMember = new TeamMember(firstAidName.Text, fTraining, fAidhh.Text);
+            var dateNow = DateTime.Now;
+            
+            var radiotime = new DateTime(dateNow.Year, dateNow.Month, dateNow.Day, radioDepInt, int.Parse(radioDeparturemm.Text), dateNow.Second);
+            var fAidtime = new DateTime(dateNow.Year, dateNow.Month, dateNow.Day, fAidInt, int.Parse(fAidmm.Text), dateNow.Second);
+           
+            TeamMember radioMember = new TeamMember(radioName.Text, rTraining, radiotime);
+            TeamMember firstAidMember = new TeamMember(firstAidName.Text, fTraining, fAidtime);
 
             team.addMember(radioMember);
             team.addMember(firstAidMember);
+
+            //Add to global teams list and increment currentTeam count
             Globals.listOfTeams.Add(Globals.currentTeam, team);
             Globals.currentTeam++;
 
-            MessageBox.Show(Globals.listOfTeams[0].getName());
             //team.addToDB;
             
 
             MessageBox.Show("Success");
+            parent.Teamformation();
             this.Close();
         }
 
+        private void time_Click(object sender, EventArgs e)
+        {
+            TextBox tb = (TextBox)sender;
+            tb.Text = "";
+        }
         private void button2_Click(object sender, EventArgs e)
         {
             this.Close();
