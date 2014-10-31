@@ -132,7 +132,7 @@ namespace Emergency_Team_Dispatcher
             TeamCount++;
             
             CreateTeamForm Ctf = new CreateTeamForm(this);
-            Ctf.Show();
+            Ctf.ShowDialog();
             //box.Text = "succ";
         }
 
