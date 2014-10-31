@@ -21,7 +21,7 @@ namespace Emergency_Team_Dispatcher
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Regex nameRgx = new Regex(@"^[a-zA-Z]{1,5}$");
+            Regex nameRgx = new Regex(@"^[a-zA-Z]{1,6}$");
             if(!nameRgx.IsMatch(teamName.Text))
             {
                 MessageBox.Show("Team name is invalid.");
