@@ -163,5 +163,29 @@ namespace Emergency_Team_Dispatcher
         {
             this.Close();
         }
+
+		private void time_Click(object sender, MouseEventArgs e)
+		{
+			TextBox tb = (TextBox)sender;
+			tb.Text = "";
+		}
+
+		private void restorehh_Leave(object sender, EventArgs e)
+		{
+			TextBox tb = (TextBox)sender;
+			if(tb.Text.Equals(""))
+			{
+				tb.Text = "hh";
+			}
+		}
+
+		private void restoremm_Leave(object sender, EventArgs e)
+		{
+			TextBox tb = (TextBox)sender;
+			if(tb.Text.Equals(""))
+			{
+				tb.Text = "mm";
+			}
+		}
     }
 }
