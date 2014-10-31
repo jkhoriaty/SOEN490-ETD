@@ -14,6 +14,6 @@ namespace Emergency_Team_Dispatcher
             public static Dictionary<int, TimeSpan> interventionTime = new Dictionary<int, TimeSpan>();
             public static Dictionary<int, Team> listOfTeams = new Dictionary<int, Team>();
             public static int currentIntervention = 0;
-            public static int currentTeam = 0; //Used in CreateTeamForm as index
+            public static int currentTeam = 0;
     }
 }
