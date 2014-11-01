@@ -150,7 +150,7 @@ namespace Emergency_Team_Dispatcher
             
 
             MessageBox.Show("Success");
-            parent.Teamformation();
+            parent.TeamDisplay();
             this.Close();
         }
 

@@ -33,10 +33,8 @@ namespace Emergency_Team_Dispatcher
         int shapeRadius = 25;
         int TeamNumberPosition = 0;
         int TeamNameLabelPosition = 0;
-        int TeamEquipPositionTop =31;
-        int TeamMember1Position = 60;
-        int TeamMember2Position = 90;
-        int TeamMember3Position = 120;
+        int TeamEquipPositionTop = 43;
+        int TeamMemberPosition = 70;
         int iconPositionLeft = 0;
         int NumberOfEquipment = 0;
         int LevelofTrainingPositionLeft = 150;
@@ -369,129 +367,83 @@ namespace Emergency_Team_Dispatcher
         }
 
         //Assign and display team name
-        public void Teamformation()
+        public void TeamDisplay()
         {
+			Team team = Globals.listOfTeams[Globals.currentTeam - 1];
 
-                //team Name label
-                string TeamName = "Team ";
-                Label TeamNameLabel = new Label();
-                TeamNameLabel.Name = "TeamNameLabel";
-                TeamNameLabel.Width = 180;
-                TeamNameLabel.Height = 30;
-                TeamNameLabel.Content = TeamName + Globals.listOfTeams[0].getName();
-                TeamNameLabel.Foreground = new SolidColorBrush(Colors.White);
-                TeamNameLabel.Background = new SolidColorBrush(Colors.Black);
-                TeamNameLabel.BorderBrush = System.Windows.Media.Brushes.Black;
+			//Team
+			Label TeamNameLabel = new Label();
+			TeamNameLabel.Name = "TeamNameLabel";
+            TeamNameLabel.Width = 190;
+            TeamNameLabel.Height = 40;
+			TeamNameLabel.FontSize = 20;
+			TeamNameLabel.VerticalContentAlignment = VerticalAlignment.Center;
+			TeamNameLabel.Content = "Team " + Globals.listOfTeams[Globals.currentTeam-1].getName();
+            TeamNameLabel.Foreground = new SolidColorBrush(Colors.White);
+            TeamNameLabel.Background = new SolidColorBrush(Colors.Black);
+            TeamNameLabel.BorderBrush = System.Windows.Media.Brushes.Black;
 
-                Canvas.SetLeft(TeamNameLabel, 0);
-                Canvas.SetTop(TeamNameLabel, TeamNameLabelPosition);
-                Team_display.Children.Add(TeamNameLabel);
+            Canvas.SetLeft(TeamNameLabel, 0);
+            Canvas.SetTop(TeamNameLabel, TeamNameLabelPosition);
+            Team_display.Children.Add(TeamNameLabel);
 
-                //Team members
+			//Members
+			int pos = 0;
+			TeamMember member;
+			while((member = team.getMember(pos++)) != null)
+			{
+				Label newMember = new Label();
+				newMember.Name = "TeamMember" + pos;
+				newMember.Width = 160;
+				newMember.Height = 30;
+				newMember.FontSize = 16;
+				newMember.VerticalContentAlignment = VerticalAlignment.Center;
+				newMember.Foreground = new SolidColorBrush(Colors.Black);
+				//newMember.Background = new SolidColorBrush(Colors.Aqua);
+				newMember.BorderBrush = System.Windows.Media.Brushes.Black;
+				switch(member.trainingLevel)
+				{
+					case 0:
+						newMember.Tag = "first_aid";
+						break;
+					case 1:
+						newMember.Tag = "first_responder";
+						break;
+					case 2:
+						newMember.Tag = "medicine";
+						break;
+				}
+				newMember.Content = member.getName();
+				Canvas.SetLeft(newMember, 0);
+				Canvas.SetTop(newMember, TeamMemberPosition);
+				LevelOfTraining(newMember);
+				TeamMemberPosition += 30;
+                Team_display.Children.Add(newMember);
+			}
 
-                //team member1
-                Label TeamMember1 = new Label();
-                //level of training
-                TeamMember1.Tag = "first_aid";
-                int training = 0;
-                TeamMember1.Name = "TeamMember1";
-                TeamMember1.Width = 150;
-                TeamMember1.Height = 30;
-                string mem1name = "No First Aid";
-                try
-                {
-                    mem1name = Globals.listOfTeams[Globals.currentTeam - 1].getMember(training).getName();
-                }
-                catch (SystemException e) { }
-                TeamMember1.Content = mem1name;
-                TeamMember1.Foreground = new SolidColorBrush(Colors.Black);
-                TeamMember1.Background = new SolidColorBrush(Colors.Aqua);
-                TeamMember1.BorderBrush = System.Windows.Media.Brushes.Black;
+			TeamMemberPosition += 90;
+			TeamNameLabelPosition += 150;
+			TeamNumberPosition++;
 
-                Canvas.SetLeft(TeamMember1, 0);
-                Canvas.SetTop(TeamMember1, TeamMember1Position);
-                Team_display.Children.Add(TeamMember1);
+            Random random = new Random();
+            byte[] colorBytes = new byte[3];
+            random.NextBytes(colorBytes);
+            System.Windows.Media.Color randomColor = System.Windows.Media.Color.FromRgb(colorBytes[0], colorBytes[1], colorBytes[2]);
+            System.Windows.Shapes.Rectangle r = new System.Windows.Shapes.Rectangle();
+            r.Name = "team_" + rectangleCtr++;
+            r.Width = shapeRadius * 2;
+            r.Height = shapeRadius * 2;
+            r.Stroke = new SolidColorBrush(Colors.Black);
+            r.Fill = new SolidColorBrush(randomColor);
+            r.MouseLeftButtonDown += new MouseButtonEventHandler(team_MouseLeftButtonDown);
+            r.MouseLeftButtonUp += new MouseButtonEventHandler(team_MouseLeftButtonUp);
+            r.MouseMove += new MouseEventHandler(team_MouseMove);
+            Canvas.SetTop(r, 0);
+            Canvas.SetLeft(r, 0);
+            Map.Children.Add(r);
+            Globals.listOfTeams[Globals.currentTeam - 1].setRectangle(r);
 
-                //team member2
-                Label TeamMember2 = new Label();
-                //level of training
-                TeamMember2.Tag = "first_responder";
-                training = 1;
-                //MessageBox.Show(Globals.currentTeam);
-                string mem2name = "No First Responder";
-                try
-                {
-                    mem2name = Globals.listOfTeams[Globals.currentTeam - 1].getMember(training).getName();
-                }
-                catch (SystemException e) { }
-                TeamMember2.Name = "TeamMember2";
-                TeamMember2.Width = 150;
-                TeamMember2.Height = 30;
-                MessageBox.Show(Globals.currentTeam.ToString());
-                TeamMember2.Content = mem2name;
-                TeamMember2.Foreground = new SolidColorBrush(Colors.Black);
-                TeamMember2.Background = new SolidColorBrush(Colors.Beige);
-                TeamMember2.BorderBrush = System.Windows.Media.Brushes.Black;
-
-                Canvas.SetLeft(TeamMember2, 0);
-                Canvas.SetTop(TeamMember2, TeamMember2Position);
-                Team_display.Children.Add(TeamMember2);
-
-                //team member3
-                Label TeamMember3 = new Label();
-                //level of training
-                TeamMember3.Tag = "medicine";
-                training = 2;
-                //MessageBox.Show(Globals.currentTeam);
-                string mem3name = "No medicine officer";
-                try
-                {
-                    mem3name = Globals.listOfTeams[Globals.currentTeam - 1].getMember(training).getName();
-                }
-                catch (SystemException e) { }
-                TeamMember3.Name = "TeamMember3";
-                TeamMember3.Width = 150;
-                TeamMember3.Height = 30;
-                MessageBox.Show(Globals.currentTeam.ToString());
-                TeamMember3.Content = mem3name;
-                TeamMember3.Foreground = new SolidColorBrush(Colors.Black);
-                TeamMember3.Background = new SolidColorBrush(Colors.Red);
-                TeamMember3.BorderBrush = System.Windows.Media.Brushes.Black;
-
-                Canvas.SetLeft(TeamMember3, 0);
-                Canvas.SetTop(TeamMember3, TeamMember3Position);
-                Team_display.Children.Add(TeamMember3);
-
-                LevelOfTraining(TeamMember1);
-                LevelOfTraining(TeamMember2);
-                LevelOfTraining(TeamMember3);
-
-                TeamMember1Position += 150;
-                TeamMember2Position += 150;
-                TeamMember3Position += 150;
-                TeamNameLabelPosition += 150;
-                TeamNumberPosition++;
-
-                Random random = new Random();
-                byte[] colorBytes = new byte[3];
-                random.NextBytes(colorBytes);
-                System.Windows.Media.Color randomColor = System.Windows.Media.Color.FromRgb(colorBytes[0], colorBytes[1], colorBytes[2]);
-                System.Windows.Shapes.Rectangle r = new System.Windows.Shapes.Rectangle();
-                r.Name = "team_" + rectangleCtr++;
-                r.Width = shapeRadius * 2;
-                r.Height = shapeRadius * 2;
-                r.Stroke = new SolidColorBrush(Colors.Black);
-                r.Fill = new SolidColorBrush(randomColor);
-                r.MouseLeftButtonDown += new MouseButtonEventHandler(team_MouseLeftButtonDown);
-                r.MouseLeftButtonUp += new MouseButtonEventHandler(team_MouseLeftButtonUp);
-                r.MouseMove += new MouseEventHandler(team_MouseMove);
-                Canvas.SetTop(r, 0);
-                Canvas.SetLeft(r, 0);
-                Map.Children.Add(r);
-                Globals.listOfTeams[Globals.currentTeam - 1].setRectangle(r);
-
-                label_Click();
-
+            label_Click();
         }
 
         //Add equipment menu
@@ -642,14 +594,10 @@ namespace Emergency_Team_Dispatcher
         //display level of training
         void LevelOfTraining(Label Member)
         {
-            
-            Label TeamMember= new Label();
-            TeamMember = Member;
-
             // Create Image Element
             System.Windows.Controls.Image myImage = new System.Windows.Controls.Image();
-            myImage.Width = 13;
-            myImage.Height = 12;
+            myImage.Width = 30;
+            myImage.Height = 30;
 
             //position icon
             Canvas.SetLeft(myImage, LevelofTrainingPositionLeft);
@@ -659,66 +607,31 @@ namespace Emergency_Team_Dispatcher
             myBitmapImage.BeginInit();
 
             //first aid
-            if (TeamMember.Tag.ToString() == "first_aid")
+            if (Member.Tag.ToString() == "first_aid")
             {
 				myBitmapImage.UriSource = new Uri(AbsolutePath + @"Icons\First_Aid.png");
-                if (TeamMember.Name == "TeamMember1")
-                {
-                    Canvas.SetTop(myImage, TeamMember1Position);
-                }
-                else if (TeamMember.Name == "TeamMember2")
-                {
-                    Canvas.SetTop(myImage, TeamMember2Position);
-                }
-                else if (TeamMember.Name == "TeamMember3")
-                {
-                    Canvas.SetTop(myImage, TeamMember3Position);
-                }
+                Canvas.SetTop(myImage, TeamMemberPosition);
             }
 
             //first responder
-            if (TeamMember.Tag.ToString() == "first_responder")
+            if (Member.Tag.ToString() == "first_responder")
             {
 				myBitmapImage.UriSource = new Uri(AbsolutePath + @"Icons\First_Responder.png");
-                if (TeamMember.Name == "TeamMember1")
-                {
-                    Canvas.SetTop(myImage, TeamMember1Position);
-                }
-                else if (TeamMember.Name == "TeamMember2")
-                {
-                    Canvas.SetTop(myImage, TeamMember2Position);
-                }
-                else if (TeamMember.Name == "TeamMember3")
-                {
-                    Canvas.SetTop(myImage, TeamMember3Position);
-                }
+                Canvas.SetTop(myImage, TeamMemberPosition);
             }
 
             //Medicine
-            if (TeamMember.Tag.ToString() == "medicine")
+            if (Member.Tag.ToString() == "medicine")
             {
 				myBitmapImage.UriSource = new Uri(AbsolutePath + @"Icons\Medicine.png");
-                if (TeamMember.Name == "TeamMember1")
-                {
-                    Canvas.SetTop(myImage, TeamMember1Position);
-                }
-                else if (TeamMember.Name == "TeamMember2")
-                {
-                    Canvas.SetTop(myImage, TeamMember2Position);
-                }
-                else if(TeamMember.Name == "TeamMember3")
-                {
-                    Canvas.SetTop(myImage, TeamMember3Position);
-                }
+                Canvas.SetTop(myImage, TeamMemberPosition);
             }
             myBitmapImage.DecodePixelWidth = 13;
             myBitmapImage.EndInit();
             myImage.Source = myBitmapImage;
             Team_display.Children.Add(myImage);
-			
         }
 
-
-
+		public System.Windows.HorizontalAlignment Center { get; set; }
 	}
 }

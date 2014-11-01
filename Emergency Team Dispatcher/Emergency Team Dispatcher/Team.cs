@@ -39,21 +39,12 @@ namespace Emergency_Team_Dispatcher
             }
             return false;
         }
-        public TeamMember getMember(int tr)
-        {
-            foreach(TeamMember tm in this.members)
-            {
-                if (tm != null)
-                {
-                    if (tm.getTrainingLevel() == tr)
-                    {
 
-                        return tm;
-                    }
-                }
-            }
-            return null;
-        }
+		public TeamMember getMember(int pos)
+		{
+			if (pos >= members.Length) return null;
+			else return members[pos];
+		}
 
         public void setName(String name)
         {
