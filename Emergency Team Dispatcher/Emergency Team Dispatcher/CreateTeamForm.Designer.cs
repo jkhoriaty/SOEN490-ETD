@@ -50,6 +50,7 @@
 			this.fAidhh = new System.Windows.Forms.TextBox();
 			this.label10 = new System.Windows.Forms.Label();
 			this.label11 = new System.Windows.Forms.Label();
+			this.button3 = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
 			// label1
@@ -115,7 +116,7 @@
 			// 
 			this.radioName.Location = new System.Drawing.Point(253, 86);
 			this.radioName.Name = "radioName";
-			this.radioName.Size = new System.Drawing.Size(125, 20);
+			this.radioName.Size = new System.Drawing.Size(127, 20);
 			this.radioName.TabIndex = 1;
 			// 
 			// radioDeparturehh
@@ -127,8 +128,7 @@
 			this.radioDeparturehh.TabIndex = 2;
 			this.radioDeparturehh.Text = "hh";
 			this.radioDeparturehh.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-			this.radioDeparturehh.Click += new System.EventHandler(this.time_Click);
-			this.radioDeparturehh.MouseClick += new System.Windows.Forms.MouseEventHandler(this.time_Click);
+			this.radioDeparturehh.Enter += new System.EventHandler(this.time_Enter);
 			this.radioDeparturehh.Leave += new System.EventHandler(this.restorehh_Leave);
 			// 
 			// radioLevelOfTraining
@@ -141,7 +141,7 @@
             "Medicine"});
 			this.radioLevelOfTraining.Location = new System.Drawing.Point(253, 152);
 			this.radioLevelOfTraining.Name = "radioLevelOfTraining";
-			this.radioLevelOfTraining.Size = new System.Drawing.Size(121, 21);
+			this.radioLevelOfTraining.Size = new System.Drawing.Size(127, 21);
 			this.radioLevelOfTraining.TabIndex = 4;
 			// 
 			// firstAidLevelOfTraining
@@ -154,14 +154,14 @@
             "Medicine"});
 			this.firstAidLevelOfTraining.Location = new System.Drawing.Point(253, 288);
 			this.firstAidLevelOfTraining.Name = "firstAidLevelOfTraining";
-			this.firstAidLevelOfTraining.Size = new System.Drawing.Size(121, 21);
+			this.firstAidLevelOfTraining.Size = new System.Drawing.Size(127, 21);
 			this.firstAidLevelOfTraining.TabIndex = 8;
 			// 
 			// firstAidName
 			// 
 			this.firstAidName.Location = new System.Drawing.Point(253, 222);
 			this.firstAidName.Name = "firstAidName";
-			this.firstAidName.Size = new System.Drawing.Size(125, 20);
+			this.firstAidName.Size = new System.Drawing.Size(127, 20);
 			this.firstAidName.TabIndex = 5;
 			// 
 			// label6
@@ -207,7 +207,7 @@
 			// 
 			// button1
 			// 
-			this.button1.Location = new System.Drawing.Point(117, 349);
+			this.button1.Location = new System.Drawing.Point(35, 336);
 			this.button1.Name = "button1";
 			this.button1.Size = new System.Drawing.Size(75, 23);
 			this.button1.TabIndex = 9;
@@ -217,7 +217,8 @@
 			// 
 			// button2
 			// 
-			this.button2.Location = new System.Drawing.Point(227, 349);
+			this.button2.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+			this.button2.Location = new System.Drawing.Point(145, 336);
 			this.button2.Name = "button2";
 			this.button2.Size = new System.Drawing.Size(75, 23);
 			this.button2.TabIndex = 10;
@@ -234,8 +235,7 @@
 			this.radioDeparturemm.TabIndex = 3;
 			this.radioDeparturemm.Text = "mm";
 			this.radioDeparturemm.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-			this.radioDeparturemm.Click += new System.EventHandler(this.time_Click);
-			this.radioDeparturemm.MouseClick += new System.Windows.Forms.MouseEventHandler(this.time_Click);
+			this.radioDeparturemm.Enter += new System.EventHandler(this.time_Enter);
 			this.radioDeparturemm.Leave += new System.EventHandler(this.restoremm_Leave);
 			// 
 			// fAidmm
@@ -247,8 +247,7 @@
 			this.fAidmm.TabIndex = 7;
 			this.fAidmm.Text = "mm";
 			this.fAidmm.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-			this.fAidmm.Click += new System.EventHandler(this.time_Click);
-			this.fAidmm.MouseClick += new System.Windows.Forms.MouseEventHandler(this.time_Click);
+			this.fAidmm.Enter += new System.EventHandler(this.time_Enter);
 			this.fAidmm.Leave += new System.EventHandler(this.restoremm_Leave);
 			// 
 			// fAidhh
@@ -260,8 +259,7 @@
 			this.fAidhh.TabIndex = 6;
 			this.fAidhh.Text = "hh";
 			this.fAidhh.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-			this.fAidhh.Click += new System.EventHandler(this.time_Click);
-			this.fAidhh.MouseClick += new System.Windows.Forms.MouseEventHandler(this.time_Click);
+			this.fAidhh.Enter += new System.EventHandler(this.time_Enter);
 			this.fAidhh.Leave += new System.EventHandler(this.restorehh_Leave);
 			// 
 			// label10
@@ -284,12 +282,25 @@
 			this.label11.TabIndex = 21;
 			this.label11.Text = ":";
 			// 
+			// button3
+			// 
+			this.button3.Location = new System.Drawing.Point(253, 336);
+			this.button3.Name = "button3";
+			this.button3.Size = new System.Drawing.Size(127, 23);
+			this.button3.TabIndex = 11;
+			this.button3.Text = "Add Team Member";
+			this.button3.UseVisualStyleBackColor = true;
+			this.button3.Click += new System.EventHandler(this.button3_Click);
+			// 
 			// CreateTeamForm
 			// 
+			this.AcceptButton = this.button1;
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-			this.ClientSize = new System.Drawing.Size(422, 394);
+			this.CancelButton = this.button2;
+			this.ClientSize = new System.Drawing.Size(422, 371);
+			this.Controls.Add(this.button3);
 			this.Controls.Add(this.teamName);
 			this.Controls.Add(this.radioName);
 			this.Controls.Add(this.radioDeparturehh);
@@ -347,5 +358,6 @@
         private System.Windows.Forms.TextBox fAidhh;
 		private System.Windows.Forms.Label label10;
 		private System.Windows.Forms.Label label11;
+		private System.Windows.Forms.Button button3;
     }
 }

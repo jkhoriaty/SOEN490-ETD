@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Drawing;
 using System.Diagnostics;
+using System.Threading;
 
 
 
@@ -128,11 +129,19 @@ namespace Emergency_Team_Dispatcher
 
             i++;
             TeamCount++;
-            
-            CreateTeamForm Ctf = new CreateTeamForm(this);
-            Ctf.ShowDialog();
+
+			//ShowDialog creates a modal form so need to execute in a new thread because it will only keep control of the thread 
+			Thread thread = new Thread(new ThreadStart(formThread));
+			thread.Start();
             //box.Text = "succ";
         }
+
+		//Execution of form
+		private void formThread()
+		{
+			CreateTeamForm Ctf = new CreateTeamForm(this);
+			Ctf.ShowDialog();
+		}
 
         private void team_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
