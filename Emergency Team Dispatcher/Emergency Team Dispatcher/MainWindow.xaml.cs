@@ -134,9 +134,61 @@ namespace Emergency_Team_Dispatcher
             //box.Text = "succ";
         }
 
+        //Add equipment on the map
+        private void Add_Equipment_Click(object sender, RoutedEventArgs e)
+        {
+            MenuItem Equipment = (MenuItem)sender;
+ 
+            System.Windows.Shapes.Rectangle r = new System.Windows.Shapes.Rectangle();
+            r.Width = shapeRadius;
+            r.Height = shapeRadius-2;
+            ImageBrush imgb = new ImageBrush();
+
+            if (Equipment.Name == "_AmbulanceCart")
+            {
+                imgb.ImageSource = new BitmapImage(new Uri(AbsolutePath + @"Icons\AmbulanceCart.png"));
+            }
+
+            if (Equipment.Name == "_SittingCart")
+            {
+                imgb.ImageSource = new BitmapImage(new Uri(AbsolutePath + @"Icons\SittingCart.png"));
+            }
+
+            if (Equipment.Name == "_MountedStretcher")
+            {
+                imgb.ImageSource = new BitmapImage(new Uri(AbsolutePath + @"Icons\MountedStretcher.png"));
+            }
+
+            if (Equipment.Name == "_WheelChair")
+            {
+                imgb.ImageSource = new BitmapImage(new Uri(AbsolutePath + @"Icons\WheelChair.png"));
+            }
+
+            if (Equipment.Name == "_TransportStretcher")
+            {
+                imgb.ImageSource = new BitmapImage(new Uri(AbsolutePath + @"Icons\TransportStretcher.png"));
+            }
+
+            if (Equipment.Name == "_Epipen")
+            {
+                imgb.ImageSource = new BitmapImage(new Uri(AbsolutePath + @"Icons\Epipen.png"));
+            }
+
+            r.Fill = imgb;
+
+            r.MouseLeftButtonDown += new MouseButtonEventHandler(team_MouseLeftButtonDown);
+            r.MouseLeftButtonUp += new MouseButtonEventHandler(team_MouseLeftButtonUp);
+            r.MouseMove += new MouseEventHandler(team_MouseMove);
+        
+            Map.Children.Add(r);
+
+        }
+       
+
         private void team_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             System.Windows.Shapes.Rectangle r = sender as System.Windows.Shapes.Rectangle;
+
             _isRectDragInProg = r.CaptureMouse();
             movingRectangle = r.Name;
         }
@@ -438,6 +490,7 @@ namespace Emergency_Team_Dispatcher
             r.MouseLeftButtonDown += new MouseButtonEventHandler(team_MouseLeftButtonDown);
             r.MouseLeftButtonUp += new MouseButtonEventHandler(team_MouseLeftButtonUp);
             r.MouseMove += new MouseEventHandler(team_MouseMove);
+       
             Canvas.SetTop(r, 0);
             Canvas.SetLeft(r, 0);
             Map.Children.Add(r);
@@ -453,6 +506,8 @@ namespace Emergency_Team_Dispatcher
             //add equipment by right clicking
             ContextMenu mnuContextMenu = new ContextMenu();
             this.ContextMenu = mnuContextMenu;
+            Team_display.ContextMenu=mnuContextMenu;
+
          
             mnuContextMenu.Width = 205;
             mnuContextMenu.Height = 150;
@@ -501,6 +556,7 @@ namespace Emergency_Team_Dispatcher
             mnuContextMenu.Items.Add(TransportStretcher);
             mnuContextMenu.Items.Add(WheelChair);
             mnuContextMenu.Items.Add(Epipen);
+
 
         }
 
@@ -609,24 +665,24 @@ namespace Emergency_Team_Dispatcher
             //first aid
             if (Member.Tag.ToString() == "first_aid")
             {
-				myBitmapImage.UriSource = new Uri(AbsolutePath + @"Icons\First_Aid.png");
+				myBitmapImage.UriSource = new Uri(AbsolutePath + @"Icons\First_Aid2.png");
                 Canvas.SetTop(myImage, TeamMemberPosition);
             }
 
             //first responder
             if (Member.Tag.ToString() == "first_responder")
             {
-				myBitmapImage.UriSource = new Uri(AbsolutePath + @"Icons\First_Responder.png");
+				myBitmapImage.UriSource = new Uri(AbsolutePath + @"Icons\First_Responder2.png");
                 Canvas.SetTop(myImage, TeamMemberPosition);
             }
 
             //Medicine
             if (Member.Tag.ToString() == "medicine")
             {
-				myBitmapImage.UriSource = new Uri(AbsolutePath + @"Icons\Medicine.png");
+				myBitmapImage.UriSource = new Uri(AbsolutePath + @"Icons\Medicine2.png");
                 Canvas.SetTop(myImage, TeamMemberPosition);
             }
-            myBitmapImage.DecodePixelWidth = 13;
+            myBitmapImage.DecodePixelWidth = 30;
             myBitmapImage.EndInit();
             myImage.Source = myBitmapImage;
             Team_display.Children.Add(myImage);
