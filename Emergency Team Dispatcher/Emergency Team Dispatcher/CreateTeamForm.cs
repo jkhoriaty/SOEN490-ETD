@@ -13,130 +13,193 @@ namespace Emergency_Team_Dispatcher
     public partial class CreateTeamForm : Form
     {
         MainWindow parent;
+		int nbOfMembers;
         public CreateTeamForm(MainWindow parent)
         {
             this.parent = parent;
             InitializeComponent();
+			nbOfMembers = 1;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             Regex nameRgx = new Regex(@"^[a-zA-Z]{1,6}$");
             Regex memberNameRgx = new Regex(@"^[a-zA-Z0-9]{2,30}$");
-			Regex timeRgx = new Regex(@"^[0-9][0-9]$");
+			Regex timeHoursRgx = new Regex(@"^[0-9][0-9]$");
 			Regex timeMinutesRgx = new Regex(@"^[0-5][0-9]$");
 
 			String warning = "";
-
-            if(!nameRgx.IsMatch(teamName.Text))
+			Team team = null;
+			var dateNow = DateTime.Now;
+			var radiotime = new DateTime();
+			int rTraining = -1;
+			var fAidtime = new DateTime();
+			int fTraining = -1;
+			var fAid2time = new DateTime();
+			int f2Training = -1;
+			
+			//Checking team info
+			if(!nameRgx.IsMatch(teamName.Text))
             {
                warning += "Team name is invalid.\n";
             }
+			else
+			{
+				team = new Team(teamName.Text);
+			}
 
-            if (!memberNameRgx.IsMatch(radioName.Text))
+			//
+			//Checking radio info
+			//
+			if (!memberNameRgx.IsMatch(radioName.Text))
             {
                 warning += "Radio member name is invalid.\n";
             }
-            if (!memberNameRgx.IsMatch(firstAidName.Text))
+
+			if (!timeHoursRgx.IsMatch(radioDeparturehh.Text) || !timeMinutesRgx.IsMatch(radioDeparturemm.Text))
+			{
+				warning += "Radio member time of departure is invalid.\n";
+			}
+			else
+			{
+				//Check if the hours are between 0 to 24
+				int radioDepInt = int.Parse(radioDeparturehh.Text);
+				if (radioDepInt > 23 || radioDepInt < 0)
+				{
+					warning += "Radio member time of departure is invalid.\n";
+				}
+				else
+				{
+					radiotime = new DateTime(dateNow.Year, dateNow.Month, dateNow.Day, radioDepInt, int.Parse(radioDeparturemm.Text), dateNow.Second);
+				}
+			}
+			
+			if(!radioLevelOfTraining.Items.Contains(radioLevelOfTraining.Text))
             {
-                warning += "First aid member name is invalid.\n";
+                warning += "Radio member level of training invalid.\n";
             }
+			else
+			{
+				if(radioLevelOfTraining.Text == "General First Aid")
+				{
+					rTraining = 0;
+				}
+				else if(radioLevelOfTraining.Text == "First Responder")
+				{
+					rTraining = 1;
+				}
+				else if(radioLevelOfTraining.Text == "Medicine")
+				{
+					rTraining = 2;
+				}
+			}
 
-            if(!radioLevelOfTraining.Items.Contains(radioLevelOfTraining.Text))
-            {
-                warning += "Radio level of training invalid.\n";
-            }
+			//
+            //Checking first aid info
+			//
+			if (nbOfMembers > 1)
+			{
+				if (!memberNameRgx.IsMatch(firstAidName.Text))
+				{
+					warning += "First aid member name is invalid.\n";
+				}
 
-            if (!firstAidLevelOfTraining.Items.Contains(firstAidLevelOfTraining.Text))
-            {
-                warning += "First aid level of training invalid.\n";
-            }
+				if (!timeHoursRgx.IsMatch(fAidhh.Text) || !timeMinutesRgx.IsMatch(fAidmm.Text))
+				{
+					warning += "First aid member time of departure is invalid.\n";
+				}
+				else
+				{
+					int fAidInt = int.Parse(fAidhh.Text);
+					if (fAidInt > 23 || fAidInt < 0)
+					{
+						warning += "First aid member time of departure is invalid.\n";
+					}
+					else
+					{
+						fAidtime = new DateTime(dateNow.Year, dateNow.Month, dateNow.Day, fAidInt, int.Parse(fAidmm.Text), dateNow.Second);
+					}
+				}
 
-            if(!timeRgx.IsMatch(radioDeparturehh.Text))
-            {
-                warning += "Radio time of departure is invalid.\n";
-            }
+				if (!firstAidLevelOfTraining.Items.Contains(firstAidLevelOfTraining.Text))
+				{
+					warning += "First aid member level of training invalid.\n";
+				}
+				else
+				{
+					if (firstAidLevelOfTraining.Text == "General First Aid")
+					{
+						fTraining = 0;
+					}
+					else if (firstAidLevelOfTraining.Text == "First Responder")
+					{
+						fTraining = 1;
+					}
+					else if (firstAidLevelOfTraining.Text == "Medicine")
+					{
+						fTraining = 2;
+					}
+				}
+			}
+
+			//
+			//Checking first aid 2 info
+			//
+			if (nbOfMembers > 2)
+			{
+				if (!memberNameRgx.IsMatch(firstAid2Name.Text))
+				{
+					warning += "Second First aid member name is invalid.\n";
+				}
+
+				if (!timeHoursRgx.IsMatch(fAid2hh.Text) || !timeMinutesRgx.IsMatch(fAid2mm.Text))
+				{
+					warning += "Second First aid member time of departure is invalid.\n";
+				}
+				else
+				{
+					int fAid2Int = int.Parse(fAid2hh.Text);
+					if (fAid2Int > 23 || fAid2Int < 0)
+					{
+						warning += "Second First aid member time of departure is invalid.\n";
+					}
+					else
+					{
+						fAid2time = new DateTime(dateNow.Year, dateNow.Month, dateNow.Day, fAid2Int, int.Parse(fAid2mm.Text), dateNow.Second);
+					}
+				}
+
+				if (!firstAid2LevelOfTraining.Items.Contains(firstAid2LevelOfTraining.Text))
+				{
+					warning += "Second First aid member level of training invalid.\n";
+				}
+				else
+				{
+					if (firstAid2LevelOfTraining.Text == "General First Aid")
+					{
+						f2Training = 0;
+					}
+					else if (firstAid2LevelOfTraining.Text == "First Responder")
+					{
+						f2Training = 1;
+					}
+					else if (firstAid2LevelOfTraining.Text == "Medicine")
+					{
+						f2Training = 2;
+					}
+				}
+			}
 
 
-            //Check if the hours are between 0 to 24
-			//int radioDepInt = Convert.ToInt32(radioDeparturehh.Text);
-			int radioDepInt = int.Parse(radioDeparturehh.Text);
-            if(radioDepInt > 23 || radioDepInt < 0)
-            {
-                warning += "Radio time of departure is invalid.\n";
-            }
-
-
-            if (!timeRgx.IsMatch(fAidhh.Text))
-            {
-                warning += "First aid time of departure is invalid.\n";
-            }
-
-			//int fAidInt = Convert.ToInt32(fAidhh.Text);
-			int fAidInt = int.Parse(fAidhh.Text);
-            if (fAidInt > 23 || fAidInt < 0)
-            {
-                warning += "First aid time of departure is invalid.\n";
-            }
-
-            if (!timeMinutesRgx.IsMatch(radioDeparturehh.Text))
-            {
-                warning += "Radio time of departure is invalid.\n";
-            }
-
-            if (!timeMinutesRgx.IsMatch(fAidhh.Text))
-            {
-                warning += "First aid time of departure is invalid.\n";
-            }
-
-			if(!warning.Equals(""))
+			if (!warning.Equals(""))
 			{
 				MessageBox.Show(warning);
 				return;
 			}
 
-            //Convert level of training to int
-            int rTraining = -1;
-            
-            if(radioLevelOfTraining.Text == "General First Aid")
-            {
-                rTraining = 0;
-            }
-            else if(radioLevelOfTraining.Text == "First Responder")
-            {
-                rTraining = 1;
-            }
-            else if(radioLevelOfTraining.Text == "Medicine")
-            {
-                rTraining = 2;
-            }
-
-            int fTraining = -1;
-            if (firstAidLevelOfTraining.Text == "General First Aid")
-            {
-                fTraining = 0;
-            }
-            else if (firstAidLevelOfTraining.Text == "First Responder")
-            {
-                fTraining = 1;
-            }
-            else if (firstAidLevelOfTraining.Text == "Medicine")
-            {
-                fTraining = 2;
-            }
-
-            var dateNow = DateTime.Now;
-            
-            var radiotime = new DateTime(dateNow.Year, dateNow.Month, dateNow.Day, radioDepInt, int.Parse(radioDeparturemm.Text), dateNow.Second);
-            var fAidtime = new DateTime(dateNow.Year, dateNow.Month, dateNow.Day, fAidInt, int.Parse(fAidmm.Text), dateNow.Second);
-           
-			//Creation of team
-            TeamMember radioMember = new TeamMember(radioName.Text, rTraining, radiotime);
-            TeamMember firstAidMember = new TeamMember(firstAidName.Text, fTraining, fAidtime);
-
-            Team team = new Team(teamName.Text);
-            team.addMember(radioMember);
-            team.addMember(firstAidMember);
+			team.addMember(new TeamMember(radioName.Text, rTraining, radiotime));
+			if(nbOfMembers > 1) team.addMember(new TeamMember(firstAidName.Text, fTraining, fAidtime));
+			if(nbOfMembers > 2) team.addMember(new TeamMember(firstAid2Name.Text, f2Training, fAid2time));
 
             //Add to global teams list and increment currentTeam count
             Globals.listOfTeams.Add(Globals.currentTeam, team);
@@ -144,9 +207,7 @@ namespace Emergency_Team_Dispatcher
 
             //team.addToDB;
             
-
             MessageBox.Show("Success");
-            parent.TeamDisplay();
             this.Close();
         }
 
@@ -186,110 +247,43 @@ namespace Emergency_Team_Dispatcher
 
 		private void button3_Click(object sender, EventArgs e)
 		{
-			//Resizing form to fit last section
-			this.Size = new System.Drawing.Size(438, 540);
-
-			//Moving buttons down to the bottom of the form, and erasing the add member button
-			button1.Location = new System.Drawing.Point(120, 466);
-			button1.TabIndex = 13;
-			button2.Location = new System.Drawing.Point(230, 466);
-			button2.TabIndex = 14;
-			button3.Visible = false;
-			button3.TabIndex = 15;
-			button3.TabStop = false;
-			
-			//Adding new section to the form to fill in 3rd member information
-			Label label12 = new System.Windows.Forms.Label();
-			label12.AutoSize = true;
-			label12.Enabled = false;
-			label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			label12.Location = new System.Drawing.Point(25, 326);
-			label12.Name = "label12";
-			label12.Size = new System.Drawing.Size(205, 20);
-			label12.TabIndex = 12;
-			label12.Text = "Team Member (Second First Aid Kit)";
-
-			//Name
-			Label label13 = new System.Windows.Forms.Label();
-			label13.AutoSize = true;
-			label13.Enabled = false;
-			label13.Location = new System.Drawing.Point(55, 361);
-			label13.Name = "label13";
-			label13.Size = new System.Drawing.Size(35, 13);
-			label13.TabIndex = 18;
-			label13.Text = "Name";
-
-			TextBox firstAidName2 = new System.Windows.Forms.TextBox();
-			firstAidName2.Location = new System.Drawing.Point(253, 361);
-			firstAidName2.Name = "firstAidName2";
-			firstAidName2.Size = new System.Drawing.Size(125, 20);
-			firstAidName2.TabIndex = 9;
-
-			//Time of departure
-			Label label14 = new System.Windows.Forms.Label();
-			label14.AutoSize = true;
-			label14.Enabled = false;
-			label14.Location = new System.Drawing.Point(55, 395);
-			label14.Name = "label14";
-			label14.Size = new System.Drawing.Size(205, 20);
-			label14.TabIndex = 12;
-			label14.Text = "Time of Departure (24h format)";
-
-			TextBox fAid2hh = new System.Windows.Forms.TextBox();
-			fAid2hh.Location = new System.Drawing.Point(253, 395);
-			fAid2hh.MaxLength = 2;
-			fAid2hh.Name = "fAid2hh";
-			fAid2hh.Size = new System.Drawing.Size(25, 20);
-			fAid2hh.TabIndex = 10;
-			fAid2hh.Text = "hh";
-			fAid2hh.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-			fAid2hh.MouseClick += new System.Windows.Forms.MouseEventHandler(this.time_Click);
-			fAid2hh.Leave += new System.EventHandler(this.restorehh_Leave);
-
-			Label label15 = new System.Windows.Forms.Label();
-			label15.AutoSize = true;
-			label15.Enabled = false;
-			label15.Location = new System.Drawing.Point(280, 395);
-			label15.Name = "label15";
-			label15.Size = new System.Drawing.Size(10, 13);
-			label15.TabIndex = 20;
-			label15.Text = ":";
-
-			TextBox fAid2mm = new System.Windows.Forms.TextBox();
-			fAid2mm.Location = new System.Drawing.Point(292, 395);
-			fAid2mm.MaxLength = 2;
-			fAid2mm.Name = "fAid2mm";
-			fAid2mm.Size = new System.Drawing.Size(25, 20);
-			fAid2mm.TabIndex = 11;
-			fAid2mm.Text = "mm";
-			fAid2mm.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-			fAid2mm.MouseClick += new System.Windows.Forms.MouseEventHandler(this.time_Click);
-			fAid2mm.Leave += new System.EventHandler(this.restoremm_Leave);
-
-			//Level of training
-			Label label16 = new System.Windows.Forms.Label();
-			label16.AutoSize = true;
-			label16.Enabled = false;
-			label16.Location = new System.Drawing.Point(55, 427);
-			label16.Name = "label16";
-			label16.Size = new System.Drawing.Size(88, 13);
-			label16.TabIndex = 11;
-			label16.Text = "Level Of Training";
-
-			ComboBox firstAid2LevelOfTraining = new System.Windows.Forms.ComboBox();
-			firstAid2LevelOfTraining.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			firstAid2LevelOfTraining.FormattingEnabled = true;
-			firstAid2LevelOfTraining.Items.AddRange(new object[] {
-            "General First Aid",
-            "First Responder",
-            "Medicine"});
-			firstAid2LevelOfTraining.Location = new System.Drawing.Point(253, 427);
-			firstAid2LevelOfTraining.Name = "firstAid2LevelOfTraining";
-			firstAid2LevelOfTraining.Size = new System.Drawing.Size(121, 21);
-			firstAid2LevelOfTraining.TabIndex = 12;
-
-			this.Controls.AddRange(new Control[] { label12, label13, firstAidName2, label14, fAid2hh, label15, fAid2mm, label16, firstAid2LevelOfTraining});
-			firstAidName2.Focus();
+			switch(nbOfMembers)
+			{
+				case 1:
+					this.Size = new System.Drawing.Size(438, 400);
+					button1.Location = new System.Drawing.Point(193, 330);
+					button2.Location = new System.Drawing.Point(305, 330);
+					button3.Location = new System.Drawing.Point(29, 330);
+					label7.Visible = true;
+					label9.Visible = true;
+					firstAidName.Visible = true;
+					label8.Visible = true;
+					fAidhh.Visible = true;
+					label11.Visible = true;
+					fAidmm.Visible = true;
+					label6.Visible = true;
+					firstAidLevelOfTraining.Visible = true;
+					nbOfMembers = 2;
+					firstAidName.Focus();
+					break;
+				case 2:
+					this.Size = new System.Drawing.Size(438, 540);
+					button1.Location = new System.Drawing.Point(193, 470);
+					button2.Location = new System.Drawing.Point(305, 470);
+					button3.Visible = false;
+					label12.Visible = true;
+					label13.Visible = true;
+					firstAid2Name.Visible = true;
+					label14.Visible = true;
+					fAid2hh.Visible = true;
+					label15.Visible = true;
+					fAid2mm.Visible = true;
+					label16.Visible = true;
+					firstAid2LevelOfTraining.Visible = true;
+					nbOfMembers = 3;
+					firstAid2Name.Focus();
+					break;
+			}
 		}
     }
 }

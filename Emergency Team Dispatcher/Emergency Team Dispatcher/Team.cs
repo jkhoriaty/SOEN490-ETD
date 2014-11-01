@@ -16,7 +16,7 @@ namespace Emergency_Team_Dispatcher
         public Team()
         {
             name = "Alpha";
-            members = new TeamMember[400];
+            members = new TeamMember[10];
         }
         public Team(String name)
         {
@@ -31,13 +31,9 @@ namespace Emergency_Team_Dispatcher
 
         public bool addMember(TeamMember mem)
         {
-            if(memberCount < 2)
-            {
-                members[memberCount] = mem;
-                memberCount++;
-                return true;
-            }
-            return false;
+            members[memberCount] = mem;
+            memberCount++;
+            return true;
         }
 
 		public TeamMember getMember(int pos)

@@ -51,6 +51,15 @@
 			this.label10 = new System.Windows.Forms.Label();
 			this.label11 = new System.Windows.Forms.Label();
 			this.button3 = new System.Windows.Forms.Button();
+			this.label12 = new System.Windows.Forms.Label();
+			this.label13 = new System.Windows.Forms.Label();
+			this.firstAid2Name = new System.Windows.Forms.TextBox();
+			this.label14 = new System.Windows.Forms.Label();
+			this.fAid2hh = new System.Windows.Forms.TextBox();
+			this.label15 = new System.Windows.Forms.Label();
+			this.fAid2mm = new System.Windows.Forms.TextBox();
+			this.label16 = new System.Windows.Forms.Label();
+			this.firstAid2LevelOfTraining = new System.Windows.Forms.ComboBox();
 			this.SuspendLayout();
 			// 
 			// label1
@@ -156,6 +165,7 @@
 			this.firstAidLevelOfTraining.Name = "firstAidLevelOfTraining";
 			this.firstAidLevelOfTraining.Size = new System.Drawing.Size(127, 21);
 			this.firstAidLevelOfTraining.TabIndex = 8;
+			this.firstAidLevelOfTraining.Visible = false;
 			// 
 			// firstAidName
 			// 
@@ -163,6 +173,7 @@
 			this.firstAidName.Name = "firstAidName";
 			this.firstAidName.Size = new System.Drawing.Size(127, 20);
 			this.firstAidName.TabIndex = 5;
+			this.firstAidName.Visible = false;
 			// 
 			// label6
 			// 
@@ -173,6 +184,7 @@
 			this.label6.Size = new System.Drawing.Size(88, 13);
 			this.label6.TabIndex = 11;
 			this.label6.Text = "Level Of Training";
+			this.label6.Visible = false;
 			// 
 			// label7
 			// 
@@ -184,6 +196,7 @@
 			this.label7.Size = new System.Drawing.Size(205, 20);
 			this.label7.TabIndex = 12;
 			this.label7.Text = "Team Member (First Aid Kit)";
+			this.label7.Visible = false;
 			// 
 			// label8
 			// 
@@ -194,6 +207,7 @@
 			this.label8.Size = new System.Drawing.Size(151, 13);
 			this.label8.TabIndex = 13;
 			this.label8.Text = "Time of Departure (24h format)";
+			this.label8.Visible = false;
 			// 
 			// label9
 			// 
@@ -204,13 +218,14 @@
 			this.label9.Size = new System.Drawing.Size(35, 13);
 			this.label9.TabIndex = 14;
 			this.label9.Text = "Name";
+			this.label9.Visible = false;
 			// 
 			// button1
 			// 
-			this.button1.Location = new System.Drawing.Point(35, 336);
+			this.button1.Location = new System.Drawing.Point(193, 190);
 			this.button1.Name = "button1";
 			this.button1.Size = new System.Drawing.Size(75, 23);
-			this.button1.TabIndex = 9;
+			this.button1.TabIndex = 14;
 			this.button1.Text = "Confirm";
 			this.button1.UseVisualStyleBackColor = true;
 			this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -218,10 +233,10 @@
 			// button2
 			// 
 			this.button2.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.button2.Location = new System.Drawing.Point(145, 336);
+			this.button2.Location = new System.Drawing.Point(305, 190);
 			this.button2.Name = "button2";
 			this.button2.Size = new System.Drawing.Size(75, 23);
-			this.button2.TabIndex = 10;
+			this.button2.TabIndex = 15;
 			this.button2.Text = "Cancel";
 			this.button2.UseVisualStyleBackColor = true;
 			this.button2.Click += new System.EventHandler(this.button2_Click);
@@ -247,6 +262,7 @@
 			this.fAidmm.TabIndex = 7;
 			this.fAidmm.Text = "mm";
 			this.fAidmm.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			this.fAidmm.Visible = false;
 			this.fAidmm.Enter += new System.EventHandler(this.time_Enter);
 			this.fAidmm.Leave += new System.EventHandler(this.restoremm_Leave);
 			// 
@@ -259,6 +275,7 @@
 			this.fAidhh.TabIndex = 6;
 			this.fAidhh.Text = "hh";
 			this.fAidhh.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			this.fAidhh.Visible = false;
 			this.fAidhh.Enter += new System.EventHandler(this.time_Enter);
 			this.fAidhh.Leave += new System.EventHandler(this.restorehh_Leave);
 			// 
@@ -281,16 +298,121 @@
 			this.label11.Size = new System.Drawing.Size(10, 13);
 			this.label11.TabIndex = 21;
 			this.label11.Text = ":";
+			this.label11.Visible = false;
 			// 
 			// button3
 			// 
-			this.button3.Location = new System.Drawing.Point(253, 336);
+			this.button3.Location = new System.Drawing.Point(29, 191);
 			this.button3.Name = "button3";
 			this.button3.Size = new System.Drawing.Size(127, 23);
-			this.button3.TabIndex = 11;
+			this.button3.TabIndex = 13;
 			this.button3.Text = "Add Team Member";
 			this.button3.UseVisualStyleBackColor = true;
 			this.button3.Click += new System.EventHandler(this.button3_Click);
+			// 
+			// label12
+			// 
+			this.label12.AutoSize = true;
+			this.label12.Enabled = false;
+			this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label12.Location = new System.Drawing.Point(25, 326);
+			this.label12.Name = "label12";
+			this.label12.Size = new System.Drawing.Size(264, 20);
+			this.label12.TabIndex = 12;
+			this.label12.Text = "Team Member (Second First Aid Kit)";
+			this.label12.Visible = false;
+			// 
+			// label13
+			// 
+			this.label13.AutoSize = true;
+			this.label13.Enabled = false;
+			this.label13.Location = new System.Drawing.Point(55, 361);
+			this.label13.Name = "label13";
+			this.label13.Size = new System.Drawing.Size(35, 13);
+			this.label13.TabIndex = 18;
+			this.label13.Text = "Name";
+			this.label13.Visible = false;
+			// 
+			// firstAid2Name
+			// 
+			this.firstAid2Name.Location = new System.Drawing.Point(253, 361);
+			this.firstAid2Name.Name = "firstAid2Name";
+			this.firstAid2Name.Size = new System.Drawing.Size(125, 20);
+			this.firstAid2Name.TabIndex = 9;
+			this.firstAid2Name.Visible = false;
+			// 
+			// label14
+			// 
+			this.label14.AutoSize = true;
+			this.label14.Enabled = false;
+			this.label14.Location = new System.Drawing.Point(55, 395);
+			this.label14.Name = "label14";
+			this.label14.Size = new System.Drawing.Size(151, 13);
+			this.label14.TabIndex = 12;
+			this.label14.Text = "Time of Departure (24h format)";
+			this.label14.Visible = false;
+			// 
+			// fAid2hh
+			// 
+			this.fAid2hh.Location = new System.Drawing.Point(253, 395);
+			this.fAid2hh.MaxLength = 2;
+			this.fAid2hh.Name = "fAid2hh";
+			this.fAid2hh.Size = new System.Drawing.Size(25, 20);
+			this.fAid2hh.TabIndex = 10;
+			this.fAid2hh.Text = "hh";
+			this.fAid2hh.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			this.fAid2hh.Visible = false;
+			this.fAid2hh.MouseClick += new System.Windows.Forms.MouseEventHandler(this.time_Click);
+			this.fAid2hh.Leave += new System.EventHandler(this.restorehh_Leave);
+			// 
+			// label15
+			// 
+			this.label15.AutoSize = true;
+			this.label15.Enabled = false;
+			this.label15.Location = new System.Drawing.Point(280, 395);
+			this.label15.Name = "label15";
+			this.label15.Size = new System.Drawing.Size(10, 13);
+			this.label15.TabIndex = 20;
+			this.label15.Text = ":";
+			this.label15.Visible = false;
+			// 
+			// fAid2mm
+			// 
+			this.fAid2mm.Location = new System.Drawing.Point(292, 395);
+			this.fAid2mm.MaxLength = 2;
+			this.fAid2mm.Name = "fAid2mm";
+			this.fAid2mm.Size = new System.Drawing.Size(25, 20);
+			this.fAid2mm.TabIndex = 11;
+			this.fAid2mm.Text = "mm";
+			this.fAid2mm.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			this.fAid2mm.Visible = false;
+			this.fAid2mm.MouseClick += new System.Windows.Forms.MouseEventHandler(this.time_Click);
+			this.fAid2mm.Leave += new System.EventHandler(this.restoremm_Leave);
+			// 
+			// label16
+			// 
+			this.label16.AutoSize = true;
+			this.label16.Enabled = false;
+			this.label16.Location = new System.Drawing.Point(55, 427);
+			this.label16.Name = "label16";
+			this.label16.Size = new System.Drawing.Size(88, 13);
+			this.label16.TabIndex = 11;
+			this.label16.Text = "Level Of Training";
+			this.label16.Visible = false;
+			// 
+			// firstAid2LevelOfTraining
+			// 
+			this.firstAid2LevelOfTraining.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.firstAid2LevelOfTraining.FormattingEnabled = true;
+			this.firstAid2LevelOfTraining.Items.AddRange(new object[] {
+            "General First Aid",
+            "First Responder",
+            "Medicine"});
+			this.firstAid2LevelOfTraining.Location = new System.Drawing.Point(253, 427);
+			this.firstAid2LevelOfTraining.Name = "firstAid2LevelOfTraining";
+			this.firstAid2LevelOfTraining.Size = new System.Drawing.Size(121, 21);
+			this.firstAid2LevelOfTraining.TabIndex = 12;
+			this.firstAid2LevelOfTraining.Visible = false;
 			// 
 			// CreateTeamForm
 			// 
@@ -299,7 +421,7 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
 			this.CancelButton = this.button2;
-			this.ClientSize = new System.Drawing.Size(422, 371);
+			this.ClientSize = new System.Drawing.Size(422, 221);
 			this.Controls.Add(this.button3);
 			this.Controls.Add(this.teamName);
 			this.Controls.Add(this.radioName);
@@ -323,6 +445,15 @@
 			this.Controls.Add(this.label3);
 			this.Controls.Add(this.label2);
 			this.Controls.Add(this.label1);
+			this.Controls.Add(this.label12);
+			this.Controls.Add(this.label13);
+			this.Controls.Add(this.firstAid2Name);
+			this.Controls.Add(this.label14);
+			this.Controls.Add(this.fAid2hh);
+			this.Controls.Add(this.label15);
+			this.Controls.Add(this.fAid2mm);
+			this.Controls.Add(this.label16);
+			this.Controls.Add(this.firstAid2LevelOfTraining);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
@@ -359,5 +490,14 @@
 		private System.Windows.Forms.Label label10;
 		private System.Windows.Forms.Label label11;
 		private System.Windows.Forms.Button button3;
+		private System.Windows.Forms.Label label12;
+		private System.Windows.Forms.Label label13;
+		private System.Windows.Forms.TextBox firstAid2Name;
+		private System.Windows.Forms.Label label14;
+		private System.Windows.Forms.TextBox fAid2hh;
+		private System.Windows.Forms.Label label15;
+		private System.Windows.Forms.TextBox fAid2mm;
+		private System.Windows.Forms.Label label16;
+		private System.Windows.Forms.ComboBox firstAid2LevelOfTraining;
     }
 }

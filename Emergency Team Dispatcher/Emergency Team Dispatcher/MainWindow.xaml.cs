@@ -130,9 +130,12 @@ namespace Emergency_Team_Dispatcher
             i++;
             TeamCount++;
 
-			//ShowDialog creates a modal form so need to execute in a new thread because it will only keep control of the thread 
+			//ShowDialog creates a modal form so need to execute in a new thread because it will only keep control of the thread
+			int currentTeam = Globals.currentTeam;
 			Thread thread = new Thread(new ThreadStart(formThread));
 			thread.Start();
+			thread.Join();
+			if(currentTeam < Globals.currentTeam) TeamDisplay();
             //box.Text = "succ";
         }
 
@@ -383,7 +386,7 @@ namespace Emergency_Team_Dispatcher
 			//Team
 			Label TeamNameLabel = new Label();
 			TeamNameLabel.Name = "TeamNameLabel";
-            TeamNameLabel.Width = 190;
+            TeamNameLabel.Width = 188;
             TeamNameLabel.Height = 40;
 			TeamNameLabel.FontSize = 20;
 			TeamNameLabel.VerticalContentAlignment = VerticalAlignment.Center;
@@ -410,7 +413,7 @@ namespace Emergency_Team_Dispatcher
 				newMember.Foreground = new SolidColorBrush(Colors.Black);
 				//newMember.Background = new SolidColorBrush(Colors.Aqua);
 				newMember.BorderBrush = System.Windows.Media.Brushes.Black;
-				switch(member.trainingLevel)
+				switch(member.getTrainingLevel())
 				{
 					case 0:
 						newMember.Tag = "first_aid";
@@ -430,8 +433,8 @@ namespace Emergency_Team_Dispatcher
                 Team_display.Children.Add(newMember);
 			}
 
+			TeamNameLabelPosition = TeamMemberPosition + 15;
 			TeamMemberPosition += 90;
-			TeamNameLabelPosition += 150;
 			TeamNumberPosition++;
 
             Random random = new Random();
@@ -601,7 +604,7 @@ namespace Emergency_Team_Dispatcher
         }
 
         //display level of training
-        void LevelOfTraining(Label Member)
+        private void LevelOfTraining(Label Member)
         {
             // Create Image Element
             System.Windows.Controls.Image myImage = new System.Windows.Controls.Image();
@@ -616,21 +619,21 @@ namespace Emergency_Team_Dispatcher
             myBitmapImage.BeginInit();
 
             //first aid
-            if (Member.Tag.ToString() == "first_aid")
+            if (Member.Tag.ToString().Equals("first_aid"))
             {
 				myBitmapImage.UriSource = new Uri(AbsolutePath + @"Icons\First_Aid.png");
                 Canvas.SetTop(myImage, TeamMemberPosition);
             }
 
             //first responder
-            if (Member.Tag.ToString() == "first_responder")
+            if (Member.Tag.ToString().Equals("first_responder"))
             {
 				myBitmapImage.UriSource = new Uri(AbsolutePath + @"Icons\First_Responder.png");
                 Canvas.SetTop(myImage, TeamMemberPosition);
             }
 
             //Medicine
-            if (Member.Tag.ToString() == "medicine")
+            if (Member.Tag.ToString().Equals("medicine"))
             {
 				myBitmapImage.UriSource = new Uri(AbsolutePath + @"Icons\Medicine.png");
                 Canvas.SetTop(myImage, TeamMemberPosition);
