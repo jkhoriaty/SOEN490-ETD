@@ -18,7 +18,6 @@ using System.Diagnostics;
 
 
 
-
 namespace Emergency_Team_Dispatcher
 {
 	/// <summary>
@@ -422,17 +421,21 @@ namespace Emergency_Team_Dispatcher
         public void TeamDisplay()
         {
 			Team team = Globals.listOfTeams[Globals.currentTeam - 1];
+            Random random = new Random();
+            byte[] colorBytes = new byte[3];
+            random.NextBytes(colorBytes);
+            System.Windows.Media.Color randomColor = System.Windows.Media.Color.FromRgb(colorBytes[0], colorBytes[1], colorBytes[2]);
 
 			//Team
 			Label TeamNameLabel = new Label();
 			TeamNameLabel.Name = "TeamNameLabel";
-            TeamNameLabel.Width = 190;
+            TeamNameLabel.Width = 188;
             TeamNameLabel.Height = 40;
 			TeamNameLabel.FontSize = 20;
 			TeamNameLabel.VerticalContentAlignment = VerticalAlignment.Center;
 			TeamNameLabel.Content = "Team " + Globals.listOfTeams[Globals.currentTeam-1].getName();
-            TeamNameLabel.Foreground = new SolidColorBrush(Colors.White);
-            TeamNameLabel.Background = new SolidColorBrush(Colors.Black);
+            TeamNameLabel.Foreground = new SolidColorBrush(Colors.Black);
+            TeamNameLabel.Background = new SolidColorBrush(randomColor);
             TeamNameLabel.BorderBrush = System.Windows.Media.Brushes.Black;
 
             Canvas.SetLeft(TeamNameLabel, 0);
@@ -477,10 +480,6 @@ namespace Emergency_Team_Dispatcher
 			TeamNameLabelPosition += 150;
 			TeamNumberPosition++;
 
-            Random random = new Random();
-            byte[] colorBytes = new byte[3];
-            random.NextBytes(colorBytes);
-            System.Windows.Media.Color randomColor = System.Windows.Media.Color.FromRgb(colorBytes[0], colorBytes[1], colorBytes[2]);
             System.Windows.Shapes.Rectangle r = new System.Windows.Shapes.Rectangle();
             r.Name = "team_" + rectangleCtr++;
             r.Width = shapeRadius * 2;
@@ -490,7 +489,7 @@ namespace Emergency_Team_Dispatcher
             r.MouseLeftButtonDown += new MouseButtonEventHandler(team_MouseLeftButtonDown);
             r.MouseLeftButtonUp += new MouseButtonEventHandler(team_MouseLeftButtonUp);
             r.MouseMove += new MouseEventHandler(team_MouseMove);
-       
+     
             Canvas.SetTop(r, 0);
             Canvas.SetLeft(r, 0);
             Map.Children.Add(r);
