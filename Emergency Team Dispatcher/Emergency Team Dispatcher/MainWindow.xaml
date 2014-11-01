@@ -13,7 +13,15 @@
 					<MenuItem Name="_GetTimerTest" Header="_Timer Test" Click="TimeTest_MenuItem_Click"/>
 					<MenuItem Name="_LoadMap" Header="_Load Map" Click="Map_MenuItem_Click"/>
 					<MenuItem Name="_CreateTeam" Header="_Create Team" Click="Team_MenuItem_Click"/>
-					<MenuItem Name="_Quit" Header="_Quit" Click="Exit_MenuItem_Click"/>
+                    <MenuItem Name="_AddEquipment" Header="_Add Equipment">
+                        <MenuItem Name="_AmbulanceCart" Header="_Ambulance cart" Click="Add_Equipment_Click" />
+                        <MenuItem Name="_SittingCart" Header="_Sitting cart" Click="Add_Equipment_Click" />
+                        <MenuItem Name="_MountedStretcher" Header="_Mounted stretcher" Click="Add_Equipment_Click" />
+                        <MenuItem Name="_TransportStretcher" Header="_Transport stretcher" Click="Add_Equipment_Click" />
+                        <MenuItem Name="_WheelChair" Header="_WheelChair" Click="Add_Equipment_Click" />
+                        <MenuItem Name="_Epipen" Header="_Epipen" Click="Add_Equipment_Click" />
+                    </MenuItem>
+                    <MenuItem Name="_Quit" Header="_Quit" Click="Exit_MenuItem_Click"/>
 				</MenuItem>
 				<MenuItem Name="_Tools" Header="_Tools">
 					<MenuItem Name="_Language" Header="Change _Language">
@@ -28,7 +36,11 @@
 		</DockPanel>
 
 		<Border BorderBrush="Black" BorderThickness="1" Margin="2,50,0,125" HorizontalAlignment="Left" Width="190">
-			<Canvas Name="Team_display"></Canvas>
+            <Canvas Name="Team_display">
+    
+                
+                
+            </Canvas>
 		</Border>
 		<TextBlock Name="timer" HorizontalAlignment="Left" VerticalAlignment="Bottom" TextWrapping="Wrap" Text="Timer" Height="16" Width="30"/>
 		<Border BorderBrush="Black" BorderThickness="1" Margin="200,20,-0.4,125">

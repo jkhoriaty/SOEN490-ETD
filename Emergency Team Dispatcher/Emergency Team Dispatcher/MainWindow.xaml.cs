@@ -19,7 +19,6 @@ using System.Threading;
 
 
 
-
 namespace Emergency_Team_Dispatcher
 {
 	/// <summary>
@@ -146,9 +145,63 @@ namespace Emergency_Team_Dispatcher
 			Ctf.ShowDialog();
 		}
 
+        //Add equipment on the map
+        private void Add_Equipment_Click(object sender, RoutedEventArgs e)
+        {
+            MenuItem Equipment = (MenuItem)sender;
+ 
+            System.Windows.Shapes.Rectangle r = new System.Windows.Shapes.Rectangle();
+            r.Width = shapeRadius;
+            r.Height = shapeRadius-2;
+            ImageBrush imgb = new ImageBrush();
+            
+            if (Equipment.Name == "_AmbulanceCart")
+            {
+
+                imgb.ImageSource = new BitmapImage(new Uri(AbsolutePath + @"Icons\AmbulanceCart.png"));
+
+            }
+
+            if (Equipment.Name == "_SittingCart")
+            {
+                imgb.ImageSource = new BitmapImage(new Uri(AbsolutePath + @"Icons\SittingCart.png"));
+            }
+
+            if (Equipment.Name == "_MountedStretcher")
+            {
+                imgb.ImageSource = new BitmapImage(new Uri(AbsolutePath + @"Icons\MountedStretcher.png"));
+            }
+
+            if (Equipment.Name == "_WheelChair")
+            {
+                imgb.ImageSource = new BitmapImage(new Uri(AbsolutePath + @"Icons\WheelChair.png"));
+            }
+
+            if (Equipment.Name == "_TransportStretcher")
+            {
+                imgb.ImageSource = new BitmapImage(new Uri(AbsolutePath + @"Icons\TransportStretcher.png"));
+            }
+
+            if (Equipment.Name == "_Epipen")
+            {
+                imgb.ImageSource = new BitmapImage(new Uri(AbsolutePath + @"Icons\Epipen.png"));
+            }
+
+            r.Fill = imgb;
+
+            r.MouseLeftButtonDown += new MouseButtonEventHandler(team_MouseLeftButtonDown);
+            r.MouseLeftButtonUp += new MouseButtonEventHandler(team_MouseLeftButtonUp);
+            r.MouseMove += new MouseEventHandler(team_MouseMove);
+        
+            Map.Children.Add(r);
+
+        }
+       
+
         private void team_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             System.Windows.Shapes.Rectangle r = sender as System.Windows.Shapes.Rectangle;
+
             _isRectDragInProg = r.CaptureMouse();
             movingRectangle = r.Name;
         }
@@ -379,9 +432,13 @@ namespace Emergency_Team_Dispatcher
         }
 
         //Assign and display team name
-        public void TeamDisplay()
+        public void TeamDisplay( )
         {
 			Team team = Globals.listOfTeams[Globals.currentTeam - 1];
+            Random random = new Random();
+            byte[] colorBytes = new byte[3];
+            random.NextBytes(colorBytes);
+            System.Windows.Media.Color randomColor = System.Windows.Media.Color.FromRgb(colorBytes[0], colorBytes[1], colorBytes[2]);
 
 			//Team
 			Label TeamNameLabel = new Label();
@@ -391,9 +448,10 @@ namespace Emergency_Team_Dispatcher
 			TeamNameLabel.FontSize = 20;
 			TeamNameLabel.VerticalContentAlignment = VerticalAlignment.Center;
 			TeamNameLabel.Content = "Team " + Globals.listOfTeams[Globals.currentTeam-1].getName();
-            TeamNameLabel.Foreground = new SolidColorBrush(Colors.White);
-            TeamNameLabel.Background = new SolidColorBrush(Colors.Black);
+            TeamNameLabel.Foreground = new SolidColorBrush(Colors.Black);
+            TeamNameLabel.Background = new SolidColorBrush(randomColor);
             TeamNameLabel.BorderBrush = System.Windows.Media.Brushes.Black;
+            TeamNameLabel.BorderThickness = new Thickness(0, 1, 0, 1);
 
             Canvas.SetLeft(TeamNameLabel, 0);
             Canvas.SetTop(TeamNameLabel, TeamNameLabelPosition);
@@ -406,7 +464,7 @@ namespace Emergency_Team_Dispatcher
 			{
 				Label newMember = new Label();
 				newMember.Name = "TeamMember" + pos;
-				newMember.Width = 160;
+                newMember.Width = 188;
 				newMember.Height = 30;
 				newMember.FontSize = 16;
 				newMember.VerticalContentAlignment = VerticalAlignment.Center;
@@ -437,10 +495,6 @@ namespace Emergency_Team_Dispatcher
 			TeamMemberPosition += 90;
 			TeamNumberPosition++;
 
-            Random random = new Random();
-            byte[] colorBytes = new byte[3];
-            random.NextBytes(colorBytes);
-            System.Windows.Media.Color randomColor = System.Windows.Media.Color.FromRgb(colorBytes[0], colorBytes[1], colorBytes[2]);
             System.Windows.Shapes.Rectangle r = new System.Windows.Shapes.Rectangle();
             r.Name = "team_" + rectangleCtr++;
             r.Width = shapeRadius * 2;
@@ -450,6 +504,8 @@ namespace Emergency_Team_Dispatcher
             r.MouseLeftButtonDown += new MouseButtonEventHandler(team_MouseLeftButtonDown);
             r.MouseLeftButtonUp += new MouseButtonEventHandler(team_MouseLeftButtonUp);
             r.MouseMove += new MouseEventHandler(team_MouseMove);
+
+       
             Canvas.SetTop(r, 0);
             Canvas.SetLeft(r, 0);
             Map.Children.Add(r);
@@ -465,6 +521,8 @@ namespace Emergency_Team_Dispatcher
             //add equipment by right clicking
             ContextMenu mnuContextMenu = new ContextMenu();
             this.ContextMenu = mnuContextMenu;
+            Team_display.ContextMenu=mnuContextMenu;
+
          
             mnuContextMenu.Width = 205;
             mnuContextMenu.Height = 150;
@@ -514,6 +572,7 @@ namespace Emergency_Team_Dispatcher
             mnuContextMenu.Items.Add(WheelChair);
             mnuContextMenu.Items.Add(Epipen);
 
+
         }
 
         //Displaying Equipment
@@ -525,7 +584,7 @@ namespace Emergency_Team_Dispatcher
             MenuItem TransportStretcher = (MenuItem)sender;
             MenuItem SittingCart = (MenuItem)sender;
             MenuItem Epipen = (MenuItem)sender;
-
+    
             //limits the number of equipments the user can add
             if (NumberOfEquipment > 5)
             {
@@ -554,7 +613,7 @@ namespace Emergency_Team_Dispatcher
                 myBitmapImage.BeginInit();
 
                 //AmbulanceCart
-                if (AmbulanceCart.Name == "Ambulance_Cart")
+                if (AmbulanceCart.Name == "Ambulance_Cart" )
                 {
                     myBitmapImage.UriSource = new Uri(AbsolutePath + @"Icons\AmbulanceCart.png");
                 }
@@ -621,24 +680,24 @@ namespace Emergency_Team_Dispatcher
             //first aid
             if (Member.Tag.ToString().Equals("first_aid"))
             {
-				myBitmapImage.UriSource = new Uri(AbsolutePath + @"Icons\First_Aid.png");
+				myBitmapImage.UriSource = new Uri(AbsolutePath + @"Icons\First_Aid2.png");
                 Canvas.SetTop(myImage, TeamMemberPosition);
             }
 
             //first responder
             if (Member.Tag.ToString().Equals("first_responder"))
             {
-				myBitmapImage.UriSource = new Uri(AbsolutePath + @"Icons\First_Responder.png");
+				myBitmapImage.UriSource = new Uri(AbsolutePath + @"Icons\First_Responder2.png");
                 Canvas.SetTop(myImage, TeamMemberPosition);
             }
 
             //Medicine
             if (Member.Tag.ToString().Equals("medicine"))
             {
-				myBitmapImage.UriSource = new Uri(AbsolutePath + @"Icons\Medicine.png");
+				myBitmapImage.UriSource = new Uri(AbsolutePath + @"Icons\Medicine2.png");
                 Canvas.SetTop(myImage, TeamMemberPosition);
             }
-            myBitmapImage.DecodePixelWidth = 13;
+            myBitmapImage.DecodePixelWidth = 30;
             myBitmapImage.EndInit();
             myImage.Source = myBitmapImage;
             Team_display.Children.Add(myImage);
