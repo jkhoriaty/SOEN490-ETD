@@ -142,10 +142,12 @@ namespace Emergency_Team_Dispatcher
             r.Width = shapeRadius;
             r.Height = shapeRadius-2;
             ImageBrush imgb = new ImageBrush();
-
+            
             if (Equipment.Name == "_AmbulanceCart")
             {
+
                 imgb.ImageSource = new BitmapImage(new Uri(AbsolutePath + @"Icons\AmbulanceCart.png"));
+
             }
 
             if (Equipment.Name == "_SittingCart")
@@ -418,7 +420,7 @@ namespace Emergency_Team_Dispatcher
         }
 
         //Assign and display team name
-        public void TeamDisplay()
+        public void TeamDisplay( )
         {
 			Team team = Globals.listOfTeams[Globals.currentTeam - 1];
             Random random = new Random();
@@ -437,6 +439,7 @@ namespace Emergency_Team_Dispatcher
             TeamNameLabel.Foreground = new SolidColorBrush(Colors.Black);
             TeamNameLabel.Background = new SolidColorBrush(randomColor);
             TeamNameLabel.BorderBrush = System.Windows.Media.Brushes.Black;
+            TeamNameLabel.BorderThickness = new Thickness(0, 1, 0, 1);
 
             Canvas.SetLeft(TeamNameLabel, 0);
             Canvas.SetTop(TeamNameLabel, TeamNameLabelPosition);
@@ -449,13 +452,14 @@ namespace Emergency_Team_Dispatcher
 			{
 				Label newMember = new Label();
 				newMember.Name = "TeamMember" + pos;
-				newMember.Width = 160;
+                newMember.Width = 188;
 				newMember.Height = 30;
 				newMember.FontSize = 16;
 				newMember.VerticalContentAlignment = VerticalAlignment.Center;
 				newMember.Foreground = new SolidColorBrush(Colors.Black);
 				//newMember.Background = new SolidColorBrush(Colors.Aqua);
 				newMember.BorderBrush = System.Windows.Media.Brushes.Black;
+
 				switch(member.trainingLevel)
 				{
 					case 0:
@@ -489,7 +493,8 @@ namespace Emergency_Team_Dispatcher
             r.MouseLeftButtonDown += new MouseButtonEventHandler(team_MouseLeftButtonDown);
             r.MouseLeftButtonUp += new MouseButtonEventHandler(team_MouseLeftButtonUp);
             r.MouseMove += new MouseEventHandler(team_MouseMove);
-     
+
+       
             Canvas.SetTop(r, 0);
             Canvas.SetLeft(r, 0);
             Map.Children.Add(r);
@@ -568,7 +573,7 @@ namespace Emergency_Team_Dispatcher
             MenuItem TransportStretcher = (MenuItem)sender;
             MenuItem SittingCart = (MenuItem)sender;
             MenuItem Epipen = (MenuItem)sender;
-
+    
             //limits the number of equipments the user can add
             if (NumberOfEquipment > 5)
             {
@@ -597,7 +602,7 @@ namespace Emergency_Team_Dispatcher
                 myBitmapImage.BeginInit();
 
                 //AmbulanceCart
-                if (AmbulanceCart.Name == "Ambulance_Cart")
+                if (AmbulanceCart.Name == "Ambulance_Cart" )
                 {
                     myBitmapImage.UriSource = new Uri(AbsolutePath + @"Icons\AmbulanceCart.png");
                 }
