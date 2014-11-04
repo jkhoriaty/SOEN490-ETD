@@ -23,8 +23,6 @@ namespace Emergency_Team_Dispatcher
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Regex nameRgx = new Regex(@"^[a-zA-Z]{1,6}$");
-            Regex memberNameRgx = new Regex(@"^[a-zA-Z0-9]{2,30}$");
 			Regex timeHoursRgx = new Regex(@"^[0-9][0-9]$");
 			Regex timeMinutesRgx = new Regex(@"^[0-5][0-9]$");
 
@@ -39,7 +37,7 @@ namespace Emergency_Team_Dispatcher
 			int f2Training = -1;
 			
 			//Checking team info
-			if(!nameRgx.IsMatch(teamName.Text))
+			if(teamName.Text == "")
             {
                warning += "Team name is invalid.\n";
             }
@@ -51,7 +49,7 @@ namespace Emergency_Team_Dispatcher
 			//
 			//Checking radio info
 			//
-			if (!memberNameRgx.IsMatch(radioName.Text))
+			if (radioName.Text == null)
             {
                 warning += "Radio member name is invalid.\n";
             }
@@ -99,7 +97,7 @@ namespace Emergency_Team_Dispatcher
 			//
 			if (nbOfMembers > 1)
 			{
-				if (!memberNameRgx.IsMatch(firstAidName.Text))
+				if (firstAidName.Text == "")
 				{
 					warning += "First aid member name is invalid.\n";
 				}
@@ -147,7 +145,7 @@ namespace Emergency_Team_Dispatcher
 			//
 			if (nbOfMembers > 2)
 			{
-				if (!memberNameRgx.IsMatch(firstAid2Name.Text))
+				if (firstAid2Name.Text == "")
 				{
 					warning += "Second First aid member name is invalid.\n";
 				}
