@@ -552,10 +552,10 @@ namespace Emergency_Team_Dispatcher
             l.Padding = new Thickness(0);
             l.FontWeight = FontWeights.DemiBold;
             System.Windows.Media.Effects.DropShadowEffect shadow = new System.Windows.Media.Effects.DropShadowEffect();
-            shadow.ShadowDepth = 4;
+            shadow.ShadowDepth = 3;
             shadow.Direction = 315;
             shadow.Opacity = 1.0;
-            shadow.BlurRadius = 2;
+            shadow.BlurRadius = 3;
             shadow.Color = Colors.White;
             l.Effect = shadow;
 
