@@ -60,6 +60,7 @@
 			this.fAid2mm = new System.Windows.Forms.TextBox();
 			this.label16 = new System.Windows.Forms.Label();
 			this.firstAid2LevelOfTraining = new System.Windows.Forms.ComboBox();
+			this.button4 = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
 			// label1
@@ -117,6 +118,7 @@
 			// teamName
 			// 
 			this.teamName.Location = new System.Drawing.Point(253, 19);
+			this.teamName.MaxLength = 6;
 			this.teamName.Name = "teamName";
 			this.teamName.Size = new System.Drawing.Size(100, 20);
 			this.teamName.TabIndex = 0;
@@ -124,6 +126,7 @@
 			// radioName
 			// 
 			this.radioName.Location = new System.Drawing.Point(253, 86);
+			this.radioName.MaxLength = 32;
 			this.radioName.Name = "radioName";
 			this.radioName.Size = new System.Drawing.Size(127, 20);
 			this.radioName.TabIndex = 1;
@@ -170,6 +173,7 @@
 			// firstAidName
 			// 
 			this.firstAidName.Location = new System.Drawing.Point(253, 222);
+			this.firstAidName.MaxLength = 6;
 			this.firstAidName.Name = "firstAidName";
 			this.firstAidName.Size = new System.Drawing.Size(127, 20);
 			this.firstAidName.TabIndex = 5;
@@ -222,10 +226,10 @@
 			// 
 			// button1
 			// 
-			this.button1.Location = new System.Drawing.Point(193, 190);
+			this.button1.Location = new System.Drawing.Point(240, 190);
 			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(75, 23);
-			this.button1.TabIndex = 14;
+			this.button1.Size = new System.Drawing.Size(80, 23);
+			this.button1.TabIndex = 15;
 			this.button1.Text = "Confirm";
 			this.button1.UseVisualStyleBackColor = true;
 			this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -233,10 +237,10 @@
 			// button2
 			// 
 			this.button2.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.button2.Location = new System.Drawing.Point(305, 190);
+			this.button2.Location = new System.Drawing.Point(320, 190);
 			this.button2.Name = "button2";
-			this.button2.Size = new System.Drawing.Size(75, 23);
-			this.button2.TabIndex = 15;
+			this.button2.Size = new System.Drawing.Size(80, 23);
+			this.button2.TabIndex = 16;
 			this.button2.Text = "Cancel";
 			this.button2.UseVisualStyleBackColor = true;
 			this.button2.Click += new System.EventHandler(this.button2_Click);
@@ -302,11 +306,11 @@
 			// 
 			// button3
 			// 
-			this.button3.Location = new System.Drawing.Point(29, 191);
+			this.button3.Location = new System.Drawing.Point(30, 190);
 			this.button3.Name = "button3";
-			this.button3.Size = new System.Drawing.Size(127, 23);
+			this.button3.Size = new System.Drawing.Size(80, 23);
 			this.button3.TabIndex = 13;
-			this.button3.Text = "Add Team Member";
+			this.button3.Text = "Add Member";
 			this.button3.UseVisualStyleBackColor = true;
 			this.button3.Click += new System.EventHandler(this.button3_Click);
 			// 
@@ -336,6 +340,7 @@
 			// firstAid2Name
 			// 
 			this.firstAid2Name.Location = new System.Drawing.Point(253, 361);
+			this.firstAid2Name.MaxLength = 6;
 			this.firstAid2Name.Name = "firstAid2Name";
 			this.firstAid2Name.Size = new System.Drawing.Size(125, 20);
 			this.firstAid2Name.TabIndex = 9;
@@ -414,6 +419,17 @@
 			this.firstAid2LevelOfTraining.TabIndex = 12;
 			this.firstAid2LevelOfTraining.Visible = false;
 			// 
+			// button4
+			// 
+			this.button4.Location = new System.Drawing.Point(110, 330);
+			this.button4.Name = "button4";
+			this.button4.Size = new System.Drawing.Size(100, 23);
+			this.button4.TabIndex = 14;
+			this.button4.Text = "Remove Member";
+			this.button4.UseVisualStyleBackColor = true;
+			this.button4.Visible = false;
+			this.button4.Click += new System.EventHandler(this.button4_Click);
+			// 
 			// CreateTeamForm
 			// 
 			this.AcceptButton = this.button1;
@@ -422,6 +438,7 @@
 			this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
 			this.CancelButton = this.button2;
 			this.ClientSize = new System.Drawing.Size(422, 221);
+			this.Controls.Add(this.button4);
 			this.Controls.Add(this.button3);
 			this.Controls.Add(this.teamName);
 			this.Controls.Add(this.radioName);
@@ -499,5 +516,6 @@
 		private System.Windows.Forms.TextBox fAid2mm;
 		private System.Windows.Forms.Label label16;
 		private System.Windows.Forms.ComboBox firstAid2LevelOfTraining;
+		private System.Windows.Forms.Button button4;
     }
 }

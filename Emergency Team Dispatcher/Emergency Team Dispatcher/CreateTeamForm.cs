@@ -23,8 +23,6 @@ namespace Emergency_Team_Dispatcher
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Regex nameRgx = new Regex(@"^[a-zA-Z]{1,6}$");
-            Regex memberNameRgx = new Regex(@"^[a-zA-Z0-9]{2,30}$");
 			Regex timeHoursRgx = new Regex(@"^[0-9][0-9]$");
 			Regex timeMinutesRgx = new Regex(@"^[0-5][0-9]$");
 
@@ -39,7 +37,7 @@ namespace Emergency_Team_Dispatcher
 			int f2Training = -1;
 			
 			//Checking team info
-			if(!nameRgx.IsMatch(teamName.Text))
+			if(teamName.Text == "")
             {
                warning += "Team name is invalid.\n";
             }
@@ -51,7 +49,7 @@ namespace Emergency_Team_Dispatcher
 			//
 			//Checking radio info
 			//
-			if (!memberNameRgx.IsMatch(radioName.Text))
+			if (radioName.Text == null)
             {
                 warning += "Radio member name is invalid.\n";
             }
@@ -99,7 +97,7 @@ namespace Emergency_Team_Dispatcher
 			//
 			if (nbOfMembers > 1)
 			{
-				if (!memberNameRgx.IsMatch(firstAidName.Text))
+				if (firstAidName.Text == "")
 				{
 					warning += "First aid member name is invalid.\n";
 				}
@@ -147,7 +145,7 @@ namespace Emergency_Team_Dispatcher
 			//
 			if (nbOfMembers > 2)
 			{
-				if (!memberNameRgx.IsMatch(firstAid2Name.Text))
+				if (firstAid2Name.Text == "")
 				{
 					warning += "Second First aid member name is invalid.\n";
 				}
@@ -251,9 +249,10 @@ namespace Emergency_Team_Dispatcher
 			{
 				case 1:
 					this.Size = new System.Drawing.Size(438, 400);
-					button1.Location = new System.Drawing.Point(193, 330);
-					button2.Location = new System.Drawing.Point(305, 330);
-					button3.Location = new System.Drawing.Point(29, 330);
+					button1.Location = new System.Drawing.Point(240, 330);
+					button2.Location = new System.Drawing.Point(320, 330);
+					button3.Location = new System.Drawing.Point(30, 330);
+					button4.Visible = true;
 					label7.Visible = true;
 					label9.Visible = true;
 					firstAidName.Visible = true;
@@ -268,9 +267,10 @@ namespace Emergency_Team_Dispatcher
 					break;
 				case 2:
 					this.Size = new System.Drawing.Size(438, 540);
-					button1.Location = new System.Drawing.Point(193, 470);
-					button2.Location = new System.Drawing.Point(305, 470);
+					button1.Location = new System.Drawing.Point(240, 470);
+					button2.Location = new System.Drawing.Point(320, 470);
 					button3.Visible = false;
+					button4.Location = new System.Drawing.Point(110, 470);
 					label12.Visible = true;
 					label13.Visible = true;
 					firstAid2Name.Visible = true;
@@ -282,6 +282,49 @@ namespace Emergency_Team_Dispatcher
 					firstAid2LevelOfTraining.Visible = true;
 					nbOfMembers = 3;
 					firstAid2Name.Focus();
+					break;
+			}
+		}
+
+		private void button4_Click(object sender, EventArgs e)
+		{
+			switch (nbOfMembers)
+			{
+				case 2:
+					this.Size = new System.Drawing.Size(438, 260);
+					button1.Location = new System.Drawing.Point(240, 190);
+					button2.Location = new System.Drawing.Point(320, 190);
+					button3.Location = new System.Drawing.Point(30, 190);
+					button4.Visible = false;
+					label7.Visible = false;
+					label9.Visible = false;
+					firstAidName.Visible = false;
+					label8.Visible = false;
+					fAidhh.Visible = false;
+					label11.Visible = false;
+					fAidmm.Visible = false;
+					label6.Visible = false;
+					firstAidLevelOfTraining.Visible = false;
+					nbOfMembers = 1;
+					radioName.Focus();
+					break;
+				case 3:
+					this.Size = new System.Drawing.Size(438, 400);
+					button1.Location = new System.Drawing.Point(240, 330);
+					button2.Location = new System.Drawing.Point(320, 330);
+					button3.Visible = true;
+					button4.Location = new System.Drawing.Point(110, 330);
+					label12.Visible = false;
+					label13.Visible = false;
+					firstAid2Name.Visible = false;
+					label14.Visible = false;
+					fAid2hh.Visible = false;
+					label15.Visible = false;
+					fAid2mm.Visible = false;
+					label16.Visible = false;
+					firstAid2LevelOfTraining.Visible = false;
+					nbOfMembers = 2;
+					firstAidName.Focus();
 					break;
 			}
 		}
