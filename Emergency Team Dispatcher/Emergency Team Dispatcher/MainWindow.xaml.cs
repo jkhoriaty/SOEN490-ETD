@@ -151,8 +151,8 @@ namespace Emergency_Team_Dispatcher
             MenuItem Equipment = (MenuItem)sender;
  
             System.Windows.Shapes.Rectangle r = new System.Windows.Shapes.Rectangle();
-            r.Width = shapeRadius;
-            r.Height = shapeRadius-2;
+            r.Width = 25;
+            r.Height = 23;
             ImageBrush imgb = new ImageBrush();
             
             if (Equipment.Name == "_AmbulanceCart")
@@ -458,6 +458,10 @@ namespace Emergency_Team_Dispatcher
             Team_display.Children.Add(TeamNameLabel);
 
 			//Members
+            ImageBrush imgb = new ImageBrush();
+            int NumberOfLevel0Members = 0;
+            int NumberOfLevel1Members = 0;
+            int NumberOfLevel2Members = 0;
 			int pos = 0;
 			TeamMember member;
 			while((member = team.getMember(pos++)) != null)
@@ -475,14 +479,31 @@ namespace Emergency_Team_Dispatcher
 				{
 					case 0:
 						newMember.Tag = "first_aid";
+                        NumberOfLevel0Members++;
 						break;
 					case 1:
 						newMember.Tag = "first_responder";
+                        NumberOfLevel1Members++;
 						break;
 					case 2:
 						newMember.Tag = "medicine";
+                        NumberOfLevel2Members++;
 						break;
 				}
+
+                if (NumberOfLevel0Members >= NumberOfLevel1Members )
+                {
+                    imgb.ImageSource = new BitmapImage(new Uri(AbsolutePath + @"Icons\First_Aid2.png"));
+                }
+                else if (NumberOfLevel1Members >= NumberOfLevel0Members)
+                {
+                    imgb.ImageSource = new BitmapImage(new Uri(AbsolutePath + @"Icons\First_Responder2.png"));
+                }
+                else
+                {
+                    imgb.ImageSource = new BitmapImage(new Uri(AbsolutePath + @"Icons\Medicine2.png"));
+                }
+
 				newMember.Content = member.getName();
 				Canvas.SetLeft(newMember, 0);
 				Canvas.SetTop(newMember, TeamMemberPosition);
@@ -500,12 +521,12 @@ namespace Emergency_Team_Dispatcher
             r.Width = shapeRadius * 2;
             r.Height = shapeRadius * 2;
             r.Stroke = new SolidColorBrush(Colors.Black);
-            r.Fill = new SolidColorBrush(randomColor);
+
+            r.Fill = imgb;
             r.MouseLeftButtonDown += new MouseButtonEventHandler(team_MouseLeftButtonDown);
             r.MouseLeftButtonUp += new MouseButtonEventHandler(team_MouseLeftButtonUp);
             r.MouseMove += new MouseEventHandler(team_MouseMove);
 
-       
             Canvas.SetTop(r, 0);
             Canvas.SetLeft(r, 0);
             Map.Children.Add(r);
