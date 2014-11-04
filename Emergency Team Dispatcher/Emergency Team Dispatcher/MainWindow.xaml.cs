@@ -30,7 +30,7 @@ namespace Emergency_Team_Dispatcher
         //variable initialization
         private bool _isRectDragInProg;
         String movingRectangle;
-        int shapeRadius = 25;
+        int shapeRadius = 20;
         int TeamNumberPosition = 0;
         int TeamNameLabelPosition = 0;
         int TeamEquipPositionTop = 43;
@@ -393,6 +393,15 @@ namespace Emergency_Team_Dispatcher
             //Drop the rectangle if there are not collision or after resolution of collision
             Canvas.SetLeft(r, (horizontalDropped - shapeRadius));
             Canvas.SetTop(r, (verticalDropped - shapeRadius));
+            //Move label associated with rectangle
+            System.Windows.Controls.Label l = new Label();
+            foreach (KeyValuePair<int, Team> t in Globals.listOfTeams)
+            {
+                if (t.Value.getRectangle() == r)
+                    l = t.Value.getLabel();
+            }
+            Canvas.SetLeft(l, (horizontalDropped - shapeRadius));
+            Canvas.SetTop(l, (verticalDropped - shapeRadius));
         }
 
         //Method to visually drag the item selected and insuring it doesn't go outside of the map
@@ -404,6 +413,12 @@ namespace Emergency_Team_Dispatcher
             // get the position of the mouse relative to the Canvas
             var mousePos = e.GetPosition(Map);
             System.Windows.Shapes.Rectangle r = sender as System.Windows.Shapes.Rectangle;
+            System.Windows.Controls.Label l = new Label();
+            foreach(KeyValuePair<int, Team> t in Globals.listOfTeams)
+            {
+                if(t.Value.getRectangle() == r)
+                    l = t.Value.getLabel();
+            }
 
             //Handling exception where fixed rectangle gets moved when another rectangle is dropped on it
             if (!r.Name.Equals(movingRectangle))
@@ -419,6 +434,8 @@ namespace Emergency_Team_Dispatcher
 
             Canvas.SetLeft(r, (mousePos.X - shapeRadius));
             Canvas.SetTop(r, (mousePos.Y - shapeRadius));
+            Canvas.SetLeft(l, (mousePos.X - shapeRadius));
+            Canvas.SetTop(l, (mousePos.Y - shapeRadius));
         }
 
         private void French_Click(object sender, RoutedEventArgs e)
@@ -521,16 +538,55 @@ namespace Emergency_Team_Dispatcher
             r.Width = shapeRadius * 2;
             r.Height = shapeRadius * 2;
             r.Stroke = new SolidColorBrush(Colors.Black);
-
+            
             r.Fill = imgb;
             r.MouseLeftButtonDown += new MouseButtonEventHandler(team_MouseLeftButtonDown);
             r.MouseLeftButtonUp += new MouseButtonEventHandler(team_MouseLeftButtonUp);
             r.MouseMove += new MouseEventHandler(team_MouseMove);
 
+            Label l = new Label(); 
+            l.Content = team.getName();
+            l.Width = shapeRadius * 2;
+            l.Height = shapeRadius * 2;
+            l.Margin = new Thickness(0);
+            l.Padding = new Thickness(0);
+            l.FontWeight = FontWeights.DemiBold;
+            System.Windows.Media.Effects.DropShadowEffect shadow = new System.Windows.Media.Effects.DropShadowEffect();
+            shadow.ShadowDepth = 4;
+            shadow.Direction = 315;
+            shadow.Opacity = 1.0;
+            shadow.BlurRadius = 2;
+            shadow.Color = Colors.White;
+            l.Effect = shadow;
+
+            switch(l.Content.ToString().Length)
+            {
+                case 1: l.FontSize = 28;
+                    break;
+                case 2: l.FontSize = 24;
+                    break;
+                case 3: l.FontSize = 20;
+                    break;
+                case 4: l.FontSize = 16;
+                    break;
+                case 5: l.FontSize = 12;
+                    break;
+                case 6: l.FontSize = 12;
+                    break;
+                default: l.FontSize = 16;
+                    break;
+            }
+            l.HorizontalContentAlignment = HorizontalAlignment.Center;
+            l.VerticalContentAlignment = VerticalAlignment.Center;
+            l.IsHitTestVisible = false;
             Canvas.SetTop(r, 0);
             Canvas.SetLeft(r, 0);
+            Canvas.SetTop(l, 0);
+            Canvas.SetLeft(l, 0);
             Map.Children.Add(r);
+            Map.Children.Add(l);
             Globals.listOfTeams[Globals.currentTeam - 1].setRectangle(r);
+            Globals.listOfTeams[Globals.currentTeam - 1].setLabel(l);
 
             label_Click();
         }
