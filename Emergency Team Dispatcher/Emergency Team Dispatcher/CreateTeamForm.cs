@@ -209,6 +209,7 @@ namespace Emergency_Team_Dispatcher
             //team.addToDB;
             
             MessageBox.Show("Success");
+            parent.TeamDisplay();
             this.Close();
         }
 
@@ -331,5 +332,42 @@ namespace Emergency_Team_Dispatcher
 					break;
 			}
 		}
+        public void tabChange(object sender, KeyEventArgs e)
+        {
+            Control TB = (Control)sender;
+            if (e.KeyCode == Keys.Tab)
+            {
+                foreach (Control x in this.Controls)
+                {
+                    if (x is TextBox)
+                    {
+                        TextBox currentBox = (TextBox)x;
+                        if(currentBox.TabIndex == TB.TabIndex+1)
+                        {
+                            currentBox.Focus();
+                        }
+                    }
+
+                    if(x is ComboBox)
+                    {
+                        ComboBox currentBox = (ComboBox)x;
+                        if(currentBox.TabIndex == TB.TabIndex+1)
+                        {
+                            currentBox.Focus();
+                        }
+                    }
+                    if(x is Button)
+                    {
+                        Button currentBox = (Button)x;
+                        if(currentBox.TabIndex == TB.TabIndex+1)
+                        {
+                            currentBox.Focus();
+                        }
+                    }
+                }
+                //this.radioName.Focus();
+                e.Handled = true;
+            }
+        }
     }
 }

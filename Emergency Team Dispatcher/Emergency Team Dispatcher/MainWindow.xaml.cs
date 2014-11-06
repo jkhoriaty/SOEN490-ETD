@@ -132,10 +132,14 @@ namespace Emergency_Team_Dispatcher
 
 			//ShowDialog creates a modal form so need to execute in a new thread because it will only keep control of the thread
 			int currentTeam = Globals.currentTeam;
-			Thread thread = new Thread(new ThreadStart(formThread));
-			thread.Start();
-			thread.Join();
-			if(currentTeam < Globals.currentTeam) TeamDisplay();
+			//Thread thread = new Thread(new ThreadStart(formThread));
+			//thread.Start();
+			//thread.Join();
+
+            CreateTeamForm Ctf = new CreateTeamForm(this);
+            Ctf.Show();
+
+			//if(currentTeam < Globals.currentTeam) TeamDisplay();
             //box.Text = "succ";
         }
 
