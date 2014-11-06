@@ -28,6 +28,7 @@ namespace Emergency_Team_Dispatcher
 
 			String warning = "";
 			Team team = null;
+			int teamID = -1;
 			var dateNow = DateTime.Now;
 			var radiotime = new DateTime();
 			int rTraining = -1;
@@ -37,19 +38,21 @@ namespace Emergency_Team_Dispatcher
 			int f2Training = -1;
 			
 			//Checking team info
-			if(teamName.Text == "")
+			if(teamName.Text == "" || teamName.Text.Length > 6)
             {
                warning += "Team name is invalid.\n";
             }
 			else
 			{
 				team = new Team(teamName.Text);
+				//teamID = dbAccess.insertTeam(teamName.Text);
+				//MessageBox.Show("" + teamID);
 			}
 
 			//
 			//Checking radio info
 			//
-			if (radioName.Text == null)
+			if (radioName.Text == null || radioName.Text.Length > 32)
             {
                 warning += "Radio member name is invalid.\n";
             }
@@ -97,7 +100,7 @@ namespace Emergency_Team_Dispatcher
 			//
 			if (nbOfMembers > 1)
 			{
-				if (firstAidName.Text == "")
+				if (firstAidName.Text == "" || firstAidName.Text.Length > 32)
 				{
 					warning += "First aid member name is invalid.\n";
 				}
@@ -145,7 +148,7 @@ namespace Emergency_Team_Dispatcher
 			//
 			if (nbOfMembers > 2)
 			{
-				if (firstAid2Name.Text == "")
+				if (firstAid2Name.Text == "" || firstAid2Name.Text.Length > 32)
 				{
 					warning += "Second First aid member name is invalid.\n";
 				}

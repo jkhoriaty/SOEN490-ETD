@@ -59,6 +59,7 @@ namespace Emergency_Team_Dispatcher
 
         private void TimeTest_MenuItem_Click(object sender, RoutedEventArgs e)
         {
+			MessageBox.Show(dbAccess.OpenConnection());
             //This Method currently returns the timer of the last queue'd timer.
             //Once the intervention creation interface is completed, it will be a trivial
             //matter to select which intervention from the dictionary you would like to retrieve the time from.
