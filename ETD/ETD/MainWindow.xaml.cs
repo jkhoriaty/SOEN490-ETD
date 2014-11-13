@@ -24,5 +24,42 @@ namespace ETD
 		{
 			InitializeComponent();
 		}
+
+		//Resizing of the team display section along with the window
+		private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
+		{
+			MainWindowUpdate.setTeamsHeight(this);
+		}
+
+		//Maximization and minimization do not register as size changes, so resizing the team display section as well
+		private void Window_StateChanged(object sender, EventArgs e)
+		{
+			MainWindowUpdate.setTeamsHeight(this);
+		}
+
+		//Clicking on the add team button
+		private void CreateTeam(object sender, RoutedEventArgs e)
+		{
+			MainWindowUpdate.DisplayTeam(this);
+		}
+
+		//
+		// Getters for the view to get the reference to needed controls
+		//
+		public ScrollViewer getScroller()
+		{
+			return Scroller;
+		}
+
+		public StackPanel getTeamList()
+		{
+			return TeamList;
+		}
+
+		public Border getTeamSection()
+		{
+			return TeamSection;
+		}
+
 	}
 }
