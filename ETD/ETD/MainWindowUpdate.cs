@@ -30,6 +30,8 @@ namespace ETD
 		//Called to display a created team
 		public static void DisplayTeam(MainWindow caller)
 		{
+            CreateTeamForm ctf = new CreateTeamForm();
+            ctf.Show();
 			System.Windows.Controls.ScrollViewer Scroller = caller.getScroller();
 			System.Windows.Controls.StackPanel TeamList = caller.getTeamList();
 			System.Windows.Controls.Border TeamSection = caller.getTeamSection();
