@@ -6,3 +6,6 @@ Emergency Team Dispatcher/Emergency Team Dispatcher.accdb
 Emergency Team Dispatcher/EmergencyTeamDispatcherTest/obj/Debug/
 Emergency Team Dispatcher/EmergencyTeamDispatcherTest/bin/Debug/
 *.TMP
+ETD/ETD/bin/
+ETD/ETD/obj/
+ETD/ETD.v12.suo
