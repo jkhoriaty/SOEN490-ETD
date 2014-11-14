@@ -19,9 +19,16 @@ namespace ETD
     /// </summary>
     public partial class CreateTeamForm : Window
     {
+        CreateTeamFormUpdate CTFU;
         public CreateTeamForm()
         {
             InitializeComponent();
+            CTFU = new CreateTeamFormUpdate();
+        }
+
+        private void addMember_Click(object sender, RoutedEventArgs e)
+        {
+            CTFU.addMember(this);
         }
     }
 }

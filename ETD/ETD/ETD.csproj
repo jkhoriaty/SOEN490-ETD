@@ -65,6 +65,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="CreateTeamFormUpdate.cs" />
     <Compile Include="CreateTeamForm.xaml.cs">
       <DependentUpon>CreateTeamForm.xaml</DependentUpon>
     </Compile>
