@@ -104,7 +104,15 @@ namespace Emergency_Team_Dispatcher
             if (openFileDialog.ShowDialog() == true)
             {
                 System.IO.FileInfo File = new System.IO.FileInfo(openFileDialog.FileName);
-                Map.Background = new ImageBrush(new BitmapImage(new Uri(openFileDialog.FileName)));
+                BitmapImage coloredImage = new BitmapImage(new Uri(openFileDialog.FileName));
+
+                FormatConvertedBitmap grayBitmap = new FormatConvertedBitmap();
+                grayBitmap.BeginInit();
+                grayBitmap.Source = coloredImage;
+                grayBitmap.DestinationFormat = PixelFormats.Gray8;
+                grayBitmap.EndInit();
+
+                Map.Background = new ImageBrush(grayBitmap);
             }
         }
 

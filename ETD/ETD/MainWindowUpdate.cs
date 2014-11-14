@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
+using System.Diagnostics;
+using System.Threading;
 
 namespace ETD
 {
@@ -30,8 +32,17 @@ namespace ETD
 		//Called to display a created team
 		public static void DisplayTeam(MainWindow caller)
 		{
-            CreateTeamForm ctf = new CreateTeamForm();
+			CreateTeamForm ctf = new CreateTeamForm();
             ctf.Show();
+		
+            int temp = Globals.currentIntervention;
+            Stopwatch interventionTimer = new Stopwatch();
+            interventionTimer.Start();
+
+            Globals.timers.Add(temp, interventionTimer);
+
+            Globals.currentIntervention += 1;
+
 			System.Windows.Controls.ScrollViewer Scroller = caller.getScroller();
 			System.Windows.Controls.StackPanel TeamList = caller.getTeamList();
 			System.Windows.Controls.Border TeamSection = caller.getTeamSection();
@@ -100,5 +111,25 @@ namespace ETD
 					mainStackPanel.Children.Add(teamMember2);
 						teamMember2.Children.Add(teamMember2Name);
 		}
+
+        public static void TimeTest_MenuItem_Click(MainWindow caller)
+        {
+            //MessageBox.Show(dbAccess.OpenConnection());
+            //This Method currently returns the timer of the last queue'd timer.
+            //Once the intervention creation interface is completed, it will be a trivial
+            //matter to select which intervention from the dictionary you would like to retrieve the time from.
+            //It is important to note, that in this current function, the timer keeps going even after you poll
+            //it for its value. I left this in intentionally to prove that my function for retrieving didn't break
+            //the stopwatch's functionality. This could be extremely useful if we wanted to keep a running display of
+            //the time taken for each portion of each intervention.
+            if (Globals.timers.ContainsKey(Globals.currentIntervention - 1))
+            {
+                TimeSpan elapsed = Globals.timers[Globals.currentIntervention - 1].Elapsed;
+                System.Windows.Controls.TextBlock TimerText = caller.getTimer();
+                TimerText.Text = elapsed.TotalSeconds.ToString();                               //Converts the total time on the stopwatch into an amount of seconds.
+
+                Globals.interventionTime.Add(Globals.currentIntervention - 1, elapsed);     //Saves it to a second dictionary, this one only stores the elapsed times, this will be pushed to DB.
+            }
+        }
 	}
 }

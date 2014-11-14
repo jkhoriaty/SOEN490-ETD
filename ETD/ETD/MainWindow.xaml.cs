@@ -42,7 +42,10 @@ namespace ETD
 		{
 			MainWindowUpdate.DisplayTeam(this);
 		}
-
+        private void SetTimer(object sender, RoutedEventArgs e)
+        {
+            MainWindowUpdate.TimeTest_MenuItem_Click(this);
+        }
 		//
 		// Getters for the view to get the reference to needed controls
 		//
@@ -60,6 +63,11 @@ namespace ETD
 		{
 			return TeamSection;
 		}
+
+        public TextBlock getTimer()
+        {
+            return timer;
+        }
 
 	}
 }

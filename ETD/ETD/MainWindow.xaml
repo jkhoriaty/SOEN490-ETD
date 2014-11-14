@@ -20,5 +20,8 @@
 				</Border>
 			</StackPanel>
 		</Border>
-	</Grid>
+        <TextBlock Name="timer" HorizontalAlignment="Left" VerticalAlignment="Bottom" TextWrapping="Wrap" Text="Timer" Height="16" Width="30"/>
+        <Button Name="TimerTestButton" HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="Test" Click="SetTimer"/>
+    </Grid>
+    
 </Window>
