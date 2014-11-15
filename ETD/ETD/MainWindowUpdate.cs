@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,11 @@ using System.Windows.Media;
 using System.Diagnostics;
 using System.Threading;
 using System.Windows.Controls;
+using System.Windows.Media;
+using System.Diagnostics;
+using System.Threading;
+using System.Drawing;
+using System.Windows.Media.Imaging;
 
 namespace ETD
 {
@@ -149,6 +155,30 @@ namespace ETD
                 TimerText.Text = elapsed.TotalSeconds.ToString();                               //Converts the total time on the stopwatch into an amount of seconds.
 
                 Globals.interventionTime.Add(Globals.currentIntervention - 1, elapsed);     //Saves it to a second dictionary, this one only stores the elapsed times, this will be pushed to DB.
+            }
+        }
+
+        public static void LoadMap(MainWindow caller)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image Files (*.bmp, *.jpg, *.png, *.gif)|*.bmp;*.jpg; *.png; *.gif";
+            openFileDialog.FilterIndex = 1;
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                System.IO.FileInfo File = new System.IO.FileInfo(openFileDialog.FileName);
+                BitmapImage coloredImage = new BitmapImage(new Uri(openFileDialog.FileName));
+
+                FormatConvertedBitmap grayBitmap = new FormatConvertedBitmap();
+                grayBitmap.BeginInit();
+                grayBitmap.Source = coloredImage;
+                grayBitmap.DestinationFormat = PixelFormats.Gray8;
+                grayBitmap.EndInit();
+
+                System.Windows.Controls.Canvas Map = caller.Map;
+                Map.Background = new ImageBrush(grayBitmap);
+
+                //System.Windows.Controls.TextBlock TimerText = caller.getTimer();
             }
         }
 	}
