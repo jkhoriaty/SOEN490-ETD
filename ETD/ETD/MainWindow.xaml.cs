@@ -43,39 +43,24 @@ namespace ETD
 		//Clicking on the add team button
 		private void CreateTeam(object sender, RoutedEventArgs e)
 		{
-			//Opening the form to get the required information
-			//CreateTeamForm ctf = new CreateTeamForm();
-			//ctf.Show();
 			updater.DisplayCreateTeamForm();
-			updater.DisplayTeam();
-			//MainWindowUpdate.DisplayTeam(this); - To be moved to the form submission method
 		}
+
+		//Hiding form after submit or cancel
+		public void hideTeamForm()
+		{
+			updater.HideCreateTeamForm();
+		}
+
         private void SetTimer(object sender, RoutedEventArgs e)
         {
             updater.TimeTest_MenuItem_Click();
         }
-		//
-		// Getters for the view to get the reference to needed controls
-		//
-		public ScrollViewer getScroller()
-		{
-			return Scroller;
-		}
 
-		public StackPanel getTeamList()
-		{
-			return TeamList;
-		}
-
-		public Border getTeamSection()
-		{
-			return TeamSection;
-		}
-
-        public TextBlock getTimer()
-        {
-            return timer;
-        }
-
+		/* Uncomment for the view to pull the Team through the controller
+		 * private Team getTeam(int index)
+		 * {
+		 * Globals.getTeam(index);
+		}*/
 	}
 }

@@ -6,46 +6,139 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Drawing;
+using System.Windows.Media;
 
 namespace ETD
 {
     class TeamFormUpdate
     {
         private TeamForm caller;
-        private int currentNumberOfMembers = 1; //Used to track the number of members on the TeamForm
+        public int currentNumberOfMembers = 1; //Used to track the number of members on the TeamForm
+		private Dictionary<String, String> textboxContent = new Dictionary<string,string>();
+		private List<Control> textboxLastValidationFailed = null;
+		private List<Border> comboboxLastValidationFailed = null;
 
-        public void addMember(TeamForm caller)
+		public TeamFormUpdate(TeamForm caller)
+		{
+			this.caller = caller;
+		}
+
+        public void addMember()
         {
-            this.caller = caller;
             switch (currentNumberOfMembers)
             {
                 case 1:
+					caller.member2.Visibility = Visibility.Visible;
                     caller.RemoveMember.IsEnabled = true;
                     break;
                 case 2:
+					caller.member3.Visibility = Visibility.Visible;
+					caller.AddMember.IsEnabled = false;
                     break;
             }
-            MessageBox.Show("Add Member Pressed");
+			currentNumberOfMembers++;
         }
 
-        public void removeMember(TeamForm caller)
+        public void removeMember()
         {
-            this.caller = caller;
-            MessageBox.Show("Remove Member Pressed");
+			switch (currentNumberOfMembers)
+			{
+				case 2:
+					caller.member2.Visibility = Visibility.Collapsed;
+					caller.RemoveMember.IsEnabled = false;
+					break;
+				case 3:
+					caller.member3.Visibility = Visibility.Collapsed;
+					caller.AddMember.IsEnabled = true;
+					break;
+			}
+			currentNumberOfMembers--;
         }
 
-        public void submit(TeamForm caller)
+        public void submit()
         {
-            this.caller = caller;
             MessageBox.Show("Submit Pressed");
         }
 
-        public void cancel(TeamForm caller)
+        public void cancel()
         {
-            this.caller = caller;
             MessageBox.Show("Cancel Pressed");
         }
-    }
+
+		//Clearing TextBoxes 
+		public void clearText(TextBox tb)
+		{
+			if (!textboxContent.ContainsKey(tb.Name))
+			{
+				textboxContent.Add(tb.Name, tb.Text);
+			}
+			tb.Text = "";
+		}
+
+		//Restoring TextBoxes text if left empty
+		public void restoreText(TextBox tb)
+		{
+			tb.Text = textboxContent[tb.Name];
+			textboxContent.Remove(tb.Name);
+		}
+
+		//Redenning the borders of the controls that failed validation
+		public bool reportValidationFail(List<Control> failedValidation)
+		{
+			//Resetting border values to default
+			if(textboxLastValidationFailed != null)
+			{
+				foreach(Control ctl in textboxLastValidationFailed)
+				{
+					ctl.ClearValue(Control.BorderBrushProperty);
+				}
+			}
+			textboxLastValidationFailed = new List<Control>(failedValidation);
+
+
+			//Giving a red border to all the controls that have failed validation
+			if (failedValidation.Count != 0)
+			{
+				foreach (Control ctl in failedValidation)
+				{
+					ctl.BorderBrush = new SolidColorBrush(Colors.Red);
+				}
+				return false;
+			}
+			else
+			{
+				return true;
+			}
+		}
+
+		//Redenning the borders of the controls that failed validation
+		public bool reportValidationFail(List<Border> failedValidation)
+		{
+			//Resetting border values to default
+			if (comboboxLastValidationFailed != null)
+			{
+				foreach (Border bd in comboboxLastValidationFailed)
+				{
+					bd.BorderBrush = new SolidColorBrush(Colors.White);
+				}
+			}
+			comboboxLastValidationFailed = new List<Border>(failedValidation);
+
+			//Giving a red border to all the controls that have failed validation
+			if (failedValidation.Count != 0)
+			{
+				foreach (Border bd in failedValidation)
+				{
+					bd.BorderBrush = new SolidColorBrush(Colors.Red);
+				}
+				return false;
+			}
+			else
+			{
+				return true;
+			}
+		}
+	}
 }
 
 

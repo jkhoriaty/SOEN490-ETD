@@ -4,29 +4,82 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       mc:Ignorable="d" 
-      d:DesignHeight="200" d:DesignWidth="243"
 	Title="TeamForm">
     <Grid>
         <Grid Name="createTeamGrid">
-            <Border BorderBrush="Black" BorderThickness="1" CornerRadius="5" Margin="0 5 0 5">
-                <StackPanel Name="teamStackPanel" Margin="5 5 5 5">
-                    <TextBox BorderBrush="Black" Name="teamName" Text="Team Name" FontStyle="Italic" FontWeight="Bold" FontSize="20" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" />
-                    <Border BorderBrush="Black" BorderThickness="1" Margin="0 2 0 2"></Border>
-                    <TextBox BorderBrush="Black" Name="teamMember" Text="Team Member Name" FontSize="18"/>
-                    <Border BorderBrush="Black" BorderThickness="1" Margin="0 2 0 2"></Border>
-                    <Grid>
-                        <Label Content="Time of Departure:"/>
-                        <TextBox BorderBrush="Black" Name="departurehh" Margin="35 0 0 0" Width="30">hh</TextBox>
-                        <TextBox BorderBrush="Black" Name="departuremm" Margin="110 0 0 0" Width="30">mm</TextBox>
-                    </Grid>
-                    <Border BorderBrush="Black" BorderThickness="1" Margin="0 2 0 2"></Border>
-                    <ComboBox Name="lvlOfTraining">
-                        <ComboBoxItem Content="General First Aid"/>
-                        <ComboBoxItem Content="First Responder"/>
-                        <ComboBoxItem Content="Medicine"/>
-                    </ComboBox>
-                    <Border BorderBrush="Black" BorderThickness="1" Margin="0 2 0 2"></Border>
-                    <Grid>
+            <Border BorderBrush="Black" BorderThickness="1" CornerRadius="5">
+                <StackPanel Name="teamStackPanel" Margin="2,2,2,2">
+                    <TextBox Name="teamName" Text="Team Name" FontStyle="Italic" FontWeight="Bold" FontSize="20" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus" MaxLength="6"/>
+					
+                    <Border BorderBrush="Black" BorderThickness="1" Margin="0,3,0,3"></Border>
+					
+					<!-- Information on Team Member 1-->
+					<StackPanel>
+						<TextBox Name="teamMember1" Text="Team Member Name" FontSize="18" Margin="0,2,0,2" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus" MaxLength="20"/>
+						<Grid Margin="0,2,0,2">
+							<Label Content="Time of Departure:" HorizontalAlignment="Left"/>
+							<StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+								<TextBox Name="departurehh1" Width="30" Text="hh" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus" MaxLength="2"></TextBox>
+								<Label Content=":"/>
+								<TextBox Name="departuremm1" Width="30" Text="mm" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus" MaxLength="2"></TextBox>
+							</StackPanel>
+						</Grid>
+						<Border Name="lvlOfTraining1Border" BorderThickness="1">
+							<ComboBox Name="lvlOfTraining1" Margin="0,2,0,2">
+								<ComboBoxItem Content="General First Aid"/>
+								<ComboBoxItem Content="First Responder"/>
+								<ComboBoxItem Content="Medicine"/>
+							</ComboBox>
+						</Border>
+					</StackPanel>
+
+
+					<!-- Information on Team Member 2-->
+					<StackPanel Name="member2" Visibility="Collapsed">
+						<Border BorderBrush="Black" BorderThickness="1" Margin="0,3,0,3"></Border>
+						<TextBox BorderBrush="Black" Name="teamMember2" Text="Team Member Name" FontSize="18" Margin="0,2,0,2" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus" MaxLength="20"/>
+						<Grid Margin="0,2,0,2">
+							<Label Content="Time of Departure:" HorizontalAlignment="Left"/>
+							<StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+								<TextBox Name="departurehh2" Width="30" Text="hh" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus" MaxLength="2"></TextBox>
+								<Label Content=":"/>
+								<TextBox Name="departuremm2" Width="30" Text="mm" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus" MaxLength="2"></TextBox>
+							</StackPanel>
+						</Grid>
+						<Border Name="lvlOfTraining2Border" BorderThickness="1">
+							<ComboBox Name="lvlOfTraining2" Margin="0,2,0,2">
+								<ComboBoxItem Content="General First Aid"/>
+								<ComboBoxItem Content="First Responder"/>
+								<ComboBoxItem Content="Medicine"/>
+							</ComboBox>
+						</Border>
+					</StackPanel>
+
+
+					<!-- Information on Team Member 3-->
+					<StackPanel Name="member3" Visibility="Collapsed">
+						<Border BorderBrush="Black" BorderThickness="1" Margin="0,3,0,3"></Border>
+						<TextBox BorderBrush="Black" Name="teamMember3" Text="Team Member Name" FontSize="18" Margin="0,2,0,2" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus" MaxLength="20"/>
+						<Grid Margin="0,2,0,2">
+							<Label Content="Time of Departure:" HorizontalAlignment="Left"/>
+							<StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+								<TextBox Name="departurehh3" Width="30" Text="hh" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus" MaxLength="2"></TextBox>
+								<Label Content=":"/>
+								<TextBox Name="departuremm3" Width="30" Text="mm" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus" MaxLength="2"></TextBox>
+							</StackPanel>
+						</Grid>
+						<Border Name="lvlOfTraining3Border" BorderThickness="1">
+							<ComboBox Name="lvlOfTraining3" Margin="0,2,0,2">
+								<ComboBoxItem Content="General First Aid"/>
+								<ComboBoxItem Content="First Responder"/>
+								<ComboBoxItem Content="Medicine"/>
+							</ComboBox>
+						</Border>
+					</StackPanel>
+
+					<Border BorderBrush="Black" BorderThickness="1" Margin="0,3,0,3"></Border>
+					
+					<Grid>
                         <Button Name="AddMember" Width ="100" Content="Add Member" FontSize="12" FontWeight="ExtraBlack" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="White" BorderBrush="Black"  Margin="0,0,129,0" Click="AddMember_Click"></Button>
                         <Button Name="RemoveMember" IsEnabled="false" Content="Remove Member" FontSize="12" FontWeight="ExtraBlack" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="White" BorderBrush="Black"  Margin="121,0,0,0" Height="22" VerticalAlignment="Top" Click="RemoveMember_Click"/>
                     </Grid>
