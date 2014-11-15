@@ -1,0 +1,41 @@
+﻿<Page x:Class="ETD.TeamForm"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="200" d:DesignWidth="243"
+	Title="TeamForm">
+    <Grid>
+        <Grid Name="createTeamGrid">
+            <Border BorderBrush="Black" BorderThickness="1" CornerRadius="5" Margin="0 5 0 5">
+                <StackPanel Name="teamStackPanel" Margin="5 5 5 5">
+                    <TextBox BorderBrush="Black" Name="teamName" Text="Team Name" FontStyle="Italic" FontWeight="Bold" FontSize="20" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" />
+                    <Border BorderBrush="Black" BorderThickness="1" Margin="0 2 0 2"></Border>
+                    <TextBox BorderBrush="Black" Name="teamMember" Text="Team Member Name" FontSize="18"/>
+                    <Border BorderBrush="Black" BorderThickness="1" Margin="0 2 0 2"></Border>
+                    <Grid>
+                        <Label Content="Time of Departure:"/>
+                        <TextBox BorderBrush="Black" Name="departurehh" Margin="35 0 0 0" Width="30">hh</TextBox>
+                        <TextBox BorderBrush="Black" Name="departuremm" Margin="110 0 0 0" Width="30">mm</TextBox>
+                    </Grid>
+                    <Border BorderBrush="Black" BorderThickness="1" Margin="0 2 0 2"></Border>
+                    <ComboBox Name="lvlOfTraining">
+                        <ComboBoxItem Content="General First Aid"/>
+                        <ComboBoxItem Content="First Responder"/>
+                        <ComboBoxItem Content="Medicine"/>
+                    </ComboBox>
+                    <Border BorderBrush="Black" BorderThickness="1" Margin="0 2 0 2"></Border>
+                    <Grid>
+                        <Button Name="AddMember" Width ="100" Content="Add Member" FontSize="12" FontWeight="ExtraBlack" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="White" BorderBrush="Black"  Margin="0,0,129,0" Click="AddMember_Click"></Button>
+                        <Button Name="RemoveMember" IsEnabled="false" Content="Remove Member" FontSize="12" FontWeight="ExtraBlack" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="White" BorderBrush="Black"  Margin="121,0,0,0" Height="22" VerticalAlignment="Top" Click="RemoveMember_Click"/>
+                    </Grid>
+                    <Grid>
+                        <Button Name="Submit" Width ="100" Content="Submit" FontSize="12" FontWeight="ExtraBlack" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="White" BorderBrush="Black"  Margin="0,0,129,0" Click="Submit_Click"></Button>
+                        <Button Name="Cancel" Content="Cancel" FontSize="12" FontWeight="ExtraBlack" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="White" BorderBrush="Black"  Margin="121,0,0,0" Height="22" VerticalAlignment="Top" Click="Cancel_Click"/>
+                    </Grid>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Grid>
+</Page>

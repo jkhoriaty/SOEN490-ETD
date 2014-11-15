@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Media;
 using System.Diagnostics;
 using System.Threading;
+using System.Windows.Controls;
 
 namespace ETD
 {
@@ -38,66 +39,14 @@ namespace ETD
 		//Called to show the form to create a new team
 		public void DisplayCreateTeamForm()
 		{
+            
+            Frame frame = new Frame();
+            frame.Content = new TeamForm(); 
+
 			System.Windows.Controls.StackPanel TeamList = caller.getTeamList();
-
-			System.Windows.Controls.Border mainBorder = new System.Windows.Controls.Border();
-			mainBorder.Name = "newTeam";
-			mainBorder.BorderBrush = new SolidColorBrush(Colors.Black); ;
-			mainBorder.BorderThickness = new System.Windows.Thickness(1);
-			mainBorder.CornerRadius = new System.Windows.CornerRadius(5);
-			Thickness topMargin = mainBorder.Margin;
-			topMargin.Top = 5;
-			mainBorder.Margin = topMargin;
-
-				System.Windows.Controls.StackPanel mainStackPanel = new System.Windows.Controls.StackPanel();
-				mainBorder.Name = "newTeamList";
-
-					System.Windows.Controls.TextBox teamName = new System.Windows.Controls.TextBox();
-					teamName.Name = "teamName";
-					teamName.Text = "Team Name";
-					teamName.FontWeight = FontWeights.Bold;
-					teamName.FontSize = 20;
-
-					System.Windows.Controls.Border line1 = createLine();
-
-					//TODO: Move to add team member and have this method call the add teamMember method
-					System.Windows.Controls.TextBox teamMember = new System.Windows.Controls.TextBox();
-					teamMember.Name = "teamMember1";
-					teamMember.Text = "Team Member Name";
-					teamMember.FontSize = 18;
-
-					System.Windows.Controls.Border line2 = createLine();
-					
-					System.Windows.Controls.Grid timeGrid = new System.Windows.Controls.Grid();
-
-						System.Windows.Controls.Label timeText = new System.Windows.Controls.Label();
-						timeText.Content = "Time of departure:";
-						timeText.HorizontalAlignment = HorizontalAlignment.Left;
-
-			//
-			// Linking items together to form appropriate hierarchy
-			//
-			TeamList.Children.Add(mainBorder);
-				mainBorder.Child = mainStackPanel;
-					mainStackPanel.Children.Add(teamName);
-					mainStackPanel.Children.Add(line1);
-					mainStackPanel.Children.Add(teamMember);
-					mainStackPanel.Children.Add(line2);
-					mainStackPanel.Children.Add(timeGrid);
-						timeGrid.Children.Add(timeText);
+            TeamList.Children.Add(frame);
 		}
-
-		private System.Windows.Controls.Border createLine()
-		{
-			System.Windows.Controls.Border line = new System.Windows.Controls.Border();
-			line.BorderBrush = new SolidColorBrush(Colors.Black); ;
-			line.BorderThickness = new System.Windows.Thickness(1);
-			Thickness topMargin = line.Margin;
-			topMargin.Top = 2;
-			topMargin.Bottom = 2;
-			line.Margin = topMargin;
-			return line;
-		}
+   
 		
 		//Called to display a created team
 		public void DisplayTeam()
