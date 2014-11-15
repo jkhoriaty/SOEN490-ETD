@@ -10,12 +10,18 @@ using System.Threading;
 
 namespace ETD
 {
-	static class MainWindowUpdate
+	class MainWindowUpdate
 	{
 		private static double teamSizeDifference = 0;
+		private MainWindow caller;
+
+		public MainWindowUpdate(MainWindow caller)
+		{
+			this.caller = caller;
+		}
 
 		//Actual resizing of the team display section to handle resizing of window or different screen sizes
-		public static void setTeamsHeight(MainWindow caller)
+		public void setTeamsHeight()
 		{
 			System.Windows.Controls.Border TeamSection = caller.getTeamSection();
 			System.Windows.Controls.ScrollViewer Scroller = caller.getScroller();
@@ -29,12 +35,73 @@ namespace ETD
 			Scroller.MaxHeight = TeamSection.Height - teamSizeDifference;
 		}
 
-		//Called to display a created team
-		public static void DisplayTeam(MainWindow caller)
+		//Called to show the form to create a new team
+		public void DisplayCreateTeamForm()
 		{
-			CreateTeamForm ctf = new CreateTeamForm();
-            ctf.Show();
+			System.Windows.Controls.StackPanel TeamList = caller.getTeamList();
+
+			System.Windows.Controls.Border mainBorder = new System.Windows.Controls.Border();
+			mainBorder.Name = "newTeam";
+			mainBorder.BorderBrush = new SolidColorBrush(Colors.Black); ;
+			mainBorder.BorderThickness = new System.Windows.Thickness(1);
+			mainBorder.CornerRadius = new System.Windows.CornerRadius(5);
+			Thickness topMargin = mainBorder.Margin;
+			topMargin.Top = 5;
+			mainBorder.Margin = topMargin;
+
+				System.Windows.Controls.StackPanel mainStackPanel = new System.Windows.Controls.StackPanel();
+				mainBorder.Name = "newTeamList";
+
+					System.Windows.Controls.TextBox teamName = new System.Windows.Controls.TextBox();
+					teamName.Name = "teamName";
+					teamName.Text = "Team Name";
+					teamName.FontWeight = FontWeights.Bold;
+					teamName.FontSize = 20;
+
+					System.Windows.Controls.Border line1 = createLine();
+
+					//TODO: Move to add team member and have this method call the add teamMember method
+					System.Windows.Controls.TextBox teamMember = new System.Windows.Controls.TextBox();
+					teamMember.Name = "teamMember1";
+					teamMember.Text = "Team Member Name";
+					teamMember.FontSize = 18;
+
+					System.Windows.Controls.Border line2 = createLine();
+					
+					System.Windows.Controls.Grid timeGrid = new System.Windows.Controls.Grid();
+
+						System.Windows.Controls.Label timeText = new System.Windows.Controls.Label();
+						timeText.Content = "Time of departure:";
+						timeText.HorizontalAlignment = HorizontalAlignment.Left;
+
+			//
+			// Linking items together to form appropriate hierarchy
+			//
+			TeamList.Children.Add(mainBorder);
+				mainBorder.Child = mainStackPanel;
+					mainStackPanel.Children.Add(teamName);
+					mainStackPanel.Children.Add(line1);
+					mainStackPanel.Children.Add(teamMember);
+					mainStackPanel.Children.Add(line2);
+					mainStackPanel.Children.Add(timeGrid);
+						timeGrid.Children.Add(timeText);
+		}
+
+		private System.Windows.Controls.Border createLine()
+		{
+			System.Windows.Controls.Border line = new System.Windows.Controls.Border();
+			line.BorderBrush = new SolidColorBrush(Colors.Black); ;
+			line.BorderThickness = new System.Windows.Thickness(1);
+			Thickness topMargin = line.Margin;
+			topMargin.Top = 2;
+			topMargin.Bottom = 2;
+			line.Margin = topMargin;
+			return line;
+		}
 		
+		//Called to display a created team
+		public void DisplayTeam()
+		{
             int temp = Globals.currentIntervention;
             Stopwatch interventionTimer = new Stopwatch();
             interventionTimer.Start();
@@ -43,20 +110,19 @@ namespace ETD
 
             Globals.currentIntervention += 1;
 
-			System.Windows.Controls.ScrollViewer Scroller = caller.getScroller();
 			System.Windows.Controls.StackPanel TeamList = caller.getTeamList();
-			System.Windows.Controls.Border TeamSection = caller.getTeamSection();
 
 			//
 			// Creation of all the objects needed for the teams display
 			//
-			System.Windows.Shapes.Rectangle seperator = new System.Windows.Shapes.Rectangle();
-			seperator.Height = 5;
-			
 			System.Windows.Controls.Border mainBorder = new System.Windows.Controls.Border();
+			mainBorder.Name = "Bravo"; //TODO: To be changed to adapt to input
 			mainBorder.BorderBrush = new SolidColorBrush(Colors.Black); ;
 			mainBorder.BorderThickness = new System.Windows.Thickness(1);
 			mainBorder.CornerRadius = new System.Windows.CornerRadius(5);
+			Thickness topMargin = mainBorder.Margin;
+			topMargin.Top = 5;
+			mainBorder.Margin = topMargin;
 
 				System.Windows.Controls.StackPanel mainStackPanel = new System.Windows.Controls.StackPanel();
 
@@ -76,8 +142,6 @@ namespace ETD
 						equipmentStackPanel.Orientation = System.Windows.Controls.Orientation.Horizontal;
 						equipmentStackPanel.FlowDirection = FlowDirection.RightToLeft;
 
-						//TODO: Have to make the pieces of equipment clickable so that they can be removed from the team
-
 					//TODO: Add this to a loop to account for teams of different number of members
 					System.Windows.Controls.Grid teamMember1 = new System.Windows.Controls.Grid();
 
@@ -96,23 +160,22 @@ namespace ETD
 						teamMember2Name.FontSize = 18;
 
 						//TODO: Need to add training level
+						
 
 			//
 			// Linking items together to form appropriate hierarchy
 			//
-			TeamList.Children.Add(seperator);
 			TeamList.Children.Add(mainBorder);
 				mainBorder.Child = mainStackPanel;
 					mainStackPanel.Children.Add(teamNameGrid);
 						teamNameGrid.Children.Add(teamName);
-						teamNameGrid.Children.Add(equipmentStackPanel);
 					mainStackPanel.Children.Add(teamMember1);
 						teamMember1.Children.Add(teamMember1Name);
 					mainStackPanel.Children.Add(teamMember2);
 						teamMember2.Children.Add(teamMember2Name);
 		}
 
-        public static void TimeTest_MenuItem_Click(MainWindow caller)
+        public void TimeTest_MenuItem_Click()
         {
             //MessageBox.Show(dbAccess.OpenConnection());
             //This Method currently returns the timer of the last queue'd timer.

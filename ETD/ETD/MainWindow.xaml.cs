@@ -20,31 +20,39 @@ namespace ETD
 	/// </summary>
 	public partial class MainWindow : Window
 	{
+		MainWindowUpdate updater;
+
 		public MainWindow()
 		{
 			InitializeComponent();
+			updater = new MainWindowUpdate(this);
 		}
 
 		//Resizing of the team display section along with the window
 		private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
 		{
-			MainWindowUpdate.setTeamsHeight(this);
+			updater.setTeamsHeight();
 		}
 
 		//Maximization and minimization do not register as size changes, so resizing the team display section as well
 		private void Window_StateChanged(object sender, EventArgs e)
 		{
-			MainWindowUpdate.setTeamsHeight(this);
+			updater.setTeamsHeight();
 		}
 
 		//Clicking on the add team button
 		private void CreateTeam(object sender, RoutedEventArgs e)
 		{
-			MainWindowUpdate.DisplayTeam(this);
+			//Opening the form to get the required information
+			//CreateTeamForm ctf = new CreateTeamForm();
+			//ctf.Show();
+			updater.DisplayCreateTeamForm();
+			updater.DisplayTeam();
+			//MainWindowUpdate.DisplayTeam(this); - To be moved to the form submission method
 		}
         private void SetTimer(object sender, RoutedEventArgs e)
         {
-            MainWindowUpdate.TimeTest_MenuItem_Click(this);
+            updater.TimeTest_MenuItem_Click();
         }
 		//
 		// Getters for the view to get the reference to needed controls
