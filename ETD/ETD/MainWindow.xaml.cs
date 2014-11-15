@@ -44,7 +44,7 @@ namespace ETD
 		}
         private void SetTimer(object sender, RoutedEventArgs e)
         {
-            MainWindowUpdate.TimeTest_MenuItem_Click(this);
+            Timer.TestTimer(this);
         }
 		//
 		// Getters for the view to get the reference to needed controls
