@@ -56,15 +56,8 @@ namespace ETD
 		//Called to display a created team
 		public void DisplayTeam() //TODO: Need to take as input or get the Team Name as well as the name and training level of all members
 		{
-
+            Timer.StartTimer();
 			//TODO: Need to be moved to model in team creation
-            int temp = Globals.currentIntervention;
-            Stopwatch interventionTimer = new Stopwatch();
-            interventionTimer.Start();
-
-            Globals.timers.Add(temp, interventionTimer);
-
-            Globals.currentIntervention += 1;
 			//----------------------------------
 
 			StackPanel TeamList = caller.TeamList;
@@ -131,25 +124,5 @@ namespace ETD
 					mainStackPanel.Children.Add(teamMember2);
 						teamMember2.Children.Add(teamMember2Name);
 		}
-
-        public void TimeTest_MenuItem_Click()
-        {
-            //MessageBox.Show(dbAccess.OpenConnection());
-            //This Method currently returns the timer of the last queue'd timer.
-            //Once the intervention creation interface is completed, it will be a trivial
-            //matter to select which intervention from the dictionary you would like to retrieve the time from.
-            //It is important to note, that in this current function, the timer keeps going even after you poll
-            //it for its value. I left this in intentionally to prove that my function for retrieving didn't break
-            //the stopwatch's functionality. This could be extremely useful if we wanted to keep a running display of
-            //the time taken for each portion of each intervention.
-            if (Globals.timers.ContainsKey(Globals.currentIntervention - 1))
-            {
-                TimeSpan elapsed = Globals.timers[Globals.currentIntervention - 1].Elapsed;
-                TextBlock TimerText = caller.timer;
-                TimerText.Text = elapsed.TotalSeconds.ToString();                               //Converts the total time on the stopwatch into an amount of seconds.
-
-                Globals.interventionTime.Add(Globals.currentIntervention - 1, elapsed);     //Saves it to a second dictionary, this one only stores the elapsed times, this will be pushed to DB.
-            }
-        }
 	}
 }

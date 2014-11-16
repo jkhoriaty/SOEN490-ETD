@@ -45,6 +45,10 @@ namespace ETD
 		{
 			updater.DisplayCreateTeamForm();
 		}
+		private void SetTime(object sender, RoutedEventArgs e)
+		{
+            Timer.TestTimer(this);
+        }
 
 		//Hiding form after submit or cancel
 		public void hideTeamForm()
