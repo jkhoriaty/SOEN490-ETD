@@ -23,5 +23,9 @@
 		<!-- Items to test timer feature, need to be removed before release-->
 		<TextBlock Name="timer" HorizontalAlignment="Left" VerticalAlignment="Bottom" TextWrapping="Wrap" Text="Timer" Height="16" Width="30"/>
 		<Button Name="TimerTestButton" HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="Test" Click="SetTimer"/>
-	</Grid>
+        <Border BorderBrush="Black" BorderThickness="1" Margin="250,0,0,67">
+            <Canvas Name="Map"></Canvas>
+        </Border>
+        <Button Name="Load_Map" HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="Load Map" Click="LoadMap" Margin="475,0,222,40"/>
+    </Grid>
 </Window>

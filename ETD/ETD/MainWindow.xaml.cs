@@ -50,6 +50,11 @@ namespace ETD
             Timer.TestTimer(this);
         }
 
+        private void LoadMap(object sender, RoutedEventArgs e)
+        {
+            MainWindowUpdate.LoadMap(this);
+        }
+
 		//Hiding form after submit or cancel
 		public void hideTeamForm()
 		{
@@ -58,8 +63,14 @@ namespace ETD
 
         private void SetTimer(object sender, RoutedEventArgs e)
         {
-            updater.TimeTest_MenuItem_Click();
+            Timer.TestTimer(this);
         }
+
+		public TextBlock getTimer()
+		{
+			return timer;
+		}
+
 
 		/* Uncomment for the view to pull the Team through the controller
 		 * private Team getTeam(int index)
