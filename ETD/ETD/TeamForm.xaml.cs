@@ -45,6 +45,8 @@ namespace ETD
 			if(formValidation())
 			{
 				MessageBox.Show("Validation Successful");
+                Team team = updater.createTeam();
+                //Use this team to link it to map
 			}
 			else
 			{

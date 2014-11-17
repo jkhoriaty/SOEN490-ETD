@@ -53,10 +53,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Team.cs" />
     <Compile Include="TeamForm.xaml.cs">
       <DependentUpon>TeamForm.xaml</DependentUpon>
     </Compile>
     <Compile Include="TeamFormUpdate.cs" />
+    <Compile Include="TeamMember.cs" />
     <Page Include="CreateTeamForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
