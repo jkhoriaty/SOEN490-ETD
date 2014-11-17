@@ -25,7 +25,7 @@ namespace ETD
 
         public bool addMember(TeamMember mem)
         {
-            if(memberCount < 2)
+            if(memberCount <= 2)
             {
                 members[memberCount] = mem;
                 memberCount++;
@@ -34,14 +34,31 @@ namespace ETD
             return false;
         }
 
+		//
+		//Getters and Setters
+		//
         public void setName(String name)
         {
             this.name = name;
         }
+
         public String getName()
         {
             return this.name;
         }
+
+		public TeamMember getMember(int i)
+		{
+			if(i < memberCount)
+			{
+				return members[i];
+			}
+			else
+			{
+				return null;
+			}
+		}
+
         //Generate shape to represent team on screen
         public void draw()
         {

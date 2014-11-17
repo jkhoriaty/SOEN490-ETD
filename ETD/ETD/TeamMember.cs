@@ -17,5 +17,15 @@ namespace ETD
             this.trainingLevel = training;
             this.departure = departure;
         }
+
+		public String getName()
+		{
+			return name;
+		}
+
+		public int getTrainingLevel()
+		{
+			return trainingLevel;
+		}
     }
 }

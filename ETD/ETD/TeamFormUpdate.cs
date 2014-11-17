@@ -55,47 +55,6 @@ namespace ETD
 			currentNumberOfMembers--;
         }
 
-        public Team createTeam() //will be called after form validation function passes
-        {
-            
-            DateTime dateNow = DateTime.Now;
-
-            //Create team
-            String team_name = caller.teamName.Text;
-            Team team = new Team(team_name);
-
-            //Create first member
-            String mem_1_name = caller.teamMember1.Text;
-            DateTime mem_1_departure = new DateTime(dateNow.Year, dateNow.Month, dateNow.Day, int.Parse(caller.departurehh1.Text), int.Parse(caller.departuremm1.Text), dateNow.Second);
-            int mem_1_lvlOfTraining = caller.lvlOfTraining1.SelectedIndex;
-            TeamMember mem_1 = new TeamMember(mem_1_name, mem_1_lvlOfTraining, mem_1_departure);
-            team.addMember(mem_1);
-
-            //Create second member
-            String mem_2_name = caller.teamMember2.Text;
-            MessageBox.Show(mem_2_name);
-            if(mem_2_name != "Team Member Name")
-            {
-                DateTime mem_2_departure = new DateTime(dateNow.Year, dateNow.Month, dateNow.Day, int.Parse(caller.departurehh2.Text), int.Parse(caller.departuremm2.Text), dateNow.Second);
-                int mem_2_lvlOfTraining = caller.lvlOfTraining2.SelectedIndex;
-                TeamMember mem_2 = new TeamMember(mem_2_name, mem_2_lvlOfTraining, mem_2_departure);
-                team.addMember(mem_2);
-            }
-
-            //Create third member
-            String mem_3_name = caller.teamMember3.Text;
-            MessageBox.Show(mem_3_name);
-            if (mem_3_name != "Team Member Name")
-            {
-                DateTime mem_3_departure = new DateTime(dateNow.Year, dateNow.Month, dateNow.Day, int.Parse(caller.departurehh3.Text), int.Parse(caller.departuremm3.Text), dateNow.Second);
-                int mem_3_lvlOfTraining = caller.lvlOfTraining3.SelectedIndex;
-                TeamMember mem_3 = new TeamMember(mem_3_name, mem_3_lvlOfTraining, mem_3_departure);
-                team.addMember(mem_3);
-            }
-
-            return team;
-        }
-
         public void submit()
         {
             MessageBox.Show("Submit Pressed");

@@ -21,6 +21,7 @@ namespace ETD
 	public partial class MainWindow : Window
 	{
 		MainWindowUpdate updater;
+		String AbsolutePath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase);
 
 		public MainWindow()
 		{
@@ -57,10 +58,24 @@ namespace ETD
             updater.TimeTest_MenuItem_Click();
         }
 
-		/* Uncomment for the view to pull the Team through the controller
-		 * private Team getTeam(int index)
-		 * {
-		 * Globals.getTeam(index);
-		}*/
+		//Displaying the team
+		public void DisplayTeam(Team team)
+		{
+			updater.HideCreateTeamForm();
+			updater.DisplayTeam(team);
+		}
+
+		//Getting picture from the path
+		public BitmapImage getImage(String relativePath)
+		{
+			BitmapImage img = new BitmapImage(new Uri(AbsolutePath + relativePath));
+			return img;
+		}
+
+		//Getting the full name of the letter
+		public String getLetter(String letter)
+		{
+			return PhoneticAlphabet.getLetter(letter);
+		}
 	}
 }

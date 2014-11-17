@@ -8,6 +8,8 @@ using System.Windows.Media;
 using System.Diagnostics;
 using System.Threading;
 using System.Windows.Controls;
+using System.Windows.Shapes;
+using System.Windows.Media.Imaging;
 
 namespace ETD
 {
@@ -54,9 +56,8 @@ namespace ETD
 		}
 		
 		//Called to display a created team
-		public void DisplayTeam() //TODO: Need to take as input or get the Team Name as well as the name and training level of all members
+		public void DisplayTeam(Team team)
 		{
-
 			//TODO: Need to be moved to model in team creation
             int temp = Globals.currentIntervention;
             Stopwatch interventionTimer = new Stopwatch();
@@ -73,63 +74,103 @@ namespace ETD
 			// Creation of all the objects needed for the teams display
 			//
 			Border mainBorder = new Border();
-			mainBorder.Name = "Bravo"; //TODO: To be changed to adapt to input
+			mainBorder.Name = team.getName();
 			mainBorder.BorderBrush = new SolidColorBrush(Colors.Black);
 			mainBorder.BorderThickness = new System.Windows.Thickness(1);
 			mainBorder.CornerRadius = new System.Windows.CornerRadius(5);
 			Thickness topMargin = mainBorder.Margin;
 			topMargin.Top = 5;
 			mainBorder.Margin = topMargin;
+			TeamList.Children.Add(mainBorder); //Adding to the view
 
 				StackPanel mainStackPanel = new StackPanel();
+				mainBorder.Child = mainStackPanel;
 
 					Grid teamNameGrid = new Grid();
 					teamNameGrid.Background = new SolidColorBrush(Colors.Black);
+					mainStackPanel.Children.Add(teamNameGrid);
 
 						Label teamName = new Label();
-						teamName.Content = "Bravo"; //TODO: To be changed to adapt to input
+						if (team.getName().Length == 1)
+						{
+							teamName.Content = caller.getLetter(team.getName());
+						}
+						else
+						{
+							teamName.Content = team.getName();
+						}
 						teamName.HorizontalAlignment = HorizontalAlignment.Left;
 						teamName.FontWeight = FontWeights.Bold;
 						teamName.FontSize = 20;
 						teamName.Foreground = new SolidColorBrush(Colors.White);
+						teamNameGrid.Children.Add(teamName);
 
 						//This will hold the training of the team as well as all the pieces of equipment that the team carries
 						StackPanel equipmentStackPanel = new StackPanel();
 						equipmentStackPanel.HorizontalAlignment = HorizontalAlignment.Right;
 						equipmentStackPanel.Orientation = Orientation.Horizontal;
 						equipmentStackPanel.FlowDirection = FlowDirection.RightToLeft;
+						teamNameGrid.Children.Add(equipmentStackPanel);
 
-					//TODO: Add this to a loop to account for teams of different number of members
-					Grid teamMember1 = new Grid();
+					//Adding all of the members to the list under the team name
+					TeamMember member = null;
+					int i = 0;
+					int highestTraining = 0;
+					while((member = team.getMember(i++)) != null)
+					{
+						Grid teamMember = new Grid();
+						mainStackPanel.Children.Add(teamMember);
 
-						Label teamMember1Name = new Label();
-						teamMember1Name.Content = "Tarzan"; //TODO: To be changed to adapt to input
-						teamMember1Name.HorizontalAlignment = HorizontalAlignment.Left;
-						teamMember1Name.FontSize = 18;
+							Label teamMemberName = new Label();
+							teamMemberName.Content = member.getName();
+							teamMemberName.HorizontalAlignment = HorizontalAlignment.Left;
+							teamMemberName.FontSize = 18;
+							teamMember.Children.Add(teamMemberName);
 
-						//TODO: Need to add training level
+							Rectangle training = new Rectangle();
+							training.HorizontalAlignment = HorizontalAlignment.Right;
+							training.Width = 30;
+							training.Height = 30;
+							if(highestTraining < member.getTrainingLevel())
+							{
+								highestTraining = member.getTrainingLevel();
+							}
+							ImageBrush img = new ImageBrush();
+							switch(member.getTrainingLevel())
+							{
+								case 0:
+									img.ImageSource = caller.getImage(@"\Icons\First_Aid2.png");
+									break;
+								case 1:
+									img.ImageSource = caller.getImage(@"\Icons\First_Responder2.png");
+									break;
+								case 2:
+									img.ImageSource = caller.getImage(@"\Icons\Medicine2.png");
+									break;
+							}
+							training.Fill = img;
+							teamMember.Children.Add(training);
+					}
 
-					Grid teamMember2 = new Grid();
-
-						Label teamMember2Name = new Label();
-						teamMember2Name.Content = "Rambo"; //TODO: To be changed to adapt to input
-						teamMember2Name.HorizontalAlignment = HorizontalAlignment.Left;
-						teamMember2Name.FontSize = 18;
-
-						//TODO: Need to add training level
-						
-
-			//
-			// Linking items together to form appropriate hierarchy
-			//
-			TeamList.Children.Add(mainBorder);
-				mainBorder.Child = mainStackPanel;
-					mainStackPanel.Children.Add(teamNameGrid);
-						teamNameGrid.Children.Add(teamName);
-					mainStackPanel.Children.Add(teamMember1);
-						teamMember1.Children.Add(teamMember1Name);
-					mainStackPanel.Children.Add(teamMember2);
-						teamMember2.Children.Add(teamMember2Name);
+					//Displaying the team's training as the highest member training
+					Rectangle teamTraining = new Rectangle();
+					teamTraining.Width = 35;
+					teamTraining.Height = 35;
+					ImageBrush teamImg = new ImageBrush();
+					switch (highestTraining)
+					{
+						case 0:
+							teamImg.ImageSource = caller.getImage(@"\Icons\First_Aid2.png");
+							break;
+						case 1:
+							teamImg.ImageSource = caller.getImage(@"\Icons\First_Responder2.png");
+							break;
+						case 2:
+							teamImg.ImageSource = caller.getImage(@"\Icons\Medicine2.png");
+							break;
+					}
+					teamTraining.Fill = teamImg;
+					equipmentStackPanel.Children.Add(teamTraining);
 		}
 
         public void TimeTest_MenuItem_Click()
