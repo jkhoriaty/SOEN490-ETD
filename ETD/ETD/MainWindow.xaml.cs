@@ -18,7 +18,7 @@ namespace ETD
 	/// <summary>
 	/// Interaction logic for MainWindow.xaml
 	/// </summary>
-	public partial class MainWindow : Window
+    public partial class MainWindow : Window, IObserver
 	{
 		MainWindowUpdate updater;
 
@@ -26,6 +26,7 @@ namespace ETD
 		{
 			InitializeComponent();
 			updater = new MainWindowUpdate(this);
+            LanguageSelector.attach(this);
 		}
 
 		//Resizing of the team display section along with the window
@@ -77,5 +78,8 @@ namespace ETD
 		 * {
 		 * Globals.getTeam(index);
 		}*/
+
+        public void update()
+        { }
 	}
 }
