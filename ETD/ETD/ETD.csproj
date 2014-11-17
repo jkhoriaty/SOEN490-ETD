@@ -58,6 +58,8 @@
       <DependentUpon>TeamForm.xaml</DependentUpon>
     </Compile>
     <Compile Include="TeamFormUpdate.cs" />
+    <Compile Include="Vocabulary.cs" />
+    <Compile Include="Word.cs" />
     <Page Include="CreateTeamForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -110,6 +112,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Vocabulary.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
