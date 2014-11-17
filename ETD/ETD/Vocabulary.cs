@@ -15,7 +15,8 @@ namespace ETD
             loadVocabulary();
         }
 
-        public void loadVocabulary()
+        //Load words for the vocabulary from an XML file.
+        private void loadVocabulary()
         {
             using (XmlReader reader = XmlReader.Create("..\\..\\Vocabulary.xml"))
             {
@@ -37,6 +38,19 @@ namespace ETD
                     }
                 }
             }
+        }
+
+        public string findWord(String id, String lang)
+        {
+            string value = "";
+            if (vocabulary.ContainsKey(id))
+            {
+                if(lang.Equals("French"))
+                    value = vocabulary[id].getFrench();
+                else if(lang.Equals("English"))
+                    value = vocabulary[id].getEnglish();
+            }
+            return value;
         }
     }
 }

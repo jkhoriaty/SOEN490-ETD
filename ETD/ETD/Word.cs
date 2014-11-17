@@ -6,13 +6,35 @@ namespace ETD
     // Can be expanded by adding more.
     class Word
     {
-        private String fr { get; set; } // French version of a word.
-        private String en { get; set; } // English version of a word.
+        private String fr; // French version of a word.
 
+        private String en; // English version of a word.
+        
         public Word(String f, String e)
         {
             this.fr = f;
             this.en = e;
         }
+
+        public void setFrench(string f)
+        {
+            this.fr = f;
+        }
+
+        public String getFrench()
+        {
+            return this.fr;
+        }
+
+        public void setEnglish(string e)
+        {
+            this.en = e;
+        }
+
+        public String getEnglish()
+        {
+            return this.en;
+        }
+        
     }
 }
