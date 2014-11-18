@@ -53,6 +53,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Equipment.cs" />
     <Compile Include="PhoneticAlphabet.cs" />
     <Compile Include="Team.cs" />
     <Compile Include="TeamForm.xaml.cs">

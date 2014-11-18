@@ -72,6 +72,13 @@ namespace ETD
 			return img;
 		}
 
+        //get equipment icon from path
+        public Uri getIcon(String relpath)
+        {
+            Uri img2 = new Uri(AbsolutePath + relpath);
+            return img2;
+
+        }
 		//Getting the full name of the letter
 		public String getLetter(String letter)
 		{

@@ -10,17 +10,21 @@ namespace ETD
     {
         String name;
         TeamMember[] members;
+        Equipment[] equipments;
+        int EquipmentCount = 0;
         int memberCount = 0;
 
         public Team()
         {
             name = "Alpha";
             members = new TeamMember[400];
+            equipments =  new Equipment[5];
         }
         public Team(String name)
         {
             this.name = name;
             members = new TeamMember[400];
+            equipments = new Equipment[5];
         }
 
         public bool addMember(TeamMember mem)
@@ -64,5 +68,84 @@ namespace ETD
         {
 
         }
+
+        public bool addEquipment(Equipment EquipmentName)
+        {
+            if (EquipmentCount < 5)
+            {
+
+                for (int i = 0; i < EquipmentCount; i++)
+                {
+                    if (equipments[i] != null)
+                        equipments[i] = EquipmentName;
+                }
+
+                EquipmentCount++;
+                return true;
+            }
+            return false;
+        }
+
+        public Equipment getEquipment(int i)
+        {
+            if (i < EquipmentCount)
+            {
+                return equipments[i];
+            }
+            else
+            {
+                return null;
+            }
+
+        }
+        public String loadEquipment(String teamName, int i)
+       {
+      
+           String RelativePath;
+
+               switch(equipments[i].getEquipment()){
+                   case "ambulance cart":
+                       RelativePath = @"Icons\AmbulanceCart.png";
+                       return RelativePath;
+                      
+                   case "mounted stretcher":
+                       RelativePath = @"Icons\MountedStretcher.png";
+                       return RelativePath;
+                    
+                   case "wheel chair":
+                       RelativePath = @"Icons\WheelChair.png";
+                       return RelativePath;
+                     
+                   case "transport stretcher":
+                       RelativePath = @"Icons\TransportStretcher.png";
+                       return RelativePath;
+                    
+                   case "sitting cart":
+                       RelativePath = @"Icons\SittingCart.png";
+                       return RelativePath;
+                      
+                   case "epipen":
+                       RelativePath = @"Icons\Epipen.png";
+                       return RelativePath;
+
+                   default:
+                       return "";
+               }
+
+       }
+
+        public void removeEquipment(String e)
+        {
+            String equip = e;
+          for ( int i=0; i < equipments.Length; i++)
+            {
+                if (equip == equipments[i].getEquipment())
+                    equipments[i] = null;
+                EquipmentCount--;
+                
+            }
+         }
+
+
     }
 }

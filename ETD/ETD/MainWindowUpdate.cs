@@ -110,7 +110,33 @@ namespace ETD
 						equipmentStackPanel.HorizontalAlignment = HorizontalAlignment.Right;
 						equipmentStackPanel.Orientation = Orientation.Horizontal;
 						equipmentStackPanel.FlowDirection = FlowDirection.RightToLeft;
-						teamNameGrid.Children.Add(equipmentStackPanel);
+                        equipmentStackPanel.Height = 30;
+                        equipmentStackPanel.Width = 30;
+                        
+                        //test adding ambulance cart
+                        Equipment one = new Equipment("ambulance cart");
+                        team.addEquipment(one);
+
+                        Equipment equip = null;
+                        int j = 0;
+                        while ((equip = team.getEquipment(j++))!=null)
+                        {
+                            System.Windows.Controls.Image myImage = new System.Windows.Controls.Image();
+                            myImage.Width = 25;
+                            myImage.Height = 23;
+
+                            BitmapImage myBitmapImage = new BitmapImage();
+
+                            myBitmapImage.BeginInit();
+                            myBitmapImage.DecodePixelWidth = 25;
+                            String path = team.loadEquipment(team.getName(), j);
+                            myBitmapImage.UriSource = caller.getIcon(path);
+                            myBitmapImage.EndInit();
+                            myImage.Source = myBitmapImage;
+                            equipmentStackPanel.Children.Add(myImage);
+                        
+                        }
+                        teamNameGrid.Children.Add(equipmentStackPanel);
 
 					//Adding all of the members to the list under the team name
 					TeamMember member = null;
