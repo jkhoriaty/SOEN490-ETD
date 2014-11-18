@@ -8,14 +8,14 @@ namespace ETD
 {
    public class Equipment
     {
-       public string EquipmentName;
+       public String EquipmentName;
 
        public Equipment(String name)
        {
            EquipmentName = name;
        }
 
-       public string getEquipment()
+       public String getEquipmentName()
        {
            return EquipmentName;
 

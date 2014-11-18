@@ -79,6 +79,17 @@ namespace ETD
             return img2;
 
         }
+        //Adding and removing equipment
+        //
+        public void EquipmentUpdate(object sender, RoutedEventArgs e)
+        {
+
+          //  updater.EquipmentUpdate_Click();
+
+        }
+
+
+
 		//Getting the full name of the letter
 		public String getLetter(String letter)
 		{

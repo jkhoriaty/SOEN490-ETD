@@ -113,29 +113,46 @@ namespace ETD
                         equipmentStackPanel.Height = 30;
                         equipmentStackPanel.Width = 30;
                         
-                        //test adding ambulance cart
+                        //testing adding equipment
+                        // to be moved to equipmentupdate form
                         Equipment one = new Equipment("ambulance cart");
                         team.addEquipment(one);
-
+             
                         Equipment equip = null;
+                        Grid Equipment = new Grid();
+                        Button EquipmentManipulation = new Button();
+                        EquipmentManipulation.Width = 30;
+                        EquipmentManipulation.HorizontalAlignment = HorizontalAlignment.Right;
+                        EquipmentManipulation.FontWeight = FontWeights.ExtraBlack;
+                        EquipmentManipulation.Background = Brushes.White;
+                        EquipmentManipulation.Content = "+/-";
+                        //EquipmentManipulation.Click += new RoutedEventHandler(EquipmentUpdate_Click);
+
+                        Equipment.Children.Add(EquipmentManipulation);
+
+                        mainStackPanel.Children.Add(Equipment);
+
                         int j = 0;
-                        while ((equip = team.getEquipment(j++))!=null)
+                        while ((equip = team.getEquipment(j))!=null)
                         {
+
                             System.Windows.Controls.Image myImage = new System.Windows.Controls.Image();
                             myImage.Width = 25;
                             myImage.Height = 23;
-
                             BitmapImage myBitmapImage = new BitmapImage();
-
                             myBitmapImage.BeginInit();
                             myBitmapImage.DecodePixelWidth = 25;
-                            String path = team.loadEquipment(team.getName(), j);
+                            String path = team.loadEquipment(team, j);                     
                             myBitmapImage.UriSource = caller.getIcon(path);
                             myBitmapImage.EndInit();
                             myImage.Source = myBitmapImage;
-                            equipmentStackPanel.Children.Add(myImage);
-                        
+                            myImage.HorizontalAlignment = HorizontalAlignment.Left;
+
+                            Equipment.Children.Add(myImage);
+                  
+                            j++;
                         }
+
                         teamNameGrid.Children.Add(equipmentStackPanel);
 
 					//Adding all of the members to the list under the team name
@@ -199,6 +216,15 @@ namespace ETD
 					equipmentStackPanel.Children.Add(teamTraining);
 		}
 
+        //add or remove equipment. 
+        //Clicking on the +/- button will open a form and let the user decide which equipment to add or remove from the team
+        public void EquipmentUpdate_Click()
+        {
+
+
+        }
+
+      
         public void TimeTest_MenuItem_Click()
         {
             //MessageBox.Show(dbAccess.OpenConnection());
