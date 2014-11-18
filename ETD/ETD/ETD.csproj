@@ -54,7 +54,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="IObservable.cs" />
-    <Compile Include="IObserverWindow.cs" />
+    <Compile Include="IObserver.cs" />
     <Compile Include="LanguageSelector.cs" />
     <Compile Include="Timer.cs" />
     <Compile Include="TeamForm.xaml.cs">

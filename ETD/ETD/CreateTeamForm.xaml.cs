@@ -17,22 +17,18 @@ namespace ETD
     /// <summary>
     /// Interaction logic for CreateTeamForm.xaml
     /// </summary>
-    public partial class CreateTeamForm : Window, IObserver
+    public partial class CreateTeamForm : Window
     {
         CreateTeamFormUpdate CTFU;
         public CreateTeamForm()
         {
             InitializeComponent();
             CTFU = new CreateTeamFormUpdate();
-            LanguageSelector.attach(this);
         }
 
         private void addMember_Click(object sender, RoutedEventArgs e)
         {
             CTFU.addMember(this);
         }
-
-        public void update()
-        { }
     }
 }

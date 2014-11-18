@@ -10,7 +10,7 @@ using System.Windows.Media;
 
 namespace ETD
 {
-    class TeamFormUpdate
+    class TeamFormUpdate : IObserver
     {
         private TeamForm caller;
         public int currentNumberOfMembers = 1; //Used to track the number of members on the TeamForm
@@ -21,6 +21,7 @@ namespace ETD
 		public TeamFormUpdate(TeamForm caller)
 		{
 			this.caller = caller;
+            LanguageSelector.attach(this);
 		}
 
         public void addMember()
@@ -138,6 +139,13 @@ namespace ETD
 				return true;
 			}
 		}
+
+        // Updates all text fields when a language change is observed
+        public void update()
+        {
+            //Example
+            //control.text = LanguageSelector.getString(control.name)
+        }
 	}
 }
 

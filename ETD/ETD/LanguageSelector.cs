@@ -1,10 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
-using System.Windows;
 
 
 namespace ETD
@@ -29,11 +24,14 @@ namespace ETD
 
         public static void switchLanguage(String lang)
         {
-            if (lang.Equals(LanguageSelector.English))
-                currentLang = LanguageSelector.English;
-            else if (lang.Equals(LanguageSelector.French))
-                currentLang = LanguageSelector.French;
-            update();
+            if (!lang.Equals(currentLang))
+            {
+                if (lang.Equals(LanguageSelector.English))
+                    currentLang = LanguageSelector.English;
+                else if (lang.Equals(LanguageSelector.French))
+                    currentLang = LanguageSelector.French;
+                update();
+            }
         }
 
         private static void update()

@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 
 namespace ETD
 {
-	class MainWindowUpdate
+	class MainWindowUpdate : IObserver
 	{
 		private MainWindow caller;
 		private static double teamSizeDifference = 0;
@@ -22,6 +22,7 @@ namespace ETD
 		public MainWindowUpdate(MainWindow caller)
 		{
 			this.caller = caller;
+            LanguageSelector.attach(this);
 		}
 
 		//Actual resizing of the team display section to handle resizing of window or different screen sizes
@@ -151,5 +152,12 @@ namespace ETD
                 //System.Windows.Controls.TextBlock TimerText = caller.getTimer();
 			}
 		}
+
+        // Updates all text fields when a language change is observed
+        public void update()
+        {
+            //Example
+            //control.text = LanguageSelector.getString(control.name)
+        }
 	}
 }
