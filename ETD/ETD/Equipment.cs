@@ -6,21 +6,21 @@ using System.Threading.Tasks;
 
 namespace ETD
 {
-   public class Equipment
-    {
-       public String EquipmentName;
+	public enum equipments {ambulanceCart, sittingCart, epipen, transportStretcher, mountedStretcher, wheelchair};
 
-       public Equipment(String name)
+	public class Equipment
+    {
+
+	   public equipments EquipmentName;
+
+       public Equipment(equipments name)
        {
            EquipmentName = name;
        }
 
-       public String getEquipmentName()
+       public equipments getEquipmentName()
        {
            return EquipmentName;
-
        }
-
-
     }
 }

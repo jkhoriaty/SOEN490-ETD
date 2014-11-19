@@ -87,28 +87,25 @@ namespace ETD
 			return img;
 		}
 
-        //get equipment icon from path
-        public Uri getIcon(String relpath)
-        {
-            Uri img2 = new Uri(AbsolutePath + relpath);
-            return img2;
-
-        }
-        //Adding and removing equipment
-        //
-        public void EquipmentUpdate(object sender, RoutedEventArgs e)
-        {
-
-          //  updater.EquipmentUpdate_Click();
-
-        }
-
-
-
 		//Getting the full name of the letter
-		public String getLetter(String letter)
+		public String getPhoneticLetter(String letter)
 		{
 			return PhoneticAlphabet.getLetter(letter);
+		}
+
+		//TO BECOME: Method that gets called when equipment is overlapped with a team
+		private void Button_Click(object sender, RoutedEventArgs e)
+		{
+			//TODO: Move to controller
+			/*
+			Equipment one = new Equipment("ambulance cart");
+			team.addEquipment(one);
+			 */
+
+			//SHOULD LIMIT TO 3 EQUIPEMENTS
+			Equipment ms = new Equipment(equipments.mountedStretcher);
+			String teamName = "N";
+			updater.AddEquipment(ms, teamName);
 		}
 	}
 }

@@ -73,14 +73,16 @@ namespace ETD
 			{
 				textboxContent.Add(tb.Name, tb.Text);
 			}
-			tb.Text = "";
+			if (tb.Text.Equals(textboxContent[tb.Name]))
+			{
+				tb.Text = "";
+			}
 		}
 
 		//Restoring TextBoxes text if left empty
 		public void restoreText(TextBox tb)
 		{
 			tb.Text = textboxContent[tb.Name];
-			textboxContent.Remove(tb.Name);
 		}
 
 		//Redenning the borders of the controls that failed validation

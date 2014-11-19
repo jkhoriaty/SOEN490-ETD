@@ -37,7 +37,7 @@ namespace ETD
 			{
 				teamSizeDifference = TeamSection.ActualHeight - TeamList.ActualHeight;
 			}
-			TeamSection.Height = caller.ActualHeight - 200;
+			TeamSection.Height = caller.MapBorder.ActualHeight;
 			Scroller.MaxHeight = TeamSection.Height - teamSizeDifference;
 		}
 
@@ -61,9 +61,8 @@ namespace ETD
 		//Called to display a created team
 		public void DisplayTeam(Team team)
 		{
-            Timer.StartTimer();
 			//TODO: Need to be moved to model in team creation
-			//----------------------------------
+            Timer.StartTimer();
 
 			StackPanel TeamList = caller.TeamList;
 
@@ -85,72 +84,34 @@ namespace ETD
 
 					Grid teamNameGrid = new Grid();
 					teamNameGrid.Background = new SolidColorBrush(Colors.Black);
+					teamNameGrid.Name = "teamNameGrid";
 					mainStackPanel.Children.Add(teamNameGrid);
 
-						Label teamName = new Label();
-						if (team.getName().Length == 1)
-						{
-							teamName.Content = caller.getLetter(team.getName());
-						}
-						else
-						{
-							teamName.Content = team.getName();
-						}
-						teamName.HorizontalAlignment = HorizontalAlignment.Left;
-						teamName.FontWeight = FontWeights.Bold;
-						teamName.FontSize = 20;
-						teamName.Foreground = new SolidColorBrush(Colors.White);
-						teamNameGrid.Children.Add(teamName);
+						StackPanel teamNameStackPanel = new StackPanel();
+						teamNameStackPanel.HorizontalAlignment = HorizontalAlignment.Left;
+						teamNameGrid.Children.Add(teamNameStackPanel);
+
+							Label teamName = new Label();
+							if (team.getName().Length == 1)
+							{
+								teamName.Content = caller.getPhoneticLetter(team.getName());
+							}
+							else
+							{
+								teamName.Content = team.getName();
+							}
+							teamName.FontWeight = FontWeights.Bold;
+							teamName.FontSize = 20;
+							teamName.Foreground = new SolidColorBrush(Colors.White);
+							teamNameStackPanel.Children.Add(teamName);
 
 						//This will hold the training of the team as well as all the pieces of equipment that the team carries
 						StackPanel equipmentStackPanel = new StackPanel();
+						equipmentStackPanel.Name = "equipmentStackPanel";
 						equipmentStackPanel.HorizontalAlignment = HorizontalAlignment.Right;
 						equipmentStackPanel.Orientation = Orientation.Horizontal;
 						equipmentStackPanel.FlowDirection = FlowDirection.RightToLeft;
-                        equipmentStackPanel.Height = 30;
-                        equipmentStackPanel.Width = 30;
-                        
-                        //testing adding equipment
-                        // to be moved to equipmentupdate form
-                        Equipment one = new Equipment("ambulance cart");
-                        team.addEquipment(one);
-             
-                        Equipment equip = null;
-                        Grid Equipment = new Grid();
-                        Button EquipmentManipulation = new Button();
-                        EquipmentManipulation.Width = 30;
-                        EquipmentManipulation.HorizontalAlignment = HorizontalAlignment.Right;
-                        EquipmentManipulation.FontWeight = FontWeights.ExtraBlack;
-                        EquipmentManipulation.Background = Brushes.White;
-                        EquipmentManipulation.Content = "+/-";
-                        //EquipmentManipulation.Click += new RoutedEventHandler(EquipmentUpdate_Click);
-
-                        Equipment.Children.Add(EquipmentManipulation);
-
-                        mainStackPanel.Children.Add(Equipment);
-
-                        int j = 0;
-                        while ((equip = team.getEquipment(j))!=null)
-                        {
-
-                            System.Windows.Controls.Image myImage = new System.Windows.Controls.Image();
-                            myImage.Width = 25;
-                            myImage.Height = 23;
-                            BitmapImage myBitmapImage = new BitmapImage();
-                            myBitmapImage.BeginInit();
-                            myBitmapImage.DecodePixelWidth = 25;
-                            String path = team.loadEquipment(team, j);                     
-                            myBitmapImage.UriSource = caller.getIcon(path);
-                            myBitmapImage.EndInit();
-                            myImage.Source = myBitmapImage;
-                            myImage.HorizontalAlignment = HorizontalAlignment.Left;
-
-                            Equipment.Children.Add(myImage);
-                  
-                            j++;
-                        }
-
-                        teamNameGrid.Children.Add(equipmentStackPanel);
+						teamNameGrid.Children.Add(equipmentStackPanel);
 
 					//Adding all of the members to the list under the team name
 					TeamMember member = null;
@@ -190,7 +151,7 @@ namespace ETD
 							}
 							training.Fill = img;
 							teamMember.Children.Add(training);
-        }
+					}
             
 					//Displaying the team's training as the highest member training
 					Rectangle teamTraining = new Rectangle();
@@ -211,6 +172,75 @@ namespace ETD
 					}
 					teamTraining.Fill = teamImg;
 					equipmentStackPanel.Children.Add(teamTraining);
+		}
+
+		public void AddEquipment(Equipment equip, String teamName)
+		{
+			//TODO: Move to controller
+			/*
+			Equipment one = new Equipment("ambulance cart");
+			team.addEquipment(one);
+			 */
+
+			//Creating the rectangle in which the equipment is going to reside
+			Rectangle equipment = new Rectangle();
+			equipment.Width = 27;
+			equipment.Height = 27;
+			Thickness equipmentMargin = equipment.Margin;
+			equipmentMargin.Right = 2;
+			equipmentMargin.Left = 2;
+			equipment.Margin = equipmentMargin;
+
+			//Getting the background image to the rectangle
+			ImageBrush equipmentImage = new ImageBrush();
+			if(equip.getEquipmentName() == equipments.ambulanceCart)
+			{
+				equipmentImage.ImageSource = caller.getImage(@"\Icons\AmbulanceCart3.png");
+			}
+			else if (equip.getEquipmentName() == equipments.epipen)
+			{
+				equipmentImage.ImageSource = caller.getImage(@"\Icons\epipen.png");
+			}
+			else if (equip.getEquipmentName() == equipments.mountedStretcher)
+			{
+				equipmentImage.ImageSource = caller.getImage(@"\Icons\MountedStretcher3.png");
+			}
+			else if (equip.getEquipmentName() == equipments.sittingCart)
+			{
+				equipmentImage.ImageSource = caller.getImage(@"\Icons\SittingCart3.png");
+			}
+			else if (equip.getEquipmentName() == equipments.transportStretcher)
+			{
+				equipmentImage.ImageSource = caller.getImage(@"\Icons\TransportStretcher.png");
+			}
+			else if (equip.getEquipmentName() == equipments.wheelchair)
+			{
+				equipmentImage.ImageSource = caller.getImage(@"\Icons\WheelChair.png");
+			}
+			equipment.Fill = equipmentImage;
+
+			//Getting the appropriate equipment StackPanel
+			foreach (Border teams in caller.TeamList.Children)
+			{
+				if (teams.Name.Equals(teamName))
+				{
+					StackPanel sp = (StackPanel)teams.Child;
+					foreach (Grid info in sp.Children)
+					{
+						if (info.Name.Equals("teamNameGrid"))
+						{
+							foreach (StackPanel section in info.Children)
+							{
+								if (section.Name.Equals("equipmentStackPanel"))
+								{
+									//Adding the equipment to the StackPanel
+									section.Children.Add(equipment);
+								}
+							}
+						}
+					}
+				}
+			}
 		}
 
         //add or remove equipment. 

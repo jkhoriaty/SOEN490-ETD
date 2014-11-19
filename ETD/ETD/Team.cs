@@ -117,7 +117,7 @@ namespace ETD
             }
         }
        
-
+		/*
         public Equipment getEquipment(int i)
         {
             if (i < EquipmentCount)
@@ -129,67 +129,30 @@ namespace ETD
                 return null;
             }
 
-        }
-        public String loadEquipment( Team team, int i)
-       {
-      
-           String RelativePath;
-        
-               switch(team.getEquipment(i).getEquipmentName()){
-                   case "ambulance cart":
-                       RelativePath = @"\Icons\AmbulanceCart.png";
-                       return RelativePath;
-                      
-                   case "mounted stretcher":
-                       RelativePath = @"\Icons\MountedStretcher.png";
-                       return RelativePath;
-                    
-                   case "wheel chair":
-                       RelativePath = @"\Icons\WheelChair.png";
-                       return RelativePath;
-                     
-                   case "transport stretcher":
-                       RelativePath = @"\Icons\TransportStretcher.png";
-                       return RelativePath;
-                    
-                   case "sitting cart":
-                       RelativePath = @"\Icons\SittingCart.png";
-                       return RelativePath;
-                      
-                   case "epipen":
-                       RelativePath = @"\Icons\Epipen.png";
-                       return RelativePath;
-
-                   default:
-                       return "";
-               }
-
-       }
-        //to be moved to equipmentupdate form
-        public void removeEquipment(String e)
-        {
-            String equip = e;
-          for ( int i=0; i < equipments.Length; i++)
-            {
-                if (equip == equipments[i].getEquipmentName())
-                    equipments[i] = null;
-                EquipmentCount--;
-                
-            }
-         }
+        }*/
 
         //to be moved to equipmentupdate form
-        public bool addEquipment(Equipment EquipmentName)
+        public bool addEquipment(Equipment equipment)
         {
-            if (EquipmentCount < 5)
+            if (EquipmentCount < 3)
             {
-
-                equipments[EquipmentCount] = EquipmentName;
+				equipments[EquipmentCount] = equipment;
 
                 EquipmentCount++;
                 return true;
             }
             return false;
         }
+
+        //to be moved to equipmentupdate form
+        public void removeEquipment(equipments equipment)
+        {
+			for ( int i=0; i < equipments.Length; i++)
+            {
+				if (equipment == equipments[i].getEquipmentName())
+                    equipments[i] = null;
+                EquipmentCount--;
+            }
+		}
     }
 }
