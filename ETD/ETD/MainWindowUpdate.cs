@@ -194,7 +194,7 @@ namespace ETD
 							training.Fill = img;
 							teamMember.Children.Add(training);
 					}
-
+            
 					//Displaying the team's training as the highest member training
 					Rectangle teamTraining = new Rectangle();
 					teamTraining.Width = 35;

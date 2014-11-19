@@ -14,5 +14,6 @@ namespace ETD
         public static Dictionary<int, TimeSpan> interventionTime = new Dictionary<int, TimeSpan>();
         public static int currentIntervention = 0;
         public static int currentTeam = 0; //Used in CreateTeamForm as index
+   
     }
 }

@@ -13,12 +13,14 @@ namespace ETD
         Equipment[] equipments;
         int EquipmentCount = 0;
         int memberCount = 0;
+        bool availability = true;
 
         public Team()
         {
             name = "Alpha";
             members = new TeamMember[400];
             equipments =  new Equipment[5];
+      
         }
         public Team(String name)
         {
@@ -64,9 +66,55 @@ namespace ETD
 		}
 
         //Generate shape to represent team on screen
-        public void draw()
+        public String draw(int HighestlevelOftraining, Team team)
         {
+            String relpath;
+            switch (HighestlevelOftraining)
+            {
+                case 0:
+                    if (availability == true)
+                    {
+                        relpath = @"\Icons\FirstAid_available.png";
 
+                        return relpath;
+                    }
+                    else 
+                    {
+                        relpath = @"\Icons\FirstAid_busy.png";
+                        return relpath;
+                    }
+
+                case 1:
+                    if (availability == true)
+                    {
+                        relpath = @"\Icons\FirstResponder_available.png";
+
+                        return relpath;
+                    }
+                    else
+                    {
+                        relpath = @"\Icons\FirstResponder_busy.png";
+                        return relpath;
+                    }
+
+
+                case 2:
+                    if (availability == true)
+                    {
+                        relpath = @"\Icons\Medicine_available.png";
+
+                        return relpath;
+                    }
+                    else
+                    {
+                        relpath = @"\Icons\Medicine_busy.png";
+                        return relpath;
+                    }
+
+                default:
+                    return "";
+
+            }
         }
        
 
