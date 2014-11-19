@@ -44,7 +44,44 @@ namespace ETD
         {
 			if(formValidation())
 			{
-				MessageBox.Show("Validation Successful");
+				//Creating team
+				DateTime dateNow = DateTime.Now;
+
+				//Create team
+				String team_name = teamName.Text;
+				Team team = new Team(team_name);
+
+				//Create first member
+				String mem_1_name = teamMember1.Text;
+				DateTime mem_1_departure = new DateTime(dateNow.Year, dateNow.Month, dateNow.Day, int.Parse(departurehh1.Text), int.Parse(departuremm1.Text), dateNow.Second);
+				int mem_1_lvlOfTraining = lvlOfTraining1.SelectedIndex;
+				TeamMember mem_1 = new TeamMember(mem_1_name, mem_1_lvlOfTraining, mem_1_departure);
+				team.addMember(mem_1);
+
+				//Create second member
+				String mem_2_name = teamMember2.Text;
+				if (mem_2_name != "Team Member Name")
+				{
+					DateTime mem_2_departure = new DateTime(dateNow.Year, dateNow.Month, dateNow.Day, int.Parse(departurehh2.Text), int.Parse(departuremm2.Text), dateNow.Second);
+					int mem_2_lvlOfTraining = lvlOfTraining2.SelectedIndex;
+					TeamMember mem_2 = new TeamMember(mem_2_name, mem_2_lvlOfTraining, mem_2_departure);
+					team.addMember(mem_2);
+				}
+
+				//Create third member
+				String mem_3_name = teamMember3.Text;
+				if (mem_3_name != "Team Member Name")
+				{
+					DateTime mem_3_departure = new DateTime(dateNow.Year, dateNow.Month, dateNow.Day, int.Parse(departurehh3.Text), int.Parse(departuremm3.Text), dateNow.Second);
+					int mem_3_lvlOfTraining = lvlOfTraining3.SelectedIndex;
+					TeamMember mem_3 = new TeamMember(mem_3_name, mem_3_lvlOfTraining, mem_3_departure);
+					team.addMember(mem_3);
+				}
+
+				//Displaying the team on the main window
+				caller.DisplayTeam(team);
+
+                //Use this team to link it to map
 			}
 			else
 			{
