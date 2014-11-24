@@ -154,5 +154,10 @@ namespace ETD
                 EquipmentCount--;
             }
 		}
+
+        public int getEquipmentCount()
+        {
+            return EquipmentCount;
+        }
     }
 }

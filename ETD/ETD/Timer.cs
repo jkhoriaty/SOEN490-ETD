@@ -37,6 +37,13 @@ namespace ETD
             }
         }
 
+        public static void RemoveTimer(int interventionNumber)
+        {
+            if (timers.ContainsKey(interventionNumber))
+            {
+                timers.Remove(interventionNumber);
+            }
+        }
 
         public static void TestTimer(MainWindow caller)
         {
