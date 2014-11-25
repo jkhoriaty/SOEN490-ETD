@@ -160,5 +160,10 @@ namespace ETD
             }
 
         }*/
+
+        public int getEquipmentCount()
+        {
+            return EquipmentCount;
+        }
     }
 }

@@ -52,6 +52,9 @@
   <ItemGroup>
     <Compile Include="TimerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TeamTest.cs" />
+    <Compile Include="TeamMemberTest.cs" />
+    <Compile Include="EquipmentTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ETD\ETD.csproj">
