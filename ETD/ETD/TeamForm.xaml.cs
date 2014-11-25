@@ -54,7 +54,7 @@ namespace ETD
 				//Create first member
 				String mem_1_name = teamMember1.Text;
 				DateTime mem_1_departure = new DateTime(dateNow.Year, dateNow.Month, dateNow.Day, int.Parse(departurehh1.Text), int.Parse(departuremm1.Text), dateNow.Second);
-				int mem_1_lvlOfTraining = lvlOfTraining1.SelectedIndex;
+				trainings mem_1_lvlOfTraining = (trainings)lvlOfTraining1.SelectedIndex;
 				TeamMember mem_1 = new TeamMember(mem_1_name, mem_1_lvlOfTraining, mem_1_departure);
 				team.addMember(mem_1);
 
@@ -63,7 +63,7 @@ namespace ETD
 				if (mem_2_name != "Team Member Name")
 				{
 					DateTime mem_2_departure = new DateTime(dateNow.Year, dateNow.Month, dateNow.Day, int.Parse(departurehh2.Text), int.Parse(departuremm2.Text), dateNow.Second);
-					int mem_2_lvlOfTraining = lvlOfTraining2.SelectedIndex;
+					trainings mem_2_lvlOfTraining = (trainings) lvlOfTraining2.SelectedIndex;
 					TeamMember mem_2 = new TeamMember(mem_2_name, mem_2_lvlOfTraining, mem_2_departure);
 					team.addMember(mem_2);
 				}
@@ -73,7 +73,7 @@ namespace ETD
 				if (mem_3_name != "Team Member Name")
 				{
 					DateTime mem_3_departure = new DateTime(dateNow.Year, dateNow.Month, dateNow.Day, int.Parse(departurehh3.Text), int.Parse(departuremm3.Text), dateNow.Second);
-					int mem_3_lvlOfTraining = lvlOfTraining3.SelectedIndex;
+					trainings mem_3_lvlOfTraining = (trainings)lvlOfTraining3.SelectedIndex;
 					TeamMember mem_3 = new TeamMember(mem_3_name, mem_3_lvlOfTraining, mem_3_departure);
 					team.addMember(mem_3);
 				}
@@ -91,7 +91,7 @@ namespace ETD
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
-			caller.hideTeamForm();
+			caller.HideCreateTeamForm();
         }
 
 		private void TextBoxes_GotFocus(object sender, RoutedEventArgs e)

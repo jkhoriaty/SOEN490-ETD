@@ -19,6 +19,7 @@ namespace ETD
 	{
 		private MainWindow caller;
 		private static double teamSizeDifference = 0;
+		int shapeRadius = 20;
 
 		public MainWindowUpdate(MainWindow caller)
 		{
@@ -29,16 +30,26 @@ namespace ETD
 		//Actual resizing of the team display section to handle resizing of window or different screen sizes
 		public void setTeamsHeight()
 		{
-			Border TeamSection = caller.TeamSection;
-			ScrollViewer Scroller = caller.Scroller;
-			StackPanel TeamList = caller.TeamList;
-
 			if (teamSizeDifference == 0)
 			{
-				teamSizeDifference = TeamSection.ActualHeight - TeamList.ActualHeight;
+				teamSizeDifference = caller.TeamSection.ActualHeight - caller.TeamList.ActualHeight;
 			}
-			TeamSection.Height = caller.MapBorder.ActualHeight;
-			Scroller.MaxHeight = TeamSection.Height - teamSizeDifference;
+			caller.TeamSection.Height = caller.MapBorder.ActualHeight;
+			caller.Scroller.MaxHeight = caller.TeamSection.Height - teamSizeDifference;
+		}
+
+		//Processing of the selected image and displaying it as a background
+		public void LoadMap(BitmapImage coloredImage)
+        {
+			//Making the picture grayscale
+			FormatConvertedBitmap grayBitmap = new FormatConvertedBitmap();
+            grayBitmap.BeginInit();
+            grayBitmap.Source = coloredImage;
+            grayBitmap.DestinationFormat = PixelFormats.Gray8;
+            grayBitmap.EndInit();
+
+			//Displaying the map as the background
+            caller.Map.Background = new ImageBrush(grayBitmap);
 		}
 
 		//Called to show the form to create a new team
@@ -94,7 +105,7 @@ namespace ETD
 							Label teamName = new Label();
 							if (team.getName().Length == 1)
 							{
-								teamName.Content = caller.getPhoneticLetter(team.getName());
+								teamName.Content = Services.getPhoneticLetter(team.getName());
 							}
 							else
 							{
@@ -116,7 +127,6 @@ namespace ETD
 					//Adding all of the members to the list under the team name
 					TeamMember member = null;
 					int i = 0;
-					int highestTraining = 0;
 					while((member = team.getMember(i++)) != null)
 					{
 						Grid teamMember = new Grid();
@@ -132,23 +142,8 @@ namespace ETD
 							training.HorizontalAlignment = HorizontalAlignment.Right;
 							training.Width = 30;
 							training.Height = 30;
-							if(highestTraining < member.getTrainingLevel())
-							{
-								highestTraining = member.getTrainingLevel();
-							}
 							ImageBrush img = new ImageBrush();
-							switch(member.getTrainingLevel())
-							{
-								case 0:
-									img.ImageSource = caller.getImage(@"\Icons\First_Aid2.png");
-									break;
-								case 1:
-									img.ImageSource = caller.getImage(@"\Icons\First_Responder2.png");
-									break;
-								case 2:
-									img.ImageSource = caller.getImage(@"\Icons\Medicine2.png");
-									break;
-							}
+							img.ImageSource = Services.getImage(member.getTrainingLevel());
 							training.Fill = img;
 							teamMember.Children.Add(training);
 					}
@@ -158,30 +153,13 @@ namespace ETD
 					teamTraining.Width = 35;
 					teamTraining.Height = 35;
 					ImageBrush teamImg = new ImageBrush();
-					switch (highestTraining)
-					{
-						case 0:
-							teamImg.ImageSource = caller.getImage(@"\Icons\First_Aid2.png");
-							break;
-						case 1:
-							teamImg.ImageSource = caller.getImage(@"\Icons\First_Responder2.png");
-							break;
-						case 2:
-							teamImg.ImageSource = caller.getImage(@"\Icons\Medicine2.png");
-							break;
-					}
+					teamImg.ImageSource = Services.getImage((trainings) team.getHighestLevelOfTraining());
 					teamTraining.Fill = teamImg;
 					equipmentStackPanel.Children.Add(teamTraining);
 		}
 
 		public void AddEquipment(Equipment equip, String teamName)
 		{
-			//TODO: Move to controller
-			/*
-			Equipment one = new Equipment("ambulance cart");
-			team.addEquipment(one);
-			 */
-
 			//Creating the rectangle in which the equipment is going to reside
 			Rectangle equipment = new Rectangle();
 			equipment.Width = 27;
@@ -193,30 +171,7 @@ namespace ETD
 
 			//Getting the background image to the rectangle
 			ImageBrush equipmentImage = new ImageBrush();
-			if(equip.getEquipmentName() == equipments.ambulanceCart)
-			{
-				equipmentImage.ImageSource = caller.getImage(@"\Icons\AmbulanceCart3.png");
-			}
-			else if (equip.getEquipmentName() == equipments.epipen)
-			{
-				equipmentImage.ImageSource = caller.getImage(@"\Icons\epipen.png");
-			}
-			else if (equip.getEquipmentName() == equipments.mountedStretcher)
-			{
-				equipmentImage.ImageSource = caller.getImage(@"\Icons\MountedStretcher3.png");
-			}
-			else if (equip.getEquipmentName() == equipments.sittingCart)
-			{
-				equipmentImage.ImageSource = caller.getImage(@"\Icons\SittingCart3.png");
-			}
-			else if (equip.getEquipmentName() == equipments.transportStretcher)
-			{
-				equipmentImage.ImageSource = caller.getImage(@"\Icons\TransportStretcher.png");
-			}
-			else if (equip.getEquipmentName() == equipments.wheelchair)
-			{
-				equipmentImage.ImageSource = caller.getImage(@"\Icons\WheelChair.png");
-			}
+			equipmentImage.ImageSource = Services.getImage(equip.getEquipmentName());
 			equipment.Fill = equipmentImage;
 
 			//Getting the appropriate equipment StackPanel
@@ -233,46 +188,20 @@ namespace ETD
 							{
 								if (section.Name.Equals("equipmentStackPanel"))
 								{
-									//Adding the equipment to the StackPanel
-									section.Children.Add(equipment);
+									if (section.Children.Count < 4)
+									{
+										//Adding the equipment to the StackPanel
+										section.Children.Add(equipment);
+									}
+									else
+									{
+										MessageBox.Show("The team cannot hold more than 3 pieces of equipment!");
+									}
 								}
 							}
 						}
 					}
 				}
-			}
-		}
-
-        //add or remove equipment. 
-        //Clicking on the +/- button will open a form and let the user decide which equipment to add or remove from the team
-        public void EquipmentUpdate_Click()
-        {
-
-
-        }
-
-      
-		public static void LoadMap(MainWindow caller)
-        {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Image Files (*.bmp, *.jpg, *.png, *.gif)|*.bmp;*.jpg; *.png; *.gif";
-            openFileDialog.FilterIndex = 1;
-
-            if (openFileDialog.ShowDialog() == true)
-            {
-                System.IO.FileInfo File = new System.IO.FileInfo(openFileDialog.FileName);
-                BitmapImage coloredImage = new BitmapImage(new Uri(openFileDialog.FileName));
-
-                FormatConvertedBitmap grayBitmap = new FormatConvertedBitmap();
-                grayBitmap.BeginInit();
-                grayBitmap.Source = coloredImage;
-                grayBitmap.DestinationFormat = PixelFormats.Gray8;
-                grayBitmap.EndInit();
-
-                System.Windows.Controls.Canvas Map = caller.Map;
-                Map.Background = new ImageBrush(grayBitmap);
-
-                //System.Windows.Controls.TextBlock TimerText = caller.getTimer();
 			}
 		}
 

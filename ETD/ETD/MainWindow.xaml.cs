@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,13 +22,16 @@ namespace ETD
     public partial class MainWindow
 	{
 		MainWindowUpdate updater;
-		String AbsolutePath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase);
 
 		public MainWindow()
 		{
 			InitializeComponent();
 			updater = new MainWindowUpdate(this);
 		}
+
+		//---------------------------------------------------------------------------
+		//Window changes handling
+		//---------------------------------------------------------------------------
 
 		//Resizing of the team display section along with the window
 		private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -41,56 +45,50 @@ namespace ETD
 			updater.setTeamsHeight();
 		}
 
+		//---------------------------------------------------------------------------
+		//Map related methods
+		//---------------------------------------------------------------------------
+
+		//Method to prompt the user for input and to load that image as a map
+        private void LoadMap(object sender, RoutedEventArgs e)
+        {
+			//Initiating and displaying of the dialog
+			OpenFileDialog openFileDialog = new OpenFileDialog();
+			openFileDialog.Filter = "Image Files (*.bmp, *.jpg, *.png, *.gif)|*.bmp;*.jpg; *.png; *.gif";
+			openFileDialog.FilterIndex = 1;
+
+			//Getting the selected image
+			BitmapImage coloredImage = null;
+			if (openFileDialog.ShowDialog() == true)
+			{
+				System.IO.FileInfo File = new System.IO.FileInfo(openFileDialog.FileName);
+				coloredImage = new BitmapImage(new Uri(openFileDialog.FileName));
+			}
+
+			updater.LoadMap(coloredImage);
+        }
+
+		//---------------------------------------------------------------------------
+		//Team section related methods
+		//---------------------------------------------------------------------------
+
 		//Clicking on the add team button
-		private void CreateTeam(object sender, RoutedEventArgs e)
+		private void DisplayCreateTeamForm(object sender, RoutedEventArgs e)
 		{
 			updater.DisplayCreateTeamForm();
 		}
-		private void SetTime(object sender, RoutedEventArgs e)
-		{
-            Timer.TestTimer(this);
-        }
-
-        private void LoadMap(object sender, RoutedEventArgs e)
-        {
-            MainWindowUpdate.LoadMap(this);
-        }
 
 		//Hiding form after submit or cancel
-		public void hideTeamForm()
+		public void HideCreateTeamForm()
 		{
 			updater.HideCreateTeamForm();
 		}
 
-        private void SetTimer(object sender, RoutedEventArgs e)
-        {
-            Timer.TestTimer(this);
-        }
-
-		public TextBlock getTimer()
-		{
-			return timer;
-		}
-
-
-		//Displaying the team
+		//Displaying the team upon form submit
 		public void DisplayTeam(Team team)
 		{
 			updater.HideCreateTeamForm();
 			updater.DisplayTeam(team);
-		}
-
-		//Getting picture from the path
-		public BitmapImage getImage(String relativePath)
-		{
-			BitmapImage img = new BitmapImage(new Uri(AbsolutePath + relativePath));
-			return img;
-		}
-
-		//Getting the full name of the letter
-		public String getPhoneticLetter(String letter)
-		{
-			return PhoneticAlphabet.getLetter(letter);
 		}
 
 		//TO BECOME: Method that gets called when equipment is overlapped with a team
@@ -102,10 +100,24 @@ namespace ETD
 			team.addEquipment(one);
 			 */
 
-			//SHOULD LIMIT TO 3 EQUIPEMENTS
 			Equipment ms = new Equipment(equipments.mountedStretcher);
 			String teamName = "N";
 			updater.AddEquipment(ms, teamName);
 		}
+
+		//TODO: Remove, just for debugging-------------------------------------------
+		private void SetTime(object sender, RoutedEventArgs e)
+		{
+            Timer.TestTimer(this);
+        }
+        private void SetTimer(object sender, RoutedEventArgs e)
+        {
+            Timer.TestTimer(this);
+        }
+		public TextBlock getTimer()
+		{
+			return timer;
+		}
+		//--------------------------------------------------------------------------
 	}
 }

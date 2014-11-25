@@ -8,25 +8,24 @@ namespace ETD
 {
     public class Team
     {
+		public static List<Team> teams = new List<Team>();
+
         String name;
         TeamMember[] members;
         Equipment[] equipments;
         int EquipmentCount = 0;
         int memberCount = 0;
         bool availability = true;
+		int highestLevelOfTraining = 0;
 
-        public Team()
-        {
-            name = "Alpha";
-            members = new TeamMember[400];
-            equipments =  new Equipment[5];
-      
-        }
         public Team(String name)
         {
             this.name = name;
-            members = new TeamMember[400];
+            members = new TeamMember[3];
             equipments = new Equipment[5];
+
+			//Adding the team to the list of teams
+			teams.Add(this);
         }
 
         public bool addMember(TeamMember mem)
@@ -34,11 +33,37 @@ namespace ETD
             if(memberCount <= 2)
             {
                 members[memberCount] = mem;
+				if(highestLevelOfTraining < (int) mem.getTrainingLevel())
+				{
+					highestLevelOfTraining = (int) mem.getTrainingLevel();
+				}
                 memberCount++;
                 return true;
             }
             return false;
         }
+		
+		public bool addEquipment(Equipment equipment)
+        {
+            if (EquipmentCount < 3)
+            {
+				equipments[EquipmentCount] = equipment;
+
+                EquipmentCount++;
+                return true;
+            }
+            return false;
+        }
+
+        public void removeEquipment(equipments equipment)
+        {
+			for ( int i=0; i < equipments.Length; i++)
+            {
+				if (equipment == equipments[i].getEquipmentName())
+                    equipments[i] = null;
+                EquipmentCount--;
+            }
+		}
 
 		//
 		//Getters and Setters
@@ -65,11 +90,16 @@ namespace ETD
 			}
 		}
 
+		public int getHighestLevelOfTraining()
+		{
+			return highestLevelOfTraining;
+		}
+
         //Generate shape to represent team on screen
-        public String draw(int HighestlevelOftraining, Team team)
+        public String draw(Team team)
         {
             String relpath;
-            switch (HighestlevelOftraining)
+            switch (highestLevelOfTraining)
             {
                 case 0:
                     if (availability == true)
@@ -130,29 +160,5 @@ namespace ETD
             }
 
         }*/
-
-        //to be moved to equipmentupdate form
-        public bool addEquipment(Equipment equipment)
-        {
-            if (EquipmentCount < 3)
-            {
-				equipments[EquipmentCount] = equipment;
-
-                EquipmentCount++;
-                return true;
-            }
-            return false;
-        }
-
-        //to be moved to equipmentupdate form
-        public void removeEquipment(equipments equipment)
-        {
-			for ( int i=0; i < equipments.Length; i++)
-            {
-				if (equipment == equipments[i].getEquipmentName())
-                    equipments[i] = null;
-                EquipmentCount--;
-            }
-		}
     }
 }

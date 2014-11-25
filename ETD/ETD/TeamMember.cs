@@ -5,13 +5,15 @@ using System.Text;
 
 namespace ETD
 {
+	public enum trainings {firstAid, firstResponder, medicine};
+
     public class TeamMember
     {
         public String name;
-        public int trainingLevel; //0: First Aid, 1: First Responder, 2: Medicine
+        public trainings trainingLevel;
         public DateTime departure;
 
-        public TeamMember(String name, int training, DateTime departure)
+        public TeamMember(String name, trainings training, DateTime departure)
         {
             this.name = name;
             this.trainingLevel = training;
@@ -23,7 +25,7 @@ namespace ETD
 			return name;
 		}
 
-		public int getTrainingLevel()
+		public trainings getTrainingLevel()
 		{
 			return trainingLevel;
 		}

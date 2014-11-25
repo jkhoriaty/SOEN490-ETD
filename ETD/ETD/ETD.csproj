@@ -57,7 +57,7 @@
     <Compile Include="IObserver.cs" />
     <Compile Include="LanguageSelector.cs" />
     <Compile Include="Equipment.cs" />
-    <Compile Include="PhoneticAlphabet.cs" />
+    <Compile Include="Services.cs" />
     <Compile Include="Team.cs" />
     <Compile Include="Timer.cs" />
     <Compile Include="TeamForm.xaml.cs">
