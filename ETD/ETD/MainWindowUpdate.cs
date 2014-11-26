@@ -12,6 +12,8 @@ using System.Windows.Controls;
 using System.Drawing;
 using System.Windows.Shapes;
 using System.Windows.Media.Imaging;
+using System.Windows.Input;
+using System.Windows.Media.Effects;
 
 namespace ETD
 {
@@ -54,7 +56,7 @@ namespace ETD
 		}
 
 		//Collision detection amongst rectangles (i.e. any item) on the map
-		public void collisionDetection(Rectangle r, double horizontalDropped, double verticalDropped)
+		public void collisionDetection(Grid g, double horizontalDropped, double verticalDropped)
 		{
 			//Replacing item within horizontal bounds
 			if (horizontalDropped > (caller.Map.ActualWidth - shapeRadius)) //Right
@@ -86,18 +88,18 @@ namespace ETD
 				collisionDetected = false;
 				verificationCount++;
 
-				//Gathering all rectangles to search for collision
-				var rectangles = caller.Map.Children.OfType<Rectangle>().ToList();
+				//Gathering all grids to search for collision
+				var grids = caller.Map.Children.OfType<Grid>().ToList();
 
 				//Iterating throught them
-				foreach (var rectangle in rectangles)
+				foreach (var grid in grids)
 				{
 					//Skipping collision-detection with itself
-					if (rectangle != r)
+					if (grid != g)
 					{
 						//Getting the position of where the rectangle has been dropped
-						double horizontalFixed = Math.Round((((double)Canvas.GetLeft(rectangle)) + shapeRadius), 3);
-						double verticalFixed = Math.Round((((double)Canvas.GetTop(rectangle)) + shapeRadius), 3);
+						double horizontalFixed = Math.Round((((double)Canvas.GetLeft(grid)) + shapeRadius), 3);
+						double verticalFixed = Math.Round((((double)Canvas.GetTop(grid)) + shapeRadius), 3);
 
 						//Checking if the dropped rectangle is within the bounds of any other rectangle
 						while (horizontalDropped > (horizontalFixed - (shapeRadius * 2)) && horizontalDropped < (horizontalFixed + (shapeRadius * 2)) && verticalDropped > (verticalFixed - (shapeRadius * 2)) && verticalDropped < (verticalFixed + (shapeRadius * 2)))
@@ -166,10 +168,9 @@ namespace ETD
 								verificationCount = 0;
 							}
 
-							//Handling case of perfect superposition
+							//Handling case of perfect superposition and placing right of fixed item
 							if (horizontalDropped == horizontalFixed && verticalDropped == verticalFixed)
 							{
-								MessageBox.Show("Perfect superposition");
 								horizontalDropped = horizontalDropped + (2 * shapeRadius);
 								moved = true;
 							}
@@ -211,21 +212,13 @@ namespace ETD
 			}
 
 			//Drop the rectangle if there are not collision or after resolution of collision
-			setPosition(r, horizontalDropped, verticalDropped);
+			setPosition(g, horizontalDropped, verticalDropped);
 		}
 
-		public void setPosition(Rectangle r, double horizontalDropped, double verticalDropped)
+		public void setPosition(Grid g, double horizontalDropped, double verticalDropped)
 		{
-			Canvas.SetLeft(r, (horizontalDropped - shapeRadius));
-			Canvas.SetTop(r, (verticalDropped - shapeRadius));
-
-			if(r.Tag.Equals("Team"))
-			{
-				Label l = relatedLabel[r];
-
-				Canvas.SetLeft(l, (horizontalDropped - shapeRadius));
-				Canvas.SetTop(l, (verticalDropped - shapeRadius));
-			}
+			Canvas.SetLeft(g, (horizontalDropped - shapeRadius));
+			Canvas.SetTop(g, (verticalDropped - shapeRadius));
 		}
 
 		//Called to show the form to create a new team
@@ -329,9 +322,81 @@ namespace ETD
 					teamTraining.Width = 35;
 					teamTraining.Height = 35;
 					ImageBrush teamImg = new ImageBrush();
-					teamImg.ImageSource = Services.getImage((trainings) team.getHighestLevelOfTraining());
+					teamImg.ImageSource = Services.getImage(team.getHighestLevelOfTraining());
 					teamTraining.Fill = teamImg;
 					equipmentStackPanel.Children.Add(teamTraining);
+		}
+
+		public void DisplayTeamPin(Team team)
+		{
+			Grid grid = new Grid();
+			grid.Name = team.getName();
+			grid.Tag = "team";
+			grid.Width = shapeRadius * 2;
+			grid.Height = shapeRadius * 2;
+			grid.MouseLeftButtonDown += new MouseButtonEventHandler(caller.grid_MouseLeftButtonDown);
+			grid.MouseLeftButtonUp += new MouseButtonEventHandler(caller.grid_MouseLeftButtonUp);
+			grid.MouseMove += new MouseEventHandler(caller.grid_MouseMove);
+
+				Rectangle r = new Rectangle();
+				r.Width = shapeRadius * 2;
+				r.Height = shapeRadius * 2;
+				ImageBrush img = new ImageBrush();
+				img.ImageSource = Services.getImage(team, statuses.available);
+				r.Fill = img;
+				r.Width = shapeRadius * 2;
+				r.Height = shapeRadius * 2;
+
+				Label l = new Label();
+				l.Width = shapeRadius * 2;
+				l.Height = shapeRadius * 2;
+				l.FontWeight = FontWeights.DemiBold;
+				DropShadowEffect shadow = new DropShadowEffect();
+				shadow.ShadowDepth = 3;
+				shadow.Direction = 315;
+				shadow.Opacity = 1.0;
+				shadow.BlurRadius = 3;
+				shadow.Color = Colors.White;
+				l.Effect = shadow;
+
+				Thickness lMargin = l.Margin;//Hack magic needed to make text vertically centered
+				l.Content = team.getName();
+				switch (l.Content.ToString().Length)
+				{
+					case 1:
+						l.FontSize = 28;
+						lMargin.Top = -10; 
+						break;
+					case 2:
+						l.FontSize = 24;
+						lMargin.Top = -6; 
+						break;
+					case 3:
+						l.FontSize = 20;
+						lMargin.Top = -3; 
+						break;
+					case 4:
+					default:
+						l.FontSize = 16;
+						lMargin.Top = -2; 
+						break;
+					case 5:
+					case 6:
+						l.FontSize = 12;
+						lMargin.Top = -1; 
+						break;
+				}
+				l.Margin = lMargin;
+				l.HorizontalContentAlignment = HorizontalAlignment.Center;
+				l.VerticalContentAlignment = VerticalAlignment.Center;
+				l.IsHitTestVisible = false;
+
+			caller.Map.Children.Add(grid);
+				grid.Children.Add(r);
+				grid.Children.Add(l);
+
+			setPosition(grid, shapeRadius, shapeRadius); //Setting it top corner
+			collisionDetection(grid, shapeRadius, shapeRadius);	
 		}
 
 		public void AddEquipment(Equipment equip, String teamName)

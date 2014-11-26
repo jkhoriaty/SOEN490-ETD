@@ -23,7 +23,7 @@ namespace ETD
 	{
 		private MainWindowUpdate updater;
 		private bool _isRectDragInProg;
-		private String movingRectangle;
+		private String movingGrid;
 
 		public MainWindow()
 		{
@@ -71,25 +71,25 @@ namespace ETD
         }
 
 
-		private void team_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+		public void grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
 		{
-			Rectangle r = (Rectangle) sender;
+			Grid g = (Grid) sender;
 
-			_isRectDragInProg = r.CaptureMouse();
-			movingRectangle = r.Name;
+			_isRectDragInProg = g.CaptureMouse();
+			movingGrid = g.Name;
 		}
 
-		private void team_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+		public void grid_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
 		{
-			Rectangle r = (Rectangle) sender;
+			Grid g = (Grid) sender;
 
 			//Avoid in having method called on object being collided with
-			if (!r.Name.Equals(movingRectangle))
+			if (!g.Name.Equals(movingGrid))
 			{
 				return;
 			}
 
-			r.ReleaseMouseCapture();
+			g.ReleaseMouseCapture();
 			_isRectDragInProg = false;
 
 			var mousePos = e.GetPosition(Map);
@@ -97,19 +97,19 @@ namespace ETD
 			double verticalDropped = mousePos.Y;
 
 			//Calling collision detection and resolution for the dropped object
-			updater.collisionDetection(r, horizontalDropped, verticalDropped);
+			updater.collisionDetection(g, horizontalDropped, verticalDropped);
 		}
 
 		//Method to visually drag the item selected and insuring it doesn't go outside of the map
-		private void team_MouseMove(object sender, MouseEventArgs e)
+		public void grid_MouseMove(object sender, MouseEventArgs e)
 		{
 			//If no rectangle are clicked, exit method
 			if (!_isRectDragInProg) return;
 
-			Rectangle r = (Rectangle) sender;
+			Grid g = (Grid) sender;
 
 			//Handling behaviour where fixed rectangle gets moved when another rectangle is dropped on it
-			if (!r.Name.Equals(movingRectangle))
+			if (!g.Name.Equals(movingGrid))
 			{
 				return;
 			}
@@ -124,7 +124,7 @@ namespace ETD
 				return;
 			}
 
-			updater.setPosition(r, mousePos.X, mousePos.Y);
+			updater.setPosition(g, mousePos.X, mousePos.Y);
 		}
 
 		//---------------------------------------------------------------------------
@@ -148,6 +148,7 @@ namespace ETD
 		{
 			updater.HideCreateTeamForm();
 			updater.DisplayTeamInfo(team);
+			updater.DisplayTeamPin(team);
 		}
 
 		//TO BECOME: Method that gets called when equipment is overlapped with a team

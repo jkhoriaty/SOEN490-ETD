@@ -141,7 +141,8 @@
     <Content Include="Icons\FirstAid_available.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Icons\FirstAid_busy.png">
+    <Content Include="Icons\FirstAid_busy.png" />
+    <Content Include="Icons\FirstAid_intervening.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Icons\FirstAid_moving.png">
@@ -150,7 +151,8 @@
     <Content Include="Icons\FirstResponder_available.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Icons\FirstResponder_busy.png">
+    <Content Include="Icons\FirstResponder_busy.png" />
+    <Content Include="Icons\FirstResponder_intervening.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Icons\FirstResponder_moving.png">
@@ -180,7 +182,8 @@
     <Content Include="Icons\Medicine_available.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Icons\Medicine_busy.png">
+    <Content Include="Icons\Medicine_busy.png" />
+    <Content Include="Icons\Medicine_intervening.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Icons\Medicine_moving.png">
