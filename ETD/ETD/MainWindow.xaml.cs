@@ -166,10 +166,9 @@ namespace ETD
 
 		public void RemoveTeamEquipment(object sender, RoutedEventArgs e)
 		{
-			Rectangle rct = (Rectangle) sender;
+			Rectangle rct = (Rectangle)sender;
 			updater.RemoveTeamEquipment(rct);
 		}
-
 
 		//TODO: Remove, just for debugging-------------------------------------------
 		private void SetTime(object sender, RoutedEventArgs e)

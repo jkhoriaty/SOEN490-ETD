@@ -474,7 +474,6 @@ namespace ETD
 					return;
 				}
 			}
-			
 		}
 
 		//Adding equipment to team description
@@ -507,7 +506,6 @@ namespace ETD
 			StackPanel equipmentStackPanel = (StackPanel) sender.Parent;
 			equipmentStackPanel.Children.Remove(sender);
 		}
-
 
         // Updates all text fields when a language change is observed
         public void update()
