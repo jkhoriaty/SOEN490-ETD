@@ -23,7 +23,7 @@ namespace ETD
 	{
 		private MainWindowUpdate updater;
 		private bool _isRectDragInProg;
-		private String movingGrid;
+		private Grid movingGrid;
 
 		public MainWindow()
 		{
@@ -76,7 +76,7 @@ namespace ETD
 			Grid g = (Grid) sender;
 
 			_isRectDragInProg = g.CaptureMouse();
-			movingGrid = g.Name;
+			movingGrid = g;
 		}
 
 		public void grid_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -84,7 +84,7 @@ namespace ETD
 			Grid g = (Grid) sender;
 
 			//Avoid in having method called on object being collided with
-			if (!g.Name.Equals(movingGrid))
+			if (g != movingGrid)
 			{
 				return;
 			}
@@ -109,7 +109,7 @@ namespace ETD
 			Grid g = (Grid) sender;
 
 			//Handling behaviour where fixed rectangle gets moved when another rectangle is dropped on it
-			if (!g.Name.Equals(movingGrid))
+			if (g != movingGrid)
 			{
 				return;
 			}
@@ -119,7 +119,7 @@ namespace ETD
 
 			//Making sure it is not dragged out of bounds
 			//Getting shapeRadius from updater to only have one centralized copy of this
-			if (mousePos.X > (Map.ActualWidth - updater.shapeRadius) || mousePos.Y > (Map.ActualHeight - updater.shapeRadius) || mousePos.X < updater.shapeRadius || mousePos.Y < updater.shapeRadius)
+			if (mousePos.X > (Map.ActualWidth - (g.Width / 2)) || mousePos.Y > (Map.ActualHeight - (g.Width / 2)) || mousePos.X < (g.Width / 2) || mousePos.Y < (g.Width / 2))
 			{
 				return;
 			}
@@ -151,18 +151,31 @@ namespace ETD
 			updater.DisplayTeamPin(team);
 		}
 
-		//TO BECOME: Method that gets called when equipment is overlapped with a team
 		private void Button_Click(object sender, RoutedEventArgs e)
 		{
-			//TODO: Move to controller
-			/*
-			Equipment one = new Equipment("ambulance cart");
-			team.addEquipment(one);
-			 */
+			Grid grid = new Grid();
+			grid.Name = "ambulanceCart";
+			grid.Tag = "equipment";
+			grid.Width = 30;
+			grid.Height = 30;
+			grid.MouseLeftButtonDown += new MouseButtonEventHandler(grid_MouseLeftButtonDown);
+			grid.MouseLeftButtonUp += new MouseButtonEventHandler(grid_MouseLeftButtonUp);
+			grid.MouseMove += new MouseEventHandler(grid_MouseMove);
 
-			Equipment ms = new Equipment(equipments.mountedStretcher);
-			String teamName = "N";
-			updater.AddEquipment(ms, teamName);
+			equipments equip = equipments.ambulanceCart;
+
+			Rectangle r = new Rectangle();
+			r.Width = 30;
+			r.Height = 30;
+			ImageBrush img = new ImageBrush();
+			img.ImageSource = Services.getImage(equip);
+			r.Fill = img;
+
+			Map.Children.Add(grid);
+			grid.Children.Add(r);
+
+			updater.setPosition(grid, (grid.Width / 2), (grid.Width / 2)); //Setting it top corner
+			updater.collisionDetection(grid, (grid.Width / 2), (grid.Width / 2));	
 		}
 
 		//TODO: Remove, just for debugging-------------------------------------------

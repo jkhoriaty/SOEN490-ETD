@@ -21,8 +21,8 @@ namespace ETD
 	{
 		private MainWindow caller;
 		private static double teamSizeDifference = 0;
-		public int shapeRadius = 20;
-		Dictionary<Rectangle, Label> relatedLabel = new Dictionary<Rectangle,Label>();
+		private static int teamWidth = 40;
+		private static int equipmentWidth = 30;
 
 		public MainWindowUpdate(MainWindow caller)
 		{
@@ -59,23 +59,23 @@ namespace ETD
 		public void collisionDetection(Grid g, double horizontalDropped, double verticalDropped)
 		{
 			//Replacing item within horizontal bounds
-			if (horizontalDropped > (caller.Map.ActualWidth - shapeRadius)) //Right
+			if (horizontalDropped > (caller.Map.ActualWidth - (g.Width/2))) //Right
 			{
-				horizontalDropped = caller.Map.ActualWidth - shapeRadius;
+				horizontalDropped = caller.Map.ActualWidth - (g.Width / 2);
 			}
-			else if (horizontalDropped < shapeRadius) //Left
+			else if (horizontalDropped < (g.Width / 2)) //Left
 			{
-				horizontalDropped = shapeRadius;
+				horizontalDropped = (g.Width / 2);
 			}
 
 			//Replacing item within vertical bounds
-			if (verticalDropped > (caller.Map.ActualHeight - shapeRadius)) //Bottom
+			if (verticalDropped > (caller.Map.ActualHeight - (g.Width / 2))) //Bottom
 			{
-				verticalDropped = caller.Map.ActualHeight - shapeRadius;
+				verticalDropped = caller.Map.ActualHeight - (g.Width / 2);
 			}
-			else if (verticalDropped < shapeRadius) //Top
+			else if (verticalDropped < (g.Width / 2)) //Top
 			{
-				verticalDropped = shapeRadius;
+				verticalDropped = (g.Width / 2);
 			}
 
 			bool collisionDetected = true;
@@ -98,11 +98,18 @@ namespace ETD
 					if (grid != g)
 					{
 						//Getting the position of where the rectangle has been dropped
-						double horizontalFixed = Math.Round((((double)Canvas.GetLeft(grid)) + shapeRadius), 3);
-						double verticalFixed = Math.Round((((double)Canvas.GetTop(grid)) + shapeRadius), 3);
+						double horizontalFixed = Math.Round((((double)Canvas.GetLeft(grid)) + (grid.Width / 2)), 3);
+						double verticalFixed = Math.Round((((double)Canvas.GetTop(grid)) + (grid.Width / 2)), 3);
+
+						//If equipment is dropped on team and it overlaps more than 25% (i.e. not by mistake)
+						if (g.Tag.Equals("equipment") && grid.Tag.Equals("team") && horizontalDropped > (horizontalFixed - (g.Width / 2)) && horizontalDropped < (horizontalFixed + (g.Width / 2)) && verticalDropped > (verticalFixed - (g.Width / 2)) && verticalDropped < (verticalFixed + (g.Width / 2)))
+						{
+							AddEquipment(g.Name, grid.Name);
+							g.Visibility = Visibility.Collapsed;
+						}
 
 						//Checking if the dropped rectangle is within the bounds of any other rectangle
-						while (horizontalDropped > (horizontalFixed - (shapeRadius * 2)) && horizontalDropped < (horizontalFixed + (shapeRadius * 2)) && verticalDropped > (verticalFixed - (shapeRadius * 2)) && verticalDropped < (verticalFixed + (shapeRadius * 2)))
+						while (horizontalDropped > (horizontalFixed - ((g.Width / 2) + (grid.Width / 2))) && horizontalDropped < (horizontalFixed + ((g.Width / 2) + (grid.Width / 2))) && verticalDropped > (verticalFixed - ((g.Width / 2) + (grid.Width / 2))) && verticalDropped < (verticalFixed + ((g.Width / 2) + (grid.Width / 2))))
 						{
 							//Collision detected, resolution by shifting the rectangle in the same direction that it has been dropped
 							collisionDetected = true;
@@ -124,7 +131,7 @@ namespace ETD
 								differenceRatio = Math.Round(((Math.Abs(verticalDifference) / Math.Abs(horizontalDifference)) / 10), 3);
 
 								//Shifting horizontally in the correct direction, if not at the border
-								if (shapeRadius < horizontalDropped && horizontalDropped < (caller.Map.ActualWidth - shapeRadius))
+								if ((g.Width / 2) < horizontalDropped && horizontalDropped < (caller.Map.ActualWidth - (g.Width / 2)))
 								{
 									if (horizontalDifference < 0)
 									{
@@ -143,7 +150,7 @@ namespace ETD
 							if (verticalDifference != 0)
 							{
 								//Shifting vertically in the correct direction
-								if (shapeRadius < verticalDropped && verticalDropped < (caller.Map.ActualHeight - shapeRadius))
+								if ((g.Width / 2) < verticalDropped && verticalDropped < (caller.Map.ActualHeight - (g.Width / 2)))
 								{
 									if (verticalDifference < 0)
 									{
@@ -171,38 +178,36 @@ namespace ETD
 							//Handling case of perfect superposition and placing right of fixed item
 							if (horizontalDropped == horizontalFixed && verticalDropped == verticalFixed)
 							{
-								horizontalDropped = horizontalDropped + (2 * shapeRadius);
+								horizontalDropped = horizontalDropped + ((g.Width / 2) + (grid.Width / 2));
 								moved = true;
 							}
 
-							//Handling corner situation, placing object back in the middle
+							//Handling corner situation
 							if (moved == false)
 							{
-								MessageBox.Show("There's not enough space in the corner for this item. Replacing it in the center for you to replace it elsewhere.");
-
 								double horizontalToBorder = Math.Min(horizontalFixed, (caller.Map.ActualWidth - horizontalFixed));
 								double verticalToBorder = Math.Min(verticalFixed, (caller.Map.ActualHeight - verticalFixed));
 
-								if (horizontalToBorder <= verticalToBorder) //Need horizontal mvoement
+								if (horizontalToBorder <= verticalToBorder) //Need horizontal movement
 								{
-									if (horizontalDropped <= shapeRadius) //Left
+									if (horizontalDropped <= (g.Width / 2)) //Left
 									{
-										horizontalDropped = horizontalFixed + (shapeRadius * 2);
+										horizontalDropped = horizontalFixed + ((g.Width / 2) + (grid.Width / 2));
 									}
 									else //Right
 									{
-										horizontalDropped = horizontalFixed - (shapeRadius * 2);
+										horizontalDropped = horizontalFixed - ((g.Width / 2) + (grid.Width / 2));
 									}
 								}
-								else //Need vertical mvoement
+								else //Need vertical movement
 								{
-									if (verticalDropped <= shapeRadius) //Left
+									if (verticalDropped <= (g.Width / 2)) //Left
 									{
-										verticalDropped = verticalFixed + (shapeRadius * 2);
+										verticalDropped = verticalFixed + ((g.Width / 2) + (grid.Width / 2));
 									}
 									else //Right
 									{
-										verticalDropped = verticalFixed - (shapeRadius * 2);
+										verticalDropped = verticalFixed - ((g.Width / 2) + (grid.Width / 2));
 									}
 								}
 							}
@@ -217,8 +222,8 @@ namespace ETD
 
 		public void setPosition(Grid g, double horizontalDropped, double verticalDropped)
 		{
-			Canvas.SetLeft(g, (horizontalDropped - shapeRadius));
-			Canvas.SetTop(g, (verticalDropped - shapeRadius));
+			Canvas.SetLeft(g, (horizontalDropped - (g.Width / 2)));
+			Canvas.SetTop(g, (verticalDropped - (g.Width / 2)));
 		}
 
 		//Called to show the form to create a new team
@@ -332,24 +337,24 @@ namespace ETD
 			Grid grid = new Grid();
 			grid.Name = team.getName();
 			grid.Tag = "team";
-			grid.Width = shapeRadius * 2;
-			grid.Height = shapeRadius * 2;
+			grid.Width = teamWidth;
+			grid.Height = teamWidth;
 			grid.MouseLeftButtonDown += new MouseButtonEventHandler(caller.grid_MouseLeftButtonDown);
 			grid.MouseLeftButtonUp += new MouseButtonEventHandler(caller.grid_MouseLeftButtonUp);
 			grid.MouseMove += new MouseEventHandler(caller.grid_MouseMove);
 
 				Rectangle r = new Rectangle();
-				r.Width = shapeRadius * 2;
-				r.Height = shapeRadius * 2;
+				r.Width = teamWidth;
+				r.Height = teamWidth;
 				ImageBrush img = new ImageBrush();
 				img.ImageSource = Services.getImage(team, statuses.available);
 				r.Fill = img;
-				r.Width = shapeRadius * 2;
-				r.Height = shapeRadius * 2;
+				r.Width = teamWidth;
+				r.Height = teamWidth;
 
 				Label l = new Label();
-				l.Width = shapeRadius * 2;
-				l.Height = shapeRadius * 2;
+				l.Width = teamWidth;
+				l.Height = teamWidth;
 				l.FontWeight = FontWeights.DemiBold;
 				DropShadowEffect shadow = new DropShadowEffect();
 				shadow.ShadowDepth = 3;
@@ -395,11 +400,12 @@ namespace ETD
 				grid.Children.Add(r);
 				grid.Children.Add(l);
 
-			setPosition(grid, shapeRadius, shapeRadius); //Setting it top corner
-			collisionDetection(grid, shapeRadius, shapeRadius);	
+			setPosition(grid, (teamWidth / 2), (teamWidth / 2)); //Setting it top corner
+			collisionDetection(grid, (teamWidth / 2), (teamWidth / 2));	
 		}
 
-		public void AddEquipment(Equipment equip, String teamName)
+		//Adding equipment to team description
+		public void AddEquipment(String equip, String teamName)
 		{
 			//Creating the rectangle in which the equipment is going to reside
 			Rectangle equipment = new Rectangle();
@@ -412,7 +418,7 @@ namespace ETD
 
 			//Getting the background image to the rectangle
 			ImageBrush equipmentImage = new ImageBrush();
-			equipmentImage.ImageSource = Services.getImage(equip.getEquipmentName());
+			equipmentImage.ImageSource = Services.getImage((equipments) Enum.Parse(typeof(equipments), equip));
 			equipment.Fill = equipmentImage;
 
 			//Getting the appropriate equipment StackPanel
