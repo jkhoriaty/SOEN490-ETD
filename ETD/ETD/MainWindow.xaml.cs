@@ -21,7 +21,9 @@ namespace ETD
 	/// </summary>
     public partial class MainWindow
 	{
-		MainWindowUpdate updater;
+		private MainWindowUpdate updater;
+		private bool _isRectDragInProg;
+		private String movingRectangle;
 
 		public MainWindow()
 		{
@@ -68,6 +70,63 @@ namespace ETD
 			updater.LoadMap(coloredImage);
         }
 
+
+		private void team_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+		{
+			Rectangle r = (Rectangle) sender;
+
+			_isRectDragInProg = r.CaptureMouse();
+			movingRectangle = r.Name;
+		}
+
+		private void team_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+		{
+			Rectangle r = (Rectangle) sender;
+
+			//Avoid in having method called on object being collided with
+			if (!r.Name.Equals(movingRectangle))
+			{
+				return;
+			}
+
+			r.ReleaseMouseCapture();
+			_isRectDragInProg = false;
+
+			var mousePos = e.GetPosition(Map);
+			double horizontalDropped = mousePos.X;
+			double verticalDropped = mousePos.Y;
+
+			//Calling collision detection and resolution for the dropped object
+			updater.collisionDetection(r, horizontalDropped, verticalDropped);
+		}
+
+		//Method to visually drag the item selected and insuring it doesn't go outside of the map
+		private void team_MouseMove(object sender, MouseEventArgs e)
+		{
+			//If no rectangle are clicked, exit method
+			if (!_isRectDragInProg) return;
+
+			Rectangle r = (Rectangle) sender;
+
+			//Handling behaviour where fixed rectangle gets moved when another rectangle is dropped on it
+			if (!r.Name.Equals(movingRectangle))
+			{
+				return;
+			}
+			
+			//Get the position of the mouse relative to the Canvas
+			var mousePos = e.GetPosition(Map);
+
+			//Making sure it is not dragged out of bounds
+			//Getting shapeRadius from updater to only have one centralized copy of this
+			if (mousePos.X > (Map.ActualWidth - updater.shapeRadius) || mousePos.Y > (Map.ActualHeight - updater.shapeRadius) || mousePos.X < updater.shapeRadius || mousePos.Y < updater.shapeRadius)
+			{
+				return;
+			}
+
+			updater.setPosition(r, mousePos.X, mousePos.Y);
+		}
+
 		//---------------------------------------------------------------------------
 		//Team section related methods
 		//---------------------------------------------------------------------------
@@ -88,7 +147,7 @@ namespace ETD
 		public void DisplayTeam(Team team)
 		{
 			updater.HideCreateTeamForm();
-			updater.DisplayTeam(team);
+			updater.DisplayTeamInfo(team);
 		}
 
 		//TO BECOME: Method that gets called when equipment is overlapped with a team

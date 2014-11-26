@@ -19,7 +19,8 @@ namespace ETD
 	{
 		private MainWindow caller;
 		private static double teamSizeDifference = 0;
-		int shapeRadius = 20;
+		public int shapeRadius = 20;
+		Dictionary<Rectangle, Label> relatedLabel = new Dictionary<Rectangle,Label>();
 
 		public MainWindowUpdate(MainWindow caller)
 		{
@@ -52,6 +53,181 @@ namespace ETD
             caller.Map.Background = new ImageBrush(grayBitmap);
 		}
 
+		//Collision detection amongst rectangles (i.e. any item) on the map
+		public void collisionDetection(Rectangle r, double horizontalDropped, double verticalDropped)
+		{
+			//Replacing item within horizontal bounds
+			if (horizontalDropped > (caller.Map.ActualWidth - shapeRadius)) //Right
+			{
+				horizontalDropped = caller.Map.ActualWidth - shapeRadius;
+			}
+			else if (horizontalDropped < shapeRadius) //Left
+			{
+				horizontalDropped = shapeRadius;
+			}
+
+			//Replacing item within vertical bounds
+			if (verticalDropped > (caller.Map.ActualHeight - shapeRadius)) //Bottom
+			{
+				verticalDropped = caller.Map.ActualHeight - shapeRadius;
+			}
+			else if (verticalDropped < shapeRadius) //Top
+			{
+				verticalDropped = shapeRadius;
+			}
+
+			bool collisionDetected = true;
+			int verificationCount = 0;
+
+			//Loop to make sure that last verification ensures no collision with any object
+			while (collisionDetected == true)
+			{
+
+				collisionDetected = false;
+				verificationCount++;
+
+				//Gathering all rectangles to search for collision
+				var rectangles = caller.Map.Children.OfType<Rectangle>().ToList();
+
+				//Iterating throught them
+				foreach (var rectangle in rectangles)
+				{
+					//Skipping collision-detection with itself
+					if (rectangle != r)
+					{
+						//Getting the position of where the rectangle has been dropped
+						double horizontalFixed = Math.Round((((double)Canvas.GetLeft(rectangle)) + shapeRadius), 3);
+						double verticalFixed = Math.Round((((double)Canvas.GetTop(rectangle)) + shapeRadius), 3);
+
+						//Checking if the dropped rectangle is within the bounds of any other rectangle
+						while (horizontalDropped > (horizontalFixed - (shapeRadius * 2)) && horizontalDropped < (horizontalFixed + (shapeRadius * 2)) && verticalDropped > (verticalFixed - (shapeRadius * 2)) && verticalDropped < (verticalFixed + (shapeRadius * 2)))
+						{
+							//Collision detected, resolution by shifting the rectangle in the same direction that it has been dropped
+							collisionDetected = true;
+
+							//Rounding values to avoid ratio division by tiny number creating a huge ratio
+							horizontalDropped = Math.Round(horizontalDropped, 3);
+							verticalDropped = Math.Round(verticalDropped, 3);
+
+							//Finding out how much is the dropped rectangle covering the fixed one
+							double horizontalDifference = Math.Round((horizontalDropped - horizontalFixed), 3);
+							double verticalDifference = Math.Round((verticalDropped - verticalFixed), 3);
+							double differenceRatio = 0.1;
+							bool moved = false;
+
+							//Don't move horizontally if there are no difference and avoiding division by 0
+							if (horizontalDifference != 0)
+							{
+								//Finding the ratio at which we should increase the values to put the objects side by side but in the same direction as it was dropped
+								differenceRatio = Math.Round(((Math.Abs(verticalDifference) / Math.Abs(horizontalDifference)) / 10), 3);
+
+								//Shifting horizontally in the correct direction, if not at the border
+								if (shapeRadius < horizontalDropped && horizontalDropped < (caller.Map.ActualWidth - shapeRadius))
+								{
+									if (horizontalDifference < 0)
+									{
+										horizontalDropped -= 0.1;
+										moved = true;
+									}
+									else
+									{
+										horizontalDropped += 0.1;
+										moved = true;
+									}
+								}
+							}
+
+							//Don't move vertically if there are no difference
+							if (verticalDifference != 0)
+							{
+								//Shifting vertically in the correct direction
+								if (shapeRadius < verticalDropped && verticalDropped < (caller.Map.ActualHeight - shapeRadius))
+								{
+									if (verticalDifference < 0)
+									{
+										verticalDropped -= differenceRatio;
+										moved = true;
+									}
+									else
+									{
+										verticalDropped += differenceRatio;
+										moved = true;
+									}
+								}
+							}
+
+							//Handling situation where object is dropped between two others and is just bouncing around, placing object in the middle
+							if (verificationCount > 100)
+							{
+
+								MessageBox.Show("The dropped object is dropped between two objects and is bouncing around with no progress. Resetting it.");
+								horizontalDropped = (caller.Map.ActualWidth / 2);
+								verticalDropped = (caller.Map.ActualHeight / 2);
+								verificationCount = 0;
+							}
+
+							//Handling case of perfect superposition
+							if (horizontalDropped == horizontalFixed && verticalDropped == verticalFixed)
+							{
+								MessageBox.Show("Perfect superposition");
+								horizontalDropped = horizontalDropped + (2 * shapeRadius);
+								moved = true;
+							}
+
+							//Handling corner situation, placing object back in the middle
+							if (moved == false)
+							{
+								MessageBox.Show("There's not enough space in the corner for this item. Replacing it in the center for you to replace it elsewhere.");
+
+								double horizontalToBorder = Math.Min(horizontalFixed, (caller.Map.ActualWidth - horizontalFixed));
+								double verticalToBorder = Math.Min(verticalFixed, (caller.Map.ActualHeight - verticalFixed));
+
+								if (horizontalToBorder <= verticalToBorder) //Need horizontal mvoement
+								{
+									if (horizontalDropped <= shapeRadius) //Left
+									{
+										horizontalDropped = horizontalFixed + (shapeRadius * 2);
+									}
+									else //Right
+									{
+										horizontalDropped = horizontalFixed - (shapeRadius * 2);
+									}
+								}
+								else //Need vertical mvoement
+								{
+									if (verticalDropped <= shapeRadius) //Left
+									{
+										verticalDropped = verticalFixed + (shapeRadius * 2);
+									}
+									else //Right
+									{
+										verticalDropped = verticalFixed - (shapeRadius * 2);
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+
+			//Drop the rectangle if there are not collision or after resolution of collision
+			setPosition(r, horizontalDropped, verticalDropped);
+		}
+
+		public void setPosition(Rectangle r, double horizontalDropped, double verticalDropped)
+		{
+			Canvas.SetLeft(r, (horizontalDropped - shapeRadius));
+			Canvas.SetTop(r, (verticalDropped - shapeRadius));
+
+			if(r.Tag.Equals("Team"))
+			{
+				Label l = relatedLabel[r];
+
+				Canvas.SetLeft(l, (horizontalDropped - shapeRadius));
+				Canvas.SetTop(l, (verticalDropped - shapeRadius));
+			}
+		}
+
 		//Called to show the form to create a new team
 		public void DisplayCreateTeamForm()
 		{
@@ -69,8 +245,8 @@ namespace ETD
 			caller.CreateTeamButton.IsEnabled = true;
 		}
 		
-		//Called to display a created team
-		public void DisplayTeam(Team team)
+		//Called to display a created team information in the Team list
+		public void DisplayTeamInfo(Team team)
 		{
 			//TODO: Need to be moved to model in team creation
             Timer.StartTimer();
