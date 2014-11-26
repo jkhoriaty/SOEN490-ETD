@@ -23,7 +23,7 @@ namespace ETD
 	{
 		private MainWindowUpdate updater;
 		private bool _isRectDragInProg;
-		private String movingGrid;
+		private Grid movingGrid;
 
 		public MainWindow()
 		{
@@ -71,12 +71,18 @@ namespace ETD
         }
 
 
+		private void AddEquipmentPin(object sender, RoutedEventArgs e)
+		{
+			Button bt = (Button) sender;
+			updater.DisplayEquipmentPin(bt.Name);
+		}
+
 		public void grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
 		{
 			Grid g = (Grid) sender;
 
 			_isRectDragInProg = g.CaptureMouse();
-			movingGrid = g.Name;
+			movingGrid = g;
 		}
 
 		public void grid_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -84,7 +90,7 @@ namespace ETD
 			Grid g = (Grid) sender;
 
 			//Avoid in having method called on object being collided with
-			if (!g.Name.Equals(movingGrid))
+			if (g != movingGrid)
 			{
 				return;
 			}
@@ -109,7 +115,7 @@ namespace ETD
 			Grid g = (Grid) sender;
 
 			//Handling behaviour where fixed rectangle gets moved when another rectangle is dropped on it
-			if (!g.Name.Equals(movingGrid))
+			if (g != movingGrid)
 			{
 				return;
 			}
@@ -119,7 +125,7 @@ namespace ETD
 
 			//Making sure it is not dragged out of bounds
 			//Getting shapeRadius from updater to only have one centralized copy of this
-			if (mousePos.X > (Map.ActualWidth - updater.shapeRadius) || mousePos.Y > (Map.ActualHeight - updater.shapeRadius) || mousePos.X < updater.shapeRadius || mousePos.Y < updater.shapeRadius)
+			if (mousePos.X > (Map.ActualWidth - (g.Width / 2)) || mousePos.Y > (Map.ActualHeight - (g.Width / 2)) || mousePos.X < (g.Width / 2) || mousePos.Y < (g.Width / 2))
 			{
 				return;
 			}
@@ -151,19 +157,19 @@ namespace ETD
 			updater.DisplayTeamPin(team);
 		}
 
-		//TO BECOME: Method that gets called when equipment is overlapped with a team
-		private void Button_Click(object sender, RoutedEventArgs e)
+		//Deleting the team upon right click on the label
+		public void RemoveTeam(object sender, RoutedEventArgs e)
 		{
-			//TODO: Move to controller
-			/*
-			Equipment one = new Equipment("ambulance cart");
-			team.addEquipment(one);
-			 */
-
-			Equipment ms = new Equipment(equipments.mountedStretcher);
-			String teamName = "N";
-			updater.AddEquipment(ms, teamName);
+			Label lb = (Label)sender;
+			updater.RemoveTeamInfo(lb.Name);
 		}
+
+		public void RemoveTeamEquipment(object sender, RoutedEventArgs e)
+		{
+			Rectangle rct = (Rectangle) sender;
+			updater.RemoveTeamEquipment(rct);
+		}
+
 
 		//TODO: Remove, just for debugging-------------------------------------------
 		private void SetTime(object sender, RoutedEventArgs e)

@@ -10,7 +10,6 @@ namespace ETD
 
     public class Team
     {
-		public static Dictionary<String, Team> teams = new Dictionary<String, Team>();
 
         String name;
         TeamMember[] members;
@@ -28,9 +27,6 @@ namespace ETD
             members = new TeamMember[3];
             equipments = new Equipment[5];
 			status = statuses.available;
-
-			//Adding team to the dictionnary of teams
-			teams.Add(name, this);
         }
 
         public bool addMember(TeamMember mem)
