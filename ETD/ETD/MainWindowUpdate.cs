@@ -37,7 +37,7 @@ namespace ETD
 			{
 				teamSizeDifference = caller.TeamSection.ActualHeight - caller.TeamList.ActualHeight;
 			}
-			caller.TeamSection.Height = caller.MapBorder.ActualHeight;
+			caller.TeamSection.Height = caller.MapBorder.ActualHeight + 20;
 			caller.Scroller.MaxHeight = caller.TeamSection.Height - teamSizeDifference;
 		}
 
@@ -104,7 +104,7 @@ namespace ETD
 						//If equipment is dropped on team and it overlaps more than 25% (i.e. not by mistake)
 						if (g.Tag.Equals("equipment") && grid.Tag.Equals("team") && horizontalDropped > (horizontalFixed - (g.Width / 2)) && horizontalDropped < (horizontalFixed + (g.Width / 2)) && verticalDropped > (verticalFixed - (g.Width / 2)) && verticalDropped < (verticalFixed + (g.Width / 2)))
 						{
-							AddEquipment(g.Name, grid.Name);
+							AddTeamEquipment(g.Name, grid.Name);
 							g.Visibility = Visibility.Collapsed;
 						}
 
@@ -405,16 +405,19 @@ namespace ETD
 		}
 
 		//Adding equipment to team description
-		public void AddEquipment(String equip, String teamName)
+		public void AddTeamEquipment(String equip, String teamName)
 		{
 			//Creating the rectangle in which the equipment is going to reside
 			Rectangle equipment = new Rectangle();
+			equipment.Name = equip;
+			equipment.Tag = teamName;
 			equipment.Width = 27;
 			equipment.Height = 27;
 			Thickness equipmentMargin = equipment.Margin;
 			equipmentMargin.Right = 2;
 			equipmentMargin.Left = 2;
 			equipment.Margin = equipmentMargin;
+			equipment.MouseRightButtonDown += new MouseButtonEventHandler(caller.RemoveTeamEquipment);
 
 			//Getting the background image to the rectangle
 			ImageBrush equipmentImage = new ImageBrush();
@@ -450,6 +453,69 @@ namespace ETD
 					}
 				}
 			}
+		}
+
+		public void RemoveTeamEquipment(String equip, String teamName)
+		{
+			//Getting the appropriate equipment StackPanel
+			foreach (Border teams in caller.TeamList.Children)
+			{
+				if (teams.Name.Equals(teamName))
+				{
+					StackPanel sp = (StackPanel)teams.Child;
+					foreach (Grid info in sp.Children)
+					{
+						if (info.Name.Equals("teamNameGrid"))
+						{
+							foreach (StackPanel section in info.Children)
+							{
+								if (section.Name.Equals("equipmentStackPanel"))
+								{
+									Rectangle rctToRemove = null;
+									foreach(Rectangle item in section.Children)
+									{
+										if(item.Name.Equals(equip))
+										{
+											rctToRemove = item;
+											break;
+										}
+									}
+									//Removing the equipment and re-adding it on the map
+									section.Children.Remove(rctToRemove);
+									AddEquipmentPin(equip);
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+
+		public void AddEquipmentPin(String equipment)
+		{
+			Grid grid = new Grid();
+			grid.Name = equipment;
+			grid.Tag = "equipment";
+			grid.Width = 30;
+			grid.Height = 30;
+			grid.MouseLeftButtonDown += new MouseButtonEventHandler(caller.grid_MouseLeftButtonDown);
+			grid.MouseLeftButtonUp += new MouseButtonEventHandler(caller.grid_MouseLeftButtonUp);
+			grid.MouseMove += new MouseEventHandler(caller.grid_MouseMove);
+
+			equipments equip = (equipments) Enum.Parse(typeof(equipments), equipment);
+
+				Rectangle r = new Rectangle();
+				r.Width = 30;
+				r.Height = 30;
+				ImageBrush img = new ImageBrush();
+				img.ImageSource = Services.getImage(equip);
+				r.Fill = img;
+
+			caller.Map.Children.Add(grid);
+				grid.Children.Add(r);
+
+			setPosition(grid, (grid.Width / 2), (grid.Width / 2)); //Setting it top corner
+			collisionDetection(grid, (grid.Width / 2), (grid.Width / 2));
 		}
 
         // Updates all text fields when a language change is observed

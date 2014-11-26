@@ -71,6 +71,12 @@ namespace ETD
         }
 
 
+		private void AddEquipmentPin(object sender, RoutedEventArgs e)
+		{
+			Button bt = (Button) sender;
+			updater.AddEquipmentPin(bt.Name);
+		}
+
 		public void grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
 		{
 			Grid g = (Grid) sender;
@@ -151,32 +157,12 @@ namespace ETD
 			updater.DisplayTeamPin(team);
 		}
 
-		private void Button_Click(object sender, RoutedEventArgs e)
+		public void RemoveTeamEquipment(object sender, RoutedEventArgs e)
 		{
-			Grid grid = new Grid();
-			grid.Name = "ambulanceCart";
-			grid.Tag = "equipment";
-			grid.Width = 30;
-			grid.Height = 30;
-			grid.MouseLeftButtonDown += new MouseButtonEventHandler(grid_MouseLeftButtonDown);
-			grid.MouseLeftButtonUp += new MouseButtonEventHandler(grid_MouseLeftButtonUp);
-			grid.MouseMove += new MouseEventHandler(grid_MouseMove);
-
-			equipments equip = equipments.ambulanceCart;
-
-			Rectangle r = new Rectangle();
-			r.Width = 30;
-			r.Height = 30;
-			ImageBrush img = new ImageBrush();
-			img.ImageSource = Services.getImage(equip);
-			r.Fill = img;
-
-			Map.Children.Add(grid);
-			grid.Children.Add(r);
-
-			updater.setPosition(grid, (grid.Width / 2), (grid.Width / 2)); //Setting it top corner
-			updater.collisionDetection(grid, (grid.Width / 2), (grid.Width / 2));	
+			Rectangle rct = (Rectangle) sender;
+			updater.RemoveTeamEquipment(rct.Name, rct.Tag.ToString());
 		}
+
 
 		//TODO: Remove, just for debugging-------------------------------------------
 		private void SetTime(object sender, RoutedEventArgs e)
