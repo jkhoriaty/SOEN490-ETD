@@ -505,6 +505,7 @@ namespace ETD
 		{
 			StackPanel equipmentStackPanel = (StackPanel) sender.Parent;
 			equipmentStackPanel.Children.Remove(sender);
+			DisplayEquipmentPin(sender.Name);
 		}
 
         // Updates all text fields when a language change is observed
