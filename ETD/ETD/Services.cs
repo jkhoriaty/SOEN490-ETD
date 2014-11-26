@@ -28,6 +28,30 @@ namespace ETD
 			{trainings.medicine, @"\Icons\Medicine2.png"}
 		};
 
+		private static Dictionary<statuses, String> firstAidPinRelPath = new Dictionary<statuses, String>
+		{
+			{statuses.available, @"\Icons\FirstAid_available.png"},
+			{statuses.moving, @"\Icons\FirstAid_moving.png"},
+			{statuses.intervening, @"\Icons\FirstAid_intervening.png"},
+			{statuses.busy, @"\Icons\FirstAid_busy.png"}
+		};
+
+		private static Dictionary<statuses, String> firstResponderPinRelPath = new Dictionary<statuses, String>
+		{
+			{statuses.available, @"\Icons\FirstResponder_available.png"},
+			{statuses.moving, @"\Icons\FirstResponder_moving.png"},
+			{statuses.intervening, @"\Icons\FirstResponder_intervening.png"},
+			{statuses.busy, @"\Icons\FirstResponder_busy.png"}
+		};
+
+		private static Dictionary<statuses, String> medicinePinRelPath = new Dictionary<statuses, String>
+		{
+			{statuses.available, @"\Icons\Medicine_available.png"},
+			{statuses.moving, @"\Icons\Medicine_moving.png"},
+			{statuses.intervening, @"\Icons\Medicine_intervening.png"},
+			{statuses.busy, @"\Icons\Medicine_busy.png"}
+		};
+
 		private static Dictionary<String, String> alphabet = new Dictionary<String, String>
 		{
 			{"A", "Alpha"},
@@ -69,6 +93,27 @@ namespace ETD
 		public static BitmapImage getImage(trainings training)
 		{
 			BitmapImage img = new BitmapImage(new Uri(AbsolutePath + trainingRelPath[training]));
+			return img;
+		}
+
+		public static BitmapImage getImage(Team team, statuses status)
+		{
+			trainings teamTraining = team.getHighestLevelOfTraining();
+
+			BitmapImage img = null;
+			if(teamTraining == trainings.firstAid)
+			{
+				img = new BitmapImage(new Uri(AbsolutePath + firstAidPinRelPath[status]));
+			}
+			else if (teamTraining == trainings.firstResponder)
+			{
+				img = new BitmapImage(new Uri(AbsolutePath + firstResponderPinRelPath[status]));
+			}
+			else if (teamTraining == trainings.medicine)
+			{
+				img = new BitmapImage(new Uri(AbsolutePath + medicinePinRelPath[status]));
+			}
+
 			return img;
 		}
 

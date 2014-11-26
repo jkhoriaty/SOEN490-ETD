@@ -49,6 +49,10 @@ namespace ETD
 
 				//Create team
 				String team_name = teamName.Text;
+				if(team_name.Length == 1)
+				{
+					team_name = team_name.ToUpper();
+				}
 				Team team = new Team(team_name);
 
 				//Create first member
