@@ -21,7 +21,10 @@
 			</StackPanel>
 		</Border>
 		<!-- Items to test timer feature, need to be removed before release-->
-		<TextBlock Name="timer" HorizontalAlignment="Left" VerticalAlignment="Bottom" TextWrapping="Wrap" Text="Timer" Height="16" Width="30"/>
+       
+        <Button Width="250" Name="CreateInterventionButton" Content="+" FontSize="30" FontWeight="ExtraBlack" HorizontalAlignment="Left" VerticalAlignment="Bottom" Background="White" BorderBrush="Black" Click="DisplayInterventionForm"></Button>
+       
+        <TextBlock Name="timer" HorizontalAlignment="Left" VerticalAlignment="Bottom" TextWrapping="Wrap" Text="Timer" Height="16" Width="30"/>
 		<Button Name="TimerTestButton" HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="Test" Click="SetTimer"/>
 		
         <Border Name="MapBorder" BorderBrush="Black" BorderThickness="1" Margin="250,0,0,200">

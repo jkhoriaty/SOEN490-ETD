@@ -118,6 +118,11 @@ namespace ETD
 		{
 			return timer;
 		}
+
+        private void DisplayInterventionForm(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("test");
+        }
 		//--------------------------------------------------------------------------
 	}
 }
