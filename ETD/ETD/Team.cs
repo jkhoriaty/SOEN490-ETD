@@ -6,26 +6,27 @@ using System.Threading.Tasks;
 
 namespace ETD
 {
+	public enum statuses {available, moving, intervening, busy};
+
     public class Team
     {
-		public static List<Team> teams = new List<Team>();
 
         String name;
         TeamMember[] members;
         Equipment[] equipments;
+		statuses status;
+
         int EquipmentCount = 0;
         int memberCount = 0;
         bool availability = true;
-		int highestLevelOfTraining = 0;
+		trainings highestLevelOfTraining = 0;
 
         public Team(String name)
         {
             this.name = name;
             members = new TeamMember[3];
             equipments = new Equipment[5];
-
-			//Adding the team to the list of teams
-			teams.Add(this);
+			status = statuses.available;
         }
 
         public bool addMember(TeamMember mem)
@@ -33,9 +34,9 @@ namespace ETD
             if(memberCount <= 2)
             {
                 members[memberCount] = mem;
-				if(highestLevelOfTraining < (int) mem.getTrainingLevel())
+				if((int) highestLevelOfTraining < (int) mem.getTrainingLevel())
 				{
-					highestLevelOfTraining = (int) mem.getTrainingLevel();
+					highestLevelOfTraining = mem.getTrainingLevel();
 				}
                 memberCount++;
                 return true;
@@ -90,76 +91,10 @@ namespace ETD
 			}
 		}
 
-		public int getHighestLevelOfTraining()
+		public trainings getHighestLevelOfTraining()
 		{
 			return highestLevelOfTraining;
 		}
-
-        //Generate shape to represent team on screen
-        public String draw(Team team)
-        {
-            String relpath;
-            switch (highestLevelOfTraining)
-            {
-                case 0:
-                    if (availability == true)
-                    {
-                        relpath = @"\Icons\FirstAid_available.png";
-
-                        return relpath;
-                    }
-                    else 
-                    {
-                        relpath = @"\Icons\FirstAid_busy.png";
-                        return relpath;
-                    }
-
-                case 1:
-                    if (availability == true)
-                    {
-                        relpath = @"\Icons\FirstResponder_available.png";
-
-                        return relpath;
-                    }
-                    else
-                    {
-                        relpath = @"\Icons\FirstResponder_busy.png";
-                        return relpath;
-                    }
-
-
-                case 2:
-                    if (availability == true)
-                    {
-                        relpath = @"\Icons\Medicine_available.png";
-
-                        return relpath;
-                    }
-                    else
-                    {
-                        relpath = @"\Icons\Medicine_busy.png";
-                        return relpath;
-                    }
-
-                default:
-                    return "";
-
-            }
-        }
-       
-		/*
-        public Equipment getEquipment(int i)
-        {
-            if (i < EquipmentCount)
-            {
-                return equipments[i];
-            }
-            else
-            {
-                return null;
-            }
-
-        }*/
 
         public int getEquipmentCount()
         {

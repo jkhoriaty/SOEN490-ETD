@@ -24,10 +24,21 @@
 		<TextBlock Name="timer" HorizontalAlignment="Left" VerticalAlignment="Bottom" TextWrapping="Wrap" Text="Timer" Height="16" Width="30"/>
 		<Button Name="TimerTestButton" HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="Test" Click="SetTimer"/>
 		
-        <Border Name="MapBorder" BorderBrush="Black" BorderThickness="1" Margin="250,0,0,200">
+		<StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="250,0,0,0">
+			<!-- Here go all the buttons -->
+			<Button Content="Load Map" Name="Load_Map" Click="LoadMap" Margin="2,0,2,0"/>
+		</StackPanel>
+		<StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="250,0,0,0">
+			<!-- Here go all the buttons -->
+			<Button Content="Ambulance Cart" Name="ambulanceCart" Click="AddEquipmentPin" Margin="2,0,2,0"/>
+			<Button Content="Sitting Cart" Name="sittingCart" Click="AddEquipmentPin" Margin="2,0,2,0"/>
+			<Button Content="Epipen" Name="epipen" Click="AddEquipmentPin" Margin="2,0,2,0"/>
+			<Button Content="Transport Stretcher" Name="transportStretcher" Click="AddEquipmentPin" Margin="2,0,2,0"/>
+			<Button Content="Mounted Stretcher" Name="mountedStretcher" Click="AddEquipmentPin" Margin="2,0,2,0"/>
+			<Button Content="Wheelchair" Name="wheelchair" Click="AddEquipmentPin" Margin="2,0,2,0"/>
+		</StackPanel>
+        <Border Name="MapBorder" BorderBrush="Black" BorderThickness="1" Margin="250,20,0,200">
             <Canvas Name="Map"></Canvas>
         </Border>
-        <Button Name="Load_Map" HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="Load Map" Click="LoadMap" Margin="475,0,222,40"/>
-		<Button Content="Button" HorizontalAlignment="Left" Margin="801,539,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
 	</Grid>
 </Window>
