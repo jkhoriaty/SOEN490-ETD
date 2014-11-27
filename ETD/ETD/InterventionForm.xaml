@@ -1,0 +1,34 @@
+﻿<Page x:Class="ETD.InterventionForm"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="175" d:DesignWidth="600"
+	Title="InterventionForm">
+
+    <StackPanel Orientation="Horizontal">
+        <StackPanel HorizontalAlignment="Left">
+            <StackPanel Orientation="Horizontal">
+                <Label>Time of Call:</Label>
+                <TextBox Name="timeOfCallhh" Width="30" Text="hh" />
+                <TextBox Name="timeOfCallmm" Width="30" Text="mm" />
+            </StackPanel>
+            <TextBox Name="callerName" Text="Caller Name" />
+            <TextBox Name="location" Text="Location" />
+            <TextBox Name="typeOfCall" Text="Type Of Call" />
+            <StackPanel Orientation="Horizontal">
+                <TextBox Name="Code" Text="Code"/>
+                <ComboBox Name="Gender" Width="65">
+                    <ComboBoxItem>Male</ComboBoxItem>
+                    <ComboBoxItem>Female</ComboBoxItem>
+                </ComboBox>
+                <TextBox Name="Age" Text="Age"/>
+            </StackPanel>
+            <TextBox Name="complaint" Text="Complaint"/>
+        </StackPanel>
+        <StackPanel>
+            
+        </StackPanel>
+    </StackPanel>
+</Page>
