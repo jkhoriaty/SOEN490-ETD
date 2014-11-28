@@ -53,6 +53,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="InterventionForm.xaml.cs">
+      <DependentUpon>InterventionForm.xaml</DependentUpon>
+    </Compile>
     <Compile Include="IObservable.cs" />
     <Compile Include="IObserver.cs" />
     <Compile Include="LanguageSelector.cs" />
@@ -68,6 +71,10 @@
     <Compile Include="TeamMember.cs" />
     <Compile Include="Word.cs" />
     <Page Include="CreateTeamForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="InterventionForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
