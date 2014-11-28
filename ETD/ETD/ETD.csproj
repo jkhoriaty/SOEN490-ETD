@@ -33,7 +33,18 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <!--
+    Auto Generated
+  -->
   <ItemGroup>
+    <Compile Include="ViewsPresenters\TeamsSection\TeamInfo\TeamInfoPage.xaml.cs">
+      <DependentUpon>TeamInfoPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewsPresenters\TeamsSection\TeamInfo\TeamInfoPageUpdater.cs" />
+    <Compile Include="ViewsPresenters\TeamsSection\TeamsSectionPage.xaml.cs">
+      <DependentUpon>TeamsSectionPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewsPresenters\TeamsSection\TeamsSectionPageUpdater.cs" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -47,60 +58,14 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-  </ItemGroup>
-  <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="InterventionForm.xaml.cs">
-      <DependentUpon>InterventionForm.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="IObservable.cs" />
-    <Compile Include="IObserver.cs" />
-    <Compile Include="LanguageSelector.cs" />
-    <Compile Include="Equipment.cs" />
-    <Compile Include="Services.cs" />
-    <Compile Include="Team.cs" />
-    <Compile Include="Timer.cs" />
-    <Compile Include="TeamForm.xaml.cs">
-      <DependentUpon>TeamForm.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="TeamFormUpdate.cs" />
-    <Compile Include="Vocabulary.cs" />
-    <Compile Include="TeamMember.cs" />
-    <Compile Include="Word.cs" />
-    <Page Include="CreateTeamForm.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="InterventionForm.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="CreateTeamFormUpdate.cs" />
-    <Compile Include="CreateTeamForm.xaml.cs">
-      <DependentUpon>CreateTeamForm.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Page Include="TeamForm.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="MainWindowUpdate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -118,18 +83,89 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="ClassDiagram1.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <!--
+    Models
+  -->
   <ItemGroup>
-    <Resource Include="Vocabulary.xml" />
+    <Compile Include="Models\IObservable.cs" />
+    <Compile Include="Models\IObserver.cs" />
+    <Compile Include="Models\LanguageSelector.cs" />
+    <Compile Include="Models\Equipment.cs" />
+    <Compile Include="Models\Services.cs" />
+    <Compile Include="Models\Team.cs" />
+    <Compile Include="Models\Timer.cs" />
+    <Compile Include="Models\Vocabulary.cs" />
+    <Compile Include="Models\TeamMember.cs" />
+    <Compile Include="Models\Word.cs" />
+  </ItemGroup>
+  <!--
+    ViewsPresenters
+  -->
+  <ItemGroup>
+    <Page Include="ViewsPresenters\MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="ViewsPresenters\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewsPresenters\MainWindowUpdater.cs" />
+    <!--
+      TeamsSection
+    -->
+    <!--
+        TeamForm
+      -->
+    <Page Include="ViewsPresenters\TeamsSection\TeamForm\TeamFormPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Compile Include="ViewsPresenters\TeamsSection\TeamForm\TeamFormPage.xaml.cs">
+      <DependentUpon>TeamFormPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewsPresenters\TeamsSection\TeamForm\TeamFormPageUpdater.cs" />
+    <!--
+      InterventionsSection
+    -->
+    <!--
+        InterventionForm
+      -->
+    <Page Include="ViewsPresenters\InterventionsSection\InterventionForm\InterventionFormPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Compile Include="ViewsPresenters\InterventionsSection\InterventionForm\InterventionFormPage.xaml.cs">
+      <DependentUpon>InterventionFormPage.xaml</DependentUpon>
+    </Compile>
+    <Page Include="ViewsPresenters\TeamsSection\TeamInfo\TeamInfoPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ViewsPresenters\TeamsSection\TeamsSectionPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <!--
+    Resources
+  -->
+  <ItemGroup>
+    <Content Include="Resources\Vocabulary.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <!--
+    Icons
+  -->
+  <ItemGroup>
     <Content Include="Icons\addbutton.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -145,22 +181,15 @@
     <Content Include="Icons\AmbulanceCart3.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Icons\bluecircle.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Icons\bluesquare.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Icons\bluetriangle.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Icons\epipen.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Icons\FirstAid_available.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Icons\FirstAid_busy.png" />
+    <Content Include="Icons\FirstAid_busy.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Icons\FirstAid_intervening.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -170,7 +199,9 @@
     <Content Include="Icons\FirstResponder_available.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Icons\FirstResponder_busy.png" />
+    <Content Include="Icons\FirstResponder_busy.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Icons\FirstResponder_intervening.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -213,7 +244,9 @@
     <Content Include="Icons\Medicine_available.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Icons\Medicine_busy.png" />
+    <Content Include="Icons\Medicine_busy.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Icons\Medicine_intervening.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
