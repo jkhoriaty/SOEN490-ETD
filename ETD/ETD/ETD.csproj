@@ -37,6 +37,11 @@
     Auto Generated
   -->
   <ItemGroup>
+    <Compile Include="ViewsPresenters\MapSection\MapSectionPage.xaml.cs">
+      <DependentUpon>MapSectionPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewsPresenters\MapSection\PinEditor.cs" />
+    <Compile Include="ViewsPresenters\MapSection\PinHandler.cs" />
     <Compile Include="ViewsPresenters\TeamsSection\TeamInfo\TeamInfoPage.xaml.cs">
       <DependentUpon>TeamInfoPage.xaml</DependentUpon>
     </Compile>
@@ -117,13 +122,16 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ViewsPresenters\MainWindowUpdater.cs" />
     <!--
       TeamsSection
     -->
     <!--
         TeamForm
       -->
+    <Page Include="ViewsPresenters\MapSection\MapSectionPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ViewsPresenters\TeamsSection\TeamForm\TeamFormPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -281,6 +289,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

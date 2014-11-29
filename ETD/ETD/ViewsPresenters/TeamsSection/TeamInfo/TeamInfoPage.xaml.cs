@@ -23,37 +23,52 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamInfo
 	public partial class TeamInfoPage : Page
 	{
 		TeamsSectionPage teamsSection;
-		TeamInfoPageUpdater updater;
 
 		public TeamInfoPage(TeamsSectionPage teamsSection, Team team)
 		{
 			InitializeComponent();
 			this.teamsSection = teamsSection;
-			updater = new TeamInfoPageUpdater(this);
 			populateInfo(team);
 		}
 
+		//Filling up the page with the information on the team
 		private void populateInfo(Team team)
 		{
-			String phoneticLetter = "";
+			page.Name = team.getName();
+			teamName.Name = team.getName();
 			if (team.getName().Length == 1)
 			{
-				phoneticLetter = Services.getPhoneticLetter(team.getName());
+				teamName.Content = Services.getPhoneticLetter(team.getName());
 			}
 			else
 			{
-				phoneticLetter = team.getName();
+				teamName.Content = team.getName();
 			}
-			updater.setTeamInfo(team.getName(), phoneticLetter, Services.getImage(team.getHighestLevelOfTraining()));
+
+			ImageBrush img = new ImageBrush();
+			img.ImageSource = Services.getImage(team.getHighestLevelOfTraining());
+			teamTraining.Fill = img;
 
 			TeamMember member = null;
-			int i = 0;
-			while ((member = team.getMember(i++)) != null)
+			int position = 0;
+			while ((member = team.getMember(position++)) != null)
 			{
-				updater.setMemberInfo(i, member.getName(), Services.getImage(member.getTrainingLevel()));
+				Grid memberLine = (Grid)informations.Children[position];
+				memberLine.Visibility = System.Windows.Visibility.Visible;
+
+				Label memberName = (Label)memberLine.Children[0];
+				memberName.Content = member.getName();
+
+				Rectangle memberTraining = (Rectangle)memberLine.Children[1];
+				ImageBrush img2 = new ImageBrush();
+				img2.ImageSource = Services.getImage(member.getTrainingLevel());
+				memberTraining.Fill = img2;
 			}
+
+			teamsSection.registerStackPanel(team.getName(), equipmentStackPanel);
 		}
 
+		//Right click on the team to remove it from the team list
 		private void DeleteTeam(object sender, MouseButtonEventArgs e)
 		{
 			Label label = (Label)sender;

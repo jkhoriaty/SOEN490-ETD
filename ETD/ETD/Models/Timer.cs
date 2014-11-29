@@ -45,7 +45,7 @@ namespace ETD.Models
             }
         }
 
-		//POC - TO DELETE
+		/*//POC - TO DELETE
         public static void TestTimer(ETD.ViewsPresenters.MainWindow caller)
         {
             //This Method currently returns the timer of the last queue'd timer.
@@ -63,7 +63,7 @@ namespace ETD.Models
 
                 interventionTime.Add(currentIntervention - 1, elapsed);     //Saves it to a second dictionary, this one only stores the elapsed times, this will be pushed to DB.
             }
-        }
+        }*/
 
     }
 }

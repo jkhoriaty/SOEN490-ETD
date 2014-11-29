@@ -12,7 +12,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
 using ETD.ViewsPresenters;
 using ETD.Models;
 
@@ -24,25 +23,52 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
     public partial class TeamFormPage : Page
     {
 		TeamsSectionPage caller;
-        TeamFormPageUpdater updater;
+		public int currentNumberOfMembers = 1; //Used to track the number of members on the TeamForm
+		private Dictionary<String, String> textboxContent = new Dictionary<string, string>();
+		private List<Control> textboxLastValidationFailed = null;
+		private List<Border> comboboxLastValidationFailed = null;
 
         public TeamFormPage(TeamsSectionPage caller)
         {
             InitializeComponent();
 			this.caller = caller;
-            updater = new TeamFormPageUpdater(this);
         }
 
+		//Click: Add Member
         private void AddMember_Click(object sender, RoutedEventArgs e)
         {
-            updater.addMember();
+			switch (currentNumberOfMembers)
+			{
+				case 1:
+					member2.Visibility = Visibility.Visible;
+					RemoveMember.IsEnabled = true;
+					break;
+				case 2:
+					member3.Visibility = Visibility.Visible;
+					AddMember.IsEnabled = false;
+					break;
+			}
+			currentNumberOfMembers++;
         }
 
+		//Click: Remove Member
         private void RemoveMember_Click(object sender, RoutedEventArgs e)
         {
-            updater.removeMember();
+			switch (currentNumberOfMembers)
+			{
+				case 2:
+					member2.Visibility = Visibility.Collapsed;
+					RemoveMember.IsEnabled = false;
+					break;
+				case 3:
+					member3.Visibility = Visibility.Collapsed;
+					AddMember.IsEnabled = true;
+					break;
+			}
+			currentNumberOfMembers--;
         }
 
+		//Click: Submit
         private void Submit_Click(object sender, RoutedEventArgs e)
         {
 			if(formValidation())
@@ -86,7 +112,7 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 				}
 
 				//Displaying the team on the main window
-				caller.DisplayTeam(team);
+				caller.DisplayTeamInfo(team);
 
                 //Use this team to link it to map
 			}
@@ -96,26 +122,37 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 			}
         }
 
+		//Click: Cancel
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
 			caller.HideCreateTeamForm();
         }
 
+		//Focus: Textboxes - Clearing the fields upon focus if populated by the default text
 		private void TextBoxes_GotFocus(object sender, RoutedEventArgs e)
 		{
 			TextBox tb = (TextBox) sender;
-			updater.clearText(tb);
+			if (!textboxContent.ContainsKey(tb.Name))
+			{
+				textboxContent.Add(tb.Name, tb.Text);
+			}
+			if (tb.Text.Equals(textboxContent[tb.Name]))
+			{
+				tb.Text = "";
+			}
 		}
 
+		//LostFocus: Textboxes - Recovering the fields default text if left empty
 		private void TextBoxes_LostFocus(object sender, RoutedEventArgs e)
 		{
 			TextBox tb = (TextBox)sender;
 			if (tb.Text.Equals(""))
 			{
-				updater.restoreText(tb);
+				tb.Text = textboxContent[tb.Name];
 			}
 		}
 
+		//Validating all fields when form is submitted before team creation
 		private bool formValidation()
 		{
 			List<Control> textboxFailedValidation = new List<Control>();
@@ -148,7 +185,7 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 			}
 
 			//Team Member 2
-			if (updater.currentNumberOfMembers >= 2)
+			if (currentNumberOfMembers >= 2)
 			{
 				if (teamMember2.Text.Equals("Team Member Name"))
 				{
@@ -171,7 +208,7 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 			}
 
 			//Team Member 3
-			if (updater.currentNumberOfMembers >= 3)
+			if (currentNumberOfMembers >= 3)
 			{
 				if (teamMember3.Text.Equals("Team Member Name"))
 				{
@@ -194,11 +231,12 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 			}
 
 			bool success = true;
-			success = updater.reportValidationFail(textboxFailedValidation);
-			success = updater.reportValidationFail(comboboxFailedValidation);
+			success = reportValidationFail(textboxFailedValidation);
+			success = reportValidationFail(comboboxFailedValidation);
 			return success;
 		}
 
+		//Validation of hours and minutes fields, hours is true when the time passed is one of the hours fields
 		private bool timeValidation(String time, bool hours)
 		{
 			if(hours == true && time.Equals("hh"))
@@ -229,6 +267,63 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 				}
 			}
 			return true;
+		}
+
+		//Redenning the borders of the controls that failed validation
+		public bool reportValidationFail(List<Control> failedValidation)
+		{
+			//Resetting border values to default
+			if (textboxLastValidationFailed != null)
+			{
+				foreach (Control ctl in textboxLastValidationFailed)
+				{
+					ctl.ClearValue(Control.BorderBrushProperty);
+				}
+			}
+			textboxLastValidationFailed = new List<Control>(failedValidation);
+
+
+			//Giving a red border to all the controls that have failed validation
+			if (failedValidation.Count != 0)
+			{
+				foreach (Control ctl in failedValidation)
+				{
+					ctl.BorderBrush = new SolidColorBrush(Colors.Red);
+				}
+				return false;
+			}
+			else
+			{
+				return true;
+			}
+		}
+
+		//Redenning the borders of the controls that failed validation
+		public bool reportValidationFail(List<Border> failedValidation)
+		{
+			//Resetting border values to default
+			if (comboboxLastValidationFailed != null)
+			{
+				foreach (Border bd in comboboxLastValidationFailed)
+				{
+					bd.BorderBrush = new SolidColorBrush(Colors.White);
+				}
+			}
+			comboboxLastValidationFailed = new List<Border>(failedValidation);
+
+			//Giving a red border to all the controls that have failed validation
+			if (failedValidation.Count != 0)
+			{
+				foreach (Border bd in failedValidation)
+				{
+					bd.BorderBrush = new SolidColorBrush(Colors.Red);
+				}
+				return false;
+			}
+			else
+			{
+				return true;
+			}
 		}
     }
 }
