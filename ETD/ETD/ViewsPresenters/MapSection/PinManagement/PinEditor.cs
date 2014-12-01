@@ -11,7 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Effects;
 using System.Windows.Shapes;
 
-namespace ETD.ViewsPresenters.MapSection
+namespace ETD.ViewsPresenters.MapSection.PinManagement
 {
 	class PinEditor
 	{

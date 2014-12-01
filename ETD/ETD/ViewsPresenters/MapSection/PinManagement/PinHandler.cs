@@ -7,7 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace ETD.ViewsPresenters.MapSection
+namespace ETD.ViewsPresenters.MapSection.PinManagement
 {
 	class PinHandler
 	{
