@@ -40,16 +40,14 @@
     <Compile Include="ViewsPresenters\MapSection\MapSectionPage.xaml.cs">
       <DependentUpon>MapSectionPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewsPresenters\MapSection\PinEditor.cs" />
-    <Compile Include="ViewsPresenters\MapSection\PinHandler.cs" />
+    <Compile Include="ViewsPresenters\MapSection\PinManagement\PinEditor.cs" />
+    <Compile Include="ViewsPresenters\MapSection\PinManagement\PinHandler.cs" />
     <Compile Include="ViewsPresenters\TeamsSection\TeamInfo\TeamInfoPage.xaml.cs">
       <DependentUpon>TeamInfoPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewsPresenters\TeamsSection\TeamInfo\TeamInfoPageUpdater.cs" />
     <Compile Include="ViewsPresenters\TeamsSection\TeamsSectionPage.xaml.cs">
       <DependentUpon>TeamsSectionPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewsPresenters\TeamsSection\TeamsSectionPageUpdater.cs" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -139,7 +137,6 @@
     <Compile Include="ViewsPresenters\TeamsSection\TeamForm\TeamFormPage.xaml.cs">
       <DependentUpon>TeamFormPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewsPresenters\TeamsSection\TeamForm\TeamFormPageUpdater.cs" />
     <!--
       InterventionsSection
     -->
