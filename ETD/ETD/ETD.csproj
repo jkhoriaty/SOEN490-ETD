@@ -37,6 +37,7 @@
     Auto Generated
   -->
   <ItemGroup>
+    <Compile Include="Models\Intervention.cs" />
     <Compile Include="ViewsPresenters\MapSection\MapSectionPage.xaml.cs">
       <DependentUpon>MapSectionPage.xaml</DependentUpon>
     </Compile>
