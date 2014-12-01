@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ETD.ViewsPresenters.InterventionsSection;
 
 namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm
 {
@@ -20,9 +21,12 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm
     /// </summary>
     public partial class InterventionFormPage : Page
     {
-        public InterventionFormPage()
+		InterventionSectionPage caller;
+
+        public InterventionFormPage(InterventionSectionPage caller)
         {
             InitializeComponent();
+			this.caller = caller;
         }
     }
 }

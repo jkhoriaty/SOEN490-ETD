@@ -38,6 +38,10 @@
   -->
   <ItemGroup>
     <Compile Include="Models\Intervention.cs" />
+    <Compile Include="Models\TextBoxHandler.cs" />
+    <Compile Include="ViewsPresenters\InterventionsSection\InterventionSectionPage.xaml.cs">
+      <DependentUpon>InterventionSectionPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewsPresenters\MapSection\MapSectionPage.xaml.cs">
       <DependentUpon>MapSectionPage.xaml</DependentUpon>
     </Compile>
@@ -113,6 +117,10 @@
     ViewsPresenters
   -->
   <ItemGroup>
+    <Page Include="ViewsPresenters\InterventionsSection\InterventionSectionPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ViewsPresenters\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -164,6 +172,12 @@
     Resources
   -->
   <ItemGroup>
+    <Content Include="Icons\AmbulanceCart4.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\SittingCart4.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Vocabulary.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -287,7 +301,11 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="ViewsPresenters\InterventionsSection\InterventionForm\CompletedInterventionForm\" />
+    <Folder Include="ViewsPresenters\InterventionsSection\InterventionForm\InitialInterventionForm\" />
+    <Folder Include="ViewsPresenters\InterventionsSection\InterventionForm\OngoingInterventionForm\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

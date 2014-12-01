@@ -35,13 +35,13 @@ namespace ETD.ViewsPresenters.TeamsSection
 		}
 
 		//Adjusting the team section height
-		public void setTeamsSectionHeight(Border TeamSection)
+		public void setTeamsSectionHeight(Border TeamsSection)
 		{
 			if (teamSizeDifference == 0)
 			{
-				teamSizeDifference = TeamSection.ActualHeight - TeamList.ActualHeight;
+				teamSizeDifference = TeamsSection.ActualHeight - TeamList.ActualHeight;
 			}
-			Scroller.MaxHeight = TeamSection.Height - teamSizeDifference;
+			Scroller.MaxHeight = TeamsSection.Height - teamSizeDifference;
 		}
 
 		//Clicking on the add team button
@@ -103,8 +103,7 @@ namespace ETD.ViewsPresenters.TeamsSection
 			imageRectangle.MouseRightButtonDown += new MouseButtonEventHandler(RemoveTeamEquipment);
 
 			Thickness equipmentMargin = imageRectangle.Margin;
-			equipmentMargin.Right = 2;
-			equipmentMargin.Left = 2;
+			equipmentMargin.Right = 1;
 			imageRectangle.Margin = equipmentMargin;
 
 			//Getting the background image to the rectangle

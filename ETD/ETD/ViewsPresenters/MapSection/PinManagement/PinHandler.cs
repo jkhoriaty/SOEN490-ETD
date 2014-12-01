@@ -83,8 +83,25 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 
 		public void DetectCollision(Grid movedPin, double movedPin_X, double movedPin_Y)
 		{
-			//Replacing pin within bounds if mouse is out of bounds
-			ReplaceWithinBounds(movedPin, movedPin_X, movedPin_Y);
+			//Replacing item within horizontal bounds
+			if (movedPin_X > (caller.Map.ActualWidth - (movedPin.Width / 2))) //Right
+			{
+				movedPin_X = caller.Map.ActualWidth - (movedPin.Width / 2);
+			}
+			else if (movedPin_X < (movedPin.Width / 2)) //Left
+			{
+				movedPin_X = (movedPin.Width / 2);
+			}
+
+			//Replacing item within vertical bounds
+			if (movedPin_Y > (caller.Map.ActualHeight - (movedPin.Width / 2))) //Bottom
+			{
+				movedPin_Y = caller.Map.ActualHeight - (movedPin.Width / 2);
+			}
+			else if (movedPin_Y < (movedPin.Width / 2)) //Top
+			{
+				movedPin_Y = (movedPin.Width / 2);
+			}
 
 			bool collisionDetected = true;
 			int verificationCount = 0;
@@ -227,30 +244,6 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 
 			//Drop the rectangle if there are not collision or after resolution of collision
 			SetPinPosition(movedPin, movedPin_X, movedPin_Y);
-		}
-
-		//Replacing pin within bounds if mouse is out of bounds
-		private void ReplaceWithinBounds(Grid movedPin, double movedPin_X, double movedPin_Y)
-		{
-			//Replacing item within horizontal bounds
-			if (movedPin_X > (caller.Map.ActualWidth - (movedPin.Width / 2))) //Right
-			{
-				movedPin_X = caller.Map.ActualWidth - (movedPin.Width / 2);
-			}
-			else if (movedPin_X < (movedPin.Width / 2)) //Left
-			{
-				movedPin_X = (movedPin.Width / 2);
-			}
-
-			//Replacing item within vertical bounds
-			if (movedPin_Y > (caller.Map.ActualHeight - (movedPin.Width / 2))) //Bottom
-			{
-				movedPin_Y = caller.Map.ActualHeight - (movedPin.Width / 2);
-			}
-			else if (movedPin_Y < (movedPin.Width / 2)) //Top
-			{
-				movedPin_Y = (movedPin.Width / 2);
-			}
 		}
 	}
 }
