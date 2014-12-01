@@ -4,31 +4,106 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       mc:Ignorable="d" 
-      d:DesignHeight="175" d:DesignWidth="600"
+      d:DesignHeight="175" d:DesignWidth="800"
 	Title="InterventionForm">
 
     <StackPanel Orientation="Horizontal">
         <StackPanel HorizontalAlignment="Left">
             <StackPanel Orientation="Horizontal">
-                <Label>Time of Call:</Label>
-                <TextBox Name="timeOfCallhh" Width="30" Text="hh" />
-                <TextBox Name="timeOfCallmm" Width="30" Text="mm" />
+                <Label Height="26">Time of Call:</Label>
+                <TextBox Name="timeOfCallhh" Width="30" Text="hh" Height="26"/>
+                <TextBox Name="timeOfCallmm" Width="30" Text="mm" Height="26"/>
             </StackPanel>
-            <TextBox Name="callerName" Text="Caller Name" />
-            <TextBox Name="location" Text="Location" />
-            <TextBox Name="typeOfCall" Text="Type Of Call" />
+            <TextBox Name="callerName" Text="Caller Name" Height="26"/>
+            <TextBox Name="location" Text="Location" Height="26"/>
+            <TextBox Name="typeOfCall" Text="Type Of Call" Height="26"/>
             <StackPanel Orientation="Horizontal">
-                <TextBox Name="Code" Text="Code"/>
-                <ComboBox Name="Gender" Width="65">
+                <TextBox Name="Code" Text="Code" Height="26"/>
+                <ComboBox Name="Gender" Width="65" Height="26">
                     <ComboBoxItem>Male</ComboBoxItem>
                     <ComboBoxItem>Female</ComboBoxItem>
                 </ComboBox>
-                <TextBox Name="Age" Text="Age"/>
+                <TextBox Name="Age" Text="Age" Height="26"/>
             </StackPanel>
-            <TextBox Name="complaint" Text="Complaint"/>
+            <TextBox Name="complaint" Text="Complaint" Height="26"/>
         </StackPanel>
         <StackPanel>
-            
+            <Label Name="ResourceLabel" Content="Resources" FontWeight="Bold" Height="26"/>
+            <Label Name="PriseEnCharge" Content="Prise en Charge" Height="26"/>
+            <TextBox Name="Resource1" Height="26"/>
+            <TextBox Name="Resource2" Height="26"/>
+            <TextBox Name="Resource3" Height="26"/>
+            <TextBox Name="Resource4" Height="26"/>
+        </StackPanel>
+        <StackPanel>
+            <Label Name="IndicatifLabel" Content="Indicatif" FontWeight="Bold" Height="26"/>
+            <TextBox Name="Indicatif1" Height="26"/>
+            <TextBox Name="Indicatif2" Height="26"/>
+            <TextBox Name="Indicatif3" Height="26"/>
+            <TextBox Name="Indicatif4" Height="26"/>
+            <TextBox Name="Indicatif5" Height="26"/>
+        </StackPanel>
+        <StackPanel>
+            <Label Name="InDirectionLabel" Content="En Direction" FontWeight="Bold" Height="26"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="26">
+                <TextBox Name="InDirectionhh1" Text="hh" Width="30" Height="26"/>
+                <TextBox Name="InDirectionmm1" Text="mm" Width="30" Height="26"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBox Name="InDirectionhh2" Text="hh" Width="30" Height="26"/>
+                <TextBox Name="InDirectionmm2" Text="mm" Width="30" Height="26"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBox Name="InDirectionhh3" Text="hh" Width="30" Height="26"/>
+                <TextBox Name="InDirectionmm3" Text="mm" Width="30" Height="26"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBox Name="InDirectionhh4" Text="hh" Width="30" Height="26"/>
+                <TextBox Name="InDirectionmm4" Text="mm" Width="30" Height="26"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBox Name="InDirectionhh5" Text="hh" Width="30" Height="26"/>
+                <TextBox Name="InDirectionmm5" Text="mm" Width="30" Height="26"/>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel>
+            <Label Name="InPositionLabel" Content="In Position" FontWeight="Bold"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBox Name="InPositionhh1" Text="hh" Width="30" Height="26"/>
+                <TextBox Name="InPositionmm1" Text="mm" Width="30" Height="26"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBox Name="InPositionhh2" Text="hh" Width="30" Height="26"/>
+                <TextBox Name="InPositionmm2" Text="mm" Width="30" Height="26"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBox Name="InPositionhh3" Text="hh" Width="30" Height="26"/>
+                <TextBox Name="InPositionmm3" Text="mm" Width="30" Height="26"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBox Name="InPositionhh4" Text="hh" Width="30" Height="26"/>
+                <TextBox Name="InPositionmm4" Text="mm" Width="30" Height="26"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBox Name="InPositionhh5" Text="hh" Width="30" Height="26"/>
+                <TextBox Name="InPositionmm5" Text="mm" Width="30" Height="26"/>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel>
+            <Label Name="AdditionalInfoLabel" Content="Additional Information" FontWeight="Bold" Height="26"/>
+            <TextBox Height="130" Name="AdditionalInfo" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible"/>
+        </StackPanel>
+        <StackPanel>
+            <Label Name="FirstRespLabel" Content="First Respondant" Height="26" HorizontalAlignment="Right"/>
+            <Label Name="AmbulanceLabel" Content="Ambulance" Height="26" HorizontalAlignment="Right"/>
+        </StackPanel>
+        <StackPanel>
+            <TextBox Name="CompanyService1" Text="Service" Height="26" Width="60"/>
+            <TextBox Name="CompanyService2" Text="Service" Height="26" Width="60"/>
+        </StackPanel>
+        <StackPanel>
+            <TextBox Name="Vehicle1" Text="Vehicle" Height="26" Width="60" />
+            <TextBox Name="Vehicle2" Text="Vehicle" Height="26" Width="60"/>
         </StackPanel>
     </StackPanel>
 </Page>
