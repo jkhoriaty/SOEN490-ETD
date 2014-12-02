@@ -4,15 +4,15 @@
         Title="Emergency Team Dispatcher"
 		WindowStartupLocation="CenterScreen"
 		WindowState="Maximized"
-		SizeChanged="setTeamsSectionHeight"
-		StateChanged="setTeamsSectionHeight"
+		SizeChanged="setSectionsHeight"
+		StateChanged="setSectionsHeight"
 		MinWidth="1000"
+		Width="1000"
 		MinHeight="700"
-		Height="700"
-		Width="1000">
+		Height="700">
 	<Grid>
 		<!-- The following is the team display section along with the tag and the button to add new teams -->
-		<Border Name="TeamSection" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" VerticalAlignment="Top"  Width="250" Padding="2">
+		<Border Name="TeamsSection" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" VerticalAlignment="Top"  Width="250" Padding="2">
 			<!-- Here goes the TeamsSectionPage frame -->
 		</Border>
 		
@@ -31,6 +31,9 @@
 		</StackPanel>
 		<Border Name="MapSection" BorderBrush="Black" BorderThickness="1" Margin="250,20,0,200">
 			<!-- Here goes the MapSectionPage frame -->
+		</Border>
+		<Border Name="InterventionsSection" BorderBrush="Black" BorderThickness="1" VerticalAlignment="Bottom" Height="200" Padding="2">
+			<!-- Here goes the InterventionsSection frame -->
 		</Border>
 	</Grid>
 </Window>

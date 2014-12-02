@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 
 using ETD.ViewsPresenters.TeamsSection;
 using ETD.ViewsPresenters.MapSection;
+using ETD.ViewsPresenters.InterventionsSection;
 using ETD.Models;
 
 namespace ETD.ViewsPresenters
@@ -27,6 +28,7 @@ namespace ETD.ViewsPresenters
 	{
 		private TeamsSectionPage teamsSection;
 		private MapSectionPage mapSection;
+		private InterventionSectionPage interventionsSection;
 
 		public MainWindow()
 		{
@@ -34,23 +36,30 @@ namespace ETD.ViewsPresenters
 
 			teamsSection = new TeamsSectionPage(this);
 			mapSection = new MapSectionPage(this);
+			interventionsSection = new InterventionSectionPage(this);
 
-			//Populating the Team section
+			//Populating the Teams section
 			Frame teamsFrame = new Frame();
 			teamsFrame.Content = teamsSection;
-			TeamSection.Child = teamsFrame;
+			TeamsSection.Child = teamsFrame;
 
 			//Populating the Map section
 			Frame mapFrame = new Frame();
 			mapFrame.Content = mapSection;
 			MapSection.Child = mapFrame;
+
+			//Populating the Interventions section
+			Frame interventionsFrame = new Frame();
+			interventionsFrame.Content = interventionsSection;
+			InterventionsSection.Child = interventionsFrame;
 		}
 
 		//Window size or state changed - Adjusting the team section height
-		public void setTeamsSectionHeight(object sender, EventArgs e)
+		public void setSectionsHeight(object sender, EventArgs e)
 		{
-			TeamSection.Height = MapSection.ActualHeight + 20;
-			teamsSection.setTeamsSectionHeight(TeamSection);
+			TeamsSection.Height = MapSection.ActualHeight + 20;
+			teamsSection.setTeamsSectionHeight(TeamsSection);
+			interventionsSection.setInterventionsSectionWidth(InterventionsSection);
 		}
 
 		//Click: Load Map

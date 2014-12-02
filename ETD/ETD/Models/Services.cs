@@ -13,17 +13,17 @@ namespace ETD.Models
 
 		private static Dictionary<equipments, String> equipmentRelPath = new Dictionary<equipments, String>
 		{
-			{equipments.ambulanceCart, @"\Icons\AmbulanceCart3.png"},
+			{equipments.ambulanceCart, @"\Icons\AmbulanceCart4.png"},
 			{equipments.epipen, @"\Icons\epipen.png"},
 			{equipments.mountedStretcher, @"\Icons\MountedStretcher3.png"},
-			{equipments.sittingCart, @"\Icons\SittingCart3.png"},
+			{equipments.sittingCart, @"\Icons\SittingCart4.png"},
 			{equipments.transportStretcher, @"\Icons\TransportStretcher.png"},
 			{equipments.wheelchair, @"\Icons\WheelChair.png"}
 		};
 
 		private static Dictionary<trainings, String> trainingRelPath = new Dictionary<trainings, String>
 		{
-			{trainings.firstAid, @"\Icons\First_Aid2.png"},
+			{trainings.firstAid, @"\Icons\First_Aid3.png"},
 			{trainings.firstResponder, @"\Icons\First_Responder2.png"},
 			{trainings.medicine, @"\Icons\Medicine2.png"}
 		};

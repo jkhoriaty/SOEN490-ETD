@@ -24,7 +24,6 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
     {
 		TeamsSectionPage caller;
 		public int currentNumberOfMembers = 1; //Used to track the number of members on the TeamForm
-		private Dictionary<String, String> textboxContent = new Dictionary<string, string>();
 		private List<Control> textboxLastValidationFailed = null;
 		private List<Border> comboboxLastValidationFailed = null;
 
@@ -131,25 +130,13 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 		//Focus: Textboxes - Clearing the fields upon focus if populated by the default text
 		private void TextBoxes_GotFocus(object sender, RoutedEventArgs e)
 		{
-			TextBox tb = (TextBox) sender;
-			if (!textboxContent.ContainsKey(tb.Name))
-			{
-				textboxContent.Add(tb.Name, tb.Text);
-			}
-			if (tb.Text.Equals(textboxContent[tb.Name]))
-			{
-				tb.Text = "";
-			}
+			TextBoxHandler.GotFocus(sender, e);
 		}
 
 		//LostFocus: Textboxes - Recovering the fields default text if left empty
 		private void TextBoxes_LostFocus(object sender, RoutedEventArgs e)
 		{
-			TextBox tb = (TextBox)sender;
-			if (tb.Text.Equals(""))
-			{
-				tb.Text = textboxContent[tb.Name];
-			}
+			TextBoxHandler.LostFocus(sender, e);
 		}
 
 		//Validating all fields when form is submitted before team creation
