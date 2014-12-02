@@ -85,7 +85,7 @@ namespace ETD.ViewsPresenters.TeamsSection
 				if (team.Name.Equals(teamName))
 				{
 					teamEquipmentStacks.Remove(teamName);
-					TeamList.Children.Remove(team);
+					TeamList.Children.Remove(item);
 					break;
 				}
 			}

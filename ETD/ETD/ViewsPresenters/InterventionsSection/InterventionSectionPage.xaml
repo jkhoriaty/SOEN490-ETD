@@ -7,10 +7,10 @@
       d:DesignHeight="300" d:DesignWidth="300"
 	Title="InterventionSectionPage">
 
-	<StackPanel Orientation="Horizontal">
+	<StackPanel Name="InterventionsSection" Orientation="Horizontal">
 		<Label Name="InterventionsSectionLabel" Content="Interventions" FontWeight="ExtraBlack" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24"/>
 		<ScrollViewer Name="Scroller" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Visible">
-			<StackPanel Name="InterventionList" Orientation="Horizontal">
+			<StackPanel Name="InterventionsList" Orientation="Horizontal">
 				<!-- Intervention display is here -->
 
 			</StackPanel>

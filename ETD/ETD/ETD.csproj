@@ -39,6 +39,9 @@
   <ItemGroup>
     <Compile Include="Models\Intervention.cs" />
     <Compile Include="Models\TextBoxHandler.cs" />
+    <Compile Include="ViewsPresenters\InterventionsSection\InterventionForm\DetailsInterventionForm\DetailsInterventionFormPage.xaml.cs">
+      <DependentUpon>DetailsInterventionFormPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewsPresenters\InterventionsSection\InterventionSectionPage.xaml.cs">
       <DependentUpon>InterventionSectionPage.xaml</DependentUpon>
     </Compile>
@@ -117,6 +120,10 @@
     ViewsPresenters
   -->
   <ItemGroup>
+    <Page Include="ViewsPresenters\InterventionsSection\InterventionForm\DetailsInterventionForm\DetailsInterventionFormPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ViewsPresenters\InterventionsSection\InterventionSectionPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -303,7 +310,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewsPresenters\InterventionsSection\InterventionForm\CompletedInterventionForm\" />
-    <Folder Include="ViewsPresenters\InterventionsSection\InterventionForm\InitialInterventionForm\" />
     <Folder Include="ViewsPresenters\InterventionsSection\InterventionForm\OngoingInterventionForm\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
