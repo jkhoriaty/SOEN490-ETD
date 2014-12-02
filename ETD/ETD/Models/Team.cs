@@ -91,6 +91,16 @@ namespace ETD.Models
 			}
 		}
 
+        public statuses getStatus()
+        {
+            return status;
+        }
+
+        public void setStatus(statuses s)
+        {
+            this.status = s;
+        }
+
 		public trainings getHighestLevelOfTraining()
 		{
 			return highestLevelOfTraining;

@@ -9,5 +9,14 @@
 
     <Canvas Name="Map">
         
+        
     </Canvas>
+    <Page.Resources>
+        <ContextMenu x:Key="TeamContext">
+            <MenuItem Header="Available" Click="ChangeStatus"></MenuItem>
+            <MenuItem Header="Moving" Click="ChangeStatus"></MenuItem>
+            <MenuItem Header="Intervening" Click="ChangeStatus"></MenuItem>
+            <MenuItem Header="Busy" Click="ChangeStatus"></MenuItem>
+        </ContextMenu>
+    </Page.Resources>
 </Page>
