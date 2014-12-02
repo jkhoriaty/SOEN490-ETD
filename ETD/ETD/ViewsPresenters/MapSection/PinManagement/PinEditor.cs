@@ -77,8 +77,17 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
                     }
                 }
             }
-            
+        }
 
+        public void CheckRight(object sender, RoutedEventArgs e)
+        {
+            ContextMenu cm = sender as ContextMenu;
+            TeamGrid fe = cm.PlacementTarget as TeamGrid;
+            
+            foreach (MenuItem mi in cm.Items)
+            {
+                mi.IsChecked = ((statuses)Enum.Parse(typeof(statuses), mi.Header.ToString().ToLower()) == fe.team.getStatus());
+            }                   
         }
 	}
 }

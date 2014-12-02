@@ -13,7 +13,7 @@ namespace ETD.Models
     {
         private int size = 40;
         private Rectangle imageRectangle;
-        private Team team;
+        public Team team;
         public TeamGrid(Team team, MapSectionPage caller) : base()
         {
             this.team = team;

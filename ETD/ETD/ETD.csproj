@@ -37,6 +37,15 @@
     Auto Generated
   -->
   <ItemGroup>
+    <Compile Include="Models\EquipmentGrid.cs" />
+    <Compile Include="Models\TeamGrid.cs" />
+    <Compile Include="Models\TextboxHandler.cs" />
+    <Compile Include="ViewsPresenters\InterventionsSection\InterventionForm\DetailsInterventionForm\DetailsInterventionFormPage.xaml.cs">
+      <DependentUpon>DetailsInterventionFormPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewsPresenters\InterventionsSection\InterventionSectionPage.xaml.cs">
+      <DependentUpon>InterventionSectionPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewsPresenters\MapSection\MapSectionPage.xaml.cs">
       <DependentUpon>MapSectionPage.xaml</DependentUpon>
     </Compile>
@@ -112,6 +121,14 @@
     ViewsPresenters
   -->
   <ItemGroup>
+    <Page Include="ViewsPresenters\InterventionsSection\InterventionForm\DetailsInterventionForm\DetailsInterventionFormPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ViewsPresenters\InterventionsSection\InterventionSectionPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="ViewsPresenters\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -286,7 +303,10 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="ViewsPresenters\InterventionsSection\InterventionForm\CompletedInterventionForm\" />
+    <Folder Include="ViewsPresenters\InterventionsSection\InterventionForm\OngoingInterventionForm\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

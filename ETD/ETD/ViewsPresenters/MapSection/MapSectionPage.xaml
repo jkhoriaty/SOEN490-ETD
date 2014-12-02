@@ -12,7 +12,7 @@
         
     </Canvas>
     <Page.Resources>
-        <ContextMenu x:Key="TeamContext">
+        <ContextMenu x:Key="TeamContext" Opened="CheckRight">
             <MenuItem Header="Available" Click="ChangeStatus"></MenuItem>
             <MenuItem Header="Moving" Click="ChangeStatus"></MenuItem>
             <MenuItem Header="Intervening" Click="ChangeStatus"></MenuItem>

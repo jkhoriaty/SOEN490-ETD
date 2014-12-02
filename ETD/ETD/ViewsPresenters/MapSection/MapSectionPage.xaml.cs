@@ -91,9 +91,14 @@ namespace ETD.ViewsPresenters.MapSection
 			mainWindow.AddTeamEquipment(equip, teamName);
 		}
 
-        public void ChangeStatus(object sender, RoutedEventArgs e)
+        internal void ChangeStatus(object sender, RoutedEventArgs e)
         {
             pinEditor.ChangeStatus(sender, e);
+        }
+
+        internal void CheckRight(object sender, RoutedEventArgs e)
+        {
+            pinEditor.CheckRight(sender, e);
         }
 	}
 }
