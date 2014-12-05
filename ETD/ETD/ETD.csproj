@@ -40,8 +40,20 @@
     <Compile Include="Models\EquipmentGrid.cs" />
     <Compile Include="Models\TeamGrid.cs" />
     <Compile Include="Models\TextboxHandler.cs" />
+    <Compile Include="ViewsPresenters\InterventionsSection\InterventionForm\ABCInterventionForm\ABCInterventionFormPage.xaml.cs">
+      <DependentUpon>ABCInterventionFormPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewsPresenters\InterventionsSection\InterventionForm\AdditionalInfoInterventionForm\AdditionalInfoInterventionFormPage.xaml.cs">
+      <DependentUpon>AdditionalInfoInterventionFormPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewsPresenters\InterventionsSection\InterventionForm\DetailsInterventionForm\DetailsInterventionFormPage.xaml.cs">
       <DependentUpon>DetailsInterventionFormPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewsPresenters\InterventionsSection\InterventionForm\EndInterventionForm\EndInterventionFormPage.xaml.cs">
+      <DependentUpon>EndInterventionFormPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewsPresenters\InterventionsSection\InterventionForm\ResourcesInterventionForm\ResourcesInterventionFormPage.xaml.cs">
+      <DependentUpon>ResourcesInterventionFormPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewsPresenters\InterventionsSection\InterventionSectionPage.xaml.cs">
       <DependentUpon>InterventionSectionPage.xaml</DependentUpon>
@@ -121,9 +133,25 @@
     ViewsPresenters
   -->
   <ItemGroup>
+    <Page Include="ViewsPresenters\InterventionsSection\InterventionForm\ABCInterventionForm\ABCInterventionFormPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ViewsPresenters\InterventionsSection\InterventionForm\AdditionalInfoInterventionForm\AdditionalInfoInterventionFormPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ViewsPresenters\InterventionsSection\InterventionForm\DetailsInterventionForm\DetailsInterventionFormPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ViewsPresenters\InterventionsSection\InterventionForm\EndInterventionForm\EndInterventionFormPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ViewsPresenters\InterventionsSection\InterventionForm\ResourcesInterventionForm\ResourcesInterventionFormPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ViewsPresenters\InterventionsSection\InterventionSectionPage.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -180,6 +208,12 @@
     Resources
   -->
   <ItemGroup>
+    <Content Include="Icons\AmbulanceCart4.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\SittingCart4.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Vocabulary.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -303,10 +337,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ViewsPresenters\InterventionsSection\InterventionForm\CompletedInterventionForm\" />
-    <Folder Include="ViewsPresenters\InterventionsSection\InterventionForm\OngoingInterventionForm\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -95,24 +95,33 @@ namespace ETD.ViewsPresenters.TeamsSection
 		//Adding equipment to specified team equipment stack
 		public void AddTeamEquipment(String equip, String teamName)
 		{
-			Rectangle imageRectangle = new Rectangle();
-			imageRectangle.Name = equip;
-			imageRectangle.Tag = teamName;
-			imageRectangle.Width = 27;
-			imageRectangle.Height = 27;
-			imageRectangle.MouseRightButtonDown += new MouseButtonEventHandler(RemoveTeamEquipment);
+			//Limit of 3 pieces of equipment per team
+			if (teamEquipmentStacks[teamName].Children.Count <= 3)
+			{
+				Rectangle imageRectangle = new Rectangle();
+				imageRectangle.Name = equip;
+				imageRectangle.Tag = teamName;
+				imageRectangle.Width = 27;
+				imageRectangle.Height = 27;
+				imageRectangle.MouseRightButtonDown += new MouseButtonEventHandler(RemoveTeamEquipment);
 
-			Thickness equipmentMargin = imageRectangle.Margin;
-			equipmentMargin.Right = 1;
-			imageRectangle.Margin = equipmentMargin;
+				Thickness equipmentMargin = imageRectangle.Margin;
+				equipmentMargin.Right = 1;
+				imageRectangle.Margin = equipmentMargin;
 
-			//Getting the background image to the rectangle
-			ImageBrush equipmentImage = new ImageBrush();
-			equipmentImage.ImageSource = Services.getImage((equipments)Enum.Parse(typeof(equipments), equip));
-			imageRectangle.Fill = equipmentImage;
+				//Getting the background image to the rectangle
+				ImageBrush equipmentImage = new ImageBrush();
+				equipmentImage.ImageSource = Services.getImage((equipments)Enum.Parse(typeof(equipments), equip));
+				imageRectangle.Fill = equipmentImage;
 
-			//Getting the appropriate equipment StackPanel
-			teamEquipmentStacks[teamName].Children.Add(imageRectangle);
+				//Getting the appropriate equipment StackPanel
+				teamEquipmentStacks[teamName].Children.Add(imageRectangle);
+			}
+			else
+			{
+				MessageBox.Show("You cannot add more than 3 pieces of equipment to a team. The equipment is going to be readded to the map.");
+				mainWindow.CreateEquipmentPin(equip);
+			}
 		}
 
 		//Right clicking on an equipment in a team description removew the equipment from the stack and adds it back to the map

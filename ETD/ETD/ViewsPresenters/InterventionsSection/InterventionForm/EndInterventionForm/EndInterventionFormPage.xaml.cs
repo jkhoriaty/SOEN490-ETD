@@ -14,16 +14,16 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ETD.Models;
 
-namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.DetailsInterventionForm
+namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndInterventionForm
 {
 	/// <summary>
-	/// Interaction logic for DetailsInterventionFormPage.xaml
+	/// Interaction logic for EndInterventionFormPage.xaml
 	/// </summary>
-	public partial class DetailsInterventionFormPage : Page
+	public partial class EndInterventionFormPage : Page
 	{
 		private InterventionFormPage interventionForm;
 
-		public DetailsInterventionFormPage(InterventionFormPage interventionForm)
+		public EndInterventionFormPage(InterventionFormPage interventionForm)
 		{
 			InitializeComponent();
 			this.interventionForm = interventionForm;
@@ -37,6 +37,12 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.DetailsInter
 		private void TextBoxes_LostFocus(object sender, RoutedEventArgs e)
 		{
 			TextBoxHandler.LostFocus(sender, e);
+		}
+
+		//Submitting end of intervention
+		private void EndIntervention(object sender, RoutedEventArgs e)
+		{
+
 		}
 	}
 }

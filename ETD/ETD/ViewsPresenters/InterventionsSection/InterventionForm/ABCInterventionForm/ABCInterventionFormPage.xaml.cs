@@ -12,31 +12,20 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using ETD.Models;
 
-namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.DetailsInterventionForm
+namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.ABCInterventionForm
 {
 	/// <summary>
-	/// Interaction logic for DetailsInterventionFormPage.xaml
+	/// Interaction logic for ABCInterventionFormPage.xaml
 	/// </summary>
-	public partial class DetailsInterventionFormPage : Page
+	public partial class ABCInterventionFormPage : Page
 	{
 		private InterventionFormPage interventionForm;
 
-		public DetailsInterventionFormPage(InterventionFormPage interventionForm)
+		public ABCInterventionFormPage(InterventionFormPage interventionForm)
 		{
 			InitializeComponent();
 			this.interventionForm = interventionForm;
-		}
-
-		private void TextBoxes_GotFocus(object sender, RoutedEventArgs e)
-		{
-			TextBoxHandler.GotFocus(sender, e);
-		}
-
-		private void TextBoxes_LostFocus(object sender, RoutedEventArgs e)
-		{
-			TextBoxHandler.LostFocus(sender, e);
 		}
 	}
 }

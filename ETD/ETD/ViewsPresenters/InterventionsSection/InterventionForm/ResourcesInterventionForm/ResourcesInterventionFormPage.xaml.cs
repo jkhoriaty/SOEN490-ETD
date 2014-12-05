@@ -14,16 +14,16 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ETD.Models;
 
-namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.DetailsInterventionForm
+namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.ResourcesInterventionForm
 {
 	/// <summary>
-	/// Interaction logic for DetailsInterventionFormPage.xaml
+	/// Interaction logic for ResourcesInterventionForm.xaml
 	/// </summary>
-	public partial class DetailsInterventionFormPage : Page
+	public partial class ResourcesInterventionFormPage : Page
 	{
 		private InterventionFormPage interventionForm;
 
-		public DetailsInterventionFormPage(InterventionFormPage interventionForm)
+		public ResourcesInterventionFormPage(InterventionFormPage interventionForm)
 		{
 			InitializeComponent();
 			this.interventionForm = interventionForm;

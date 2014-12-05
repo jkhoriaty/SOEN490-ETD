@@ -7,7 +7,7 @@
       d:DesignHeight="177" d:DesignWidth="300"
 	Title="InterventionForm">
 	
-	<Border BorderBrush="Black" BorderThickness="1" CornerRadius="5" Margin="2,0,2,0">
+	<Border BorderBrush="Black" BorderThickness="1" CornerRadius="5" Margin="2,0,2,0" Width="300">
 		<StackPanel>
 			<Border CornerRadius="5,5,0,0" BorderBrush="Black" BorderThickness="1" >
 				<Grid>
@@ -17,25 +17,31 @@
 						<ColumnDefinition Width="1*"/>
 					</Grid.ColumnDefinitions>
 					<Border Grid.Column="0" Background="Black">
-						<Label Content="A" Name="teamName" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="14" Foreground="White"/>
+						<TextBlock Name="teamName" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="20" Foreground="White"/>
 					</Border>
-					<Label Grid.Column="1" Name="interventionType" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="14"/>
+					<Viewbox Grid.Column="1" Height="27">
+						<TextBlock Name="interventionType" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+					</Viewbox>
+					
 					<Border Grid.Column="2" Background="Black">
-						<Label Grid.Column="2" Name="interventionNumber" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="14" Foreground="White"/>
+						<TextBlock Name="interventionNumber" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="20" Foreground="White"/>
 					</Border>
 				</Grid>
 			</Border>
-			<TabControl Name="TabControl" TabStripPlacement="Bottom" Width="300" Height="145">
-				<TabItem Header="Preview">
+			<TabControl Name="TabControl" TabStripPlacement="Bottom" Height="145">
+				<TabItem Name="details" Header="Details">
 
 				</TabItem>
-				<TabItem Name="Details" Header="Details">
+				<TabItem Name="resources" Header="Resources">
 
 				</TabItem>
-				<TabItem Header="Resources">
+				<TabItem Name="abc" Header="ABC">
+					
+				</TabItem>
+				<TabItem Name="additionalInfo" Header="Additional Info">
 
 				</TabItem>
-				<TabItem Header="End">
+				<TabItem Name="end" Header="End">
 
 				</TabItem>
 			</TabControl>
