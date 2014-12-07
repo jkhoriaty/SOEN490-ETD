@@ -56,6 +56,11 @@ namespace ETD.ViewsPresenters.MapSection
 			pinEditor.CreateEquipmentPin(equipmentName);
 		}
 
+		public void CreateInterventionPin(int interventionNumber)
+		{
+			pinEditor.CreateInterventionPin(interventionNumber);
+		}
+
 		public void DeletePin(String pinName)
 		{
 			pinEditor.DeletePin(pinName);

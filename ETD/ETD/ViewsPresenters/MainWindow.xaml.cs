@@ -100,6 +100,12 @@ namespace ETD.ViewsPresenters
 			mapSection.CreateEquipmentPin(equipmentName);
 		}
 
+		//Creating intervention pin
+		public void CreateInterventionPin(int interventionNumber)
+		{
+			mapSection.CreateInterventionPin(interventionNumber);
+		}
+
 		//Deleting pin using its name (e.g. when a team is deleted)
 		public void DeletePin(String pinName)
 		{
@@ -111,5 +117,6 @@ namespace ETD.ViewsPresenters
 		{
 			teamsSection.AddTeamEquipment(equip, teamName);
 		}
+
 	}
 }

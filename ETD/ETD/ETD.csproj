@@ -38,6 +38,8 @@
   -->
   <ItemGroup>
     <Compile Include="Models\EquipmentGrid.cs" />
+    <Compile Include="Models\Intervention.cs" />
+    <Compile Include="Models\InterventionGrid.cs" />
     <Compile Include="Models\TeamGrid.cs" />
     <Compile Include="Models\TextboxHandler.cs" />
     <Compile Include="ViewsPresenters\InterventionsSection\InterventionForm\ABCInterventionForm\ABCInterventionFormPage.xaml.cs">

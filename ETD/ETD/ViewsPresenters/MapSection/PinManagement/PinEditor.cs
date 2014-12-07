@@ -15,44 +15,55 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 {
 	class PinEditor
 	{
-		private MapSectionPage caller;
-		private double teamSize = 40;
-		private double equipmentSize = 30;
+		private MapSectionPage mapSection;
+		private int teamSize = 40;
+		private int equipmentSize = 30;
+		private int interventionSize = 40;
 
-		public PinEditor(MapSectionPage caller)
+		public PinEditor(MapSectionPage mapSection)
 		{
-			this.caller = caller;
+			this.mapSection = mapSection;
 		}
 
 		//Creating a new team pin as a result to the successfull submission of the team form
 		public void CreateTeamPin(Team team)
 		{
-			TeamGrid mainContainer = new TeamGrid(team,caller);
-			caller.Map.Children.Add(mainContainer);
+			TeamGrid mainContainer = new TeamGrid(team, mapSection, teamSize);
+			mapSection.Map.Children.Add(mainContainer);
             
 			//Setting pin in the top-left corner and making sure it does not cover any other item
-			caller.SetPinPosition(mainContainer, (teamSize / 2), (teamSize / 2)); //Setting it top corner
-			caller.DetectCollision(mainContainer, (teamSize / 2), (teamSize / 2));
+			mapSection.SetPinPosition(mainContainer, (teamSize / 2), (teamSize / 2)); //Setting it top corner
+			mapSection.DetectCollision(mainContainer, (teamSize / 2), (teamSize / 2));
 		}
 
 		public void CreateEquipmentPin(String equipmentName)
 		{
-			EquipmentGrid mainContainer = new EquipmentGrid(equipmentName, caller);
-			caller.Map.Children.Add(mainContainer);
+			EquipmentGrid mainContainer = new EquipmentGrid(equipmentName, mapSection, equipmentSize);
+			mapSection.Map.Children.Add(mainContainer);
 
 			//Setting pin in the top-left corner and making sure it does not cover any other item
-			caller.SetPinPosition(mainContainer, (equipmentSize / 2), (equipmentSize / 2));
-			caller.DetectCollision(mainContainer, (equipmentSize / 2), (equipmentSize / 2));
+			mapSection.SetPinPosition(mainContainer, (equipmentSize / 2), (equipmentSize / 2));
+			mapSection.DetectCollision(mainContainer, (equipmentSize / 2), (equipmentSize / 2));
+		}
+
+		public void CreateInterventionPin(int interventionNumber)
+		{
+			InterventionGrid mainContainer = new InterventionGrid(interventionNumber, mapSection, interventionSize);
+			mapSection.Map.Children.Add(mainContainer);
+
+			//Setting pin in the bottom-left corner and making sure it does not cover any other item
+			mapSection.SetPinPosition(mainContainer, (interventionSize / 2), (interventionSize / 2));
+			mapSection.DetectCollision(mainContainer, (interventionSize / 2), (interventionSize / 2));
 		}
 
 		//Deleting pin using its name
 		public void DeletePin(String pinName)
 		{
-			foreach (Grid grid in caller.Map.Children)
+			foreach (Grid grid in mapSection.Map.Children)
 			{
 				if (grid.Name.Equals(pinName))
 				{
-					caller.Map.Children.Remove(grid);
+					mapSection.Map.Children.Remove(grid);
 					return;
 				}
 			}

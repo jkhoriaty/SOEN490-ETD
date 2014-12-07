@@ -11,16 +11,15 @@ namespace ETD.Models
 {
     class EquipmentGrid : Grid
     {
-        private int size = 30;
-        public EquipmentGrid(String equipmentName, MapSectionPage caller) : base()
+        public EquipmentGrid(String equipmentName, MapSectionPage mapSection, int size) : base()
         {
             this.Name = equipmentName;
             this.Tag = "equipment";
             this.Width = size;
             this.Height = size;
-            this.MouseLeftButtonDown += new MouseButtonEventHandler(caller.DragStart);
-            this.MouseLeftButtonUp += new MouseButtonEventHandler(caller.DragStop);
-            this.MouseMove += new MouseEventHandler(caller.DragMove);
+            this.MouseLeftButtonDown += new MouseButtonEventHandler(mapSection.DragStart);
+            this.MouseLeftButtonUp += new MouseButtonEventHandler(mapSection.DragStop);
+            this.MouseMove += new MouseEventHandler(mapSection.DragMove);
             
 
             Rectangle imageRectangle = new Rectangle();

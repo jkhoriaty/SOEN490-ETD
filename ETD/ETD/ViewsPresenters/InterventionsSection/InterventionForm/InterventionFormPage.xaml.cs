@@ -18,6 +18,7 @@ using ETD.ViewsPresenters.InterventionsSection.InterventionForm.ResourcesInterve
 using ETD.ViewsPresenters.InterventionsSection.InterventionForm.ABCInterventionForm;
 using ETD.ViewsPresenters.InterventionsSection.InterventionForm.AdditionalInfoInterventionForm;
 using ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndInterventionForm;
+using ETD.Models;
 
 namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm
 {
@@ -27,16 +28,21 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm
     public partial class InterventionFormPage : Page
     {
 		private InterventionSectionPage interventionSection;
+		private Intervention intervention;
 		private DetailsInterventionFormPage detailsPage;
 		private ResourcesInterventionFormPage resourcesPage;
 		private ABCInterventionFormPage abcPage;
 		private AdditionalInfoInterventionFormPage additionalInfoPage;
 		private EndInterventionFormPage endPage;
 
-		public InterventionFormPage(InterventionSectionPage interventionSection)
+		public InterventionFormPage(InterventionSectionPage interventionSection, Intervention intervention)
         {
             InitializeComponent();
 			this.interventionSection = interventionSection;
+
+			this.intervention = intervention;
+			interventionNumber.Text = "" + intervention.getInterventionNumber();
+
 			detailsPage = new DetailsInterventionFormPage(this);
 			resourcesPage = new ResourcesInterventionFormPage(this);
 			abcPage = new ABCInterventionFormPage(this);

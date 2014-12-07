@@ -11,10 +11,9 @@ namespace ETD.Models
 {
     class TeamGrid : Grid
     {
-        private int size = 40;
         private Rectangle imageRectangle;
         public Team team;
-        public TeamGrid(Team team, MapSectionPage caller) : base()
+        public TeamGrid(Team team, MapSectionPage mapSection, int size) : base()
         {
             this.team = team;
 
@@ -22,10 +21,10 @@ namespace ETD.Models
             this.Tag = "team";
             this.Width = size;
             this.Height = size;
-            this.MouseLeftButtonDown += new MouseButtonEventHandler(caller.DragStart);
-            this.MouseLeftButtonUp += new MouseButtonEventHandler(caller.DragStop);
-            this.MouseMove += new MouseEventHandler(caller.DragMove);
-            this.ContextMenu = caller.Resources["TeamContext"] as ContextMenu;
+            this.MouseLeftButtonDown += new MouseButtonEventHandler(mapSection.DragStart);
+            this.MouseLeftButtonUp += new MouseButtonEventHandler(mapSection.DragStop);
+            this.MouseMove += new MouseEventHandler(mapSection.DragMove);
+            this.ContextMenu = mapSection.Resources["TeamContext"] as ContextMenu;
             (this.ContextMenu.Items[0] as MenuItem).IsChecked = true;
 
             imageRectangle = new Rectangle();

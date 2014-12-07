@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ETD.ViewsPresenters.InterventionsSection.InterventionForm;
+using ETD.Models;
 
 namespace ETD.ViewsPresenters.InterventionsSection
 {
@@ -44,8 +45,11 @@ namespace ETD.ViewsPresenters.InterventionsSection
 
 		private void CreateInterventionForm(object sender, RoutedEventArgs e)
 		{
+			Intervention intervention = new Intervention();
+			mainWindow.CreateInterventionPin(intervention.getInterventionNumber());
+
 			Frame frame = new Frame();
-			frame.Content = new InterventionFormPage(this);
+			frame.Content = new InterventionFormPage(this, intervention);
 			InterventionsList.Children.Add(frame);
 		}
 	}
