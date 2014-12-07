@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ETD.ViewsPresenters.InterventionsSection;
+using ETD.ViewsPresenters.InterventionsSection.InterventionForm.TimersInterventionForm;
 using ETD.ViewsPresenters.InterventionsSection.InterventionForm.DetailsInterventionForm;
 using ETD.ViewsPresenters.InterventionsSection.InterventionForm.ResourcesInterventionForm;
 using ETD.ViewsPresenters.InterventionsSection.InterventionForm.ABCInterventionForm;
@@ -29,6 +30,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm
     {
 		private InterventionSectionPage interventionSection;
 		private Intervention intervention;
+		private TimersInterventionFormPage timersPage;
 		private DetailsInterventionFormPage detailsPage;
 		private ResourcesInterventionFormPage resourcesPage;
 		private ABCInterventionFormPage abcPage;
@@ -41,13 +43,18 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm
 			this.interventionSection = interventionSection;
 
 			this.intervention = intervention;
-			interventionNumber.Text = "" + intervention.getInterventionNumber();
+			setInterventionNumber(intervention.getInterventionNumber());
 
+			timersPage = new TimersInterventionFormPage(this);
 			detailsPage = new DetailsInterventionFormPage(this);
 			resourcesPage = new ResourcesInterventionFormPage(this);
 			abcPage = new ABCInterventionFormPage(this);
 			additionalInfoPage = new AdditionalInfoInterventionFormPage(this);
 			endPage = new EndInterventionFormPage(this);
+
+			Frame timersFrame = new Frame();
+			timersFrame.Content = timersPage;
+			timers.Content = timersFrame;
 
 			Frame detailsFrame = new Frame();
 			detailsFrame.Content = detailsPage;
@@ -68,6 +75,11 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm
 			Frame endFrame = new Frame();
 			endFrame.Content = endPage;
 			end.Content = endFrame;
+		}
+
+		public void setInterventionNumber(int interventionNum)
+		{
+			interventionNumber.Text = "" + interventionNum;
 		}
     }
 }

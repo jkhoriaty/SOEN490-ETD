@@ -57,6 +57,9 @@
     <Compile Include="ViewsPresenters\InterventionsSection\InterventionForm\ResourcesInterventionForm\ResourcesInterventionFormPage.xaml.cs">
       <DependentUpon>ResourcesInterventionFormPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewsPresenters\InterventionsSection\InterventionForm\TimersInterventionForm\TimersInterventionFormPage.xaml.cs">
+      <DependentUpon>TimersInterventionFormPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewsPresenters\InterventionsSection\InterventionSectionPage.xaml.cs">
       <DependentUpon>InterventionSectionPage.xaml</DependentUpon>
     </Compile>
@@ -152,6 +155,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ViewsPresenters\InterventionsSection\InterventionForm\ResourcesInterventionForm\ResourcesInterventionFormPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ViewsPresenters\InterventionsSection\InterventionForm\TimersInterventionForm\TimersInterventionFormPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
