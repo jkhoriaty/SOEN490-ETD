@@ -38,5 +38,21 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.DetailsInter
 		{
 			TextBoxHandler.LostFocus(sender, e);
 		}
+
+		private void SelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+			ComboBox comboBox = (ComboBox)sender;
+			ComboBoxItem item = (ComboBoxItem)comboBox.SelectedItem;
+			if (item.Content.Equals("Other"))
+			{
+				Grid.SetColumnSpan(complaint, 1);
+				AdditionalInformation.Visibility = Visibility.Visible;
+			}
+			else
+			{
+				AdditionalInformation.Visibility = Visibility.Collapsed;
+				Grid.SetColumnSpan(complaint, 2);
+			}
+		}
 	}
 }

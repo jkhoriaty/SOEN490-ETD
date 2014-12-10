@@ -29,7 +29,8 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.TimersInterv
 		private Dictionary<String, Label> timerLabels = new Dictionary<String, Label>();
 		private Dictionary<String, Stopwatch> stopwatches = new Dictionary<String, Stopwatch>();
 		private Dictionary<String, Label> statusLabels = new Dictionary<String, Label>();
-		private int deadline = 15;
+		public static int interventionDeadline = 30;
+		public static int movingDeadline = 5;
 
 		public TimersInterventionFormPage(InterventionFormPage interventionForm)
 		{
@@ -40,31 +41,50 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.TimersInterv
 			dispatcherTimer.Interval = new TimeSpan(0, 0, 1); //Update every second
 			dispatcherTimer.Start();
 
-			createOverallTimer();
+			CreateOverallTimer();
+
+			CreateTimer("A", "Backup");
 		}
 
+		//Method ran every second
 		public void refresh(object sender, EventArgs e)
 		{
 			foreach(KeyValuePair<String, Stopwatch> stopwatch in stopwatches)
 			{
-				if (statusLabels[stopwatch.Key].Content.Equals("Ongoing") || statusLabels[stopwatch.Key].Content.Equals("Overtime"))
+				String name = stopwatch.Key;
+				if (statusLabels[name].Content.Equals("Ongoing") || statusLabels[name].Content.Equals("Overtime"))
 				{
+					//Update all timers
 					TimeSpan elapsed = stopwatch.Value.Elapsed;
-					timerLabels[stopwatch.Key].Content = elapsed.Minutes + ":";
+					timerLabels[name].Content = elapsed.Minutes + ":";
 					if(elapsed.Seconds < 10)
 					{
-						timerLabels[stopwatch.Key].Content += "0";
+						timerLabels[name].Content += "0";
 					}
-					timerLabels[stopwatch.Key].Content += "" + elapsed.Seconds;
-					if(statusLabels[stopwatch.Key].Content.Equals("Ongoing") && deadline <= elapsed.Minutes)
+					timerLabels[name].Content += "" + elapsed.Seconds;
+
+					//Setting status to overtime of it surpasses the deadline
+					if(statusLabels[name].Content.Equals("Ongoing") && ((name.Equals("Intervention") && (interventionDeadline <= elapsed.Minutes)) || (!name.Equals("Intervention") && (movingDeadline <= elapsed.Minutes))))
 					{
-						setStatus(stopwatch.Key, "Overtime");
+						setStatus(name, "Overtime");
+					}
+
+					//Flash 15 seconds every minute if overtime
+					if(statusLabels[name].Content.Equals("Overtime"))
+					{
+						if(elapsed.Seconds <= 15)
+						{
+							Brush backgroundColor = statusLabels[name].Background;
+							statusLabels[name].Background = statusLabels[name].Foreground;
+							statusLabels[name].Foreground = backgroundColor;
+						}
 					}
 				}
 			}
 		}
 
-		public void createOverallTimer()
+		//Create the intervention timer
+		public void CreateOverallTimer()
 		{
 			Thickness border = new Thickness();
 			border.Bottom = 1;
@@ -161,6 +181,11 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.TimersInterv
 			stopwatch.Start();
 
 			timerPosition++;
+		}
+
+		public void StopOverallTimer()
+		{
+			setStatus("Intervention", "Completed");
 		}
 	}
 }

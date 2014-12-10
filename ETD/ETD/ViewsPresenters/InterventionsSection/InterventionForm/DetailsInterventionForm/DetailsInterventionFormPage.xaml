@@ -43,18 +43,17 @@
 		<Grid Margin="0,2,0,2">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="1*"/>
-				<ColumnDefinition Width="3*"/>
+				<ColumnDefinition Width="1*"/>
+				<ColumnDefinition Width="2*"/>
 			</Grid.ColumnDefinitions>
 			<Label Grid.Column="0" Content="Complaint:"/>
-			<ComboBox Grid.Column="1" Name="complaint" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+			<ComboBox Grid.Column="1" Grid.ColumnSpan="2" Name="complaint" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" SelectionChanged="SelectionChanged">
 				<ComboBoxItem Content="Musculo-Squelettique"/>
 				<ComboBoxItem Content="Number 2"/>
 				<ComboBoxItem Content="Number 3"/>
-				<ComboBoxItem Content="Number 4"/>
-				<ComboBoxItem>
-					<TextBox Text="Other"/>
-				</ComboBoxItem>
+				<ComboBoxItem Content="Other"/>
 			</ComboBox>
+			<TextBox Name="AdditionalInformation" Grid.Column="2" Grid.Row="0" Visibility="Collapsed" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
 		</Grid>
 	</StackPanel>
 </Page>

@@ -42,7 +42,46 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
 		//Submitting end of intervention
 		private void EndIntervention(object sender, RoutedEventArgs e)
 		{
+			Endhh.Text = "" + DateTime.Now.Hour;
+			Endmm.Text = "" + DateTime.Now.Minute;
 
+			interventionForm.HideInterventionForm();
+		}
+
+		private void Call911(object sender, RoutedEventArgs e)
+		{
+			Call911hh.Text = "" + DateTime.Now.Hour;
+			Call911mm.Text = "" + DateTime.Now.Minute;
+		}
+
+		private void FirstResponderArrival(object sender, RoutedEventArgs e)
+		{
+			FirstResponderCompany.Text = "SIM";
+			FirstResponderArrivalhh.Text = "" + DateTime.Now.Hour;
+			FirstResponderArrivalmm.Text = "" + DateTime.Now.Minute;
+		}
+
+		private void AmbulanceArrival(object sender, RoutedEventArgs e)
+		{
+			AmbulanceCompany.Text = "US";
+			AmbulanceArrivalhh.Text = "" + DateTime.Now.Hour;
+			AmbulanceArrivalmm.Text = "" + DateTime.Now.Minute;
+		}
+
+		private void SelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+			ComboBox comboBox = (ComboBox)sender;
+			ComboBoxItem item = (ComboBoxItem)comboBox.SelectedItem;
+			if (item.Content.Equals("Hospital") || item.Content.Equals("Other"))
+			{
+				Grid.SetColumnSpan(ComboBoxBorder, 1);
+				AdditionalInformation.Visibility = Visibility.Visible;
+			}
+			else
+			{
+				AdditionalInformation.Visibility = Visibility.Collapsed;
+				Grid.SetColumnSpan(ComboBoxBorder, 2);
+			}
 		}
 	}
 }

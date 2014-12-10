@@ -25,7 +25,6 @@ namespace ETD.ViewsPresenters.TeamsSection
 	public partial class TeamsSectionPage : Page
 	{
 		private MainWindow mainWindow;
-		private static double teamSizeDifference = 0;
 		private static Dictionary<String, StackPanel> teamEquipmentStacks = new Dictionary<String, StackPanel>();
 
 		public TeamsSectionPage(MainWindow mainWindow)
@@ -37,11 +36,8 @@ namespace ETD.ViewsPresenters.TeamsSection
 		//Adjusting the team section height
 		public void setTeamsSectionHeight(Border TeamsSection)
 		{
-			if (teamSizeDifference == 0)
-			{
-				teamSizeDifference = TeamsSection.ActualHeight - TeamList.ActualHeight;
-			}
-			Scroller.MaxHeight = TeamsSection.Height - teamSizeDifference;
+			//11 to account for padding of 2 on top and 2 on the bottom in addition to 7 in margin to the CreateTeamButtonBorder
+			Scroller.MaxHeight = TeamsSection.ActualHeight - TeamsSectionLabel.ActualHeight - CreateTeamButtonBorder.ActualHeight - 11;
 		}
 
 		//Clicking on the add team button

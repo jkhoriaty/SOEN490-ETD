@@ -15,7 +15,7 @@
 
 			</StackPanel>
 		</ScrollViewer>
-		<Border Margin="0,5,0,2" BorderBrush="Black" BorderThickness="1" CornerRadius="5">
+		<Border Name="CreateTeamButtonBorder" Margin="0,5,0,2" BorderBrush="Black" BorderThickness="1" CornerRadius="5">
 			<Button Name="CreateTeamButton" Content="+" FontSize="30" FontWeight="ExtraBlack" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="White" BorderBrush="Transparent" Click="DisplayCreateTeamForm"></Button>
 		</Border>
 	</StackPanel>

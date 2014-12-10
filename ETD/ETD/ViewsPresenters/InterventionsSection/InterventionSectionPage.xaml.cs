@@ -49,8 +49,57 @@ namespace ETD.ViewsPresenters.InterventionsSection
 			mainWindow.CreateInterventionPin(intervention.getInterventionNumber());
 
 			Frame frame = new Frame();
-			frame.Content = new InterventionFormPage(this, intervention);
+			InterventionFormPage form = new InterventionFormPage(this, intervention);
+			frame.Content = form;
+			frame.Name = "Intervention_" + form.getInterventionNumber();
+			frame.Tag = "Ongoing";
+			if(!InterventionFilterLabel.Content.Equals("Ongoing"))
+			{
+				frame.Visibility = Visibility.Collapsed;
+			}
 			InterventionsList.Children.Add(frame);
+		}
+
+		//Hiding intervention form after completion
+		public void HideInterventionForm(int interventionNumber)
+		{
+			foreach(Frame frame in InterventionsList.Children)
+			{
+				if(frame.Name.Equals("Intervention_" + interventionNumber))
+				{
+					frame.Tag = "Completed";
+					frame.Visibility = Visibility.Collapsed;
+				}
+			}
+		}
+
+		//Showing and hiding the appropriate intervention forms
+		private void FilterInterventions(object sender, RoutedEventArgs e)
+		{
+			MenuItem mi = (MenuItem)sender;
+			ContextMenu cm = (ContextMenu)mi.Parent;
+
+			foreach(MenuItem item in cm.Items)
+			{
+				if(item.IsChecked)
+				{
+					item.IsChecked = false;
+				}
+			}
+			mi.IsChecked = true;
+			InterventionFilterLabel.Content = mi.Tag;
+
+			foreach (Frame frame in InterventionsList.Children)
+			{
+				if(frame.Tag.Equals(mi.Tag))
+				{
+					frame.Visibility = Visibility.Visible;
+				}
+				else
+				{
+					frame.Visibility = Visibility.Collapsed;
+				}
+			}
 		}
 	}
 }

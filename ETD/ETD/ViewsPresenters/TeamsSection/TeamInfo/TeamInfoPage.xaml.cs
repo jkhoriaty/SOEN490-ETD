@@ -71,7 +71,7 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamInfo
 		//Right click on the team to remove it from the team list
 		private void DeleteTeam(object sender, MouseButtonEventArgs e)
 		{
-			Label label = (Label)sender;
+			TextBlock label = (TextBlock)sender;
 			teamsSection.RemoveTeam(label.Name);
 		}
 	}

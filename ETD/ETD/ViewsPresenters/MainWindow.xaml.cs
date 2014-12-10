@@ -18,6 +18,7 @@ using ETD.ViewsPresenters.TeamsSection;
 using ETD.ViewsPresenters.MapSection;
 using ETD.ViewsPresenters.InterventionsSection;
 using ETD.Models;
+using ETD.ViewsPresenters.InterventionsSection.InterventionForm.TimersInterventionForm;
 
 namespace ETD.ViewsPresenters
 {
@@ -57,7 +58,6 @@ namespace ETD.ViewsPresenters
 		//Window size or state changed - Adjusting the team section height
 		public void setSectionsHeight(object sender, EventArgs e)
 		{
-			TeamsSection.Height = MapSection.ActualHeight + 20;
 			teamsSection.setTeamsSectionHeight(TeamsSection);
 			interventionsSection.setInterventionsSectionWidth(InterventionsSection);
 		}
@@ -90,8 +90,15 @@ namespace ETD.ViewsPresenters
 		//Click: Create any type equipement
 		private void CreateEquipmentPin(object sender, RoutedEventArgs e)
 		{
-			Button bt = (Button)sender;
-			mapSection.CreateEquipmentPin(bt.Name);
+			ComboBoxItem selectedItem = (ComboBoxItem)EquipmentAdd.SelectedItem;
+			if (selectedItem != null)
+			{
+				mapSection.CreateEquipmentPin("" + selectedItem.Name);
+			}
+			else
+			{
+				MessageBox.Show("You need to select an equipment to add!");
+			}
 		}
 
 		//Recreating equipment after removal from the team
@@ -118,5 +125,35 @@ namespace ETD.ViewsPresenters
 			teamsSection.AddTeamEquipment(equip, teamName);
 		}
 
+		private void ChangeDeadlines(object sender, RoutedEventArgs e)
+		{
+			bool success = true;
+			int interventionDeadline = 0;
+			int movingDeadline = 0;
+			try
+			{
+				interventionDeadline = Int32.Parse(InterventionDeadline.Text);
+				movingDeadline = Int32.Parse(MovingDeadline.Text);
+				if (interventionDeadline < 0 || movingDeadline < 0)
+				{
+					success = false;
+				}
+			}
+			catch (Exception ex)
+			{
+				success = false;
+			}
+
+			if(success == false)
+			{
+				MessageBox.Show("The intervention deadlines should be numbers!");
+			}
+			else
+			{
+				TimersInterventionFormPage.interventionDeadline = interventionDeadline;
+				TimersInterventionFormPage.movingDeadline = movingDeadline;
+				MessageBox.Show("The deadlines have been changed.");
+			}
+		}
 	}
 }

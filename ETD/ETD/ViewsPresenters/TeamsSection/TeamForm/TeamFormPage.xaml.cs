@@ -26,6 +26,7 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 		public int currentNumberOfMembers = 1; //Used to track the number of members on the TeamForm
 		private List<Control> textboxLastValidationFailed = null;
 		private List<Border> comboboxLastValidationFailed = null;
+		private static List<String> activeTeamsList = new List<String>();
 
         public TeamFormPage(TeamsSectionPage caller)
         {
@@ -77,6 +78,7 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 
 				//Create team
 				String team_name = teamName.Text;
+				activeTeamsList.Add(team_name);
 				if(team_name.Length == 1)
 				{
 					team_name = team_name.ToUpper();
@@ -150,6 +152,15 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 			{
 				textboxFailedValidation.Add(teamName);
 			}
+
+			//Make sure that there are no other team with the same name
+			foreach(String item in activeTeamsList)
+			{
+				if(item.Equals(teamName.Text))
+				{
+					textboxFailedValidation.Add(teamName);
+				}
+			}
 			
 			//Team Member 1
 			if (teamMember1.Text.Equals("Team Member Name"))
@@ -217,10 +228,17 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 				}
 			}
 
-			bool success = true;
-			success = reportValidationFail(textboxFailedValidation);
-			success = reportValidationFail(comboboxFailedValidation);
-			return success;
+			bool textBoxSuccess = reportValidationFail(textboxFailedValidation);
+			bool comboBoxSuccess = reportValidationFail(comboboxFailedValidation);
+			if (textBoxSuccess == false || comboBoxSuccess == false)
+			{
+				return false;
+			}
+			else
+			{
+				return true;
+			}
+			
 		}
 
 		//Validation of hours and minutes fields, hours is true when the time passed is one of the hours fields

@@ -20,7 +20,6 @@ namespace ETD.Models
             this.MouseLeftButtonDown += new MouseButtonEventHandler(mapSection.DragStart);
             this.MouseLeftButtonUp += new MouseButtonEventHandler(mapSection.DragStop);
             this.MouseMove += new MouseEventHandler(mapSection.DragMove);
-            
 
             Rectangle imageRectangle = new Rectangle();
             imageRectangle.Width = size;

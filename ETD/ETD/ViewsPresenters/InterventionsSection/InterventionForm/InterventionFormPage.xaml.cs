@@ -44,6 +44,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm
 
 			this.intervention = intervention;
 			setInterventionNumber(intervention.getInterventionNumber());
+			//Set the intervention type RED if it is of code 1
 
 			timersPage = new TimersInterventionFormPage(this);
 			detailsPage = new DetailsInterventionFormPage(this);
@@ -80,6 +81,20 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm
 		public void setInterventionNumber(int interventionNum)
 		{
 			interventionNumber.Text = "" + interventionNum;
+		}
+
+		public int getInterventionNumber()
+		{
+			return intervention.getInterventionNumber();
+		}
+
+		//Hiding intervention form after completion
+		public void HideInterventionForm()
+		{
+			//Stopping timer
+			timersPage.StopOverallTimer();
+
+			interventionSection.HideInterventionForm(getInterventionNumber());
 		}
     }
 }

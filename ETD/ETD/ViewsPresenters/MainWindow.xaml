@@ -10,29 +10,52 @@
 		Width="1000"
 		MinHeight="700"
 		Height="700">
+
 	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="250"/>
+			<ColumnDefinition/>
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="25"/>
+			<RowDefinition/>
+			<RowDefinition Height="200"/>
+		</Grid.RowDefinitions>
 		<!-- The following is the team display section along with the tag and the button to add new teams -->
-		<Border Name="TeamsSection" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" VerticalAlignment="Top"  Width="250" Padding="2">
+		<Border Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Name="TeamsSection" BorderBrush="Black" BorderThickness="1" Padding="2">
 			<!-- Here goes the TeamsSectionPage frame -->
 		</Border>
 		
-		<StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="250,0,0,0">
-			<!-- Here go all the buttons -->
-			<Button Content="Load Map" Name="Load_Map" Click="LoadMap" Margin="2,0,2,0"/>
-		</StackPanel>
-		<StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="250,0,0,0">
-			<!-- Here go all the buttons -->
-			<Button Content="Ambulance Cart" Name="ambulanceCart" Click="CreateEquipmentPin" Margin="2,0,2,0"/>
-			<Button Content="Sitting Cart" Name="sittingCart" Click="CreateEquipmentPin" Margin="2,0,2,0"/>
-			<Button Content="Epipen" Name="epipen" Click="CreateEquipmentPin" Margin="2,0,2,0"/>
-			<Button Content="Transport Stretcher" Name="transportStretcher" Click="CreateEquipmentPin" Margin="2,0,2,0"/>
-			<Button Content="Mounted Stretcher" Name="mountedStretcher" Click="CreateEquipmentPin" Margin="2,0,2,0"/>
-			<Button Content="Wheelchair" Name="wheelchair" Click="CreateEquipmentPin" Margin="2,0,2,0"/>
-		</StackPanel>
-		<Border Name="MapSection" BorderBrush="Black" BorderThickness="1" Margin="250,20,0,200">
+		<Grid Grid.Column="1" Grid.Row="0">
+			<StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+				<!-- Here go all the buttons -->
+				<Button Content="Load Map" Name="Load_Map" Click="LoadMap" Margin="2,0,2,0"/>
+			</StackPanel>
+			<StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+				<!-- Here go all the buttons -->
+				<TextBlock Text="Deadlines (mins):" FontWeight="Bold" Margin="1,0,1,0" VerticalAlignment="Center"/>
+				<TextBlock Text="Intervention" Margin="1,0,1,0" VerticalAlignment="Center"/>
+				<TextBox Name="InterventionDeadline" Text="30" Width="20" Margin="1,0,1,0" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+				<TextBlock Text="Moving" Margin="1,0,1,0" VerticalAlignment="Center"/>
+				<TextBox Name="MovingDeadline" Text="5" Width="20" Margin="1,0,1,0" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+				<Button Content="Submit" Margin="1,0,1,0" VerticalAlignment="Center" Click="ChangeDeadlines"/>
+				<Border BorderThickness="0.25" BorderBrush="Black" Margin="3,0,3,0" VerticalAlignment="Center"/>
+				<ComboBox Grid.Column="0" Name="EquipmentAdd" HorizontalAlignment="Stretch" Width="130" Margin="1,0,1,0" VerticalAlignment="Center">
+					<ComboBoxItem Content="Ambulance Cart" Name="ambulanceCart"/>
+					<ComboBoxItem Content="Sitting Cart" Name="sittingCart"/>
+					<ComboBoxItem Content="Epipen" Name="epipen"/>
+					<ComboBoxItem Content="Transport Stretcher" Name="transportStretcher"/>
+					<ComboBoxItem Content="Mounted Stretcher" Name="mountedStretcher"/>
+					<ComboBoxItem Content="Wheelchair" Name="wheelchair"/>
+				</ComboBox>
+				<Button Grid.Column="1" Content="Add Equipemnt" Click="CreateEquipmentPin" Margin="1,0,1,0" VerticalAlignment="Center"/>
+			</StackPanel>
+		</Grid>
+		
+		<Border Grid.Column="1" Grid.Row="1" Name="MapSection" BorderBrush="Black" BorderThickness="1">
 			<!-- Here goes the MapSectionPage frame -->
 		</Border>
-		<Border Name="InterventionsSection" BorderBrush="Black" BorderThickness="1" VerticalAlignment="Bottom" Height="200" Padding="2">
+		<Border Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" Name="InterventionsSection" BorderBrush="Black" BorderThickness="1" VerticalAlignment="Bottom" Height="200" Padding="2">
 			<!-- Here goes the InterventionsSection frame -->
 		</Border>
 	</Grid>
