@@ -14,16 +14,16 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ETD.Models;
 
-namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.DetailsInterventionForm
+namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.ResourcesInterventionForm
 {
 	/// <summary>
-	/// Interaction logic for DetailsInterventionFormPage.xaml
+	/// Interaction logic for ResourcesInterventionForm.xaml
 	/// </summary>
-	public partial class DetailsInterventionFormPage : Page
+	public partial class ResourcesInterventionFormPage : Page
 	{
 		private InterventionFormPage interventionForm;
 
-		public DetailsInterventionFormPage(InterventionFormPage interventionForm)
+		public ResourcesInterventionFormPage(InterventionFormPage interventionForm)
 		{
 			InitializeComponent();
 			this.interventionForm = interventionForm;
@@ -37,22 +37,6 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.DetailsInter
 		private void TextBoxes_LostFocus(object sender, RoutedEventArgs e)
 		{
 			TextBoxHandler.LostFocus(sender, e);
-		}
-
-		private void SelectionChanged(object sender, SelectionChangedEventArgs e)
-		{
-			ComboBox comboBox = (ComboBox)sender;
-			ComboBoxItem item = (ComboBoxItem)comboBox.SelectedItem;
-			if (item.Content.Equals("Other"))
-			{
-				Grid.SetColumnSpan(complaint, 1);
-				AdditionalInformation.Visibility = Visibility.Visible;
-			}
-			else
-			{
-				AdditionalInformation.Visibility = Visibility.Collapsed;
-				Grid.SetColumnSpan(complaint, 2);
-			}
 		}
 	}
 }

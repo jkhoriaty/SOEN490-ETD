@@ -11,10 +11,9 @@ namespace ETD.Models
 {
     class TeamGrid : Grid
     {
-        private int size = 40;
         private Rectangle imageRectangle;
         public Team team;
-        public TeamGrid(Team team, MapSectionPage caller) : base()
+        public TeamGrid(Team team, MapSectionPage mapSection, int size) : base()
         {
             this.team = team;
 
@@ -22,10 +21,10 @@ namespace ETD.Models
             this.Tag = "team";
             this.Width = size;
             this.Height = size;
-            this.MouseLeftButtonDown += new MouseButtonEventHandler(caller.DragStart);
-            this.MouseLeftButtonUp += new MouseButtonEventHandler(caller.DragStop);
-            this.MouseMove += new MouseEventHandler(caller.DragMove);
-            this.ContextMenu = caller.Resources["TeamContext"] as ContextMenu;
+            this.MouseLeftButtonDown += new MouseButtonEventHandler(mapSection.DragStart);
+            this.MouseLeftButtonUp += new MouseButtonEventHandler(mapSection.DragStop);
+            this.MouseMove += new MouseEventHandler(mapSection.DragMove);
+            this.ContextMenu = mapSection.Resources["TeamContext"] as ContextMenu;
             (this.ContextMenu.Items[0] as MenuItem).IsChecked = true;
 
             imageRectangle = new Rectangle();
@@ -36,12 +35,16 @@ namespace ETD.Models
             imageRectangle.Fill = img;
             this.Children.Add(imageRectangle);
 
-            Label nameLabel = new Label();
-            nameLabel.Width = size;
-            nameLabel.Height = size;
+			Viewbox viewbox = new Viewbox();
+			viewbox.Width = size;
+			viewbox.Height = size;
+			viewbox.HorizontalAlignment = HorizontalAlignment.Center;
+			viewbox.VerticalAlignment = VerticalAlignment.Center;
+            this.Children.Add(viewbox);
+
+			TextBlock nameLabel = new TextBlock();
+			nameLabel.Text = team.getName();
             nameLabel.FontWeight = FontWeights.DemiBold;
-            nameLabel.HorizontalContentAlignment = HorizontalAlignment.Center;
-            nameLabel.VerticalContentAlignment = VerticalAlignment.Center;
             nameLabel.IsHitTestVisible = false;
 
             //Adding shadow effect so text appears clearly no matter what the background is
@@ -51,39 +54,9 @@ namespace ETD.Models
             shadow.Opacity = 1.0;
             shadow.BlurRadius = 3;
             shadow.Color = Colors.White;
-            nameLabel.Effect = shadow;
+			nameLabel.Effect = shadow;
 
-            //Determining size of text and margin to make the text appear perfectly centered
-            Thickness labelMargin = nameLabel.Margin;
-            nameLabel.Content = team.getName();
-            switch (nameLabel.Content.ToString().Length)
-            {
-                case 1:
-                    nameLabel.FontSize = 28;
-                    labelMargin.Top = -10;
-                    break;
-                case 2:
-                    nameLabel.FontSize = 24;
-                    labelMargin.Top = -6;
-                    break;
-                case 3:
-                    nameLabel.FontSize = 20;
-                    labelMargin.Top = -3;
-                    break;
-                case 4:
-                default:
-                    nameLabel.FontSize = 16;
-                    labelMargin.Top = -2;
-                    break;
-                case 5:
-                case 6:
-                    nameLabel.FontSize = 12;
-                    labelMargin.Top = -1;
-                    break;
-            }
-            nameLabel.Margin = labelMargin;
-
-            this.Children.Add(nameLabel);
+			viewbox.Child = nameLabel;
         }
 
         public void ChangeStatus(String status)

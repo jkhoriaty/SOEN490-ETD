@@ -4,25 +4,50 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
+      d:DesignHeight="177" d:DesignWidth="325"
 	Title="InterventionForm">
 	
-	<Border BorderBrush="Black" BorderThickness="1" CornerRadius="5" Margin="2,0,2,0">
-		<Grid>
-			<TabControl Name="TabControl" TabStripPlacement="Bottom" Width="300" >
-				<TabItem Header="Preview">
+	<Border BorderBrush="Black" BorderThickness="1" CornerRadius="5" Margin="2,0,2,0" Width="325">
+		<StackPanel>
+			<Border CornerRadius="5,5,0,0" BorderBrush="Black" BorderThickness="1" >
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="2*"/>
+						<ColumnDefinition Width="7*"/>
+						<ColumnDefinition Width="1*"/>
+					</Grid.ColumnDefinitions>
+					<Border Grid.Column="0" Background="Black">
+						<TextBlock Name="teamName" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="20" Foreground="White"/>
+					</Border>
+					<Viewbox Grid.Column="1" Height="27">
+						<TextBlock Name="interventionType" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+					</Viewbox>
+					
+					<Border Grid.Column="2" Background="Black">
+						<TextBlock Name="interventionNumber" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="20" Foreground="White"/>
+					</Border>
+				</Grid>
+			</Border>
+			<TabControl Name="TabControl" TabStripPlacement="Bottom" Height="145">
+				<TabItem Name="timers" Header="Timers">
 					
 				</TabItem>
-				<TabItem Name="Details" Header="Details">
-					
-				</TabItem>
-				<TabItem Header="Resources">
+				<TabItem Name="details" Header="Details">
 
 				</TabItem>
-				<TabItem Header="End">
+				<TabItem Name="resources" Header="Resources">
+
+				</TabItem>
+				<TabItem Name="abc" Header="ABC">
+					
+				</TabItem>
+				<TabItem Name="additionalInfo" Header="Additional Info">
+
+				</TabItem>
+				<TabItem Name="end" Header="End">
 
 				</TabItem>
 			</TabControl>
-		</Grid>
+		</StackPanel>
 	</Border>
 </Page>

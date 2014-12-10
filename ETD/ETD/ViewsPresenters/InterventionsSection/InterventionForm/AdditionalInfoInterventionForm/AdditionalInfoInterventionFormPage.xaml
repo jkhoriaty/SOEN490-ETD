@@ -1,0 +1,13 @@
+﻿<Page x:Class="ETD.ViewsPresenters.InterventionsSection.InterventionForm.AdditionalInfoInterventionForm.AdditionalInfoInterventionFormPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="120" d:DesignWidth="325"
+	Title="AdditionalInfoInterventionFormPage">
+
+    <Grid>
+		<TextBox Name="additionalInformation" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible"/>
+	</Grid>
+</Page>

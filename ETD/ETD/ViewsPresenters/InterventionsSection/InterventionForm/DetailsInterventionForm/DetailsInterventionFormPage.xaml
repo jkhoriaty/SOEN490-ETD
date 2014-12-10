@@ -4,55 +4,56 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
+      d:DesignHeight="120" d:DesignWidth="325"
 	Title="DetailsInterventionFormPage">
 
 	<StackPanel VerticalAlignment="Center">
 		<UniformGrid Margin="0,1,0,1">
 			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 				<Label Content="Call:"/>
-				<TextBox Name="timeOfCallhh" Width="30" Text="hh" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+				<TextBox Name="callhh" Width="30" Text="hh" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
 				<Label Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-				<TextBox Name="timeOfCallmm" Width="30" Text="mm" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+				<TextBox Name="callmm" Width="30" Text="mm" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
 			</StackPanel>
-			<TextBox Text="Caller" Name="callerName" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-			<TextBox Text="Location" Name="location" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,1,0,1"/>
-			<TextBox Text="Nature of Call" Name="typeOfCall" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,1,0,1"/>
+			<TextBox Text="Caller" Name="callerName" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+			<TextBox Text="Location" Name="location" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,1,0,1" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+			<TextBox Text="Nature of Call" Name="typeOfCall" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,1,0,1" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
 		</UniformGrid>
 		<Border BorderThickness="1" BorderBrush="Black" Margin="0,3,0,3"/>
 		<UniformGrid Rows="1">
 			<StackPanel Orientation="Horizontal">
 				<Label Content="Priority:"/>
-				<ComboBox HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+				<ComboBox Name="priority" Width="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
 					<ComboBoxItem Content="1"/>
 					<ComboBoxItem Content="2"/>
 				</ComboBox>
 			</StackPanel>
 			<StackPanel Orientation="Horizontal">
 				<Label Content="Gender:"/>
-				<ComboBox HorizontalAlignment="Stretch" VerticalContentAlignment="Stretch">
+				<ComboBox Name="gender" Width="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
 					<ComboBoxItem Content="M"/>
 					<ComboBoxItem Content="F"/>
 				</ComboBox>
 			</StackPanel>
 			<StackPanel Orientation="Horizontal">
 				<Label Content="Age:"/>
-				<TextBox Width="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+				<TextBox Name="age" Width="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
 			</StackPanel>
 		</UniformGrid>
 		<Grid Margin="0,2,0,2">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="1*"/>
+				<ColumnDefinition Width="1*"/>
 				<ColumnDefinition Width="2*"/>
 			</Grid.ColumnDefinitions>
 			<Label Grid.Column="0" Content="Complaint:"/>
-			<ComboBox Grid.Column="1">
+			<ComboBox Grid.Column="1" Grid.ColumnSpan="2" Name="complaint" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" SelectionChanged="SelectionChanged">
 				<ComboBoxItem Content="Musculo-Squelettique"/>
 				<ComboBoxItem Content="Number 2"/>
 				<ComboBoxItem Content="Number 3"/>
-				<ComboBoxItem Content="Number 4"/>
-				<ComboBoxItem Content="Number 5"/>
+				<ComboBoxItem Content="Other"/>
 			</ComboBox>
+			<TextBox Name="AdditionalInformation" Grid.Column="2" Grid.Row="0" Visibility="Collapsed" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
 		</Grid>
 	</StackPanel>
 </Page>

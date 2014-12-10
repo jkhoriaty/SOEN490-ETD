@@ -52,6 +52,11 @@ namespace ETD.Models
 			{statuses.busy, @"\Icons\Medicine_busy.png"}
 		};
 
+		private static Dictionary<String, String> generalRelPath = new Dictionary<String, String>
+		{
+			{"intervention", @"\Icons\addbutton.png"}
+		};
+
 		private static Dictionary<String, String> alphabet = new Dictionary<String, String>
 		{
 			{"A", "Alpha"},
@@ -114,6 +119,12 @@ namespace ETD.Models
 				img = new BitmapImage(new Uri(AbsolutePath + medicinePinRelPath[status]));
 			}
 
+			return img;
+		}
+
+		public static BitmapImage getImage(String type)
+		{
+			BitmapImage img = new BitmapImage(new Uri(AbsolutePath + generalRelPath[type]));
 			return img;
 		}
 

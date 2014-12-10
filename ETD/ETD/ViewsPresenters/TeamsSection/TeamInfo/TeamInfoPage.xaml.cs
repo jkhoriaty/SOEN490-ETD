@@ -38,11 +38,11 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamInfo
 			teamName.Name = team.getName();
 			if (team.getName().Length == 1)
 			{
-				teamName.Content = Services.getPhoneticLetter(team.getName());
+				teamName.Text = Services.getPhoneticLetter(team.getName());
 			}
 			else
 			{
-				teamName.Content = team.getName();
+				teamName.Text = team.getName();
 			}
 
 			ImageBrush img = new ImageBrush();
@@ -71,7 +71,7 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamInfo
 		//Right click on the team to remove it from the team list
 		private void DeleteTeam(object sender, MouseButtonEventArgs e)
 		{
-			Label label = (Label)sender;
+			TextBlock label = (TextBlock)sender;
 			teamsSection.RemoveTeam(label.Name);
 		}
 	}

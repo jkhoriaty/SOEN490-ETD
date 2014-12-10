@@ -25,7 +25,6 @@ namespace ETD.ViewsPresenters.TeamsSection
 	public partial class TeamsSectionPage : Page
 	{
 		private MainWindow mainWindow;
-		private static double teamSizeDifference = 0;
 		private static Dictionary<String, StackPanel> teamEquipmentStacks = new Dictionary<String, StackPanel>();
 
 		public TeamsSectionPage(MainWindow mainWindow)
@@ -37,11 +36,8 @@ namespace ETD.ViewsPresenters.TeamsSection
 		//Adjusting the team section height
 		public void setTeamsSectionHeight(Border TeamsSection)
 		{
-			if (teamSizeDifference == 0)
-			{
-				teamSizeDifference = TeamsSection.ActualHeight - TeamList.ActualHeight;
-			}
-			Scroller.MaxHeight = TeamsSection.Height - teamSizeDifference;
+			//11 to account for padding of 2 on top and 2 on the bottom in addition to 7 in margin to the CreateTeamButtonBorder
+			Scroller.MaxHeight = TeamsSection.ActualHeight - TeamsSectionLabel.ActualHeight - CreateTeamButtonBorder.ActualHeight - 11;
 		}
 
 		//Clicking on the add team button
@@ -95,24 +91,33 @@ namespace ETD.ViewsPresenters.TeamsSection
 		//Adding equipment to specified team equipment stack
 		public void AddTeamEquipment(String equip, String teamName)
 		{
-			Rectangle imageRectangle = new Rectangle();
-			imageRectangle.Name = equip;
-			imageRectangle.Tag = teamName;
-			imageRectangle.Width = 27;
-			imageRectangle.Height = 27;
-			imageRectangle.MouseRightButtonDown += new MouseButtonEventHandler(RemoveTeamEquipment);
+			//Limit of 3 pieces of equipment per team
+			if (teamEquipmentStacks[teamName].Children.Count <= 3)
+			{
+				Rectangle imageRectangle = new Rectangle();
+				imageRectangle.Name = equip;
+				imageRectangle.Tag = teamName;
+				imageRectangle.Width = 27;
+				imageRectangle.Height = 27;
+				imageRectangle.MouseRightButtonDown += new MouseButtonEventHandler(RemoveTeamEquipment);
 
-			Thickness equipmentMargin = imageRectangle.Margin;
-			equipmentMargin.Right = 1;
-			imageRectangle.Margin = equipmentMargin;
+				Thickness equipmentMargin = imageRectangle.Margin;
+				equipmentMargin.Right = 1;
+				imageRectangle.Margin = equipmentMargin;
 
-			//Getting the background image to the rectangle
-			ImageBrush equipmentImage = new ImageBrush();
-			equipmentImage.ImageSource = Services.getImage((equipments)Enum.Parse(typeof(equipments), equip));
-			imageRectangle.Fill = equipmentImage;
+				//Getting the background image to the rectangle
+				ImageBrush equipmentImage = new ImageBrush();
+				equipmentImage.ImageSource = Services.getImage((equipments)Enum.Parse(typeof(equipments), equip));
+				imageRectangle.Fill = equipmentImage;
 
-			//Getting the appropriate equipment StackPanel
-			teamEquipmentStacks[teamName].Children.Add(imageRectangle);
+				//Getting the appropriate equipment StackPanel
+				teamEquipmentStacks[teamName].Children.Add(imageRectangle);
+			}
+			else
+			{
+				MessageBox.Show("You cannot add more than 3 pieces of equipment to a team. The equipment is going to be readded to the map.");
+				mainWindow.CreateEquipmentPin(equip);
+			}
 		}
 
 		//Right clicking on an equipment in a team description removew the equipment from the stack and adds it back to the map
