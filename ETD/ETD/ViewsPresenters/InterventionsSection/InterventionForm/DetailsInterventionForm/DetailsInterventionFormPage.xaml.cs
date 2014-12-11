@@ -22,11 +22,14 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.DetailsInter
 	public partial class DetailsInterventionFormPage : Page
 	{
 		private InterventionFormPage interventionForm;
+		private Intervention intervention;
 
-		public DetailsInterventionFormPage(InterventionFormPage interventionForm)
+		public DetailsInterventionFormPage(InterventionFormPage interventionForm, Intervention intervention)
 		{
 			InitializeComponent();
 			this.interventionForm = interventionForm;
+			this.intervention = intervention;
+			TextBoxHandler.setNow(Callhh, Callmm);
 		}
 
 		private void TextBoxes_GotFocus(object sender, RoutedEventArgs e)
@@ -45,14 +48,74 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.DetailsInter
 			ComboBoxItem item = (ComboBoxItem)comboBox.SelectedItem;
 			if (item.Content.Equals("Other"))
 			{
-				Grid.SetColumnSpan(complaint, 1);
-				AdditionalInformation.Visibility = Visibility.Visible;
+				Grid.SetColumnSpan(Complaint, 1);
+				OtherChiefComplaint.Visibility = Visibility.Visible;
 			}
 			else
 			{
-				AdditionalInformation.Visibility = Visibility.Collapsed;
-				Grid.SetColumnSpan(complaint, 2);
+				OtherChiefComplaint.Visibility = Visibility.Collapsed;
+				Grid.SetColumnSpan(Complaint, 2);
 			}
+		}
+
+		public void PersistencyUpdate()
+		{
+			try
+			{
+				DateTime callTime = intervention.getTimeOfCall();
+				int hours = int.Parse(Callhh.Text);
+				int minutes = int.Parse(Callmm.Text);
+				callTime = callTime.Date + (new TimeSpan(hours, minutes, 0));
+				intervention.setTimeOfCall(callTime);
+			}
+			catch (Exception e) { }
+
+			if(!TextBoxHandler.isDefaultText(CallerName))
+			{
+				intervention.setCallerName(CallerName.Text);
+			}
+			if(!TextBoxHandler.isDefaultText(Location))
+			{
+				intervention.setLocation(Location.Text);
+			}
+			if (!TextBoxHandler.isDefaultText(NatureOfCall))
+			{
+				intervention.setNatureOfCall(NatureOfCall.Text);
+			}
+
+			try
+			{
+				ComboBoxItem priorityItem = (ComboBoxItem)Priority.SelectedItem;
+				int code = int.Parse("" + priorityItem.Content);
+				intervention.setCode(code);
+			}
+			catch (Exception e) { }
+
+			try
+			{
+				ComboBoxItem genderItem = (ComboBoxItem)Gender.SelectedItem;
+				intervention.setGender("" + genderItem.Content);
+			}
+			catch (Exception e) { }
+
+			intervention.setAge("" + Age.Text);
+
+			try
+			{
+				ComboBoxItem chiefComplaint = (ComboBoxItem)Complaint.SelectedItem;
+				String complaint = "" + chiefComplaint.Content;
+				intervention.setChiefComplaint(complaint);
+				if(complaint.Equals("Other"))
+				{
+					intervention.setOtherChiefComplaint(OtherChiefComplaint.Text);
+				}
+			}
+			catch (Exception e) { }
+		}
+
+		private void Button_Click(object sender, RoutedEventArgs e)
+		{
+			TextBoxHandler.setNow(Callhh, Callmm);
 		}
 	}
 }

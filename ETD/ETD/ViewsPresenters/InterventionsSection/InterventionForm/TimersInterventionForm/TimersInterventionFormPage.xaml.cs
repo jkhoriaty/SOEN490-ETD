@@ -42,8 +42,6 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.TimersInterv
 			dispatcherTimer.Start();
 
 			CreateOverallTimer();
-
-			CreateTimer("A", "Backup");
 		}
 
 		//Method ran every second
@@ -84,7 +82,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.TimersInterv
 		}
 
 		//Create the intervention timer
-		public void CreateOverallTimer()
+		private void CreateOverallTimer()
 		{
 			Thickness border = new Thickness();
 			border.Bottom = 1;
@@ -155,25 +153,25 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.TimersInterv
 			Grid.SetRow(teamLabel, timerPosition);
 			timersList.Children.Add(teamLabel);
 
-			Label name = new Label();
-			name.Content = resource;
-			Grid.SetColumn(name, 1);
-			Grid.SetRow(name, timerPosition);
-			timersList.Children.Add(name);
+			Label resourceLabel = new Label();
+			resourceLabel.Content = resource;
+			Grid.SetColumn(resourceLabel, 1);
+			Grid.SetRow(resourceLabel, timerPosition);
+			timersList.Children.Add(resourceLabel);
 
-			Label timer = new Label();
-			timer.HorizontalContentAlignment = HorizontalAlignment.Center;
-			Grid.SetColumn(timer, 2);
-			Grid.SetRow(timer, timerPosition);
-			timersList.Children.Add(timer);
-			timerLabels.Add(resource, timer);
+			Label timerLabel = new Label();
+			timerLabel.HorizontalContentAlignment = HorizontalAlignment.Center;
+			Grid.SetColumn(timerLabel, 2);
+			Grid.SetRow(timerLabel, timerPosition);
+			timersList.Children.Add(timerLabel);
+			timerLabels.Add(resource, timerLabel);
 
-			Label status = new Label();
-			status.HorizontalContentAlignment = HorizontalAlignment.Center;
-			Grid.SetColumn(status, 3);
-			Grid.SetRow(status, timerPosition);
-			timersList.Children.Add(status);
-			statusLabels.Add(resource, status);
+			Label statusLabel = new Label();
+			statusLabel.HorizontalContentAlignment = HorizontalAlignment.Center;
+			Grid.SetColumn(statusLabel, 3);
+			Grid.SetRow(statusLabel, timerPosition);
+			timersList.Children.Add(statusLabel);
+			statusLabels.Add(resource, statusLabel);
 			setStatus(resource, "Ongoing");
 
 			Stopwatch stopwatch = new Stopwatch();

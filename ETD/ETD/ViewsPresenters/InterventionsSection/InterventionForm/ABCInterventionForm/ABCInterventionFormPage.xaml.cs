@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ETD.Models;
 
 namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.ABCInterventionForm
 {
@@ -21,11 +22,13 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.ABCIntervent
 	public partial class ABCInterventionFormPage : Page
 	{
 		private InterventionFormPage interventionForm;
+		private Intervention intervention;
 
-		public ABCInterventionFormPage(InterventionFormPage interventionForm)
+		public ABCInterventionFormPage(InterventionFormPage interventionForm, Intervention intervention)
 		{
 			InitializeComponent();
 			this.interventionForm = interventionForm;
+			this.intervention = intervention;
 		}
 	}
 }

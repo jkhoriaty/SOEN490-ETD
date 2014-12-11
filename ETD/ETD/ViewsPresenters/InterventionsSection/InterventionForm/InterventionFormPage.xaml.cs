@@ -20,6 +20,7 @@ using ETD.ViewsPresenters.InterventionsSection.InterventionForm.ABCInterventionF
 using ETD.ViewsPresenters.InterventionsSection.InterventionForm.AdditionalInfoInterventionForm;
 using ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndInterventionForm;
 using ETD.Models;
+using System.Windows.Threading;
 
 namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm
 {
@@ -37,6 +38,8 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm
 		private AdditionalInfoInterventionFormPage additionalInfoPage;
 		private EndInterventionFormPage endPage;
 
+		private DispatcherTimer dispatcherTimer = new DispatcherTimer();
+
 		public InterventionFormPage(InterventionSectionPage interventionSection, Intervention intervention)
         {
             InitializeComponent();
@@ -46,12 +49,16 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm
 			setInterventionNumber(intervention.getInterventionNumber());
 			//Set the intervention type RED if it is of code 1
 
+			dispatcherTimer.Tick += new EventHandler(PersistencyUpdate);
+			dispatcherTimer.Interval += new TimeSpan(0, 1, 0);
+			dispatcherTimer.Start();
+
 			timersPage = new TimersInterventionFormPage(this);
-			detailsPage = new DetailsInterventionFormPage(this);
-			resourcesPage = new ResourcesInterventionFormPage(this);
-			abcPage = new ABCInterventionFormPage(this);
-			additionalInfoPage = new AdditionalInfoInterventionFormPage(this);
-			endPage = new EndInterventionFormPage(this);
+			detailsPage = new DetailsInterventionFormPage(this, intervention);
+			resourcesPage = new ResourcesInterventionFormPage(this, intervention);
+			abcPage = new ABCInterventionFormPage(this, intervention);
+			additionalInfoPage = new AdditionalInfoInterventionFormPage(this, intervention);
+			endPage = new EndInterventionFormPage(this, intervention);
 
 			Frame timersFrame = new Frame();
 			timersFrame.Content = timersPage;
@@ -88,6 +95,13 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm
 			return intervention.getInterventionNumber();
 		}
 
+		//Runs once per minute - Registers all changes in the form to the intervention object
+		public void PersistencyUpdate(object sender, EventArgs e)
+		{
+			detailsPage.PersistencyUpdate();
+			resourcesPage.PersistencyUpdate();
+		}
+
 		//Hiding intervention form after completion
 		public void HideInterventionForm()
 		{
@@ -95,6 +109,11 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm
 			timersPage.StopOverallTimer();
 
 			interventionSection.HideInterventionForm(getInterventionNumber());
+		}
+
+		public void CreateTimer(String team, String resource)
+		{
+			timersPage.CreateTimer(team, resource);
 		}
     }
 }

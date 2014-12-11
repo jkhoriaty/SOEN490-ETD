@@ -9,16 +9,21 @@ namespace ETD.Models
     public class Intervention
     {
 		private static int lastIntervention = 0;
+
 		private int interventionNumber;
-        private DateTime timeOfCall;
+
+        private DateTime timeOfCall = DateTime.Now;
         private String callerName;
         private String location;
         private String natureOfCall;
-        private Resource[] resources = new Resource[5];
+
+        public Resource[] resources = new Resource[10];
 
         private int code;
-        private char gender;
-        private int age;
+        private String gender;
+        private String age;
+		private String chiefComplaint;
+		private String otherChiefComplaint;
 
         private String additionalInfo;
 
@@ -35,44 +40,12 @@ namespace ETD.Models
 			private DateTime moving;
 			private DateTime arrival;
 
-			public void setResourceName(String resourceName)
+			public Resource(String resourceName, String team, DateTime moving, DateTime arrival)
 			{
 				this.resourceName = resourceName;
-			}
-
-			public String getResourceName()
-			{
-				return resourceName;
-			}
-
-			public void setTeam(String team)
-			{
 				this.team = team;
-			}
-
-			public String getTeam()
-			{
-				return team;
-			}
-
-			public void setMoving(DateTime moving)
-			{
 				this.moving = moving;
-			}
-
-			public DateTime getMoving()
-			{
-				return moving;
-			}
-
-			public void setArrival(DateTime arrival)
-			{
 				this.arrival = arrival;
-			}
-
-			public DateTime getArrival()
-			{
-				return arrival;
 			}
 		}
 
@@ -84,6 +57,16 @@ namespace ETD.Models
 		public int getInterventionNumber()
 		{
 			return interventionNumber;
+		}
+
+		public void setTimeOfCall(DateTime timeOfCall)
+		{
+			this.timeOfCall = timeOfCall;
+		}
+
+		public DateTime getTimeOfCall()
+		{
+			return timeOfCall;
 		}
 
 		public void setCallerName(String callerName)
@@ -125,23 +108,43 @@ namespace ETD.Models
             return this.code;
         }
 
-        public void setGender(char gender)
+        public void setGender(String gender)
         {
             this.gender = gender;
         }
-        public char getGender()
+        public String getGender()
         {
             return this.gender;
         }
 
-        public void setAge(int age) 
+        public void setAge(String age) 
         {
             this.age = age;
         }
-        public int getAge()
+        public String getAge()
         {
             return this.age;
         }
+
+		public void setChiefComplaint(String chiefComplaint)
+		{
+			this.chiefComplaint = chiefComplaint;
+		}
+
+		public String getChiefComplaint()
+		{
+			return chiefComplaint;
+		}
+
+		public void setOtherChiefComplaint(String otherChiefComplaint)
+		{
+			this.otherChiefComplaint = otherChiefComplaint;
+		}
+
+		public String getOtherChiefComplaint()
+		{
+			return otherChiefComplaint;
+		}
 
         public void setAdditionalInfo(String info)
         {

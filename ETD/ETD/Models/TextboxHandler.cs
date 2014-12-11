@@ -35,5 +35,38 @@ namespace ETD.Models
 				tb.Text = textboxContent[tb.Name];
 			}
 		}
+
+		//Return true if the text is the default text, if not false
+		public static bool isDefaultText(TextBox tb)
+		{
+			if(textboxContent.ContainsKey(tb.Name))
+			{
+				if(tb.Text.Equals(textboxContent[tb.Name]))
+				{
+					return true;
+				}
+				else
+				{
+					return false;
+				}
+			}
+			else
+			{
+				return true;
+			}
+		}
+
+		public static void setNow(TextBox hh, TextBox mm)
+		{
+			hh.Text = "" + DateTime.Now.Hour;
+			if (DateTime.Now.Minute < 10)
+			{
+				mm.Text = "0" + DateTime.Now.Minute;
+			}
+			else
+			{
+				mm.Text = "" + DateTime.Now.Minute;
+			}
+		}
 	}
 }

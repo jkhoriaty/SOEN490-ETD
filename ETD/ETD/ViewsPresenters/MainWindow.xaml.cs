@@ -19,6 +19,7 @@ using ETD.ViewsPresenters.MapSection;
 using ETD.ViewsPresenters.InterventionsSection;
 using ETD.Models;
 using ETD.ViewsPresenters.InterventionsSection.InterventionForm.TimersInterventionForm;
+using System.Windows.Threading;
 
 namespace ETD.ViewsPresenters
 {
@@ -34,7 +35,6 @@ namespace ETD.ViewsPresenters
 		public MainWindow()
 		{
 			InitializeComponent();
-
 			teamsSection = new TeamsSectionPage(this);
 			mapSection = new MapSectionPage(this);
 			interventionsSection = new InterventionSectionPage(this);

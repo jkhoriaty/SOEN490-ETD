@@ -11,33 +11,33 @@
 		<UniformGrid Margin="0,1,0,1">
 			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 				<Label Content="Call:"/>
-				<TextBox Name="callhh" Width="30" Text="hh" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
-				<Label Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-				<TextBox Name="callmm" Width="30" Text="mm" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+				<TextBox Name="Callhh" Width="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+				<Button Width="10" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="White" BorderBrush="White" Click="Button_Click"/>
+				<TextBox Name="Callmm" Width="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
 			</StackPanel>
-			<TextBox Text="Caller" Name="callerName" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
-			<TextBox Text="Location" Name="location" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,1,0,1" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
-			<TextBox Text="Nature of Call" Name="typeOfCall" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,1,0,1" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+			<TextBox Text="Caller Name" Name="CallerName" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+			<TextBox Text="Location" Name="Location" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,1,0,1" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+			<TextBox Text="Nature of Call" Name="NatureOfCall" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,1,0,1" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
 		</UniformGrid>
 		<Border BorderThickness="1" BorderBrush="Black" Margin="0,3,0,3"/>
 		<UniformGrid Rows="1">
-			<StackPanel Orientation="Horizontal">
+			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 				<Label Content="Priority:"/>
-				<ComboBox Name="priority" Width="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+				<ComboBox Name="Priority" Width="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
 					<ComboBoxItem Content="1"/>
 					<ComboBoxItem Content="2"/>
 				</ComboBox>
 			</StackPanel>
-			<StackPanel Orientation="Horizontal">
+			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 				<Label Content="Gender:"/>
-				<ComboBox Name="gender" Width="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+				<ComboBox Name="Gender" Width="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
 					<ComboBoxItem Content="M"/>
 					<ComboBoxItem Content="F"/>
 				</ComboBox>
 			</StackPanel>
-			<StackPanel Orientation="Horizontal">
+			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 				<Label Content="Age:"/>
-				<TextBox Name="age" Width="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+				<TextBox Name="Age" Width="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
 			</StackPanel>
 		</UniformGrid>
 		<Grid Margin="0,2,0,2">
@@ -47,13 +47,13 @@
 				<ColumnDefinition Width="2*"/>
 			</Grid.ColumnDefinitions>
 			<Label Grid.Column="0" Content="Complaint:"/>
-			<ComboBox Grid.Column="1" Grid.ColumnSpan="2" Name="complaint" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" SelectionChanged="SelectionChanged">
+			<ComboBox Grid.Column="1" Grid.ColumnSpan="2" Name="Complaint" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" SelectionChanged="SelectionChanged">
 				<ComboBoxItem Content="Musculo-Squelettique"/>
 				<ComboBoxItem Content="Number 2"/>
 				<ComboBoxItem Content="Number 3"/>
 				<ComboBoxItem Content="Other"/>
 			</ComboBox>
-			<TextBox Name="AdditionalInformation" Grid.Column="2" Grid.Row="0" Visibility="Collapsed" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+			<TextBox Name="OtherChiefComplaint" Grid.Column="2" Grid.Row="0" Visibility="Collapsed" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
 		</Grid>
 	</StackPanel>
 </Page>
