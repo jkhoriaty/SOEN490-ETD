@@ -23,11 +23,13 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamInfo
 	public partial class TeamInfoPage : Page
 	{
 		TeamsSectionPage teamsSection;
+		Team team;
 
 		public TeamInfoPage(TeamsSectionPage teamsSection, Team team)
 		{
 			InitializeComponent();
 			this.teamsSection = teamsSection;
+			this.team = team;
 			populateInfo(team);
 		}
 

@@ -10,10 +10,11 @@ namespace ETD.Models
 
     public class Team
     {
+		public static Dictionary<String, Team> teams = new Dictionary<String, Team>();
 
         String name;
         TeamMember[] members;
-        Equipment[] equipments;
+        String[] equipments;
 		statuses status;
 
         int EquipmentCount = 0;
@@ -25,8 +26,10 @@ namespace ETD.Models
         {
             this.name = name;
             members = new TeamMember[3];
-            equipments = new Equipment[5];
+            equipments = new String[3];
 			status = statuses.available;
+
+			teams.Add(name, this);
         }
 
         public bool addMember(TeamMember mem)
@@ -44,7 +47,7 @@ namespace ETD.Models
             return false;
         }
 		
-		public bool addEquipment(Equipment equipment)
+		public bool addEquipment(String equipment)
         {
             if (EquipmentCount < 3)
             {
@@ -56,11 +59,11 @@ namespace ETD.Models
             return false;
         }
 
-        public void removeEquipment(equipments equipment)
+        public void removeEquipment(String equipment)
         {
 			for ( int i=0; i < equipments.Length; i++)
             {
-				if (equipment == equipments[i].getEquipmentName())
+				if (equipment == equipments[i])
                     equipments[i] = null;
                 EquipmentCount--;
             }

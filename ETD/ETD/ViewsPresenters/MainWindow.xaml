@@ -39,7 +39,7 @@
 				<TextBlock Text="Moving" Margin="1,0,1,0" VerticalAlignment="Center"/>
 				<TextBox Name="MovingDeadline" Text="5" Width="20" Margin="1,0,1,0" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
 				<Button Content="Submit" Margin="1,0,1,0" VerticalAlignment="Center" Click="ChangeDeadlines"/>
-				<Border BorderThickness="0.25" BorderBrush="Black" Margin="3,0,3,0" VerticalAlignment="Center"/>
+				<Border BorderThickness="0.5" BorderBrush="Black" Margin="3,0,3,0" VerticalAlignment="Stretch"/>
 				<ComboBox Grid.Column="0" Name="EquipmentAdd" HorizontalAlignment="Stretch" Width="130" Margin="1,0,1,0" VerticalAlignment="Center">
 					<ComboBoxItem Content="Ambulance Cart" Name="ambulanceCart"/>
 					<ComboBoxItem Content="Sitting Cart" Name="sittingCart"/>

@@ -85,6 +85,7 @@ namespace ETD.ViewsPresenters.TeamsSection
 					break;
 				}
 			}
+			Team.teams.Remove(teamName);
 			mainWindow.DeletePin(teamName);
 		}
 
@@ -112,6 +113,8 @@ namespace ETD.ViewsPresenters.TeamsSection
 
 				//Getting the appropriate equipment StackPanel
 				teamEquipmentStacks[teamName].Children.Add(imageRectangle);
+
+				Team.teams[teamName].addEquipment(equip);
 			}
 			else
 			{
@@ -125,8 +128,10 @@ namespace ETD.ViewsPresenters.TeamsSection
 		{
 			Rectangle equipment = (Rectangle)sender;
 			StackPanel equipmentStackPanel = (StackPanel)equipment.Parent;
+			Team.teams["" + equipment.Tag].removeEquipment(equipment.Name);
 			equipmentStackPanel.Children.Remove(equipment);
 			mainWindow.CreateEquipmentPin(equipment.Name);
+
 		}
 	}
 }
