@@ -54,7 +54,7 @@ namespace ETD.Models
 
 		private static Dictionary<String, String> generalRelPath = new Dictionary<String, String>
 		{
-			{"intervention", @"\Icons\addbutton.png"}
+			{"intervention", @"\Icons\AddInterventionButton.png"}
 		};
 
 		private static Dictionary<String, String> alphabet = new Dictionary<String, String>
