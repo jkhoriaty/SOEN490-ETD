@@ -44,16 +44,40 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
 		//Submitting end of intervention
 		private void EndIntervention(object sender, RoutedEventArgs e)
 		{
-			Endhh.Text = "" + DateTime.Now.Hour;
-			if(DateTime.Now.Minute < 10)
+			try
 			{
-				Endmm.Text = "0" + DateTime.Now.Minute;
+				int hh = int.Parse(Endhh.Text);
+				int mm = int.Parse(Endmm.Text);
+				DateTime endTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, hh, mm, DateTime.Now.Second);
+				int offset = (int)DateTime.Now.Subtract(endTime).TotalMinutes;
+				if (offset < 0)
+				{
+					MessageBox.Show("The time inserted is in the future!");
+				}
+				else
+				{
+					ComboBoxItem conclusion = (ComboBoxItem)Conclusion.SelectedItem;
+					String conc = "" + conclusion.Content;
+
+					if ((conc.Equals("Hospital") || conc.Equals("Other")) && AdditionalInformation.Text.Equals(""))
+					{
+						throw new Exception();
+					}
+					else
+					{
+						interventionForm.HideInterventionForm(offset);
+					}
+				}
+
 			}
-			else
+			catch (FormatException ex)
 			{
-				Endmm.Text = "" + DateTime.Now.Minute;
+				MessageBox.Show("The text inserted in the time boxes is not valid");
 			}
-			interventionForm.HideInterventionForm();
+			catch(Exception ex2)
+			{
+				MessageBox.Show("No conclusion is set!");
+			}
 		}
 
 		private void SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -63,11 +87,11 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
 			if (item.Content.Equals("Hospital") || item.Content.Equals("Other"))
 			{
 				Grid.SetColumnSpan(ComboBoxBorder, 1);
-				AdditionalInformation.Visibility = Visibility.Visible;
+				AdditionalInformationBorder.Visibility = Visibility.Visible;
 			}
 			else
 			{
-				AdditionalInformation.Visibility = Visibility.Collapsed;
+				AdditionalInformationBorder.Visibility = Visibility.Collapsed;
 				Grid.SetColumnSpan(ComboBoxBorder, 2);
 			}
 		}

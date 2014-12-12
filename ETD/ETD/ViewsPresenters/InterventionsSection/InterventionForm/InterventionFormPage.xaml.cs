@@ -103,17 +103,23 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm
 		}
 
 		//Hiding intervention form after completion
-		public void HideInterventionForm()
+		public void HideInterventionForm(int offset)
 		{
 			//Stopping timer
-			timersPage.StopOverallTimer();
-
+			if(timersPage.StopOverallTimer(offset))
+			{
 			interventionSection.HideInterventionForm(getInterventionNumber());
+			}
 		}
 
-		public void CreateTimer(String team, String resource)
+		public void CreateTimer(int position, String team, String resource, int offset)
 		{
-			timersPage.CreateTimer(team, resource);
+			timersPage.CreateTimer(position, team, resource, offset);
+		}
+
+		public void StopTimer(int position, int offset)
+		{
+			timersPage.StopTimer(position, offset);
 		}
     }
 }
