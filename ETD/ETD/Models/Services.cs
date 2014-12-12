@@ -13,10 +13,10 @@ namespace ETD.Models
 
 		private static Dictionary<equipments, String> equipmentRelPath = new Dictionary<equipments, String>
 		{
-			{equipments.ambulanceCart, @"\Icons\AmbulanceCart4.png"},
+			{equipments.ambulanceCart, @"\Icons\AmbulanceCart.png"},
 			{equipments.epipen, @"\Icons\epipen.png"},
-			{equipments.mountedStretcher, @"\Icons\MountedStretcher3.png"},
-			{equipments.sittingCart, @"\Icons\SittingCart4.png"},
+			{equipments.mountedStretcher, @"\Icons\MountedStretcher.png"},
+			{equipments.sittingCart, @"\Icons\SittingCart.png"},
 			{equipments.transportStretcher, @"\Icons\TransportStretcher.png"},
 			{equipments.wheelchair, @"\Icons\WheelChair.png"}
 		};
@@ -25,7 +25,7 @@ namespace ETD.Models
 		{
 			{trainings.firstAid, @"\Icons\First_Aid3.png"},
 			{trainings.firstResponder, @"\Icons\First_Responder2.png"},
-			{trainings.medicine, @"\Icons\Medicine2.png"}
+			{trainings.medicine, @"\Icons\Medicine.png"}
 		};
 
 		private static Dictionary<statuses, String> firstAidPinRelPath = new Dictionary<statuses, String>
@@ -54,7 +54,7 @@ namespace ETD.Models
 
 		private static Dictionary<String, String> generalRelPath = new Dictionary<String, String>
 		{
-			{"intervention", @"\Icons\addbutton.png"}
+			{"intervention", @"\Icons\AddInterventionButton.png"}
 		};
 
 		private static Dictionary<String, String> alphabet = new Dictionary<String, String>
