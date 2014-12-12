@@ -41,9 +41,9 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 			EquipmentGrid mainContainer = new EquipmentGrid(equipmentName, mapSection, equipmentSize);
 			mapSection.Map.Children.Add(mainContainer);
 
-			//Setting pin in the top-left corner and making sure it does not cover any other item
-			mapSection.SetPinPosition(mainContainer, (equipmentSize / 2), (equipmentSize / 2));
-			mapSection.DetectCollision(mainContainer, (equipmentSize / 2), (equipmentSize / 2));
+			//Setting pin in the top-right corner and making sure it does not cover any other item
+			mapSection.SetPinPosition(mainContainer, (mapSection.Map.ActualWidth-(equipmentSize / 2)), (equipmentSize / 2));
+			mapSection.DetectCollision(mainContainer, (mapSection.Map.ActualWidth - (equipmentSize / 2)), (equipmentSize / 2));
 		}
 
 		public void CreateInterventionPin(int interventionNumber)
@@ -52,8 +52,8 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 			mapSection.Map.Children.Add(mainContainer);
 
 			//Setting pin in the bottom-left corner and making sure it does not cover any other item
-			mapSection.SetPinPosition(mainContainer, (interventionSize / 2), (interventionSize / 2));
-			mapSection.DetectCollision(mainContainer, (interventionSize / 2), (interventionSize / 2));
+			mapSection.SetPinPosition(mainContainer, (interventionSize / 2), (mapSection.Map.ActualHeight - (interventionSize / 2)));
+			mapSection.DetectCollision(mainContainer, (interventionSize / 2), (mapSection.Map.ActualHeight - (interventionSize / 2)));
 		}
 
 		//Deleting pin using its name

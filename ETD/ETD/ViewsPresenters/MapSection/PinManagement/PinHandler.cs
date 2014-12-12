@@ -123,11 +123,11 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 					if (fixedPin != movedPin)
 					{
 						//Getting the position of where the rectangle has been dropped
-						double detectCollision_X = Math.Round((((double)Canvas.GetLeft(fixedPin)) + (fixedPin.Width / 2)), 3);
-						double detectCollision_Y = Math.Round((((double)Canvas.GetTop(fixedPin)) + (fixedPin.Width / 2)), 3);
+						double fixedPin_X = Math.Round((((double)Canvas.GetLeft(fixedPin)) + (fixedPin.Width / 2)), 3);
+						double fixedPin_Y = Math.Round((((double)Canvas.GetTop(fixedPin)) + (fixedPin.Width / 2)), 3);
 
 						//If equipment is dropped on team and it overlaps more than 25% (i.e. not by mistake)
-						if (movedPin.Tag.Equals("equipment") && fixedPin.Tag.Equals("team") && movedPin_X > (detectCollision_X - (movedPin.Width / 2)) && movedPin_X < (detectCollision_X + (movedPin.Width / 2)) && movedPin_Y > (detectCollision_Y - (movedPin.Width / 2)) && movedPin_Y < (detectCollision_Y + (movedPin.Width / 2)))
+						if (movedPin.Tag.Equals("equipment") && fixedPin.Tag.Equals("team") && movedPin_X > (fixedPin_X - (movedPin.Width / 2)) && movedPin_X < (fixedPin_X + (movedPin.Width / 2)) && movedPin_Y > (fixedPin_Y - (movedPin.Width / 2)) && movedPin_Y < (fixedPin_Y + (movedPin.Width / 2)))
 						{
 							mapSection.AddTeamEquipment(movedPin.Name, fixedPin.Name);
 							Canvas parent = (Canvas)movedPin.Parent;
@@ -136,7 +136,7 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 						}
 
 						//Checking if the dropped rectangle is within the bounds of any other rectangle
-						while (movedPin_X > (detectCollision_X - ((movedPin.Width / 2) + (fixedPin.Width / 2))) && movedPin_X < (detectCollision_X + ((movedPin.Width / 2) + (fixedPin.Width / 2))) && movedPin_Y > (detectCollision_Y - ((movedPin.Width / 2) + (fixedPin.Width / 2))) && movedPin_Y < (detectCollision_Y + ((movedPin.Width / 2) + (fixedPin.Width / 2))))
+						while (movedPin_X > (fixedPin_X - ((movedPin.Width / 2) + (fixedPin.Width / 2))) && movedPin_X < (fixedPin_X + ((movedPin.Width / 2) + (fixedPin.Width / 2))) && movedPin_Y > (fixedPin_Y - ((movedPin.Width / 2) + (fixedPin.Width / 2))) && movedPin_Y < (fixedPin_Y + ((movedPin.Width / 2) + (fixedPin.Width / 2))))
 						{
 							//Collision detected, resolution by shifting the rectangle in the same direction that it has been dropped
 							collisionDetected = true;
@@ -146,8 +146,8 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 							movedPin_Y = Math.Round(movedPin_Y, 3);
 
 							//Finding out how much is the dropped rectangle covering the fixed one
-							double horizontalDifference = Math.Round((movedPin_X - detectCollision_X), 3);
-							double verticalDifference = Math.Round((movedPin_Y - detectCollision_Y), 3);
+							double horizontalDifference = Math.Round((movedPin_X - fixedPin_X), 3);
+							double verticalDifference = Math.Round((movedPin_Y - fixedPin_Y), 3);
 							double differenceRatio = 0.1;
 							bool moved = false;
 
@@ -201,39 +201,46 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 								verificationCount = 0;
 							}
 
-							//Handling case of perfect superposition and placing right of fixed item
-							if (movedPin_X == detectCollision_X && movedPin_Y == detectCollision_Y)
+							//Handling case of perfect superposition and placing right of fixed item if in the left half of the map, otherwise place left
+							if (movedPin_X == fixedPin_X && movedPin_Y == fixedPin_Y)
 							{
-								movedPin_X = movedPin_X + ((movedPin.Width / 2) + (fixedPin.Width / 2));
+								if(fixedPin_X < (mapSection.Map.ActualWidth /2))
+								{
+									movedPin_X = movedPin_X + ((movedPin.Width / 2) + (fixedPin.Width / 2));
+								}
+								else
+								{
+									movedPin_X = movedPin_X - ((movedPin.Width / 2) + (fixedPin.Width / 2));
+								}
 								moved = true;
 							}
 
 							//Handling corner situation
 							if (moved == false)
 							{
-								double horizontalToBorder = Math.Min(detectCollision_X, (mapSection.Map.ActualWidth - detectCollision_X));
-								double verticalToBorder = Math.Min(detectCollision_Y, (mapSection.Map.ActualHeight - detectCollision_Y));
+								double horizontalToBorder = Math.Min(fixedPin_X, (mapSection.Map.ActualWidth - fixedPin_X));
+								double verticalToBorder = Math.Min(fixedPin_Y, (mapSection.Map.ActualHeight - fixedPin_Y));
 
 								if (horizontalToBorder <= verticalToBorder) //Need horizontal movement
 								{
 									if (movedPin_X <= (movedPin.Width / 2)) //Left
 									{
-										movedPin_X = detectCollision_X + ((movedPin.Width / 2) + (fixedPin.Width / 2));
+										movedPin_X = fixedPin_X + ((movedPin.Width / 2) + (fixedPin.Width / 2));
 									}
 									else //Right
 									{
-										movedPin_X = detectCollision_X - ((movedPin.Width / 2) + (fixedPin.Width / 2));
+										movedPin_X = fixedPin_X - ((movedPin.Width / 2) + (fixedPin.Width / 2));
 									}
 								}
 								else //Need vertical movement
 								{
 									if (movedPin_Y <= (movedPin.Width / 2)) //Left
 									{
-										movedPin_Y = detectCollision_Y + ((movedPin.Width / 2) + (fixedPin.Width / 2));
+										movedPin_Y = fixedPin_Y + ((movedPin.Width / 2) + (fixedPin.Width / 2));
 									}
 									else //Right
 									{
-										movedPin_Y = detectCollision_Y - ((movedPin.Width / 2) + (fixedPin.Width / 2));
+										movedPin_Y = fixedPin_Y - ((movedPin.Width / 2) + (fixedPin.Width / 2));
 									}
 								}
 							}
