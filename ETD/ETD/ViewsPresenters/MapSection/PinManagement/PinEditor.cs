@@ -32,8 +32,12 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 			mapSection.Map.Children.Add(mainContainer);
             
 			//Setting pin in the top-left corner and making sure it does not cover any other item
-			mapSection.SetPinPosition(mainContainer, (teamSize / 2), (teamSize / 2)); //Setting it top corner
+			mapSection.SetPinPosition(mainContainer, (teamSize / 2), (teamSize / 2));
+
+			//The tag of the pin is modified before being added so that the team does not get added to a intervention
+			mainContainer.Tag = "intervention";
 			mapSection.DetectCollision(mainContainer, (teamSize / 2), (teamSize / 2));
+			mainContainer.Tag = "team";
 		}
 
 		public void CreateEquipmentPin(String equipmentName)
@@ -41,9 +45,13 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 			EquipmentGrid mainContainer = new EquipmentGrid(equipmentName, mapSection, equipmentSize);
 			mapSection.Map.Children.Add(mainContainer);
 
-			//Setting pin in the top-left corner and making sure it does not cover any other item
-			mapSection.SetPinPosition(mainContainer, (equipmentSize / 2), (equipmentSize / 2));
-			mapSection.DetectCollision(mainContainer, (equipmentSize / 2), (equipmentSize / 2));
+			//Setting pin in the top-right corner and making sure it does not cover any other item
+			mapSection.SetPinPosition(mainContainer, (mapSection.Map.ActualWidth - (equipmentSize / 2)), (equipmentSize / 2));
+
+			//The tag of the pin is modified before being added so that the equipment does not get added to a member and possibly stuck in a modal MessageBox loop
+			mainContainer.Tag = "intervention";
+			mapSection.DetectCollision(mainContainer, (mapSection.Map.ActualWidth - (equipmentSize / 2)), (equipmentSize / 2));
+			mainContainer.Tag = "equipment";
 		}
 
 		public void CreateInterventionPin(int interventionNumber)
@@ -52,8 +60,8 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 			mapSection.Map.Children.Add(mainContainer);
 
 			//Setting pin in the bottom-left corner and making sure it does not cover any other item
-			mapSection.SetPinPosition(mainContainer, (interventionSize / 2), (interventionSize / 2));
-			mapSection.DetectCollision(mainContainer, (interventionSize / 2), (interventionSize / 2));
+			mapSection.SetPinPosition(mainContainer, (interventionSize / 2), (mapSection.Map.ActualHeight - (interventionSize / 2)));
+			mapSection.DetectCollision(mainContainer, (interventionSize / 2), (mapSection.Map.ActualHeight - (interventionSize / 2)));
 		}
 
 		//Deleting pin using its name
@@ -97,7 +105,7 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
             
             foreach (MenuItem mi in cm.Items)
             {
-                mi.IsChecked = ((statuses)Enum.Parse(typeof(statuses), mi.Header.ToString().ToLower()) == fe.team.getStatus());
+                mi.IsChecked = ((Statuses)Enum.Parse(typeof(Statuses), mi.Header.ToString().ToLower()) == fe.team.getStatus());
             }                   
         }
 	}

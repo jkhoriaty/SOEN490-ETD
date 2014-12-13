@@ -17,7 +17,7 @@
 			</Border.ContextMenu>
 			<StackPanel VerticalAlignment="Center">
 				<Label Name="InterventionFilterLabel" Content="Ongoing" FontWeight="ExtraBlack" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24"/>
-				<Label Content="Interventions" FontWeight="ExtraBlack" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24"/>
+				<Label Name="InterventionsLabel" Content="Interventions" FontWeight="ExtraBlack" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24"/>
 			</StackPanel>
 		</Border>
 		<ScrollViewer Name="Scroller" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Visible">

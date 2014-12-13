@@ -11,45 +11,45 @@ namespace ETD.Models
 	{
 		private static String AbsolutePath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase);
 
-		private static Dictionary<equipments, String> equipmentRelPath = new Dictionary<equipments, String>
+		private static Dictionary<Equipments, String> equipmentRelPath = new Dictionary<Equipments, String>
 		{
-			{equipments.ambulanceCart, @"\Icons\AmbulanceCart.png"},
-			{equipments.epipen, @"\Icons\epipen.png"},
-			{equipments.mountedStretcher, @"\Icons\MountedStretcher.png"},
-			{equipments.sittingCart, @"\Icons\SittingCart.png"},
-			{equipments.transportStretcher, @"\Icons\TransportStretcher.png"},
-			{equipments.wheelchair, @"\Icons\WheelChair.png"}
+			{Equipments.ambulanceCart, @"\Icons\AmbulanceCart.png"},
+			{Equipments.epipen, @"\Icons\epipen.png"},
+			{Equipments.mountedStretcher, @"\Icons\MountedStretcher.png"},
+			{Equipments.sittingCart, @"\Icons\SittingCart.png"},
+			{Equipments.transportStretcher, @"\Icons\TransportStretcher.png"},
+			{Equipments.wheelchair, @"\Icons\WheelChair.png"}
 		};
 
-		private static Dictionary<trainings, String> trainingRelPath = new Dictionary<trainings, String>
+		private static Dictionary<Trainings, String> trainingRelPath = new Dictionary<Trainings, String>
 		{
-			{trainings.firstAid, @"\Icons\First_Aid3.png"},
-			{trainings.firstResponder, @"\Icons\First_Responder2.png"},
-			{trainings.medicine, @"\Icons\Medicine.png"}
+			{Trainings.firstAid, @"\Icons\First_Aid3.png"},
+			{Trainings.firstResponder, @"\Icons\First_Responder2.png"},
+			{Trainings.medicine, @"\Icons\Medicine.png"}
 		};
 
-		private static Dictionary<statuses, String> firstAidPinRelPath = new Dictionary<statuses, String>
+		private static Dictionary<Statuses, String> firstAidPinRelPath = new Dictionary<Statuses, String>
 		{
-			{statuses.available, @"\Icons\FirstAid_available.png"},
-			{statuses.moving, @"\Icons\FirstAid_moving.png"},
-			{statuses.intervening, @"\Icons\FirstAid_intervening.png"},
-			{statuses.busy, @"\Icons\FirstAid_busy.png"}
+			{Statuses.available, @"\Icons\FirstAid_available.png"},
+			{Statuses.moving, @"\Icons\FirstAid_moving.png"},
+			{Statuses.intervening, @"\Icons\FirstAid_intervening.png"},
+			{Statuses.busy, @"\Icons\FirstAid_busy.png"}
 		};
 
-		private static Dictionary<statuses, String> firstResponderPinRelPath = new Dictionary<statuses, String>
+		private static Dictionary<Statuses, String> firstResponderPinRelPath = new Dictionary<Statuses, String>
 		{
-			{statuses.available, @"\Icons\FirstResponder_available.png"},
-			{statuses.moving, @"\Icons\FirstResponder_moving.png"},
-			{statuses.intervening, @"\Icons\FirstResponder_intervening.png"},
-			{statuses.busy, @"\Icons\FirstResponder_busy.png"}
+			{Statuses.available, @"\Icons\FirstResponder_available.png"},
+			{Statuses.moving, @"\Icons\FirstResponder_moving.png"},
+			{Statuses.intervening, @"\Icons\FirstResponder_intervening.png"},
+			{Statuses.busy, @"\Icons\FirstResponder_busy.png"}
 		};
 
-		private static Dictionary<statuses, String> medicinePinRelPath = new Dictionary<statuses, String>
+		private static Dictionary<Statuses, String> medicinePinRelPath = new Dictionary<Statuses, String>
 		{
-			{statuses.available, @"\Icons\Medicine_available.png"},
-			{statuses.moving, @"\Icons\Medicine_moving.png"},
-			{statuses.intervening, @"\Icons\Medicine_intervening.png"},
-			{statuses.busy, @"\Icons\Medicine_busy.png"}
+			{Statuses.available, @"\Icons\Medicine_available.png"},
+			{Statuses.moving, @"\Icons\Medicine_moving.png"},
+			{Statuses.intervening, @"\Icons\Medicine_intervening.png"},
+			{Statuses.busy, @"\Icons\Medicine_busy.png"}
 		};
 
 		private static Dictionary<String, String> generalRelPath = new Dictionary<String, String>
@@ -88,33 +88,33 @@ namespace ETD.Models
 		};
 
 		//Return image of equipment
-		public static BitmapImage getImage(equipments equipment)
+		public static BitmapImage getImage(Equipments equipment)
 		{
 			BitmapImage img = new BitmapImage(new Uri(AbsolutePath + equipmentRelPath[equipment]));
 			return img;
 		}
 
 		//Return image of training
-		public static BitmapImage getImage(trainings training)
+		public static BitmapImage getImage(Trainings training)
 		{
 			BitmapImage img = new BitmapImage(new Uri(AbsolutePath + trainingRelPath[training]));
 			return img;
 		}
 
-		public static BitmapImage getImage(Team team, statuses status)
+		public static BitmapImage getImage(Team team, Statuses status)
 		{
-			trainings teamTraining = team.getHighestLevelOfTraining();
+			Trainings teamTraining = team.getHighestLevelOfTraining();
 
 			BitmapImage img = null;
-			if(teamTraining == trainings.firstAid)
+			if(teamTraining == Trainings.firstAid)
 			{
 				img = new BitmapImage(new Uri(AbsolutePath + firstAidPinRelPath[status]));
 			}
-			else if (teamTraining == trainings.firstResponder)
+			else if (teamTraining == Trainings.firstResponder)
 			{
 				img = new BitmapImage(new Uri(AbsolutePath + firstResponderPinRelPath[status]));
 			}
-			else if (teamTraining == trainings.medicine)
+			else if (teamTraining == Trainings.medicine)
 			{
 				img = new BitmapImage(new Uri(AbsolutePath + medicinePinRelPath[status]));
 			}

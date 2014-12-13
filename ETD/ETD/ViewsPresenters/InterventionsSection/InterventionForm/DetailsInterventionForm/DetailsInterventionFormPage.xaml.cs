@@ -42,7 +42,14 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.DetailsInter
 			TextBoxHandler.LostFocus(sender, e);
 		}
 
-		private void SelectionChanged(object sender, SelectionChangedEventArgs e)
+		private void Priority_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+			ComboBox comboBox = (ComboBox)sender;
+			ComboBoxItem item = (ComboBoxItem)comboBox.SelectedItem;
+			interventionForm.setPriority("" + item.Content);
+		}
+
+		private void Complaint_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
 			ComboBox comboBox = (ComboBox)sender;
 			ComboBoxItem item = (ComboBoxItem)comboBox.SelectedItem;
@@ -50,11 +57,13 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.DetailsInter
 			{
 				Grid.SetColumnSpan(Complaint, 1);
 				OtherChiefComplaint.Visibility = Visibility.Visible;
+				interventionForm.setComplaint("" + OtherChiefComplaint);
 			}
 			else
 			{
 				OtherChiefComplaint.Visibility = Visibility.Collapsed;
 				Grid.SetColumnSpan(Complaint, 2);
+				interventionForm.setComplaint("" + item.Content);
 			}
 		}
 

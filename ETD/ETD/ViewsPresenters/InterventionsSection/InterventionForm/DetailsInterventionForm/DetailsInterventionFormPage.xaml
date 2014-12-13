@@ -12,7 +12,7 @@
 			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 				<Label Content="Call:"/>
 				<TextBox Name="Callhh" Width="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
-				<Button Width="10" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="White" BorderBrush="White" Click="Button_Click"/>
+				<Button Width="10" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="Transparent" BorderBrush="Transparent" Click="Button_Click"/>
 				<TextBox Name="Callmm" Width="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
 			</StackPanel>
 			<TextBox Text="Caller Name" Name="CallerName" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
@@ -23,7 +23,7 @@
 		<UniformGrid Rows="1">
 			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 				<Label Content="Priority:"/>
-				<ComboBox Name="Priority" Width="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+				<ComboBox Name="Priority" Width="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" SelectionChanged="Priority_SelectionChanged">
 					<ComboBoxItem Content="1"/>
 					<ComboBoxItem Content="2"/>
 				</ComboBox>
@@ -47,7 +47,7 @@
 				<ColumnDefinition Width="2*"/>
 			</Grid.ColumnDefinitions>
 			<Label Grid.Column="0" Content="Complaint:"/>
-			<ComboBox Grid.Column="1" Grid.ColumnSpan="2" Name="Complaint" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" SelectionChanged="SelectionChanged">
+			<ComboBox Grid.Column="1" Grid.ColumnSpan="2" Name="Complaint" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" SelectionChanged="Complaint_SelectionChanged">
 				<ComboBoxItem Content="Musculo-Squelettique"/>
 				<ComboBoxItem Content="Number 2"/>
 				<ComboBoxItem Content="Number 3"/>

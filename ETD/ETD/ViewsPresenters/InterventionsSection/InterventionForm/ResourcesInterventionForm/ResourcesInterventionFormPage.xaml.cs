@@ -102,7 +102,11 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.ResourcesInt
 		private void TextBoxes_TextChanged(object sender, RoutedEventArgs e)
 		{
 			TextBox tb = (TextBox)sender;
-			if (tb.Name.Equals("Team4"))
+			if(tb.Name.Equals("Team1"))
+			{
+				interventionForm.setTeam(tb.Text);
+			}
+			else if (tb.Name.Equals("Team4"))
 			{
 				MainGrid.RowDefinitions[5].Height = new GridLength(23);
 			}
@@ -183,8 +187,13 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.ResourcesInt
 
 		private void UpdateResource(int position, TextBox MovinghhBox, TextBox MovingmmBox, TextBox ArrivalhhBox, TextBox ArrivalmmBox, TextBox Resource, TextBox Team)
 		{
-			int movinghh = int.Parse(MovinghhBox.Text);
-			int movingmm = int.Parse(MovingmmBox.Text);
+			int movinghh = 0;
+			int movingmm = 0;
+			if (!MovinghhBox.Text.Equals("hh") && !MovingmmBox.Text.Equals("mm"))
+			{
+				movinghh = int.Parse(MovinghhBox.Text);
+				movingmm = int.Parse(MovingmmBox.Text);
+			}
 			DateTime moving = DateTime.Now;
 			moving = moving.Date + new TimeSpan(movinghh, movingmm, 0);
 
@@ -198,7 +207,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.ResourcesInt
 			DateTime arrival = DateTime.Now;
 			arrival = arrival.Date + new TimeSpan(arrivalhh, arrivalmm, 0);
 
-			intervention.resources[position] = new Intervention.Resource(Resource.Text, Team.Text, moving, arrival);
+			intervention.setResources(position, new Intervention.Resource(Resource.Text, Team.Text, moving, arrival));
 		}
 
 		private void Moving_Click(object sender, RoutedEventArgs e)

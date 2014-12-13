@@ -105,5 +105,11 @@ namespace ETD.ViewsPresenters.MapSection
         {
             pinEditor.CheckRight(sender, e);
         }
+
+		//When the window is resized, the pins need to move to stay in the window
+		public void movePins(double widthRatio, double heightRatio)
+		{
+			pinHandler.movePins(widthRatio, heightRatio);
+		}
 	}
 }

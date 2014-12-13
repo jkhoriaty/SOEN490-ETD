@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ETD.Models
 {
-	public enum statuses {available, moving, intervening, busy};
+	public enum Statuses {available, moving, intervening, busy};
 
     public class Team
     {
@@ -15,19 +15,19 @@ namespace ETD.Models
         String name;
         TeamMember[] members;
         String[] equipments;
-		statuses status;
+		Statuses status;
 
         int EquipmentCount = 0;
         int memberCount = 0;
         bool availability = true;
-		trainings highestLevelOfTraining = 0;
+		Trainings highestLevelOfTraining = 0;
 
         public Team(String name)
         {
             this.name = name;
             members = new TeamMember[3];
             equipments = new String[3];
-			status = statuses.available;
+			status = Statuses.available;
 
 			teams.Add(name, this);
         }
@@ -96,17 +96,17 @@ namespace ETD.Models
 			}
 		}
 
-        public statuses getStatus()
+        public Statuses getStatus()
         {
             return status;
         }
 
-        public void setStatus(statuses s)
+        public void setStatus(Statuses s)
         {
             this.status = s;
         }
 
-		public trainings getHighestLevelOfTraining()
+		public Trainings getHighestLevelOfTraining()
 		{
 			return highestLevelOfTraining;
 		}

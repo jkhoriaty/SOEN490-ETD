@@ -5,15 +5,15 @@ using System.Text;
 
 namespace ETD.Models
 {
-	public enum trainings {firstAid, firstResponder, medicine};
+	public enum Trainings {firstAid, firstResponder, medicine};
 
     public class TeamMember
     {
         public String name;
-        public trainings trainingLevel;
+        public Trainings trainingLevel;
         public DateTime departure;
 
-        public TeamMember(String name, trainings training, DateTime departure)
+        public TeamMember(String name, Trainings training, DateTime departure)
         {
             this.name = name;
             this.trainingLevel = training;
@@ -25,7 +25,7 @@ namespace ETD.Models
 			return name;
 		}
 
-		public trainings getTrainingLevel()
+		public Trainings getTrainingLevel()
 		{
 			return trainingLevel;
 		}
