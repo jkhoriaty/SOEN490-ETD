@@ -63,9 +63,11 @@ namespace ETD.Models
         {
 			for ( int i=0; i < equipments.Length; i++)
             {
-				if (equipment == equipments[i])
+                if (equipment == equipments[i])
+                {
                     equipments[i] = null;
-                EquipmentCount--;
+                    EquipmentCount--;
+                }
             }
 		}
 

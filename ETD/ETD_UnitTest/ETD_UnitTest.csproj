@@ -55,6 +55,7 @@
     <Compile Include="TeamTest.cs" />
     <Compile Include="TeamMemberTest.cs" />
     <Compile Include="EquipmentTest.cs" />
+    <Compile Include="WordTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ETD\ETD.csproj">

@@ -4,7 +4,7 @@ namespace ETD.Models
 {
     // Class containing the multilingual equivalent of a word. One string variable per language.
     // Can be expanded by adding more.
-    class Word
+    public class Word
     {
         private String fr; // French version of a word.
 

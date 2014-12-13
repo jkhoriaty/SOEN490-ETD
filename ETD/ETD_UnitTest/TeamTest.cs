@@ -31,20 +31,36 @@ namespace ETD_UnitTest
         }
 
         [TestMethod]
-        public void EquipmentAddTest()
+        public void EquipmentAddRemoveTest()
         {
             Team a = new Team("A");
-            Equipment equip1 = new Equipment(equipments.sittingCart);
-            Equipment equip2 = new Equipment(equipments.ambulanceCart);
-            Equipment equip3 = new Equipment(equipments.epipen);
-            Equipment equip4 = new Equipment(equipments.transportStretcher);
+            String equip1 = "TestEquip1";
+            String equip2 = "TestEquip2";
+            String equip3 = "TestEquip3";
+            String equip4 = "TestEquip4";
+            //Equipment equip1 = new Equipment(equipments.sittingCart);
+            //Equipment equip2 = new Equipment(equipments.ambulanceCart);
+            //Equipment equip3 = new Equipment(equipments.epipen);
+            //Equipment equip4 = new Equipment(equipments.transportStretcher);
             a.addEquipment(equip1);
             a.addEquipment(equip2);
             a.addEquipment(equip3);
-            a.addEquipment(equip4);
+            Assert.IsFalse(a.addEquipment(equip4));
             Assert.AreEqual(a.getEquipmentCount(), 3);
+
+            a.removeEquipment(equip1);
+            a.removeEquipment(equip4);
+            Assert.AreEqual(a.getEquipmentCount(), 2);
+
         }
 
+        [TestMethod]
+        public void setStatusTest()
+        {
+            Team a = new Team("A");
 
+            a.setStatus(statuses.available);
+            Assert.AreEqual(a.getStatus(), statuses.available);
+        }
     }
 }
