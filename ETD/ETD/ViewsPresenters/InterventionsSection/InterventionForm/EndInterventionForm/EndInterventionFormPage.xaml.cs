@@ -23,7 +23,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
 	{
 		private InterventionFormPage interventionForm;
 		private Intervention intervention;
-		private bool ambulanceCall = false;
+		private bool selectionChanged = false;
 
 		public EndInterventionFormPage(InterventionFormPage interventionForm, Intervention intervention)
 		{
@@ -95,6 +95,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
 				AdditionalInformationBorder.Visibility = Visibility.Collapsed;
 				Grid.SetColumnSpan(ComboBoxBorder, 2);
 			}
+			selectionChanged = true;
 		}
 
 		public void PersistencyUpdate()
@@ -121,53 +122,57 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
 			conclusionTime = conclusionTime.Date + new TimeSpan(conclusionhh, conclusionmm, 0);
 			intervention.setConclusionTime(conclusionTime);
 
-			ComboBoxItem item = (ComboBoxItem)ConclusionBox.SelectedItem;
-			if (item.Content.Equals("Hospital"))
+			if(selectionChanged)
 			{
-				intervention.setConclusionAdditionalInfo(AdditionalInformation.Text);
-
-				int call911hh = 0;
-				int call911mm = 0;
-				if (!Call911hh.Text.Equals("hh") && !Call911mm.Text.Equals("mm"))
+				ComboBoxItem item = (ComboBoxItem)ConclusionBox.SelectedItem;
+				if (item.Content.Equals("Hospital"))
 				{
-					call911hh = int.Parse(Call911hh.Text);
-					call911mm = int.Parse(Call911mm.Text);
-				}
-				DateTime call911Time = DateTime.Now;
-				call911Time = call911Time.Date + new TimeSpan(call911hh, call911mm, 0);
-				intervention.setCall911Time(call911Time);
+					intervention.setConclusionAdditionalInfo(AdditionalInformation.Text);
 
-				intervention.setFirstResponderCompany(FirstResponderCompany.Text);
-				intervention.setFirstResponderVehicle(FirstResponderVehicle.Text);
-				int firstResponderArrivalhh = 0;
-				int firstResponderArrivalmm = 0;
-				if (!FirstResponderArrivalhh.Text.Equals("hh") && !FirstResponderArrivalmm.Text.Equals("mm"))
-				{
-					firstResponderArrivalhh = int.Parse(FirstResponderArrivalhh.Text);
-					firstResponderArrivalmm = int.Parse(FirstResponderArrivalmm.Text);
-				}
-				DateTime firstResponderArrival = DateTime.Now;
-				firstResponderArrival = firstResponderArrival.Date + new TimeSpan(firstResponderArrivalhh, firstResponderArrivalmm, 0);
-				intervention.setFirstResponderArrivalTime(firstResponderArrival);
+					int call911hh = 0;
+					int call911mm = 0;
+					if (!Call911hh.Text.Equals("hh") && !Call911mm.Text.Equals("mm"))
+					{
+						call911hh = int.Parse(Call911hh.Text);
+						call911mm = int.Parse(Call911mm.Text);
+					}
+					DateTime call911Time = DateTime.Now;
+					call911Time = call911Time.Date + new TimeSpan(call911hh, call911mm, 0);
+					intervention.setCall911Time(call911Time);
 
-				intervention.setAmbulanceCompany(AmbulanceCompany.Text);
-				intervention.setAmbulanceVehicle(AmbulanceVehicle.Text);
-				int ambulanceArrivalhh = 0;
-				int ambulanceArrivalmm = 0;
-				if (!AmbulanceArrivalhh.Text.Equals("hh") && !AmbulanceArrivalmm.Text.Equals("mm"))
-				{
-					ambulanceArrivalhh = int.Parse(AmbulanceArrivalhh.Text);
-					ambulanceArrivalmm = int.Parse(AmbulanceArrivalmm.Text);
+					intervention.setFirstResponderCompany(FirstResponderCompany.Text);
+					intervention.setFirstResponderVehicle(FirstResponderVehicle.Text);
+					int firstResponderArrivalhh = 0;
+					int firstResponderArrivalmm = 0;
+					if (!FirstResponderArrivalhh.Text.Equals("hh") && !FirstResponderArrivalmm.Text.Equals("mm"))
+					{
+						firstResponderArrivalhh = int.Parse(FirstResponderArrivalhh.Text);
+						firstResponderArrivalmm = int.Parse(FirstResponderArrivalmm.Text);
+					}
+					DateTime firstResponderArrival = DateTime.Now;
+					firstResponderArrival = firstResponderArrival.Date + new TimeSpan(firstResponderArrivalhh, firstResponderArrivalmm, 0);
+					intervention.setFirstResponderArrivalTime(firstResponderArrival);
+
+					intervention.setAmbulanceCompany(AmbulanceCompany.Text);
+					intervention.setAmbulanceVehicle(AmbulanceVehicle.Text);
+					int ambulanceArrivalhh = 0;
+					int ambulanceArrivalmm = 0;
+					if (!AmbulanceArrivalhh.Text.Equals("hh") && !AmbulanceArrivalmm.Text.Equals("mm"))
+					{
+						ambulanceArrivalhh = int.Parse(AmbulanceArrivalhh.Text);
+						ambulanceArrivalmm = int.Parse(AmbulanceArrivalmm.Text);
+					}
+					DateTime ambulanceArrivalTime = DateTime.Now;
+					ambulanceArrivalTime = ambulanceArrivalTime.Date + new TimeSpan(ambulanceArrivalhh, ambulanceArrivalmm, 0);
+					intervention.setAmbulanceArrivalTime(ambulanceArrivalTime);
 				}
-				DateTime ambulanceArrivalTime = DateTime.Now;
-				ambulanceArrivalTime = ambulanceArrivalTime.Date + new TimeSpan(ambulanceArrivalhh, ambulanceArrivalmm, 0);
-				intervention.setAmbulanceArrivalTime(ambulanceArrivalTime);
+
+				if (item.Content.Equals("Other"))
+				{
+					intervention.setConclusionAdditionalInfo(AdditionalInformation.Text);
+				}
 			}
-
-			if (item.Content.Equals("Other"))
-			{
-				intervention.setConclusionAdditionalInfo(AdditionalInformation.Text);
-			}
+			
 		}
 
 		private void End_Click(object sender, RoutedEventArgs e)

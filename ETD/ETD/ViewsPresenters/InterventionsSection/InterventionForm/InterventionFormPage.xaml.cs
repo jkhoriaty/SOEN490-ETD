@@ -95,6 +95,28 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm
 			return intervention.getInterventionNumber();
 		}
 
+		public void setComplaint(String complaint)
+		{
+			interventionType.Text = complaint;
+		}
+
+		public void setPriority(String priority)
+		{
+			if(priority.Equals("1"))
+			{
+				interventionType.Foreground = new SolidColorBrush(Colors.Red);
+			}
+			else
+			{
+				interventionType.Foreground = new SolidColorBrush(Colors.Black);
+			}
+		}
+
+		public void setTeam(String team)
+		{
+			teamName.Text = team;
+		}
+
 		//Runs once per minute - Registers all changes in the form to the intervention object
 		public void PersistencyUpdate(object sender, EventArgs e)
 		{

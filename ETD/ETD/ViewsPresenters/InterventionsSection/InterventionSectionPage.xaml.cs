@@ -34,13 +34,13 @@ namespace ETD.ViewsPresenters.InterventionsSection
 		//Adjusting the intervention section width
 		public void setInterventionsSectionWidth(Border InterventionsSection)
 		{
-			if (interventionSizeDifference == 0)
+			/*if (interventionSizeDifference == 0)
 			{
 				//By getting the position of the button, we're able to now how much the label, and button are occupying space
 				var position = CreateInterventionButton.PointToScreen(new Point(0, 0));
 				interventionSizeDifference = position.X;
-			}
-			Scroller.MaxWidth = InterventionsSection.ActualWidth - interventionSizeDifference;
+			}*/
+			Scroller.MaxWidth = InterventionsSection.ActualWidth - InterventionsLabel.ActualWidth - CreateInterventionButton.ActualWidth - 10;
 		}
 
 		private void CreateInterventionForm(object sender, RoutedEventArgs e)

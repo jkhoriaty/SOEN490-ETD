@@ -196,7 +196,7 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 							if (verificationCount > 100)
 							{
 								MessageBox.Show("The dropped object is dropped between two objects and is bouncing around with no progress. Resetting it.");
-								if(movedPin_Y < mapSection.Map.ActualHeight)
+								if(movedPin_Y < (mapSection.Map.ActualHeight / 2))
 								{
 									movedPin_Y += fixedPin.Height;
 								}

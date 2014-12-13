@@ -102,7 +102,11 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.ResourcesInt
 		private void TextBoxes_TextChanged(object sender, RoutedEventArgs e)
 		{
 			TextBox tb = (TextBox)sender;
-			if (tb.Name.Equals("Team4"))
+			if(tb.Name.Equals("Team1"))
+			{
+				interventionForm.setTeam(tb.Text);
+			}
+			else if (tb.Name.Equals("Team4"))
 			{
 				MainGrid.RowDefinitions[5].Height = new GridLength(23);
 			}
