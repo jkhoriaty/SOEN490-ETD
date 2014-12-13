@@ -30,5 +30,10 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.AdditionalIn
 			this.interventionForm = interventionForm;
 			this.intervention = intervention;
 		}
+
+		public void PersistencyUpdate()
+		{
+			intervention.setAdditionalInfo(AdditionalInformation.Text);
+		}
 	}
 }

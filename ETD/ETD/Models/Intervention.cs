@@ -6,6 +6,12 @@ using System.Threading.Tasks;
 
 namespace ETD.Models
 {
+	public enum Consciousness { alert, verbal, painful, unconscious, notSet };
+	public enum Airways { clear, partiallyObstructed, completelyObstructed, notSet };
+	public enum Breathing { normal, difficulty, absent, notSet };
+	public enum Circulation { normal, rsp, hemorrhage, absent, notSet };
+	public enum Conclusions { returnToSite, returnToHome, referredToDoctor, equipmentDistribution, hospital, patientNotFound, noInterventions, other, notSet };
+
     public class Intervention
     {
 		private static int lastIntervention = 0;
@@ -17,15 +23,30 @@ namespace ETD.Models
         private String location;
         private String natureOfCall;
 
-        public Resource[] resources = new Resource[10];
-
         private int code;
         private String gender;
         private String age;
 		private String chiefComplaint;
 		private String otherChiefComplaint;
 
+        private Resource[] resources = new Resource[10];
+
+		private ABC abc;
+
         private String additionalInfo;
+
+		private Conclusions conclusion;
+		private String conclusionAdditionalInfo;
+		private DateTime conclusionTime;
+
+		private DateTime call911Time;
+		private String meetingPoint;
+		private String firstResponderCompany;
+		private String firstResponderVehicle;
+		private DateTime firstResponderArrivalTime;
+		private String ambulanceCompany;
+		private String ambulanceVehicle;
+		private DateTime ambulanceArrivalTime;
 
 		public Intervention()
 		{
@@ -46,6 +67,29 @@ namespace ETD.Models
 				this.team = team;
 				this.moving = moving;
 				this.arrival = arrival;
+			}
+		}
+
+		public struct ABC
+		{
+
+			private Consciousness consciousness;
+			private bool disoriented;
+			private Airways airways;
+			private Breathing breathing;
+			private int breathingFrequency;
+			private Circulation circulation;
+			private int circulationFrequency;
+
+			public ABC(Consciousness consciousness, bool disoriented, Airways airways, Breathing breathing, int breathingFrequency, Circulation circulation, int circulationFrequency)
+			{
+				this.consciousness = consciousness;
+				this.disoriented = disoriented;
+				this.airways = airways;
+				this.breathing = breathing;
+				this.breathingFrequency = breathingFrequency;
+				this.circulation = circulation;
+				this.circulationFrequency = circulationFrequency;
 			}
 		}
 
@@ -146,6 +190,26 @@ namespace ETD.Models
 			return otherChiefComplaint;
 		}
 
+		public void setResources(int position, Resource resource)
+		{
+			resources[position] = resource;
+		}
+
+		public Resource[] getResources()
+		{
+			return resources;
+		}
+
+		public void setABC(ABC abc)
+		{
+			this.abc = abc;
+		}
+
+		public ABC getABC()
+		{
+			return abc;
+		}
+
         public void setAdditionalInfo(String info)
         {
             this.additionalInfo = info;
@@ -155,5 +219,115 @@ namespace ETD.Models
         {
             return this.additionalInfo;
         }
+
+		public void setConclusion(Conclusions conclusion)
+		{
+			this.conclusion = conclusion;
+		}
+
+		public Conclusions getConclusion()
+		{
+			return conclusion;
+		}
+
+		public void setConclusionAdditionalInfo(String additionalInfo)
+		{
+			this.additionalInfo = additionalInfo;
+		}
+
+		public String getConclusionAdditionalInfo()
+		{
+			return conclusionAdditionalInfo;
+		}
+
+		public void setConclusionTime(DateTime conclusionTime)
+		{
+			this.conclusionTime = conclusionTime;
+		}
+
+		public DateTime getConclusionTime()
+		{
+			return conclusionTime;
+		}
+
+		public void setCall911Time(DateTime call911Time)
+		{
+			this.call911Time = call911Time;
+		}
+
+		public DateTime getCall911Time()
+		{
+			return call911Time;
+		}
+
+		public void setMeetingPoint(String meetingPoint)
+		{
+			this.meetingPoint = meetingPoint;
+		}
+
+		public String getMeetingPoint()
+		{
+			return meetingPoint;
+		}
+
+		public void setFirstResponderCompany(String firstResponderCompany)
+		{
+			this.firstResponderCompany = firstResponderCompany;
+		}
+
+		public String getFirstResponderCompany()
+		{
+			return firstResponderCompany;
+		}
+
+		public void setFirstResponderVehicle(String firstResponderVehicle)
+		{
+			this.firstResponderVehicle = firstResponderVehicle;
+		}
+
+		public String getFirstResponderVehicle()
+		{
+			return firstResponderVehicle;
+		}
+
+		public void setFirstResponderArrivalTime(DateTime firstResponderArrivalTime)
+		{
+			this.firstResponderArrivalTime = firstResponderArrivalTime;
+		}
+
+		public DateTime getFirstResponderArrivalTime()
+		{
+			return firstResponderArrivalTime;
+		}
+
+		public void setAmbulanceCompany(String ambulanceCompany)
+		{
+			this.ambulanceCompany = ambulanceCompany;
+		}
+
+		public String getAmbulanceCompany()
+		{
+			return ambulanceCompany;
+		}
+
+		public void setAmbulanceVehicle(String ambulanceVehicle)
+		{
+			this.ambulanceVehicle = ambulanceVehicle;
+		}
+
+		public String getAmbulanceVehicle()
+		{
+			return ambulanceVehicle;
+		}
+
+		public void setAmbulanceArrivalTime(DateTime ambulanceArrivalTime)
+		{
+			this.ambulanceArrivalTime = ambulanceArrivalTime;
+		}
+
+		public DateTime getAmbulanceArrivalTime()
+		{
+			return ambulanceArrivalTime;
+		}
     }
 }

@@ -8,6 +8,6 @@
 	Title="AdditionalInfoInterventionFormPage">
 
     <Grid>
-		<TextBox Name="additionalInformation" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible"/>
+		<TextBox Name="AdditionalInformation" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible"/>
 	</Grid>
 </Page>

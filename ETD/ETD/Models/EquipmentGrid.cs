@@ -24,7 +24,7 @@ namespace ETD.Models
             Rectangle imageRectangle = new Rectangle();
             imageRectangle.Width = size;
             imageRectangle.Height = size;
-            equipments equipment = (equipments)Enum.Parse(typeof(equipments), equipmentName);
+            Equipments equipment = (Equipments)Enum.Parse(typeof(Equipments), equipmentName);
             ImageBrush img = new ImageBrush();
             img.ImageSource = Services.getImage(equipment);
             imageRectangle.Fill = img;

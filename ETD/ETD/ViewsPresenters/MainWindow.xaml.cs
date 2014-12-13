@@ -32,12 +32,18 @@ namespace ETD.ViewsPresenters
 		private MapSectionPage mapSection;
 		private InterventionSectionPage interventionsSection;
 
+		private double previousWidth;
+		private double previousHeight;
+
 		public MainWindow()
 		{
 			InitializeComponent();
 			teamsSection = new TeamsSectionPage(this);
 			mapSection = new MapSectionPage(this);
 			interventionsSection = new InterventionSectionPage(this);
+
+			previousWidth = MapSection.ActualWidth;
+			previousHeight = MapSection.ActualHeight;
 
 			//Populating the Teams section
 			Frame teamsFrame = new Frame();
@@ -60,6 +66,11 @@ namespace ETD.ViewsPresenters
 		{
 			teamsSection.setTeamsSectionHeight(TeamsSection);
 			interventionsSection.setInterventionsSectionWidth(InterventionsSection);
+
+			mapSection.movePins((MapSection.ActualWidth / previousWidth), (MapSection.ActualHeight / previousHeight));
+
+			previousWidth = MapSection.ActualWidth;
+			previousHeight = MapSection.ActualHeight;
 		}
 
 		//Click: Load Map

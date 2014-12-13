@@ -6,19 +6,19 @@ using System.Threading.Tasks;
 
 namespace ETD.Models
 {
-	public enum equipments {ambulanceCart, sittingCart, epipen, transportStretcher, mountedStretcher, wheelchair};
+	public enum Equipments {ambulanceCart, sittingCart, epipen, transportStretcher, mountedStretcher, wheelchair};
 
 	public class Equipment
     {
 
-	   public equipments EquipmentName;
+	   public Equipments EquipmentName;
 
-       public Equipment(equipments name)
+       public Equipment(Equipments name)
        {
            EquipmentName = name;
        }
 
-       public equipments getEquipmentName()
+       public Equipments getEquipmentName()
        {
            return EquipmentName;
        }

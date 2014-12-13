@@ -100,6 +100,9 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm
 		{
 			detailsPage.PersistencyUpdate();
 			resourcesPage.PersistencyUpdate();
+			abcPage.PersistencyUpdate();
+			additionalInfoPage.PersistencyUpdate();
+			endPage.PersistencyUpdate();
 		}
 
 		//Hiding intervention form after completion

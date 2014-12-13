@@ -30,5 +30,57 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.ABCIntervent
 			this.interventionForm = interventionForm;
 			this.intervention = intervention;
 		}
+
+		public void PersistencyUpdate()
+		{
+			Consciousness consciousness;
+			if(ConsciousnessBox.SelectedIndex == -1)
+			{
+				consciousness = (Consciousness)4;
+			}
+			else
+			{
+				consciousness = (Consciousness)ConsciousnessBox.SelectedIndex;
+			}
+			bool disoriented = (bool)Disoriented.IsChecked;
+
+			Airways airways;
+			if(AirwaysBox.SelectedIndex == -1)
+			{
+				airways = (Airways)3;
+			}
+			else
+			{
+				airways = (Airways)AirwaysBox.SelectedIndex;
+			}
+
+			Breathing breathing;
+			if (BreathingBox.SelectedIndex == -1)
+			{
+				breathing = (Breathing)3;
+			}
+			else
+			{
+				breathing = (Breathing)BreathingBox.SelectedIndex;
+			}
+			int breathingFrequency = -1;
+			try { breathingFrequency = int.Parse(BreathingFrequency.Text); }
+			catch (Exception e) { }
+
+			Circulation circulation;
+			if(CirculationBox.SelectedIndex == -1)
+			{
+				circulation = (Circulation)4;
+			}
+			else
+			{
+				circulation = (Circulation)CirculationBox.SelectedIndex;
+			}
+			int circulationFrequency = -1;
+			try { circulationFrequency = int.Parse(CirculationFrequency.Text); }
+			catch (Exception e) { }
+
+			intervention.setABC(new Intervention.ABC(consciousness, disoriented, airways, breathing, breathingFrequency, circulation, circulationFrequency));
+		}
 	}
 }

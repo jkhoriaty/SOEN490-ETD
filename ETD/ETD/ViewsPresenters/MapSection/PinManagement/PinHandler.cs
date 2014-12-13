@@ -126,7 +126,7 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 						double fixedPin_X = Math.Round((((double)Canvas.GetLeft(fixedPin)) + (fixedPin.Width / 2)), 3);
 						double fixedPin_Y = Math.Round((((double)Canvas.GetTop(fixedPin)) + (fixedPin.Width / 2)), 3);
 
-						//If equipment is dropped on team and it overlaps more than 25% (i.e. not by mistake)
+						//If equipment is dropped on team and it overlaps more than 25% (assumption: not by mistake)
 						if (movedPin.Tag.Equals("equipment") && fixedPin.Tag.Equals("team") && movedPin_X > (fixedPin_X - (movedPin.Width / 2)) && movedPin_X < (fixedPin_X + (movedPin.Width / 2)) && movedPin_Y > (fixedPin_Y - (movedPin.Width / 2)) && movedPin_Y < (fixedPin_Y + (movedPin.Width / 2)))
 						{
 							mapSection.AddTeamEquipment(movedPin.Name, fixedPin.Name);
@@ -196,9 +196,16 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 							if (verificationCount > 100)
 							{
 								MessageBox.Show("The dropped object is dropped between two objects and is bouncing around with no progress. Resetting it.");
-								movedPin_X = (mapSection.Map.ActualWidth / 2);
-								movedPin_Y = (mapSection.Map.ActualHeight / 2);
+								if(movedPin_Y < mapSection.Map.ActualHeight)
+								{
+									movedPin_Y += fixedPin.Height;
+								}
+								else
+								{
+									movedPin_Y -= fixedPin.Height;
+								}
 								verificationCount = 0;
+								moved = true;
 							}
 
 							//Handling case of perfect superposition and placing right of fixed item if in the left half of the map, otherwise place left
@@ -251,6 +258,20 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 
 			//Drop the rectangle if there are not collision or after resolution of collision
 			SetPinPosition(movedPin, movedPin_X, movedPin_Y);
+		}
+
+		public void movePins(double widthRatio, double heightRatio)
+		{
+			var allPins = mapSection.Map.Children.OfType<Grid>().ToList();
+
+			foreach (var pin in allPins)
+			{
+				double movedPin_X = widthRatio * ((double)Canvas.GetLeft(pin) + (pin.Width / 2));
+				double movedPin_Y = heightRatio * ((double)Canvas.GetTop(pin) + (pin.Height / 2));
+
+				SetPinPosition(pin, movedPin_X, movedPin_Y);
+				DetectCollision(pin, movedPin_X, movedPin_Y);
+			}
 		}
 	}
 }

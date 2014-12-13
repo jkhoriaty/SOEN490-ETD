@@ -108,7 +108,7 @@ namespace ETD.ViewsPresenters.TeamsSection
 
 				//Getting the background image to the rectangle
 				ImageBrush equipmentImage = new ImageBrush();
-				equipmentImage.ImageSource = Services.getImage((equipments)Enum.Parse(typeof(equipments), equip));
+				equipmentImage.ImageSource = Services.getImage((Equipments)Enum.Parse(typeof(Equipments), equip));
 				imageRectangle.Fill = equipmentImage;
 
 				//Getting the appropriate equipment StackPanel

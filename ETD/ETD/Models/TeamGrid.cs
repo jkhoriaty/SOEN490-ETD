@@ -61,7 +61,7 @@ namespace ETD.Models
 
         public void ChangeStatus(String status)
         {
-            team.setStatus((statuses)Enum.Parse(typeof(statuses), status));
+            team.setStatus((Statuses)Enum.Parse(typeof(Statuses), status));
             ImageBrush img = new ImageBrush();
             img.ImageSource = Services.getImage(team, team.getStatus());
             imageRectangle.Fill = img;
