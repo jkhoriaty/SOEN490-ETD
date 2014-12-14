@@ -53,7 +53,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.TimersInterv
 			dispatcherTimer.Interval = new TimeSpan(0, 0, 1); //Update every second
 			dispatcherTimer.Start();
 
-			CreateOverallTimer();
+			CreateOverallTimer(0);
 		}
 
 		//Method ran every second
@@ -97,49 +97,57 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.TimersInterv
 		}
 
 		//Create the intervention timer
-		private void CreateOverallTimer()
+		public void CreateOverallTimer(int offset)
 		{
-			Thickness border = new Thickness();
-			border.Bottom = 1;
+			if (stopwatches[0] != null)
+			{
+				offsets[0] = offset;
+				stopwatches[0].Restart();
+			}
+			else
+			{
+				Thickness border = new Thickness();
+				border.Bottom = 1;
 
-			Label name = new Label();
-			name.Content = "Intervention";
-			name.FontWeight = FontWeights.Bold;
-			Grid.SetColumn(name, 0);
-			Grid.SetColumnSpan(name, 2);
-			Grid.SetRow(name, 0);
-			name.BorderBrush = new SolidColorBrush(Colors.Black);
-			name.BorderThickness = border;
+				Label name = new Label();
+				name.Content = "Intervention";
+				name.FontWeight = FontWeights.Bold;
+				Grid.SetColumn(name, 0);
+				Grid.SetColumnSpan(name, 2);
+				Grid.SetRow(name, 0);
+				name.BorderBrush = new SolidColorBrush(Colors.Black);
+				name.BorderThickness = border;
 
-			timersList.Children.Add(name);
-			resourceLabels[0] = name;
+				timersList.Children.Add(name);
+				resourceLabels[0] = name;
 
-			Label timer = new Label();
-			timer.FontWeight = FontWeights.Bold;
-			timer.HorizontalContentAlignment = HorizontalAlignment.Center;
-			Grid.SetColumn(timer, 2);
-			Grid.SetRow(timer, 0);
-			timer.BorderBrush = new SolidColorBrush(Colors.Black);
-			timer.BorderThickness = border;
+				Label timer = new Label();
+				timer.FontWeight = FontWeights.Bold;
+				timer.HorizontalContentAlignment = HorizontalAlignment.Center;
+				Grid.SetColumn(timer, 2);
+				Grid.SetRow(timer, 0);
+				timer.BorderBrush = new SolidColorBrush(Colors.Black);
+				timer.BorderThickness = border;
 
-			timersList.Children.Add(timer);
-			timerLabels[0] = timer;
+				timersList.Children.Add(timer);
+				timerLabels[0] = timer;
 
-			Label status = new Label();
-			status.FontWeight = FontWeights.Bold;
-			status.HorizontalContentAlignment = HorizontalAlignment.Center;
-			Grid.SetColumn(status, 3);
-			Grid.SetRow(status, 0);
-			status.BorderBrush = new SolidColorBrush(Colors.Black);
-			status.BorderThickness = border;
+				Label status = new Label();
+				status.FontWeight = FontWeights.Bold;
+				status.HorizontalContentAlignment = HorizontalAlignment.Center;
+				Grid.SetColumn(status, 3);
+				Grid.SetRow(status, 0);
+				status.BorderBrush = new SolidColorBrush(Colors.Black);
+				status.BorderThickness = border;
 
-			timersList.Children.Add(status);
-			statusLabels[0] = status;
-			setStatus(0, "Ongoing");
+				timersList.Children.Add(status);
+				statusLabels[0] = status;
+				setStatus(0, "Ongoing");
 
-			Stopwatch stopwatch = new Stopwatch();
-			stopwatches[0] = stopwatch;
-			stopwatch.Start();
+				Stopwatch stopwatch = new Stopwatch();
+				stopwatches[0] = stopwatch;
+				stopwatch.Start();
+			}
 		}
 
 		public void CreateTimer(int position, String team, String resource, int offset)

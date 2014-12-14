@@ -65,9 +65,10 @@ namespace ETD.Models
             {
                 if (equipment == equipments[i])
                 {
-                    equipments[i] = null;
-                    EquipmentCount--;
-                }
+					equipments[i] = null;
+					EquipmentCount--;
+					return;
+				}
             }
 		}
 
