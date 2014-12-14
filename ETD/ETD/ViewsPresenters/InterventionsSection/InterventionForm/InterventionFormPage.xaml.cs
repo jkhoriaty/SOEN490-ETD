@@ -137,6 +137,11 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm
 			}
 		}
 
+		public void CreateOverallTimer(int offset)
+		{
+			timersPage.CreateOverallTimer(offset);
+		}
+
 		public void CreateTimer(int position, String team, String resource, int offset)
 		{
 			timersPage.CreateTimer(position, team, resource, offset);

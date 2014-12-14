@@ -124,7 +124,26 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.DetailsInter
 
 		private void Button_Click(object sender, RoutedEventArgs e)
 		{
-			TextBoxHandler.setNow(Callhh, Callmm);
+			try
+			{
+				int hh = int.Parse(Callhh.Text);
+				int mm = int.Parse(Callmm.Text);
+				DateTime callTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, hh, mm, DateTime.Now.Second);
+				int offset = (int)DateTime.Now.Subtract(callTime).TotalMinutes;
+				if (offset < 0)
+				{
+					MessageBox.Show("The time inserted is in the future!");
+				}
+				else
+				{
+					interventionForm.CreateOverallTimer(offset);
+				}
+
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show("The text inserted in the time boxes is not valid");
+			}
 		}
 	}
 }
