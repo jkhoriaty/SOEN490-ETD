@@ -21,8 +21,8 @@ namespace ETD_UnitTest
         {
             Team a = new Team("A");
             DateTime departure = new DateTime(2014, 11, 20);
-            TeamMember MemberA = new TeamMember("John", trainings.firstResponder, departure);
-            TeamMember MemberB = new TeamMember("Alex", trainings.firstAid, departure);
+            TeamMember MemberA = new TeamMember("John", Trainings.firstResponder, departure);
+            TeamMember MemberB = new TeamMember("Alex", Trainings.firstAid, departure);
             a.addMember(MemberA);
             a.addMember(MemberB);
             Assert.AreEqual(a.getMember(2), null);
@@ -34,14 +34,14 @@ namespace ETD_UnitTest
         public void EquipmentAddTest()
         {
             Team a = new Team("A");
-            Equipment equip1 = new Equipment(equipments.sittingCart);
-            Equipment equip2 = new Equipment(equipments.ambulanceCart);
-            Equipment equip3 = new Equipment(equipments.epipen);
-            Equipment equip4 = new Equipment(equipments.transportStretcher);
-            a.addEquipment(equip1);
-            a.addEquipment(equip2);
-            a.addEquipment(equip3);
-            a.addEquipment(equip4);
+            Equipment equip1 = new Equipment(Equipments.sittingCart);
+            Equipment equip2 = new Equipment(Equipments.ambulanceCart);
+            Equipment equip3 = new Equipment(Equipments.epipen);
+            Equipment equip4 = new Equipment(Equipments.transportStretcher);
+            //a.addEquipment(equip1);
+            //a.addEquipment(equip2);
+            //a.addEquipment(equip3);
+            //a.addEquipment(equip4);
             Assert.AreEqual(a.getEquipmentCount(), 3);
         }
 

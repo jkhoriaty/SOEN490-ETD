@@ -86,5 +86,133 @@ namespace ETD_UnitTest
             a.setChiefComplaint("testcomplaint");
             Assert.AreEqual("testcomplaint", a.getChiefComplaint());
         }
+
+        [TestMethod]
+        public void InterventionSetOtherChiefComplaintTest()
+        {
+            Intervention a = new Intervention();
+            a.setOtherChiefComplaint("testothercomplaint");
+            Assert.AreEqual("testothercomplaint", a.getOtherChiefComplaint());
+        }
+
+        [TestMethod]
+        public void InterventionSetResourcesTest()
+        {
+            Intervention a = new Intervention();
+            a.setResources(1, new Intervention.Resource("resource1", "A", DateTime.Now, DateTime.Now));
+            a.setResources(2, new Intervention.Resource("resource2", "B", DateTime.Now, DateTime.Now));
+
+            Intervention.Resource[] b = a.getResources();
+            //Not sure how to assertequal here...
+        }
+
+        [TestMethod]
+        public void InterventionSetABCTest()
+        {
+            Intervention a = new Intervention();
+            a.setABC(new Intervention.ABC(Consciousness.alert, true, Airways.clear, Breathing.normal, 1, Circulation.normal, 1));
+
+            Assert.IsNotNull(a.getABC()); //Not sure if this is correct... someone check.
+        }
+
+        [TestMethod]
+        public void InterventionSetAdditionalInfoTest()
+        {
+            Intervention a = new Intervention();
+            a.setAdditionalInfo("Test info");
+            Assert.AreEqual("Test info", a.getAdditionalInfo());
+        }
+
+        [TestMethod]
+        public void InterventionSetConclusionTest()
+        {
+            Intervention a = new Intervention();
+            a.setConclusion(Conclusions.hospital);
+            Assert.AreEqual(Conclusions.hospital, a.getConclusion());
+        }
+
+        [TestMethod]
+        public void InterventionSetConclusionAdditionalInfoTest()
+        {
+            Intervention a = new Intervention();
+            a.setConclusionAdditionalInfo("additional conclusion info");
+            Assert.AreEqual("additional conclusion info", a.getConclusionAdditionalInfo());
+        }
+
+        [TestMethod]
+        public void InterventionSetConclusionTimeTest()
+        {
+            Intervention a = new Intervention();
+            DateTime now = DateTime.Now;
+            a.setConclusionTime(now);
+            Assert.AreEqual(now, a.getConclusionTime());
+        }
+
+        [TestMethod]
+        public void InterventionSetCall911TimeTest()
+        {
+            Intervention a = new Intervention();
+            DateTime now = DateTime.Now;
+            a.setCall911Time(now);
+            Assert.AreEqual(now, a.getCall911Time());
+        }
+
+        [TestMethod]
+        public void InterventionSetMeetingPointTest()
+        {
+            Intervention a = new Intervention();
+            a.setMeetingPoint("meetingpoint");
+            Assert.AreEqual("meetingpoint", a.getMeetingPoint());
+        }
+
+        [TestMethod]
+        public void InterventionSetFirstResponderCompanyTest()
+        {
+            Intervention a = new Intervention();
+            a.setFirstResponderCompany("frcompany");
+            Assert.AreEqual("frcompany", a.getFirstResponderCompany());
+        }
+
+        [TestMethod]
+        public void InterventionSetFirstResponderVehicleTest()
+        {
+            Intervention a = new Intervention();
+            a.setFirstResponderVehicle("frvehicle");
+            Assert.AreEqual("frvehicle", a.getFirstResponderVehicle());
+        }
+
+        [TestMethod]
+        public void InterventionSetFirstResponderArrivalTimeTest()
+        {
+            Intervention a = new Intervention();
+            DateTime now = DateTime.Now;
+            a.setFirstResponderArrivalTime(now);
+            Assert.AreEqual(now, a.getFirstResponderArrivalTime());
+        }
+
+        [TestMethod]
+        public void InterventionSetAmbulanceCompanyTest()
+        {
+            Intervention a = new Intervention();
+            a.setAmbulanceCompany("ambulancecompany");
+            Assert.AreEqual("ambulancecompany", a.getAmbulanceCompany());
+        }
+
+        [TestMethod]
+        public void InterventionSetAmbulanceVehicleTest()
+        {
+            Intervention a = new Intervention();
+            a.setAmbulanceVehicle("ambulancevehicle");
+            Assert.AreEqual("ambulancevehicle", a.getAmbulanceVehicle());
+        }
+
+        [TestMethod]
+        public void InterventionSetAmbulanceArrivalTimeTest()
+        {
+            Intervention a = new Intervention();
+            DateTime now = DateTime.Now;
+            a.setAmbulanceArrivalTime(now);
+            Assert.AreEqual(now, a.getAmbulanceArrivalTime());
+        }
     }
 }
