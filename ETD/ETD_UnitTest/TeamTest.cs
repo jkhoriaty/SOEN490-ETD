@@ -21,8 +21,8 @@ namespace ETD_UnitTest
         {
             Team a = new Team("A");
             DateTime departure = new DateTime(2014, 11, 20);
-            TeamMember MemberA = new TeamMember("John", trainings.firstResponder, departure);
-            TeamMember MemberB = new TeamMember("Alex", trainings.firstAid, departure);
+            TeamMember MemberA = new TeamMember("John", Trainings.firstResponder, departure);
+            TeamMember MemberB = new TeamMember("Alex", Trainings.firstAid, departure);
             a.addMember(MemberA);
             a.addMember(MemberB);
             Assert.AreEqual(a.getMember(2), null);
@@ -59,8 +59,10 @@ namespace ETD_UnitTest
         {
             Team a = new Team("A");
 
-            a.setStatus(statuses.available);
-            Assert.AreEqual(a.getStatus(), statuses.available);
+            a.setStatus(Statuses.available);
+            Assert.AreEqual(a.getStatus(), Statuses.available);
         }
+
+       
     }
 }
