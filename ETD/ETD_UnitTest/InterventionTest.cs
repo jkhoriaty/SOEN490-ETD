@@ -9,7 +9,7 @@ namespace ETD_UnitTest
     {
 
         [TestMethod]
-        public void AddInterventionTest()
+        public void AddInterventionInitialDetailsTest()
         {
              Intervention intervention = new Intervention();
              int interventionNumber = 1;
@@ -17,27 +17,19 @@ namespace ETD_UnitTest
              String callerName = "Paul";
              String location = "7141 Sherbrooke Street West, Montreal, QC H4B 1R6 ";
              String natureOfCall = "Broken ankle";
-             int code = 1;
-             String gender = "male";
-             String age = "25";
 
              intervention.setInterventionNumber(interventionNumber);
              intervention.setTimeOfCall(timeOfCall);
              intervention.setCallerName(callerName);
              intervention.setLocation(location);
              intervention.setNatureOfCall(natureOfCall);
-             intervention.setCode(code);
-             intervention.setGender(gender);
-             intervention.setAge(age);
 
              Assert.AreEqual(intervention.getInterventionNumber(), interventionNumber);
              Assert.AreEqual(intervention.getTimeOfCall() ,timeOfCall );
              Assert.AreEqual(intervention.getCallerName() , callerName);
              Assert.AreEqual(intervention.getLocation() , location);
              Assert.AreEqual(intervention.getNatureOfCall() ,natureOfCall );
-             Assert.AreEqual(intervention.getCode() ,code );
-             Assert.AreEqual(intervention.getGender() ,gender );
-             Assert.AreEqual(intervention.getAge() ,age );
+        
 
         }
         [TestMethod]
@@ -73,31 +65,48 @@ namespace ETD_UnitTest
             Assert.AreEqual(intervention.getAmbulanceArrivalTime(), ambulanceArrivalTime);
         }
 
+        [TestMethod]
         public void LogEndOfInterventionTest()
         {
             Intervention intervention = new Intervention();
             String chiefComplaint = "Not fast enough.";
             String otherChiefComplaint = null;
-            String additionalInfo = null;
             DateTime conclusionTime = DateTime.Now;
             Conclusions conclusion = Conclusions.referredToDoctor;
             String conclusionAdditionalInfo = null;
 		    
             intervention.setChiefComplaint(chiefComplaint);
             intervention.setOtherChiefComplaint(otherChiefComplaint);
-            intervention.setAdditionalInfo(additionalInfo);
             intervention.setConclusion(conclusion);
             intervention.setConclusionAdditionalInfo(conclusionAdditionalInfo);
             intervention.setConclusionTime(conclusionTime);
      
             Assert.AreEqual(intervention.getChiefComplaint(), chiefComplaint);
             Assert.AreEqual(intervention.getOtherChiefComplaint(), otherChiefComplaint);
-            Assert.AreEqual(intervention.getAdditionalInfo(), additionalInfo);
             Assert.AreEqual(intervention.getConclusion(), conclusion);
             Assert.AreEqual(intervention.getConclusionAdditionalInfo(), conclusionAdditionalInfo);
             Assert.AreEqual(intervention.getConclusionTime(), conclusionTime);
         }
 
+       [TestMethod]
+        public void AddAdditionalDetailsTest()
+        {
+            Intervention intervention = new Intervention();
+            String additionalInfo = null;
+            int code = 1;
+            String gender = "male";
+            String age = "25";
+
+            intervention.setAdditionalInfo(additionalInfo);
+            intervention.setCode(code);
+            intervention.setGender(gender);
+            intervention.setAge(age);
+
+            Assert.AreEqual(intervention.getCode(), code);
+            Assert.AreEqual(intervention.getGender(), gender);
+            Assert.AreEqual(intervention.getAge(), age);
+            Assert.AreEqual(intervention.getAdditionalInfo(), additionalInfo);
+        }
 
         [TestMethod]
         public void getResourcesTest()
