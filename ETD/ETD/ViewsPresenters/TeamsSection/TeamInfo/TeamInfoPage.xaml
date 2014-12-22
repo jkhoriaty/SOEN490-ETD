@@ -14,7 +14,7 @@
 				<Grid>
 					<TextBlock Name="teamName" HorizontalAlignment="Left" FontWeight="Bold" FontSize="20" Foreground="White" MouseRightButtonDown="DeleteTeam" Margin="3,0,0,0"/>
 					<StackPanel Name="equipmentStackPanel" HorizontalAlignment="Right" Orientation="Horizontal" FlowDirection="RightToLeft">
-						<Rectangle Name="teamTraining" Width="35" Height="35"/>
+						<Rectangle Name="teamTraining" Width="35" Height="35" FlowDirection="LeftToRight"/>
 					</StackPanel>
 				</Grid>
 			</Border>
