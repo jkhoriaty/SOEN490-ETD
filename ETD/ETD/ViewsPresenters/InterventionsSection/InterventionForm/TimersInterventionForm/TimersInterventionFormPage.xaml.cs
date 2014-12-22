@@ -91,6 +91,10 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.TimersInterv
 							statusLabels[i].Background = statusLabels[i].Foreground;
 							statusLabels[i].Foreground = backgroundColor;
 						}
+						else
+						{
+							setStatus(i, "Overtime");
+						}
 					}
 				}
 			}
