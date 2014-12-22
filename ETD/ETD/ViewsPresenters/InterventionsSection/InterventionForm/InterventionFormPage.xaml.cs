@@ -50,7 +50,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm
 			//Set the intervention type RED if it is of code 1
 
 			dispatcherTimer.Tick += new EventHandler(PersistencyUpdate);
-			dispatcherTimer.Interval += new TimeSpan(0, 1, 0);
+			dispatcherTimer.Interval += new TimeSpan(0, 0, 30);
 			dispatcherTimer.Start();
 
 			timersPage = new TimersInterventionFormPage(this);
