@@ -103,6 +103,7 @@ namespace ETD_UnitTest
             a.setResources(2, new Intervention.Resource("resource2", "B", DateTime.Now, DateTime.Now));
 
             Intervention.Resource[] b = a.getResources();
+            Assert.IsNotNull(b);
             //Not sure how to assertequal here...
         }
 
