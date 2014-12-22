@@ -232,7 +232,7 @@ namespace ETD.Models
 
 		public void setConclusionAdditionalInfo(String additionalInfo)
 		{
-			this.additionalInfo = additionalInfo;
+            this.conclusionAdditionalInfo = additionalInfo;
 		}
 
 		public String getConclusionAdditionalInfo()
