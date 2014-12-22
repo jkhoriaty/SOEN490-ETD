@@ -31,7 +31,7 @@ namespace ETD_UnitTest
         }
 
         [TestMethod]
-        public void EquipmentAddRemoveTest()
+        public void EquipmentAddTest()
         {
             Team c = new Team("C");
             String equip1 = "TestEquip1";
