@@ -21,8 +21,8 @@ namespace ETD_UnitTest
         {
             Team a = new Team("A");
             DateTime departure = new DateTime(2014, 11, 20);
-            TeamMember MemberA = new TeamMember("John", trainings.firstResponder, departure);
-            TeamMember MemberB = new TeamMember("Alex", trainings.firstAid, departure);
+            TeamMember MemberA = new TeamMember("John", Trainings.firstResponder, departure);
+            TeamMember MemberB = new TeamMember("Alex", Trainings.firstAid, departure);
             a.addMember(MemberA);
             a.addMember(MemberB);
             Assert.AreEqual(a.getMember(2), null);
@@ -33,7 +33,7 @@ namespace ETD_UnitTest
         [TestMethod]
         public void EquipmentAddRemoveTest()
         {
-            Team a = new Team("A");
+            Team c = new Team("C");
             String equip1 = "TestEquip1";
             String equip2 = "TestEquip2";
             String equip3 = "TestEquip3";
@@ -42,25 +42,26 @@ namespace ETD_UnitTest
             //Equipment equip2 = new Equipment(equipments.ambulanceCart);
             //Equipment equip3 = new Equipment(equipments.epipen);
             //Equipment equip4 = new Equipment(equipments.transportStretcher);
-            a.addEquipment(equip1);
-            a.addEquipment(equip2);
-            a.addEquipment(equip3);
-            Assert.IsFalse(a.addEquipment(equip4));
-            Assert.AreEqual(a.getEquipmentCount(), 3);
+            c.addEquipment(equip1);
+            c.addEquipment(equip2);
+            c.addEquipment(equip3);
+            Assert.IsFalse(c.addEquipment(equip4));
+            Assert.AreEqual(c.getEquipmentCount(), 3);
 
-            a.removeEquipment(equip1);
-            a.removeEquipment(equip4);
-            Assert.AreEqual(a.getEquipmentCount(), 2);
+            c.removeEquipment(equip1);
+            Assert.AreEqual(c.getEquipmentCount(), 2);
 
         }
 
         [TestMethod]
         public void setStatusTest()
         {
-            Team a = new Team("A");
+            Team b = new Team("B");
 
-            a.setStatus(statuses.available);
-            Assert.AreEqual(a.getStatus(), statuses.available);
+            b.setStatus(Statuses.available);
+            Assert.AreEqual(b.getStatus(), Statuses.available);
         }
+
+       
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ETD.Models
 {
-	public enum Statuses {available, moving, intervening, busy};
+	public enum Statuses {available, moving, intervening, unavailable};
 
     public class Team
     {

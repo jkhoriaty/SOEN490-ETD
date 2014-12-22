@@ -10,8 +10,8 @@ namespace ETD_UnitTest
         [TestMethod]
         public void EquipmentCreation()
         {
-            Equipment test = new Equipment(equipments.sittingCart);
-            Assert.AreEqual(test.getEquipmentName(), equipments.sittingCart);
+            Equipment test = new Equipment(Equipments.sittingCart);
+            Assert.AreEqual(test.getEquipmentName(), Equipments.sittingCart);
         }
     }
 }

@@ -16,7 +16,7 @@
             <MenuItem Header="Available" Click="ChangeStatus"></MenuItem>
             <MenuItem Header="Moving" Click="ChangeStatus"></MenuItem>
             <MenuItem Header="Intervening" Click="ChangeStatus"></MenuItem>
-            <MenuItem Header="Busy" Click="ChangeStatus"></MenuItem>
+            <MenuItem Header="Unavailable" Click="ChangeStatus"></MenuItem>
         </ContextMenu>
     </Page.Resources>
 </Page>

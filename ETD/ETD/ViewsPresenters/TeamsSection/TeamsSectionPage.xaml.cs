@@ -101,6 +101,7 @@ namespace ETD.ViewsPresenters.TeamsSection
 				imageRectangle.Width = 27;
 				imageRectangle.Height = 27;
 				imageRectangle.MouseRightButtonDown += new MouseButtonEventHandler(RemoveTeamEquipment);
+                imageRectangle.FlowDirection = FlowDirection.LeftToRight;
 
 				Thickness equipmentMargin = imageRectangle.Margin;
 				equipmentMargin.Right = 1;

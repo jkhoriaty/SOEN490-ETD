@@ -33,7 +33,7 @@ namespace ETD.Models
 			{Statuses.available, @"\Icons\FirstAid_available.png"},
 			{Statuses.moving, @"\Icons\FirstAid_moving.png"},
 			{Statuses.intervening, @"\Icons\FirstAid_intervening.png"},
-			{Statuses.busy, @"\Icons\FirstAid_busy.png"}
+			{Statuses.unavailable, @"\Icons\FirstAid_unavailable.png"}
 		};
 
 		private static Dictionary<Statuses, String> firstResponderPinRelPath = new Dictionary<Statuses, String>
@@ -41,7 +41,7 @@ namespace ETD.Models
 			{Statuses.available, @"\Icons\FirstResponder_available.png"},
 			{Statuses.moving, @"\Icons\FirstResponder_moving.png"},
 			{Statuses.intervening, @"\Icons\FirstResponder_intervening.png"},
-			{Statuses.busy, @"\Icons\FirstResponder_busy.png"}
+			{Statuses.unavailable, @"\Icons\FirstResponder_unavailable.png"}
 		};
 
 		private static Dictionary<Statuses, String> medicinePinRelPath = new Dictionary<Statuses, String>
@@ -49,12 +49,12 @@ namespace ETD.Models
 			{Statuses.available, @"\Icons\Medicine_available.png"},
 			{Statuses.moving, @"\Icons\Medicine_moving.png"},
 			{Statuses.intervening, @"\Icons\Medicine_intervening.png"},
-			{Statuses.busy, @"\Icons\Medicine_busy.png"}
+			{Statuses.unavailable, @"\Icons\Medicine_unavailable.png"}
 		};
 
 		private static Dictionary<String, String> generalRelPath = new Dictionary<String, String>
 		{
-			{"intervention", @"\Icons\AddInterventionButton.png"}
+			{"intervention", @"\Icons\InterventionIcon.png"}
 		};
 
 		private static Dictionary<String, String> alphabet = new Dictionary<String, String>
