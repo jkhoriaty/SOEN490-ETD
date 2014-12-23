@@ -13,7 +13,7 @@ using System.Windows.Shapes;
 
 namespace ETD.ViewsPresenters.MapSection.PinManagement
 {
-	class PinEditor
+	public class PinEditor
 	{
 		private MapSectionPage mapSection;
 		private int teamSize = 40;

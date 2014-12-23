@@ -9,7 +9,7 @@ using System.Windows.Shapes;
 
 namespace ETD.Models
 {
-    class TeamGrid : Grid
+    public class TeamGrid : Grid
     {
         private Rectangle imageRectangle;
         public Team team;
