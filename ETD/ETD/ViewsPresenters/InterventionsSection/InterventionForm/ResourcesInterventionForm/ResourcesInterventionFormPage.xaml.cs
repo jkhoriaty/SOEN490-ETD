@@ -40,52 +40,44 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.ResourcesInt
 
 		private void setupMovingMap()
 		{
-			movingMap.Add("Moving1", textboxArray(Movinghh1, Movingmm1));
-			movingMap.Add("Moving2", textboxArray(Movinghh2, Movingmm2));
-			movingMap.Add("Moving3", textboxArray(Movinghh3, Movingmm3));
-			movingMap.Add("Moving4", textboxArray(Movinghh4, Movingmm4));
-			movingMap.Add("Moving5", textboxArray(Movinghh5, Movingmm5));
-			movingMap.Add("Moving6", textboxArray(Movinghh6, Movingmm6));
-			movingMap.Add("Moving7", textboxArray(Movinghh7, Movingmm7));
-			movingMap.Add("Moving8", textboxArray(Movinghh8, Movingmm8));
-			movingMap.Add("Moving9", textboxArray(Movinghh9, Movingmm9));
-			movingMap.Add("Moving10", textboxArray(Movinghh10, Movingmm10));
+			movingMap.Add("Moving1", TextBoxHandler.textboxArray(Movinghh1, Movingmm1));
+			movingMap.Add("Moving2", TextBoxHandler.textboxArray(Movinghh2, Movingmm2));
+			movingMap.Add("Moving3", TextBoxHandler.textboxArray(Movinghh3, Movingmm3));
+			movingMap.Add("Moving4", TextBoxHandler.textboxArray(Movinghh4, Movingmm4));
+			movingMap.Add("Moving5", TextBoxHandler.textboxArray(Movinghh5, Movingmm5));
+			movingMap.Add("Moving6", TextBoxHandler.textboxArray(Movinghh6, Movingmm6));
+			movingMap.Add("Moving7", TextBoxHandler.textboxArray(Movinghh7, Movingmm7));
+			movingMap.Add("Moving8", TextBoxHandler.textboxArray(Movinghh8, Movingmm8));
+			movingMap.Add("Moving9", TextBoxHandler.textboxArray(Movinghh9, Movingmm9));
+			movingMap.Add("Moving10", TextBoxHandler.textboxArray(Movinghh10, Movingmm10));
 		}
 
 		private void setupArrivalMap()
 		{
-			arrivalMap.Add("Arrival1", textboxArray(Arrivalhh1, Arrivalmm1));
-			arrivalMap.Add("Arrival2", textboxArray(Arrivalhh2, Arrivalmm2));
-			arrivalMap.Add("Arrival3", textboxArray(Arrivalhh3, Arrivalmm3));
-			arrivalMap.Add("Arrival4", textboxArray(Arrivalhh4, Arrivalmm4));
-			arrivalMap.Add("Arrival5", textboxArray(Arrivalhh5, Arrivalmm5));
-			arrivalMap.Add("Arrival6", textboxArray(Arrivalhh6, Arrivalmm6));
-			arrivalMap.Add("Arrival7", textboxArray(Arrivalhh7, Arrivalmm7));
-			arrivalMap.Add("Arrival8", textboxArray(Arrivalhh8, Arrivalmm8));
-			arrivalMap.Add("Arrival9", textboxArray(Arrivalhh9, Arrivalmm9));
-			arrivalMap.Add("Arrival10", textboxArray(Arrivalhh10, Arrivalmm10));
+			arrivalMap.Add("Arrival1", TextBoxHandler.textboxArray(Arrivalhh1, Arrivalmm1));
+			arrivalMap.Add("Arrival2", TextBoxHandler.textboxArray(Arrivalhh2, Arrivalmm2));
+			arrivalMap.Add("Arrival3", TextBoxHandler.textboxArray(Arrivalhh3, Arrivalmm3));
+			arrivalMap.Add("Arrival4", TextBoxHandler.textboxArray(Arrivalhh4, Arrivalmm4));
+			arrivalMap.Add("Arrival5", TextBoxHandler.textboxArray(Arrivalhh5, Arrivalmm5));
+			arrivalMap.Add("Arrival6", TextBoxHandler.textboxArray(Arrivalhh6, Arrivalmm6));
+			arrivalMap.Add("Arrival7", TextBoxHandler.textboxArray(Arrivalhh7, Arrivalmm7));
+			arrivalMap.Add("Arrival8", TextBoxHandler.textboxArray(Arrivalhh8, Arrivalmm8));
+			arrivalMap.Add("Arrival9", TextBoxHandler.textboxArray(Arrivalhh9, Arrivalmm9));
+			arrivalMap.Add("Arrival10", TextBoxHandler.textboxArray(Arrivalhh10, Arrivalmm10));
 		}
 
 		private void setupInformationMap()
 		{
-			informationMap.Add("Moving1", textboxArray(Team1, Resources1));
-			informationMap.Add("Moving2", textboxArray(Team2, Resources2));
-			informationMap.Add("Moving3", textboxArray(Team3, Resources3));
-			informationMap.Add("Moving4", textboxArray(Team4, Resources4));
-			informationMap.Add("Moving5", textboxArray(Team5, Resources5));
-			informationMap.Add("Moving6", textboxArray(Team6, Resources6));
-			informationMap.Add("Moving7", textboxArray(Team7, Resources7));
-			informationMap.Add("Moving8", textboxArray(Team8, Resources8));
-			informationMap.Add("Moving9", textboxArray(Team9, Resources9));
-			informationMap.Add("Moving10", textboxArray(Team10, Resources10));
-		}
-
-		private TextBox[] textboxArray(TextBox box1, TextBox box2)
-		{
-			TextBox[] array = new TextBox[2];
-			array[0] = box1;
-			array[1] = box2;
-			return array;
+			informationMap.Add("Moving1", TextBoxHandler.textboxArray(Team1, Resources1));
+			informationMap.Add("Moving2", TextBoxHandler.textboxArray(Team2, Resources2));
+			informationMap.Add("Moving3", TextBoxHandler.textboxArray(Team3, Resources3));
+			informationMap.Add("Moving4", TextBoxHandler.textboxArray(Team4, Resources4));
+			informationMap.Add("Moving5", TextBoxHandler.textboxArray(Team5, Resources5));
+			informationMap.Add("Moving6", TextBoxHandler.textboxArray(Team6, Resources6));
+			informationMap.Add("Moving7", TextBoxHandler.textboxArray(Team7, Resources7));
+			informationMap.Add("Moving8", TextBoxHandler.textboxArray(Team8, Resources8));
+			informationMap.Add("Moving9", TextBoxHandler.textboxArray(Team9, Resources9));
+			informationMap.Add("Moving10", TextBoxHandler.textboxArray(Team10, Resources10));
 		}
 
 		private void TextBoxes_GotFocus(object sender, RoutedEventArgs e)

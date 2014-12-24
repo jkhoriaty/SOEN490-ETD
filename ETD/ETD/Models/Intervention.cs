@@ -33,7 +33,7 @@ namespace ETD.Models
 
 		private ABC abc;
 
-        private String additionalInfo;
+        private AdditionalInformation[] additionalInfo;
 
 		private Conclusions conclusion;
 		private String conclusionAdditionalInfo;
@@ -72,7 +72,6 @@ namespace ETD.Models
 
 		public struct ABC
 		{
-
 			private Consciousness consciousness;
 			private bool disoriented;
 			private Airways airways;
@@ -90,6 +89,18 @@ namespace ETD.Models
 				this.breathingFrequency = breathingFrequency;
 				this.circulation = circulation;
 				this.circulationFrequency = circulationFrequency;
+			}
+		}
+
+		public struct AdditionalInformation
+		{
+			private String information;
+			private DateTime timestamp;
+
+			public AdditionalInformation(String information, DateTime timestamp)
+			{
+				this.information = information;
+				this.timestamp = timestamp;
 			}
 		}
 
@@ -210,12 +221,12 @@ namespace ETD.Models
 			return abc;
 		}
 
-        public void setAdditionalInfo(String info)
+        public void setAdditionalInfo(int position, AdditionalInformation info)
         {
-            this.additionalInfo = info;
+            this.additionalInfo[position] = info;
         }
 
-        public String getAdditionalInfo()
+		public AdditionalInformation[] getAdditionalInfo()
         {
             return this.additionalInfo;
         }

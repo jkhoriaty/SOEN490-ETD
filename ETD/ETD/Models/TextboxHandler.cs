@@ -107,5 +107,14 @@ namespace ETD.Models
 				mm.Text = "" + DateTime.Now.Minute;
 			}
 		}
+
+		//Places the two items in a TextBox array and returns the array
+		public static TextBox[] textboxArray(TextBox box1, TextBox box2)
+		{
+			TextBox[] array = new TextBox[2];
+			array[0] = box1;
+			array[1] = box2;
+			return array;
+		}
 	}
 }
