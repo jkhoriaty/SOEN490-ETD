@@ -54,8 +54,9 @@ namespace ETD.ViewsPresenters.InterventionsSection
 		}
 
 		//Hiding intervention form after completion
-		public void HideInterventionForm(int interventionNumber)
+		public void CompleteIntervention(int interventionNumber)
 		{
+			//Setting the intervention as completed and hiding it so it doesn't show in the ongoing intervention list
 			foreach(Frame frame in InterventionsList.Children)
 			{
 				if(frame.Name.Equals("Intervention_" + interventionNumber))
@@ -64,6 +65,9 @@ namespace ETD.ViewsPresenters.InterventionsSection
 					frame.Visibility = Visibility.Collapsed;
 				}
 			}
+
+			//Deleting the intervention pin
+			mainWindow.DeletePin("intervention_" + interventionNumber);
 		}
 
 		//Showing and hiding the appropriate intervention forms
