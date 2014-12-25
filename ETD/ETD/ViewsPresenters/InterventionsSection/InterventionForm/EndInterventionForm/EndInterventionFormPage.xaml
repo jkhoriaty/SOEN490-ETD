@@ -46,7 +46,7 @@
 			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 				<TextBox Name="Endhh" Width="29" Text="hh" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
 				<Button Width="10" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="Transparent" BorderBrush="Transparent" Click="End_Click" Margin="0,0,0,0.2"/>
-				<TextBox Name="Endmm" Width="29" Text="mm" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+				<TextBox Name="Endmm" Width="29" Text="00" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
 			</StackPanel>
 		</Border>
 		
