@@ -23,18 +23,20 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.TimersInterv
 	/// </summary>
 	public partial class TimersInterventionFormPage : Page
 	{
-		private InterventionFormPage interventionForm;
+        private const int TIMER_LIMIT = 13;
+        private InterventionFormPage interventionForm;
 		private DispatcherTimer dispatcherTimer = new DispatcherTimer();
 		private int timerPosition = 1;
 
-		private Label[] teamLabels = new Label[11];
-		private Label[] resourceLabels = new Label[11];
-		private Label[] timerLabels = new Label[11];
-		private Label[] statusLabels = new Label[11];
 
-		private Stopwatch[] stopwatches = new Stopwatch[11];
-		private int[] offsets = new int[11];
-		private int[] endOffsets = new int[11];
+        private Label[] teamLabels = new Label[TIMER_LIMIT];
+        private Label[] resourceLabels = new Label[TIMER_LIMIT];
+        private Label[] timerLabels = new Label[TIMER_LIMIT];
+        private Label[] statusLabels = new Label[TIMER_LIMIT];
+
+        private Stopwatch[] stopwatches = new Stopwatch[TIMER_LIMIT];
+        private int[] offsets = new int[TIMER_LIMIT];
+        private int[] endOffsets = new int[TIMER_LIMIT];
 
 		public static int interventionDeadline = 30;
 		public static int movingDeadline = 5;
@@ -59,7 +61,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.TimersInterv
 		//Method ran every second
 		public void refresh(object sender, EventArgs e)
 		{
-			for (int i = 0; i < 11; i++)
+			for (int i = 0; i < TIMER_LIMIT; i++)
 			{
 				if (stopwatches[i] != null && (statusLabels[i].Content.Equals("Ongoing") || statusLabels[i].Content.Equals("Overtime")))
 				{
@@ -69,15 +71,15 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.TimersInterv
 					}
 					//Update all timers
 					TimeSpan elapsed = stopwatches[i].Elapsed;
-					timerLabels[i].Content = (elapsed.Minutes + offsets[i]) + ":";
-					if (elapsed.Seconds < 10)
+					timerLabels[i].Content = (elapsed.Minutes + offsets[i]/60) + ":";
+                    if (elapsed.Seconds + offsets[i] % 60 < 10)
 					{
 						timerLabels[i].Content += "0";
 					}
-					timerLabels[i].Content += "" + elapsed.Seconds;
+                    timerLabels[i].Content += "" + (elapsed.Seconds + offsets[i] % 60);
 
 					//Setting status to overtime of it surpasses the deadline
-					if (statusLabels[i].Content.Equals("Ongoing") && ((i == 0 && (interventionDeadline <= (elapsed.Minutes + offsets[i]))) || (i != 0 && (movingDeadline <= (elapsed.Minutes + offsets[i])))))
+                    if (statusLabels[i].Content.Equals("Ongoing") && ((i == 0 && (interventionDeadline <= (elapsed.Minutes + offsets[i] / 60))) || (i != 0 && (movingDeadline <= (elapsed.Minutes + offsets[i] / 60)))))
 					{
 						setStatus(i, "Overtime");
 					}
@@ -207,6 +209,66 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.TimersInterv
 			
 		}
 
+        //TODO: Make CloneTimer Method
+        public void CloneTimer(int position, String team, String resource, int offset, int original)
+        {
+            if (stopwatches[original] != null)
+            {
+                if (stopwatches[position] != null)
+                {
+                    teamLabels[position].Content = team;
+                    resourceLabels[position].Content = resource;
+
+                    offsets[position] = offset + (int)(stopwatches[original].ElapsedMilliseconds/1000);
+                    stopwatches[position].Restart();
+                }
+                else
+                {
+                    Label teamLabel = new Label();
+                    teamLabel.Content = team;
+                    teamLabel.HorizontalContentAlignment = HorizontalAlignment.Center;
+                    Grid.SetColumn(teamLabel, 0);
+                    Grid.SetRow(teamLabel, timerPosition);
+
+                    timersList.Children.Add(teamLabel);
+                    teamLabels[position] = teamLabel;
+
+                    Label resourceLabel = new Label();
+                    resourceLabel.Content = resource;
+                    Grid.SetColumn(resourceLabel, 1);
+                    Grid.SetRow(resourceLabel, timerPosition);
+
+                    timersList.Children.Add(resourceLabel);
+                    resourceLabels[position] = resourceLabel;
+
+                    Label timerLabel = new Label();
+                    timerLabel.HorizontalContentAlignment = HorizontalAlignment.Center;
+                    Grid.SetColumn(timerLabel, 2);
+                    Grid.SetRow(timerLabel, timerPosition);
+
+                    timersList.Children.Add(timerLabel);
+                    timerLabels[position] = timerLabel;
+
+                    Label statusLabel = new Label();
+                    statusLabel.HorizontalContentAlignment = HorizontalAlignment.Center;
+                    Grid.SetColumn(statusLabel, 3);
+                    Grid.SetRow(statusLabel, timerPosition);
+
+                    timersList.Children.Add(statusLabel);
+                    statusLabels[position] = statusLabel;
+                    setStatus(position, "Ongoing");
+
+                    offsets[position] = offset + (int)(stopwatches[original].ElapsedMilliseconds/1000);
+
+                    Stopwatch stopwatch = new Stopwatch();
+                    stopwatches[position] = stopwatch;
+                    stopwatch.Start();
+
+                    timerPosition++;
+                }
+            }
+        }
+
 		public void setStatus(int position, String status)
 		{
 			Label statusLabel = statusLabels[position];
@@ -256,5 +318,22 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.TimersInterv
 				MessageBox.Show("The end time is before the start time");
 			}
 		}
+
+        public bool IsRunning(int position)
+        {
+            if (stopwatches[position] != null)
+                return stopwatches[position].IsRunning;
+            else
+                return false;
+        }
+
+        public void RenameTimer(int position, String team, String resource)
+        {
+            if (stopwatches[position] != null)
+            {
+                teamLabels[position].Content = team;
+                resourceLabels[position].Content = resource;
+            }
+        }
 	}
 }

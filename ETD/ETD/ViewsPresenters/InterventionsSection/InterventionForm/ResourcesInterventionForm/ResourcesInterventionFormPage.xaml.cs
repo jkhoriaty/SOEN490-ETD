@@ -218,7 +218,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.ResourcesInt
 				TextBoxHandler.setNow(movingMap[bt.Name][0], movingMap[bt.Name][1]);
 			}
 
-			if(Team1.Text.Equals("") || Resources1.Text.Equals(""))
+            if (informationMap[bt.Name][0].Text.Equals("") || informationMap[bt.Name][1].Text.Equals(""))
 			{
 				MessageBox.Show("Please set the team and resource name before submitting time.");
 			}
@@ -231,7 +231,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.ResourcesInt
 					int hh = int.Parse(movingMap[bt.Name][0].Text);
 					int mm = int.Parse(movingMap[bt.Name][1].Text);
 					DateTime startTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, hh, mm, DateTime.Now.Second);
-					int offset = (int)DateTime.Now.Subtract(startTime).TotalMinutes;
+					int offset = (int)DateTime.Now.Subtract(startTime).TotalSeconds;
 					if(offset < 0)
 					{
 						MessageBox.Show("The time inserted is in the future!");
