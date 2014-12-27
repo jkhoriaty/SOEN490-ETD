@@ -48,14 +48,14 @@
 				<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 					<TextBox Text="hh" Width="29" Name="Movinghh1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
 					<Button Width="10" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="Transparent" BorderBrush="Transparent" Name="Moving1" Click="Moving_Click"/>
-					<TextBox Text="mm" Width="29" Name="Movingmm1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+					<TextBox Text="00" Width="29" Name="Movingmm1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
 				</StackPanel>
 			</Border>
 			<Border Grid.Column="3" Grid.Row="1" BorderBrush="Black" BorderThickness="1,1,0,1">
 				<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 					<TextBox Text="hh" Width="29" Name="Arrivalhh1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
 					<Button Width="10" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="Transparent" BorderBrush="Transparent" Name="Arrival1" Click="Arrival_Click"/>
-					<TextBox Text="mm" Width="29" Name="Arrivalmm1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+					<TextBox Text="00" Width="29" Name="Arrivalmm1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
 				</StackPanel>
 			</Border>
 
@@ -65,14 +65,14 @@
 				<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 					<TextBox Text="hh" Width="29" Name="Movinghh2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
 					<Button Width="10" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="Transparent" BorderBrush="Transparent" Name="Moving2" Click="Moving_Click"/>
-					<TextBox Text="mm" Width="29" Name="Movingmm2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+					<TextBox Text="00" Width="29" Name="Movingmm2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
 				</StackPanel>
 			</Border>
 			<Border Grid.Column="3" Grid.Row="2" BorderBrush="Black" BorderThickness="1,0,0,1">
 				<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 					<TextBox Text="hh" Width="29" Name="Arrivalhh2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
 					<Button Width="10" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="Transparent" BorderBrush="Transparent" Name="Arrival2" Click="Arrival_Click"/>
-					<TextBox Text="mm" Width="29" Name="Arrivalmm2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+					<TextBox Text="00" Width="29" Name="Arrivalmm2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
 				</StackPanel>
 			</Border>
 
@@ -82,14 +82,14 @@
 				<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 					<TextBox Text="hh" Width="29" Name="Movinghh3" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
 					<Button Width="10" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="Transparent" BorderBrush="Transparent" Name="Moving3" Click="Moving_Click"/>
-					<TextBox Text="mm" Width="29" Name="Movingmm3" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+					<TextBox Text="00" Width="29" Name="Movingmm3" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
 				</StackPanel>
 			</Border>
 			<Border Grid.Column="3" Grid.Row="3" BorderBrush="Black" BorderThickness="1,0,0,1">
 				<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 					<TextBox Text="hh" Width="29" Name="Arrivalhh3" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
 					<Button Width="10" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="Transparent" BorderBrush="Transparent" Name="Arrival3" Click="Arrival_Click"/>
-					<TextBox Text="mm" Width="29" Name="Arrivalmm3" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+					<TextBox Text="00" Width="29" Name="Arrivalmm3" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
 				</StackPanel>
 			</Border>
 
@@ -99,14 +99,14 @@
 				<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 					<TextBox Text="hh" Width="29" Name="Movinghh4" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
 					<Button Width="10" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="Transparent" BorderBrush="Transparent" Name="Moving4" Click="Moving_Click"/>
-					<TextBox Text="mm" Width="29" Name="Movingmm4" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+					<TextBox Text="00" Width="29" Name="Movingmm4" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
 				</StackPanel>
 			</Border>
 			<Border Grid.Column="3" Grid.Row="4" BorderBrush="Black" BorderThickness="1,0,0,1">
 				<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 					<TextBox Text="hh" Width="29" Name="Arrivalhh4" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
 					<Button Width="10" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="Transparent" BorderBrush="Transparent" Name="Arrival4" Click="Arrival_Click"/>
-					<TextBox Text="mm" Width="29" Name="Arrivalmm4" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+					<TextBox Text="00" Width="29" Name="Arrivalmm4" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
 				</StackPanel>
 			</Border>
 
@@ -116,14 +116,14 @@
 				<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 					<TextBox Text="hh" Width="26" Name="Movinghh5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
 					<Button Width="10" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="Transparent" BorderBrush="Transparent" Name="Moving5" Click="Moving_Click"/>
-					<TextBox Text="mm" Width="26" Name="Movingmm5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+					<TextBox Text="00" Width="26" Name="Movingmm5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
 				</StackPanel>
 			</Border>
 			<Border Grid.Column="3" Grid.Row="5" BorderBrush="Black" BorderThickness="1,0,0,1">
 				<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 					<TextBox Text="hh" Width="26" Name="Arrivalhh5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
 					<Button Width="10" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="Transparent" BorderBrush="Transparent" Name="Arrival5" Click="Arrival_Click"/>
-					<TextBox Text="mm" Width="26" Name="Arrivalmm5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+					<TextBox Text="00" Width="26" Name="Arrivalmm5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
 				</StackPanel>
 			</Border>
 
@@ -133,14 +133,14 @@
 				<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 					<TextBox Text="hh" Width="26" Name="Movinghh6" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
 					<Button Width="10" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="Transparent" BorderBrush="Transparent" Name="Moving6" Click="Moving_Click"/>
-					<TextBox Text="mm" Width="26" Name="Movingmm6" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+					<TextBox Text="00" Width="26" Name="Movingmm6" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
 				</StackPanel>
 			</Border>
 			<Border Grid.Column="3" Grid.Row="6" BorderBrush="Black" BorderThickness="1,0,0,1">
 				<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 					<TextBox Text="hh" Width="26" Name="Arrivalhh6" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
 					<Button Width="10" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="Transparent" BorderBrush="Transparent" Name="Arrival6" Click="Arrival_Click"/>
-					<TextBox Text="mm" Width="26" Name="Arrivalmm6" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+					<TextBox Text="00" Width="26" Name="Arrivalmm6" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
 				</StackPanel>
 			</Border>
 
@@ -150,14 +150,14 @@
 				<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 					<TextBox Text="hh" Width="26" Name="Movinghh7" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
 					<Button Width="10" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="Transparent" BorderBrush="Transparent" Name="Moving7" Click="Moving_Click"/>
-					<TextBox Text="mm" Width="26" Name="Movingmm7" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+					<TextBox Text="00" Width="26" Name="Movingmm7" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
 				</StackPanel>
 			</Border>
 			<Border Grid.Column="3" Grid.Row="7" BorderBrush="Black" BorderThickness="1,0,0,1">
 				<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 					<TextBox Text="hh" Width="26" Name="Arrivalhh7" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
 					<Button Width="10" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="Transparent" BorderBrush="Transparent" Name="Arrival7" Click="Arrival_Click"/>
-					<TextBox Text="mm" Width="26" Name="Arrivalmm7" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+					<TextBox Text="00" Width="26" Name="Arrivalmm7" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
 				</StackPanel>
 			</Border>
 
@@ -167,14 +167,14 @@
 				<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 					<TextBox Text="hh" Width="26" Name="Movinghh8" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
 					<Button Width="10" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="Transparent" BorderBrush="Transparent" Name="Moving8" Click="Moving_Click"/>
-					<TextBox Text="mm" Width="26" Name="Movingmm8" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+					<TextBox Text="00" Width="26" Name="Movingmm8" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
 				</StackPanel>
 			</Border>
 			<Border Grid.Column="3" Grid.Row="8" BorderBrush="Black" BorderThickness="1,0,0,1">
 				<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 					<TextBox Text="hh" Width="26" Name="Arrivalhh8" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
 					<Button Width="10" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="Transparent" BorderBrush="Transparent" Name="Arrival8" Click="Arrival_Click"/>
-					<TextBox Text="mm" Width="26" Name="Arrivalmm8" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+					<TextBox Text="00" Width="26" Name="Arrivalmm8" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
 				</StackPanel>
 			</Border>
 
@@ -184,14 +184,14 @@
 				<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 					<TextBox Text="hh" Width="26" Name="Movinghh9" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
 					<Button Width="10" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="Transparent" BorderBrush="Transparent" Name="Moving9" Click="Moving_Click"/>
-					<TextBox Text="mm" Width="26" Name="Movingmm9" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+					<TextBox Text="00" Width="26" Name="Movingmm9" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
 				</StackPanel>
 			</Border>
 			<Border Grid.Column="3" Grid.Row="9" BorderBrush="Black" BorderThickness="1,0,0,1">
 				<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 					<TextBox Text="hh" Width="26" Name="Arrivalhh9" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
 					<Button Width="10" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="Transparent" BorderBrush="Transparent" Name="Arrival9" Click="Arrival_Click"/>
-					<TextBox Text="mm" Width="26" Name="Arrivalmm9" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+					<TextBox Text="00" Width="26" Name="Arrivalmm9" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
 				</StackPanel>
 			</Border>
 
@@ -201,14 +201,14 @@
 				<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 					<TextBox Text="hh" Width="26" Name="Movinghh10" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
 					<Button Width="10" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="Transparent" BorderBrush="Transparent" Name="Moving10" Click="Moving_Click"/>
-					<TextBox Text="mm" Width="26" Name="Movingmm10" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+					<TextBox Text="00" Width="26" Name="Movingmm10" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
 				</StackPanel>
 			</Border>
 			<Border Grid.Column="3" Grid.Row="10" BorderBrush="Black" BorderThickness="1,0,0,0">
 				<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 					<TextBox Text="hh" Width="26" Name="Arrivalhh10" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
 					<Button Width="10" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="Transparent" BorderBrush="Transparent" Name="Arrival10" Click="Arrival_Click"/>
-					<TextBox Text="mm" Width="26" Name="Arrivalmm10" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+					<TextBox Text="00" Width="26" Name="Arrivalmm10" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
 				</StackPanel>
 			</Border>
 		</Grid>
