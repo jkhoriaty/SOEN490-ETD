@@ -90,13 +90,13 @@ namespace ETD.ViewsPresenters.TeamsSection
 		}
 
 		//Adding equipment to specified team equipment stack
-		public void AddTeamEquipment(String equip, String teamName)
+		public void AddTeamEquipment(Equipment equip, String teamName)
 		{
 			//Limit of 3 pieces of equipment per team
 			if (teamEquipmentStacks[teamName].Children.Count <= 3)
 			{
 				Rectangle imageRectangle = new Rectangle();
-				imageRectangle.Name = equip;
+				imageRectangle.Name = equip.ToString();
 				imageRectangle.Tag = teamName;
 				imageRectangle.Width = 27;
 				imageRectangle.Height = 27;
@@ -109,7 +109,7 @@ namespace ETD.ViewsPresenters.TeamsSection
 
 				//Getting the background image to the rectangle
 				ImageBrush equipmentImage = new ImageBrush();
-				equipmentImage.ImageSource = Services.getImage((Equipments)Enum.Parse(typeof(Equipments), equip));
+				equipmentImage.ImageSource = Services.getImage(equip.getEquipmentName());
 				imageRectangle.Fill = equipmentImage;
 
 				//Getting the appropriate equipment StackPanel
@@ -120,7 +120,7 @@ namespace ETD.ViewsPresenters.TeamsSection
 			else
 			{
 				MessageBox.Show("You cannot add more than 3 pieces of equipment to a team. The equipment is going to be readded to the map.");
-				mainWindow.CreateEquipmentPin(equip);
+				mainWindow.CreateEquipmentPin(equip.ToString());
 			}
 		}
 
@@ -128,8 +128,10 @@ namespace ETD.ViewsPresenters.TeamsSection
 		public void RemoveTeamEquipment(object sender, RoutedEventArgs e)
 		{
 			Rectangle equipment = (Rectangle)sender;
+            //Type equipType = Type.GetType(equipment.Name.ToString());
+            Equipment equip = new Equipment((Equipments)Enum.Parse(typeof(Equipments), equipment.Name.ToString()));
 			StackPanel equipmentStackPanel = (StackPanel)equipment.Parent;
-			Team.teams["" + equipment.Tag].removeEquipment(equipment.Name);
+			Team.teams["" + equipment.Tag].removeEquipment(equip);
 			equipmentStackPanel.Children.Remove(equipment);
 			mainWindow.CreateEquipmentPin(equipment.Name);
 

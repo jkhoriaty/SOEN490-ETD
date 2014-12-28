@@ -34,14 +34,14 @@ namespace ETD_UnitTest
         public void EquipmentAddTest()
         {
             Team c = new Team("C");
-            String equip1 = "TestEquip1";
-            String equip2 = "TestEquip2";
-            String equip3 = "TestEquip3";
-            String equip4 = "TestEquip4";
-            //Equipment equip1 = new Equipment(equipments.sittingCart);
-            //Equipment equip2 = new Equipment(equipments.ambulanceCart);
-            //Equipment equip3 = new Equipment(equipments.epipen);
-            //Equipment equip4 = new Equipment(equipments.transportStretcher);
+            //String equip1 = "TestEquip1";
+            //String equip2 = "TestEquip2";
+            //String equip3 = "TestEquip3";
+            //String equip4 = "TestEquip4";
+            Equipment equip1 = new Equipment(Equipments.sittingCart);
+            Equipment equip2 = new Equipment(Equipments.ambulanceCart);
+            Equipment equip3 = new Equipment(Equipments.epipen);
+            Equipment equip4 = new Equipment(Equipments.transportStretcher);
             c.addEquipment(equip1);
             c.addEquipment(equip2);
             c.addEquipment(equip3);

@@ -93,7 +93,8 @@ namespace ETD.ViewsPresenters.MapSection
 		//Pushing request to mainWindow
 		public void AddTeamEquipment(String equip, String teamName)
 		{
-			mainWindow.AddTeamEquipment(equip, teamName);
+            Equipment equipment = new Equipment((Equipments)Enum.Parse(typeof(Equipments), equip));
+			mainWindow.AddTeamEquipment(equipment, teamName);
 		}
 
         internal void ChangeStatus(object sender, RoutedEventArgs e)

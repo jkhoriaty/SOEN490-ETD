@@ -120,7 +120,8 @@ namespace ETD_UnitTest
         public void InterventionSetAdditionalInfoTest()
         {
             Intervention a = new Intervention();
-            a.setAdditionalInfo("Test info");
+            //TEST NEED TO BE FIXED
+            //a.setAdditionalInfo("Test info");
             Assert.AreEqual("Test info", a.getAdditionalInfo());
         }
 

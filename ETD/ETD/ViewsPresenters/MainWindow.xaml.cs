@@ -131,7 +131,7 @@ namespace ETD.ViewsPresenters
 		}
 
 		//Add equipment to team
-		public void AddTeamEquipment(String equip, String teamName)
+		public void AddTeamEquipment(Equipment equip, String teamName)
 		{
 			teamsSection.AddTeamEquipment(equip, teamName);
 		}
