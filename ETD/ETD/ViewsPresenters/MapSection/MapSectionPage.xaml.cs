@@ -102,15 +102,29 @@ namespace ETD.ViewsPresenters.MapSection
             pinEditor.ChangeStatus(sender, e);
         }
 
-        internal void CheckRight(object sender, RoutedEventArgs e)
+        internal void EditMenuItems(object sender, RoutedEventArgs e)
         {
-            pinEditor.CheckRight(sender, e);
+			pinEditor.EditMenuItems(sender, e);
         }
 
 		//When the window is resized, the pins need to move to stay in the window
 		public void movePins(double widthRatio, double heightRatio)
 		{
 			pinHandler.movePins(widthRatio, heightRatio);
+		}
+
+		private void DeleteEquipment(object sender, RoutedEventArgs e)
+		{
+			MenuItem item = sender as MenuItem;
+			if (item != null)
+			{
+				ContextMenu parent = item.Parent as ContextMenu;
+				if (parent != null)
+				{
+					EquipmentGrid grid = (EquipmentGrid)parent.PlacementTarget;
+					pinEditor.DeletePin(grid.Name);
+				}
+			}
 		}
 	}
 }

@@ -223,7 +223,8 @@ namespace ETD.Models
 
         public void setAdditionalInfo(int position, AdditionalInformation info)
         {
-            this.additionalInfo[position] = info;
+			//Have to fix
+            //this.additionalInfo[position] = info;
         }
 
 		public AdditionalInformation[] getAdditionalInfo()

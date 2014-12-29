@@ -20,6 +20,7 @@ namespace ETD.Models
             this.MouseLeftButtonDown += new MouseButtonEventHandler(mapSection.DragStart);
             this.MouseLeftButtonUp += new MouseButtonEventHandler(mapSection.DragStop);
             this.MouseMove += new MouseEventHandler(mapSection.DragMove);
+			this.ContextMenu = mapSection.Resources["TeamContext"] as ContextMenu;
 
             Rectangle imageRectangle = new Rectangle();
             imageRectangle.Width = size;

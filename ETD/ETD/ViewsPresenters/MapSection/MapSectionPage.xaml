@@ -12,11 +12,12 @@
         
     </Canvas>
     <Page.Resources>
-        <ContextMenu x:Key="TeamContext" Opened="CheckRight">
-            <MenuItem Header="Available" Click="ChangeStatus"></MenuItem>
-            <MenuItem Header="Moving" Click="ChangeStatus"></MenuItem>
-            <MenuItem Header="Intervening" Click="ChangeStatus"></MenuItem>
-            <MenuItem Header="Unavailable" Click="ChangeStatus"></MenuItem>
-        </ContextMenu>
+		<ContextMenu x:Key="TeamContext" Opened="EditMenuItems">
+			<MenuItem Header="Available" Tag="team" Click="ChangeStatus"/>
+			<MenuItem Header="Moving" Tag="team" Click="ChangeStatus"/>
+			<MenuItem Header="Intervening" Tag="team" Click="ChangeStatus"/>
+			<MenuItem Header="Unavailable" Tag="team" Click="ChangeStatus"/>
+			<MenuItem Header="Delete Equipment" Tag="equipment" Click="DeleteEquipment"/>
+		</ContextMenu>
     </Page.Resources>
 </Page>
