@@ -45,8 +45,8 @@
 		<Border Grid.Column="3" Grid.Row="0" BorderBrush="Black" BorderThickness="0,0,0,1">
 			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 				<TextBox Name="Endhh" Width="29" Text="hh" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
-				<Button Width="10" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="Transparent" BorderBrush="Transparent" Click="End_Click" Margin="0,0,0,0.2"/>
-				<TextBox Name="Endmm" Width="29" Text="00" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+				<Button Width="10" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Click="End_Click" Margin="0,0,0,0.2"/>
+				<TextBox Name="Endmm" Width="29" Text="mm" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
 			</StackPanel>
 		</Border>
 		
@@ -54,7 +54,7 @@
 		<Border Grid.Column="0" Grid.Row="2" BorderBrush="Black" BorderThickness="0,0,1,1">
 			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 				<TextBox Name="Call911hh" Width="29" Text="hh" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
-				<Button Width="10" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="Transparent" BorderBrush="Transparent" Click="Call_Click"/>
+				<Button Width="10" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Click="Call_Click"/>
 				<TextBox Name="Call911mm" Width="29" Text="mm" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
 			</StackPanel>
 		</Border>
@@ -79,12 +79,12 @@
 
 		<StackPanel Grid.Column="3" Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center">
 			<TextBox Name="FirstResponderArrivalhh" Width="29" Text="hh" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
-			<Button Width="10" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="Transparent" BorderBrush="Transparent" Click="FirstResponder_Click"/>
+			<Button Width="10" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Click="FirstResponder_Click"/>
 			<TextBox Name="FirstResponderArrivalmm" Width="29" Text="mm" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
 		</StackPanel>
 		<StackPanel Grid.Column="3" Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center">
 			<TextBox Name="AmbulanceArrivalhh" Width="29" Text="hh" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
-			<Button Width="10" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="Transparent" BorderBrush="Transparent" Click="Ambulance_Click"/>
+			<Button Width="10" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Click="Ambulance_Click"/>
 			<TextBox Name="AmbulanceArrivalmm" Width="29" Text="mm" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
 		</StackPanel>
 	</Grid>

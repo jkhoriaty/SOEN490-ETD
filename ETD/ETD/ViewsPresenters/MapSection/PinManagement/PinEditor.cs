@@ -98,15 +98,28 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
             }
         }
 
-        public void CheckRight(object sender, RoutedEventArgs e)
+        internal void CheckRight(MenuItem mi, TeamGrid fe)
         {
-            ContextMenu cm = sender as ContextMenu;
-            TeamGrid fe = cm.PlacementTarget as TeamGrid;
-            
-            foreach (MenuItem mi in cm.Items)
-            {
-                mi.IsChecked = ((Statuses)Enum.Parse(typeof(Statuses), mi.Header.ToString().ToLower()) == fe.team.getStatus());
-            }                   
+			mi.IsChecked = ((Statuses)Enum.Parse(typeof(Statuses), mi.Header.ToString().ToLower()) == fe.team.getStatus());
         }
+
+		//Filter itmes and edit the appropriate status
+		public void EditMenuItems(object sender, RoutedEventArgs e)
+		{
+			ContextMenu cm = (ContextMenu)sender;
+			foreach(MenuItem mi in cm.Items)
+			{
+				mi.Visibility = Visibility.Collapsed;
+				if(cm.PlacementTarget is TeamGrid && mi.Tag.Equals("team"))
+				{
+					mi.Visibility = Visibility.Visible;
+					CheckRight(mi, (TeamGrid)cm.PlacementTarget);
+				}
+				else if(cm.PlacementTarget is EquipmentGrid && mi.Tag.Equals("equipment"))
+				{
+					mi.Visibility = Visibility.Visible;
+				}
+			}
+		}
 	}
 }

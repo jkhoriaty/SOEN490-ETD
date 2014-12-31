@@ -28,8 +28,8 @@
 					<TextBox Width="230" Name="AdditionalInformation0" TextWrapping="Wrap" AcceptsReturn="True" BorderBrush="Black" BorderThickness="0,0,1,0" GotFocus="AdditionalInformation_GotFocus"/>
 					<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="20">
 						<TextBox Text="hh" Width="29" Name="Timestamphh0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
-						<Button Width="10" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="Transparent" BorderBrush="Transparent" Name="Timestamp0" Click="Timestamp_Click"/>
-						<TextBox Text="00" Width="29" Name="Timestampmm0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+						<Button Width="10" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="Timestamp0" Click="Timestamp_Click"/>
+						<TextBox Text="mm" Width="29" Name="Timestampmm0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
 					</StackPanel>
 				</DockPanel>
 			</Border>
@@ -39,8 +39,8 @@
 					<TextBox Width="230" Name="AdditionalInformation1" TextWrapping="Wrap" AcceptsReturn="True" BorderBrush="Black" BorderThickness="0,0,1,0" GotFocus="AdditionalInformation_GotFocus"/>
 					<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="20">
 						<TextBox Text="hh" Width="29" Name="Timestamphh1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
-						<Button Width="10" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="Transparent" BorderBrush="Transparent" Name="Timestamp1" Click="Timestamp_Click"/>
-						<TextBox Text="00" Width="29" Name="Timestampmm1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+						<Button Width="10" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="Timestamp1" Click="Timestamp_Click"/>
+						<TextBox Text="mm" Width="29" Name="Timestampmm1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
 					</StackPanel>
 				</DockPanel>
 			</Border>
@@ -50,8 +50,8 @@
 					<TextBox Width="230" Name="AdditionalInformation2" TextWrapping="Wrap" AcceptsReturn="True" BorderBrush="Black" BorderThickness="0,0,1,0" GotFocus="AdditionalInformation_GotFocus"/>
 					<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="20">
 						<TextBox Text="hh" Width="29" Name="Timestamphh2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
-						<Button Width="10" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="Transparent" BorderBrush="Transparent" Name="Timestamp2" Click="Timestamp_Click"/>
-						<TextBox Text="00" Width="29" Name="Timestampmm2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+						<Button Width="10" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="Timestamp2" Click="Timestamp_Click"/>
+						<TextBox Text="mm" Width="29" Name="Timestampmm2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
 					</StackPanel>
 				</DockPanel>
 			</Border>
@@ -61,8 +61,8 @@
 					<TextBox Width="230" Name="AdditionalInformation3" TextWrapping="Wrap" AcceptsReturn="True" BorderBrush="Black" BorderThickness="0,0,1,0" GotFocus="AdditionalInformation_GotFocus"/>
 					<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="20">
 						<TextBox Text="hh" Width="29" Name="Timestamphh3" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
-						<Button Width="10" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="Transparent" BorderBrush="Transparent" Name="Timestamp3" Click="Timestamp_Click"/>
-						<TextBox Text="00" Width="29" Name="Timestampmm3" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+						<Button Width="10" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="Timestamp3" Click="Timestamp_Click"/>
+						<TextBox Text="mm" Width="29" Name="Timestampmm3" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
 					</StackPanel>
 				</DockPanel>
 			</Border>
@@ -72,8 +72,8 @@
 					<TextBox Width="230" Name="AdditionalInformation4" TextWrapping="Wrap" AcceptsReturn="True" BorderBrush="Black" BorderThickness="0,0,1,0" GotFocus="AdditionalInformation_GotFocus"/>
 					<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="20">
 						<TextBox Text="hh" Width="29" Name="Timestamphh4" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
-						<Button Width="10" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="Transparent" BorderBrush="Transparent" Name="Timestamp4" Click="Timestamp_Click"/>
-						<TextBox Text="00" Width="29" Name="Timestampmm4" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+						<Button Width="10" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="Timestamp4" Click="Timestamp_Click"/>
+						<TextBox Text="mm" Width="29" Name="Timestampmm4" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
 					</StackPanel>
 				</DockPanel>
 			</Border>
@@ -83,8 +83,8 @@
 					<TextBox Width="230" Name="AdditionalInformation5" TextWrapping="Wrap" AcceptsReturn="True" BorderBrush="Black" BorderThickness="0,0,1,0" GotFocus="AdditionalInformation_GotFocus"/>
 					<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="20">
 						<TextBox Text="hh" Width="29" Name="Timestamphh5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
-						<Button Width="10" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="Transparent" BorderBrush="Transparent" Name="Timestamp5" Click="Timestamp_Click"/>
-						<TextBox Text="00" Width="29" Name="Timestampmm5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+						<Button Width="10" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="Timestamp5" Click="Timestamp_Click"/>
+						<TextBox Text="mm" Width="29" Name="Timestampmm5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
 					</StackPanel>
 				</DockPanel>
 			</Border>
@@ -94,8 +94,8 @@
 					<TextBox Width="230" Name="AdditionalInformation6" TextWrapping="Wrap" AcceptsReturn="True" BorderBrush="Black" BorderThickness="0,0,1,0" GotFocus="AdditionalInformation_GotFocus"/>
 					<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="20">
 						<TextBox Text="hh" Width="29" Name="Timestamphh6" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
-						<Button Width="10" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="Transparent" BorderBrush="Transparent" Name="Timestamp6" Click="Timestamp_Click"/>
-						<TextBox Text="00" Width="29" Name="Timestampmm6" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+						<Button Width="10" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="Timestamp6" Click="Timestamp_Click"/>
+						<TextBox Text="mm" Width="29" Name="Timestampmm6" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
 					</StackPanel>
 				</DockPanel>
 			</Border>
@@ -105,8 +105,8 @@
 					<TextBox Width="230" Name="AdditionalInformation7" TextWrapping="Wrap" AcceptsReturn="True" BorderBrush="Black" BorderThickness="0,0,1,0" GotFocus="AdditionalInformation_GotFocus"/>
 					<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="20">
 						<TextBox Text="hh" Width="29" Name="Timestamphh7" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
-						<Button Width="10" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="Transparent" BorderBrush="Transparent" Name="Timestamp7" Click="Timestamp_Click"/>
-						<TextBox Text="00" Width="29" Name="Timestampmm7" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+						<Button Width="10" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="Timestamp7" Click="Timestamp_Click"/>
+						<TextBox Text="mm" Width="29" Name="Timestampmm7" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
 					</StackPanel>
 				</DockPanel>
 			</Border>
@@ -116,8 +116,8 @@
 					<TextBox Width="230" Name="AdditionalInformation8" TextWrapping="Wrap" AcceptsReturn="True" BorderBrush="Black" BorderThickness="0,0,1,0" GotFocus="AdditionalInformation_GotFocus"/>
 					<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="20">
 						<TextBox Text="hh" Width="29" Name="Timestamphh8" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
-						<Button Width="10" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="Transparent" BorderBrush="Transparent" Name="Timestamp8" Click="Timestamp_Click"/>
-						<TextBox Text="00" Width="29" Name="Timestampmm8" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+						<Button Width="10" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="Timestamp8" Click="Timestamp_Click"/>
+						<TextBox Text="mm" Width="29" Name="Timestampmm8" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
 					</StackPanel>
 				</DockPanel>
 			</Border>
@@ -127,8 +127,8 @@
 					<TextBox Width="230" Name="AdditionalInformation9" TextWrapping="Wrap" AcceptsReturn="True" BorderBrush="Black" BorderThickness="0,0,1,0" GotFocus="AdditionalInformation_GotFocus"/>
 					<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="20">
 						<TextBox Text="hh" Width="29" Name="Timestamphh9" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
-						<Button Width="10" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="Transparent" BorderBrush="Transparent" Name="Timestamp9" Click="Timestamp_Click"/>
-						<TextBox Text="00" Width="29" Name="Timestampmm9" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+						<Button Width="10" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="Timestamp9" Click="Timestamp_Click"/>
+						<TextBox Text="mm" Width="29" Name="Timestampmm9" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
 					</StackPanel>
 				</DockPanel>
 			</Border>
