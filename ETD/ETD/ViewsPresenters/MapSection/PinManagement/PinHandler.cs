@@ -12,6 +12,7 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 	class PinHandler
 	{
 		private MapSectionPage mapSection;
+        private AdditionalInfoPage AIPmap;
 		private bool _isRectDragInProg;
 		private Grid movingGrid;
 
@@ -19,6 +20,11 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 		{
 			this.mapSection = mapSection;
 		}
+
+        public PinHandler(AdditionalInfoPage AIP)
+        {
+            this.AIPmap = AIP;
+        }
 
 		//Setting position of pin
 		public void SetPinPosition(Grid g, double X, double Y)
@@ -273,5 +279,8 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 				DetectCollision(pin, movedPin_X, movedPin_Y);
 			}
 		}
+
+
+     
 	}
 }
