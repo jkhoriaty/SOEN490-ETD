@@ -131,14 +131,16 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 
         //resize icons
         //available choices: small, medium, large
-        public void ScalePin(String pinName)
+        public void ScalePin(object sender, RoutedEventArgs e)
         {
            
         }
 
         //Deleting pin from the additional info page
-        public void AIDeletePin(String pinName)
+        public void AIDeletePin(object sender, RoutedEventArgs e)
         {
+            String pinName = sender.ToString();
+
             foreach (Grid grid in AIPmap.AdditionalMap.Children)
             {
                 if (grid.Name.Equals(pinName))

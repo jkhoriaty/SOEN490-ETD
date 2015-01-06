@@ -21,6 +21,10 @@ namespace ETD.Models
             this.MouseLeftButtonDown += new MouseButtonEventHandler(AIPmap.DragStart);
             this.MouseLeftButtonUp += new MouseButtonEventHandler(AIPmap.DragStop);
             this.MouseMove += new MouseEventHandler(AIPmap.DragMove);
+            this.ContextMenu = AIPmap.Resources["AIcontext"] as ContextMenu;
+            (this.ContextMenu.Items[0] as MenuItem).IsChecked = true;
+
+
 
             Rectangle imageRectangle = new Rectangle();
             imageRectangle.Width = size;

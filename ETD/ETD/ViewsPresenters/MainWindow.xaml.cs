@@ -62,7 +62,11 @@ namespace ETD.ViewsPresenters
 			interventionsFrame.Content = interventionsSection;
 			InterventionsSection.Child = interventionsFrame;
 
-          
+
+            //Populating the AI section
+            Frame AIFrame = new Frame();
+            AIFrame.Content = AIPmapSection;
+            AIPSection.Child = AIFrame;
 		}
 
 		//Window size or state changed - Adjusting the team section height
@@ -173,9 +177,19 @@ namespace ETD.ViewsPresenters
 		}
 
 
-        public void ScalePin(String pinName)
+  
+
+        public void CreateAdditionalIntoPin(object sender, RoutedEventArgs e)
         {
-            AIPmapSection.ScalePin(pinName);
+            ComboBoxItem selectedItem = (ComboBoxItem)AI.SelectedItem;
+            if (selectedItem != null)
+            {
+                AIPmapSection.CreateAdditionnalInfoPin("" + selectedItem.Name);
+            }
+            else
+            {
+                MessageBox.Show("You need to select a shape to add!");
+            }
         }
 
         public void CreateAdditionnalInfoPin(String AI)
@@ -183,9 +197,9 @@ namespace ETD.ViewsPresenters
             AIPmapSection.CreateAdditionnalInfoPin(AI);
         }
 
-        public void AIDeletePin(String pinName)
+        public void AIDeletePin(object sender, RoutedEventArgs e)
         {
-            AIPmapSection.AIDeletePin(pinName);
+            AIPmapSection.AIDeletePin(sender,e);
         }
 
 	}

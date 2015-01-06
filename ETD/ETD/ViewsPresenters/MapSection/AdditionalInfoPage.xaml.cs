@@ -47,15 +47,6 @@ namespace ETD.ViewsPresenters.MapSection
 		}
 		
 	
-		public void AIDeletePin(String pinName)
-		{
-            pinEditor.AIDeletePin(pinName);
-		}
-
-        public void ScalePin(String pinName)
-        {
-            pinEditor.ScalePin(pinName);
-        }
 
 		public void SetPinPosition(Grid g, double X, double Y)
 		{
@@ -82,7 +73,10 @@ namespace ETD.ViewsPresenters.MapSection
 			pinHandler.DetectCollision(movedItem, movedItem_X, movedItem_Y);
 		}
 
-		
+        internal void CheckRight(object sender, RoutedEventArgs e)
+        {
+            pinEditor.CheckRight(sender, e);
+        }
 
 		//When the window is resized, the pins need to move to stay in the window
 		public void movePins(double widthRatio, double heightRatio)
@@ -90,9 +84,24 @@ namespace ETD.ViewsPresenters.MapSection
 			pinHandler.movePins(widthRatio, heightRatio);
 		}
 
+
+        /// <summary>
+        /// //////////////////////////////////////////////////////////
+        /// </summary>
+        /// <param name="AI"></param>
         public void CreateAdditionnalInfoPin(String AI)
         {
             pinEditor.CreateAdditionnalInfoPin(AI);
+        }
+
+        		internal void AIDeletePin(object sender, RoutedEventArgs e)
+		{
+            pinEditor.AIDeletePin(sender,e);
+		}
+
+                internal void ScalePin(object sender, RoutedEventArgs e)
+        {
+            pinEditor.ScalePin(sender,e);
         }
 
 	}
