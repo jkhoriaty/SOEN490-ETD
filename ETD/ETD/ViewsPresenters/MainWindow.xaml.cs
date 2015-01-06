@@ -176,10 +176,6 @@ namespace ETD.ViewsPresenters
 				MessageBox.Show("The deadlines have been changed.");
 			}
 		}
-
-
-
-
         public void CreateAdditionnalInfoPin(object sender, RoutedEventArgs e)
         {
             ComboBoxItem selectedItem = (ComboBoxItem)AI.SelectedItem;
