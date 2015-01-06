@@ -179,7 +179,7 @@ namespace ETD.ViewsPresenters
 
   
 
-        public void CreateAdditionalIntoPin(object sender, RoutedEventArgs e)
+        public void CreateAdditionnalInfoPin(object sender, RoutedEventArgs e)
         {
             ComboBoxItem selectedItem = (ComboBoxItem)AI.SelectedItem;
             if (selectedItem != null)
