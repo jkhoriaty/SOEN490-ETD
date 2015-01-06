@@ -72,6 +72,7 @@
       <DependentUpon>MapSectionPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewsPresenters\MapSection\PinManagement\PinEditor.cs" />
+    <Compile Include="ViewsPresenters\MapSection\PinManagement\AIPinHandler.cs" />
     <Compile Include="ViewsPresenters\MapSection\PinManagement\PinHandler.cs" />
     <Compile Include="ViewsPresenters\TeamsSection\TeamInfo\TeamInfoPage.xaml.cs">
       <DependentUpon>TeamInfoPage.xaml</DependentUpon>

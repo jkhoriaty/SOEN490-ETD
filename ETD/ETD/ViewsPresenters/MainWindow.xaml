@@ -64,7 +64,7 @@
 			<!-- Here goes the MapSectionPage frame -->
 		</Border>
         <Border Grid.Column="1" Grid.Row="1" Name="AIPSection" BorderBrush="Black" BorderThickness="1">
-            <!-- Here goes the MapSectionPage frame -->
+            <!-- Here goes the AdditionalInfoSectionPage frame -->
         </Border>
         <Border Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" Name="InterventionsSection" BorderBrush="Black" BorderThickness="1" VerticalAlignment="Bottom" Height="200" Padding="2">
 			<!-- Here goes the InterventionsSection frame -->

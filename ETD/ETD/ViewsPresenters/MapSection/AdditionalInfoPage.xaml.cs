@@ -21,14 +21,14 @@ namespace ETD.ViewsPresenters.MapSection
 	{
 		MainWindow mainWindow;
 		PinEditor pinEditor;
-		PinHandler pinHandler;
+        AIPinHandler pinHandler;
 
         public AdditionalInfoPage(MainWindow mainWindow)
 		{
 			InitializeComponent();
 			this.mainWindow = mainWindow;
 			pinEditor = new PinEditor(this);
-			pinHandler = new PinHandler(this);
+            pinHandler = new AIPinHandler(this);
 		}
 
 		//Loading of map as a result to the user clicking the "Load Map" button
@@ -68,10 +68,10 @@ namespace ETD.ViewsPresenters.MapSection
 			pinHandler.DragMove(sender, e);
 		}
 
-		public void DetectCollision(Grid movedItem, double movedItem_X, double movedItem_Y)
-		{
-			pinHandler.DetectCollision(movedItem, movedItem_X, movedItem_Y);
-		}
+		//public void DetectCollision(Grid movedItem, double movedItem_X, double movedItem_Y)
+		//{
+		//	pinHandler.DetectCollision(movedItem, movedItem_X, movedItem_Y);
+		//}
 
         internal void CheckRight(object sender, RoutedEventArgs e)
         {
