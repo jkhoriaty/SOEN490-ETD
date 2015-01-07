@@ -24,7 +24,14 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 		public void SetPinPosition(Grid g, double X, double Y)
 		{
 			Canvas.SetLeft(g, (X - (g.Width / 2)));
-			Canvas.SetTop(g, (Y - (g.Width / 2)));
+			Canvas.SetTop(g, (Y - (g.Height / 2)));
+		}
+
+		private Grid getActualContainer(Grid grid)
+		{
+			StackPanel stack = (StackPanel)grid.Parent;
+			Border border = (Border)stack.Parent;
+			return (Grid)border.Parent;
 		}
 
 		public void DragStart(object sender, MouseButtonEventArgs e)
@@ -73,7 +80,7 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 			var mousePos = e.GetPosition(mapSection.Map);
 
 			//Making sure it is not dragged out of bounds
-			if (mousePos.X < (g.Width / 2) || (mapSection.Map.ActualWidth - (g.Width / 2)) < mousePos.X || mousePos.Y < (g.Width / 2) || (mapSection.Map.ActualHeight - (g.Width / 2)) < mousePos.Y)
+			if (mousePos.X < (g.Width / 2) || (mapSection.Map.ActualWidth - (g.Width / 2)) < mousePos.X || mousePos.Y < (g.Height / 2) || (mapSection.Map.ActualHeight - (g.Height / 2)) < mousePos.Y)
 			{
 				return;
 			}
@@ -94,13 +101,13 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 			}
 
 			//Replacing item within vertical bounds
-			if (movedPin_Y > (mapSection.Map.ActualHeight - (movedPin.Width / 2))) //Bottom
+			if (movedPin_Y > (mapSection.Map.ActualHeight - (movedPin.Height / 2))) //Bottom
 			{
-				movedPin_Y = mapSection.Map.ActualHeight - (movedPin.Width / 2);
+				movedPin_Y = mapSection.Map.ActualHeight - (movedPin.Height / 2);
 			}
-			else if (movedPin_Y < (movedPin.Width / 2)) //Top
+			else if (movedPin_Y < (movedPin.Height / 2)) //Top
 			{
-				movedPin_Y = (movedPin.Width / 2);
+				movedPin_Y = (movedPin.Height / 2);
 			}
 
 			bool collisionDetected = true;
@@ -124,10 +131,10 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 					{
 						//Getting the position of where the rectangle has been dropped
 						double fixedPin_X = Math.Round((((double)Canvas.GetLeft(fixedPin)) + (fixedPin.Width / 2)), 3);
-						double fixedPin_Y = Math.Round((((double)Canvas.GetTop(fixedPin)) + (fixedPin.Width / 2)), 3);
+						double fixedPin_Y = Math.Round((((double)Canvas.GetTop(fixedPin)) + (fixedPin.Height / 2)), 3);
 
 						//If equipment is dropped on team and it overlaps more than 25% (assumption: not by mistake)
-						if (movedPin.Tag.Equals("equipment") && fixedPin.Tag.Equals("team") && movedPin_X > (fixedPin_X - (movedPin.Width / 2)) && movedPin_X < (fixedPin_X + (movedPin.Width / 2)) && movedPin_Y > (fixedPin_Y - (movedPin.Width / 2)) && movedPin_Y < (fixedPin_Y + (movedPin.Width / 2)))
+						if (movedPin.Tag.Equals("equipment") && fixedPin.Tag.Equals("team") && movedPin_X > (fixedPin_X - (movedPin.Width / 2)) && movedPin_X < (fixedPin_X + (movedPin.Width / 2)) && movedPin_Y > (fixedPin_Y - (movedPin.Height / 2)) && movedPin_Y < (fixedPin_Y + (movedPin.Height / 2)))
 						{
 							mapSection.AddTeamEquipment(movedPin.Name, fixedPin.Name);
 							Canvas parent = (Canvas)movedPin.Parent;
@@ -135,8 +142,23 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 							return;
 						}
 
+						//If a team is dropped on an intervention and it overlaps more than 25% of the moved pin
+						if (movedPin.Tag.Equals("team") && fixedPin.Tag.Equals("intervention") && movedPin_X > (fixedPin_X - (fixedPin.Width / 2)) && movedPin_X < (fixedPin_X + (fixedPin.Width / 2)) && movedPin_Y > (fixedPin_Y - (fixedPin.Height / 2)) && movedPin_Y < (fixedPin_Y + (fixedPin.Height / 2)))
+						{
+							Grid intervention = (Grid)fixedPin;
+							foreach(var element in intervention.Children)
+							{
+								Border border = (Border)element;
+								StackPanel verticalStack = (StackPanel)border.Child;
+								StackPanel horizontalStack = (StackPanel)findSpotInIntervention(verticalStack, fixedPin, movedPin);
+								mapSection.Map.Children.Remove(movedPin);
+								horizontalStack.Children.Add(movedPin);
+								return;
+							}
+						}
+
 						//Checking if the dropped rectangle is within the bounds of any other rectangle
-						while (movedPin_X > (fixedPin_X - ((movedPin.Width / 2) + (fixedPin.Width / 2))) && movedPin_X < (fixedPin_X + ((movedPin.Width / 2) + (fixedPin.Width / 2))) && movedPin_Y > (fixedPin_Y - ((movedPin.Width / 2) + (fixedPin.Width / 2))) && movedPin_Y < (fixedPin_Y + ((movedPin.Width / 2) + (fixedPin.Width / 2))))
+						while (movedPin_X > (fixedPin_X - ((movedPin.Width / 2) + (fixedPin.Width / 2))) && movedPin_X < (fixedPin_X + ((movedPin.Width / 2) + (fixedPin.Width / 2))) && movedPin_Y > (fixedPin_Y - ((movedPin.Height / 2) + (fixedPin.Height / 2))) && movedPin_Y < (fixedPin_Y + ((movedPin.Height / 2) + (fixedPin.Height / 2))))
 						{
 							//Collision detected, resolution by shifting the rectangle in the same direction that it has been dropped
 							collisionDetected = true;
@@ -177,7 +199,7 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 							if (verticalDifference != 0)
 							{
 								//Shifting vertically in the correct direction
-								if ((movedPin.Width / 2) < movedPin_Y && movedPin_Y < (mapSection.Map.ActualHeight - (movedPin.Width / 2)))
+								if ((movedPin.Height / 2) < movedPin_Y && movedPin_Y < (mapSection.Map.ActualHeight - (movedPin.Height / 2)))
 								{
 									if (verticalDifference < 0)
 									{
@@ -241,13 +263,13 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 								}
 								else //Need vertical movement
 								{
-									if (movedPin_Y <= (movedPin.Width / 2)) //Left
+									if (movedPin_Y <= (movedPin.Height / 2)) //Left
 									{
-										movedPin_Y = fixedPin_Y + ((movedPin.Width / 2) + (fixedPin.Width / 2));
+										movedPin_Y = fixedPin_Y + ((movedPin.Height / 2) + (fixedPin.Height / 2));
 									}
 									else //Right
 									{
-										movedPin_Y = fixedPin_Y - ((movedPin.Width / 2) + (fixedPin.Width / 2));
+										movedPin_Y = fixedPin_Y - ((movedPin.Height / 2) + (fixedPin.Height / 2));
 									}
 								}
 							}
@@ -272,6 +294,47 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 				SetPinPosition(pin, movedPin_X, movedPin_Y);
 				DetectCollision(pin, movedPin_X, movedPin_Y);
 			}
+		}
+
+		public StackPanel findSpotInIntervention(StackPanel verticalStack, Grid fixedPin, Grid movedPin)
+		{
+			StackPanel horizontalStack = null;
+
+			//There are no teams assigned to the intervention already
+			if(verticalStack.Children.Count == 1)
+			{
+				horizontalStack = new StackPanel();
+				verticalStack.Children.Add(horizontalStack);
+				fixedPin.Height += movedPin.Height;
+			}
+			else
+			{
+				int level = 1;
+				while(level < verticalStack.Children.Count)
+				{
+					horizontalStack = (StackPanel)verticalStack.Children[level];
+					if(horizontalStack.Children.Count < 2)
+					{
+						if (level == 1)
+						{
+							fixedPin.Width += movedPin.Width;
+						}
+						break;
+					}
+					else if(level == (verticalStack.Children.Count-1))
+					{
+						horizontalStack = new StackPanel();
+						verticalStack.Children.Add(horizontalStack);
+						fixedPin.Height += movedPin.Height;
+						break;
+					}
+					level++;
+				}
+			}
+
+			horizontalStack.HorizontalAlignment = HorizontalAlignment.Center;
+			horizontalStack.Orientation = Orientation.Horizontal;
+			return horizontalStack;
 		}
 	}
 }

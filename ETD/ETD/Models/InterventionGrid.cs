@@ -25,20 +25,37 @@ namespace ETD.Models
 			this.MouseLeftButtonUp += new MouseButtonEventHandler(mapSection.DragStop);
 			this.MouseMove += new MouseEventHandler(mapSection.DragMove);
 
+			Border interventionBorder = new Border();
+			Thickness thickness = new Thickness();
+			thickness.Top = 1;
+			thickness.Bottom = 1;
+			thickness.Left = 1;
+			thickness.Right = 1;
+			interventionBorder.BorderThickness = thickness;
+			interventionBorder.CornerRadius = new CornerRadius(5);
+			interventionBorder.BorderBrush = new SolidColorBrush(Colors.Red);
+			this.Children.Add(interventionBorder);
+
+			StackPanel verticalStack = new StackPanel();
+			interventionBorder.Child = verticalStack;
+
+			Grid grid = new Grid();
+			verticalStack.Children.Add(grid);
+
 			Rectangle imageRectangle = new Rectangle();
 			imageRectangle.Width = size;
 			imageRectangle.Height = size;
 			ImageBrush img = new ImageBrush();
 			img.ImageSource = Services.getImage("intervention");
 			imageRectangle.Fill = img;
-			this.Children.Add(imageRectangle);
+			grid.Children.Add(imageRectangle);
 
 			Viewbox viewbox = new Viewbox();
 			viewbox.Width = size;
 			viewbox.Height = size;
 			viewbox.HorizontalAlignment = HorizontalAlignment.Center;
 			viewbox.VerticalAlignment = VerticalAlignment.Center;
-			this.Children.Add(viewbox);
+			grid.Children.Add(viewbox);
 
 			TextBlock nameLabel = new TextBlock();
 			nameLabel.Text = interventionNumber.ToString();
