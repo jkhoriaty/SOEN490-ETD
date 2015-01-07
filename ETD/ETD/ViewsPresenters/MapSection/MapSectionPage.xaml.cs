@@ -22,6 +22,7 @@ namespace ETD.ViewsPresenters.MapSection
 		MainWindow mainWindow;
 		PinEditor pinEditor;
 		PinHandler pinHandler;
+        ImageBrush imgbrush;
 
 		public MapSectionPage(MainWindow mainWindow)
 		{
@@ -42,8 +43,19 @@ namespace ETD.ViewsPresenters.MapSection
 			grayBitmap.EndInit();
 
 			//Displaying the map as the background
-			Map.Background = new ImageBrush(grayBitmap);
+            imgbrush = new ImageBrush(grayBitmap);
+			Map.Background = imgbrush;
+            ScaleMap(1.2, 1.2);
+
 		}
+
+        public void ScaleMap(double x, double y)
+        {
+            ScaleTransform a = new ScaleTransform();
+            a.ScaleX = x;
+            a.ScaleY = y;
+            imgbrush.Transform = a;
+        }
 		
 		//Pushing request to children classes
 		public void CreateTeamPin(Team team)

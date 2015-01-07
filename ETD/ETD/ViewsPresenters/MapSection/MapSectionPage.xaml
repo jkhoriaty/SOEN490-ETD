@@ -8,8 +8,7 @@
 	Title="MapSectionPage">
 
     <Canvas Name="Map">
-
-
+        
     </Canvas>
     <Page.Resources>
 		<ContextMenu x:Key="TeamContext" Opened="EditMenuItems">
