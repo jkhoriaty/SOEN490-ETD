@@ -37,6 +37,8 @@
     Auto Generated
   -->
   <ItemGroup>
+    <Compile Include="Models\AdditionalInfo.cs" />
+    <Compile Include="Models\AdditionalInfoGrid.cs" />
     <Compile Include="Models\EquipmentGrid.cs" />
     <Compile Include="Models\Intervention.cs" />
     <Compile Include="Models\InterventionGrid.cs" />
@@ -63,10 +65,14 @@
     <Compile Include="ViewsPresenters\InterventionsSection\InterventionSectionPage.xaml.cs">
       <DependentUpon>InterventionSectionPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewsPresenters\MapSection\AdditionalInfoPage.xaml.cs">
+      <DependentUpon>AdditionalInfoPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewsPresenters\MapSection\MapSectionPage.xaml.cs">
       <DependentUpon>MapSectionPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewsPresenters\MapSection\PinManagement\PinEditor.cs" />
+    <Compile Include="ViewsPresenters\MapSection\PinManagement\AIPinHandler.cs" />
     <Compile Include="ViewsPresenters\MapSection\PinManagement\PinHandler.cs" />
     <Compile Include="ViewsPresenters\TeamsSection\TeamInfo\TeamInfoPage.xaml.cs">
       <DependentUpon>TeamInfoPage.xaml</DependentUpon>
@@ -180,6 +186,10 @@
     <!--
         TeamForm
       -->
+    <Page Include="ViewsPresenters\MapSection\AdditionalInfoPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="ViewsPresenters\MapSection\MapSectionPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -220,6 +230,12 @@
     <Content Include="Icons\AmbulanceCar.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Icons\camp.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\circle.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Icons\dragdropbutton.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -232,6 +248,9 @@
     <Content Include="Icons\InterventionIcon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Icons\line.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Icons\Medicine_available.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -242,6 +261,15 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Icons\Medicine_unavailable.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\rectangle.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\square.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\stairs.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Icons\statExport.png">
