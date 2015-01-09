@@ -89,6 +89,8 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm
 			endFrame = new Frame();
 			endFrame.Content = endPage;
 			end.Content = endFrame;
+
+            details.Focus();
 		}
 
 		public void setInterventionNumber(int interventionNum)
