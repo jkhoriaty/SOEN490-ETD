@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ETD.ViewsPresenters.InterventionsSection.InterventionForm;
-using ETD.Models;
+using ETD.Models.Objects;
 
 namespace ETD.ViewsPresenters.InterventionsSection
 {

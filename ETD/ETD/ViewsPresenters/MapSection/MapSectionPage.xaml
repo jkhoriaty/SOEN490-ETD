@@ -7,9 +7,10 @@
       d:DesignHeight="300" d:DesignWidth="300"
 	Title="MapSectionPage">
 
-    <Canvas Name="Map">
+	<Canvas Name="Map">
         
-    </Canvas>
+	</Canvas>
+	
     <Page.Resources>
 		<ContextMenu x:Key="TeamContext" Opened="EditMenuItems">
 			<MenuItem Header="Available" Tag="team" Click="ChangeStatus"/>

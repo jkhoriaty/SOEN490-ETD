@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 
-namespace ETD.Models
+namespace ETD.Models.Services
 {
     public class LanguageSelector
     {

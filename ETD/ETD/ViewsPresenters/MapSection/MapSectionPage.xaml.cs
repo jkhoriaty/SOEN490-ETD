@@ -1,4 +1,5 @@
-﻿using ETD.Models;
+﻿using ETD.Models.Objects;
+using ETD.Models.Grids;
 using ETD.ViewsPresenters.MapSection.PinManagement;
 using System;
 using System.Collections.Generic;

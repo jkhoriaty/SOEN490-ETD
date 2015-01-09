@@ -75,7 +75,7 @@ namespace ETD.ViewsPresenters.MapSection
 
         internal void CheckRight(object sender, RoutedEventArgs e)
         {
-            pinEditor.CheckRight(sender, e);
+			pinEditor.EditMenuItems(sender, e);
         }
 
 		//When the window is resized, the pins need to move to stay in the window

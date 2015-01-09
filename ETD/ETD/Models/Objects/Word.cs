@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ETD.Models
+namespace ETD.Models.Objects
 {
     // Class containing the multilingual equivalent of a word. One string variable per language.
     // Can be expanded by adding more.

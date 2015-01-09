@@ -19,7 +19,7 @@ using ETD.ViewsPresenters.InterventionsSection.InterventionForm.ResourcesInterve
 using ETD.ViewsPresenters.InterventionsSection.InterventionForm.ABCInterventionForm;
 using ETD.ViewsPresenters.InterventionsSection.InterventionForm.AdditionalInfoInterventionForm;
 using ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndInterventionForm;
-using ETD.Models;
+using ETD.Models.Objects;
 using System.Windows.Threading;
 
 namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm

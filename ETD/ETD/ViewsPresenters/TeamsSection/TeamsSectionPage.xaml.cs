@@ -15,7 +15,8 @@ using System.Windows.Shapes;
 
 using ETD.ViewsPresenters.TeamsSection.TeamForm;
 using ETD.ViewsPresenters.TeamsSection.TeamInfo;
-using ETD.Models;
+using ETD.Models.Objects;
+using ETD.Models.Services;
 
 namespace ETD.ViewsPresenters.TeamsSection
 {
@@ -109,7 +110,7 @@ namespace ETD.ViewsPresenters.TeamsSection
 
 				//Getting the background image to the rectangle
 				ImageBrush equipmentImage = new ImageBrush();
-				equipmentImage.ImageSource = Services.getImage(equip.getEquipmentName());
+				equipmentImage.ImageSource = TechnicalServices.getImage(equip.getEquipmentName());
 				imageRectangle.Fill = equipmentImage;
 
 				//Getting the appropriate equipment StackPanel

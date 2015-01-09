@@ -267,8 +267,5 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 				DetectCollision(pin, movedPin_X, movedPin_Y);
 			}
 		}
-
-
-     
 	}
 }

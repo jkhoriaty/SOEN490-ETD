@@ -6,8 +6,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Effects;
 using System.Windows.Shapes;
+using ETD.Models.Objects;
+using ETD.Models.Services;
 
-namespace ETD.Models
+namespace ETD.Models.Grids
 {
     public class TeamGrid : Grid
     {
@@ -31,7 +33,7 @@ namespace ETD.Models
             imageRectangle.Width = size;
             imageRectangle.Height = size;
             ImageBrush img = new ImageBrush();
-            img.ImageSource = Services.getImage(team, team.getStatus());
+            img.ImageSource = TechnicalServices.getImage(team, team.getStatus());
             imageRectangle.Fill = img;
             this.Children.Add(imageRectangle);
 
@@ -63,7 +65,7 @@ namespace ETD.Models
         {
             team.setStatus((Statuses)Enum.Parse(typeof(Statuses), status));
             ImageBrush img = new ImageBrush();
-            img.ImageSource = Services.getImage(team, team.getStatus());
+            img.ImageSource = TechnicalServices.getImage(team, team.getStatus());
             imageRectangle.Fill = img;
         }
     }

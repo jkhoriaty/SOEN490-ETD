@@ -16,8 +16,7 @@ using System.Windows.Shapes;
 using ETD.ViewsPresenters.TeamsSection;
 using ETD.ViewsPresenters.MapSection;
 using ETD.ViewsPresenters.InterventionsSection;
-
-using ETD.Models;
+using ETD.Models.Objects;
 using ETD.ViewsPresenters.InterventionsSection.InterventionForm.TimersInterventionForm;
 using System.Windows.Threading;
 

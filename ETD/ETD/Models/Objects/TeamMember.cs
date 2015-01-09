@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ETD.Models
+namespace ETD.Models.Objects
 {
 	public enum Trainings {firstAid, firstResponder, medicine};
 
