@@ -34,10 +34,6 @@ namespace ETD.ViewsPresenters.MapSection
 			pinEditor = new PinEditor(this);
 			pinHandler = new PinHandler(this);
 
-            this.MouseLeftButtonDown += new MouseButtonEventHandler(DragBegin);
-            this.MouseLeftButtonUp += new MouseButtonEventHandler(DragEnd);
-            this.MouseMove += new MouseEventHandler(DragMoving);
-
             cm = new ContextMenu();
             this.ContextMenu = cm;
 
@@ -71,24 +67,7 @@ namespace ETD.ViewsPresenters.MapSection
             mi200.Click += Zoom_Click_200;
             cm.Items.Add(mi200); 
 		}
-        
-        internal void DragBegin(object sender, MouseButtonEventArgs e)
-        {
-            dragInProg = true;
-        }
-        internal void DragEnd(object sender, MouseButtonEventArgs e)
-        {
-            dragInProg = false;   
-        }
-        internal void DragMoving(object sender, MouseEventArgs e)
-        {
-            if(dragInProg)
-            { 
-                var mousePos = e.GetPosition(Map);
-                TranslateTransform TT = new TranslateTransform(mousePos.X-Map.ActualWidth/2, mousePos.Y-Map.ActualHeight/2);
-                imgbrush.Transform = TT;
-            }
-        }
+
         public void Zoom_Click_100(object sender, EventArgs e)
         {
             ScaleMap(1, 1);

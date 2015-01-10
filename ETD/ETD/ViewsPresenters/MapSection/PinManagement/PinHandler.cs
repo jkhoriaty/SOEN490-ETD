@@ -81,6 +81,12 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 
 			var mousePos = e.GetPosition(mapSection.Map);
 
+			if(g.Tag.Equals("team"))
+			{
+				TeamGrid team = (TeamGrid)g;
+				team.ChangeStatus("moving");
+			}
+
 			//If the pin dragged is a team that was in an intervention
 			if(relatedIntervention != null)
 			{

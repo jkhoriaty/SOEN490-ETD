@@ -50,7 +50,7 @@ namespace ETD.Models.Grids
                 Rectangle imageRectangle = new Rectangle();
                 AdditionalInfos AIP = (AdditionalInfos)Enum.Parse(typeof(AdditionalInfos), this.Name);
                 ImageBrush img = new ImageBrush();
-                img.ImageSource = Services.getImage(AIP);
+                img.ImageSource = TechnicalServices.getImage(AIP);
                 imageRectangle.Width = 90;
                 imageRectangle.Fill = img;
                 gr.setAISize(90);
