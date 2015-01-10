@@ -20,6 +20,11 @@ namespace ETD.Models.Objects
             this.departure = departure;
         }
 
+        public DateTime getDeparture()
+        {
+            return departure;
+        }
+
 		public String getName()
 		{
 			return name;
