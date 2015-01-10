@@ -37,6 +37,7 @@
     Auto Generated
   -->
   <ItemGroup>
+    <Compile Include="Models\Alarm.cs" />
     <Compile Include="Models\EquipmentGrid.cs" />
     <Compile Include="Models\Intervention.cs" />
     <Compile Include="Models\InterventionGrid.cs" />

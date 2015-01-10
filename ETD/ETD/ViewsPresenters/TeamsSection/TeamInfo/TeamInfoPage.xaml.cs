@@ -61,6 +61,12 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamInfo
 				Label memberName = (Label)memberLine.Children[0];
 				memberName.Content = member.getName();
 
+                /* TO BE COMPLETED!!!!!!
+                //ToolTip departureTime = new ToolTip();
+                //teamsSection.setTimer(member, departureTime);
+                //departureTime.Content = "hello";
+                memberLine.ToolTip = "departureTime";
+                 */            
 				Rectangle memberTraining = (Rectangle)memberLine.Children[1];
 				ImageBrush img2 = new ImageBrush();
 				img2.ImageSource = Services.getImage(member.getTrainingLevel());
