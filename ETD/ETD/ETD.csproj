@@ -37,13 +37,14 @@
     Auto Generated
   -->
   <ItemGroup>
-    <Compile Include="Models\AdditionalInfo.cs" />
-    <Compile Include="Models\AdditionalInfoGrid.cs" />
-    <Compile Include="Models\EquipmentGrid.cs" />
-    <Compile Include="Models\Intervention.cs" />
-    <Compile Include="Models\InterventionGrid.cs" />
-    <Compile Include="Models\TeamGrid.cs" />
-    <Compile Include="Models\TextboxHandler.cs" />
+    <Compile Include="Models\Grids\BorderGrid.cs" />
+    <Compile Include="Models\Objects\AdditionalInfo.cs" />
+    <Compile Include="Models\Grids\AdditionalInfoGrid.cs" />
+    <Compile Include="Models\Grids\EquipmentGrid.cs" />
+    <Compile Include="Models\Objects\Intervention.cs" />
+    <Compile Include="Models\Grids\InterventionGrid.cs" />
+    <Compile Include="Models\Grids\TeamGrid.cs" />
+    <Compile Include="Models\Services\TextboxHandler.cs" />
     <Compile Include="ViewsPresenters\InterventionsSection\InterventionForm\ABCInterventionForm\ABCInterventionFormPage.xaml.cs">
       <DependentUpon>ABCInterventionFormPage.xaml</DependentUpon>
     </Compile>
@@ -129,16 +130,15 @@
     Models
   -->
   <ItemGroup>
-    <Compile Include="Models\IObservable.cs" />
-    <Compile Include="Models\IObserver.cs" />
-    <Compile Include="Models\LanguageSelector.cs" />
-    <Compile Include="Models\Equipment.cs" />
-    <Compile Include="Models\Services.cs" />
-    <Compile Include="Models\Team.cs" />
-    <Compile Include="Models\Timer.cs" />
-    <Compile Include="Models\Vocabulary.cs" />
-    <Compile Include="Models\TeamMember.cs" />
-    <Compile Include="Models\Word.cs" />
+    <Compile Include="Models\Services\IObservable.cs" />
+    <Compile Include="Models\Services\IObserver.cs" />
+    <Compile Include="Models\Services\LanguageSelector.cs" />
+    <Compile Include="Models\Objects\Equipment.cs" />
+    <Compile Include="Models\Services\TechnicalServices.cs" />
+    <Compile Include="Models\Objects\Team.cs" />
+    <Compile Include="Models\Services\Vocabulary.cs" />
+    <Compile Include="Models\Objects\TeamMember.cs" />
+    <Compile Include="Models\Objects\Word.cs" />
   </ItemGroup>
   <!--
     ViewsPresenters

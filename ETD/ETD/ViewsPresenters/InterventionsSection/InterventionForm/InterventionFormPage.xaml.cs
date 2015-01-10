@@ -19,7 +19,7 @@ using ETD.ViewsPresenters.InterventionsSection.InterventionForm.ResourcesInterve
 using ETD.ViewsPresenters.InterventionsSection.InterventionForm.ABCInterventionForm;
 using ETD.ViewsPresenters.InterventionsSection.InterventionForm.AdditionalInfoInterventionForm;
 using ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndInterventionForm;
-using ETD.Models;
+using ETD.Models.Objects;
 using System.Windows.Threading;
 
 namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm
@@ -32,11 +32,17 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm
 		private InterventionSectionPage interventionSection;
 		private Intervention intervention;
 		private TimersInterventionFormPage timersPage;
+		Frame timersFrame;
 		private DetailsInterventionFormPage detailsPage;
+		Frame detailsFrame;
 		private ResourcesInterventionFormPage resourcesPage;
+		Frame resourcesFrame;
 		private ABCInterventionFormPage abcPage;
+		Frame abcFrame;
 		private AdditionalInfoInterventionFormPage additionalInfoPage;
+		Frame additionalInfoFrame;
 		private EndInterventionFormPage endPage;
+		Frame endFrame;
 
 		private DispatcherTimer dispatcherTimer = new DispatcherTimer();
 
@@ -60,29 +66,31 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm
 			additionalInfoPage = new AdditionalInfoInterventionFormPage(this, intervention);
 			endPage = new EndInterventionFormPage(this, intervention);
 
-			Frame timersFrame = new Frame();
+			timersFrame = new Frame();
 			timersFrame.Content = timersPage;
 			timers.Content = timersFrame;
 
-			Frame detailsFrame = new Frame();
+			detailsFrame = new Frame();
 			detailsFrame.Content = detailsPage;
 			details.Content = detailsFrame;
 
-			Frame resourcesFrame = new Frame();
+			resourcesFrame = new Frame();
 			resourcesFrame.Content = resourcesPage;
 			resources.Content = resourcesFrame;
 
-			Frame abcFrame = new Frame();
+			abcFrame = new Frame();
 			abcFrame.Content = abcPage;
 			abc.Content = abcFrame;
 
-			Frame additionalInfoFrame = new Frame();
+			additionalInfoFrame = new Frame();
 			additionalInfoFrame.Content = additionalInfoPage;
 			additionalInfo.Content = additionalInfoFrame;
 
-			Frame endFrame = new Frame();
+			endFrame = new Frame();
 			endFrame.Content = endPage;
 			end.Content = endFrame;
+
+            details.Focus();
 		}
 
 		public void setInterventionNumber(int interventionNum)
@@ -128,12 +136,18 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm
 		}
 
 		//Hiding intervention form after completion
-		public void HideInterventionForm(int offset)
+		public void CompleteIntervention(int offset)
 		{
 			//Stopping timer
 			if(timersPage.StopOverallTimer(offset))
 			{
-			interventionSection.HideInterventionForm(getInterventionNumber());
+				interventionSection.CompleteIntervention(getInterventionNumber());
+
+				timersFrame.IsEnabled = false;
+				detailsFrame.IsEnabled = false;
+				resourcesFrame.IsEnabled = false;
+				abcFrame.IsEnabled = false;
+				endFrame.IsEnabled = false;
 			}
 		}
 

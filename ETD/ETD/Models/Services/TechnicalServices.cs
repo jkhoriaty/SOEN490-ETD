@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
+using ETD.Models.Objects;
 
-namespace ETD.Models
+namespace ETD.Models.Services
 {
-	static class Services
+	static class TechnicalServices
 	{
 		private static String AbsolutePath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase);
 

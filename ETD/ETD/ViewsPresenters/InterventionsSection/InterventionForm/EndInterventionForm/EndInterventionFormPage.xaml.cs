@@ -12,7 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using ETD.Models;
+using ETD.Models.Objects;
+using ETD.Models.Services;
 
 namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndInterventionForm
 {
@@ -58,15 +59,14 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
 				else
 				{
 					ComboBoxItem conclusion = (ComboBoxItem)ConclusionBox.SelectedItem;
-					String conc = "" + conclusion.Content;
 
-					if ((conc.Equals("Hospital") || conc.Equals("Other")) && AdditionalInformation.Text.Equals(""))
+					if ((conclusion.Name.Equals("call911") || conclusion.Name.Equals("other")) && AdditionalInformation.Text.Equals(""))
 					{
 						throw new Exception();
 					}
 					else
 					{
-						interventionForm.HideInterventionForm(offset);
+						interventionForm.CompleteIntervention(offset);
 					}
 				}
 
@@ -83,12 +83,37 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
 
 		private void SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
+			//By default, for all selections, the ambulance form is hidden
+			MainGrid.RowDefinitions[1].Height = new GridLength(0);
+			MainGrid.RowDefinitions[2].Height = new GridLength(0);
+			MainGrid.RowDefinitions[3].Height = new GridLength(0);
+			MainGrid.RowDefinitions[4].Height = new GridLength(0);
+
 			ComboBox comboBox = (ComboBox)sender;
 			ComboBoxItem item = (ComboBoxItem)comboBox.SelectedItem;
-			if (item.Content.Equals("Hospital") || item.Content.Equals("Other"))
+			if (item.Name.Equals("call911") || item.Name.Equals("other") || item.Name.Equals("doctor"))
 			{
 				Grid.SetColumnSpan(ComboBoxBorder, 1);
 				AdditionalInformationBorder.Visibility = Visibility.Visible;
+				if (item.Name.Equals("call911"))
+				{
+					AdditionalInformation.Text = "Hospital?";
+
+					//If the ambulance requires an ambulance, show the ambulance form
+					MainGrid.RowDefinitions[1].Height = new GridLength(1, GridUnitType.Star);
+					MainGrid.RowDefinitions[2].Height = new GridLength(1, GridUnitType.Star);
+					MainGrid.RowDefinitions[3].Height = new GridLength(1, GridUnitType.Star);
+					MainGrid.RowDefinitions[4].Height = new GridLength(1, GridUnitType.Star);
+				}
+				else if (item.Name.Equals("other"))
+				{
+					AdditionalInformation.Text = "Conclusion?";
+				}
+				else if (item.Name.Equals("doctor"))
+				{
+					AdditionalInformation.Text = "Hospital?";
+				}
+				TextBoxHandler.ResetHandling(AdditionalInformation);
 			}
 			else
 			{
@@ -125,7 +150,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
 			if(selectionChanged)
 			{
 				ComboBoxItem item = (ComboBoxItem)ConclusionBox.SelectedItem;
-				if (item.Content.Equals("Hospital"))
+				if (item.Name.Equals("call911"))
 				{
 					intervention.setConclusionAdditionalInfo(AdditionalInformation.Text);
 
@@ -166,10 +191,16 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
 					ambulanceArrivalTime = ambulanceArrivalTime.Date + new TimeSpan(ambulanceArrivalhh, ambulanceArrivalmm, 0);
 					intervention.setAmbulanceArrivalTime(ambulanceArrivalTime);
 				}
-
-				if (item.Content.Equals("Other"))
+				else if (item.Name.Equals("other"))
 				{
 					intervention.setConclusionAdditionalInfo(AdditionalInformation.Text);
+				}
+				else if (item.Name.Equals("doctor"))
+				{
+					if(!TextBoxHandler.isDefaultText(AdditionalInformation))
+					{
+						intervention.setConclusionAdditionalInfo(AdditionalInformation.Text);
+					}
 				}
 			}
 			

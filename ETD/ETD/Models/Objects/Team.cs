@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ETD.Models
+namespace ETD.Models.Objects
 {
 	public enum Statuses {available, moving, intervening, unavailable};
 
@@ -14,7 +14,7 @@ namespace ETD.Models
 
         String name;
         TeamMember[] members;
-        String[] equipments;
+        Equipment[] equipments;
 		Statuses status;
 
         int EquipmentCount = 0;
@@ -26,7 +26,7 @@ namespace ETD.Models
         {
             this.name = name;
             members = new TeamMember[3];
-            equipments = new String[3];
+            equipments = new Equipment[3];
 			status = Statuses.available;
 
 			teams.Add(name, this);
@@ -47,7 +47,7 @@ namespace ETD.Models
             return false;
         }
 		
-		public bool addEquipment(String equipment)
+		public bool addEquipment(Equipment equipment)
         {
             if (EquipmentCount < 3)
             {
@@ -59,7 +59,7 @@ namespace ETD.Models
             return false;
         }
 
-        public void removeEquipment(String equipment)
+        public void removeEquipment(Equipment equipment)
         {
 			for ( int i=0; i < equipments.Length; i++)
             {

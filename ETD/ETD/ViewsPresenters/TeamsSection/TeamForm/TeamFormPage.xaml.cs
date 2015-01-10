@@ -13,7 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ETD.ViewsPresenters;
-using ETD.Models;
+using ETD.Models.Objects;
+using ETD.Models.Services;
 
 namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 {

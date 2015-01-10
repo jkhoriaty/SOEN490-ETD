@@ -1,4 +1,5 @@
-﻿using ETD.Models;
+﻿using ETD.Models.Objects;
+using ETD.Models.Grids;
 using ETD.ViewsPresenters.MapSection.PinManagement;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,8 @@ namespace ETD.ViewsPresenters.MapSection
 		MainWindow mainWindow;
 		PinEditor pinEditor;
 		PinHandler pinHandler;
+        ImageBrush imgbrush;
+        ContextMenu cm;
 
 		public MapSectionPage(MainWindow mainWindow)
 		{
@@ -29,8 +32,69 @@ namespace ETD.ViewsPresenters.MapSection
 			this.mainWindow = mainWindow;
 			pinEditor = new PinEditor(this);
 			pinHandler = new PinHandler(this);
-		}
 
+            cm = new ContextMenu();
+            this.ContextMenu = cm;
+
+            MenuItem mi100 = new MenuItem();
+            mi100.Header = "100%";
+            mi100.Click += Zoom_Click_100;
+            cm.Items.Add(mi100);
+
+            MenuItem mi120 = new MenuItem();
+            mi120.Header = "120%";
+            mi120.Click += Zoom_Click_120;
+            cm.Items.Add(mi120);
+
+            MenuItem mi140 = new MenuItem();
+            mi140.Header = "140%";
+            mi140.Click += Zoom_Click_140;
+            cm.Items.Add(mi140);
+
+            MenuItem mi160 = new MenuItem();
+            mi160.Header = "160%";
+            mi160.Click += Zoom_Click_160;
+            cm.Items.Add(mi160);
+
+            MenuItem mi180 = new MenuItem();
+            mi180.Header = "180%";
+            mi180.Click += Zoom_Click_180;
+            cm.Items.Add(mi180);
+
+            MenuItem mi200 = new MenuItem();
+            mi200.Header = "200%";
+            mi200.Click += Zoom_Click_200;
+            cm.Items.Add(mi200); 
+		}
+        public void Zoom_Click_100(object sender, EventArgs e)
+        {
+            ScaleMap(1, 1);
+        }
+
+        public void Zoom_Click_120(object sender, EventArgs e)
+        {
+            ScaleMap(1.2, 1.2);
+        }
+
+        public void Zoom_Click_140(object sender, EventArgs e)
+        {
+            ScaleMap(1.4, 1.4);
+        }
+
+        public void Zoom_Click_160(object sender, EventArgs e)
+        {
+            ScaleMap(1.6, 1.6);
+        }
+
+        public void Zoom_Click_180(object sender, EventArgs e)
+        {
+            ScaleMap(1.8, 1.8);
+        }
+
+        public void Zoom_Click_200(object sender, EventArgs e)
+        {
+            ScaleMap(2, 2);
+        }
 		//Loading of map as a result to the user clicking the "Load Map" button
 		public void SetMap(BitmapImage coloredImage)
 		{
@@ -42,8 +106,19 @@ namespace ETD.ViewsPresenters.MapSection
 			grayBitmap.EndInit();
 
 			//Displaying the map as the background
-			Map.Background = new ImageBrush(grayBitmap);
+            imgbrush = new ImageBrush(grayBitmap);
+			Map.Background = imgbrush;
+            ScaleMap(1.2, 1.2);
+
 		}
+
+        public void ScaleMap(double x, double y)
+        {
+            ScaleTransform a = new ScaleTransform();
+            a.ScaleX = x;
+            a.ScaleY = y;
+            imgbrush.Transform = a;
+        }
 		
 		//Pushing request to children classes
 		public void CreateTeamPin(Team team)
@@ -93,7 +168,8 @@ namespace ETD.ViewsPresenters.MapSection
 		//Pushing request to mainWindow
 		public void AddTeamEquipment(String equip, String teamName)
 		{
-			mainWindow.AddTeamEquipment(equip, teamName);
+            Equipment equipment = new Equipment((Equipments)Enum.Parse(typeof(Equipments), equip));
+			mainWindow.AddTeamEquipment(equipment, teamName);
 		}
 
         internal void ChangeStatus(object sender, RoutedEventArgs e)
@@ -101,15 +177,29 @@ namespace ETD.ViewsPresenters.MapSection
             pinEditor.ChangeStatus(sender, e);
         }
 
-        internal void CheckRight(object sender, RoutedEventArgs e)
+        internal void EditMenuItems(object sender, RoutedEventArgs e)
         {
-            pinEditor.CheckRight(sender, e);
+			//pinEditor.EditMenuItems(sender, e);
         }
 
 		//When the window is resized, the pins need to move to stay in the window
 		public void movePins(double widthRatio, double heightRatio)
 		{
 			pinHandler.movePins(widthRatio, heightRatio);
+		}
+
+		private void DeleteEquipment(object sender, RoutedEventArgs e)
+		{
+			MenuItem item = sender as MenuItem;
+			if (item != null)
+			{
+				ContextMenu parent = item.Parent as ContextMenu;
+				if (parent != null)
+				{
+					EquipmentGrid grid = (EquipmentGrid)parent.PlacementTarget;
+					pinEditor.DeletePin(grid.Name);
+				}
+			}
 		}
 	}
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ETD.Models.Grids;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace ETD.ViewsPresenters.MapSection.PinManagement
 {
@@ -15,6 +17,8 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
         private AdditionalInfoPage AIPmap;
 		private bool _isRectDragInProg;
 		private Grid movingGrid;
+		private Dictionary<Grid, Grid[]> activeInterventions = new Dictionary<Grid, Grid[]>();
+		private Dictionary<Grid, double[]> offsets = new Dictionary<Grid, double[]>();
 
 		public PinHandler(MapSectionPage mapSection)
 		{
@@ -30,7 +34,20 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 		public void SetPinPosition(Grid g, double X, double Y)
 		{
 			Canvas.SetLeft(g, (X - (g.Width / 2)));
-			Canvas.SetTop(g, (Y - (g.Width / 2)));
+			Canvas.SetTop(g, (Y - (g.Height / 2)));
+		}
+
+		public void SetBorderPosition(Border b, double X, double Y)
+		{
+			Canvas.SetLeft(b, (X - (b.Width / 2)));
+			Canvas.SetTop(b, (Y - (b.Height / 2)));
+		}
+
+		private Grid getActualContainer(Grid grid)
+		{
+			StackPanel stack = (StackPanel)grid.Parent;
+			Border border = (Border)stack.Parent;
+			return (Grid)border.Parent;
 		}
 
 		public void DragStart(object sender, MouseButtonEventArgs e)
@@ -39,6 +56,15 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 
 			_isRectDragInProg = g.CaptureMouse();
 			movingGrid = g;
+
+			if (activeInterventions.ContainsKey(g))
+			{
+				foreach(Grid interveningGrid in activeInterventions[g])
+				{
+					double X = (double)Canvas.GetLeft(g) - Canvas.GetLeft(interveningGrid);
+					double Y = (double)Canvas.GetTop(g) - Canvas.GetTop(interveningGrid);
+				}
+			}
 		}
 
 		//Left Mouse Button Up: Any pin
@@ -79,12 +105,31 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 			var mousePos = e.GetPosition(mapSection.Map);
 
 			//Making sure it is not dragged out of bounds
-			if (mousePos.X < (g.Width / 2) || (mapSection.Map.ActualWidth - (g.Width / 2)) < mousePos.X || mousePos.Y < (g.Width / 2) || (mapSection.Map.ActualHeight - (g.Width / 2)) < mousePos.Y)
+			if (mousePos.X < (g.Width / 2) || (mapSection.Map.ActualWidth - (g.Width / 2)) < mousePos.X || mousePos.Y < (g.Height / 2) || (mapSection.Map.ActualHeight - (g.Height / 2)) < mousePos.Y)
 			{
 				return;
 			}
 
 			SetPinPosition(g, mousePos.X, mousePos.Y);
+			if(activeInterventions.ContainsKey(g))
+			{
+				double border_Y = g.Height;
+				switch(activeInterventions[g].Count())
+				{
+					case 6:
+					case 5:
+						border_Y += activeInterventions[g][0].Height;
+						goto case 4;
+					case 4:
+					case 3:
+						border_Y += activeInterventions[g][0].Height;
+						goto case 2;
+					case 2:
+					case 1:
+						border_Y += activeInterventions[g][0].Height;
+						break;
+				}
+			}
 		}
 
 		public void DetectCollision(Grid movedPin, double movedPin_X, double movedPin_Y)
@@ -100,13 +145,13 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 			}
 
 			//Replacing item within vertical bounds
-			if (movedPin_Y > (mapSection.Map.ActualHeight - (movedPin.Width / 2))) //Bottom
+			if (movedPin_Y > (mapSection.Map.ActualHeight - (movedPin.Height / 2))) //Bottom
 			{
-				movedPin_Y = mapSection.Map.ActualHeight - (movedPin.Width / 2);
+				movedPin_Y = mapSection.Map.ActualHeight - (movedPin.Height / 2);
 			}
-			else if (movedPin_Y < (movedPin.Width / 2)) //Top
+			else if (movedPin_Y < (movedPin.Height / 2)) //Top
 			{
-				movedPin_Y = (movedPin.Width / 2);
+				movedPin_Y = (movedPin.Height / 2);
 			}
 
 			bool collisionDetected = true;
@@ -126,14 +171,14 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 				foreach (var fixedPin in allPins)
 				{
 					//Skipping collision-detection with itself
-					if (fixedPin != movedPin)
+					if (fixedPin != movedPin && !fixedPin.Tag.Equals("border"))
 					{
 						//Getting the position of where the rectangle has been dropped
 						double fixedPin_X = Math.Round((((double)Canvas.GetLeft(fixedPin)) + (fixedPin.Width / 2)), 3);
-						double fixedPin_Y = Math.Round((((double)Canvas.GetTop(fixedPin)) + (fixedPin.Width / 2)), 3);
+						double fixedPin_Y = Math.Round((((double)Canvas.GetTop(fixedPin)) + (fixedPin.Height / 2)), 3);
 
 						//If equipment is dropped on team and it overlaps more than 25% (assumption: not by mistake)
-						if (movedPin.Tag.Equals("equipment") && fixedPin.Tag.Equals("team") && movedPin_X > (fixedPin_X - (movedPin.Width / 2)) && movedPin_X < (fixedPin_X + (movedPin.Width / 2)) && movedPin_Y > (fixedPin_Y - (movedPin.Width / 2)) && movedPin_Y < (fixedPin_Y + (movedPin.Width / 2)))
+						if (movedPin.Tag.Equals("equipment") && fixedPin.Tag.Equals("team") && movedPin_X > (fixedPin_X - (movedPin.Width / 2)) && movedPin_X < (fixedPin_X + (movedPin.Width / 2)) && movedPin_Y > (fixedPin_Y - (movedPin.Height / 2)) && movedPin_Y < (fixedPin_Y + (movedPin.Height / 2)))
 						{
 							mapSection.AddTeamEquipment(movedPin.Name, fixedPin.Name);
 							Canvas parent = (Canvas)movedPin.Parent;
@@ -141,8 +186,30 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 							return;
 						}
 
+						//If a team is dropped on an intervention and it overlaps more than 25% of the moved pin
+						if (movedPin.Tag.Equals("team") && fixedPin.Tag.Equals("intervention") && movedPin_X > (fixedPin_X - (fixedPin.Width / 2)) && movedPin_X < (fixedPin_X + (fixedPin.Width / 2)) && movedPin_Y > (fixedPin_Y - (fixedPin.Height / 2)) && movedPin_Y < (fixedPin_Y + (fixedPin.Height / 2)))
+						{
+							BorderGrid borderGrid = new BorderGrid(fixedPin.Name, fixedPin.Width, fixedPin.Height + movedPin.Height);
+							mapSection.Map.Children.Add(borderGrid);
+
+							double verticalDifference = (fixedPin.Height / 2) + (movedPin.Height / 2);
+							if ((fixedPin_Y + verticalDifference) > (mapSection.Map.ActualHeight - (movedPin.Height / 2))) //Bottom
+							{
+								SetPinPosition(fixedPin, fixedPin_X, (mapSection.Map.ActualHeight - ((fixedPin.Height / 2) + movedPin.Height) - 3));
+								SetPinPosition(movedPin, fixedPin_X, (mapSection.Map.ActualHeight - (movedPin.Height / 2) - 3));
+								SetPinPosition(borderGrid, fixedPin_X, (mapSection.Map.ActualHeight - (borderGrid.Height / 2) - 3));
+							}
+							else
+							{
+								SetPinPosition(movedPin, fixedPin_X, (fixedPin_Y + verticalDifference));
+								SetPinPosition(borderGrid, fixedPin_X, (fixedPin_Y + (verticalDifference / 2)));
+							}
+
+							return;
+						}
+
 						//Checking if the dropped rectangle is within the bounds of any other rectangle
-						while (movedPin_X > (fixedPin_X - ((movedPin.Width / 2) + (fixedPin.Width / 2))) && movedPin_X < (fixedPin_X + ((movedPin.Width / 2) + (fixedPin.Width / 2))) && movedPin_Y > (fixedPin_Y - ((movedPin.Width / 2) + (fixedPin.Width / 2))) && movedPin_Y < (fixedPin_Y + ((movedPin.Width / 2) + (fixedPin.Width / 2))))
+						while (movedPin_X > (fixedPin_X - ((movedPin.Width / 2) + (fixedPin.Width / 2))) && movedPin_X < (fixedPin_X + ((movedPin.Width / 2) + (fixedPin.Width / 2))) && movedPin_Y > (fixedPin_Y - ((movedPin.Height / 2) + (fixedPin.Height / 2))) && movedPin_Y < (fixedPin_Y + ((movedPin.Height / 2) + (fixedPin.Height / 2))))
 						{
 							//Collision detected, resolution by shifting the rectangle in the same direction that it has been dropped
 							collisionDetected = true;
@@ -183,7 +250,7 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 							if (verticalDifference != 0)
 							{
 								//Shifting vertically in the correct direction
-								if ((movedPin.Width / 2) < movedPin_Y && movedPin_Y < (mapSection.Map.ActualHeight - (movedPin.Width / 2)))
+								if ((movedPin.Height / 2) < movedPin_Y && movedPin_Y < (mapSection.Map.ActualHeight - (movedPin.Height / 2)))
 								{
 									if (verticalDifference < 0)
 									{
@@ -247,13 +314,13 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 								}
 								else //Need vertical movement
 								{
-									if (movedPin_Y <= (movedPin.Width / 2)) //Left
+									if (movedPin_Y <= (movedPin.Height / 2)) //Left
 									{
-										movedPin_Y = fixedPin_Y + ((movedPin.Width / 2) + (fixedPin.Width / 2));
+										movedPin_Y = fixedPin_Y + ((movedPin.Height / 2) + (fixedPin.Height / 2));
 									}
 									else //Right
 									{
-										movedPin_Y = fixedPin_Y - ((movedPin.Width / 2) + (fixedPin.Width / 2));
+										movedPin_Y = fixedPin_Y - ((movedPin.Height / 2) + (fixedPin.Height / 2));
 									}
 								}
 							}
@@ -279,8 +346,5 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 				DetectCollision(pin, movedPin_X, movedPin_Y);
 			}
 		}
-
-
-     
 	}
 }

@@ -8,14 +8,14 @@
 	Title="InterventionSectionPage">
 
 	<StackPanel Name="InterventionsSection" Orientation="Horizontal">
-		<Border>
-			<Border.ContextMenu>
+		<Border Background="Transparent">
+            <Border.ContextMenu>
 				<ContextMenu Name="InterventionFilter">
 					<MenuItem Header="Ongoing Interventions" Tag="Ongoing" IsChecked="True" Click="FilterInterventions"/>
 					<MenuItem Header="Completed Interventions" Tag="Completed" Click="FilterInterventions"/>
 				</ContextMenu>
 			</Border.ContextMenu>
-			<StackPanel VerticalAlignment="Center">
+			<StackPanel VerticalAlignment="Center" Background="Transparent">
 				<Label Name="InterventionFilterLabel" Content="Ongoing" FontWeight="ExtraBlack" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24"/>
 				<Label Name="InterventionsLabel" Content="Interventions" FontWeight="ExtraBlack" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24"/>
 			</StackPanel>

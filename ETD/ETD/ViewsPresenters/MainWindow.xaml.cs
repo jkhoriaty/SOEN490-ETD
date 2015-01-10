@@ -13,12 +13,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
 using ETD.ViewsPresenters.TeamsSection;
 using ETD.ViewsPresenters.MapSection;
 using ETD.ViewsPresenters.InterventionsSection;
-
-using ETD.Models;
+using ETD.Models.Objects;
 using ETD.ViewsPresenters.InterventionsSection.InterventionForm.TimersInterventionForm;
 using System.Windows.Threading;
 
@@ -142,7 +140,7 @@ namespace ETD.ViewsPresenters
 
 
 		//Add equipment to team
-		public void AddTeamEquipment(String equip, String teamName)
+		public void AddTeamEquipment(Equipment equip, String teamName)
 		{
 			teamsSection.AddTeamEquipment(equip, teamName);
 		}

@@ -6,9 +6,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Effects;
 using System.Windows.Shapes;
+using ETD.Models.Objects;
+using ETD.Models.Services;
 
-
-namespace ETD.Models
+namespace ETD.Models.Grids
 {
     class AdditionalInfoGrid : Grid
     {
@@ -36,7 +37,7 @@ namespace ETD.Models
             imageRectangle.Height = size;
             AdditionalInfos AIP = (AdditionalInfos)Enum.Parse(typeof(AdditionalInfos), this.Name);
             ImageBrush img = new ImageBrush();
-            img.ImageSource = Services.getImage(AIP);
+            img.ImageSource = TechnicalServices.getImage(AIP);
             imageRectangle.Fill = img;
             this.Children.Add(imageRectangle);
         }

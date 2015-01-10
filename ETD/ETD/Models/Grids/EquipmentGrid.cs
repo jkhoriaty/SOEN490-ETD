@@ -6,8 +6,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Effects;
 using System.Windows.Shapes;
+using ETD.Models.Objects;
+using ETD.Models.Services;
 
-namespace ETD.Models
+namespace ETD.Models.Grids
 {
     class EquipmentGrid : Grid
     {
@@ -20,13 +22,14 @@ namespace ETD.Models
             this.MouseLeftButtonDown += new MouseButtonEventHandler(mapSection.DragStart);
             this.MouseLeftButtonUp += new MouseButtonEventHandler(mapSection.DragStop);
             this.MouseMove += new MouseEventHandler(mapSection.DragMove);
+			this.ContextMenu = mapSection.Resources["TeamContext"] as ContextMenu;
 
             Rectangle imageRectangle = new Rectangle();
             imageRectangle.Width = size;
             imageRectangle.Height = size;
             Equipments equipment = (Equipments)Enum.Parse(typeof(Equipments), equipmentName);
             ImageBrush img = new ImageBrush();
-            img.ImageSource = Services.getImage(equipment);
+            img.ImageSource = TechnicalServices.getImage(equipment);
             imageRectangle.Fill = img;
             this.Children.Add(imageRectangle);
         }
