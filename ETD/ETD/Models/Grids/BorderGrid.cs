@@ -27,5 +27,15 @@ namespace ETD.Models.Grids
 			border.BorderBrush = new SolidColorBrush(Colors.Red);
 			this.Children.Add(border);
 		}
+
+		public void setWidth (double width)
+		{
+			this.Width = width;
+		}
+
+		public void setHeight (double height)
+		{
+			this.Height = height;
+		}
 	}
 }

@@ -19,8 +19,8 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 		private MapSectionPage mapSection;
         private AdditionalInfoPage AIPmap;
 		private int teamSize = 40;
+		private int interventionSize = 40; //WARNING: If different than team size, need to revisit the addition of a team onto an intervention in the CollisionDetection method in the PinHandler file
 		private int equipmentSize = 30;
-		private int interventionSize = 40;
         private int AddtionalInfoSize = 60;
 
 		public PinEditor(MapSectionPage mapSection)

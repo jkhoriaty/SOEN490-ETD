@@ -17,8 +17,11 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
         private AdditionalInfoPage AIPmap;
 		private bool _isRectDragInProg;
 		private Grid movingGrid;
-		private Dictionary<Grid, Grid[]> activeInterventions = new Dictionary<Grid, Grid[]>();
-		private Dictionary<Grid, double[]> offsets = new Dictionary<Grid, double[]>();
+		private Grid relatedIntervention;
+		private double previousX;
+		private double previousY;
+		private Dictionary<Grid, List<Grid>> activeTeams = new Dictionary<Grid, List<Grid>>();
+		private Dictionary<Grid, BorderGrid> interventionBorders = new Dictionary<Grid, BorderGrid>();
 
 		public PinHandler(MapSectionPage mapSection)
 		{
@@ -31,23 +34,20 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
         }
 
 		//Setting position of pin
-		public void SetPinPosition(Grid g, double X, double Y)
+		public void setPinPosition(Grid g, double X, double Y)
 		{
 			Canvas.SetLeft(g, (X - (g.Width / 2)));
 			Canvas.SetTop(g, (Y - (g.Height / 2)));
 		}
 
-		public void SetBorderPosition(Border b, double X, double Y)
+		public double getX(Grid g)
 		{
-			Canvas.SetLeft(b, (X - (b.Width / 2)));
-			Canvas.SetTop(b, (Y - (b.Height / 2)));
+			return Math.Round((double)Canvas.GetLeft(g) + (g.Width / 2), 3);
 		}
 
-		private Grid getActualContainer(Grid grid)
+		public double getY(Grid g)
 		{
-			StackPanel stack = (StackPanel)grid.Parent;
-			Border border = (Border)stack.Parent;
-			return (Grid)border.Parent;
+			return Math.Round((double)Canvas.GetTop(g) + (g.Height / 2), 3);
 		}
 
 		public void DragStart(object sender, MouseButtonEventArgs e)
@@ -57,13 +57,11 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 			_isRectDragInProg = g.CaptureMouse();
 			movingGrid = g;
 
-			if (activeInterventions.ContainsKey(g))
+			if(RelatedIntervention(g) != null)
 			{
-				foreach(Grid interveningGrid in activeInterventions[g])
-				{
-					double X = (double)Canvas.GetLeft(g) - Canvas.GetLeft(interveningGrid);
-					double Y = (double)Canvas.GetTop(g) - Canvas.GetTop(interveningGrid);
-				}
+				relatedIntervention = RelatedIntervention(g);
+				previousX = getX(g);
+				previousY = getY(g);
 			}
 		}
 
@@ -83,8 +81,39 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 
 			var mousePos = e.GetPosition(mapSection.Map);
 
-			//Calling collision detection and resolution for the dropped object
-			DetectCollision(g, mousePos.X, mousePos.Y);
+			//If the pin dragged is a team that was in an intervention
+			if(relatedIntervention != null)
+			{
+				//If it is kept within the bounds of the intervention (accident drag), put it back in it's place, else remove it from the intervention and treat it any other pin
+				if (getX(g) > (getX(relatedIntervention) - ((g.Width / 2) + (relatedIntervention.Width / 2))) && getX(g) < (getX(relatedIntervention) + ((g.Width / 2) + (relatedIntervention.Width / 2))) && getY(g) > (getY(relatedIntervention) - ((g.Height / 2) + (relatedIntervention.Height / 2))) && getY(g) < (getY(relatedIntervention) + ((g.Height / 2) + (relatedIntervention.Height / 2))))
+				{
+					setPinPosition(g, previousX, previousY);
+				}
+				else
+				{
+					//Remove team from active team list and redraw border
+					foreach(KeyValuePair<Grid, BorderGrid> interventionBorderPair in interventionBorders)
+					{
+						if(interventionBorderPair.Value == relatedIntervention)
+						{
+							activeTeams[interventionBorderPair.Key].Remove(g);
+							DrawInterventionBorder(interventionBorderPair.Key);
+							break;
+						}
+					}
+					DetectCollision(g, mousePos.X, mousePos.Y);
+				}
+			}
+			else
+			{
+				//Calling collision detection and resolution for the dropped object
+				DetectCollision(g, mousePos.X, mousePos.Y);
+			}
+
+			//Resetting values
+			relatedIntervention = null;
+			previousX = -1;
+			previousY = -1;
 		}
 
 		//Mouse Move
@@ -110,25 +139,22 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 				return;
 			}
 
-			SetPinPosition(g, mousePos.X, mousePos.Y);
-			if(activeInterventions.ContainsKey(g))
+			//If it's an active intervention, keep the whole border with all the teams within the map space
+			if (interventionBorders.ContainsKey(g))
 			{
-				double border_Y = g.Height;
-				switch(activeInterventions[g].Count())
+				if (mousePos.X < (interventionBorders[g].Width / 2) || (mapSection.Map.ActualWidth - (interventionBorders[g].Width / 2)) < mousePos.X || mousePos.Y < (g.Height / 2) || (mapSection.Map.ActualHeight - interventionBorders[g].Height + (g.Height / 2)) < mousePos.Y)
 				{
-					case 6:
-					case 5:
-						border_Y += activeInterventions[g][0].Height;
-						goto case 4;
-					case 4:
-					case 3:
-						border_Y += activeInterventions[g][0].Height;
-						goto case 2;
-					case 2:
-					case 1:
-						border_Y += activeInterventions[g][0].Height;
-						break;
+					return;
 				}
+			}
+
+			setPinPosition(g, mousePos.X, mousePos.Y);
+
+			//If it's an active intervention, move the border and all the teams with it
+			if(interventionBorders.ContainsKey(g))
+			{
+				setPinPosition(interventionBorders[g], getX(g), Canvas.GetTop(g) + (interventionBorders[g].Height / 2));
+				PlaceInterventionPins(g);
 			}
 		}
 
@@ -156,11 +182,11 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 
 			bool collisionDetected = true;
 			int verificationCount = 0;
+			Grid intervention = null;
 
 			//Loop to make sure that last verification ensures no collision with any object
 			while (collisionDetected == true)
 			{
-
 				collisionDetected = false;
 				verificationCount++;
 
@@ -171,166 +197,199 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 				foreach (var fixedPin in allPins)
 				{
 					//Skipping collision-detection with itself
-					if (fixedPin != movedPin && !fixedPin.Tag.Equals("border"))
+					if (fixedPin == movedPin)
 					{
-						//Getting the position of where the rectangle has been dropped
-						double fixedPin_X = Math.Round((((double)Canvas.GetLeft(fixedPin)) + (fixedPin.Width / 2)), 3);
-						double fixedPin_Y = Math.Round((((double)Canvas.GetTop(fixedPin)) + (fixedPin.Height / 2)), 3);
+						continue;
+					}
 
-						//If equipment is dropped on team and it overlaps more than 25% (assumption: not by mistake)
-						if (movedPin.Tag.Equals("equipment") && fixedPin.Tag.Equals("team") && movedPin_X > (fixedPin_X - (movedPin.Width / 2)) && movedPin_X < (fixedPin_X + (movedPin.Width / 2)) && movedPin_Y > (fixedPin_Y - (movedPin.Height / 2)) && movedPin_Y < (fixedPin_Y + (movedPin.Height / 2)))
+					bool related = false;
+					//If collision detection is being done on an intervention border, ignore collision with all pins related to it
+					if(movedPin.Tag.Equals("border"))
+					{
+						foreach(KeyValuePair<Grid, BorderGrid> interventionBorderPair in interventionBorders)
 						{
-							mapSection.AddTeamEquipment(movedPin.Name, fixedPin.Name);
-							Canvas parent = (Canvas)movedPin.Parent;
-							parent.Children.Remove(movedPin);
-							return;
+							if(interventionBorderPair.Value == movedPin && (activeTeams[interventionBorderPair.Key].Contains(fixedPin) || fixedPin == interventionBorderPair.Key))
+							{
+								intervention = interventionBorderPair.Key;
+								related = true;
+							}
 						}
+					}
 
-						//If a team is dropped on an intervention and it overlaps more than 25% of the moved pin
-						if (movedPin.Tag.Equals("team") && fixedPin.Tag.Equals("intervention") && movedPin_X > (fixedPin_X - (fixedPin.Width / 2)) && movedPin_X < (fixedPin_X + (fixedPin.Width / 2)) && movedPin_Y > (fixedPin_Y - (fixedPin.Height / 2)) && movedPin_Y < (fixedPin_Y + (fixedPin.Height / 2)))
+					if(movedPin.Tag.Equals("intervention") && fixedPin.Tag.Equals("border") && interventionBorders.ContainsKey(movedPin) && interventionBorders[movedPin] == fixedPin)
+					{
+						related = true;
+					}
+					
+					if(related)
+					{
+						continue;
+					}
+
+					//Getting the position of where the rectangle has been dropped (center point)
+					double fixedPin_X = getX(fixedPin);
+					double fixedPin_Y = getY(fixedPin);
+
+					//If equipment is dropped on team and it overlaps more than 25% (assumption: not by mistake)
+					if (movedPin.Tag.Equals("equipment") && fixedPin.Tag.Equals("team") && movedPin_X > (fixedPin_X - (movedPin.Width / 2)) && movedPin_X < (fixedPin_X + (movedPin.Width / 2)) && movedPin_Y > (fixedPin_Y - (movedPin.Height / 2)) && movedPin_Y < (fixedPin_Y + (movedPin.Height / 2)))
+					{
+						mapSection.AddTeamEquipment(movedPin.Name, fixedPin.Name);
+						Canvas parent = (Canvas)movedPin.Parent;
+						parent.Children.Remove(movedPin);
+						return;
+					}
+
+					//If a team is dropped on an intervention and it overlaps more than 25% of the moved pin
+					if (movedPin.Tag.Equals("team") && fixedPin.Tag.Equals("intervention") && movedPin_X > (fixedPin_X - (fixedPin.Width / 2)) && movedPin_X < (fixedPin_X + (fixedPin.Width / 2)) && movedPin_Y > (fixedPin_Y - (fixedPin.Height / 2)) && movedPin_Y < (fixedPin_Y + (fixedPin.Height / 2)))
+					{
+						//Add the team to the intervention, create or change the intervention border appropriately
+						if (!interventionBorders.ContainsKey(fixedPin))
 						{
 							BorderGrid borderGrid = new BorderGrid(fixedPin.Name, fixedPin.Width, fixedPin.Height + movedPin.Height);
 							mapSection.Map.Children.Add(borderGrid);
+							interventionBorders.Add(fixedPin, borderGrid);
+							activeTeams.Add(fixedPin, new List<Grid>());
+						}
+						activeTeams[fixedPin].Add(movedPin);
+						DrawInterventionBorder(fixedPin);
+						return;
+					}
 
-							double verticalDifference = (fixedPin.Height / 2) + (movedPin.Height / 2);
-							if ((fixedPin_Y + verticalDifference) > (mapSection.Map.ActualHeight - (movedPin.Height / 2))) //Bottom
+					//Checking if the dropped rectangle is within the bounds of any other rectangle
+					while (movedPin_X > (fixedPin_X - ((movedPin.Width / 2) + (fixedPin.Width / 2))) && movedPin_X < (fixedPin_X + ((movedPin.Width / 2) + (fixedPin.Width / 2))) && movedPin_Y > (fixedPin_Y - ((movedPin.Height / 2) + (fixedPin.Height / 2))) && movedPin_Y < (fixedPin_Y + ((movedPin.Height / 2) + (fixedPin.Height / 2))))
+					{
+						//Collision detected, resolution by shifting the rectangle in the same direction that it has been dropped
+						collisionDetected = true;
+
+						//Rounding values to avoid ratio division by tiny number creating a huge ratio
+						movedPin_X = Math.Round(movedPin_X, 3);
+						movedPin_Y = Math.Round(movedPin_Y, 3);
+
+						//Finding out how much is the dropped rectangle covering the fixed one
+						double horizontalDifference = Math.Round((movedPin_X - fixedPin_X), 3);
+						double verticalDifference = Math.Round((movedPin_Y - fixedPin_Y), 3);
+						double differenceRatio = 0.1;
+						bool moved = false;
+
+						//Don't move horizontally if there are no difference and avoiding division by 0
+						if (horizontalDifference != 0)
+						{
+							//Finding the ratio at which we should increase the values to put the objects side by side but in the same direction as it was dropped
+							differenceRatio = Math.Round(((Math.Abs(verticalDifference) / Math.Abs(horizontalDifference)) / 10), 3);
+
+							//Shifting horizontally in the correct direction, if not at the border
+							if ((movedPin.Width / 2) < movedPin_X && movedPin_X < (mapSection.Map.ActualWidth - (movedPin.Width / 2)))
 							{
-								SetPinPosition(fixedPin, fixedPin_X, (mapSection.Map.ActualHeight - ((fixedPin.Height / 2) + movedPin.Height) - 3));
-								SetPinPosition(movedPin, fixedPin_X, (mapSection.Map.ActualHeight - (movedPin.Height / 2) - 3));
-								SetPinPosition(borderGrid, fixedPin_X, (mapSection.Map.ActualHeight - (borderGrid.Height / 2) - 3));
+								if (horizontalDifference < 0)
+								{
+									movedPin_X -= 0.1;
+									moved = true;
+								}
+								else
+								{
+									movedPin_X += 0.1;
+									moved = true;
+								}
+							}
+						}
+
+						//Don't move vertically if there are no difference
+						if (verticalDifference != 0)
+						{
+							//Shifting vertically in the correct direction
+							if ((movedPin.Height / 2) < movedPin_Y && movedPin_Y < (mapSection.Map.ActualHeight - (movedPin.Height / 2)))
+							{
+								if (verticalDifference < 0)
+								{
+									movedPin_Y -= differenceRatio;
+									moved = true;
+								}
+								else
+								{
+									movedPin_Y += differenceRatio;
+									moved = true;
+								}
+							}
+						}
+
+						//Handling situation where object is dropped between two others and is just bouncing around, placing object in the middle
+						if (verificationCount > 100)
+						{
+							MessageBox.Show("The dropped object is dropped between two objects and is bouncing around with no progress. Resetting it.");
+							if(movedPin_Y < (mapSection.Map.ActualHeight / 2))
+							{
+								movedPin_Y += fixedPin.Height;
 							}
 							else
 							{
-								SetPinPosition(movedPin, fixedPin_X, (fixedPin_Y + verticalDifference));
-								SetPinPosition(borderGrid, fixedPin_X, (fixedPin_Y + (verticalDifference / 2)));
+								movedPin_Y -= fixedPin.Height;
 							}
-
-							return;
+							verificationCount = 0;
+							moved = true;
 						}
 
-						//Checking if the dropped rectangle is within the bounds of any other rectangle
-						while (movedPin_X > (fixedPin_X - ((movedPin.Width / 2) + (fixedPin.Width / 2))) && movedPin_X < (fixedPin_X + ((movedPin.Width / 2) + (fixedPin.Width / 2))) && movedPin_Y > (fixedPin_Y - ((movedPin.Height / 2) + (fixedPin.Height / 2))) && movedPin_Y < (fixedPin_Y + ((movedPin.Height / 2) + (fixedPin.Height / 2))))
+						//Handling case of perfect superposition and placing right of fixed item if in the left half of the map, otherwise place left
+						if (movedPin_X == fixedPin_X && movedPin_Y == fixedPin_Y)
 						{
-							//Collision detected, resolution by shifting the rectangle in the same direction that it has been dropped
-							collisionDetected = true;
-
-							//Rounding values to avoid ratio division by tiny number creating a huge ratio
-							movedPin_X = Math.Round(movedPin_X, 3);
-							movedPin_Y = Math.Round(movedPin_Y, 3);
-
-							//Finding out how much is the dropped rectangle covering the fixed one
-							double horizontalDifference = Math.Round((movedPin_X - fixedPin_X), 3);
-							double verticalDifference = Math.Round((movedPin_Y - fixedPin_Y), 3);
-							double differenceRatio = 0.1;
-							bool moved = false;
-
-							//Don't move horizontally if there are no difference and avoiding division by 0
-							if (horizontalDifference != 0)
+							if(fixedPin_X < (mapSection.Map.ActualWidth /2))
 							{
-								//Finding the ratio at which we should increase the values to put the objects side by side but in the same direction as it was dropped
-								differenceRatio = Math.Round(((Math.Abs(verticalDifference) / Math.Abs(horizontalDifference)) / 10), 3);
+								movedPin_X = movedPin_X + ((movedPin.Width / 2) + (fixedPin.Width / 2));
+							}
+							else
+							{
+								movedPin_X = movedPin_X - ((movedPin.Width / 2) + (fixedPin.Width / 2));
+							}
+							moved = true;
+						}
 
-								//Shifting horizontally in the correct direction, if not at the border
-								if ((movedPin.Width / 2) < movedPin_X && movedPin_X < (mapSection.Map.ActualWidth - (movedPin.Width / 2)))
+						//Handling corner situation
+						if (moved == false)
+						{
+							double horizontalToBorder = Math.Min(fixedPin_X, (mapSection.Map.ActualWidth - fixedPin_X));
+							double verticalToBorder = Math.Min(fixedPin_Y, (mapSection.Map.ActualHeight - fixedPin_Y));
+
+							if (horizontalToBorder <= verticalToBorder) //Need horizontal movement
+							{
+								if (movedPin_X <= (movedPin.Width / 2)) //Left
 								{
-									if (horizontalDifference < 0)
-									{
-										movedPin_X -= 0.1;
-										moved = true;
-									}
-									else
-									{
-										movedPin_X += 0.1;
-										moved = true;
-									}
+									movedPin_X = fixedPin_X + ((movedPin.Width / 2) + (fixedPin.Width / 2));
+								}
+								else //Right
+								{
+									movedPin_X = fixedPin_X - ((movedPin.Width / 2) + (fixedPin.Width / 2));
 								}
 							}
-
-							//Don't move vertically if there are no difference
-							if (verticalDifference != 0)
+							else //Need vertical movement
 							{
-								//Shifting vertically in the correct direction
-								if ((movedPin.Height / 2) < movedPin_Y && movedPin_Y < (mapSection.Map.ActualHeight - (movedPin.Height / 2)))
+								if (movedPin_Y <= (movedPin.Height / 2)) //Left
 								{
-									if (verticalDifference < 0)
-									{
-										movedPin_Y -= differenceRatio;
-										moved = true;
-									}
-									else
-									{
-										movedPin_Y += differenceRatio;
-										moved = true;
-									}
+									movedPin_Y = fixedPin_Y + ((movedPin.Height / 2) + (fixedPin.Height / 2));
 								}
-							}
-
-							//Handling situation where object is dropped between two others and is just bouncing around, placing object in the middle
-							if (verificationCount > 100)
-							{
-								MessageBox.Show("The dropped object is dropped between two objects and is bouncing around with no progress. Resetting it.");
-								if(movedPin_Y < (mapSection.Map.ActualHeight / 2))
+								else //Right
 								{
-									movedPin_Y += fixedPin.Height;
-								}
-								else
-								{
-									movedPin_Y -= fixedPin.Height;
-								}
-								verificationCount = 0;
-								moved = true;
-							}
-
-							//Handling case of perfect superposition and placing right of fixed item if in the left half of the map, otherwise place left
-							if (movedPin_X == fixedPin_X && movedPin_Y == fixedPin_Y)
-							{
-								if(fixedPin_X < (mapSection.Map.ActualWidth /2))
-								{
-									movedPin_X = movedPin_X + ((movedPin.Width / 2) + (fixedPin.Width / 2));
-								}
-								else
-								{
-									movedPin_X = movedPin_X - ((movedPin.Width / 2) + (fixedPin.Width / 2));
-								}
-								moved = true;
-							}
-
-							//Handling corner situation
-							if (moved == false)
-							{
-								double horizontalToBorder = Math.Min(fixedPin_X, (mapSection.Map.ActualWidth - fixedPin_X));
-								double verticalToBorder = Math.Min(fixedPin_Y, (mapSection.Map.ActualHeight - fixedPin_Y));
-
-								if (horizontalToBorder <= verticalToBorder) //Need horizontal movement
-								{
-									if (movedPin_X <= (movedPin.Width / 2)) //Left
-									{
-										movedPin_X = fixedPin_X + ((movedPin.Width / 2) + (fixedPin.Width / 2));
-									}
-									else //Right
-									{
-										movedPin_X = fixedPin_X - ((movedPin.Width / 2) + (fixedPin.Width / 2));
-									}
-								}
-								else //Need vertical movement
-								{
-									if (movedPin_Y <= (movedPin.Height / 2)) //Left
-									{
-										movedPin_Y = fixedPin_Y + ((movedPin.Height / 2) + (fixedPin.Height / 2));
-									}
-									else //Right
-									{
-										movedPin_Y = fixedPin_Y - ((movedPin.Height / 2) + (fixedPin.Height / 2));
-									}
+									movedPin_Y = fixedPin_Y - ((movedPin.Height / 2) + (fixedPin.Height / 2));
 								}
 							}
 						}
 					}
+
 				}
 			}
 
 			//Drop the rectangle if there are not collision or after resolution of collision
-			SetPinPosition(movedPin, movedPin_X, movedPin_Y);
+			setPinPosition(movedPin, movedPin_X, movedPin_Y);
+
+			//If the border has moved, replace all items back in the border
+			if(movedPin.Tag.Equals("border") && intervention != null)
+			{
+				setPinPosition(intervention, movedPin_X, movedPin_Y - (movedPin.Height / 2) + (intervention.Height / 2));
+				PlaceInterventionPins(intervention);
+			}
+
+			if(interventionBorders.ContainsKey(movedPin))
+			{
+				DetectCollision(interventionBorders[movedPin], movedPin_X, movedPin_Y - (movedPin.Height / 2) + (interventionBorders[movedPin].Height / 2));
+			}
 		}
 
 		public void movePins(double widthRatio, double heightRatio)
@@ -339,12 +398,98 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 
 			foreach (var pin in allPins)
 			{
-				double movedPin_X = widthRatio * ((double)Canvas.GetLeft(pin) + (pin.Width / 2));
-				double movedPin_Y = heightRatio * ((double)Canvas.GetTop(pin) + (pin.Height / 2));
+				double movedPin_X = widthRatio * getX(pin);
+				double movedPin_Y = heightRatio * getY(pin);
 
-				SetPinPosition(pin, movedPin_X, movedPin_Y);
+				setPinPosition(pin, movedPin_X, movedPin_Y);
 				DetectCollision(pin, movedPin_X, movedPin_Y);
 			}
+		}
+
+		private void PlaceInterventionPins(Grid fixedPin)
+		{
+			double Y = getY(fixedPin) + fixedPin.Height;
+			for(int i = 0; i < activeTeams[fixedPin].Count; i++)
+			{
+				if((i % 2) == 0) //First item on line
+				{
+					if ((i + 1) == activeTeams[fixedPin].Count) //Single on the line
+					{
+						setPinPosition(activeTeams[fixedPin][i], getX(fixedPin), Y);
+					}
+					else //There's another team on the line
+					{
+						setPinPosition(activeTeams[fixedPin][i], Canvas.GetLeft(fixedPin), Y);
+					}
+				}
+				else //Second item on the line
+				{
+					setPinPosition(activeTeams[fixedPin][i], Canvas.GetLeft(fixedPin) + fixedPin.Width, Y);
+					Y += activeTeams[fixedPin][i].Height;
+				}
+			}
+		}
+
+		//Handles drawing an intervention border, adding all teams to it and detecting collision on it
+		private void DrawInterventionBorder(Grid fixedPin)
+		{
+			//Determine the number of rows and number of columns of items that the border is going to have
+			int rows = 1;
+			int columns = 1;
+
+			double height = ((double)activeTeams[fixedPin].Count()) / 2;
+			rows += (int)Math.Ceiling(height);
+			if (activeTeams[fixedPin].Count() > 1)
+			{
+				columns = 2;
+			}
+			//Adjusting the borders' size according to the number of rows and columns
+			interventionBorders[fixedPin].setWidth(columns * fixedPin.Width);
+			interventionBorders[fixedPin].setHeight(rows * fixedPin.Height);
+
+			//Setting all the objects in the correct position
+			double border_X = getX(fixedPin);
+			double border_Y = Canvas.GetTop(fixedPin) + (interventionBorders[fixedPin].Height / 2);
+
+			//Replacing border within horizontal bounds
+			if (border_X > (mapSection.Map.ActualWidth - (interventionBorders[fixedPin].Width / 2))) //Right
+			{
+				border_X = mapSection.Map.ActualWidth - (interventionBorders[fixedPin].Width / 2);
+			}
+			else if (border_X < (interventionBorders[fixedPin].Width / 2)) //Left
+			{
+				border_X = (interventionBorders[fixedPin].Width / 2);
+			}
+
+			//Replacing border within vertical bounds
+			if (border_Y > (mapSection.Map.ActualHeight - (interventionBorders[fixedPin].Height / 2))) //Bottom
+			{
+				border_Y = mapSection.Map.ActualHeight - (interventionBorders[fixedPin].Height / 2);
+			}
+			else if (border_Y < (interventionBorders[fixedPin].Height / 2)) //Top
+			{
+				border_Y = (interventionBorders[fixedPin].Height / 2);
+			}
+
+			//Adjusting the border and intervention pin if the border has been moved back to within the bounds
+			setPinPosition(interventionBorders[fixedPin], border_X, border_Y);
+			setPinPosition(fixedPin, border_X, border_Y - (interventionBorders[fixedPin].Height / 2) + (fixedPin.Height / 2));
+
+			//Populating the border with the teams affected to the intervention
+			PlaceInterventionPins(fixedPin);
+			DetectCollision(interventionBorders[fixedPin], border_X, border_Y);
+		}
+
+		private Grid RelatedIntervention(Grid team)
+		{
+			foreach(KeyValuePair<Grid, BorderGrid> interventionBorderPair in interventionBorders)
+			{
+				if(activeTeams[interventionBorderPair.Key].Contains(team))
+				{
+					return interventionBorderPair.Value;
+				}
+			}
+			return null;
 		}
 	}
 }

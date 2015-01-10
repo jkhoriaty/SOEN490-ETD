@@ -142,7 +142,7 @@ namespace ETD.ViewsPresenters.MapSection
 		}
 		public void SetPinPosition(Grid g, double X, double Y)
 		{
-			pinHandler.SetPinPosition(g, X, Y);
+			pinHandler.setPinPosition(g, X, Y);
 		}
 		
 		internal void DragStart(object sender, MouseButtonEventArgs e)
