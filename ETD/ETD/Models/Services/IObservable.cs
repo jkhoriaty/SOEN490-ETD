@@ -1,4 +1,4 @@
-﻿namespace ETD.Models
+﻿namespace ETD.Models.Services
 {
     interface IObservable
     {

@@ -1,4 +1,5 @@
-﻿using ETD.Models;
+﻿using ETD.Models.Grids;
+using ETD.Models.Objects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,14 +17,21 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 	public class PinEditor
 	{
 		private MapSectionPage mapSection;
+        private AdditionalInfoPage AIPmap;
 		private int teamSize = 40;
 		private int equipmentSize = 30;
 		private int interventionSize = 40;
+        private int AddtionalInfoSize = 60;
 
 		public PinEditor(MapSectionPage mapSection)
 		{
 			this.mapSection = mapSection;
 		}
+
+        public PinEditor(AdditionalInfoPage AIP)
+        {
+            this.AIPmap = AIP;
+        }
 
 		//Creating a new team pin as a result to the successfull submission of the team form
 		public void CreateTeamPin(Team team)
@@ -98,24 +106,59 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
             }
         }
 
-        internal void CheckRight(MenuItem mi, TeamGrid fe)
-        {
+		internal void CheckRight(MenuItem mi, TeamGrid fe)
+		{
 			mi.IsChecked = ((Statuses)Enum.Parse(typeof(Statuses), mi.Header.ToString().ToLower()) == fe.team.getStatus());
+		}
+
+
+        //create additionnal info pin on the AdditionalInfoPage.xaml
+        public void CreateAdditionnalInfoPin(String AI)
+        {
+            AdditionalInfoGrid mainContainer = new AdditionalInfoGrid(AI, AIPmap, AddtionalInfoSize);
+            AIPmap.AdditionalMap.Children.Add(mainContainer);
+
+            //Setting pin in the bottom-left corner and making sure it does not cover any other item
+            AIPmap.SetPinPosition(mainContainer, (AddtionalInfoSize / 2), (AIPmap.AdditionalMap.ActualHeight - (AddtionalInfoSize / 2)));
+            //AIPmap.DetectCollision(mainContainer, (AddtionalInfoSize / 2), (AIPmap.AdditionalMap.ActualHeight - (AddtionalInfoSize / 2)));
+        }
+
+
+        //resize icons
+        //available choices: small, medium, large
+        public void ScalePin(object sender, RoutedEventArgs e)
+        {
+           
+        }
+
+        //Deleting pin from the additional info page
+        public void AIDeletePin(object sender, RoutedEventArgs e)
+        {
+            String pinName = sender.ToString();
+
+            foreach (Grid grid in AIPmap.AdditionalMap.Children)
+            {
+                if (grid.Name.Equals(pinName))
+                {
+                    AIPmap.AdditionalMap.Children.Remove(grid);
+                    return;
+                }
+            }
         }
 
 		//Filter itmes and edit the appropriate status
 		public void EditMenuItems(object sender, RoutedEventArgs e)
 		{
 			ContextMenu cm = (ContextMenu)sender;
-			foreach(MenuItem mi in cm.Items)
+			foreach (MenuItem mi in cm.Items)
 			{
 				mi.Visibility = Visibility.Collapsed;
-				if(cm.PlacementTarget is TeamGrid && mi.Tag.Equals("team"))
+				if (cm.PlacementTarget is TeamGrid && mi.Tag.Equals("team"))
 				{
 					mi.Visibility = Visibility.Visible;
 					CheckRight(mi, (TeamGrid)cm.PlacementTarget);
 				}
-				else if(cm.PlacementTarget is EquipmentGrid && mi.Tag.Equals("equipment"))
+				else if (cm.PlacementTarget is EquipmentGrid && mi.Tag.Equals("equipment"))
 				{
 					mi.Visibility = Visibility.Visible;
 				}

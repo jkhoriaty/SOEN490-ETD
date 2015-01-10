@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
+using ETD.Models.Objects;
 
-namespace ETD.Models
+namespace ETD.Models.Services
 {
-	static class Services
+	static class TechnicalServices
 	{
 		private static String AbsolutePath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase);
 
@@ -57,6 +58,19 @@ namespace ETD.Models
 			{"intervention", @"\Icons\InterventionIcon.png"}
 		};
 
+
+        private static Dictionary<AdditionalInfos, String> AdditionalInfoPath = new Dictionary<AdditionalInfos, String>
+        {
+            {AdditionalInfos.camp, @"\Icons\camp.png"},
+            {AdditionalInfos.circle, @"\Icons\circle.png"},
+            {AdditionalInfos.line, @"\Icons\line.png"},
+            {AdditionalInfos.rectangle, @"\Icons\rectangle.png"},
+            {AdditionalInfos.square, @"\Icons\square.png"},
+            {AdditionalInfos.stairs, @"\Icons\stairs.png"}
+            //{AdditionalInfo.ramp, },
+            //{AdditionalInfo.text, }
+        };
+
 		private static Dictionary<String, String> alphabet = new Dictionary<String, String>
 		{
 			{"A", "Alpha"},
@@ -87,6 +101,7 @@ namespace ETD.Models
 			{"Z", "Zulu"},
 		};
 
+    
 		//Return image of equipment
 		public static BitmapImage getImage(Equipments equipment)
 		{
@@ -133,5 +148,14 @@ namespace ETD.Models
 		{
 			return alphabet[letter];
 		}
+
+
+        //Return image of additionnal info
+        public static BitmapImage getImage(AdditionalInfos AI)
+        {
+            BitmapImage img = new BitmapImage(new Uri(AbsolutePath + AdditionalInfoPath[AI]));
+            return img;
+
+        }
 	}
 }

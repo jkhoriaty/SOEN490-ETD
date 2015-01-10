@@ -1,5 +1,4 @@
-﻿using ETD.Models.Grids;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,25 +6,18 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
 
 namespace ETD.ViewsPresenters.MapSection.PinManagement
 {
-	class PinHandler
+	class AIPinHandler
 	{
-		private MapSectionPage mapSection;
+		
         private AdditionalInfoPage AIPmap;
 		private bool _isRectDragInProg;
 		private Grid movingGrid;
-		private Dictionary<Grid, Grid[]> activeInterventions = new Dictionary<Grid, Grid[]>();
-		private Dictionary<Grid, double[]> offsets = new Dictionary<Grid, double[]>();
 
-		public PinHandler(MapSectionPage mapSection)
-		{
-			this.mapSection = mapSection;
-		}
 
-        public PinHandler(AdditionalInfoPage AIP)
+        public AIPinHandler(AdditionalInfoPage AIP)
         {
             this.AIPmap = AIP;
         }
@@ -34,20 +26,7 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 		public void SetPinPosition(Grid g, double X, double Y)
 		{
 			Canvas.SetLeft(g, (X - (g.Width / 2)));
-			Canvas.SetTop(g, (Y - (g.Height / 2)));
-		}
-
-		public void SetBorderPosition(Border b, double X, double Y)
-		{
-			Canvas.SetLeft(b, (X - (b.Width / 2)));
-			Canvas.SetTop(b, (Y - (b.Height / 2)));
-		}
-
-		private Grid getActualContainer(Grid grid)
-		{
-			StackPanel stack = (StackPanel)grid.Parent;
-			Border border = (Border)stack.Parent;
-			return (Grid)border.Parent;
+			Canvas.SetTop(g, (Y - (g.Width / 2)));
 		}
 
 		public void DragStart(object sender, MouseButtonEventArgs e)
@@ -56,15 +35,6 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 
 			_isRectDragInProg = g.CaptureMouse();
 			movingGrid = g;
-
-			if (activeInterventions.ContainsKey(g))
-			{
-				foreach(Grid interveningGrid in activeInterventions[g])
-				{
-					double X = (double)Canvas.GetLeft(g) - Canvas.GetLeft(interveningGrid);
-					double Y = (double)Canvas.GetTop(g) - Canvas.GetTop(interveningGrid);
-				}
-			}
 		}
 
 		//Left Mouse Button Up: Any pin
@@ -81,7 +51,7 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 			g.ReleaseMouseCapture();
 			_isRectDragInProg = false;
 
-			var mousePos = e.GetPosition(mapSection.Map);
+			var mousePos = e.GetPosition(AIPmap.AdditionalMap);
 
 			//Calling collision detection and resolution for the dropped object
 			DetectCollision(g, mousePos.X, mousePos.Y);
@@ -102,42 +72,23 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 			}
 
 			//Get the position of the mouse relative to the Canvas
-			var mousePos = e.GetPosition(mapSection.Map);
+			var mousePos = e.GetPosition(AIPmap.AdditionalMap);
 
 			//Making sure it is not dragged out of bounds
-			if (mousePos.X < (g.Width / 2) || (mapSection.Map.ActualWidth - (g.Width / 2)) < mousePos.X || mousePos.Y < (g.Height / 2) || (mapSection.Map.ActualHeight - (g.Height / 2)) < mousePos.Y)
+			if (mousePos.X < (g.Width / 2) || (AIPmap.AdditionalMap.ActualWidth - (g.Width / 2)) < mousePos.X || mousePos.Y < (g.Width / 2) || (AIPmap.AdditionalMap.ActualHeight - (g.Width / 2)) < mousePos.Y)
 			{
 				return;
 			}
 
 			SetPinPosition(g, mousePos.X, mousePos.Y);
-			if(activeInterventions.ContainsKey(g))
-			{
-				double border_Y = g.Height;
-				switch(activeInterventions[g].Count())
-				{
-					case 6:
-					case 5:
-						border_Y += activeInterventions[g][0].Height;
-						goto case 4;
-					case 4:
-					case 3:
-						border_Y += activeInterventions[g][0].Height;
-						goto case 2;
-					case 2:
-					case 1:
-						border_Y += activeInterventions[g][0].Height;
-						break;
-				}
-			}
 		}
 
 		public void DetectCollision(Grid movedPin, double movedPin_X, double movedPin_Y)
 		{
 			//Replacing item within horizontal bounds
-			if (movedPin_X > (mapSection.Map.ActualWidth - (movedPin.Width / 2))) //Right
+			if (movedPin_X > (AIPmap.AdditionalMap.ActualWidth - (movedPin.Width / 2))) //Right
 			{
-				movedPin_X = mapSection.Map.ActualWidth - (movedPin.Width / 2);
+				movedPin_X = AIPmap.AdditionalMap.ActualWidth - (movedPin.Width / 2);
 			}
 			else if (movedPin_X < (movedPin.Width / 2)) //Left
 			{
@@ -145,13 +96,13 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 			}
 
 			//Replacing item within vertical bounds
-			if (movedPin_Y > (mapSection.Map.ActualHeight - (movedPin.Height / 2))) //Bottom
+			if (movedPin_Y > (AIPmap.AdditionalMap.ActualHeight - (movedPin.Width / 2))) //Bottom
 			{
-				movedPin_Y = mapSection.Map.ActualHeight - (movedPin.Height / 2);
+				movedPin_Y = AIPmap.AdditionalMap.ActualHeight - (movedPin.Width / 2);
 			}
-			else if (movedPin_Y < (movedPin.Height / 2)) //Top
+			else if (movedPin_Y < (movedPin.Width / 2)) //Top
 			{
-				movedPin_Y = (movedPin.Height / 2);
+				movedPin_Y = (movedPin.Width / 2);
 			}
 
 			bool collisionDetected = true;
@@ -165,51 +116,21 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 				verificationCount++;
 
 				//Gathering all grids to search for collision
-				var allPins = mapSection.Map.Children.OfType<Grid>().ToList();
+				var allPins = AIPmap.AdditionalMap.Children.OfType<Grid>().ToList();
 
 				//Iterating throught them
 				foreach (var fixedPin in allPins)
 				{
 					//Skipping collision-detection with itself
-					if (fixedPin != movedPin && !fixedPin.Tag.Equals("border"))
+					if (fixedPin != movedPin)
 					{
 						//Getting the position of where the rectangle has been dropped
 						double fixedPin_X = Math.Round((((double)Canvas.GetLeft(fixedPin)) + (fixedPin.Width / 2)), 3);
-						double fixedPin_Y = Math.Round((((double)Canvas.GetTop(fixedPin)) + (fixedPin.Height / 2)), 3);
+						double fixedPin_Y = Math.Round((((double)Canvas.GetTop(fixedPin)) + (fixedPin.Width / 2)), 3);
 
-						//If equipment is dropped on team and it overlaps more than 25% (assumption: not by mistake)
-						if (movedPin.Tag.Equals("equipment") && fixedPin.Tag.Equals("team") && movedPin_X > (fixedPin_X - (movedPin.Width / 2)) && movedPin_X < (fixedPin_X + (movedPin.Width / 2)) && movedPin_Y > (fixedPin_Y - (movedPin.Height / 2)) && movedPin_Y < (fixedPin_Y + (movedPin.Height / 2)))
-						{
-							mapSection.AddTeamEquipment(movedPin.Name, fixedPin.Name);
-							Canvas parent = (Canvas)movedPin.Parent;
-							parent.Children.Remove(movedPin);
-							return;
-						}
-
-						//If a team is dropped on an intervention and it overlaps more than 25% of the moved pin
-						if (movedPin.Tag.Equals("team") && fixedPin.Tag.Equals("intervention") && movedPin_X > (fixedPin_X - (fixedPin.Width / 2)) && movedPin_X < (fixedPin_X + (fixedPin.Width / 2)) && movedPin_Y > (fixedPin_Y - (fixedPin.Height / 2)) && movedPin_Y < (fixedPin_Y + (fixedPin.Height / 2)))
-						{
-							BorderGrid borderGrid = new BorderGrid(fixedPin.Name, fixedPin.Width, fixedPin.Height + movedPin.Height);
-							mapSection.Map.Children.Add(borderGrid);
-
-							double verticalDifference = (fixedPin.Height / 2) + (movedPin.Height / 2);
-							if ((fixedPin_Y + verticalDifference) > (mapSection.Map.ActualHeight - (movedPin.Height / 2))) //Bottom
-							{
-								SetPinPosition(fixedPin, fixedPin_X, (mapSection.Map.ActualHeight - ((fixedPin.Height / 2) + movedPin.Height) - 3));
-								SetPinPosition(movedPin, fixedPin_X, (mapSection.Map.ActualHeight - (movedPin.Height / 2) - 3));
-								SetPinPosition(borderGrid, fixedPin_X, (mapSection.Map.ActualHeight - (borderGrid.Height / 2) - 3));
-							}
-							else
-							{
-								SetPinPosition(movedPin, fixedPin_X, (fixedPin_Y + verticalDifference));
-								SetPinPosition(borderGrid, fixedPin_X, (fixedPin_Y + (verticalDifference / 2)));
-							}
-
-							return;
-						}
 
 						//Checking if the dropped rectangle is within the bounds of any other rectangle
-						while (movedPin_X > (fixedPin_X - ((movedPin.Width / 2) + (fixedPin.Width / 2))) && movedPin_X < (fixedPin_X + ((movedPin.Width / 2) + (fixedPin.Width / 2))) && movedPin_Y > (fixedPin_Y - ((movedPin.Height / 2) + (fixedPin.Height / 2))) && movedPin_Y < (fixedPin_Y + ((movedPin.Height / 2) + (fixedPin.Height / 2))))
+						while (movedPin_X > (fixedPin_X - ((movedPin.Width / 2) + (fixedPin.Width / 2))) && movedPin_X < (fixedPin_X + ((movedPin.Width / 2) + (fixedPin.Width / 2))) && movedPin_Y > (fixedPin_Y - ((movedPin.Width / 2) + (fixedPin.Width / 2))) && movedPin_Y < (fixedPin_Y + ((movedPin.Width / 2) + (fixedPin.Width / 2))))
 						{
 							//Collision detected, resolution by shifting the rectangle in the same direction that it has been dropped
 							collisionDetected = true;
@@ -231,7 +152,7 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 								differenceRatio = Math.Round(((Math.Abs(verticalDifference) / Math.Abs(horizontalDifference)) / 10), 3);
 
 								//Shifting horizontally in the correct direction, if not at the border
-								if ((movedPin.Width / 2) < movedPin_X && movedPin_X < (mapSection.Map.ActualWidth - (movedPin.Width / 2)))
+								if ((movedPin.Width / 2) < movedPin_X && movedPin_X < (AIPmap.AdditionalMap.ActualWidth - (movedPin.Width / 2)))
 								{
 									if (horizontalDifference < 0)
 									{
@@ -250,7 +171,7 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 							if (verticalDifference != 0)
 							{
 								//Shifting vertically in the correct direction
-								if ((movedPin.Height / 2) < movedPin_Y && movedPin_Y < (mapSection.Map.ActualHeight - (movedPin.Height / 2)))
+								if ((movedPin.Width / 2) < movedPin_Y && movedPin_Y < (AIPmap.AdditionalMap.ActualHeight - (movedPin.Width / 2)))
 								{
 									if (verticalDifference < 0)
 									{
@@ -269,7 +190,7 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 							if (verificationCount > 100)
 							{
 								MessageBox.Show("The dropped object is dropped between two objects and is bouncing around with no progress. Resetting it.");
-								if(movedPin_Y < (mapSection.Map.ActualHeight / 2))
+								if(movedPin_Y < (AIPmap.AdditionalMap.ActualHeight / 2))
 								{
 									movedPin_Y += fixedPin.Height;
 								}
@@ -284,7 +205,7 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 							//Handling case of perfect superposition and placing right of fixed item if in the left half of the map, otherwise place left
 							if (movedPin_X == fixedPin_X && movedPin_Y == fixedPin_Y)
 							{
-								if(fixedPin_X < (mapSection.Map.ActualWidth /2))
+                                if (fixedPin_X < (AIPmap.AdditionalMap.ActualWidth / 2))
 								{
 									movedPin_X = movedPin_X + ((movedPin.Width / 2) + (fixedPin.Width / 2));
 								}
@@ -298,8 +219,8 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 							//Handling corner situation
 							if (moved == false)
 							{
-								double horizontalToBorder = Math.Min(fixedPin_X, (mapSection.Map.ActualWidth - fixedPin_X));
-								double verticalToBorder = Math.Min(fixedPin_Y, (mapSection.Map.ActualHeight - fixedPin_Y));
+                                double horizontalToBorder = Math.Min(fixedPin_X, (AIPmap.AdditionalMap.ActualWidth - fixedPin_X));
+                                double verticalToBorder = Math.Min(fixedPin_Y, (AIPmap.AdditionalMap.ActualHeight - fixedPin_Y));
 
 								if (horizontalToBorder <= verticalToBorder) //Need horizontal movement
 								{
@@ -314,13 +235,13 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 								}
 								else //Need vertical movement
 								{
-									if (movedPin_Y <= (movedPin.Height / 2)) //Left
+									if (movedPin_Y <= (movedPin.Width / 2)) //Left
 									{
-										movedPin_Y = fixedPin_Y + ((movedPin.Height / 2) + (fixedPin.Height / 2));
+										movedPin_Y = fixedPin_Y + ((movedPin.Width / 2) + (fixedPin.Width / 2));
 									}
 									else //Right
 									{
-										movedPin_Y = fixedPin_Y - ((movedPin.Height / 2) + (fixedPin.Height / 2));
+										movedPin_Y = fixedPin_Y - ((movedPin.Width / 2) + (fixedPin.Width / 2));
 									}
 								}
 							}
@@ -335,7 +256,7 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 
 		public void movePins(double widthRatio, double heightRatio)
 		{
-			var allPins = mapSection.Map.Children.OfType<Grid>().ToList();
+            var allPins = AIPmap.AdditionalMap.Children.OfType<Grid>().ToList();
 
 			foreach (var pin in allPins)
 			{

@@ -10,8 +10,9 @@ using System.Windows.Media;
 using System.Windows.Shapes;
 using System.Windows;
 using System.Windows.Media.Effects;
+using ETD.Models.Services;
 
-namespace ETD.Models
+namespace ETD.Models.Grids
 {
 	class InterventionGrid : Grid
 	{
@@ -29,7 +30,7 @@ namespace ETD.Models
 			imageRectangle.Width = size;
 			imageRectangle.Height = size;
 			ImageBrush img = new ImageBrush();
-			img.ImageSource = Services.getImage("intervention");
+			img.ImageSource = TechnicalServices.getImage("intervention");
 			imageRectangle.Fill = img;
 			this.Children.Add(imageRectangle);
 

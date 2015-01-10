@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ETD.Models
+namespace ETD.Models.Objects
 {
 	public enum Consciousness { alert, verbal, painful, unconscious, notSet };
 	public enum Airways { clear, partiallyObstructed, completelyObstructed, notSet };

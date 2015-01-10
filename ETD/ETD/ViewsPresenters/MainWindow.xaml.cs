@@ -16,7 +16,7 @@ using System.Windows.Shapes;
 using ETD.ViewsPresenters.TeamsSection;
 using ETD.ViewsPresenters.MapSection;
 using ETD.ViewsPresenters.InterventionsSection;
-using ETD.Models;
+using ETD.Models.Objects;
 using ETD.ViewsPresenters.InterventionsSection.InterventionForm.TimersInterventionForm;
 using System.Windows.Threading;
 
@@ -30,6 +30,7 @@ namespace ETD.ViewsPresenters
 		private TeamsSectionPage teamsSection;
 		private MapSectionPage mapSection;
 		private InterventionSectionPage interventionsSection;
+        private AdditionalInfoPage AIPmapSection;
 
 		private double previousWidth;
 		private double previousHeight;
@@ -40,6 +41,7 @@ namespace ETD.ViewsPresenters
 			teamsSection = new TeamsSectionPage(this);
 			mapSection = new MapSectionPage(this);
 			interventionsSection = new InterventionSectionPage(this);
+            AIPmapSection = new AdditionalInfoPage(this);
 
 			previousWidth = MapSection.ActualWidth;
 			previousHeight = MapSection.ActualHeight;
@@ -58,6 +60,12 @@ namespace ETD.ViewsPresenters
 			Frame interventionsFrame = new Frame();
 			interventionsFrame.Content = interventionsSection;
 			InterventionsSection.Child = interventionsFrame;
+
+
+            //Populating the AI section
+            Frame AIFrame = new Frame();
+            AIFrame.Content = AIPmapSection;
+            AIPSection.Child = AIFrame;
 		}
 
 		//Window size or state changed - Adjusting the team section height
@@ -129,6 +137,7 @@ namespace ETD.ViewsPresenters
 			mapSection.DeletePin(pinName);
 		}
 
+
 		//Add equipment to team
 		public void AddTeamEquipment(Equipment equip, String teamName)
 		{
@@ -165,5 +174,28 @@ namespace ETD.ViewsPresenters
 				MessageBox.Show("The deadlines have been changed.");
 			}
 		}
+        public void CreateAdditionnalInfoPin(object sender, RoutedEventArgs e)
+        {
+            ComboBoxItem selectedItem = (ComboBoxItem)AI.SelectedItem;
+            if (selectedItem != null)
+            {
+                AIPmapSection.CreateAdditionnalInfoPin("" + selectedItem.Name);
+            }
+            else
+            {
+                MessageBox.Show("You need to select a shape to add!");
+            }
+        }
+
+        public void CreateAdditionnalInfoPin(String AI)
+        {
+            AIPmapSection.CreateAdditionnalInfoPin(AI);
+        }
+
+        public void AIDeletePin(object sender, RoutedEventArgs e)
+        {
+            AIPmapSection.AIDeletePin(sender,e);
+        }
+
 	}
 }

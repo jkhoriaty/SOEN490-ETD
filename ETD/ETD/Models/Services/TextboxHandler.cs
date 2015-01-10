@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace ETD.Models
+namespace ETD.Models.Services
 {
 	static class TextBoxHandler
 	{

@@ -12,8 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
-using ETD.Models;
+using ETD.Models.Objects;
+using ETD.Models.Services;
 
 namespace ETD.ViewsPresenters.TeamsSection.TeamInfo
 {
@@ -40,7 +40,7 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamInfo
 			teamName.Name = team.getName();
 			if (team.getName().Length == 1)
 			{
-				teamName.Text = Services.getPhoneticLetter(team.getName());
+				teamName.Text = TechnicalServices.getPhoneticLetter(team.getName());
 			}
 			else
 			{
@@ -48,7 +48,7 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamInfo
 			}
 
 			ImageBrush img = new ImageBrush();
-			img.ImageSource = Services.getImage(team.getHighestLevelOfTraining());
+			img.ImageSource = TechnicalServices.getImage(team.getHighestLevelOfTraining());
 			teamTraining.Fill = img;
 
 			TeamMember member = null;
@@ -69,7 +69,7 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamInfo
                  */            
 				Rectangle memberTraining = (Rectangle)memberLine.Children[1];
 				ImageBrush img2 = new ImageBrush();
-				img2.ImageSource = Services.getImage(member.getTrainingLevel());
+				img2.ImageSource = TechnicalServices.getImage(member.getTrainingLevel());
 				memberTraining.Fill = img2;
 			}
 

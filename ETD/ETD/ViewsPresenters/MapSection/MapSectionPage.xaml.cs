@@ -1,4 +1,5 @@
-﻿using ETD.Models;
+﻿using ETD.Models.Objects;
+using ETD.Models.Grids;
 using ETD.ViewsPresenters.MapSection.PinManagement;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,9 @@ namespace ETD.ViewsPresenters.MapSection
 		MainWindow mainWindow;
 		PinEditor pinEditor;
 		PinHandler pinHandler;
+        ImageBrush imgbrush;
+        ContextMenu cm;
+        bool dragInProg = false;
 
 		public MapSectionPage(MainWindow mainWindow)
 		{
@@ -29,8 +33,91 @@ namespace ETD.ViewsPresenters.MapSection
 			this.mainWindow = mainWindow;
 			pinEditor = new PinEditor(this);
 			pinHandler = new PinHandler(this);
-		}
 
+            this.MouseLeftButtonDown += new MouseButtonEventHandler(DragBegin);
+            this.MouseLeftButtonUp += new MouseButtonEventHandler(DragEnd);
+            this.MouseMove += new MouseEventHandler(DragMoving);
+
+            cm = new ContextMenu();
+            this.ContextMenu = cm;
+
+            MenuItem mi100 = new MenuItem();
+            mi100.Header = "100%";
+            mi100.Click += Zoom_Click_100;
+            cm.Items.Add(mi100);
+
+            MenuItem mi120 = new MenuItem();
+            mi120.Header = "120%";
+            mi120.Click += Zoom_Click_120;
+            cm.Items.Add(mi120);
+
+            MenuItem mi140 = new MenuItem();
+            mi140.Header = "140%";
+            mi140.Click += Zoom_Click_140;
+            cm.Items.Add(mi140);
+
+            MenuItem mi160 = new MenuItem();
+            mi160.Header = "160%";
+            mi160.Click += Zoom_Click_160;
+            cm.Items.Add(mi160);
+
+            MenuItem mi180 = new MenuItem();
+            mi180.Header = "180%";
+            mi180.Click += Zoom_Click_180;
+            cm.Items.Add(mi180);
+
+            MenuItem mi200 = new MenuItem();
+            mi200.Header = "200%";
+            mi200.Click += Zoom_Click_200;
+            cm.Items.Add(mi200); 
+		}
+        
+        internal void DragBegin(object sender, MouseButtonEventArgs e)
+        {
+            dragInProg = true;
+        }
+        internal void DragEnd(object sender, MouseButtonEventArgs e)
+        {
+            dragInProg = false;   
+        }
+        internal void DragMoving(object sender, MouseEventArgs e)
+        {
+            if(dragInProg)
+            { 
+                var mousePos = e.GetPosition(Map);
+                TranslateTransform TT = new TranslateTransform(mousePos.X-Map.ActualWidth/2, mousePos.Y-Map.ActualHeight/2);
+                imgbrush.Transform = TT;
+            }
+        }
+        public void Zoom_Click_100(object sender, EventArgs e)
+        {
+            ScaleMap(1, 1);
+        }
+
+        public void Zoom_Click_120(object sender, EventArgs e)
+        {
+            ScaleMap(1.2, 1.2);
+        }
+
+        public void Zoom_Click_140(object sender, EventArgs e)
+        {
+            ScaleMap(1.4, 1.4);
+        }
+
+        public void Zoom_Click_160(object sender, EventArgs e)
+        {
+            ScaleMap(1.6, 1.6);
+        }
+
+        public void Zoom_Click_180(object sender, EventArgs e)
+        {
+            ScaleMap(1.8, 1.8);
+        }
+
+        public void Zoom_Click_200(object sender, EventArgs e)
+        {
+            ScaleMap(2, 2);
+        }
 		//Loading of map as a result to the user clicking the "Load Map" button
 		public void SetMap(BitmapImage coloredImage)
 		{
@@ -42,8 +129,18 @@ namespace ETD.ViewsPresenters.MapSection
 			grayBitmap.EndInit();
 
 			//Displaying the map as the background
-			Map.Background = new ImageBrush(grayBitmap);
+            imgbrush = new ImageBrush(grayBitmap);
+			Map.Background = imgbrush;
+
 		}
+
+        public void ScaleMap(double x, double y)
+        {
+            ScaleTransform a = new ScaleTransform();
+            a.ScaleX = x;
+            a.ScaleY = y;
+            imgbrush.Transform = a;
+        }
 		
 		//Pushing request to children classes
 		public void CreateTeamPin(Team team)
@@ -104,7 +201,7 @@ namespace ETD.ViewsPresenters.MapSection
 
         internal void EditMenuItems(object sender, RoutedEventArgs e)
         {
-			pinEditor.EditMenuItems(sender, e);
+			//pinEditor.EditMenuItems(sender, e);
         }
 
 		//When the window is resized, the pins need to move to stay in the window
