@@ -31,6 +31,7 @@ namespace ETD.ViewsPresenters
 		private MapSectionPage mapSection;
 		private InterventionSectionPage interventionsSection;
         private AdditionalInfoPage AIPmapSection;
+        private int AddtionalInfoSize;
 
 		private double previousWidth;
 		private double previousHeight;
@@ -176,25 +177,26 @@ namespace ETD.ViewsPresenters
 		}
         public void CreateAdditionnalInfoPin(object sender, RoutedEventArgs e)
         {
+            
             ComboBoxItem selectedItem = (ComboBoxItem)AI.SelectedItem;
             if (selectedItem != null)
             {
-                AIPmapSection.CreateAdditionnalInfoPin("" + selectedItem.Name);
+                AIPmapSection.CreateAdditionnalInfoPin("" + selectedItem.Name, AddtionalInfoSize);
             }
             else
             {
-                MessageBox.Show("You need to select a shape to add!");
+                MessageBox.Show("Please select a shape to add.");
             }
         }
 
-        public void CreateAdditionnalInfoPin(String AI)
+        public void CreateAdditionnalInfoPin(String AI,int size)
         {
-            AIPmapSection.CreateAdditionnalInfoPin(AI);
+            AIPmapSection.CreateAdditionnalInfoPin(AI,size);
         }
 
         public void AIDeletePin(object sender, RoutedEventArgs e)
         {
-            AIPmapSection.AIDeletePin(sender,e);
+            AIPmapSection.AIDeletePin(sender, e);
         }
 
 	}

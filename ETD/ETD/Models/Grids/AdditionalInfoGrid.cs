@@ -13,10 +13,17 @@ namespace ETD.Models.Grids
 {
     class AdditionalInfoGrid : Grid
     {
-        public AdditionalInfoGrid(String AIPName, AdditionalInfoPage AIPmap, int size) : base()
+        private Rectangle imageRectangle;
+        public int AddtionalInfoSize;
+        public AdditionalInfo gr;
+
+        public AdditionalInfoGrid(AdditionalInfo AI, AdditionalInfoPage AIPmap, int size)
+            : base()
         {
-            this.Name = AIPName;
+            this.gr = AI;
+            this.Name = AI.getAdditionalinfoName();
             this.Tag = "additionalinfo";
+            this.AddtionalInfoSize=size;
             this.Width = size;
             this.Height = size;
             this.MouseLeftButtonDown += new MouseButtonEventHandler(AIPmap.DragStart);
@@ -28,12 +35,41 @@ namespace ETD.Models.Grids
             Rectangle imageRectangle = new Rectangle();
             imageRectangle.Width = size;
             imageRectangle.Height = size;
-            AdditionalInfos AIP = (AdditionalInfos)Enum.Parse(typeof(AdditionalInfos), AIPName);
+            AdditionalInfos AIP = (AdditionalInfos)Enum.Parse(typeof(AdditionalInfos), this.Name);
             ImageBrush img = new ImageBrush();
             img.ImageSource = TechnicalServices.getImage(AIP);
             imageRectangle.Fill = img;
             this.Children.Add(imageRectangle);
         }
 
+        public void ScalePin(String size)
+        {
+            if (size.Equals("small"))
+            {
+                MessageBox.Show("hi");
+                Rectangle imageRectangle = new Rectangle();
+                AdditionalInfos AIP = (AdditionalInfos)Enum.Parse(typeof(AdditionalInfos), this.Name);
+                ImageBrush img = new ImageBrush();
+                img.ImageSource = Services.getImage(AIP);
+                imageRectangle.Width = 90;
+                imageRectangle.Fill = img;
+                gr.setAISize(90);
+                this.AddtionalInfoSize = 90;
+            }
+
+            if (size.Equals("medium"))
+            {
+                gr.setAISize(60);
+                this.AddtionalInfoSize = 60;
+            }
+
+            if (size.Equals("large"))
+            {
+                gr.setAISize(100);
+                this.AddtionalInfoSize = 100;
+            }
+        }
+
+      
     }
 }
