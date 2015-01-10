@@ -89,17 +89,17 @@ namespace ETD.ViewsPresenters.MapSection
         /// //////////////////////////////////////////////////////////
         /// </summary>
         /// <param name="AI"></param>
-        public void CreateAdditionnalInfoPin(String AI)
+        public void CreateAdditionnalInfoPin(String AI,int size)
         {
-            pinEditor.CreateAdditionnalInfoPin(AI);
+            pinEditor.CreateAdditionnalInfoPin(AI,size);
         }
 
-        		internal void AIDeletePin(object sender, RoutedEventArgs e)
+        internal void AIDeletePin(object sender, RoutedEventArgs e)
 		{
-            pinEditor.AIDeletePin(sender,e);
+            pinEditor.AIDeletePin(sender, e);
 		}
 
-                internal void ScalePin(object sender, RoutedEventArgs e)
+        internal void ScalePin(object sender, RoutedEventArgs e)
         {
             pinEditor.ScalePin(sender,e);
         }
