@@ -11,7 +11,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Effects;
 using System.Windows.Shapes;
-
 namespace ETD.ViewsPresenters.MapSection.PinManagement
 {
 	public class PinEditor
@@ -19,8 +18,8 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 		private MapSectionPage mapSection;
         private AdditionalInfoPage AIPmap;
 		private int teamSize = 40;
+		private int interventionSize = 40; //WARNING: If different than team size, need to revisit the addition of a team onto an intervention in the CollisionDetection method in the PinHandler file
 		private int equipmentSize = 30;
-		private int interventionSize = 40;
         private int AddtionalInfoSize = 60;
 
 		public PinEditor(MapSectionPage mapSection)
@@ -106,21 +105,46 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
             }
         }
 
+
+        public void CheckRight(object sender, RoutedEventArgs e)
+        {
+            ContextMenu cm = sender as ContextMenu;
+            TeamGrid fe = cm.PlacementTarget as TeamGrid;
+
+            foreach (MenuItem mi in cm.Items)
+            {
+                mi.IsChecked = ((Statuses)Enum.Parse(typeof(Statuses), mi.Header.ToString().ToLower()) == fe.team.getStatus());
+   
+            }
+
+            
+        }
+
 		internal void CheckRight(MenuItem mi, TeamGrid fe)
 		{
 			mi.IsChecked = ((Statuses)Enum.Parse(typeof(Statuses), mi.Header.ToString().ToLower()) == fe.team.getStatus());
 		}
 
 
-        //create additionnal info pin on the AdditionalInfoPage.xaml
-        public void CreateAdditionnalInfoPin(String AI)
-        {
-            AdditionalInfoGrid mainContainer = new AdditionalInfoGrid(AI, AIPmap, AddtionalInfoSize);
-            AIPmap.AdditionalMap.Children.Add(mainContainer);
 
+
+
+        //create additionnal info pin on the AdditionalInfoPage.xaml
+        public void CreateAdditionnalInfoPin(String AI,int size)
+        {
+            if (size !=0)
+            {
+                AddtionalInfoSize = size;
+            }
+            AdditionalInfo AI2 = new AdditionalInfo(AI);
+            AdditionalInfoGrid mainContainer = new AdditionalInfoGrid(AI2, AIPmap, AddtionalInfoSize);
+        
+            AIPmap.AdditionalMap.Children.Add(mainContainer);
+            
             //Setting pin in the bottom-left corner and making sure it does not cover any other item
             AIPmap.SetPinPosition(mainContainer, (AddtionalInfoSize / 2), (AIPmap.AdditionalMap.ActualHeight - (AddtionalInfoSize / 2)));
             //AIPmap.DetectCollision(mainContainer, (AddtionalInfoSize / 2), (AIPmap.AdditionalMap.ActualHeight - (AddtionalInfoSize / 2)));
+         
         }
 
 
@@ -128,21 +152,72 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
         //available choices: small, medium, large
         public void ScalePin(object sender, RoutedEventArgs e)
         {
-           
+            
+            foreach (AdditionalInfoGrid grid in AIPmap.AdditionalMap.Children)
+            {
+
+                ContextMenu m = AIPmap.Resources["AIcontext"] as ContextMenu;
+
+                foreach (MenuItem mi in m.Items)
+                {
+
+                        foreach (MenuItem ji in mi.Items)
+                        {
+                            MenuItem item = sender as MenuItem;
+
+                            // MessageBox.Show(ji.Name);
+                            // MessageBox.Show(item.Header.ToString().ToLower());
+                            // MessageBox.Show((ji.IsChecked = (ji == item)).ToString());
+                              if (ji.Name.Equals("small") && (ji.IsChecked = (ji == item)))
+                              {
+                                     MessageBox.Show(ji.Name);
+                                    AIPmap.AdditionalMap.Children.Remove(grid);
+                                 CreateAdditionnalInfoPin(grid.Name, 30);
+                                  ji.IsChecked = false;
+                                   return;
+                              }
+
+                              if (ji.Name.Equals("medium") && (ji.IsChecked = (ji == item)))
+                              {
+                                  MessageBox.Show(ji.Name);
+                                  AIPmap.AdditionalMap.Children.Remove(grid);
+                                  CreateAdditionnalInfoPin(grid.Name, 60);
+                                  ji.IsChecked = false;
+                                  return;
+                              }
+                              if (ji.Name.Equals("large") && (ji.IsChecked = (ji == item)))
+                              {
+                                  MessageBox.Show(ji.Name);
+                                  AIPmap.AdditionalMap.Children.Remove(grid);
+                                  CreateAdditionnalInfoPin(grid.Name, 100);
+                                  ji.IsChecked = false;
+                                  return;
+                              }
+                       
+                           // Trying to implement it similarly to ChangeStatus but calling the Scaling method does not rescale the shape or place it at the appropriate place..
+                           // Will fix later
+                           // AdditionalInfo AI2 = new AdditionalInfo(grid.Name);
+                           // AdditionalInfoGrid Shape = new AdditionalInfoGrid(AI2, AIPmap, AddtionalInfoSize);
+                           // if (Shape != null && (ji.IsChecked = (ji == item)))
+                           // {
+                           //     Shape.ScalePin(item.Header.ToString().ToLower());
+                           // }
+
+                      }
+
+               }
+            }
         }
+
+        
 
         //Deleting pin from the additional info page
         public void AIDeletePin(object sender, RoutedEventArgs e)
         {
-            String pinName = sender.ToString();
-
-            foreach (Grid grid in AIPmap.AdditionalMap.Children)
-            {
-                if (grid.Name.Equals(pinName))
-                {
+            foreach (AdditionalInfoGrid grid in AIPmap.AdditionalMap.Children)
+            { 
                     AIPmap.AdditionalMap.Children.Remove(grid);
-                    return;
-                }
+                    return;    
             }
         }
 

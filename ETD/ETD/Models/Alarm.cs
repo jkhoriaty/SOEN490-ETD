@@ -13,7 +13,7 @@ namespace ETD.Models
         DateTime newDepartTime;
         DateTime preDepartTime;
 
-        public void Alarm(DateTime departureTime)
+        public Alarm(DateTime departureTime)
         {
             hours = departureTime.Hour;
             minutes = departureTime.Minute;

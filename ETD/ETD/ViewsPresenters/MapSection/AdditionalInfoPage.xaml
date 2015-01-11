@@ -12,11 +12,11 @@
         
     </Canvas>
     <Page.Resources>
-        <ContextMenu x:Key="AIcontext"  Opened="CheckRight">
-            <MenuItem Header="Resize" >
-                <MenuItem Header="Small" Click="ScalePin"></MenuItem>
-                <MenuItem Header="Medium" Click="ScalePin"></MenuItem>
-                <MenuItem Header="Large" Click="ScalePin"></MenuItem>
+        <ContextMenu x:Key="AIcontext" >
+            <MenuItem Header="Resize" Name="Resize" >
+                <MenuItem Header="Small" Name="small" Click="ScalePin"></MenuItem>
+                <MenuItem Header="Medium" Name="medium" Click="ScalePin"></MenuItem>
+                <MenuItem Header="Large" Name="large" Click="ScalePin"></MenuItem>
             </MenuItem>
             <MenuItem Header="Delete" Click="AIDeletePin"></MenuItem>
         </ContextMenu>

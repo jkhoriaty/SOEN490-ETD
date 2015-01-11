@@ -11,17 +11,28 @@ namespace ETD.Models.Objects
 
     public class AdditionalInfo
     {
-        public AdditionalInfo AdditionalinfoName;
+        public String AdditionalinfoName;
+        public int AISize;
 
-        public AdditionalInfo(AdditionalInfo name)
+        public AdditionalInfo(String name)
        {
            AdditionalinfoName = name;
+
        }
 
-        public AdditionalInfo getAdditionalinfo()
+        public String getAdditionalinfoName()
        {
            return AdditionalinfoName;
        }
 
+        public int getAISize()
+        {
+            return AISize;
+        }
+
+        public void setAISize(int  s)
+        {
+            this.AISize = s;
+        }
     }
 }

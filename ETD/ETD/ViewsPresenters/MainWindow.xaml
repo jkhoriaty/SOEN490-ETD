@@ -6,72 +6,77 @@
 		WindowState="Maximized"
 		SizeChanged="setSectionsHeight"
 		StateChanged="setSectionsHeight"
-		MinWidth="1000"
-		Width="1000"
+		MinWidth="1200"
+		Width="1200"
 		MinHeight="700"
 		Height="700">
 
-	<Grid>
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="250"/>
-			<ColumnDefinition/>
-		</Grid.ColumnDefinitions>
-		<Grid.RowDefinitions>
-			<RowDefinition Height="25"/>
-			<RowDefinition/>
-			<RowDefinition Height="200"/>
-		</Grid.RowDefinitions>
-		<!-- The following is the team display section along with the tag and the button to add new teams -->
-		<Border Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Name="TeamsSection" BorderBrush="Black" BorderThickness="1" Padding="2">
-			<!-- Here goes the TeamsSectionPage frame -->
-		</Border>
-		
-		<Grid Grid.Column="1" Grid.Row="0">
-			<StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
-				<!-- Here go all the buttons -->
-				<Button Content="Load Map" Name="Load_Map" Click="LoadMap" Margin="2,0,2,0"/>
-              
-                <ComboBox Grid.Column="0" Name="AI" Width="130" Margin="1,0,1,0" VerticalAlignment="Center">
-                    <ComboBoxItem Content="circle" Name="circle"/>
-                    <ComboBoxItem Content="rectangle" Name="rectangle"/>
-                    <ComboBoxItem Content="stairs" Name="stairs"/>
-                    <ComboBoxItem Content="camp" Name="camp"/>
-                    <ComboBoxItem Content="line" Name="line"/>
-                    <ComboBoxItem Content="square" Name="square"/>
-                </ComboBox>
-
-                <Button Content="AI" Click="CreateAdditionnalInfoPin" Margin="2,0,2,0"/>
-            </StackPanel>
-			<StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
-				<!-- Here go all the buttons -->
-				<TextBlock Text="Deadlines (mins):" FontWeight="Bold" Margin="1,0,1,0" VerticalAlignment="Center"/>
-				<TextBlock Text="Intervention" Margin="1,0,1,0" VerticalAlignment="Center"/>
-				<TextBox Name="InterventionDeadline" Text="30" Width="20" Margin="1,0,1,0" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-				<TextBlock Text="Moving" Margin="1,0,1,0" VerticalAlignment="Center"/>
-				<TextBox Name="MovingDeadline" Text="5" Width="20" Margin="1,0,1,0" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-				<Button Content="Submit" Margin="1,0,1,0" VerticalAlignment="Center" Click="ChangeDeadlines"/>
-				<Border BorderThickness="0.5" BorderBrush="Black" Margin="3,0,3,0" VerticalAlignment="Stretch"/>
-				<ComboBox Grid.Column="0" Name="EquipmentAdd" HorizontalAlignment="Stretch" Width="130" Margin="1,0,1,0" VerticalAlignment="Center">
-					<ComboBoxItem Content="Ambulance Cart" Name="ambulanceCart"/>
-					<ComboBoxItem Content="Sitting Cart" Name="sittingCart"/>
-					<ComboBoxItem Content="Epipen" Name="epipen"/>
-					<ComboBoxItem Content="Transport Stretcher" Name="transportStretcher"/>
-					<ComboBoxItem Content="Mounted Stretcher" Name="mountedStretcher"/>
-					<ComboBoxItem Content="Wheelchair" Name="wheelchair"/>
-				</ComboBox>
-				<Button Grid.Column="1" Content="Add Equipemnt" Click="CreateEquipmentPin" Margin="1,0,1,0" VerticalAlignment="Center"/>
-              
-            </StackPanel>
-		</Grid>
-		
-		<Border Grid.Column="1" Grid.Row="1" Name="MapSection" BorderBrush="Black" BorderThickness="1">
-			<!-- Here goes the MapSectionPage frame -->
-		</Border>
-        <Border Grid.Column="1" Grid.Row="1" Name="AIPSection" BorderBrush="Black" BorderThickness="1">
-            <!-- Here goes the AdditionalInfoSectionPage frame -->
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition Width="9*"/>
+            <ColumnDefinition Width="97*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition/>
+            <RowDefinition Height="200"/>
+        </Grid.RowDefinitions>
+        <!-- The following is the team display section along with the tag and the button to add new teams -->
+        <Border Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Name="TeamsSection" BorderBrush="Black" BorderThickness="1" Padding="2">
+            <!-- Here goes the TeamsSectionPage frame -->
         </Border>
-        <Border Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" Name="InterventionsSection" BorderBrush="Black" BorderThickness="1" VerticalAlignment="Bottom" Height="200" Padding="2">
-			<!-- Here goes the InterventionsSection frame -->
-		</Border>
-	</Grid>
+
+        <Grid Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                <!-- Here go all the buttons -->
+                <Button Content="Load Map" Name="Load_Map" Click="LoadMap" Margin="2,0,2,0"/>
+
+				<ComboBox Visibility="Collapsed" Grid.Column="0" Name="AI" Width="130" Margin="1,0,1,0" VerticalAlignment="Center">
+					<ComboBoxItem Content="circle" Name="circle"/>
+					<ComboBoxItem Content="rectangle" Name="rectangle"/>
+					<ComboBoxItem Content="stairs" Name="stairs"/>
+					<ComboBoxItem Content="camp" Name="camp"/>
+					<ComboBoxItem Content="line" Name="line"/>
+					<ComboBoxItem Content="square" Name="square"/>
+				</ComboBox>
+				
+				<ComboBox SelectionChanged="ModeChange">
+					<MenuItem Header="Regular Mode"/>
+					<MenuItem Header="Edit Mode"/>
+				</ComboBox>
+			</StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                <!-- Here go all the buttons -->
+                <TextBlock Text="Deadlines (mins):" FontWeight="Bold" Margin="1,0,1,0" VerticalAlignment="Center"/>
+                <TextBlock Text="Intervention" Margin="1,0,1,0" VerticalAlignment="Center"/>
+                <TextBox Name="InterventionDeadline" Text="30" Width="20" Margin="1,0,1,0" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                <TextBlock Text="Moving" Margin="1,0,1,0" VerticalAlignment="Center"/>
+                <TextBox Name="MovingDeadline" Text="5" Width="20" Margin="1,0,1,0" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                <Button Content="Submit" Margin="1,0,1,0" VerticalAlignment="Center" Click="ChangeDeadlines"/>
+                <Border BorderThickness="0.5" BorderBrush="Black" Margin="3,0,3,0" VerticalAlignment="Stretch"/>
+                <ComboBox Grid.Column="0" Name="EquipmentAdd" HorizontalAlignment="Stretch" Width="130" Margin="1,0,1,0" VerticalAlignment="Center">
+                    <ComboBoxItem Content="Ambulance Cart" Name="ambulanceCart"/>
+                    <ComboBoxItem Content="Sitting Cart" Name="sittingCart"/>
+                    <ComboBoxItem Content="Epipen" Name="epipen"/>
+                    <ComboBoxItem Content="Transport Stretcher" Name="transportStretcher"/>
+                    <ComboBoxItem Content="Mounted Stretcher" Name="mountedStretcher"/>
+                    <ComboBoxItem Content="Wheelchair" Name="wheelchair"/>
+                </ComboBox>
+                <Button Grid.Column="1" Content="Add Equipemnt" Click="CreateEquipmentPin" Margin="1,0,1,0" VerticalAlignment="Center"/>
+
+            </StackPanel>
+        </Grid>
+
+        <Border Grid.Column="1" Grid.Row="1" Name="MapSection" BorderBrush="Black" BorderThickness="1" Grid.ColumnSpan="2">
+            <!-- Here goes the MapSectionPage frame -->
+        </Border>
+        <Border Grid.Column="1" Grid.Row="1" Name="AIPSection" BorderBrush="Black" BorderThickness="1" Grid.ColumnSpan="2">
+            <!-- Here goes the AdditionalInfoSectionPage frame -->
+       
+        </Border>
+        <Border Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="2" Name="InterventionsSection" BorderBrush="Black" BorderThickness="1" VerticalAlignment="Bottom" Height="200" Padding="2">
+            <!-- Here goes the InterventionsSection frame -->
+        </Border>
+    </Grid>
 </Window>
