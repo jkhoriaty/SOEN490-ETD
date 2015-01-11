@@ -165,5 +165,20 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm
 		{
 			timersPage.StopTimer(position, offset);
 		}
+
+        public void RenameTimer(int position, String team, String resource)
+        {
+            timersPage.RenameTimer(position, team, resource);
+        }
+
+        public bool IsTimerRunning(int position)
+        {
+            return timersPage.IsRunning(position);
+        }
+
+        public void CloneTimer(int position, String team, String resource, int offset, int original)
+        {
+            timersPage.CloneTimer(position, team, resource, offset, original);
+        }
     }
 }
