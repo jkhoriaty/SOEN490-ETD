@@ -37,7 +37,6 @@
     Auto Generated
   -->
   <ItemGroup>
-    <Compile Include="Models\Alarm.cs" />
     <Compile Include="Models\Grids\BorderGrid.cs" />
     <Compile Include="Models\Objects\AdditionalInfo.cs" />
     <Compile Include="Models\Grids\AdditionalInfoGrid.cs" />

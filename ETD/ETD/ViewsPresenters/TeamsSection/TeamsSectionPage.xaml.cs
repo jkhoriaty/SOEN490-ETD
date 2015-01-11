@@ -46,11 +46,17 @@ namespace ETD.ViewsPresenters.TeamsSection
 			{
 				foreach(TeamMember teamMember in team.Value.getMemberList())
 				{
+
 					DateTime now = DateTime.Now.AddMinutes(15);
-					if(DateTime.Compare(now, teamMember.getDeparture()) > 0)
+                    DateTime current = DateTime.Now;
+                    if (DateTime.Compare(current, teamMember.getDeparture()) >= 0)
+                    {
+                        teamMember.getNameGrid().Background = new SolidColorBrush(Colors.Red);
+                    }
+					else if(DateTime.Compare(now, teamMember.getDeparture()) >= 0)
 					{
-						teamMember.getNameGrid().Background = new SolidColorBrush(Colors.Red);
-					}
+						teamMember.getNameGrid().Background = new SolidColorBrush(Colors.Yellow);
+					}                   
 				}
 			}
 		}
@@ -93,26 +99,7 @@ namespace ETD.ViewsPresenters.TeamsSection
 		{
 			teamEquipmentStacks.Add(teamName, equipmentStack);
 		}
-
-        /* TO BE COMPLETED
-        //Add timer to notify 15mins prior to the end of shift
-        public void setTimer(TeamMember member, ToolTip departTime) 
-        {
-            DateTime departure = member.getDeparture();
-            TimeSpan timeLeft = departure - DateTime.Now;
-            TimeSpan fifteen = TimeSpan.FromMinutes(15);
-            if (timeLeft < TimeSpan.Zero)
-            {
-                //departTime.SetToolTip(this,"Departure Time");
-            }
-            else if (timeLeft < fifteen)
-            {
-               // departTime.ToolTip = timeLeft;
-            }
-            
-        }
-        */
-
+   
 		//Deleting the team upon right click on the label
 		public void RemoveTeam(String teamName)
 		{

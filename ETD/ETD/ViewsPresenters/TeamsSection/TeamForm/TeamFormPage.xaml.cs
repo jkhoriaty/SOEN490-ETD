@@ -336,7 +336,7 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 		{
 			if (departureTime.Hour < DateTime.Now.Hour)
 			{
-				departureTime.AddDays(1);
+				departureTime = departureTime.AddDays(1);
 			}
 			return departureTime;
 		}
