@@ -23,7 +23,9 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamInfo
 	public partial class TeamInfoPage : Page
 	{
 		TeamsSectionPage teamsSection;
-		Team team;
+        Team team;
+        private StackPanel movingPanel;
+        private bool _isDragInProg;
 
 		public TeamInfoPage(TeamsSectionPage teamsSection, Team team)
 		{
@@ -66,7 +68,7 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamInfo
                 //teamsSection.setTimer(member, departureTime);
                 //departureTime.Content = "hello";
                 memberLine.ToolTip = "departureTime";
-                 */            
+                 */        
 				Rectangle memberTraining = (Rectangle)memberLine.Children[1];
 				ImageBrush img2 = new ImageBrush();
 				img2.ImageSource = TechnicalServices.getImage(member.getTrainingLevel());
@@ -77,10 +79,31 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamInfo
 		}
 
 		//Right click on the team to remove it from the team list
-		private void DeleteTeam(object sender, MouseButtonEventArgs e)
+		internal void DeleteTeam(object sender, MouseButtonEventArgs e)
 		{
 			TextBlock label = (TextBlock)sender;
 			teamsSection.RemoveTeam(label.Name);
 		}
+
+        internal void dragStart(object sender, MouseEventArgs e)
+        {
+            StackPanel s = (StackPanel)sender;
+            _isDragInProg = s.CaptureMouse();
+            movingPanel = s;
+            
+        }
+
+        internal void dragStop(object sender, MouseButtonEventArgs e)
+        {
+            StackPanel s = (StackPanel)sender;
+            if (s != movingPanel)
+            {
+                return;
+            }
+            s.ReleaseMouseCapture();
+            _isDragInProg = false;
+            //var mousePos = e.GetPosition()
+        }
+
 	}
 }
