@@ -49,15 +49,6 @@ namespace ETD.Models.Grids
             nameLabel.FontWeight = FontWeights.DemiBold;
             nameLabel.IsHitTestVisible = false;
 
-            //Adding shadow effect so text appears clearly no matter what the background is
-            DropShadowEffect shadow = new DropShadowEffect();
-            shadow.ShadowDepth = 3;
-            shadow.Direction = 315;
-            shadow.Opacity = 1.0;
-            shadow.BlurRadius = 3;
-            shadow.Color = Colors.White;
-			nameLabel.Effect = shadow;
-
 			viewbox.Child = nameLabel;
         }
 

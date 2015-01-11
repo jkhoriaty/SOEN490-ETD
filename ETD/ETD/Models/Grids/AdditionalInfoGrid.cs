@@ -46,7 +46,17 @@ namespace ETD.Models.Grids
         {
             if (size.Equals("small"))
             {
-              
+
+                MessageBox.Show("hi");
+                Rectangle imageRectangle = new Rectangle();
+                AdditionalInfos AIP = (AdditionalInfos)Enum.Parse(typeof(AdditionalInfos), this.Name);
+                ImageBrush img = new ImageBrush();
+                img.ImageSource = TechnicalServices.getImage(AIP);
+                imageRectangle.Width = 90;
+                imageRectangle.Fill = img;
+                gr.setAISize(90);
+                this.AddtionalInfoSize = 90;
+
             }
 
             if (size.Equals("medium"))
