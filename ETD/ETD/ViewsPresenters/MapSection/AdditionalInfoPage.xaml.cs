@@ -68,6 +68,13 @@ namespace ETD.ViewsPresenters.MapSection
 			pinHandler.DragMove(sender, e);
 		}
 
+        internal void RotationStart(object sender ,MouseEventArgs e)
+        {
+            RotationStart(sender, e);
+
+        }
+
+
 		//public void DetectCollision(Grid movedItem, double movedItem_X, double movedItem_Y)
 		//{
 		//	pinHandler.DetectCollision(movedItem, movedItem_X, movedItem_Y);

@@ -8,6 +8,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Controls.Primitives;
 using System.Drawing;
+using System.Windows.Media;
 namespace ETD.ViewsPresenters.MapSection.PinManagement
 {
 	class AIPinHandler
@@ -16,6 +17,7 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
         private AdditionalInfoPage AIPmap;
 		private bool _isRectDragInProg;
 		private Grid movingGrid;
+        private bool rotateMode;
 
 
         public AIPinHandler(AdditionalInfoPage AIP)
@@ -268,6 +270,39 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 				DetectCollision(pin, movedPin_X, movedPin_Y);
 			}
 		}
+
+
+        //if the shape is double click , go into rotation mode
+        internal void RotationStart(object sender, MouseEventArgs e)
+        {
+            MessageBox.Show(_isRectDragInProg.ToString());
+            MessageBox.Show(rotateMode.ToString());
+
+            var mousePos = e.GetPosition(AIPmap.AdditionalMap);
+            var allPins = AIPmap.AdditionalMap.Children.OfType<Grid>().ToList();
+
+            MessageBox.Show(_isRectDragInProg.ToString());
+
+            //if the pin is fixed and rotateMode is set to true, rotate the pin by x degrees
+            if (!_isRectDragInProg && rotateMode == true)
+            {
+                foreach (var fixedPin in allPins)
+                {
+                    double fixedPin_X = Math.Round((((double)Canvas.GetLeft(fixedPin)) + (fixedPin.Width / 2)), 3);
+                    double fixedPin_Y = Math.Round((((double)Canvas.GetTop(fixedPin)) + (fixedPin.Width / 2)), 3);
+
+                    double angle = (float)Math.Atan2((fixedPin_Y - mousePos.X), (fixedPin_X - mousePos.X));
+                    RotateTransform r = new RotateTransform(angle);
+             
+                    movingGrid.RenderTransform = r;
+                }
+            }
+
+        }
+
+
+
+
 
 	}
 }
