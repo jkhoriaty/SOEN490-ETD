@@ -132,19 +132,28 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
         //create additionnal info pin on the AdditionalInfoPage.xaml
         public void CreateAdditionnalInfoPin(String AI,int size)
         {
+            //Choose size
             if (size !=0)
             {
                 AddtionalInfoSize = size;
             }
             AdditionalInfo AI2 = new AdditionalInfo(AI);
             AdditionalInfoGrid mainContainer = new AdditionalInfoGrid(AI2, AIPmap, AddtionalInfoSize);
-        
-            AIPmap.AdditionalMap.Children.Add(mainContainer);
             
-            //Setting pin in the bottom-left corner and making sure it does not cover any other item
-            AIPmap.SetPinPosition(mainContainer, (AddtionalInfoSize / 2), (AIPmap.AdditionalMap.ActualHeight - (AddtionalInfoSize / 2)));
-            //AIPmap.DetectCollision(mainContainer, (AddtionalInfoSize / 2), (AIPmap.AdditionalMap.ActualHeight - (AddtionalInfoSize / 2)));
-         
+            //If the additional info is a line, call the drawline function
+            if (AI.Equals("line"))
+            {
+                DrawLines();
+            }
+
+            else
+            {
+                AIPmap.AdditionalMap.Children.Add(mainContainer);
+                //Setting pin in the bottom-left corner and making sure it does not cover any other item
+                AIPmap.SetPinPosition(mainContainer, (AddtionalInfoSize / 2), (AIPmap.AdditionalMap.ActualHeight - (AddtionalInfoSize / 2)));
+                //AIPmap.DetectCollision(mainContainer, (AddtionalInfoSize / 2), (AIPmap.AdditionalMap.ActualHeight - (AddtionalInfoSize / 2)));
+            }
+          
         }
 
 
@@ -209,7 +218,15 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
             }
         }
 
-        
+        //Draw lines
+        //Accepts 2 arguments:
+        //start - retrieved on first mouse click
+        //end - retrieved on second mouse click
+        public void DrawLines()
+        {
+            MessageBox.Show(" draw lines");
+        }
+
 
         //Deleting pin from the additional info page
         public void AIDeletePin(object sender, RoutedEventArgs e)

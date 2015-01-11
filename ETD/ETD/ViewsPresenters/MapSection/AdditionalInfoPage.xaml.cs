@@ -68,9 +68,9 @@ namespace ETD.ViewsPresenters.MapSection
 			pinHandler.DragMove(sender, e);
 		}
 
-        internal void RotationStart(object sender ,MouseEventArgs e)
+        internal void RotationStart_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            RotationStart(sender, e);
+            RotationStart_MouseDoubleClick(sender, e);
 
         }
 

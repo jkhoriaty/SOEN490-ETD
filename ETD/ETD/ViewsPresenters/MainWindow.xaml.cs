@@ -19,6 +19,7 @@ using ETD.ViewsPresenters.InterventionsSection;
 using ETD.Models.Objects;
 using ETD.ViewsPresenters.InterventionsSection.InterventionForm.TimersInterventionForm;
 using System.Windows.Threading;
+using System.Drawing;
 
 namespace ETD.ViewsPresenters
 {
@@ -145,6 +146,7 @@ namespace ETD.ViewsPresenters
 			teamsSection.AddTeamEquipment(equip, teamName);
 		}
 
+        //Change intervention deadlines
 		private void ChangeDeadlines(object sender, RoutedEventArgs e)
 		{
 			bool success = true;
@@ -175,6 +177,8 @@ namespace ETD.ViewsPresenters
 				MessageBox.Show("The deadlines have been changed.");
 			}
 		}
+
+        //Create additional shapes on the map
         public void CreateAdditionnalInfoPin(object sender, RoutedEventArgs e)
         {
             ComboBoxItem item = sender as ComboBoxItem;
@@ -187,17 +191,19 @@ namespace ETD.ViewsPresenters
                 }
             }  
         }
-
+        
         public void CreateAdditionnalInfoPin(String AI,int size)
         {
             AIPmapSection.CreateAdditionnalInfoPin(AI,size);
         }
 
+        //delete additional pins
         public void AIDeletePin(object sender, RoutedEventArgs e)
         {
             AIPmapSection.AIDeletePin(sender, e);
         }
 
+        //switch between Regular mode and Edit mode
         private void ModeChange(object sender, RoutedEventArgs e)
 		{
             ComboBoxItem item = sender as ComboBoxItem;
@@ -214,5 +220,7 @@ namespace ETD.ViewsPresenters
                 }
             }  
 		}
+
+  
 	}
 }

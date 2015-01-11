@@ -9,6 +9,7 @@ using System.Windows.Input;
 using System.Windows.Controls.Primitives;
 using System.Drawing;
 using System.Windows.Media;
+
 namespace ETD.ViewsPresenters.MapSection.PinManagement
 {
 	class AIPinHandler
@@ -273,7 +274,7 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 
 
         //if the shape is double click , go into rotation mode
-        internal void RotationStart(object sender, MouseEventArgs e)
+        internal void RotationStart_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             MessageBox.Show(_isRectDragInProg.ToString());
             MessageBox.Show(rotateMode.ToString());
@@ -292,9 +293,9 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
                     double fixedPin_Y = Math.Round((((double)Canvas.GetTop(fixedPin)) + (fixedPin.Width / 2)), 3);
 
                     double angle = (float)Math.Atan2((fixedPin_Y - mousePos.X), (fixedPin_X - mousePos.X));
-                    RotateTransform r = new RotateTransform(angle);
-             
-                    movingGrid.RenderTransform = r;
+                    RotateTransform rotate = new RotateTransform(angle);
+
+                    movingGrid.RenderTransform = rotate;
                 }
             }
 
