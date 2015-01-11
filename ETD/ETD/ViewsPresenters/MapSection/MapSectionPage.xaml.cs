@@ -25,7 +25,6 @@ namespace ETD.ViewsPresenters.MapSection
 		PinHandler pinHandler;
         ImageBrush imgbrush;
         ContextMenu cm;
-        bool dragInProg = false;
 
 		public MapSectionPage(MainWindow mainWindow)
 		{
@@ -34,8 +33,10 @@ namespace ETD.ViewsPresenters.MapSection
 			pinEditor = new PinEditor(this);
 			pinHandler = new PinHandler(this);
 
+            
             cm = new ContextMenu();
             this.ContextMenu = cm;
+            //cm.Opened += context_Popup;
 
             MenuItem mi100 = new MenuItem();
             mi100.Header = "100%";
@@ -68,6 +69,7 @@ namespace ETD.ViewsPresenters.MapSection
             cm.Items.Add(mi200); 
 		}
 
+     
         public void Zoom_Click_100(object sender, EventArgs e)
         {
             ScaleMap(1, 1);
@@ -113,12 +115,70 @@ namespace ETD.ViewsPresenters.MapSection
 
 		}
 
+        public void ScaleMapDefault()
+        {
+            ScaleTransform ST = new ScaleTransform();
+            ST.ScaleX = 1;
+            ST.ScaleY = 1;;
+            imgbrush.Transform = ST;
+            imgbrush.RelativeTransform = ST;
+        }
         public void ScaleMap(double x, double y)
         {
-            ScaleTransform a = new ScaleTransform();
-            a.ScaleX = x;
-            a.ScaleY = y;
-            imgbrush.Transform = a;
+            ScaleMapDefault();
+            if (x != 1 && y != 1)
+            {
+                var mousePos = Mouse.GetPosition(Map);
+                Point centerOfScreen = new Point();
+                centerOfScreen.X = Map.ActualWidth / 2;
+                centerOfScreen.Y = Map.ActualHeight / 2;
+
+                Point scaledPoint = mousePos;
+                scaledPoint.X = scaledPoint.X * x;
+                scaledPoint.Y = scaledPoint.Y * y;
+
+                TransformGroup tg = new TransformGroup();
+                ScaleTransform ST = new ScaleTransform();
+                ST.ScaleX = x;
+                ST.ScaleY = y;
+                tg.Children.Add(ST);
+                imgbrush.RelativeTransform = tg;
+
+                TranslateTransform TT;
+                double TTX = 0;
+                double TTY = 0;
+                
+                //cursor is in the top right corner of screen
+                if (mousePos.X > centerOfScreen.X && mousePos.Y < centerOfScreen.Y)
+                {
+                    TTX = -Map.ActualWidth*x + Map.ActualWidth;//-(scaledPoint.X - mousePos.X);
+                    TTY = 0;//-Map.ActualHeight;//-(scaledPoint.Y - mousePos.Y);
+                    // MessageBox.Show(Convert.ToString(mousePos.X) + "  " + Convert.ToString(mousePos.Y) + " " + Convert.ToString(TTY));
+                }
+                //cursor is in bottom right corner of screen
+                else if (mousePos.X > centerOfScreen.X && mousePos.Y > centerOfScreen.Y)
+                {
+
+                    //not currently working
+                    TTX = -Map.ActualWidth*x + Map.ActualWidth;
+                    TTY = -Map.ActualHeight*y + Map.ActualHeight;
+
+                    //MessageBox.Show(Convert.ToString(scaledPoint.Y) + "  " + Convert.ToString(mousePos.Y) + " " + Convert.ToString(TTY));
+                }
+                //cursor is in bottom left corner of screen
+                else if (mousePos.X < centerOfScreen.X && mousePos.Y > centerOfScreen.Y)
+                {
+                    TTX = 0;
+                    TTY = -Map.ActualHeight * y + Map.ActualHeight;
+                }
+
+
+                TT = new TranslateTransform(TTX, TTY);
+                //MessageBox.Show(Convert.ToString(TTX) + "  " + Convert.ToString(TTY));
+                imgbrush.Transform = TT;
+
+            }
+            
         }
 		
 		//Pushing request to children classes
