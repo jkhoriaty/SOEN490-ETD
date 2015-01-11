@@ -177,16 +177,15 @@ namespace ETD.ViewsPresenters
 		}
         public void CreateAdditionnalInfoPin(object sender, RoutedEventArgs e)
         {
-            
-            ComboBoxItem selectedItem = (ComboBoxItem)AI.SelectedItem;
-            if (selectedItem != null)
+            ComboBoxItem item = sender as ComboBoxItem;
+            ComboBox parent = item.Parent as ComboBox;
+            foreach (ComboBoxItem mi in parent.Items)
             {
-                AIPmapSection.CreateAdditionnalInfoPin("" + selectedItem.Name, AddtionalInfoSize);
-            }
-            else
-            {
-                MessageBox.Show("Please select a shape to add.");
-            }
+                if (mi!=null && mi.IsSelected )
+                {
+                    AIPmapSection.CreateAdditionnalInfoPin("" + mi.Name, AddtionalInfoSize);
+                }
+            }  
         }
 
         public void CreateAdditionnalInfoPin(String AI,int size)
@@ -199,9 +198,21 @@ namespace ETD.ViewsPresenters
             AIPmapSection.AIDeletePin(sender, e);
         }
 
-		private void ModeChange(object sender, SelectionChangedEventArgs e)
+        private void ModeChange(object sender, RoutedEventArgs e)
 		{
-
+            ComboBoxItem item = sender as ComboBoxItem;
+            ComboBox parent = item.Parent as ComboBox;
+            foreach (ComboBoxItem mi in parent.Items)
+            {  
+                if (mi.Content.Equals("Regular Mode") && (mi.IsSelected))
+                {
+                    AI.Visibility = Visibility.Collapsed;
+                }
+                else if (mi.Content.Equals("Edit Mode") && (mi.IsSelected ))
+                {
+                    AI.Visibility = Visibility.Visible;
+                }
+            }  
 		}
 	}
 }
