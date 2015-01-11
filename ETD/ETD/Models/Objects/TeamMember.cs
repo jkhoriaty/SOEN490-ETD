@@ -13,7 +13,7 @@ namespace ETD.Models.Objects
         public String name;
         public Trainings trainingLevel;
         public DateTime departure;
-		private Label nameLabel;
+		private Grid nameGrid;
 
         public TeamMember(String name, Trainings training, DateTime departure)
         {
@@ -37,9 +37,14 @@ namespace ETD.Models.Objects
 			return trainingLevel;
 		}
 
-		public void setLabel(Label lb)
+		public void setNameGrid(Grid gd)
 		{
-			this.nameLabel = lb;
+			this.nameGrid = gd;
+		}
+
+		public Grid getNameGrid()
+		{
+			return nameGrid;
 		}
     }
 }

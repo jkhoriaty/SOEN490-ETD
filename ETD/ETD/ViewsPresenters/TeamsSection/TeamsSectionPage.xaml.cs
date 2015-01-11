@@ -17,6 +17,7 @@ using ETD.ViewsPresenters.TeamsSection.TeamForm;
 using ETD.ViewsPresenters.TeamsSection.TeamInfo;
 using ETD.Models.Objects;
 using ETD.Models.Services;
+using System.Windows.Threading;
 
 namespace ETD.ViewsPresenters.TeamsSection
 {
@@ -27,11 +28,31 @@ namespace ETD.ViewsPresenters.TeamsSection
 	{
 		private MainWindow mainWindow;
 		private static Dictionary<String, StackPanel> teamEquipmentStacks = new Dictionary<String, StackPanel>();
+		private DispatcherTimer dispatcherTimer = new DispatcherTimer();
 
 		public TeamsSectionPage(MainWindow mainWindow)
 		{
 			InitializeComponent();
 			this.mainWindow = mainWindow;
+
+			dispatcherTimer.Tick += new EventHandler(refresh);
+			dispatcherTimer.Interval = new TimeSpan(0, 0, 10); //Update every minute
+			dispatcherTimer.Start();
+		}
+
+		private void refresh(object sender, EventArgs e)
+		{
+			foreach(KeyValuePair<String, Team> team in Team.teamsList)
+			{
+				foreach(TeamMember teamMember in team.Value.getMemberList())
+				{
+					DateTime now = DateTime.Now.AddMinutes(15);
+					if(DateTime.Compare(now, teamMember.getDeparture()) > 0)
+					{
+						teamMember.getNameGrid().Background = new SolidColorBrush(Colors.Red);
+					}
+				}
+			}
 		}
 
 		//Adjusting the team section height
@@ -105,7 +126,7 @@ namespace ETD.ViewsPresenters.TeamsSection
 					break;
 				}
 			}
-			Team.teams.Remove(teamName);
+			Team.teamsList.Remove(teamName);
 			mainWindow.DeletePin(teamName);
 		}
 
@@ -135,7 +156,7 @@ namespace ETD.ViewsPresenters.TeamsSection
 				//Getting the appropriate equipment StackPanel
 				teamEquipmentStacks[teamName].Children.Add(imageRectangle);
 
-				Team.teams[teamName].addEquipment(equip);
+				Team.teamsList[teamName].addEquipment(equip);
 			}
 			else
 			{
@@ -151,7 +172,7 @@ namespace ETD.ViewsPresenters.TeamsSection
             //Type equipType = Type.GetType(equipment.Name.ToString());
             Equipment equip = new Equipment((Equipments)Enum.Parse(typeof(Equipments), equipment.Name.ToString()));
 			StackPanel equipmentStackPanel = (StackPanel)equipment.Parent;
-			Team.teams["" + equipment.Tag].removeEquipment(equip);
+			Team.teamsList["" + equipment.Tag].removeEquipment(equip);
 			equipmentStackPanel.Children.Remove(equipment);
 			mainWindow.CreateEquipmentPin(equipment.Name);
 

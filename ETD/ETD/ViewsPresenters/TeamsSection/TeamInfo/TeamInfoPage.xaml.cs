@@ -38,7 +38,7 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamInfo
 		//Filling up the page with the information on the team
 		private void populateInfo(Team team)
 		{
-			page.Name = team.getName();
+			page.Name = "" + team.getName();
 			teamName.Name = team.getName();
 			if (team.getName().Length == 1)
 			{
@@ -59,11 +59,11 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamInfo
 			{
 				Grid memberLine = (Grid)informations.Children[position];
 				memberLine.Visibility = System.Windows.Visibility.Visible;
+				member.setNameGrid(memberLine);
 
 				Label memberName = (Label)memberLine.Children[0];
 				memberName.Content = member.getName();     
 				memberName.ToolTip = DepartureTimeToString(member);
-				member.setLabel(memberName);
     
 				Rectangle memberTraining = (Rectangle)memberLine.Children[1];
 				ImageBrush img2 = new ImageBrush();
