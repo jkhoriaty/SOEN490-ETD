@@ -60,13 +60,8 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamInfo
 
 				Label memberName = (Label)memberLine.Children[0];
 				memberName.Content = member.getName();
-
-                /* TO BE COMPLETED!!!!!!
-                //ToolTip departureTime = new ToolTip();
-                //teamsSection.setTimer(member, departureTime);
-                //departureTime.Content = "hello";
-                memberLine.ToolTip = "departureTime";
-                 */            
+				memberName.ToolTip = DepartureTimeToString(member);
+    
 				Rectangle memberTraining = (Rectangle)memberLine.Children[1];
 				ImageBrush img2 = new ImageBrush();
 				img2.ImageSource = TechnicalServices.getImage(member.getTrainingLevel());
@@ -74,6 +69,17 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamInfo
 			}
 
 			teamsSection.registerStackPanel(team.getName(), equipmentStackPanel);
+		}
+
+		private String DepartureTimeToString(TeamMember member)
+		{
+			String departurehh = member.getDeparture().Hour.ToString();
+			String departuremm = member.getDeparture().Minute.ToString();
+			if(departuremm.Length == 1)
+			{
+				departuremm = "0" + departuremm;
+			}
+			return departurehh + ":" + departuremm;
 		}
 
 		//Right click on the team to remove it from the team list

@@ -88,7 +88,7 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 
 				//Create first member
 				String mem_1_name = teamMember1.Text;
-				DateTime mem_1_departure = new DateTime(dateNow.Year, dateNow.Month, dateNow.Day, int.Parse(departurehh1.Text), int.Parse(departuremm1.Text), dateNow.Second);
+				DateTime mem_1_departure = checkDepartureTime(new DateTime(dateNow.Year, dateNow.Month, dateNow.Day, int.Parse(departurehh1.Text), int.Parse(departuremm1.Text), dateNow.Second));
 				Trainings mem_1_lvlOfTraining = (Trainings)lvlOfTraining1.SelectedIndex;
 				TeamMember mem_1 = new TeamMember(mem_1_name, mem_1_lvlOfTraining, mem_1_departure);
 				team.addMember(mem_1);
@@ -97,7 +97,7 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 				String mem_2_name = teamMember2.Text;
 				if (mem_2_name != "Team Member Name")
 				{
-					DateTime mem_2_departure = new DateTime(dateNow.Year, dateNow.Month, dateNow.Day, int.Parse(departurehh2.Text), int.Parse(departuremm2.Text), dateNow.Second);
+					DateTime mem_2_departure = checkDepartureTime(new DateTime(dateNow.Year, dateNow.Month, dateNow.Day, int.Parse(departurehh2.Text), int.Parse(departuremm2.Text), dateNow.Second));
 					Trainings mem_2_lvlOfTraining = (Trainings) lvlOfTraining2.SelectedIndex;
 					TeamMember mem_2 = new TeamMember(mem_2_name, mem_2_lvlOfTraining, mem_2_departure);
 					team.addMember(mem_2);
@@ -107,7 +107,7 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 				String mem_3_name = teamMember3.Text;
 				if (mem_3_name != "Team Member Name")
 				{
-					DateTime mem_3_departure = new DateTime(dateNow.Year, dateNow.Month, dateNow.Day, int.Parse(departurehh3.Text), int.Parse(departuremm3.Text), dateNow.Second);
+					DateTime mem_3_departure = checkDepartureTime(new DateTime(dateNow.Year, dateNow.Month, dateNow.Day, int.Parse(departurehh3.Text), int.Parse(departuremm3.Text), dateNow.Second));
 					Trainings mem_3_lvlOfTraining = (Trainings)lvlOfTraining3.SelectedIndex;
 					TeamMember mem_3 = new TeamMember(mem_3_name, mem_3_lvlOfTraining, mem_3_departure);
 					team.addMember(mem_3);
@@ -330,6 +330,16 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 			{
 				return true;
 			}
+		}
+
+		public DateTime checkDepartureTime(DateTime departureTime)
+		{
+			if (departureTime.Hour < DateTime.Now.Hour)
+			{
+				DateTime newDepartTime = new DateTime(departureTime.Year, departureTime.Month, departureTime.Day + 1, departureTime.Hour, departureTime.Minute, departureTime.Second);
+				return newDepartTime;
+			}
+			return departureTime;
 		}
     }
 }
