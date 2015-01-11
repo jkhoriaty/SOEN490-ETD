@@ -11,6 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Effects;
 using System.Windows.Shapes;
+using System.Drawing;
+using System.Windows.Media.Imaging;
+
 namespace ETD.ViewsPresenters.MapSection.PinManagement
 {
 	public class PinEditor
@@ -143,7 +146,7 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
             //If the additional info is a line, call the drawline function
             if (AI.Equals("line"))
             {
-                DrawLines();
+               // AIPSection_DrawLines();
             }
 
             else
@@ -221,11 +224,67 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
         //Draw lines
         //Accepts 2 arguments:
         //start - retrieved on first mouse click
-        //end - retrieved on second mouse click
-        public void DrawLines()
+        //end - retrieved on second mouse click  
+
+        // The points that make up the line segments.
+        private List<Point> Pt1 = new List<Point>();
+        private List<Point> Pt2 = new List<Point>();
+
+        // Points for the new line.
+        private bool IsDrawing = false;
+        private Point NewPt1, NewPt2;
+
+        public void AIPSection_DrawLines(object sender, MouseEventArgs e)
         {
+
+            //mouse up: not drawing, create new segment
+            var mousePos = e.GetPosition(AIPmap.AdditionalMap);
+            NewPt1 = new Point(mousePos.X, mousePos.Y);
+            NewPt2 = new Point(mousePos.X, mousePos.Y);
+
             MessageBox.Show(" draw lines");
+            // BitmapImage bmp;
+            //Pen blackPen = new Pen(Brushes.Black, 2);
+            //int x1 = 100;
+           // int y1 = 100;
+            //int x2 = 500;
+            //int y2 = 100;
+            // Draw line to screen.
+           // using (var graphics = System.Drawing.Graphics.FromImage(bmp))
+            //{
+            //    graphics.DrawLine(blackPen, x1, y1, x2, y2);
+           // }
         }
+
+        // Drawing a new segment.
+        private void AIPSection_MouseMove_Drawing(object sender, MouseEventArgs e)
+        {
+            // Save the new point.
+            var mousePos = e.GetPosition(AIPmap.AdditionalMap);
+            NewPt2 = new Point(mousePos.X, mousePos.Y);
+        }
+
+
+        // The mouse is moving, set as cross cursor
+        private void AIPSection_MouseMove_NotDown(object sender, MouseEventArgs e)
+        {
+            // Set the new cursor.
+            Cursor new_cursor = Cursors.Cross;
+            if (AIPmap.Cursor != new_cursor)
+                AIPmap.Cursor = new_cursor;
+        }
+
+        // Stop drawing.
+        private void picCanvas_MouseUp_Drawing(object sender, MouseEventArgs e)
+        {
+            IsDrawing = false;
+
+            // Create the new segment.
+            Pt1.Add(NewPt1);
+            Pt2.Add(NewPt2);
+
+        }
+
 
 
         //Deleting pin from the additional info page
