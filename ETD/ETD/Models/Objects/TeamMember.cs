@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Controls;
 
 namespace ETD.Models.Objects
 {
@@ -12,6 +13,7 @@ namespace ETD.Models.Objects
         public String name;
         public Trainings trainingLevel;
         public DateTime departure;
+		private Label nameLabel;
 
         public TeamMember(String name, Trainings training, DateTime departure)
         {
@@ -33,6 +35,11 @@ namespace ETD.Models.Objects
 		public Trainings getTrainingLevel()
 		{
 			return trainingLevel;
+		}
+
+		public void setLabel(Label lb)
+		{
+			this.nameLabel = lb;
 		}
     }
 }

@@ -61,15 +61,9 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamInfo
 				memberLine.Visibility = System.Windows.Visibility.Visible;
 
 				Label memberName = (Label)memberLine.Children[0];
-				memberName.Content = member.getName();
-
-                /* TO BE COMPLETED!!!!!!
-                //ToolTip departureTime = new ToolTip();
-                //teamsSection.setTimer(member, departureTime);
-                //departureTime.Content = "hello";
-                memberLine.ToolTip = "departureTime";
-                 */        
+				memberName.Content = member.getName();     
 				memberName.ToolTip = DepartureTimeToString(member);
+				member.setLabel(memberName);
     
 				Rectangle memberTraining = (Rectangle)memberLine.Children[1];
 				ImageBrush img2 = new ImageBrush();

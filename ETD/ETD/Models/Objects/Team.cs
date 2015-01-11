@@ -19,7 +19,6 @@ namespace ETD.Models.Objects
 
         int EquipmentCount = 0;
         int memberCount = 0;
-        bool availability = true;
 		Trainings highestLevelOfTraining = 0;
 
         public Team(String name)

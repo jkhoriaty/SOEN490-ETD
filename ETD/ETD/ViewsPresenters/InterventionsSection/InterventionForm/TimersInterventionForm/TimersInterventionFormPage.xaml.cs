@@ -49,7 +49,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.TimersInterv
 				endOffsets[i] = -1;
 			}
 
-				dispatcherTimer.Tick += new EventHandler(refresh);
+			dispatcherTimer.Tick += new EventHandler(refresh);
 			dispatcherTimer.Interval = new TimeSpan(0, 0, 1); //Update every second
 			dispatcherTimer.Start();
 
