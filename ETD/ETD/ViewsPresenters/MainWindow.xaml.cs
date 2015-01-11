@@ -199,5 +199,9 @@ namespace ETD.ViewsPresenters
             AIPmapSection.AIDeletePin(sender, e);
         }
 
+		private void ModeChange(object sender, SelectionChangedEventArgs e)
+		{
+
+		}
 	}
 }
