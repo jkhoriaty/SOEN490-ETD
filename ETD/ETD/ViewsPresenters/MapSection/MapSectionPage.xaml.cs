@@ -42,6 +42,7 @@ namespace ETD.ViewsPresenters.MapSection
             mi100.Header = "100%";
             mi100.Click += Zoom_Click_100;
             cm.Items.Add(mi100);
+            mi100.IsChecked = true;
 
             MenuItem mi120 = new MenuItem();
             mi120.Header = "120%";
@@ -69,35 +70,53 @@ namespace ETD.ViewsPresenters.MapSection
             cm.Items.Add(mi200); 
 		}
 
-     
+        public void uncheckMenuItems()
+        {
+            for(int i = 0; i <= (this.cm.Items.Count) - 1; i++)
+            {
+                (this.cm.Items[i] as MenuItem).IsChecked = false;
+            }
+        }
         public void Zoom_Click_100(object sender, EventArgs e)
         {
             ScaleMap(1, 1);
+            uncheckMenuItems();
+            (this.cm.Items[0] as MenuItem).IsChecked = true;
         }
 
         public void Zoom_Click_120(object sender, EventArgs e)
         {
             ScaleMap(1.2, 1.2);
+            uncheckMenuItems();
+            (this.cm.Items[1] as MenuItem).IsChecked = true;
         }
 
         public void Zoom_Click_140(object sender, EventArgs e)
         {
             ScaleMap(1.4, 1.4);
+            uncheckMenuItems();
+            (this.cm.Items[2] as MenuItem).IsChecked = true;
         }
 
         public void Zoom_Click_160(object sender, EventArgs e)
         {
             ScaleMap(1.6, 1.6);
+            uncheckMenuItems();
+            (this.cm.Items[3] as MenuItem).IsChecked = true;
         }
 
         public void Zoom_Click_180(object sender, EventArgs e)
         {
             ScaleMap(1.8, 1.8);
+            uncheckMenuItems();
+            (this.cm.Items[4] as MenuItem).IsChecked = true;
         }
 
         public void Zoom_Click_200(object sender, EventArgs e)
         {
             ScaleMap(2, 2);
+            uncheckMenuItems();
+            (this.cm.Items[5] as MenuItem).IsChecked = true;
         }
 		//Loading of map as a result to the user clicking the "Load Map" button
 		public void SetMap(BitmapImage coloredImage)
