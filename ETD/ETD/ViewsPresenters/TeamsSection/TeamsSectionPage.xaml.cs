@@ -124,7 +124,7 @@ namespace ETD.ViewsPresenters.TeamsSection
 			if (teamEquipmentStacks[teamName].Children.Count <= 3)
 			{
 				Rectangle imageRectangle = new Rectangle();
-				imageRectangle.Name = equip.ToString();
+				imageRectangle.Name = equip.getEquipmentName().ToString();
 				imageRectangle.Tag = teamName;
 				imageRectangle.Width = 27;
 				imageRectangle.Height = 27;

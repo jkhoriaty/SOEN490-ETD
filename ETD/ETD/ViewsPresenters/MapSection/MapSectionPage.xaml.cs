@@ -142,6 +142,7 @@ namespace ETD.ViewsPresenters.MapSection
             imgbrush.Transform = ST;
             imgbrush.RelativeTransform = ST;
         }
+
         public void ScaleMap(double x, double y)
         {
             ScaleMapDefault();
@@ -259,8 +260,15 @@ namespace ETD.ViewsPresenters.MapSection
 
         internal void EditMenuItems(object sender, RoutedEventArgs e)
         {
-			//pinEditor.EditMenuItems(sender, e);
+			ContextMenu cm = (ContextMenu)sender;
+			pinEditor.EditMenuItems(cm);
         }
+
+		public void CheckRight(object sender, ContextMenuEventArgs e)
+		{
+			TeamGrid fe = (TeamGrid)sender;
+			pinEditor.EditMenuItems(fe.ContextMenu);
+		}
 
 		//When the window is resized, the pins need to move to stay in the window
 		public void movePins(double widthRatio, double heightRatio)
@@ -279,6 +287,20 @@ namespace ETD.ViewsPresenters.MapSection
 					EquipmentGrid grid = (EquipmentGrid)parent.PlacementTarget;
 					pinEditor.DeletePin(grid.Name);
 				}
+			}
+		}
+
+		internal void AddResource(String teamName, String interventionName)
+		{
+			mainWindow.AddResource(teamName, interventionName);
+		}
+
+		internal void ReportArrival(Grid team)
+		{
+			Grid intervention = pinHandler.RelatedIntervention(team);
+			if(intervention != null)
+			{
+				mainWindow.ReportArrival(team.Name, intervention.Name);
 			}
 		}
 	}

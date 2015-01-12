@@ -73,11 +73,6 @@ namespace ETD.ViewsPresenters.MapSection
 		//	pinHandler.DetectCollision(movedItem, movedItem_X, movedItem_Y);
 		//}
 
-        internal void CheckRight(object sender, RoutedEventArgs e)
-        {
-			pinEditor.EditMenuItems(sender, e);
-        }
-
 		//When the window is resized, the pins need to move to stay in the window
 		public void movePins(double widthRatio, double heightRatio)
 		{

@@ -203,5 +203,15 @@ namespace ETD.ViewsPresenters
 		{
 
 		}
+
+		internal void AddResource(String teamName, String interventionName)
+		{
+			interventionsSection.AddResource(teamName, interventionName);
+		}
+
+		internal void ReportArrival(String teamName, String interventionName)
+		{
+			interventionsSection.ReportArrival(teamName, interventionName);
+		}
 	}
 }

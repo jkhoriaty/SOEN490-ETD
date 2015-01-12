@@ -164,7 +164,10 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.TimersInterv
 				resourceLabels[position].Content = resource;
 
 				offsets[position] = offset;
-				stopwatches[position].Restart();
+				if(offset != 0)
+				{
+					stopwatches[position].Restart();
+				}
 			}
 			else
 			{

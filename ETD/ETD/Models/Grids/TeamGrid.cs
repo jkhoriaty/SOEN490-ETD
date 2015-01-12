@@ -27,6 +27,7 @@ namespace ETD.Models.Grids
             this.MouseLeftButtonUp += new MouseButtonEventHandler(mapSection.DragStop);
             this.MouseMove += new MouseEventHandler(mapSection.DragMove);
             this.ContextMenu = mapSection.Resources["TeamContext"] as ContextMenu;
+			this.ContextMenuOpening += new ContextMenuEventHandler(mapSection.CheckRight);
             (this.ContextMenu.Items[0] as MenuItem).IsChecked = true;
 
             imageRectangle = new Rectangle();

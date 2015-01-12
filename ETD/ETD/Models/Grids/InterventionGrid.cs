@@ -18,7 +18,7 @@ namespace ETD.Models.Grids
 	{
         public InterventionGrid(int interventionNumber, MapSectionPage mapSection, int size) : base()
         {
-			this.Name = "intervention_" + interventionNumber;
+			this.Name = "Intervention_" + interventionNumber;
 			this.Tag = "intervention";
 			this.Width = size;
 			this.Height = size;

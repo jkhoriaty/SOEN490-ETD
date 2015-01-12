@@ -170,7 +170,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm
         {
             timersPage.RenameTimer(position, team, resource);
         }
-
+		
         public bool IsTimerRunning(int position)
         {
             return timersPage.IsRunning(position);
@@ -180,5 +180,17 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm
         {
             timersPage.CloneTimer(position, team, resource, offset, original);
         }
+
+		internal void AddResource(String teamName)
+		{
+			resources.Focus();
+			resourcesPage.AddResources(teamName);
+		}
+
+		internal void ReportArrival(String teamName)
+		{
+			timers.Focus();
+			resourcesPage.ReportArrival(teamName);
+		}
     }
 }

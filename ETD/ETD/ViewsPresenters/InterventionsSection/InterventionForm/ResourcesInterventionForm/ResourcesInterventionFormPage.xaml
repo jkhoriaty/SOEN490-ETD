@@ -43,7 +43,7 @@
 			</Border>
 		
 			<TextBox Grid.Column="0" Grid.Row="1" Name="Resources1" Text="Prise en charge" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderBrush="Black" BorderThickness="0,1,1,1" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
-			<TextBox Grid.Column="1" Grid.Row="1" Name="Team1" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderBrush="Black" BorderThickness="1,1,1,1" TextChanged="TextBoxes_TextChanged" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+			<TextBox Grid.Column="1" Grid.Row="1" Name="Team1" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderBrush="Black" BorderThickness="1,1,1,1" TextChanged="TeamChanged" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
 			<Border Grid.Column="2" Grid.Row="1" BorderBrush="Black" BorderThickness="1,1,1,1">
 				<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 					<TextBox Text="hh" Width="29" Name="Movinghh1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
@@ -59,8 +59,8 @@
 				</StackPanel>
 			</Border>
 
-			<TextBox Grid.Column="0" Grid.Row="2" Name="Resources2" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderBrush="Black" BorderThickness="0,0,1,1" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
-			<TextBox Grid.Column="1" Grid.Row="2" Name="Team2" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderBrush="Black" BorderThickness="1,0,1,1" TextChanged="TextBoxes_TextChanged" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+			<TextBox Grid.Column="0" Grid.Row="2" Name="Resources2" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderBrush="Black" BorderThickness="0,0,1,1" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus" TextChanged="ResourcesChanged"/>
+			<TextBox Grid.Column="1" Grid.Row="2" Name="Team2" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderBrush="Black" BorderThickness="1,0,1,1" TextChanged="TeamChanged" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
 			<Border Grid.Column="2" Grid.Row="2" BorderBrush="Black" BorderThickness="1,0,1,1">
 				<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 					<TextBox Text="hh" Width="29" Name="Movinghh2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
@@ -76,8 +76,8 @@
 				</StackPanel>
 			</Border>
 
-			<TextBox Grid.Column="0" Grid.Row="3" Name="Resources3" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderBrush="Black" BorderThickness="0,0,1,1" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
-			<TextBox Grid.Column="1" Grid.Row="3" Name="Team3" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderBrush="Black" BorderThickness="1,0,1,1" TextChanged="TextBoxes_TextChanged" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+			<TextBox Grid.Column="0" Grid.Row="3" Name="Resources3" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderBrush="Black" BorderThickness="0,0,1,1" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus" TextChanged="ResourcesChanged"/>
+			<TextBox Grid.Column="1" Grid.Row="3" Name="Team3" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderBrush="Black" BorderThickness="1,0,1,1" TextChanged="TeamChanged" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
 			<Border Grid.Column="2" Grid.Row="3" BorderBrush="Black" BorderThickness="1,0,1,1">
 				<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 					<TextBox Text="hh" Width="29" Name="Movinghh3" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
@@ -93,8 +93,8 @@
 				</StackPanel>
 			</Border>
 
-			<TextBox Grid.Column="0" Grid.Row="4" Name="Resources4" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderBrush="Black" BorderThickness="0,0,1,1" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
-			<TextBox Grid.Column="1" Grid.Row="4" Name="Team4" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderBrush="Black" BorderThickness="1,0,1,1" TextChanged="TextBoxes_TextChanged" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+			<TextBox Grid.Column="0" Grid.Row="4" Name="Resources4" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderBrush="Black" BorderThickness="0,0,1,1" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus" TextChanged="ResourcesChanged"/>
+			<TextBox Grid.Column="1" Grid.Row="4" Name="Team4" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderBrush="Black" BorderThickness="1,0,1,1" TextChanged="TeamChanged" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
 			<Border Grid.Column="2" Grid.Row="4" BorderBrush="Black" BorderThickness="1,0,1,1">
 				<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 					<TextBox Text="hh" Width="29" Name="Movinghh4" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
@@ -110,8 +110,8 @@
 				</StackPanel>
 			</Border>
 
-			<TextBox Grid.Column="0" Grid.Row="5" Name="Resources5" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderBrush="Black" BorderThickness="0,0,1,1" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
-			<TextBox Grid.Column="1" Grid.Row="5" Name="Team5" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderBrush="Black" BorderThickness="1,0,1,1" TextChanged="TextBoxes_TextChanged" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+			<TextBox Grid.Column="0" Grid.Row="5" Name="Resources5" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderBrush="Black" BorderThickness="0,0,1,1" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus" TextChanged="ResourcesChanged"/>
+			<TextBox Grid.Column="1" Grid.Row="5" Name="Team5" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderBrush="Black" BorderThickness="1,0,1,1" TextChanged="TeamChanged" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
 			<Border Grid.Column="2" Grid.Row="5" BorderBrush="Black" BorderThickness="1,0,1,1">
 				<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 					<TextBox Text="hh" Width="26" Name="Movinghh5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
@@ -127,8 +127,8 @@
 				</StackPanel>
 			</Border>
 
-			<TextBox Grid.Column="0" Grid.Row="6" Name="Resources6" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderBrush="Black" BorderThickness="0,0,1,1" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
-			<TextBox Grid.Column="1" Grid.Row="6" Name="Team6" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderBrush="Black" BorderThickness="1,0,1,1" TextChanged="TextBoxes_TextChanged" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+			<TextBox Grid.Column="0" Grid.Row="6" Name="Resources6" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderBrush="Black" BorderThickness="0,0,1,1" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus" TextChanged="ResourcesChanged"/>
+			<TextBox Grid.Column="1" Grid.Row="6" Name="Team6" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderBrush="Black" BorderThickness="1,0,1,1" TextChanged="TeamChanged" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
 			<Border Grid.Column="2" Grid.Row="6" BorderBrush="Black" BorderThickness="1,0,1,1">
 				<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 					<TextBox Text="hh" Width="26" Name="Movinghh6" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
@@ -144,8 +144,8 @@
 				</StackPanel>
 			</Border>
 
-			<TextBox Grid.Column="0" Grid.Row="7" Name="Resources7" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderBrush="Black" BorderThickness="0,0,1,1" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
-			<TextBox Grid.Column="1" Grid.Row="7" Name="Team7" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderBrush="Black" BorderThickness="1,0,1,1" TextChanged="TextBoxes_TextChanged" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+			<TextBox Grid.Column="0" Grid.Row="7" Name="Resources7" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderBrush="Black" BorderThickness="0,0,1,1" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus" TextChanged="ResourcesChanged"/>
+			<TextBox Grid.Column="1" Grid.Row="7" Name="Team7" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderBrush="Black" BorderThickness="1,0,1,1" TextChanged="TeamChanged" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
 			<Border Grid.Column="2" Grid.Row="7" BorderBrush="Black" BorderThickness="1,0,1,1">
 				<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 					<TextBox Text="hh" Width="26" Name="Movinghh7" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
@@ -161,8 +161,8 @@
 				</StackPanel>
 			</Border>
 
-			<TextBox Grid.Column="0" Grid.Row="8" Name="Resources8" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderBrush="Black" BorderThickness="0,0,1,1" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
-			<TextBox Grid.Column="1" Grid.Row="8" Name="Team8" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderBrush="Black" BorderThickness="1,0,1,1" TextChanged="TextBoxes_TextChanged" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+			<TextBox Grid.Column="0" Grid.Row="8" Name="Resources8" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderBrush="Black" BorderThickness="0,0,1,1" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus" TextChanged="ResourcesChanged"/>
+			<TextBox Grid.Column="1" Grid.Row="8" Name="Team8" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderBrush="Black" BorderThickness="1,0,1,1" TextChanged="TeamChanged" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
 			<Border Grid.Column="2" Grid.Row="8" BorderBrush="Black" BorderThickness="1,0,1,1">
 				<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 					<TextBox Text="hh" Width="26" Name="Movinghh8" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
@@ -178,8 +178,8 @@
 				</StackPanel>
 			</Border>
 
-			<TextBox Grid.Column="0" Grid.Row="9" Name="Resources9" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderBrush="Black" BorderThickness="0,0,1,1" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
-			<TextBox Grid.Column="1" Grid.Row="9" Name="Team9" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderBrush="Black" BorderThickness="1,0,1,1" TextChanged="TextBoxes_TextChanged" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+			<TextBox Grid.Column="0" Grid.Row="9" Name="Resources9" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderBrush="Black" BorderThickness="0,0,1,1" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus" TextChanged="ResourcesChanged"/>
+			<TextBox Grid.Column="1" Grid.Row="9" Name="Team9" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderBrush="Black" BorderThickness="1,0,1,1" TextChanged="TeamChanged" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
 			<Border Grid.Column="2" Grid.Row="9" BorderBrush="Black" BorderThickness="1,0,1,1">
 				<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 					<TextBox Text="hh" Width="26" Name="Movinghh9" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
@@ -195,8 +195,8 @@
 				</StackPanel>
 			</Border>
 
-			<TextBox Grid.Column="0" Grid.Row="10" Name="Resources10" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderBrush="Black" BorderThickness="0,0,1,0" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
-			<TextBox Grid.Column="1" Grid.Row="10" Name="Team10" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderBrush="Black" BorderThickness="1,0,1,0" TextChanged="TextBoxes_TextChanged" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+			<TextBox Grid.Column="0" Grid.Row="10" Name="Resources10" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderBrush="Black" BorderThickness="0,0,1,0" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus" TextChanged="ResourcesChanged"/>
+			<TextBox Grid.Column="1" Grid.Row="10" Name="Team10" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderBrush="Black" BorderThickness="1,0,1,0" TextChanged="TeamChanged" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
 			<Border Grid.Column="2" Grid.Row="10" BorderBrush="Black" BorderThickness="1,0,1,0">
 				<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 					<TextBox Text="hh" Width="26" Name="Movinghh10" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>

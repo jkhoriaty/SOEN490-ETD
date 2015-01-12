@@ -98,5 +98,28 @@ namespace ETD.ViewsPresenters.InterventionsSection
 				}
 			}
 		}
+
+		private InterventionFormPage getInterventionPage(String interventionName)
+		{
+			foreach (Frame intervention in InterventionsList.Children)
+			{
+				if (intervention.Name.Equals(interventionName))
+				{
+					InterventionFormPage interventionFormPage = (InterventionFormPage)intervention.Content;
+					return interventionFormPage;
+				}
+			}
+			return null;
+		}
+
+		internal void AddResource(String teamName, String interventionName)
+		{
+			getInterventionPage(interventionName).AddResource(teamName);
+		}
+
+		internal void ReportArrival(String teamName, String interventionName)
+		{
+			getInterventionPage(interventionName).ReportArrival(teamName);
+		}
 	}
 }

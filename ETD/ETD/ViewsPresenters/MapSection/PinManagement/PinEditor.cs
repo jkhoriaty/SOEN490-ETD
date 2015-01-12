@@ -100,12 +100,16 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
                     if (team != null)
                     {
                         team.ChangeStatus(item.Header.ToString().ToLower());
+						if(item.Header.ToString().Equals("Intervening"))
+						{
+							mapSection.ReportArrival(team);
+						}
                     }
                 }
             }
         }
 
-		private void CheckRight(MenuItem mi, TeamGrid fe)
+		internal void CheckRight(MenuItem mi, TeamGrid fe)
 		{
 			mi.IsChecked = ((Statuses)Enum.Parse(typeof(Statuses), mi.Header.ToString().ToLower()) == fe.team.getStatus());
 		}
@@ -198,9 +202,8 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
         }
 
 		//Filter itmes and edit the appropriate status
-		public void EditMenuItems(object sender, RoutedEventArgs e)
+		public void EditMenuItems(ContextMenu cm)
 		{
-			ContextMenu cm = (ContextMenu)sender;
 			foreach (MenuItem mi in cm.Items)
 			{
 				mi.Visibility = Visibility.Collapsed;

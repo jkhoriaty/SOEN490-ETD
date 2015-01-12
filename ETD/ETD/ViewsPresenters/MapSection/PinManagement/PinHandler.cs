@@ -57,9 +57,9 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 			_isRectDragInProg = g.CaptureMouse();
 			movingGrid = g;
 
-			if(RelatedIntervention(g) != null)
+			if(RelatedInterventionBorder(g) != null)
 			{
-				relatedIntervention = RelatedIntervention(g);
+				relatedIntervention = RelatedInterventionBorder(g);
 				previousX = getX(g);
 				previousY = getY(g);
 			}
@@ -208,8 +208,8 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 						continue;
 					}
 
-					bool related = false;
 					//If collision detection is being done on an intervention border, ignore collision with all pins related to it
+					bool related = false;
 					if(movedPin.Tag.Equals("border"))
 					{
 						foreach(KeyValuePair<Grid, BorderGrid> interventionBorderPair in interventionBorders)
@@ -258,6 +258,7 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 						}
 						activeTeams[fixedPin].Add(movedPin);
 						DrawInterventionBorder(fixedPin);
+						mapSection.AddResource(movedPin.Name, fixedPin.Name);
 						return;
 					}
 
@@ -486,13 +487,25 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 			DetectCollision(interventionBorders[fixedPin], border_X, border_Y);
 		}
 
-		private Grid RelatedIntervention(Grid team)
+		internal Grid RelatedInterventionBorder(Grid team)
 		{
 			foreach(KeyValuePair<Grid, BorderGrid> interventionBorderPair in interventionBorders)
 			{
 				if(activeTeams[interventionBorderPair.Key].Contains(team))
 				{
 					return interventionBorderPair.Value;
+				}
+			}
+			return null;
+		}
+
+		internal Grid RelatedIntervention(Grid team)
+		{
+			foreach (KeyValuePair<Grid, BorderGrid> interventionBorderPair in interventionBorders)
+			{
+				if (activeTeams[interventionBorderPair.Key].Contains(team))
+				{
+					return interventionBorderPair.Key;
 				}
 			}
 			return null;
