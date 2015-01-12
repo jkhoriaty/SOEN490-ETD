@@ -338,6 +338,10 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 			{
 				departureTime = departureTime.AddDays(1);
 			}
+            else if (departureTime.Hour == DateTime.Now.Hour && departureTime.Minute < DateTime.Now.Minute)
+            {
+                departureTime = departureTime.AddDays(1);
+            }
 			return departureTime;
 		}
     }
