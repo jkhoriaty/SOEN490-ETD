@@ -12,8 +12,14 @@
 		<StackPanel Name="informations">
 			<Border CornerRadius="5,5,0,0" Background="Black">
 				<Grid>
-					<TextBlock Name="teamName" HorizontalAlignment="Left" FontWeight="Bold" FontSize="20" Foreground="White" MouseRightButtonDown="DeleteTeam" Margin="3,0,0,0"/>
-					<StackPanel Name="equipmentStackPanel" HorizontalAlignment="Right" Orientation="Horizontal" FlowDirection="RightToLeft">
+                    <TextBlock Name="teamName" HorizontalAlignment="Left" FontWeight="Bold" FontSize="20" Foreground="White" Margin="3,0,0,0">
+                        <TextBlock.ContextMenu>
+                            <ContextMenu Name="TeamContextName">
+                                <MenuItem Header="Delete Team" Tag="team" Click="DeleteTeam"/>
+                            </ContextMenu>
+                        </TextBlock.ContextMenu>
+                    </TextBlock>
+                    <StackPanel Name="equipmentStackPanel" HorizontalAlignment="Right" Orientation="Horizontal" FlowDirection="RightToLeft">
 						<Rectangle Name="teamTraining" Width="35" Height="35" FlowDirection="LeftToRight"/>
 					</StackPanel>
 				</Grid>
