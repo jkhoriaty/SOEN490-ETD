@@ -192,5 +192,15 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm
 			timers.Focus();
 			resourcesPage.ReportArrival(teamName);
 		}
+
+		public static void setInterventionDeadline(int deadline)
+		{
+			TimersInterventionFormPage.setInterventionDeadline(deadline);
+		}
+
+		public static void setMovingDeadline(int deadline)
+		{
+			TimersInterventionFormPage.setMovingDeadline(deadline);
+		}
     }
 }

@@ -17,7 +17,6 @@ using ETD.ViewsPresenters.TeamsSection;
 using ETD.ViewsPresenters.MapSection;
 using ETD.ViewsPresenters.InterventionsSection;
 using ETD.Models.Objects;
-using ETD.ViewsPresenters.InterventionsSection.InterventionForm.TimersInterventionForm;
 using System.Windows.Threading;
 
 namespace ETD.ViewsPresenters
@@ -170,8 +169,8 @@ namespace ETD.ViewsPresenters
 			}
 			else
 			{
-				TimersInterventionFormPage.interventionDeadline = interventionDeadline;
-				TimersInterventionFormPage.movingDeadline = movingDeadline;
+				InterventionSectionPage.setInterventionDeadline(interventionDeadline);
+				InterventionSectionPage.setMovingDeadline(movingDeadline);
 				MessageBox.Show("The deadlines have been changed.");
 			}
 		}

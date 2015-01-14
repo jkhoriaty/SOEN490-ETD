@@ -121,5 +121,15 @@ namespace ETD.ViewsPresenters.InterventionsSection
 		{
 			getInterventionPage(interventionName).ReportArrival(teamName);
 		}
+
+		public static void setInterventionDeadline(int deadline)
+		{
+			InterventionFormPage.setInterventionDeadline(deadline);
+		}
+
+		public static void setMovingDeadline(int deadline)
+		{
+			InterventionFormPage.setMovingDeadline(deadline);
+		}
 	}
 }
