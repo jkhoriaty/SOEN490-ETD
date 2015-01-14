@@ -213,5 +213,10 @@ namespace ETD.ViewsPresenters
 		{
 			interventionsSection.ReportArrival(teamName, interventionName);
 		}
+
+        internal void ReportArrived(string interventionName, int rowNumber)
+        {
+            mapSection.ReportArrived(interventionName, rowNumber);
+        }
 	}
 }

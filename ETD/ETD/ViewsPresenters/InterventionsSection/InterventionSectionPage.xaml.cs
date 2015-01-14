@@ -121,5 +121,22 @@ namespace ETD.ViewsPresenters.InterventionsSection
 		{
 			getInterventionPage(interventionName).ReportArrival(teamName);
 		}
+
+        internal void ReportArrived(InterventionFormPage caller, int rowNumber)
+        {
+            mainWindow.ReportArrived(getInterventionName(caller), rowNumber);
+        }
+
+        private string getInterventionName(InterventionFormPage caller)
+        {
+            foreach (Frame intervention in InterventionsList.Children)
+            {
+                if (intervention.Content.Equals(caller))
+                {
+                    return intervention.Name;
+                }
+            }
+            return null;
+        }
 	}
 }

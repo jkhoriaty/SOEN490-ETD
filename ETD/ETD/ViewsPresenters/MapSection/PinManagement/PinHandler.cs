@@ -511,5 +511,19 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 			}
 			return null;
 		}
+
+        internal void ReportArrived(string interventionName, int rowNumber)
+        {
+            foreach(KeyValuePair<Grid, List<Grid>> intervention in activeTeams)
+            {
+                if (intervention.Key.Name.Equals(interventionName))
+                {
+                    TeamGrid team = (TeamGrid)intervention.Value[rowNumber];
+                    team.ChangeStatus("intervening");
+
+                    return;
+                }
+            }
+        }
 	}
 }

@@ -192,5 +192,10 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm
 			timers.Focus();
 			resourcesPage.ReportArrival(teamName);
 		}
+
+        internal void ReportArrived(int rowNumber)
+        {
+            interventionSection.ReportArrived(this, rowNumber);
+        }
     }
 }
