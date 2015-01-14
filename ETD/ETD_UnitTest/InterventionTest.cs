@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ETD.Models;
+using ETD.Models.Objects;
 
 namespace ETD_UnitTest
 {
@@ -120,9 +121,9 @@ namespace ETD_UnitTest
         public void InterventionSetAdditionalInfoTest()
         {
             Intervention a = new Intervention();
-            //TEST NEED TO BE FIXED
-            //a.setAdditionalInfo("Test info");
-            Assert.AreEqual("Test info", a.getAdditionalInfo());
+            ETD.Models.Objects.Intervention.AdditionalInformation ai = new ETD.Models.Objects.Intervention.AdditionalInformation("information", DateTime.Now);
+            a.setAdditionalInfo(5, ai);
+            Assert.AreEqual(ai, a.getAdditionalInfo(5));
         }
 
         [TestMethod]

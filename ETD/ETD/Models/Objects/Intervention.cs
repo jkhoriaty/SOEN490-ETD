@@ -52,6 +52,7 @@ namespace ETD.Models.Objects
 		{
 			interventionNumber = ++lastIntervention;
             this.timeOfCall = DateTime.Now;
+            additionalInfo = new AdditionalInformation[10];
 		}
 
 		public struct Resource
@@ -223,13 +224,12 @@ namespace ETD.Models.Objects
 
         public void setAdditionalInfo(int position, AdditionalInformation info)
         {
-			//Have to fix
-            //this.additionalInfo[position] = info;
+            this.additionalInfo[position] = info;
         }
 
-		public AdditionalInformation[] getAdditionalInfo()
+		public AdditionalInformation getAdditionalInfo(int position)
         {
-            return this.additionalInfo;
+            return this.additionalInfo[position];
         }
 
 		public void setConclusion(Conclusions conclusion)
