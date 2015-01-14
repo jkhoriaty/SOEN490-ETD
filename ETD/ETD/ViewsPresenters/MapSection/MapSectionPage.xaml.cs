@@ -285,7 +285,7 @@ namespace ETD.ViewsPresenters.MapSection
 				if (parent != null)
 				{
 					EquipmentGrid grid = (EquipmentGrid)parent.PlacementTarget;
-					pinEditor.DeletePin(grid.Name);
+					pinEditor.DeletePin(grid);
 				}
 			}
 		}

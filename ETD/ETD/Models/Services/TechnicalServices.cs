@@ -146,7 +146,14 @@ namespace ETD.Models.Services
 		//Return the full word of the phonetic letter
 		public static String getPhoneticLetter(String letter)
 		{
-			return alphabet[letter];
+			if(alphabet.ContainsKey(letter))
+			{
+				return alphabet[letter];
+			}
+			else
+			{
+				return letter;
+			}
 		}
 
 

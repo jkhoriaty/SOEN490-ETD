@@ -67,7 +67,7 @@ namespace ETD.ViewsPresenters.InterventionsSection
 			}
 
 			//Deleting the intervention pin
-			mainWindow.DeletePin("intervention_" + interventionNumber);
+			mainWindow.DeletePin("Intervention_" + interventionNumber);
 		}
 
 		//Showing and hiding the appropriate intervention forms

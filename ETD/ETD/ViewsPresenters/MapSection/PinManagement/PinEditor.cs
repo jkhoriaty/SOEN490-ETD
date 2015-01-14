@@ -79,9 +79,27 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 				if (grid.Name.Equals(pinName))
 				{
 					mapSection.Map.Children.Remove(grid);
+					if(grid.Tag.Equals("intervention"))
+					{
+						//Remove the border of the intervention as well
+						foreach (Grid g in mapSection.Map.Children)
+						{
+							if (g.Name.Equals(pinName))
+							{
+								mapSection.Map.Children.Remove(g);
+								return;
+							}
+						}
+					}
 					return;
 				}
 			}
+		}
+
+		//Different signature to handle the removal of the exact equipment and not one with a similar name
+		public void DeletePin(Grid pin)
+		{
+			mapSection.Map.Children.Remove(pin);
 		}
 
         public void ChangeStatus(object sender, RoutedEventArgs e)
