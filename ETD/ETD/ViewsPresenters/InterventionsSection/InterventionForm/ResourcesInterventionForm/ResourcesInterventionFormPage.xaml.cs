@@ -321,6 +321,8 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.ResourcesInt
 			{
 				MessageBox.Show("The text inserted in the time boxes is not valid");
 			}
+
+            interventionForm.ReportArrived(Grid.GetRow(bd) - 1);
 		}
 
 		internal void AddResources(string teamName)

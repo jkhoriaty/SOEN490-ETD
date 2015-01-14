@@ -1,4 +1,4 @@
-﻿using ETD.Models;
+﻿//using ETD.Models;
 using ETD.ViewsPresenters.MapSection.PinManagement;
 using System;
 using System.Collections.Generic;
@@ -30,7 +30,7 @@ namespace ETD.ViewsPresenters.MapSection
 			pinEditor = new PinEditor(this);
             pinHandler = new AIPinHandler(this);
 		}
-
+    
 		//Loading of map as a result to the user clicking the "Load Map" button
         //Loading the map should only be done on the AdditionalInfoPAge.xaml rather than MapSectionPage.xaml
 		public void SetMap(BitmapImage coloredImage)

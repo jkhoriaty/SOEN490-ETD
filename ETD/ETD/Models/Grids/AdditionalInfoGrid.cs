@@ -11,9 +11,8 @@ using ETD.Models.Services;
 
 namespace ETD.Models.Grids
 {
-    class AdditionalInfoGrid : Grid
+    public class AdditionalInfoGrid : Grid
     {
-        private Rectangle imageRectangle;
         public int AddtionalInfoSize;
         public AdditionalInfo gr;
 

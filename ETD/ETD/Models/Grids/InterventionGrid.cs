@@ -14,7 +14,7 @@ using ETD.Models.Services;
 
 namespace ETD.Models.Grids
 {
-	class InterventionGrid : Grid
+	public class InterventionGrid : Grid
 	{
         public InterventionGrid(int interventionNumber, MapSectionPage mapSection, int size) : base()
         {

@@ -60,5 +60,10 @@ namespace ETD.Models.Grids
             img.ImageSource = TechnicalServices.getImage(team, team.getStatus());
             imageRectangle.Fill = img;
         }
+
+        public string GetStatus()
+        {
+            return team.getStatus().ToString();
+        }
     }
 }
