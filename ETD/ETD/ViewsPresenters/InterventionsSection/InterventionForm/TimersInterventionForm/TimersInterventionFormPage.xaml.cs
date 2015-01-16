@@ -38,8 +38,8 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.TimersInterv
         private int[] offsets = new int[TIMER_LIMIT];
         private int[] endOffsets = new int[TIMER_LIMIT];
 
-		public static int interventionDeadline = 30;
-		public static int movingDeadline = 5;
+		private static int interventionDeadline = 30;
+		private static int movingDeadline = 5;
 
 		public TimersInterventionFormPage(InterventionFormPage interventionForm)
 		{
@@ -342,5 +342,15 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.TimersInterv
                 resourceLabels[position].Content = resource;
             }
         }
+
+		public static void setInterventionDeadline(int deadline)
+		{
+			interventionDeadline = deadline;
+		}
+
+		public static void setMovingDeadline(int deadline)
+		{
+			movingDeadline = deadline;
+		}
 	}
 }

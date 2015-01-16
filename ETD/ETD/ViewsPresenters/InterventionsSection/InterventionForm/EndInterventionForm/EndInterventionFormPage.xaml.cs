@@ -60,9 +60,9 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
 				{
 					ComboBoxItem conclusion = (ComboBoxItem)ConclusionBox.SelectedItem;
 
-					if ((conclusion.Name.Equals("call911") || conclusion.Name.Equals("other")) && AdditionalInformation.Text.Equals(""))
+					if (Grid.GetColumnSpan(ComboBoxBorder) == 1 && TextBoxHandler.isDefaultText(AdditionalInformation))
 					{
-						throw new Exception();
+						MessageBox.Show("No conclusion is set!");
 					}
 					else
 					{
@@ -74,10 +74,6 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
 			catch (FormatException ex)
 			{
 				MessageBox.Show("The text inserted in the time boxes is not valid");
-			}
-			catch(Exception ex)
-			{
-				MessageBox.Show("No conclusion is set!");
 			}
 		}
 

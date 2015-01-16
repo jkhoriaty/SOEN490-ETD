@@ -84,7 +84,8 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 			if(g.Tag.Equals("team"))
 			{
 				TeamGrid team = (TeamGrid)g;
-				team.ChangeStatus("moving");
+                if (team.GetStatus() != "intervening")
+				    team.ChangeStatus("moving");
 			}
 
 			//If the pin dragged is a team that was in an intervention
@@ -510,5 +511,19 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 			}
 			return null;
 		}
+
+        internal void ReportArrived(string interventionName, int rowNumber)
+        {
+            foreach(KeyValuePair<Grid, List<Grid>> intervention in activeTeams)
+            {
+                if (intervention.Key.Name.Equals(interventionName))
+                {
+                    TeamGrid team = (TeamGrid)intervention.Value[rowNumber];
+                    team.ChangeStatus("intervening");
+
+                    return;
+                }
+            }
+        }
 	}
 }

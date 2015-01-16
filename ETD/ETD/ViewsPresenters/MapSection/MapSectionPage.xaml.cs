@@ -285,7 +285,7 @@ namespace ETD.ViewsPresenters.MapSection
 				if (parent != null)
 				{
 					EquipmentGrid grid = (EquipmentGrid)parent.PlacementTarget;
-					pinEditor.DeletePin(grid.Name);
+					pinEditor.DeletePin(grid);
 				}
 			}
 		}
@@ -303,5 +303,10 @@ namespace ETD.ViewsPresenters.MapSection
 				mainWindow.ReportArrival(team.Name, intervention.Name);
 			}
 		}
+
+        internal void ReportArrived(string interventionName, int rowNumber)
+        {
+            pinHandler.ReportArrived(interventionName, rowNumber);
+        }
 	}
 }

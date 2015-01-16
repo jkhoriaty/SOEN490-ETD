@@ -12,7 +12,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using ETD.ViewsPresenters.InterventionsSection;
 using ETD.ViewsPresenters.InterventionsSection.InterventionForm.TimersInterventionForm;
 using ETD.ViewsPresenters.InterventionsSection.InterventionForm.DetailsInterventionForm;
 using ETD.ViewsPresenters.InterventionsSection.InterventionForm.ResourcesInterventionForm;
@@ -191,6 +190,21 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm
 		{
 			timers.Focus();
 			resourcesPage.ReportArrival(teamName);
+		}
+
+        internal void ReportArrived(int rowNumber)
+        {
+            interventionSection.ReportArrived(this, rowNumber);
+        }
+        
+		public static void setInterventionDeadline(int deadline)
+		{
+			TimersInterventionFormPage.setInterventionDeadline(deadline);
+		}
+
+		public static void setMovingDeadline(int deadline)
+		{
+			TimersInterventionFormPage.setMovingDeadline(deadline);
 		}
     }
 }

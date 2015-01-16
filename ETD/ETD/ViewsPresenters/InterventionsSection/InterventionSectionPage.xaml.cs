@@ -67,7 +67,7 @@ namespace ETD.ViewsPresenters.InterventionsSection
 			}
 
 			//Deleting the intervention pin
-			mainWindow.DeletePin("intervention_" + interventionNumber);
+			mainWindow.DeletePin("Intervention_" + interventionNumber);
 		}
 
 		//Showing and hiding the appropriate intervention forms
@@ -121,5 +121,32 @@ namespace ETD.ViewsPresenters.InterventionsSection
 		{
 			getInterventionPage(interventionName).ReportArrival(teamName);
 		}
+
+        internal void ReportArrived(InterventionFormPage caller, int rowNumber)
+        {
+            mainWindow.ReportArrived(getInterventionName(caller), rowNumber);
+        }
+        
+		public static void setInterventionDeadline(int deadline)
+		{
+			InterventionFormPage.setInterventionDeadline(deadline);
+		}
+
+		public static void setMovingDeadline(int deadline)
+		{
+			InterventionFormPage.setMovingDeadline(deadline);
+		}
+		
+        private string getInterventionName(InterventionFormPage caller)
+        {
+            foreach (Frame intervention in InterventionsList.Children)
+            {
+                if (intervention.Content.Equals(caller))
+                {
+                    return intervention.Name;
+                }
+            }
+            return null;
+        }
 	}
 }
