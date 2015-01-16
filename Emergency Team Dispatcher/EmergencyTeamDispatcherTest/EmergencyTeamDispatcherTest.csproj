@@ -54,6 +54,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TeamTest.cs" />
     <Compile Include="TeamMemberTest.cs" />
+    <Compile Include="LanguageSelectorTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Emergency Team Dispatcher\Emergency Team Dispatcher.csproj">

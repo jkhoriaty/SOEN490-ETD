@@ -12,10 +12,10 @@ namespace EmergencyTeamDispatcherTest
         {
             String name = "Test";
             int trainLevel = 9000;
-            TeamMember a = new TeamMember(name, trainLevel);
-            Assert.AreEqual(a.name, "Test");
-            Assert.AreEqual(a.trainingLevel, 9000);
-
+            String departure = "1500";
+            TeamMember a = new TeamMember(name, trainLevel,departure);
+            Assert.AreEqual(a.getName(), "Test");
+            Assert.AreEqual(a.getTrainingLevel(), 9000);
         }
     }
 

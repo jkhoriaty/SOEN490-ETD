@@ -1,0 +1,18 @@
+﻿using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using ETD.Models;
+using ETD.Models.Objects;
+
+namespace ETD_UnitTest
+{
+    [TestClass]
+    public class EquipmentTest
+    {
+        [TestMethod]
+        public void EquipmentCreation()
+        {
+            Equipment test = new Equipment(Equipments.sittingCart);
+            Assert.AreEqual(test.getEquipmentName(), Equipments.sittingCart);
+        }
+    }
+}
