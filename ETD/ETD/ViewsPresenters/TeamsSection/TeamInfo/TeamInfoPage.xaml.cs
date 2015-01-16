@@ -24,8 +24,7 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamInfo
 	{
 		TeamsSectionPage teamsSection;
         Team team;
-        private StackPanel movingPanel;
-        private bool _isDragInProg;
+        
 
 		public TeamInfoPage(TeamsSectionPage teamsSection, Team team)
 		{
@@ -92,25 +91,6 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamInfo
 			teamsSection.RemoveTeam(label.Name);
 		}
 
-        internal void dragStart(object sender, MouseEventArgs e)
-        {
-            StackPanel s = (StackPanel)sender;
-            _isDragInProg = s.CaptureMouse();
-            movingPanel = s;
-            
-        }
-
-        internal void dragStop(object sender, MouseButtonEventArgs e)
-        {
-            StackPanel s = (StackPanel)sender;
-            if (s != movingPanel)
-            {
-                return;
-            }
-            s.ReleaseMouseCapture();
-            _isDragInProg = false;
-            //var mousePos = e.GetPosition()
-        }
 
 	}
 }

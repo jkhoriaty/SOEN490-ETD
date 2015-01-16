@@ -29,12 +29,16 @@ namespace ETD.ViewsPresenters.TeamsSection
 		private MainWindow mainWindow;
 		private static Dictionary<String, StackPanel> teamEquipmentStacks = new Dictionary<String, StackPanel>();
 		private DispatcherTimer dispatcherTimer = new DispatcherTimer();
+        private StackPanel movingPanel;
+        private bool _isDragInProg;
 
 		public TeamsSectionPage(MainWindow mainWindow)
 		{
 			InitializeComponent();
 			this.mainWindow = mainWindow;
-
+            this.AllowDrop = true;
+            //this.DragEnter += new DragEventHandler(dragEnter);
+            //this.DragLeave += new DragEventHandler(dragDrop);
 			dispatcherTimer.Tick += new EventHandler(refresh);
 			dispatcherTimer.Interval = new TimeSpan(0, 0, 10); //Update every minute
 			dispatcherTimer.Start();
@@ -164,5 +168,32 @@ namespace ETD.ViewsPresenters.TeamsSection
 			mainWindow.CreateEquipmentPin(equipment.Name);
 
 		}
+
+        internal void dragStart(object sender, DragEventArgs e)
+        {
+            StackPanel s = (StackPanel)sender;
+            _isDragInProg = s.CaptureMouse();
+            movingPanel = s;
+
+        }
+
+        internal void dragStop(object sender, MouseButtonEventArgs e)
+        {
+            StackPanel s = (StackPanel)sender;
+            if (s != movingPanel)
+            {
+                return;
+            }
+            s.ReleaseMouseCapture();
+            _isDragInProg = false;
+            //var mousePos = e.GetPosition(this.map)
+        }
+
+        internal void dragMove(object sender, MouseEventArgs e)
+        {
+            if (!_isDragInProg) return;
+            StackPanel s = (StackPanel)sender;          
+        }
+
 	}
 }
