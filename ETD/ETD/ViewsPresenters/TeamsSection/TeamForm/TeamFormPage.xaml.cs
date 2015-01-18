@@ -78,12 +78,12 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 				DateTime dateNow = DateTime.Now;
 
 				//Create team
-				String team_name = teamName.Text;
-				activeTeamsList.Add(team_name);
-				if(team_name.Length == 1)
-				{
-					team_name = team_name.ToUpper();
-				}
+                String team_name = teamName.Text;
+                if (team_name.Length == 1)
+                {
+                    team_name = team_name.ToUpper();
+                }
+				activeTeamsList.Add(team_name);			
 				Team team = new Team(team_name);
 
 				//Create first member
@@ -157,7 +157,7 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 			//Make sure that there are no other team with the same name
 			foreach(String item in activeTeamsList)
 			{
-				if(item.Equals(teamName.Text))
+                if (item.Equals(teamName.Text) || item.Equals(teamName.Text.ToLower()) || item.Equals(teamName.Text.ToUpper()))
 				{
 					textboxFailedValidation.Add(teamName);
 				}
