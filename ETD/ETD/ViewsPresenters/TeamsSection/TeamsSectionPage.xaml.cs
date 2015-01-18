@@ -26,6 +26,7 @@ namespace ETD.ViewsPresenters.TeamsSection
 	/// </summary>
 	public partial class TeamsSectionPage : Page
 	{
+
 		private MainWindow mainWindow;
 		private static Dictionary<String, StackPanel> teamEquipmentStacks = new Dictionary<String, StackPanel>();
 		private DispatcherTimer dispatcherTimer = new DispatcherTimer();
@@ -119,6 +120,7 @@ namespace ETD.ViewsPresenters.TeamsSection
 			}
 			Team.teamsList.Remove(teamName);
 			mainWindow.DeletePin(teamName);
+            TeamFormPage.removeTeamName(teamName);
 		}
 
 		//Adding equipment to specified team equipment stack

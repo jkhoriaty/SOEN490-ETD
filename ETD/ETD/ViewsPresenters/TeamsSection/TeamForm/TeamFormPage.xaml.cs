@@ -332,6 +332,11 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 			}
 		}
 
+        internal static void removeTeamName(String teamName)
+        {
+            activeTeamsList.Remove(teamName);
+        }
+
 		public DateTime checkDepartureTime(DateTime departureTime)
 		{
 			if (departureTime.Hour < DateTime.Now.Hour)
