@@ -52,6 +52,23 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
 				int mm = int.Parse(Endmm.Text);
 				DateTime endTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, hh, mm, DateTime.Now.Second);
 				int offset = (int)DateTime.Now.Subtract(endTime).TotalMinutes;
+                
+                Intervention.Resource[] resources = this.intervention.getResources();
+                            
+                for (int i = 0; i < resources.Length; i++)
+                {
+                    MessageBox.Show(resources[i].getTeamName());
+                    try
+                    {
+                        Team.teamsList[resources[i].getTeamName()].setStatus(Statuses.unavailable);
+                    }
+                    catch (ArgumentNullException)
+                    {
+
+                    }
+                   
+                }
+
 				if (offset < 0)
 				{
 					MessageBox.Show("The time inserted is in the future!");

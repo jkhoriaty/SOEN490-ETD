@@ -27,7 +27,7 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 		public int currentNumberOfMembers = 1; //Used to track the number of members on the TeamForm
 		private List<Control> textboxLastValidationFailed = null;
 		private List<Border> comboboxLastValidationFailed = null;
-		private static List<String> activeTeamsList = new List<String>();
+		public static List<String> activeTeamsList = new List<String>();
 
         public TeamFormPage(TeamsSectionPage caller)
         {

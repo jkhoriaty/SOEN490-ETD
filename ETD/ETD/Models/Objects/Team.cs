@@ -89,6 +89,7 @@ namespace ETD.Models.Objects
         public void setStatus(Statuses s)
         {
             this.status = s;
+            
         }
 
 		public Trainings getHighestLevelOfTraining()

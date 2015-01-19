@@ -69,6 +69,16 @@ namespace ETD.Models.Objects
 				this.moving = moving;
 				this.arrival = arrival;
 			}
+
+            public String getResourceName()
+            {
+                return resourceName;
+            }
+
+            public String getTeamName()
+            {
+                return team;
+            }
 		}
 
 		public struct ABC
