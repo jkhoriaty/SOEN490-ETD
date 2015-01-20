@@ -36,6 +36,7 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 		public void CreateTeamPin(Team team)
 		{
 			TeamGrid mainContainer = new TeamGrid(team, mapSection, teamSize);
+            team.setTeamGrid(mainContainer);
 			mapSection.Map.Children.Add(mainContainer);
             
 			//Setting pin in the top-left corner and making sure it does not cover any other item

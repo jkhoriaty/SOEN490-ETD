@@ -57,10 +57,10 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
                             
                 for (int i = 0; i < resources.Length; i++)
                 {
-                    MessageBox.Show(resources[i].getTeamName());
+                    //MessageBox.Show(resources[i].getTeamName());
                     try
                     {
-                        Team.teamsList[resources[i].getTeamName()].setStatus(Statuses.unavailable);
+                        Team.teamsList[resources[i].getTeamName()].getTeamGrid().ChangeStatus("unavailable");
                     }
                     catch (ArgumentNullException)
                     {
