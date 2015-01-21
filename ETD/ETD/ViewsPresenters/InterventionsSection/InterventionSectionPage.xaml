@@ -27,7 +27,7 @@
 			</StackPanel>
 		</ScrollViewer>
 		<Border Margin="2,0,2,0" BorderBrush="Black" BorderThickness="1" CornerRadius="5">
-			<Button Name="CreateInterventionButton" Content="+" FontSize="30" FontWeight="ExtraBlack" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="White" BorderBrush="Transparent" Click="CreateInterventionForm"></Button>
+			<Button Name="CreateInterventionButton" Content="+" FontSize="30" FontWeight="ExtraBlack" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="White" BorderBrush="Transparent" Click="CreateIntervention_Click"></Button>
 		</Border>
 	</StackPanel>
 </Page>

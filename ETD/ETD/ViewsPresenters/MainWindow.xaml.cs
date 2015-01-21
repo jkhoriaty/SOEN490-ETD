@@ -217,5 +217,10 @@ namespace ETD.ViewsPresenters
         {
             mapSection.ReportArrived(interventionName, rowNumber);
         }
+
+        internal void CreateIntervention()
+        {
+            interventionsSection.CreateIntervention();
+        }
 	}
 }
