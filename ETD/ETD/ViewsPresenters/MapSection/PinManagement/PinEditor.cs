@@ -23,7 +23,8 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 		private int teamSize = 40;
 		private int interventionSize = 40; //WARNING: If different than team size, need to revisit the addition of a team onto an intervention in the CollisionDetection method in the PinHandler file
 		private int equipmentSize = 30;
-        private int AddtionalInfoSize = 60;
+        private int AddtionalInfoSize = 300;
+        private bool ContainsLine = false;
 
 		public PinEditor(MapSectionPage mapSection)
 		{
@@ -32,7 +33,9 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 
         public PinEditor(AdditionalInfoPage AIP)
         {
+           
             this.AIPmap = AIP;
+
         }
 
 		//Creating a new team pin as a result to the successfull submission of the team form
@@ -128,10 +131,6 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 			mi.IsChecked = ((Statuses)Enum.Parse(typeof(Statuses), mi.Header.ToString().ToLower()) == fe.team.getStatus());
 		}
 
-
-
-
-
         //create additionnal info pin on the AdditionalInfoPage.xaml
         public void CreateAdditionnalInfoPin(String AI,int size)
         {
@@ -140,23 +139,38 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
             {
                 AddtionalInfoSize = size;
             }
+
             AdditionalInfo AI2 = new AdditionalInfo(AI);
             AdditionalInfoGrid mainContainer = new AdditionalInfoGrid(AI2, AIPmap, AddtionalInfoSize);
-            
-            //If the additional info is a line, call the drawline function
-            if (AI.Equals("line"))
-            {
-               // AIPSection_DrawLines();
-            }
 
+            if (AI.Equals("line") )
+           {
+              
+               double lwidth = AIPmap.AdditionalMap.ActualWidth;
+               double lheight = AIPmap.AdditionalMap.ActualHeight;
+               AdditionalInfoGridLines line = new AdditionalInfoGridLines(AI2, AIPmap, lwidth, lheight);
+               
+                //line obj doesnt exist
+                if (!ContainsLine)
+                {
+                    AIPmap.AdditionalMap.Children.Add(line);
+                    ContainsLine = true;
+                }
+
+                //line obj  exist
+                else
+                {
+                    return;
+                }
+       
+            }
             else
-            {
+           {
                 AIPmap.AdditionalMap.Children.Add(mainContainer);
                 //Setting pin in the bottom-left corner and making sure it does not cover any other item
                 AIPmap.SetPinPosition(mainContainer, (AddtionalInfoSize / 2), (AIPmap.AdditionalMap.ActualHeight - (AddtionalInfoSize / 2)));
                 //AIPmap.DetectCollision(mainContainer, (AddtionalInfoSize / 2), (AIPmap.AdditionalMap.ActualHeight - (AddtionalInfoSize / 2)));
             }
-          
         }
 
 
@@ -227,20 +241,32 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
         //end - retrieved on second mouse click  
 
         // The points that make up the line segments.
-        private List<Point> Pt1 = new List<Point>();
-        private List<Point> Pt2 = new List<Point>();
+        private List<System.Windows.Point> Pt1 = new List<System.Windows.Point>();
+        private List<System.Windows.Point> Pt2 = new List<System.Windows.Point>();
 
-        // Points for the new line.
-        private bool IsDrawing = false;
-        private Point NewPt1, NewPt2;
-
-        public void AIPSection_DrawLines(object sender, MouseEventArgs e)
+        public void AIPSectionDrawLines(object sender, RoutedEventArgs e)
         {
 
-            //mouse up: not drawing, create new segment
-            var mousePos = e.GetPosition(AIPmap.AdditionalMap);
-            NewPt1 = new Point(mousePos.X, mousePos.Y);
-            NewPt2 = new Point(mousePos.X, mousePos.Y);
+            System.Windows.Point position = Mouse.GetPosition(AIPmap.AdditionalMap);
+            AIPmap.CaptureMouse();
+          //  MessageBox.Show(AIPmap.CaptureMouse().ToString());
+           MessageBox.Show(position.ToString());
+
+            ComboBoxItem item = sender as ComboBoxItem;
+            ComboBox parent = item.Parent as ComboBox;
+            foreach (ComboBoxItem mi in parent.Items)
+            {
+                if (mi.Content.Equals("line") && (mi.IsSelected))
+                {
+                    //if button released, mouse not drawing
+                    //if button pressed, save point
+                    //if button relesed, save end point and draw line
+                    MessageBox.Show(MouseButton.Right.ToString());
+                  //  AIPmap.AdditionalMap.MouseDown += new MouseButtonEventHandler(this.aiMouseDown);
+                  //  AIPmap.AdditionalMap.MouseMove += new MouseEventHandler(this.AIPSection_MouseMove_Drawing);
+
+                }
+            }
 
             MessageBox.Show(" draw lines");
             // BitmapImage bmp;
@@ -256,45 +282,34 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
            // }
         }
 
-        // Drawing a new segment.
-        private void AIPSection_MouseMove_Drawing(object sender, MouseEventArgs e)
-        {
-            // Save the new point.
-            var mousePos = e.GetPosition(AIPmap.AdditionalMap);
-            NewPt2 = new Point(mousePos.X, mousePos.Y);
-        }
-
-
-        // The mouse is moving, set as cross cursor
-        private void AIPSection_MouseMove_NotDown(object sender, MouseEventArgs e)
-        {
-            // Set the new cursor.
-            Cursor new_cursor = Cursors.Cross;
-            if (AIPmap.Cursor != new_cursor)
-                AIPmap.Cursor = new_cursor;
-        }
-
-        // Stop drawing.
-        private void picCanvas_MouseUp_Drawing(object sender, MouseEventArgs e)
-        {
-            IsDrawing = false;
-
-            // Create the new segment.
-            Pt1.Add(NewPt1);
-            Pt2.Add(NewPt2);
-
-        }
-
-
+ 
 
         //Deleting pin from the additional info page
         public void AIDeletePin(object sender, RoutedEventArgs e)
         {
-            foreach (AdditionalInfoGrid grid in AIPmap.AdditionalMap.Children)
-            { 
-                    AIPmap.AdditionalMap.Children.Remove(grid);
-                    return;    
-            }
+
+           // AdditionalInfoGridLines item = sender as AdditionalInfoGridLines;
+           // if(item.Name.Equals("line")){
+
+            //
+             //   foreach (AdditionalInfoGridLines grid2 in AIPmap.AdditionalMap.Children)
+             //   {
+             //       AIPmap.AdditionalMap.Children.Remove(grid2);
+             //       return;
+            //    }
+           // }
+          //  else
+          // {
+
+                foreach (AdditionalInfoGrid grid in AIPmap.AdditionalMap.Children)
+                 { 
+                          AIPmap.AdditionalMap.Children.Remove(grid);
+                          return;    
+                  }
+
+           
+          //  }
+            
         }
 
 		//Filter itmes and edit the appropriate status

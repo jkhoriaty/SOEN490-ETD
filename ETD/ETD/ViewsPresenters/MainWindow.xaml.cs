@@ -33,7 +33,7 @@ namespace ETD.ViewsPresenters
 		private InterventionSectionPage interventionsSection;
         private AdditionalInfoPage AIPmapSection;
         private int AddtionalInfoSize;
-
+        private bool isdrawing = false;
 		private double previousWidth;
 		private double previousHeight;
 
@@ -188,6 +188,7 @@ namespace ETD.ViewsPresenters
                 if (mi!=null && mi.IsSelected )
                 {
                     AIPmapSection.CreateAdditionnalInfoPin("" + mi.Name, AddtionalInfoSize);
+                    isdrawing = false;
                 }
             }  
         }
@@ -213,14 +214,17 @@ namespace ETD.ViewsPresenters
                 if (mi.Content.Equals("Regular Mode") && (mi.IsSelected))
                 {
                     AI.Visibility = Visibility.Collapsed;
+                    AIPmapSection.IsEnabled = false;
                 }
                 else if (mi.Content.Equals("Edit Mode") && (mi.IsSelected ))
                 {
                     AI.Visibility = Visibility.Visible;
+                    AIPmapSection.IsEnabled = true;
                 }
             }  
 		}
 
-  
+   
+   
 	}
 }

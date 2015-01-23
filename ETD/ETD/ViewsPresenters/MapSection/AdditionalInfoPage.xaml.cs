@@ -29,8 +29,9 @@ namespace ETD.ViewsPresenters.MapSection
 			this.mainWindow = mainWindow;
 			pinEditor = new PinEditor(this);
             pinHandler = new AIPinHandler(this);
-		}
 
+		}
+ 
 		//Loading of map as a result to the user clicking the "Load Map" button
         //Loading the map should only be done on the AdditionalInfoPAge.xaml rather than MapSectionPage.xaml
 		public void SetMap(BitmapImage coloredImage)
@@ -41,7 +42,6 @@ namespace ETD.ViewsPresenters.MapSection
 			grayBitmap.Source = coloredImage;
 			grayBitmap.DestinationFormat = PixelFormats.Gray8;
 			grayBitmap.EndInit();
-
 			//Displaying the map as the background
             AdditionalMap.Background = new ImageBrush(grayBitmap);
 		}
@@ -58,6 +58,27 @@ namespace ETD.ViewsPresenters.MapSection
 			pinHandler.DragStart(sender, e);
 		}
 
+        ///////////////////////////////////////////////////////////////////////////////////////////////////
+        internal void DrawingStart(object sender, MouseButtonEventArgs e)
+        {
+            pinHandler.DrawingStart(sender, e);
+        }
+
+        internal void DrawingMove(object sender, MouseEventArgs e)
+        {
+            pinHandler.DrawingMove(sender, e);
+        }
+
+        internal void DrawingStop(object sender, MouseButtonEventArgs e)
+        {
+            pinHandler.DrawingStop(sender, e);
+        }
+        internal void EraseLine(object sender, MouseButtonEventArgs e)
+        {
+            pinHandler.EraseLine(sender, e);
+        }
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////
 		internal void DragStop(object sender, MouseButtonEventArgs e)
 		{
 			pinHandler.DragStop(sender, e);
@@ -70,7 +91,7 @@ namespace ETD.ViewsPresenters.MapSection
 
         internal void RotationStart_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            RotationStart_MouseDoubleClick(sender, e);
+            pinHandler.RotationStart_MouseDoubleClick(sender, e);
 
         }
 
@@ -111,5 +132,11 @@ namespace ETD.ViewsPresenters.MapSection
             pinEditor.ScalePin(sender,e);
         }
 
+        //public void AIPSectionDrawLines(object sender, RoutedEventArgs e)
+       // {
+        //    pinEditor.AIPSectionDrawLines(sender, e);
+      //  }
+
+      
 	}
 }

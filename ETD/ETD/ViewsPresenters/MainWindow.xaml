@@ -41,7 +41,7 @@
                     <ComboBoxItem Content="square" Name="square" Selected="CreateAdditionnalInfoPin"/>
 				</ComboBox>
 
-                <ComboBox  Name="modeChange" Width="140" SelectedIndex="0">
+                <ComboBox  Name="modeChange" Width="140" >
                     <ComboBoxItem Content="Regular Mode" Selected="ModeChange" />
                     <ComboBoxItem Content="Edit Mode" Selected="ModeChange"/>
 				</ComboBox>
@@ -72,7 +72,7 @@
         <Border Grid.Column="1" Grid.Row="1" Name="MapSection" BorderBrush="Black" BorderThickness="1" Grid.ColumnSpan="2">
             <!-- Here goes the MapSectionPage frame -->
         </Border>
-        <Border Grid.Column="1" Grid.Row="1" Name="AIPSection" BorderBrush="Black" BorderThickness="1" Grid.ColumnSpan="2">
+        <Border Grid.Column="1" Grid.Row="1" Name="AIPSection" BorderBrush="Black" BorderThickness="1" Grid.ColumnSpan="2" >
             <!-- Here goes the AdditionalInfoSectionPage frame -->
        
         </Border>

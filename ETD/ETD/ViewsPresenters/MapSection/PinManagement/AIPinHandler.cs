@@ -9,6 +9,11 @@ using System.Windows.Input;
 using System.Windows.Controls.Primitives;
 using System.Drawing;
 using System.Windows.Media;
+using System.Windows.Shapes;
+using ETD.Models.Grids;
+using ETD.Models.Services;
+using ETD.Models.Objects;
+
 
 namespace ETD.ViewsPresenters.MapSection.PinManagement
 {
@@ -16,10 +21,12 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 	{
 		
         private AdditionalInfoPage AIPmap;
+       
 		private bool _isRectDragInProg;
 		private Grid movingGrid;
         private bool rotateMode;
 
+      
 
         public AIPinHandler(AdditionalInfoPage AIP)
         {
@@ -40,6 +47,71 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 			_isRectDragInProg = g.CaptureMouse();
 			movingGrid = g;
 		}
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // Points for the new line.
+        private bool IsDrawing = false;
+        private System.Windows.Point NewPt1, NewPt2;
+
+        public void DrawingStart(object sender, MouseButtonEventArgs e)
+        {
+            IsDrawing = true;
+            //get starting point
+            if (e.ButtonState == MouseButtonState.Pressed)
+            {
+                NewPt1 = e.GetPosition(AIPmap.AdditionalMap);
+            }
+
+        }
+
+        internal void DrawingMove(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+           // NewPt2 = e.GetPosition(AIPmap.AdditionalMap);
+         //  System.Windows.MessageBox.Show("higfhgfh");
+         //  System.Windows.MessageBox.Show(NewPt1.X.ToString());
+         //  System.Windows.MessageBox.Show(NewPt2.X.ToString());
+
+           if (e.LeftButton == MouseButtonState.Pressed)
+           {
+
+               Line line = new Line();
+               SolidColorBrush blackBrush = new SolidColorBrush();
+               blackBrush.Color = Colors.Black;
+               line.StrokeThickness = 4;
+               line.Stroke = blackBrush;
+               line.X1 = NewPt1.X;
+               line.Y1 = NewPt1.Y;
+
+               line.X2 = e.GetPosition(AIPmap.AdditionalMap).X;
+               line.Y2 = e.GetPosition(AIPmap.AdditionalMap).Y;
+
+               NewPt1 = e.GetPosition(AIPmap.AdditionalMap);
+             //  mainContainer.Children.Add(line);
+               AIPmap.AdditionalMap.Children.Add(line);
+               
+           }
+
+           else
+           {
+               DragMove(sender, e);
+           }
+        }
+
+        internal void DrawingStop(object sender, MouseButtonEventArgs e)
+        {
+            IsDrawing = false;
+        }
+
+        public void EraseLine(object sender, MouseButtonEventArgs e)
+        {
+            if (e.RightButton == MouseButtonState.Pressed)
+            {
+                   
+            }
+
+        }
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		//Left Mouse Button Up: Any pin
 		internal void DragStop(object sender, MouseButtonEventArgs e)
@@ -64,6 +136,11 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 		//Mouse Move
 		internal void DragMove(object sender, MouseEventArgs e)
 		{
+            // Set the new cursor.
+            Cursor new_cursor = Cursors.Cross;
+            if (AIPmap.Cursor != new_cursor)
+                AIPmap.Cursor = new_cursor;
+
 			//If no rectangle are clicked, exit method
 			if (!_isRectDragInProg) return;
 
@@ -300,8 +377,6 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
             }
 
         }
-
-
 
 
 
