@@ -178,7 +178,7 @@ namespace ETD.ViewsPresenters.InterventionsSection
                 try
                 {
                     getInterventionPage(reportArrival_Buffer[0][1]).ReportArrival(reportArrival_Buffer[0][0]);
-                    addResource_Buffer.RemoveAt(0);
+                    reportArrival_Buffer.RemoveAt(0);
                 }
                 catch (Exception ex)
                 {
