@@ -55,12 +55,11 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
                 
                 Intervention.Resource[] resources = this.intervention.getResources();
                             
-                for (int i = 0; i < resources.Length; i++)
+                for (int i = 0; i < TeamsSection.TeamForm.TeamFormPage.activeTeamsList.Count; i++)
                 {
-                    //MessageBox.Show(resources[i].getTeamName());
                     try
                     {
-                        Team.teamsList[resources[i].getTeamName()].getTeamGrid().ChangeStatus("unavailable");
+                        Team.teamsList[TeamsSection.TeamForm.TeamFormPage.activeTeamsList[i]].getTeamGrid().ChangeStatus("unavailable");
                     }
                     catch (ArgumentNullException)
                     {
