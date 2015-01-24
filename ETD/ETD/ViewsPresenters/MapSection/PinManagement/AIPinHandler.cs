@@ -24,9 +24,6 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
        
 		private bool _isRectDragInProg;
 		private Grid movingGrid;
-        private bool rotateMode;
-
-      
 
         public AIPinHandler(AdditionalInfoPage AIP)
         {
@@ -52,65 +49,110 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
         // Points for the new line.
         private bool IsDrawing = false;
         private System.Windows.Point NewPt1, NewPt2;
-
+        private List<System.Windows.Point> Pt1 = new List<System.Windows.Point>();
+        private List<System.Windows.Point> Pt2 = new List<System.Windows.Point>();
+        private List<Line> Lines = new List<Line>();
+        private Line newline;
         public void DrawingStart(object sender, MouseButtonEventArgs e)
         {
             IsDrawing = true;
             //get starting point
-            if (e.ButtonState == MouseButtonState.Pressed)
-            {
                 NewPt1 = e.GetPosition(AIPmap.AdditionalMap);
-            }
 
         }
 
         internal void DrawingMove(object sender, System.Windows.Input.MouseEventArgs e)
         {
-           // NewPt2 = e.GetPosition(AIPmap.AdditionalMap);
-         //  System.Windows.MessageBox.Show("higfhgfh");
-         //  System.Windows.MessageBox.Show(NewPt1.X.ToString());
-         //  System.Windows.MessageBox.Show(NewPt2.X.ToString());
 
-           if (e.LeftButton == MouseButtonState.Pressed)
-           {
+             newline = new Line();
+            newline.Stroke = System.Windows.Media.Brushes.Black;
+            newline.StrokeThickness = 4;
 
-               Line line = new Line();
-               SolidColorBrush blackBrush = new SolidColorBrush();
-               blackBrush.Color = Colors.Black;
-               line.StrokeThickness = 4;
-               line.Stroke = blackBrush;
-               line.X1 = NewPt1.X;
-               line.Y1 = NewPt1.Y;
+            newline.X1 = NewPt1.X;
+            newline.Y1 = NewPt1.Y;
 
-               line.X2 = e.GetPosition(AIPmap.AdditionalMap).X;
-               line.Y2 = e.GetPosition(AIPmap.AdditionalMap).Y;
+            newline.X2 = NewPt2.X;
+            newline.Y2 = NewPt2.Y;
+           // l = newline;
+            Lines.Add(newline);
+            //MessageBox.Show(Lines.IndexOf(newline).ToString());
 
-               NewPt1 = e.GetPosition(AIPmap.AdditionalMap);
-             //  mainContainer.Children.Add(line);
-               AIPmap.AdditionalMap.Children.Add(line);
+               Pt1.Add(NewPt1);
+               Pt1.Add(NewPt2);
+               AIPmap.AdditionalMap.Children.Add(newline);
+             
+
+             //  for (int i = 1; i < Pt1.Count; i++)
+           //    {
                
-           }
+                  // Pt1[i] = NewPt1;
+                  // Pt1[i+1] = NewPt2;
+                  // MessageBox.Show(Pt1[i].ToString());
+    
+             //  }
 
-           else
-           {
-               DragMove(sender, e);
-           }
+        }
+
+        internal void Move(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                 NewPt2 = e.GetPosition(AIPmap.AdditionalMap);
+            }
+               
+            if (Keyboard.IsKeyDown(Key.Escape))
+            {
+
+                MessageBox.Show("count:" + AIPmap.AdditionalMap.Children.Count.ToString());
+
+                MessageBox.Show("p1:" + Pt1.IndexOf(NewPt1).ToString());
+                MessageBox.Show("p2:" + Pt1.IndexOf(NewPt2).ToString());
+             //  MessageBox.Show("line1:" + Lines[0].ToString());
+               // MessageBox.Show("line2:" + Lines[1].ToString());
+       
+
+                //  MessageBox.Show("line:" + AIPmap.AdditionalMap.Children.IndexOf(Lines.IndexOf().ToString());
+                // int i;
+                // for (i=1; i < AIPmap.AdditionalMap.Children.Count; )
+                // {
+                // AIPmap.AdditionalMap.Children.RemoveRange(AIPmap.AdditionalMap.Children.IndexOf(line), AIPmap.AdditionalMap.Children.IndexOf(line) - 1);
+                // AIPmap.AdditionalMap.Children.RemoveRange(AIPmap.AdditionalMap.Children.IndexOf(line), 1);
+                //  AIPmap.AdditionalMap.Children.RemoveRange(2, AIPmap.AdditionalMap.Children.IndexOf(line));
+               // AIPmap.AdditionalMap.Children.RemoveAt(Lines.IndexOf(l)+1);
+    
+                //  MessageBox.Show("line:" + AIPmap.AdditionalMap.Children.IndexOf(line).ToString());
+                // }
+                //  i ++;
+
+            }
+
+    
         }
 
         internal void DrawingStop(object sender, MouseButtonEventArgs e)
         {
             IsDrawing = false;
+        
         }
 
-        public void EraseLine(object sender, MouseButtonEventArgs e)
+        public void ChangeColor(object sender, MouseWheelEventArgs e)
         {
-            if (e.RightButton == MouseButtonState.Pressed)
+            //scroll up
+            if (e.Delta > 0)
             {
-                   
+                newline.Stroke = System.Windows.Media.Brushes.Red;
             }
-
+            //scroll down to original color
+            else
+            {
+                newline.Stroke = System.Windows.Media.Brushes.Black;
+            }
+          
         }
 
+ 
+
+    
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		//Left Mouse Button Up: Any pin
@@ -350,33 +392,6 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 		}
 
 
-        //if the shape is double click , go into rotation mode
-        internal void RotationStart_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            MessageBox.Show(_isRectDragInProg.ToString());
-            MessageBox.Show(rotateMode.ToString());
-
-            var mousePos = e.GetPosition(AIPmap.AdditionalMap);
-            var allPins = AIPmap.AdditionalMap.Children.OfType<Grid>().ToList();
-
-            MessageBox.Show(_isRectDragInProg.ToString());
-
-            //if the pin is fixed and rotateMode is set to true, rotate the pin by x degrees
-            if (!_isRectDragInProg && rotateMode == true)
-            {
-                foreach (var fixedPin in allPins)
-                {
-                    double fixedPin_X = Math.Round((((double)Canvas.GetLeft(fixedPin)) + (fixedPin.Width / 2)), 3);
-                    double fixedPin_Y = Math.Round((((double)Canvas.GetTop(fixedPin)) + (fixedPin.Width / 2)), 3);
-
-                    double angle = (float)Math.Atan2((fixedPin_Y - mousePos.X), (fixedPin_X - mousePos.X));
-                    RotateTransform rotate = new RotateTransform(angle);
-
-                    movingGrid.RenderTransform = rotate;
-                }
-            }
-
-        }
 
 
 

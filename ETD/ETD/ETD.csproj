@@ -270,6 +270,9 @@
     <Content Include="Icons\Medicine_unavailable.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Icons\Ramp.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Icons\rectangle.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

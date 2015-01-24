@@ -23,9 +23,9 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 		private int teamSize = 40;
 		private int interventionSize = 40; //WARNING: If different than team size, need to revisit the addition of a team onto an intervention in the CollisionDetection method in the PinHandler file
 		private int equipmentSize = 30;
-        private int AddtionalInfoSize = 300;
+        private int AddtionalInfoSize = 50;
         private bool ContainsLine = false;
-
+        private bool isdrawing = false;
 		public PinEditor(MapSectionPage mapSection)
 		{
 			this.mapSection = mapSection;
@@ -123,7 +123,6 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
    
             }
 
-            
         }
 
 		internal void CheckRight(MenuItem mi, TeamGrid fe)
@@ -134,18 +133,23 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
         //create additionnal info pin on the AdditionalInfoPage.xaml
         public void CreateAdditionnalInfoPin(String AI,int size)
         {
-            //Choose size
-            if (size !=0)
-            {
-                AddtionalInfoSize = size;
-            }
-
+           
             AdditionalInfo AI2 = new AdditionalInfo(AI);
             AdditionalInfoGrid mainContainer = new AdditionalInfoGrid(AI2, AIPmap, AddtionalInfoSize);
 
             if (AI.Equals("line") )
            {
-              
+               //if button released, mouse not drawing
+               //if button pressed, save point
+               //if button relesed, save end point and draw line
+               isdrawing = true;
+
+                   AIPmap.AdditionalMap.MouseLeftButtonDown += new MouseButtonEventHandler(AIPmap.DrawingStart);
+                   AIPmap.AdditionalMap.MouseLeftButtonUp += new MouseButtonEventHandler(AIPmap.DrawingStop);
+                   AIPmap.AdditionalMap.MouseMove += new MouseEventHandler(AIPmap.Move);
+                   AIPmap.AdditionalMap.MouseUp += new MouseButtonEventHandler(AIPmap.DrawingMove);
+                   AIPmap.AdditionalMap.MouseWheel += new MouseWheelEventHandler(AIPmap.ChangeColor);
+            
                double lwidth = AIPmap.AdditionalMap.ActualWidth;
                double lheight = AIPmap.AdditionalMap.ActualHeight;
                AdditionalInfoGridLines line = new AdditionalInfoGridLines(AI2, AIPmap, lwidth, lheight);
@@ -166,6 +170,12 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
             }
             else
            {
+               isdrawing = false;
+               AIPmap.AdditionalMap.MouseLeftButtonDown -= new MouseButtonEventHandler(AIPmap.DrawingStart);
+               AIPmap.AdditionalMap.MouseLeftButtonUp -= new MouseButtonEventHandler(AIPmap.DrawingStop);
+               AIPmap.AdditionalMap.MouseMove -= new MouseEventHandler(AIPmap.Move);
+               AIPmap.AdditionalMap.MouseUp -= new MouseButtonEventHandler(AIPmap.DrawingMove);
+
                 AIPmap.AdditionalMap.Children.Add(mainContainer);
                 //Setting pin in the bottom-left corner and making sure it does not cover any other item
                 AIPmap.SetPinPosition(mainContainer, (AddtionalInfoSize / 2), (AIPmap.AdditionalMap.ActualHeight - (AddtionalInfoSize / 2)));
@@ -174,142 +184,23 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
         }
 
 
-        //resize icons
-        //available choices: small, medium, large
-        public void ScalePin(object sender, RoutedEventArgs e)
-        {
-            
-            foreach (AdditionalInfoGrid grid in AIPmap.AdditionalMap.Children)
-            {
-
-                ContextMenu m = AIPmap.Resources["AIcontext"] as ContextMenu;
-
-                foreach (MenuItem mi in m.Items)
-                {
-
-                        foreach (MenuItem ji in mi.Items)
-                        {
-                            MenuItem item = sender as MenuItem;
-
-                            // MessageBox.Show(ji.Name);
-                            // MessageBox.Show(item.Header.ToString().ToLower());
-                            // MessageBox.Show((ji.IsChecked = (ji == item)).ToString());
-                              if (ji.Name.Equals("small") && (ji.IsChecked = (ji == item)))
-                              {
-                                     MessageBox.Show(ji.Name);
-                                    AIPmap.AdditionalMap.Children.Remove(grid);
-                                 CreateAdditionnalInfoPin(grid.Name, 30);
-                                  ji.IsChecked = false;
-                                   return;
-                              }
-
-                              if (ji.Name.Equals("medium") && (ji.IsChecked = (ji == item)))
-                              {
-                                  MessageBox.Show(ji.Name);
-                                  AIPmap.AdditionalMap.Children.Remove(grid);
-                                  CreateAdditionnalInfoPin(grid.Name, 60);
-                                  ji.IsChecked = false;
-                                  return;
-                              }
-                              if (ji.Name.Equals("large") && (ji.IsChecked = (ji == item)))
-                              {
-                                  MessageBox.Show(ji.Name);
-                                  AIPmap.AdditionalMap.Children.Remove(grid);
-                                  CreateAdditionnalInfoPin(grid.Name, 100);
-                                  ji.IsChecked = false;
-                                  return;
-                              }
-                       
-                           // Trying to implement it similarly to ChangeStatus but calling the Scaling method does not rescale the shape or place it at the appropriate place..
-                           // Will fix later
-                           // AdditionalInfo AI2 = new AdditionalInfo(grid.Name);
-                           // AdditionalInfoGrid Shape = new AdditionalInfoGrid(AI2, AIPmap, AddtionalInfoSize);
-                           // if (Shape != null && (ji.IsChecked = (ji == item)))
-                           // {
-                           //     Shape.ScalePin(item.Header.ToString().ToLower());
-                           // }
-
-                      }
-
-               }
-            }
-        }
 
         //Draw lines
         //Accepts 2 arguments:
         //start - retrieved on first mouse click
         //end - retrieved on second mouse click  
 
-        // The points that make up the line segments.
-        private List<System.Windows.Point> Pt1 = new List<System.Windows.Point>();
-        private List<System.Windows.Point> Pt2 = new List<System.Windows.Point>();
-
-        public void AIPSectionDrawLines(object sender, RoutedEventArgs e)
-        {
-
-            System.Windows.Point position = Mouse.GetPosition(AIPmap.AdditionalMap);
-            AIPmap.CaptureMouse();
-          //  MessageBox.Show(AIPmap.CaptureMouse().ToString());
-           MessageBox.Show(position.ToString());
-
-            ComboBoxItem item = sender as ComboBoxItem;
-            ComboBox parent = item.Parent as ComboBox;
-            foreach (ComboBoxItem mi in parent.Items)
-            {
-                if (mi.Content.Equals("line") && (mi.IsSelected))
-                {
-                    //if button released, mouse not drawing
-                    //if button pressed, save point
-                    //if button relesed, save end point and draw line
-                    MessageBox.Show(MouseButton.Right.ToString());
-                  //  AIPmap.AdditionalMap.MouseDown += new MouseButtonEventHandler(this.aiMouseDown);
-                  //  AIPmap.AdditionalMap.MouseMove += new MouseEventHandler(this.AIPSection_MouseMove_Drawing);
-
-                }
-            }
-
-            MessageBox.Show(" draw lines");
-            // BitmapImage bmp;
-            //Pen blackPen = new Pen(Brushes.Black, 2);
-            //int x1 = 100;
-           // int y1 = 100;
-            //int x2 = 500;
-            //int y2 = 100;
-            // Draw line to screen.
-           // using (var graphics = System.Drawing.Graphics.FromImage(bmp))
-            //{
-            //    graphics.DrawLine(blackPen, x1, y1, x2, y2);
-           // }
-        }
-
  
-
         //Deleting pin from the additional info page
         public void AIDeletePin(object sender, RoutedEventArgs e)
         {
-
-           // AdditionalInfoGridLines item = sender as AdditionalInfoGridLines;
-           // if(item.Name.Equals("line")){
-
-            //
-             //   foreach (AdditionalInfoGridLines grid2 in AIPmap.AdditionalMap.Children)
-             //   {
-             //       AIPmap.AdditionalMap.Children.Remove(grid2);
-             //       return;
-            //    }
-           // }
-          //  else
-          // {
 
                 foreach (AdditionalInfoGrid grid in AIPmap.AdditionalMap.Children)
                  { 
                           AIPmap.AdditionalMap.Children.Remove(grid);
                           return;    
                   }
-
-           
-          //  }
-            
+          
         }
 
 		//Filter itmes and edit the appropriate status

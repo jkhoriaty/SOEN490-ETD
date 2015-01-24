@@ -39,7 +39,8 @@
                     <ComboBoxItem Content="camp" Name="camp" Selected="CreateAdditionnalInfoPin"/>
                     <ComboBoxItem Content="line" Name="line" Selected="CreateAdditionnalInfoPin"/>
                     <ComboBoxItem Content="square" Name="square" Selected="CreateAdditionnalInfoPin"/>
-				</ComboBox>
+                    <ComboBoxItem Content="ramp" Name="ramp" Selected="CreateAdditionnalInfoPin"/>
+                </ComboBox>
 
                 <ComboBox  Name="modeChange" Width="140" >
                     <ComboBoxItem Content="Regular Mode" Selected="ModeChange" />

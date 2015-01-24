@@ -46,7 +46,6 @@ namespace ETD.ViewsPresenters.MapSection
             AdditionalMap.Background = new ImageBrush(grayBitmap);
 		}
 		
-	
 
 		public void SetPinPosition(Grid g, double X, double Y)
 		{
@@ -68,16 +67,19 @@ namespace ETD.ViewsPresenters.MapSection
         {
             pinHandler.DrawingMove(sender, e);
         }
-
+        internal void Move(object sender, MouseEventArgs e)
+        {
+            pinHandler.Move(sender, e);
+        }
         internal void DrawingStop(object sender, MouseButtonEventArgs e)
         {
             pinHandler.DrawingStop(sender, e);
         }
-        internal void EraseLine(object sender, MouseButtonEventArgs e)
-        {
-            pinHandler.EraseLine(sender, e);
-        }
 
+        internal void ChangeColor(object sender, MouseWheelEventArgs e)
+        {
+            pinHandler.ChangeColor(sender, e);
+        }
         ///////////////////////////////////////////////////////////////////////////////////////////////////
 		internal void DragStop(object sender, MouseButtonEventArgs e)
 		{
@@ -89,17 +91,6 @@ namespace ETD.ViewsPresenters.MapSection
 			pinHandler.DragMove(sender, e);
 		}
 
-        internal void RotationStart_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            pinHandler.RotationStart_MouseDoubleClick(sender, e);
-
-        }
-
-
-		//public void DetectCollision(Grid movedItem, double movedItem_X, double movedItem_Y)
-		//{
-		//	pinHandler.DetectCollision(movedItem, movedItem_X, movedItem_Y);
-		//}
 
         internal void CheckRight(object sender, RoutedEventArgs e)
         {
@@ -112,11 +103,6 @@ namespace ETD.ViewsPresenters.MapSection
 			pinHandler.movePins(widthRatio, heightRatio);
 		}
 
-
-        /// <summary>
-        /// //////////////////////////////////////////////////////////
-        /// </summary>
-        /// <param name="AI"></param>
         public void CreateAdditionnalInfoPin(String AI,int size)
         {
             pinEditor.CreateAdditionnalInfoPin(AI,size);
@@ -127,16 +113,5 @@ namespace ETD.ViewsPresenters.MapSection
             pinEditor.AIDeletePin(sender, e);
 		}
 
-        internal void ScalePin(object sender, RoutedEventArgs e)
-        {
-            pinEditor.ScalePin(sender,e);
-        }
-
-        //public void AIPSectionDrawLines(object sender, RoutedEventArgs e)
-       // {
-        //    pinEditor.AIPSectionDrawLines(sender, e);
-      //  }
-
-      
 	}
 }
