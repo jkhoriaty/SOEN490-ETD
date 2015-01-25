@@ -29,7 +29,7 @@ namespace ETD.ViewsPresenters.MapSection
 			this.mainWindow = mainWindow;
 			pinEditor = new PinEditor(this);
             pinHandler = new AIPinHandler(this);
-
+            AdditionalMap.Focus();
 		}
  
 		//Loading of map as a result to the user clicking the "Load Map" button
@@ -75,6 +75,7 @@ namespace ETD.ViewsPresenters.MapSection
         {
             pinHandler.DrawingStop(sender, e);
         }
+
 
         internal void ChangeColor(object sender, MouseWheelEventArgs e)
         {

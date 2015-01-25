@@ -139,6 +139,7 @@ namespace ETD.ViewsPresenters
 			mapSection.DeletePin(pinName);
 		}
 
+  
 
 		//Add equipment to team
 		public void AddTeamEquipment(Equipment equip, String teamName)

@@ -46,93 +46,67 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 		}
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        // Points for the new line.
+        // Set drawing status
         private bool IsDrawing = false;
+        // Get starting and end point of a line
         private System.Windows.Point NewPt1, NewPt2;
-        private List<System.Windows.Point> Pt1 = new List<System.Windows.Point>();
-        private List<System.Windows.Point> Pt2 = new List<System.Windows.Point>();
+        // Store added lines
         private List<Line> Lines = new List<Line>();
         private Line newline;
+
         public void DrawingStart(object sender, MouseButtonEventArgs e)
         {
             IsDrawing = true;
             //get starting point
                 NewPt1 = e.GetPosition(AIPmap.AdditionalMap);
-
         }
 
+        //draw the line
         internal void DrawingMove(object sender, System.Windows.Input.MouseEventArgs e)
         {
-
-             newline = new Line();
+            newline = new Line();
             newline.Stroke = System.Windows.Media.Brushes.Black;
             newline.StrokeThickness = 4;
-
             newline.X1 = NewPt1.X;
             newline.Y1 = NewPt1.Y;
-
             newline.X2 = NewPt2.X;
             newline.Y2 = NewPt2.Y;
-           // l = newline;
+ 
             Lines.Add(newline);
-            //MessageBox.Show(Lines.IndexOf(newline).ToString());
-
-               Pt1.Add(NewPt1);
-               Pt1.Add(NewPt2);
-               AIPmap.AdditionalMap.Children.Add(newline);
-             
-
-             //  for (int i = 1; i < Pt1.Count; i++)
-           //    {
-               
-                  // Pt1[i] = NewPt1;
-                  // Pt1[i+1] = NewPt2;
-                  // MessageBox.Show(Pt1[i].ToString());
-    
-             //  }
-
+            AIPmap.AdditionalMap.Children.Add(newline);
         }
 
         internal void Move(object sender, System.Windows.Input.MouseEventArgs e)
         {
+            
             if (e.LeftButton == MouseButtonState.Pressed)
             {
                  NewPt2 = e.GetPosition(AIPmap.AdditionalMap);
             }
-               
-            if (Keyboard.IsKeyDown(Key.Escape))
+
+            //false, no element
+            bool isEmpty = !Lines.Any();
+
+            //erase line when the escape key is pressed and the mouse is moving
+            if (Keyboard.IsKeyDown(Key.Escape) && !isEmpty)
             {
+                int i = Lines.Count - 1;
+                AIPmap.AdditionalMap.Children.RemoveAt(Lines.Count);
 
-                MessageBox.Show("count:" + AIPmap.AdditionalMap.Children.Count.ToString());
-
-                MessageBox.Show("p1:" + Pt1.IndexOf(NewPt1).ToString());
-                MessageBox.Show("p2:" + Pt1.IndexOf(NewPt2).ToString());
-             //  MessageBox.Show("line1:" + Lines[0].ToString());
-               // MessageBox.Show("line2:" + Lines[1].ToString());
-       
-
-                //  MessageBox.Show("line:" + AIPmap.AdditionalMap.Children.IndexOf(Lines.IndexOf().ToString());
-                // int i;
-                // for (i=1; i < AIPmap.AdditionalMap.Children.Count; )
-                // {
-                // AIPmap.AdditionalMap.Children.RemoveRange(AIPmap.AdditionalMap.Children.IndexOf(line), AIPmap.AdditionalMap.Children.IndexOf(line) - 1);
-                // AIPmap.AdditionalMap.Children.RemoveRange(AIPmap.AdditionalMap.Children.IndexOf(line), 1);
-                //  AIPmap.AdditionalMap.Children.RemoveRange(2, AIPmap.AdditionalMap.Children.IndexOf(line));
-               // AIPmap.AdditionalMap.Children.RemoveAt(Lines.IndexOf(l)+1);
-    
-                //  MessageBox.Show("line:" + AIPmap.AdditionalMap.Children.IndexOf(line).ToString());
-                // }
-                //  i ++;
-
+                    if (i == 0 && Lines[0] != null)
+                    {
+                        Lines.RemoveAt(0);
+                    }
+                    else
+                    {
+                        Lines.RemoveAt(i);
+                    }
             }
-
-    
         }
 
         internal void DrawingStop(object sender, MouseButtonEventArgs e)
         {
             IsDrawing = false;
-        
         }
 
         public void ChangeColor(object sender, MouseWheelEventArgs e)
@@ -150,9 +124,7 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
           
         }
 
- 
 
-    
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		//Left Mouse Button Up: Any pin

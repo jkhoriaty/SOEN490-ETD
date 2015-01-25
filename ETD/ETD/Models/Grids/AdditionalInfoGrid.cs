@@ -96,7 +96,7 @@ namespace ETD.Models.Grids
           //  this.MouseLeftButtonUp += new MouseButtonEventHandler(AIPmap.DrawingStop);
          //   this.MouseMove += new MouseEventHandler(AIPmap.Move);
          //   this.MouseUp += new MouseButtonEventHandler(AIPmap.DrawingMove);
-           
+       
             ///////////////////////////////////////////////////////////////////////////////////////////////////
 
             this.ContextMenu = AIPmap.Resources["AIcontext"] as ContextMenu;

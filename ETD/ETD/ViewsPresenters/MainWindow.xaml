@@ -73,7 +73,7 @@
         <Border Grid.Column="1" Grid.Row="1" Name="MapSection" BorderBrush="Black" BorderThickness="1" Grid.ColumnSpan="2">
             <!-- Here goes the MapSectionPage frame -->
         </Border>
-        <Border Grid.Column="1" Grid.Row="1" Name="AIPSection" BorderBrush="Black" BorderThickness="1" Grid.ColumnSpan="2" >
+        <Border Grid.Column="1" Grid.Row="1" Name="AIPSection" BorderBrush="Black" BorderThickness="1" Grid.ColumnSpan="2">
             <!-- Here goes the AdditionalInfoSectionPage frame -->
        
         </Border>
