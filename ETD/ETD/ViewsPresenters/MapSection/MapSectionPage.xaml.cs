@@ -24,11 +24,11 @@ namespace ETD.ViewsPresenters.MapSection
 		PinEditor pinEditor;
 		PinHandler pinHandler;
         ImageBrush imgbrush;
-        ContextMenu cm;
-        double TTX = 0;
-        double TTY = 0;
-        double xScale = 1;
-        double yScale = 1;
+        internal String zoomLevel = "100%";
+        double mouseX;
+        double mouseY;
+        double TTX;
+        double TTY;
 
 		public MapSectionPage(MainWindow mainWindow)
 		{
@@ -36,92 +36,36 @@ namespace ETD.ViewsPresenters.MapSection
 			this.mainWindow = mainWindow;
 			pinEditor = new PinEditor(this);
 			pinHandler = new PinHandler(this);
-
-            
-            cm = new ContextMenu();
-            this.ContextMenu = cm;
-            //cm.Opened += context_Popup;
-
-            MenuItem mi100 = new MenuItem();
-            mi100.Header = "100%";
-            mi100.Click += Zoom_Click_100;
-            cm.Items.Add(mi100);
-            mi100.IsChecked = true;
-
-            MenuItem mi120 = new MenuItem();
-            mi120.Header = "120%";
-            mi120.Click += Zoom_Click_120;
-            cm.Items.Add(mi120);
-
-            MenuItem mi140 = new MenuItem();
-            mi140.Header = "140%";
-            mi140.Click += Zoom_Click_140;
-            cm.Items.Add(mi140);
-
-            MenuItem mi160 = new MenuItem();
-            mi160.Header = "160%";
-            mi160.Click += Zoom_Click_160;
-            cm.Items.Add(mi160);
-
-            MenuItem mi180 = new MenuItem();
-            mi180.Header = "180%";
-            mi180.Click += Zoom_Click_180;
-            cm.Items.Add(mi180);
-
-            MenuItem mi200 = new MenuItem();
-            mi200.Header = "200%";
-            mi200.Click += Zoom_Click_200;
-            cm.Items.Add(mi200); 
+            Map.ContextMenu = Resources["ContextMenu"] as ContextMenu;
 		}
 
-        public void uncheckMenuItems()
+        public void Zoom(object sender, EventArgs e)
         {
-            for(int i = 0; i <= (this.cm.Items.Count) - 1; i++)
+            MenuItem mi = (MenuItem)sender;
+            zoomLevel = (String)mi.Header;
+            switch(zoomLevel)
             {
-                (this.cm.Items[i] as MenuItem).IsChecked = false;
+                case "100%":
+                    ScaleMap(1);
+                    break;
+                case "120%":
+                    ScaleMap(1.2);
+                    break;
+                case "140%":
+                    ScaleMap(1.4);
+                    break;
+                case "160%":
+                    ScaleMap(1.6);
+                    break;
+                case "180%":
+                    ScaleMap(1.8);
+                    break;
+                case "200%":
+                    ScaleMap(2);
+                    break;
             }
         }
-        public void Zoom_Click_100(object sender, EventArgs e)
-        {
-            ScaleMap(1, 1);
-            uncheckMenuItems();
-            (this.cm.Items[0] as MenuItem).IsChecked = true;
-        }
 
-        public void Zoom_Click_120(object sender, EventArgs e)
-        {
-            ScaleMap(1.2, 1.2);
-            uncheckMenuItems();
-            (this.cm.Items[1] as MenuItem).IsChecked = true;
-        }
-
-        public void Zoom_Click_140(object sender, EventArgs e)
-        {
-            ScaleMap(1.4, 1.4);
-            uncheckMenuItems();
-            (this.cm.Items[2] as MenuItem).IsChecked = true;
-        }
-
-        public void Zoom_Click_160(object sender, EventArgs e)
-        {
-            ScaleMap(1.6, 1.6);
-            uncheckMenuItems();
-            (this.cm.Items[3] as MenuItem).IsChecked = true;
-        }
-
-        public void Zoom_Click_180(object sender, EventArgs e)
-        {
-            ScaleMap(1.8, 1.8);
-            uncheckMenuItems();
-            (this.cm.Items[4] as MenuItem).IsChecked = true;
-        }
-
-        public void Zoom_Click_200(object sender, EventArgs e)
-        {
-            ScaleMap(2, 2);
-            uncheckMenuItems();
-            (this.cm.Items[5] as MenuItem).IsChecked = true;
-        }
 		//Loading of map as a result to the user clicking the "Load Map" button
 		public void SetMap(BitmapImage coloredImage)
 		{
@@ -138,92 +82,43 @@ namespace ETD.ViewsPresenters.MapSection
 
 		}
 
+        private void Map_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            var mousePos = e.GetPosition(Map);
+            mouseX = mousePos.X;
+            mouseY = mousePos.Y;
+        }
+
         public void ScaleMapDefault()
         {
             ScaleTransform ST = new ScaleTransform();
             ST.ScaleX = 1;
             ST.ScaleY = 1;
-            imgbrush.Transform = ST;
             imgbrush.RelativeTransform = ST;
 
-            var allPins = Map.Children.OfType<Grid>().ToList();
+            TranslateTransform TT;
 
-            foreach (var pin in allPins)
-            {
-                double movedPin_X = Math.Round((double)Canvas.GetLeft(pin) + (pin.Width / 2), 3)/xScale - TTX;
-                double movedPin_Y = Math.Round((double)Canvas.GetTop(pin) + (pin.Height / 2), 3)/yScale - TTY;
-
-                pinHandler.setPinPosition(pin, movedPin_X, movedPin_Y);
-                //DetectCollision(pin, movedPin_X, movedPin_Y);
-            }
+            TT = new TranslateTransform(-TTX, -TTY);
+            imgbrush.Transform = TT;
         }
 
-        public void ScaleMap(double x, double y)
+        public void ScaleMap(double ratio)
         {
             ScaleMapDefault();
-            if (x != 1 && y != 1)
+            if (ratio != 1)
             {
-                xScale = x;
-                yScale = y;
-                var mousePos = Mouse.GetPosition(Map);
-                Point centerOfScreen = new Point();
-                centerOfScreen.X = Map.ActualWidth / 2;
-                centerOfScreen.Y = Map.ActualHeight / 2;
-
-                Point scaledPoint = mousePos;
-                scaledPoint.X = scaledPoint.X * x;
-                scaledPoint.Y = scaledPoint.Y * y;
-
-                TransformGroup tg = new TransformGroup();
                 ScaleTransform ST = new ScaleTransform();
-                ST.ScaleX = x;
-                ST.ScaleY = y;
-                tg.Children.Add(ST);
-                imgbrush.RelativeTransform = tg;
+                ST.ScaleX = ratio;
+                ST.ScaleY = ratio;
+                imgbrush.RelativeTransform = ST;
 
                 TranslateTransform TT;
-                
-                //cursor is in the top right corner of screen
-                if (mousePos.X > centerOfScreen.X && mousePos.Y < centerOfScreen.Y)
-                {
-                    TTX = -Map.ActualWidth*x + Map.ActualWidth;//-(scaledPoint.X - mousePos.X);
-                    TTY = 0;//-Map.ActualHeight;//-(scaledPoint.Y - mousePos.Y);
-                    // MessageBox.Show(Convert.ToString(mousePos.X) + "  " + Convert.ToString(mousePos.Y) + " " + Convert.ToString(TTY));
-                }
-                //cursor is in bottom right corner of screen
-                else if (mousePos.X > centerOfScreen.X && mousePos.Y > centerOfScreen.Y)
-                {
 
-                    //not currently working
-                    TTX = -Map.ActualWidth*x + Map.ActualWidth;
-                    TTY = -Map.ActualHeight*y + Map.ActualHeight;
-
-                    //MessageBox.Show(Convert.ToString(scaledPoint.Y) + "  " + Convert.ToString(mousePos.Y) + " " + Convert.ToString(TTY));
-                }
-                //cursor is in bottom left corner of screen
-                else if (mousePos.X < centerOfScreen.X && mousePos.Y > centerOfScreen.Y)
-                {
-                    TTX = 0;
-                    TTY = -Map.ActualHeight * y + Map.ActualHeight;
-                }
-
+                TTX = -mouseX * ratio + Map.ActualWidth / 2;
+                TTY = -mouseY * ratio + Map.ActualHeight / 2;
 
                 TT = new TranslateTransform(TTX, TTY);
-                //MessageBox.Show(Convert.ToString(TTX) + "  " + Convert.ToString(TTY));
                 imgbrush.Transform = TT;
-
-                var allPins = Map.Children.OfType<Grid>().ToList();
-
-                foreach (var pin in allPins)
-                {
-                    double movedPin_X = x*Math.Round((double)Canvas.GetLeft(pin) + (pin.Width / 2), 3) + TTX;
-                    double movedPin_Y = y*Math.Round((double)Canvas.GetTop(pin) + (pin.Height / 2), 3) + TTY;
-
-                    pinHandler.setPinPosition(pin, movedPin_X, movedPin_Y);
-                    //DetectCollision(pin, movedPin_X, movedPin_Y);
-                }
-                
-
             }
             
         }

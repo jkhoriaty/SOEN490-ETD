@@ -128,11 +128,6 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
             }
         }
 
-		internal void CheckRight(MenuItem mi, TeamGrid fe)
-		{
-			mi.IsChecked = ((Statuses)Enum.Parse(typeof(Statuses), mi.Header.ToString().ToLower()) == fe.team.getStatus());
-		}
-
         //create additionnal info pin on the AdditionalInfoPage.xaml
         public void CreateAdditionnalInfoPin(String AI,int size)
         {
@@ -235,7 +230,22 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 				{
 					mi.Visibility = Visibility.Visible;
 				}
+                else if (!(cm.PlacementTarget is TeamGrid || cm.PlacementTarget is EquipmentGrid) && mi.Tag.Equals("map"))
+                {
+                    mi.Visibility = Visibility.Visible;
+                    CheckRight(mi);
+                }
 			}
 		}
+
+		private void CheckRight(MenuItem mi, TeamGrid fe)
+		{
+			mi.IsChecked = ((Statuses)Enum.Parse(typeof(Statuses), mi.Header.ToString().ToLower()) == fe.team.getStatus());
+		}
+
+        private void CheckRight(MenuItem mi)
+        {
+            mi.IsChecked = (mi.Header.Equals(mapSection.zoomLevel));
+        }
 	}
 }

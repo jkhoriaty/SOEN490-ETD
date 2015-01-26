@@ -22,7 +22,7 @@ namespace ETD.Models.Grids
             this.MouseLeftButtonDown += new MouseButtonEventHandler(mapSection.DragStart);
             this.MouseLeftButtonUp += new MouseButtonEventHandler(mapSection.DragStop);
             this.MouseMove += new MouseEventHandler(mapSection.DragMove);
-			this.ContextMenu = mapSection.Resources["TeamContext"] as ContextMenu;
+            this.ContextMenu = mapSection.Resources["ContextMenu"] as ContextMenu;
 
             Rectangle imageRectangle = new Rectangle();
             imageRectangle.Width = size;

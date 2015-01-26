@@ -26,7 +26,7 @@ namespace ETD.Models.Grids
             this.MouseLeftButtonDown += new MouseButtonEventHandler(mapSection.DragStart);
             this.MouseLeftButtonUp += new MouseButtonEventHandler(mapSection.DragStop);
             this.MouseMove += new MouseEventHandler(mapSection.DragMove);
-            this.ContextMenu = mapSection.Resources["TeamContext"] as ContextMenu;
+            this.ContextMenu = mapSection.Resources["ContextMenu"] as ContextMenu;
 			this.ContextMenuOpening += new ContextMenuEventHandler(mapSection.CheckRight);
             (this.ContextMenu.Items[0] as MenuItem).IsChecked = true;
 

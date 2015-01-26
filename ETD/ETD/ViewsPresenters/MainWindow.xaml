@@ -63,7 +63,7 @@
                     <ComboBoxItem Content="Mounted Stretcher" Name="mountedStretcher"/>
                     <ComboBoxItem Content="Wheelchair" Name="wheelchair"/>
                 </ComboBox>
-                <Button Grid.Column="1" Content="Add Equipemnt" Click="CreateEquipmentPin" Margin="1,0,1,0" VerticalAlignment="Center"/>
+                <Button Grid.Column="1" Content="Add Equipement" Click="CreateEquipmentPin" Margin="1,0,1,0" VerticalAlignment="Center"/>
 
             </StackPanel>
         </Grid>
