@@ -25,6 +25,10 @@ namespace ETD.ViewsPresenters.MapSection
 		PinHandler pinHandler;
         ImageBrush imgbrush;
         ContextMenu cm;
+        double TTX = 0;
+        double TTY = 0;
+        double xScale = 1;
+        double yScale = 1;
 
 		public MapSectionPage(MainWindow mainWindow)
 		{
@@ -138,9 +142,20 @@ namespace ETD.ViewsPresenters.MapSection
         {
             ScaleTransform ST = new ScaleTransform();
             ST.ScaleX = 1;
-            ST.ScaleY = 1;;
+            ST.ScaleY = 1;
             imgbrush.Transform = ST;
             imgbrush.RelativeTransform = ST;
+
+            var allPins = Map.Children.OfType<Grid>().ToList();
+
+            foreach (var pin in allPins)
+            {
+                double movedPin_X = Math.Round((double)Canvas.GetLeft(pin) + (pin.Width / 2), 3)/xScale - TTX;
+                double movedPin_Y = Math.Round((double)Canvas.GetTop(pin) + (pin.Height / 2), 3)/yScale - TTY;
+
+                pinHandler.setPinPosition(pin, movedPin_X, movedPin_Y);
+                //DetectCollision(pin, movedPin_X, movedPin_Y);
+            }
         }
 
         public void ScaleMap(double x, double y)
@@ -148,6 +163,8 @@ namespace ETD.ViewsPresenters.MapSection
             ScaleMapDefault();
             if (x != 1 && y != 1)
             {
+                xScale = x;
+                yScale = y;
                 var mousePos = Mouse.GetPosition(Map);
                 Point centerOfScreen = new Point();
                 centerOfScreen.X = Map.ActualWidth / 2;
@@ -165,8 +182,6 @@ namespace ETD.ViewsPresenters.MapSection
                 imgbrush.RelativeTransform = tg;
 
                 TranslateTransform TT;
-                double TTX = 0;
-                double TTY = 0;
                 
                 //cursor is in the top right corner of screen
                 if (mousePos.X > centerOfScreen.X && mousePos.Y < centerOfScreen.Y)
@@ -196,6 +211,18 @@ namespace ETD.ViewsPresenters.MapSection
                 TT = new TranslateTransform(TTX, TTY);
                 //MessageBox.Show(Convert.ToString(TTX) + "  " + Convert.ToString(TTY));
                 imgbrush.Transform = TT;
+
+                var allPins = Map.Children.OfType<Grid>().ToList();
+
+                foreach (var pin in allPins)
+                {
+                    double movedPin_X = x*Math.Round((double)Canvas.GetLeft(pin) + (pin.Width / 2), 3) + TTX;
+                    double movedPin_Y = y*Math.Round((double)Canvas.GetTop(pin) + (pin.Height / 2), 3) + TTY;
+
+                    pinHandler.setPinPosition(pin, movedPin_X, movedPin_Y);
+                    //DetectCollision(pin, movedPin_X, movedPin_Y);
+                }
+                
 
             }
             
