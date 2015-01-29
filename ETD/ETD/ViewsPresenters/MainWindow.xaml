@@ -31,7 +31,7 @@
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
                 <!-- Here go all the buttons -->
                 <Button Content="Load Map" Name="Load_Map" Click="LoadMap" Margin="2,0,2,0"/>
-
+  
                 <ComboBox Visibility="Collapsed" Grid.Column="0" Name="AI" Width="130" Margin="1,0,1,0" VerticalAlignment="Center">
                     <ComboBoxItem Content="circle" Name="circle" Selected="CreateAdditionnalInfoPin"/>
                     <ComboBoxItem Content="rectangle" Name="rectangle" Selected="CreateAdditionnalInfoPin"/>
