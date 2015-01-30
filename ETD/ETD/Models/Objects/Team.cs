@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ETD.Models.Grids;
 
 namespace ETD.Models.Objects
 {
@@ -16,7 +17,7 @@ namespace ETD.Models.Objects
 		List<TeamMember> memberList = new List<TeamMember>();
         List<Equipment> equipmentList = new List<Equipment>();
 		Statuses status;
-        Grids.TeamGrid teamGrid;
+        TeamGrid teamGrid;
 
 		Trainings highestLevelOfTraining = 0;
 
@@ -41,10 +42,12 @@ namespace ETD.Models.Objects
             }
             return false;
         }
+
         public void setTeamGrid(Grids.TeamGrid tg)
         {
             teamGrid = tg;
         }
+
         public Grids.TeamGrid getTeamGrid()
         {
             return teamGrid;
