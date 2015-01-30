@@ -525,5 +525,11 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
                 }
             }
         }
+
+        internal void AppointTeamToIntervention(Grid team, Grid intervention)
+        {
+            setPinPosition(intervention, getX(team), getY(team));
+            DetectCollision(team, getX(team), getY(team));
+        }
 	}
 }

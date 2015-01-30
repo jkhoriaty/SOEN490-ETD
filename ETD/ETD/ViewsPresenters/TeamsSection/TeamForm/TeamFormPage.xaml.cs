@@ -27,7 +27,7 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 		public int currentNumberOfMembers = 1; //Used to track the number of members on the TeamForm
 		private List<Control> textboxLastValidationFailed = null;
 		private List<Border> comboboxLastValidationFailed = null;
-		private static List<String> activeTeamsList = new List<String>();
+		public static List<String> activeTeamsList = new List<String>();
 
         public TeamFormPage(TeamsSectionPage caller)
         {
@@ -78,12 +78,12 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 				DateTime dateNow = DateTime.Now;
 
 				//Create team
-				String team_name = teamName.Text;
-				activeTeamsList.Add(team_name);
-				if(team_name.Length == 1)
-				{
-					team_name = team_name.ToUpper();
-				}
+                String team_name = teamName.Text;
+                if (team_name.Length == 1)
+                {
+                    team_name = team_name.ToUpper();
+                }
+				activeTeamsList.Add(team_name);			
 				Team team = new Team(team_name);
 
 				//Create first member
@@ -157,7 +157,7 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 			//Make sure that there are no other team with the same name
 			foreach(String item in activeTeamsList)
 			{
-				if(item.Equals(teamName.Text))
+                if (item.Equals(teamName.Text) || item.Equals(teamName.Text.ToLower()) || item.Equals(teamName.Text.ToUpper()))
 				{
 					textboxFailedValidation.Add(teamName);
 				}
@@ -332,12 +332,21 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 			}
 		}
 
+        internal static void removeTeamName(String teamName)
+        {
+            activeTeamsList.Remove(teamName);
+        }
+
 		public DateTime checkDepartureTime(DateTime departureTime)
 		{
 			if (departureTime.Hour < DateTime.Now.Hour)
 			{
 				departureTime = departureTime.AddDays(1);
 			}
+            else if (departureTime.Hour == DateTime.Now.Hour && departureTime.Minute < DateTime.Now.Minute)
+            {
+                departureTime = departureTime.AddDays(1);
+            }
 			return departureTime;
 		}
     }

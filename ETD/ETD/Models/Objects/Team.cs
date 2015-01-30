@@ -16,6 +16,7 @@ namespace ETD.Models.Objects
 		List<TeamMember> memberList = new List<TeamMember>();
         List<Equipment> equipmentList = new List<Equipment>();
 		Statuses status;
+        Grids.TeamGrid teamGrid;
 
 		Trainings highestLevelOfTraining = 0;
 
@@ -39,6 +40,14 @@ namespace ETD.Models.Objects
                 return true;
             }
             return false;
+        }
+        public void setTeamGrid(Grids.TeamGrid tg)
+        {
+            teamGrid = tg;
+        }
+        public Grids.TeamGrid getTeamGrid()
+        {
+            return teamGrid;
         }
 		
 		public bool addEquipment(Equipment equipment)
@@ -89,6 +98,7 @@ namespace ETD.Models.Objects
         public void setStatus(Statuses s)
         {
             this.status = s;
+            
         }
 
 		public Trainings getHighestLevelOfTraining()

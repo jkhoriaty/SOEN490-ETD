@@ -298,10 +298,13 @@ namespace ETD.ViewsPresenters.MapSection
 		internal void ReportArrival(Grid team)
 		{
 			Grid intervention = pinHandler.RelatedIntervention(team);
-			if(intervention != null)
+			if(intervention == null)
 			{
-				mainWindow.ReportArrival(team.Name, intervention.Name);
+                mainWindow.CreateIntervention();
+                pinHandler.AppointTeamToIntervention(team, (Grid) Map.Children[Map.Children.Count - 1]);
+                intervention = pinHandler.RelatedIntervention(team);
 			}
+			mainWindow.ReportArrival(team.Name, intervention.Name);
 		}
 
         internal void ReportArrived(string interventionName, int rowNumber)

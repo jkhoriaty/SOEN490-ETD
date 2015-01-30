@@ -49,12 +49,12 @@
 			<Label Grid.Column="0" Content="Complaint:"/>
 			<ComboBox Grid.Column="1" Grid.ColumnSpan="2" Name="Complaint" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" SelectionChanged="Complaint_SelectionChanged">
 				<ComboBoxItem Content="Abdominal pain"/>
-				<ComboBoxItem Content="Allergy"/>
-				<ComboBoxItem Content="Anaphylaxy"/>
-				<ComboBoxItem Content="Behavioral"/>
+				<ComboBoxItem Content="Allergy (Mild)"/>
+				<ComboBoxItem Content="Anaphylaxis"/>
+				<ComboBoxItem Content="Behavioral Disorder"/>
 				<ComboBoxItem Content="Burn"/>
 				<ComboBoxItem Content="Cardiac Arrest"/>
-				<ComboBoxItem Content="Convulsion"/>
+				<ComboBoxItem Content="Seizures"/>
 				<ComboBoxItem Content="Environmental related disorder"/>
 				<ComboBoxItem Content="Head / Spinal injury"/>
 				<ComboBoxItem Content="Headache"/>
@@ -69,7 +69,7 @@
 				<ComboBoxItem Content="Respiratory arrest"/>
 				<ComboBoxItem Content="Soft tissue injury"/>
 				<ComboBoxItem Content="Suspected stroke"/>
-				<ComboBoxItem Content="Thoracic pain"/>
+				<ComboBoxItem Content="Chest pain"/>
 				<ComboBoxItem Content="Unconscious"/>
 				<ComboBoxItem Content="Weakness / Fainting"/>
 				<ComboBoxItem Content="Other"/>
