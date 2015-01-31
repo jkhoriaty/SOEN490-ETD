@@ -33,7 +33,7 @@ public class Login extends ActionBarActivity implements UDPCallbacks
     public void login(View view)
     {
 	    //Validate the name before sending request to the server
-        if (name.getText().toString().equals("Greg"))
+        if (name.getText().toString().matches("^[a-zA-Z]+$"))
         {
 	        //Initiate handshake with server
 	        (new Thread(new ServerHandshakeThread(this, serverIP, serverPort, deviceID, name.getText().toString()))).start();
