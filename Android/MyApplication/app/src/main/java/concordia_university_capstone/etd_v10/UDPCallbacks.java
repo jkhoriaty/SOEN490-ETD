@@ -5,6 +5,6 @@ package concordia_university_capstone.etd_v10;
  */
 public interface UDPCallbacks
 {
-	public void HandshakeSucceeded(String senderID);
-	public void HandshakeFailed();
+	public void HandshakeSucceeded();
+	public void HandshakeFailed(String message);
 }

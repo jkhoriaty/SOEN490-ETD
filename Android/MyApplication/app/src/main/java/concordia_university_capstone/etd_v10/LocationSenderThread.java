@@ -16,12 +16,12 @@ public class LocationSenderThread implements Runnable
 
 	String request;
 
-	public LocationSenderThread(String ip, int port, String senderID, Location location)
+	public LocationSenderThread(String ip, int port, String deviceID, Location location)
 	{
 		this.ip = ip;
 		this.port = port;
 
-		request = "1~" + senderID + "~" + location.getLatitude() + "~" + location.getLongitude() + "~";
+		request = "1~" + deviceID + "~" + location.getLatitude() + "~" + location.getLongitude() + "~";
 	}
 
 	public void run()

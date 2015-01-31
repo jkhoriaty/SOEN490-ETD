@@ -1,8 +1,10 @@
 package concordia_university_capstone.etd_v10;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.telephony.TelephonyManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,7 +14,9 @@ import android.widget.Toast;
 
 public class Login extends ActionBarActivity implements UDPCallbacks
 {
-	String serverIP = "24.202.7.147";
+	String deviceID;
+
+	String serverIP = "192.168.0.200";
 	int serverPort = 2000;
 
     private EditText name = null;
@@ -22,6 +26,7 @@ public class Login extends ActionBarActivity implements UDPCallbacks
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+	    deviceID = ((TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();
         name = (EditText) findViewById(R.id.editText1);
     }
 
@@ -31,7 +36,7 @@ public class Login extends ActionBarActivity implements UDPCallbacks
         if (name.getText().toString().equals("Greg"))
         {
 	        //Initiate handshake with server
-	        (new Thread(new ServerHandshakeThread(this, serverIP, serverPort, name.getText().toString()))).start();
+	        (new Thread(new ServerHandshakeThread(this, serverIP, serverPort, deviceID, name.getText().toString()))).start();
         }
         else //Validation failed
         {
@@ -40,7 +45,7 @@ public class Login extends ActionBarActivity implements UDPCallbacks
     }
 	boolean success = false;
 
-	public void HandshakeSucceeded(String senderID)
+	public void HandshakeSucceeded()
 	{
 		this.runOnUiThread(new Runnable()
 		{
@@ -51,13 +56,13 @@ public class Login extends ActionBarActivity implements UDPCallbacks
 			}
 		});
 		Intent intent = new Intent(this, LocationTransmission.class);
-		intent.putExtra("senderID", senderID);
+		intent.putExtra("deviceID", deviceID);
 		intent.putExtra("serverIP", serverIP);
 		intent.putExtra("serverPort", serverPort);
 		startActivity(intent);
 	}
 
-	public void HandshakeFailed()
+	public void HandshakeFailed(final String message)
 	{
 		if(success == false)
 		{
@@ -66,7 +71,7 @@ public class Login extends ActionBarActivity implements UDPCallbacks
 				@Override
 				public void run()
 				{
-					Toast.makeText(getApplicationContext(), "Connection to server failed!\nPlease try again later.", Toast.LENGTH_SHORT).show();
+					Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
 				}
 			});
 		}

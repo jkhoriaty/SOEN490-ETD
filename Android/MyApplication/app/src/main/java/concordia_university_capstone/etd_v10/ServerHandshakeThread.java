@@ -17,12 +17,12 @@ public class ServerHandshakeThread implements Runnable
 	int port;
 	String request;
 
-	public ServerHandshakeThread(UDPCallbacks caller, String ip, int port, String name)
+	public ServerHandshakeThread(UDPCallbacks caller, String ip, int port, String deviceID, String name)
 	{
 		this.caller = caller;
 		this.ip = ip;
 		this.port = port;
-		request = "0~" + name + "~";
+		request = "0~" + deviceID + "~" + name + "~";
 	}
 
 	public void run()
@@ -53,7 +53,16 @@ public class ServerHandshakeThread implements Runnable
 				socket.close();
 
 				String[] replyMessage = (new String(buffer)).split("~");
-				caller.HandshakeSucceeded(replyMessage[1]);
+				switch(Integer.parseInt(replyMessage[0]))
+				{
+					case 0:
+						caller.HandshakeSucceeded();
+						break;
+					case 1:
+						caller.HandshakeFailed("The name that you entered is already in use, please write your full name instead.");
+						break;
+				}
+
 				return;
 			}
 			catch(SocketTimeoutException e)
@@ -68,6 +77,6 @@ public class ServerHandshakeThread implements Runnable
 		while(unsuccessful && tries <= 10);
 
 		//Callback to the login activity to notify of failure
-		caller.HandshakeFailed();
+		caller.HandshakeFailed("Connection to server failed!\nPlease try again later.");
 	}
 }

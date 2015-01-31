@@ -19,7 +19,7 @@ import com.google.android.gms.location.LocationServices;
 
 public class LocationTransmission extends ActionBarActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener
 {
-	String senderID;
+	String deviceID;
 	String serverIP;
 	int serverPort;
 
@@ -33,7 +33,7 @@ public class LocationTransmission extends ActionBarActivity implements GoogleApi
 		setContentView(R.layout.activity_location_transmission);
 
 		Intent intent = getIntent();
-		senderID = intent.getStringExtra("senderID");
+		deviceID = intent.getStringExtra("deviceID");
 		serverIP = intent.getStringExtra("serverIP");
 		serverPort = intent.getIntExtra("serverPort", -1);
 
@@ -103,6 +103,6 @@ public class LocationTransmission extends ActionBarActivity implements GoogleApi
 	@Override
 	public void onLocationChanged(Location location)
 	{
-		new Thread(new LocationSenderThread(serverIP, serverPort, senderID, location)).start();
+		new Thread(new LocationSenderThread(serverIP, serverPort, deviceID, location)).start();
 	}
 }
