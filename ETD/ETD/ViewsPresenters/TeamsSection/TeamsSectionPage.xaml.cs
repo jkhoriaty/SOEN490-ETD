@@ -164,5 +164,10 @@ namespace ETD.ViewsPresenters.TeamsSection
 			mainWindow.CreateEquipmentPin(equipment.Name);
 
 		}
-	}
+
+        internal void UpdateSectors()
+        {
+            mainWindow.UpdateSectors();
+        }
+    }
 }
