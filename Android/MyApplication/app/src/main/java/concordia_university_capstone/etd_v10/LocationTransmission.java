@@ -121,7 +121,8 @@ public class LocationTransmission extends ActionBarActivity implements GoogleApi
 
     public void stopLocationUpdates(View view)
     {
-        //To be filled in
+        LocationServices.FusedLocationApi.removeLocationUpdates(apiClient, this);
+
     }
 
 	@Override
