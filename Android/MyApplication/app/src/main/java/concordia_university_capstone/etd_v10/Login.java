@@ -16,7 +16,7 @@ public class Login extends ActionBarActivity implements UDPCallbacks
 {
 	String deviceID;
 
-	String serverIP = "192.168.0.200";
+	String serverIP = "24.202.7.147";
 	int serverPort = 2000;
 
     private EditText name = null;

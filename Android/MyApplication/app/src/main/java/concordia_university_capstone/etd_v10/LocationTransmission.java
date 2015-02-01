@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -26,11 +27,29 @@ public class LocationTransmission extends ActionBarActivity implements GoogleApi
 	GoogleApiClient apiClient;
 	LocationRequest locationRequest;
 
+    Button locationTransmission;
+    Boolean isBroadCasting = false;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_location_transmission);
+        locationTransmission = (Button) findViewById(R.id.button1);
+        locationTransmission.setOnClickListener(new View.OnClickListener() {
+            public void onClick (View v){
+                if(!isBroadCasting){
+                    isBroadCasting = true;
+                    locationTransmission.setText("Stop Transmitting Location");
+                    startLocationUpdates(v);
+                }
+                else{
+                    isBroadCasting = false;
+                    locationTransmission.setText("Start Transmitting Location");
+                    stopLocationUpdates(v);
+                }
+            }
+        });
 
 		Intent intent = getIntent();
 		deviceID = intent.getStringExtra("deviceID");
@@ -99,6 +118,11 @@ public class LocationTransmission extends ActionBarActivity implements GoogleApi
 	{
 		LocationServices.FusedLocationApi.requestLocationUpdates(apiClient, locationRequest, this);
 	}
+
+    public void stopLocationUpdates(View view)
+    {
+        //To be filled in
+    }
 
 	@Override
 	public void onLocationChanged(Location location)
