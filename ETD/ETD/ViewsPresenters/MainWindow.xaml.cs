@@ -18,6 +18,8 @@ using ETD.ViewsPresenters.MapSection;
 using ETD.ViewsPresenters.InterventionsSection;
 using ETD.Models.Objects;
 using System.Windows.Threading;
+using ETD.Services;
+using System.Threading;
 
 namespace ETD.ViewsPresenters
 {
@@ -222,5 +224,45 @@ namespace ETD.ViewsPresenters
         {
             interventionsSection.CreateIntervention();
         }
+
+		private void TestConnectionToServer(object sender, RoutedEventArgs e)
+		{
+			Task<String[]> PingTask = new Task<string[]>(NetworkServices.PingServer);
+			PingTask.ContinueWith(ping => PingAnalyzeAnswer(ping.Result));
+			PingTask.Start();
+			TestConnectionButton.Background = new SolidColorBrush(Colors.Yellow);
+			TestConnectionButton.Foreground = new SolidColorBrush(Colors.Black);
+		}
+
+		private void PingAnalyzeAnswer(String[] reply)
+		{
+			if(reply == null)
+			{
+				NotifyConnectionFail();
+			}
+			else
+			{
+				NotifyConnectionSuccess();
+			}
+		}
+
+		private void NotifyConnectionFail()
+		{
+			Dispatcher.Invoke(() => 
+			{
+				TestConnectionButton.Background = new SolidColorBrush(Colors.Red);
+				TestConnectionButton.Foreground = new SolidColorBrush(Colors.White);
+			});
+		}
+
+		private void NotifyConnectionSuccess()
+		{
+			Dispatcher.Invoke(() => 
+			{
+				TestConnectionButton.Background = new SolidColorBrush(Colors.Green);
+				TestConnectionButton.Foreground = new SolidColorBrush(Colors.White);
+
+			});
+		}
 	}
 }

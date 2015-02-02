@@ -44,7 +44,9 @@
     <Compile Include="Models\Objects\Intervention.cs" />
     <Compile Include="Models\Grids\InterventionGrid.cs" />
     <Compile Include="Models\Grids\TeamGrid.cs" />
-    <Compile Include="Models\Services\TextboxHandler.cs" />
+    <Compile Include="Services\NetworkServices.cs" />
+    <Compile Include="Services\UDPConnectionThread.cs" />
+    <Compile Include="Services\TextboxHandler.cs" />
     <Compile Include="ViewsPresenters\InterventionsSection\InterventionForm\ABCInterventionForm\ABCInterventionFormPage.xaml.cs">
       <DependentUpon>ABCInterventionFormPage.xaml</DependentUpon>
     </Compile>
@@ -130,13 +132,13 @@
     Models
   -->
   <ItemGroup>
-    <Compile Include="Models\Services\IObservable.cs" />
-    <Compile Include="Models\Services\IObserver.cs" />
-    <Compile Include="Models\Services\LanguageSelector.cs" />
+    <Compile Include="Services\IObservable.cs" />
+    <Compile Include="Services\IObserver.cs" />
+    <Compile Include="Services\LanguageSelector.cs" />
     <Compile Include="Models\Objects\Equipment.cs" />
-    <Compile Include="Models\Services\TechnicalServices.cs" />
+    <Compile Include="Services\TechnicalServices.cs" />
     <Compile Include="Models\Objects\Team.cs" />
-    <Compile Include="Models\Services\Vocabulary.cs" />
+    <Compile Include="Services\Vocabulary.cs" />
     <Compile Include="Models\Objects\TeamMember.cs" />
     <Compile Include="Models\Objects\Word.cs" />
   </ItemGroup>
@@ -367,6 +369,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <!--
     Icons
   -->

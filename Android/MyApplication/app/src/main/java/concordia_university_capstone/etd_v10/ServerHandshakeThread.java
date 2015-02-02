@@ -12,12 +12,12 @@ import java.net.SocketTimeoutException;
  */
 public class ServerHandshakeThread implements Runnable
 {
-	UDPCallbacks caller;
+	UDPHandshakeCallbacks caller;
 	String ip;
 	int port;
 	String request;
 
-	public ServerHandshakeThread(UDPCallbacks caller, String ip, int port, String deviceID, String name)
+	public ServerHandshakeThread(UDPHandshakeCallbacks caller, String ip, int port, String deviceID, String name)
 	{
 		this.caller = caller;
 		this.ip = ip;
@@ -30,7 +30,7 @@ public class ServerHandshakeThread implements Runnable
 		boolean unsuccessful;
 		int tries = 0;
 
-		//Repeat until unsuccessful or for a max of 10 tries (~= 30 seconds)
+		//Repeat until unsuccessful or for a max of 5 tries (~= 10 seconds)
 		do
 		{
 			unsuccessful = false;
@@ -48,7 +48,7 @@ public class ServerHandshakeThread implements Runnable
 				buffer = new byte[100];
 				DatagramPacket reply = new DatagramPacket(buffer, buffer.length);
 
-				socket.setSoTimeout(3000);
+				socket.setSoTimeout(2000);
 				socket.receive(reply);
 				socket.close();
 
@@ -74,7 +74,7 @@ public class ServerHandshakeThread implements Runnable
 				e.printStackTrace();
 			}
 		}
-		while(unsuccessful && tries <= 10);
+		while(unsuccessful && tries <= 5);
 
 		//Callback to the login activity to notify of failure
 		caller.HandshakeFailed("Connection to server failed!\nPlease try again later.");

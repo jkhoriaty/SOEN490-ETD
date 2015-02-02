@@ -12,7 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-public class Login extends ActionBarActivity implements UDPCallbacks
+public class Login extends ActionBarActivity implements UDPHandshakeCallbacks
 {
 	String deviceID;
 

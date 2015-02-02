@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 using ETD.Models.Objects;
 
-namespace ETD.Models.Services
+namespace ETD.Services
 {
 	static class TechnicalServices
 	{

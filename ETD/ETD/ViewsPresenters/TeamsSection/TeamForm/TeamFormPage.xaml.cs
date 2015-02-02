@@ -14,7 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ETD.ViewsPresenters;
 using ETD.Models.Objects;
-using ETD.Models.Services;
+using ETD.Services;
 
 namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 {
