@@ -14,7 +14,6 @@
 		android:layout_height="wrap_content"
 		android:layout_centerHorizontal="true"
 		android:layout_marginBottom="94dp"
-		android:onClick="startLocationUpdates"
 		android:text="@string/send"/>
 
 </RelativeLayout>
