@@ -80,24 +80,23 @@ namespace ETD.ViewsPresenters
 
            // Absolute path doesnt work..
            // Saving to desktop directory for now
-           // String AbsolutePath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase);
-           // String Filename = @"\Maps\test.png";
-           // String test = AbsolutePath + Filename;
-           // MessageBox.Show((AbsolutePath + Filename).ToString());
-
+            String AbsolutePath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase);
+            String Filename = @"\Maps\test.png";
+            String test = AbsolutePath + Filename;
+            MessageBox.Show((AbsolutePath + Filename).ToString());
+         
             Rect AIbounds = VisualTreeHelper.GetDescendantBounds(AIPmapSection);
             Rect Mapbounds = VisualTreeHelper.GetDescendantBounds(mapSection);
             var AIFileName = "AIInfo_" + DateTime.Now.ToString("yyyyMMdd_hhss");
             var MapFileName = "Map_" + DateTime.Now.ToString("yyyyMMdd_hhss");
             var MergedMapName = "ModMap_" + DateTime.Now.ToString("yyyyMMdd_hhss");
-
             var desktopFolder = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
        
             MessageBox.Show("mapbounds:"+ Mapbounds.ToString());
             MessageBox.Show("Aibounds:" + AIbounds.ToString());
 
             double dpi = 96d;
-            if (AIbounds.ToString() != "Empty")
+            if (AIbounds.ToString() != "Empty" && Mapbounds.ToString() != "Empty")
             {
                 RenderTargetBitmap rtb = new RenderTargetBitmap((int)AIbounds.Width, (int)AIbounds.Height, dpi, dpi, System.Windows.Media.PixelFormats.Default);
                 RenderTargetBitmap rtb2 = new RenderTargetBitmap((int)Mapbounds.Width, (int)Mapbounds.Height, dpi, dpi, System.Windows.Media.PixelFormats.Default);
@@ -138,41 +137,36 @@ namespace ETD.ViewsPresenters
                     pngEncoder2.Save(ms2);
                     ms2.Close();
                     
-                    System.IO.File.WriteAllBytes(desktopFolder + "/" + AIFileName + ".png", ms.ToArray());
-                    System.IO.File.WriteAllBytes(desktopFolder + "/" + MapFileName + ".png", ms2.ToArray());
+                    System.IO.File.WriteAllBytes(desktopFolder + "/maps/" + AIFileName + ".png", ms.ToArray());
+                    System.IO.File.WriteAllBytes(desktopFolder + "/maps/" + MapFileName + ".png", ms2.ToArray());
 
-                    System.Drawing.Image img1 = System.Drawing.Image.FromFile(desktopFolder + "/" + AIFileName + ".png");
-                    System.Drawing.Image img2 = System.Drawing.Image.FromFile(desktopFolder + "/" + MapFileName + ".png");
-                    String FinalImage = desktopFolder + "/" + MergedMapName + ".png";
+                    System.Drawing.Image AIimg = System.Drawing.Image.FromFile(desktopFolder + "/maps/" + AIFileName + ".png");
+                    System.Drawing.Image Mapimg = System.Drawing.Image.FromFile(desktopFolder + "/maps/" + MapFileName + ".png");
+                    String FinalImage = desktopFolder + "/maps/" + MergedMapName + ".png";
 
-                    int width = img2.Width;
-                    int height =  img2.Height;
+                    int width = Mapimg.Width;
+                    int height = Mapimg.Height;
 
-                    Bitmap img3 = new Bitmap(width, height);
-                    Graphics g = Graphics.FromImage(img3);
+                    Bitmap FinalImg = new Bitmap(width, height);
+                    Graphics g = Graphics.FromImage(FinalImg);
 
-                   // g.DrawImage(img2, new System.Drawing.Rectangle(new System.Drawing.Point(), img2.Size), new System.Drawing.Rectangle(new System.Drawing.Point(), img2.Size), GraphicsUnit.Pixel);
-                   // g.DrawImage(img1, new System.Drawing.Rectangle(new System.Drawing.Point(0, img2.Height + 1), img1.Size),
-                   //               new System.Drawing.Rectangle(new System.Drawing.Point(), img1.Size), GraphicsUnit.Pixel);
-                   // g.DrawImage(img1, new System.Drawing.Point(img1.Width, 0));
-                  g.DrawImage(img2,new System.Drawing.Point(0,0));
-                  g.DrawImage(img1, new System.Drawing.Point(0, 0));
-                   g.Dispose();
-                    img1.Dispose();
-                   img2.Dispose();
+                    g.DrawImage(Mapimg, new System.Drawing.Point(0, 0));
+                    g.DrawImage(AIimg, new System.Drawing.Point(0, 0));
+                    g.Dispose();
+                    AIimg.Dispose();
+                    Mapimg.Dispose();
 
-                    img3.Save(FinalImage, System.Drawing.Imaging.ImageFormat.Png);
-                     img3.Dispose();
+                    FinalImg.Save(FinalImage, System.Drawing.Imaging.ImageFormat.Png);
+                    FinalImg.Dispose();
                 }
                 catch (Exception err)
                 {
                     MessageBox.Show(err.ToString(), "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
-    
 
         }
-
+         
 
 
 		//Window size or state changed - Adjusting the team section height
