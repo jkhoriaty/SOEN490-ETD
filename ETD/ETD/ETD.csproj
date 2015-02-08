@@ -41,6 +41,7 @@
     <Compile Include="Models\Objects\AdditionalInfo.cs" />
     <Compile Include="Models\Grids\AdditionalInfoGrid.cs" />
     <Compile Include="Models\Grids\EquipmentGrid.cs" />
+    <Compile Include="Models\Objects\InitialInfo.cs" />
     <Compile Include="Models\Objects\Intervention.cs" />
     <Compile Include="Models\Grids\InterventionGrid.cs" />
     <Compile Include="Models\Grids\TeamGrid.cs" />
