@@ -83,17 +83,17 @@ namespace ETD.ViewsPresenters
             String AbsolutePath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase);
             String Filename = @"\Maps\test.png";
             String test = AbsolutePath + Filename;
-            MessageBox.Show((AbsolutePath + Filename).ToString());
+           // MessageBox.Show((AbsolutePath + Filename).ToString());
          
             Rect AIbounds = VisualTreeHelper.GetDescendantBounds(AIPmapSection);
             Rect Mapbounds = VisualTreeHelper.GetDescendantBounds(mapSection);
             var AIFileName = "AIInfo_" + DateTime.Now.ToString("yyyyMMdd_hhss");
             var MapFileName = "Map_" + DateTime.Now.ToString("yyyyMMdd_hhss");
             var MergedMapName = "ModMap_" + DateTime.Now.ToString("yyyyMMdd_hhss");
-            var desktopFolder = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+            var desktopFolder = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
        
-            MessageBox.Show("mapbounds:"+ Mapbounds.ToString());
-            MessageBox.Show("Aibounds:" + AIbounds.ToString());
+           // MessageBox.Show("mapbounds:"+ Mapbounds.ToString());
+           // MessageBox.Show("Aibounds:" + AIbounds.ToString());
 
             double dpi = 96d;
             if (AIbounds.ToString() != "Empty" && Mapbounds.ToString() != "Empty")
@@ -137,12 +137,12 @@ namespace ETD.ViewsPresenters
                     pngEncoder2.Save(ms2);
                     ms2.Close();
                     
-                    System.IO.File.WriteAllBytes(desktopFolder + "/maps/" + AIFileName + ".png", ms.ToArray());
-                    System.IO.File.WriteAllBytes(desktopFolder + "/maps/" + MapFileName + ".png", ms2.ToArray());
+                    System.IO.File.WriteAllBytes(desktopFolder  + AIFileName + ".png", ms.ToArray());
+                    System.IO.File.WriteAllBytes(desktopFolder  + MapFileName + ".png", ms2.ToArray());
 
-                    System.Drawing.Image AIimg = System.Drawing.Image.FromFile(desktopFolder + "/maps/" + AIFileName + ".png");
-                    System.Drawing.Image Mapimg = System.Drawing.Image.FromFile(desktopFolder + "/maps/" + MapFileName + ".png");
-                    String FinalImage = desktopFolder + "/maps/" + MergedMapName + ".png";
+                    System.Drawing.Image AIimg = System.Drawing.Image.FromFile(desktopFolder  + AIFileName + ".png");
+                    System.Drawing.Image Mapimg = System.Drawing.Image.FromFile(desktopFolder  + MapFileName + ".png");
+                    String FinalImage = desktopFolder  + MergedMapName + ".png";
 
                     int width = Mapimg.Width;
                     int height = Mapimg.Height;

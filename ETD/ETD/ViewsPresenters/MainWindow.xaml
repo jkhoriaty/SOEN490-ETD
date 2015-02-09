@@ -79,6 +79,7 @@
         </Border>
         <Border Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="2" Name="InterventionsSection" BorderBrush="Black" BorderThickness="1" VerticalAlignment="Bottom" Height="200" Padding="2">
             <!-- Here goes the InterventionsSection frame -->
+         
         </Border>
     </Grid>
 </Window>

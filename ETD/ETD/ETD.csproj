@@ -42,10 +42,14 @@
     <Compile Include="Models\Objects\AdditionalInfo.cs" />
     <Compile Include="Models\Grids\AdditionalInfoGrid.cs" />
     <Compile Include="Models\Grids\EquipmentGrid.cs" />
+    <Compile Include="Models\Objects\FollowUpInfo.cs" />
     <Compile Include="Models\Objects\Intervention.cs" />
     <Compile Include="Models\Grids\InterventionGrid.cs" />
     <Compile Include="Models\Grids\TeamGrid.cs" />
     <Compile Include="Models\Services\TextboxHandler.cs" />
+    <Compile Include="ViewsPresenters\FollowUpSection\FollowUpSectionForm.xaml.cs">
+      <DependentUpon>FollowUpSectionForm.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewsPresenters\InterventionsSection\InterventionForm\ABCInterventionForm\ABCInterventionFormPage.xaml.cs">
       <DependentUpon>ABCInterventionFormPage.xaml</DependentUpon>
     </Compile>
@@ -148,6 +152,10 @@
     ViewsPresenters
   -->
   <ItemGroup>
+    <Page Include="ViewsPresenters\FollowUpSection\FollowUpSectionForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ViewsPresenters\InterventionsSection\InterventionForm\ABCInterventionForm\ABCInterventionFormPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
