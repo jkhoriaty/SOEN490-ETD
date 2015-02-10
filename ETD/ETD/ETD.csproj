@@ -45,6 +45,8 @@
     <Compile Include="Models\Objects\Intervention.cs" />
     <Compile Include="Models\Grids\InterventionGrid.cs" />
     <Compile Include="Models\Grids\TeamGrid.cs" />
+    <Compile Include="Models\Objects\PatrolShift.cs" />
+    <Compile Include="Models\Objects\Scheduler.cs" />
     <Compile Include="Models\Services\TextboxHandler.cs" />
     <Compile Include="ViewsPresenters\InitialSetup.xaml.cs">
       <DependentUpon>InitialSetup.xaml</DependentUpon>
@@ -79,6 +81,12 @@
     <Compile Include="ViewsPresenters\MapSection\PinManagement\PinEditor.cs" />
     <Compile Include="ViewsPresenters\MapSection\PinManagement\AIPinHandler.cs" />
     <Compile Include="ViewsPresenters\MapSection\PinManagement\PinHandler.cs" />
+    <Compile Include="ViewsPresenters\ScheduleSection\ScheduleSectionPage.xaml.cs">
+      <DependentUpon>ScheduleSectionPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewsPresenters\ScheduleSection\SectorsTable\SectorsTablePage.xaml.cs">
+      <DependentUpon>SectorsTablePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewsPresenters\TeamsSection\TeamInfo\TeamInfoPage.xaml.cs">
       <DependentUpon>TeamInfoPage.xaml</DependentUpon>
     </Compile>
@@ -199,6 +207,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="ViewsPresenters\MapSection\MapSectionPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ViewsPresenters\ScheduleSection\ScheduleSectionPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ViewsPresenters\ScheduleSection\SectorsTable\SectorsTablePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -375,6 +391,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <!--
     Icons
   -->

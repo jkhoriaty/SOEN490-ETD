@@ -1,0 +1,150 @@
+﻿<Page x:Class="ETD.ViewsPresenters.ScheduleSection.SectorsTable.SectorsTablePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="300"
+	Title="SectorsTablePage">
+
+    <Grid Name="SectorGrid">
+        <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Width="Auto" Height="Auto" />
+        <Label Content="Sectors" HorizontalAlignment="Left" Grid.Row="0" Grid.Column="0"/>
+        <TextBox Name="Sector1" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="0" Text="..." Width="{Binding ElementName=SectorGrid,Path=ActualWidth}" GotFocus="OnFocus" LostFocus="LoseFocus"/>
+        <ComboBox Grid.Row="1" Grid.Column="1">
+            
+        </ComboBox>
+        <ComboBox Grid.Row="1" Grid.Column="2">
+
+        </ComboBox>
+        <ComboBox Grid.Row="1" Grid.Column="3">
+
+        </ComboBox>
+        <TextBox Name="Sector2" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="0" Text="..." Width="{Binding ElementName=SectorGrid,Path=ActualWidth}" GotFocus="OnFocus" LostFocus="LoseFocus"/>
+        <ComboBox Grid.Row="2" Grid.Column="1">
+
+        </ComboBox>
+        <ComboBox Grid.Row="2" Grid.Column="2">
+
+        </ComboBox>
+        <ComboBox Grid.Row="2" Grid.Column="3">
+
+        </ComboBox>
+        <TextBox Name="Sector3" HorizontalAlignment="Left" Grid.Row="3" Grid.Column="0" Text="..." Width="{Binding ElementName=SectorGrid,Path=ActualWidth}" GotFocus="OnFocus" LostFocus="LoseFocus"/>
+        <ComboBox Grid.Row="3" Grid.Column="1">
+
+        </ComboBox>
+        <ComboBox Grid.Row="3" Grid.Column="2">
+
+        </ComboBox>
+        <ComboBox Grid.Row="3" Grid.Column="3">
+
+        </ComboBox>
+        <TextBox Name="Sector4" HorizontalAlignment="Left" Grid.Row="4" Grid.Column="0" Text="..." Width="{Binding ElementName=SectorGrid,Path=ActualWidth}" GotFocus="OnFocus" LostFocus="LoseFocus"/>
+        <ComboBox Grid.Row="4" Grid.Column="1">
+
+        </ComboBox>
+        <ComboBox Grid.Row="4" Grid.Column="2">
+
+        </ComboBox>
+        <ComboBox Grid.Row="4" Grid.Column="3">
+
+        </ComboBox>
+        <TextBox Name="Sector5" HorizontalAlignment="Left" Grid.Row="5" Grid.Column="0" Text="..." Width="{Binding ElementName=SectorGrid,Path=ActualWidth}" GotFocus="OnFocus" LostFocus="LoseFocus"/>
+        <ComboBox Grid.Row="5" Grid.Column="1">
+
+        </ComboBox>
+        <ComboBox Grid.Row="5" Grid.Column="2">
+
+        </ComboBox>
+        <ComboBox Grid.Row="5" Grid.Column="3">
+
+        </ComboBox>
+        <TextBox Name="Sector6" HorizontalAlignment="Left" Grid.Row="6" Grid.Column="0" Text="..." Width="{Binding ElementName=SectorGrid,Path=ActualWidth}" GotFocus="OnFocus" LostFocus="LoseFocus"/>
+        <ComboBox Grid.Row="6" Grid.Column="1">
+
+        </ComboBox>
+        <ComboBox Grid.Row="6" Grid.Column="2">
+
+        </ComboBox>
+        <ComboBox Grid.Row="6" Grid.Column="3">
+
+        </ComboBox>
+        <TextBox Name="Sector7" HorizontalAlignment="Left" Grid.Row="7" Grid.Column="0" Text="..." Width="{Binding ElementName=SectorGrid,Path=ActualWidth}" GotFocus="OnFocus" LostFocus="LoseFocus"/>
+        <ComboBox Grid.Row="7" Grid.Column="1">
+
+        </ComboBox>
+        <ComboBox Grid.Row="7" Grid.Column="2">
+
+        </ComboBox>
+        <ComboBox Grid.Row="7" Grid.Column="3">
+
+        </ComboBox>
+        <TextBox Name="Sector8" HorizontalAlignment="Left" Grid.Row="8" Grid.Column="0" Text="..." Width="{Binding ElementName=SectorGrid,Path=ActualWidth}" GotFocus="OnFocus" LostFocus="LoseFocus"/>
+        <ComboBox Grid.Row="8" Grid.Column="1">
+
+        </ComboBox>
+        <ComboBox Grid.Row="8" Grid.Column="2">
+
+        </ComboBox>
+        <ComboBox Grid.Row="8" Grid.Column="3">
+
+        </ComboBox>
+        <TextBox Name="Sector9" HorizontalAlignment="Left" Grid.Row="9" Grid.Column="0" Text="..." Width="{Binding ElementName=SectorGrid,Path=ActualWidth}" GotFocus="OnFocus" LostFocus="LoseFocus"/>
+        <ComboBox Grid.Row="9" Grid.Column="1">
+
+        </ComboBox>
+        <ComboBox Grid.Row="9" Grid.Column="2">
+
+        </ComboBox>
+        <ComboBox Grid.Row="9" Grid.Column="3">
+
+        </ComboBox>
+        <TextBox Name="Sector10" HorizontalAlignment="Left" Grid.Row="10" Grid.Column="0" Text="..." Width="{Binding ElementName=SectorGrid,Path=ActualWidth}" GotFocus="OnFocus" LostFocus="LoseFocus"/>
+        <ComboBox Grid.Row="10" Grid.Column="1">
+
+        </ComboBox>
+        <ComboBox Grid.Row="10" Grid.Column="2">
+
+        </ComboBox>
+        <ComboBox Grid.Row="10" Grid.Column="3">
+
+        </ComboBox>
+        
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="1">
+            <TextBox Name="Endhh1" Width="29" Text="hh" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+            <Button Width="10" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Click="End_Click" Margin="0,0,0,0.2"/>
+            <TextBox Name="Endmm1" Width="29" Text="mm" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="2">
+            <TextBox Name="Endhh2" Width="29" Text="hh" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+            <Button Width="10" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Click="End_Click" Margin="0,0,0,0.2"/>
+            <TextBox Name="Endmm2" Width="29" Text="mm" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="3">
+            <TextBox Name="Endhh3" Width="29" Text="hh" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+            <Button Width="10" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Click="End_Click" Margin="0,0,0,0.2"/>
+            <TextBox Name="Endmm3" Width="29" Text="mm" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+        </StackPanel>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1.25*" />
+            <RowDefinition Height="1*" Name="Sector1Row" />
+            <RowDefinition Height="1*" Name="Sector2Row" />
+            <RowDefinition Height="1*" Name="Sector3Row" />
+            <RowDefinition Height="1*" Name="Sector4Row" />
+            <RowDefinition Height="1*" Name="Sector5Row" />
+            <RowDefinition Height="1*" Name="Sector6Row" />
+            <RowDefinition Height="1*" Name="Sector7Row" />
+            <RowDefinition Height="1*" Name="Sector8Row" />
+            <RowDefinition Height="1*" Name="Sector9Row" />
+            <RowDefinition Height="1*" Name="Sector10Row" />
+        </Grid.RowDefinitions>
+     
+    </Grid>
+</Page>

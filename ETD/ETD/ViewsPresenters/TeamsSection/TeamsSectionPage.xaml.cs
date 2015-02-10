@@ -196,6 +196,12 @@ namespace ETD.ViewsPresenters.TeamsSection
             if (!_isDragInProg) return;
             StackPanel s = (StackPanel)sender;          
         }
+        
+        
+        internal void UpdateSectors()
+        {
+            mainWindow.UpdateSectors();
+        }
 
-	}
+    }
 }

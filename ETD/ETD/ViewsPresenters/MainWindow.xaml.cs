@@ -18,6 +18,7 @@ using ETD.ViewsPresenters.MapSection;
 using ETD.ViewsPresenters.InterventionsSection;
 using ETD.Models.Objects;
 using System.Windows.Threading;
+using ETD.ViewsPresenters.ScheduleSection;
 
 namespace ETD.ViewsPresenters
 {
@@ -30,6 +31,7 @@ namespace ETD.ViewsPresenters
 		private MapSectionPage mapSection;
 		private InterventionSectionPage interventionsSection;
         private AdditionalInfoPage AIPmapSection;
+        private ScheduleSectionPage ScheduleSection;
         private int AddtionalInfoSize;
 
 		private double previousWidth;
@@ -42,6 +44,7 @@ namespace ETD.ViewsPresenters
 			mapSection = new MapSectionPage(this);
 			interventionsSection = new InterventionSectionPage(this);
             AIPmapSection = new AdditionalInfoPage(this);
+            ScheduleSection = new ScheduleSectionPage(this);
 
 			previousWidth = MapSection.ActualWidth;
 			previousHeight = MapSection.ActualHeight;
@@ -66,6 +69,11 @@ namespace ETD.ViewsPresenters
             Frame AIFrame = new Frame();
             AIFrame.Content = AIPmapSection;
             AIPSection.Child = AIFrame;
+
+            //Populating the Schedule section
+            Frame ScheduleFrame = new Frame();
+            ScheduleFrame.Content = ScheduleSection;
+            MapSection.Child = ScheduleFrame;
 		}
 
 		//Window size or state changed - Adjusting the team section height
@@ -217,10 +225,15 @@ namespace ETD.ViewsPresenters
         {
             mapSection.ReportArrived(interventionName, rowNumber);
         }
+        
+        internal void UpdateSectors()
+        {
+            ScheduleSection.UpdateSectors();
+        }
 
         internal void CreateIntervention()
         {
             interventionsSection.CreateIntervention();
         }
-	}
+    }
 }
