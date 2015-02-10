@@ -44,8 +44,9 @@
     <Compile Include="Models\Objects\Intervention.cs" />
     <Compile Include="Models\Grids\InterventionGrid.cs" />
     <Compile Include="Models\Grids\TeamGrid.cs" />
+    <Compile Include="Models\PopupForms\FormPopup.cs" />
+    <Compile Include="Models\PopupForms\RegisteredVolunteersPopup.cs" />
     <Compile Include="Services\NetworkServices.cs" />
-    <Compile Include="Services\UDPConnectionThread.cs" />
     <Compile Include="Services\TextboxHandler.cs" />
     <Compile Include="ViewsPresenters\InterventionsSection\InterventionForm\ABCInterventionForm\ABCInterventionFormPage.xaml.cs">
       <DependentUpon>ABCInterventionFormPage.xaml</DependentUpon>
@@ -77,6 +78,7 @@
     <Compile Include="ViewsPresenters\MapSection\PinManagement\PinEditor.cs" />
     <Compile Include="ViewsPresenters\MapSection\PinManagement\AIPinHandler.cs" />
     <Compile Include="ViewsPresenters\MapSection\PinManagement\PinHandler.cs" />
+    <Compile Include="ViewsPresenters\PopupForm.cs" />
     <Compile Include="ViewsPresenters\TeamsSection\TeamInfo\TeamInfoPage.xaml.cs">
       <DependentUpon>TeamInfoPage.xaml</DependentUpon>
     </Compile>

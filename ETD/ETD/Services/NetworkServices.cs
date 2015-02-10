@@ -11,7 +11,7 @@ namespace ETD.Services
 {
 	class NetworkServices
 	{
-		static String serverIP = "192.168.0.200";
+		static String serverIP = "24.202.7.147";
 		static int serverPort = 2000;
 
 		private static String[] execute(String request)
@@ -58,7 +58,7 @@ namespace ETD.Services
 			return Encoding.ASCII.GetString(buffer).Split('~');
 		}
 
-		public static String[] PingServer()
+		public static String[] UpdateRegisted()
 		{
 			return execute("2~");
 		}
