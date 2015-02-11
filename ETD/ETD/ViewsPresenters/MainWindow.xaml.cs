@@ -329,8 +329,8 @@ namespace ETD.ViewsPresenters
         //switch between Regular mode and Edit mode
         private void ModeChange(object sender, RoutedEventArgs e)
 		{
-            ComboBoxItem item = sender as ComboBoxItem;
-            ComboBox parent = item.Parent as ComboBox;
+			ComboBoxItem item = sender as ComboBoxItem;
+			ComboBox parent = modeCB;
             foreach (ComboBoxItem mi in parent.Items)
             {  
                 if (mi.Content.Equals("Regular Mode") && (mi.IsSelected))
