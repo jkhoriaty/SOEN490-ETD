@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Xml;
 using ETD.Models.Objects;
 
-namespace ETD.Models.Services
+namespace ETD.Services
 {
     // Class containing the set of words in a vocabulary associated with a unique identifier.
     class Vocabulary

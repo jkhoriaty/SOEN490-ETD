@@ -25,7 +25,6 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.TimersInterv
 	{
         private const int TIMER_LIMIT = 13;
         private InterventionFormPage interventionForm;
-		private DispatcherTimer dispatcherTimer = new DispatcherTimer();
 		private int timerPosition = 1;
 
 
@@ -51,6 +50,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.TimersInterv
 				endOffsets[i] = -1;
 			}
 
+			DispatcherTimer dispatcherTimer = new DispatcherTimer();
 			dispatcherTimer.Tick += new EventHandler(refresh);
 			dispatcherTimer.Interval = new TimeSpan(0, 0, 1); //Update every second
 			dispatcherTimer.Start();

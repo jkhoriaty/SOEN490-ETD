@@ -1,4 +1,4 @@
-﻿namespace ETD.Models.Services
+﻿namespace ETD.Services
 {
     public interface IObserver
     {

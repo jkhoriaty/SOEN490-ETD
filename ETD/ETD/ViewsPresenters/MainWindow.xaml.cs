@@ -19,6 +19,10 @@ using ETD.ViewsPresenters.InterventionsSection;
 using ETD.Models.Objects;
 using System.Windows.Threading;
 using ETD.ViewsPresenters.ScheduleSection;
+using ETD.Services;
+using System.Threading;
+using System.Windows.Controls.Primitives;
+using ETD.Models.PopupForms;
 
 namespace ETD.ViewsPresenters
 {
@@ -36,6 +40,8 @@ namespace ETD.ViewsPresenters
 
 		private double previousWidth;
 		private double previousHeight;
+
+		private Dictionary<String, String> registeredVolunteers = new Dictionary<String, String>();
 
 		public MainWindow()
 		{
@@ -71,9 +77,15 @@ namespace ETD.ViewsPresenters
             AIPSection.Child = AIFrame;
 
             //Populating the Schedule section
-            Frame ScheduleFrame = new Frame();
+            /*Frame ScheduleFrame = new Frame();
             ScheduleFrame.Content = ScheduleSection;
-            MapSection.Child = ScheduleFrame;
+            MapSection.Child = ScheduleFrame;*/
+		}
+
+		//Ping server to test connection and update registed volunteers - Executes every 10 seconds
+		public void refresh(object sender, EventArgs e)
+		{
+			UpdateRegistered();
 		}
 
 		//Window size or state changed - Adjusting the team section height
@@ -235,5 +247,80 @@ namespace ETD.ViewsPresenters
         {
             interventionsSection.CreateIntervention();
         }
+
+		public void PopupLostFocus(object sender, EventArgs e)
+		{
+			Popup popup = (Popup)sender;
+			popup.IsOpen = false;
+		}
+
+		private void ShowGPSLocations(object sender, RoutedEventArgs e)
+		{
+			UpdateRegistered().Wait();
+			Dispatcher.Invoke(() =>
+			{
+				new FormPopup(this, new RegisteredVolunteersForm(registeredVolunteers));
+			});
+			newRegisteredCTR.Content = "0";
+		}
+
+		//Pinging server for registered volunteers and interpret the return
+		private Task UpdateRegistered()
+		{
+			Task<String[]> UpdateRegisteredTask = new Task<string[]>(NetworkServices.UpdateRegisted);
+			UpdateRegisteredTask.ContinueWith(task => UpdateRegisteredResultAnalysis(task.Result));
+			UpdateRegisteredTask.Start();
+			return UpdateRegisteredTask;
+		}
+
+		//Interpret the servers return
+		private void UpdateRegisteredResultAnalysis(String[] reply)
+		{
+			if(reply == null)
+			{
+				NotifyConnectionFail();
+			}
+			else if(reply.Length > 0)
+			{
+				NotifyConnectionSuccess();
+				int newCtr = 0;
+				for (int i = 1; i < (reply.Length - 1); i++)
+				{
+					String[] volunteerInfo = reply[i].Split('|');
+					if (!registeredVolunteers.ContainsKey(volunteerInfo[0]))
+					{
+						registeredVolunteers.Add(volunteerInfo[0], volunteerInfo[1]);
+						newCtr++;
+					}
+					else
+					{
+						registeredVolunteers[volunteerInfo[0]] = volunteerInfo[1];
+					}
+				}
+				Dispatcher.Invoke(() => newRegisteredCTR.Content = "" + newCtr);
+			}
+		}
+
+		//UI work to notify of connection success
+		private void NotifyConnectionSuccess()
+		{
+			Dispatcher.Invoke(() => 
+			{
+				GPSLocationsTextBlock.Background = new SolidColorBrush(Colors.Green);
+				GPSLocationsTextBlock.Foreground = new SolidColorBrush(Colors.White);
+				GPSLocationsTextBlock.IsEnabled = true;
+			});
+		}
+
+		//UI work to notify of connection failure
+		private void NotifyConnectionFail()
+		{
+			Dispatcher.Invoke(() => 
+			{
+				GPSLocationsTextBlock.Background = new SolidColorBrush(Colors.Red);
+				GPSLocationsTextBlock.Foreground = new SolidColorBrush(Colors.White);
+				GPSLocationsTextBlock.IsEnabled = false;
+			});
+		}
     }
 }

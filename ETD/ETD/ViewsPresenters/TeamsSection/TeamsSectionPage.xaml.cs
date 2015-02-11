@@ -16,7 +16,7 @@ using System.Windows.Shapes;
 using ETD.ViewsPresenters.TeamsSection.TeamForm;
 using ETD.ViewsPresenters.TeamsSection.TeamInfo;
 using ETD.Models.Objects;
-using ETD.Models.Services;
+using ETD.Services;
 using System.Windows.Threading;
 
 namespace ETD.ViewsPresenters.TeamsSection

@@ -7,7 +7,7 @@ using System.Windows.Media;
 using System.Windows.Media.Effects;
 using System.Windows.Shapes;
 using ETD.Models.Objects;
-using ETD.Models.Services;
+using ETD.Services;
 
 namespace ETD.Models.Grids
 {
