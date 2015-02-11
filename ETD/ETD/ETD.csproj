@@ -45,6 +45,8 @@
     <Compile Include="Models\Objects\Intervention.cs" />
     <Compile Include="Models\Grids\InterventionGrid.cs" />
     <Compile Include="Models\Grids\TeamGrid.cs" />
+    <Compile Include="Models\Objects\Observable.cs" />
+    <Compile Include="Models\Objects\Observer.cs" />
     <Compile Include="Models\Objects\PatrolShift.cs" />
     <Compile Include="Models\Objects\Scheduler.cs" />
     <Compile Include="Models\PopupForms\FormPopup.cs" />
