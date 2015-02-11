@@ -115,7 +115,7 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 
 				//Displaying the team on the main window
 				caller.DisplayTeamInfo(team);
-                caller.UpdateSectors();
+                //caller.UpdateSectors();
 
                 //Use this team to link it to map
 			}
