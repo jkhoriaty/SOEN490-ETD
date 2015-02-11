@@ -30,16 +30,15 @@ namespace ETD.ViewsPresenters.TeamsSection
 		private MainWindow mainWindow;
 		private static Dictionary<String, StackPanel> teamEquipmentStacks = new Dictionary<String, StackPanel>();
 		private DispatcherTimer dispatcherTimer = new DispatcherTimer();
-        private StackPanel movingPanel;
-        private bool _isDragInProg;
+        //private bool _isDragInProg;
+        //private bool _isDragDown;
+        //private Point _startPoint;
+        //private UIElement _dragSource;
 
 		public TeamsSectionPage(MainWindow mainWindow)
 		{
 			InitializeComponent();
 			this.mainWindow = mainWindow;
-            this.AllowDrop = true;
-            //this.DragEnter += new DragEventHandler(dragEnter);
-            //this.DragLeave += new DragEventHandler(dragDrop);
 			dispatcherTimer.Tick += new EventHandler(refresh);
 			dispatcherTimer.Interval = new TimeSpan(0, 0, 10); //Update every minute
 			dispatcherTimer.Start();
@@ -95,6 +94,8 @@ namespace ETD.ViewsPresenters.TeamsSection
 			HideCreateTeamForm();
 			Frame frame = new Frame();
 			frame.Content = new TeamInfoPage(this, team);
+            frame.AllowDrop = true;
+            frame.Content = this.Parent;
 			TeamList.Children.Add(frame);
 			mainWindow.CreateTeamPin(team);
 		}
@@ -170,32 +171,154 @@ namespace ETD.ViewsPresenters.TeamsSection
 			mainWindow.CreateEquipmentPin(equipment.Name);
 
 		}
-
-        internal void dragStart(object sender, DragEventArgs e)
+       
+        internal void frameKeyDown(object sender, KeyEventArgs e)
         {
-            StackPanel s = (StackPanel)sender;
-            _isDragInProg = s.CaptureMouse();
-            movingPanel = s;
+            UIElement frame = e.Source as UIElement;
 
-        }
-
-        internal void dragStop(object sender, MouseButtonEventArgs e)
-        {
-            StackPanel s = (StackPanel)sender;
-            if (s != movingPanel)
+            if (e.Key == Key.Down)
             {
-                return;
+                frameMoveDown(frame);
+                e.Handled = true;
             }
-            s.ReleaseMouseCapture();
-            _isDragInProg = false;
-            //var mousePos = e.GetPosition(this.map)
+
+            else if (e.Key == Key.Up)
+            {
+                frameMoveUp(frame);
+                e.Handled = true;
+            }
         }
 
-        internal void dragMove(object sender, MouseEventArgs e)
+        internal void frameSelection(object sender, MouseEventArgs e)
         {
-            if (!_isDragInProg) return;
-            StackPanel s = (StackPanel)sender;          
+            UIElement frame = e.Source as UIElement;
+            TeamList.KeyDown += new KeyEventHandler(frameKeyDown); 
+            if (!frame.Focus())
+            {
+                frame.Focus();
+                e.Handled = true;
+            }
+            e.Handled = true;
         }
 
+        internal void frameMoveDown(UIElement element)
+        {
+            int elementIndex = 0;
+            int count = TeamList.Children.Count; //get number of elements in stackpanel
+            int index;
+            if (TeamList.Children.Contains(element))
+            {
+                index = TeamList.Children.IndexOf(element);
+                if (index < count-1)
+                elementIndex = index+1;
+                TeamList.Children.Remove(element);
+                TeamList.Children.Insert(elementIndex, element);
+            }
+ 
+        }
+
+        internal void frameMoveUp(UIElement element)
+        {
+            int elementIndex = 0;
+            int count = TeamList.Children.Count; //get number of elements in stackpanel
+            int index;
+            if (TeamList.Children.Contains(element))
+            {
+                index = TeamList.Children.IndexOf(element);
+                if (index > 0)
+                    elementIndex = index - 1;
+                else if (index == 0)
+                    elementIndex = count - 1;
+                TeamList.Children.Remove(element);
+                TeamList.Children.Insert(elementIndex, element);
+            }
+        }
+        /*
+        internal void dragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.Text))
+            {
+                e.Effects = DragDropEffects.Copy;
+            }
+            else
+            {
+                e.Effects = DragDropEffects.None;
+            }
+            e.Handled = true;
+        }
+
+        internal void dragDrop(object sender, DragEventArgs e)
+        {
+            UIElement drop = sender as UIElement;
+            if (drop != null)
+            {
+                if (e.Data.GetDataPresent(DataFormats.StringFormat)) 
+                {
+                    UIElement droptarget = (UIElement)e.Source;
+                    MessageBox.Show(droptarget.ToString());
+                    int dropIndex = -1; 
+                    int i = 0;
+                    foreach (UIElement element in TeamList.Children)
+                    {
+                        if (element.Equals(droptarget))
+                        {
+                            dropIndex = i;
+                            break;
+                        }
+                        i++;
+                    }
+                    if (dropIndex != -1)
+                    {
+                        TeamList.Children.Remove(_dragSource);
+                        TeamList.Children.Insert(dropIndex, _dragSource);
+                    }
+                    
+                    _dragSource.ReleaseMouseCapture();
+                    _isDragInProg = false;
+                    _isDragDown = false;
+                }
+            }
+        }
+
+        internal void previewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.Source == TeamList)
+            {
+            }
+            else
+            {      
+                _isDragDown = true;
+                _startPoint = e.GetPosition(TeamList);
+            }
+        }
+
+        internal void previewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {         
+                _isDragDown = false;
+                _isDragInProg = false;
+                if (_dragSource != null)
+                _dragSource.ReleaseMouseCapture();          
+        }
+
+        internal void previewMouseMove(object sender, MouseEventArgs e) 
+        {
+            if (_isDragDown)
+            {               
+                if ((_isDragInProg == false) && ((Math.Abs(e.GetPosition(TeamList).X - _startPoint.X) > SystemParameters.MinimumHorizontalDragDistance) || (Math.Abs(e.GetPosition(TeamList).Y - _startPoint.Y) > SystemParameters.MinimumVerticalDragDistance))) 
+                {
+                    UIElement drop = sender as UIElement;
+                    UIElement data = new UIElement();
+                    _isDragInProg = true;
+                    _dragSource = (UIElement)e.Source;
+                    _dragSource.CaptureMouse();
+                    //DragDrop.DoDragDrop(drop, drop.ToString(), DragDropEffects.Move);
+                    //MessageBox.Show(drop.ToString());
+                    //MessageBox.Show(_dragSource.ToString());
+                    DragDrop.DoDragDrop(this, data, DragDropEffects.Copy | DragDropEffects.Move);
+                }
+            }
+            e.Handled = true;
+        }
+        */
 	}
 }
