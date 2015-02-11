@@ -19,6 +19,7 @@ using ETD.Models.Objects;
 using ETD.Services;
 using System.Windows.Threading;
 
+
 namespace ETD.ViewsPresenters.TeamsSection
 {
 	/// <summary>
@@ -298,7 +299,6 @@ namespace ETD.ViewsPresenters.TeamsSection
             mainWindow.UpdateSectors();
         }
 
-<<<<<<< HEAD
         internal void previewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {         
                 _isDragDown = false;
@@ -328,6 +328,6 @@ namespace ETD.ViewsPresenters.TeamsSection
         }
         */
 	}
-    }
-
 }
+
+
