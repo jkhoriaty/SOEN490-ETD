@@ -41,10 +41,28 @@
     <Compile Include="Models\Objects\AdditionalInfo.cs" />
     <Compile Include="Models\Grids\AdditionalInfoGrid.cs" />
     <Compile Include="Models\Grids\EquipmentGrid.cs" />
+
+    <Compile Include="Models\Objects\FollowUpInfo.cs" />
     <Compile Include="Models\Objects\Intervention.cs" />
     <Compile Include="Models\Grids\InterventionGrid.cs" />
     <Compile Include="Models\Grids\TeamGrid.cs" />
-    <Compile Include="Models\Services\TextboxHandler.cs" />
+    <Compile Include="ViewsPresenters\FollowUpSection\FollowUpSectionForm.xaml.cs">
+      <DependentUpon>FollowUpSectionForm.xaml</DependentUpon>
+      <DependentUpon>FollowUpSectionForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Objects\InitialInfo.cs" />
+    <Compile Include="Models\Objects\Observable.cs" />
+    <Compile Include="Models\Objects\Observer.cs" />
+    <Compile Include="Models\Objects\PatrolShift.cs" />
+    <Compile Include="Models\Objects\Scheduler.cs" />
+    <Compile Include="Models\PopupForms\FormPopup.cs" />
+    <Compile Include="Models\PopupForms\RegisteredVolunteersPopup.cs" />
+    <Compile Include="Services\NetworkServices.cs" />
+    <Compile Include="Services\TextboxHandler.cs" />
+    <Compile Include="ViewsPresenters\InitialSetup.xaml.cs">
+      <DependentUpon>InitialSetup.xaml</DependentUpon>
+
+    </Compile>
     <Compile Include="ViewsPresenters\InterventionsSection\InterventionForm\ABCInterventionForm\ABCInterventionFormPage.xaml.cs">
       <DependentUpon>ABCInterventionFormPage.xaml</DependentUpon>
     </Compile>
@@ -75,6 +93,13 @@
     <Compile Include="ViewsPresenters\MapSection\PinManagement\PinEditor.cs" />
     <Compile Include="ViewsPresenters\MapSection\PinManagement\AIPinHandler.cs" />
     <Compile Include="ViewsPresenters\MapSection\PinManagement\PinHandler.cs" />
+    <Compile Include="ViewsPresenters\PopupForm.cs" />
+    <Compile Include="ViewsPresenters\ScheduleSection\ScheduleSectionPage.xaml.cs">
+      <DependentUpon>ScheduleSectionPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewsPresenters\ScheduleSection\SectorsTable\SectorsTablePage.xaml.cs">
+      <DependentUpon>SectorsTablePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewsPresenters\TeamsSection\TeamInfo\TeamInfoPage.xaml.cs">
       <DependentUpon>TeamInfoPage.xaml</DependentUpon>
     </Compile>
@@ -83,6 +108,8 @@
     </Compile>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -118,6 +145,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -130,13 +158,13 @@
     Models
   -->
   <ItemGroup>
-    <Compile Include="Models\Services\IObservable.cs" />
-    <Compile Include="Models\Services\IObserver.cs" />
-    <Compile Include="Models\Services\LanguageSelector.cs" />
+    <Compile Include="Services\IObservable.cs" />
+    <Compile Include="Services\IObserver.cs" />
+    <Compile Include="Services\LanguageSelector.cs" />
     <Compile Include="Models\Objects\Equipment.cs" />
-    <Compile Include="Models\Services\TechnicalServices.cs" />
+    <Compile Include="Services\TechnicalServices.cs" />
     <Compile Include="Models\Objects\Team.cs" />
-    <Compile Include="Models\Services\Vocabulary.cs" />
+    <Compile Include="Services\Vocabulary.cs" />
     <Compile Include="Models\Objects\TeamMember.cs" />
     <Compile Include="Models\Objects\Word.cs" />
   </ItemGroup>
@@ -144,6 +172,16 @@
     ViewsPresenters
   -->
   <ItemGroup>
+
+    <Page Include="ViewsPresenters\FollowUpSection\FollowUpSectionForm.xaml">
+<SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ViewsPresenters\InitialSetup.xaml">
+
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ViewsPresenters\InterventionsSection\InterventionForm\ABCInterventionForm\ABCInterventionFormPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -191,6 +229,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="ViewsPresenters\MapSection\MapSectionPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ViewsPresenters\ScheduleSection\ScheduleSectionPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ViewsPresenters\ScheduleSection\SectorsTable\SectorsTablePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -251,6 +297,9 @@
     <Content Include="Icons\line.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Icons\lineCanvas.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Icons\Medicine_available.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -261,6 +310,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Icons\Medicine_unavailable.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\Ramp.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Icons\rectangle.png">
@@ -366,6 +418,9 @@
     <Content Include="Resources\Vocabulary.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Maps\" />
   </ItemGroup>
   <!--
     Icons

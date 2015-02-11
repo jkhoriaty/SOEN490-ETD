@@ -1,0 +1,10 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:context="concordia_university_capstone.etd_v10.LocationTransmission">
+	<item android:id="@+id/action_settings"
+	      android:title="@string/action_settings"
+	      android:orderInCategory="100"
+	      app:showAsAction="never"/>
+</menu>
+<!-- From: file:/D:/Users/jadk9_000/Desktop/Dropbox/Concordia%20-%20Winter%202015/SOEN%20490/Project%20Repository/Android/MyApplication/app/src/main/res/menu/menu_location_transmission.xml -->

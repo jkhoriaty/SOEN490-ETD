@@ -8,15 +8,22 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Controls.Primitives;
 using System.Drawing;
+using System.Windows.Media;
+using System.Windows.Shapes;
+using ETD.Models.Grids;
+using ETD.Services;
+using ETD.Models.Objects;
+
+
 namespace ETD.ViewsPresenters.MapSection.PinManagement
 {
 	class AIPinHandler
 	{
 		
         private AdditionalInfoPage AIPmap;
+       
 		private bool _isRectDragInProg;
 		private Grid movingGrid;
-
 
         public AIPinHandler(AdditionalInfoPage AIP)
         {
@@ -37,6 +44,88 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 			_isRectDragInProg = g.CaptureMouse();
 			movingGrid = g;
 		}
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // Set drawing status
+        private bool IsDrawing = false;
+        // Get starting and end point of a line
+        private System.Windows.Point NewPt1, NewPt2;
+        // Store added lines
+        private List<Line> Lines = new List<Line>();
+        private Line newline;
+
+        public void DrawingStart(object sender, MouseButtonEventArgs e)
+        {
+            IsDrawing = true;
+            //get starting point
+                NewPt1 = e.GetPosition(AIPmap.AdditionalMap);
+        }
+
+        //draw the line
+        internal void DrawingMove(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            newline = new Line();
+            newline.Stroke = System.Windows.Media.Brushes.Black;
+            newline.StrokeThickness = 4;
+            newline.X1 = NewPt1.X;
+            newline.Y1 = NewPt1.Y;
+            newline.X2 = NewPt2.X;
+            newline.Y2 = NewPt2.Y;
+ 
+            Lines.Add(newline);
+            AIPmap.AdditionalMap.Children.Add(newline);
+        }
+
+        internal void Move(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                 NewPt2 = e.GetPosition(AIPmap.AdditionalMap);
+            }
+
+            //false, no element
+            bool isEmpty = !Lines.Any();
+
+            //erase line when the escape key is pressed and the mouse is moving
+            if (Keyboard.IsKeyDown(Key.Escape) && !isEmpty)
+            {
+                int i = Lines.Count - 1;
+                AIPmap.AdditionalMap.Children.RemoveAt(Lines.Count);
+
+                    if (i == 0 && Lines[0] != null)
+                    {
+                        Lines.RemoveAt(0);
+                    }
+                    else
+                    {
+                        Lines.RemoveAt(i);
+                    }
+            }
+        }
+
+        internal void DrawingStop(object sender, MouseButtonEventArgs e)
+        {
+            IsDrawing = false;
+        }
+
+        public void ChangeColor(object sender, MouseWheelEventArgs e)
+        {
+            //scroll up
+            if (e.Delta > 0)
+            {
+                newline.Stroke = System.Windows.Media.Brushes.Red;
+            }
+            //scroll down to original color
+            else
+            {
+                newline.Stroke = System.Windows.Media.Brushes.Black;
+            }
+          
+        }
+
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		//Left Mouse Button Up: Any pin
 		internal void DragStop(object sender, MouseButtonEventArgs e)
@@ -61,6 +150,11 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 		//Mouse Move
 		internal void DragMove(object sender, MouseEventArgs e)
 		{
+            // Set the new cursor.
+            Cursor new_cursor = Cursors.Cross;
+            if (AIPmap.Cursor != new_cursor)
+                AIPmap.Cursor = new_cursor;
+
 			//If no rectangle are clicked, exit method
 			if (!_isRectDragInProg) return;
 
@@ -268,6 +362,10 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 				DetectCollision(pin, movedPin_X, movedPin_Y);
 			}
 		}
+
+
+
+
 
 	}
 }

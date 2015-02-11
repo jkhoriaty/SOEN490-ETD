@@ -19,6 +19,15 @@ using ETD.ViewsPresenters.InterventionsSection;
 using ETD.Models.Objects;
 using System.Windows.Threading;
 
+using System.Drawing;
+
+using ETD.ViewsPresenters.ScheduleSection;
+using ETD.Services;
+using System.Threading;
+using System.Windows.Controls.Primitives;
+using ETD.Models.PopupForms;
+
+
 namespace ETD.ViewsPresenters
 {
 	/// <summary>
@@ -30,10 +39,13 @@ namespace ETD.ViewsPresenters
 		private MapSectionPage mapSection;
 		private InterventionSectionPage interventionsSection;
         private AdditionalInfoPage AIPmapSection;
+        private ScheduleSectionPage ScheduleSection;
         private int AddtionalInfoSize;
-
+        private bool isdrawing = false;
 		private double previousWidth;
 		private double previousHeight;
+
+		private Dictionary<String, String> registeredVolunteers = new Dictionary<String, String>();
 
 		public MainWindow()
 		{
@@ -42,6 +54,10 @@ namespace ETD.ViewsPresenters
 			mapSection = new MapSectionPage(this);
 			interventionsSection = new InterventionSectionPage(this);
             AIPmapSection = new AdditionalInfoPage(this);
+            ScheduleSection = new ScheduleSectionPage(this);
+
+            //save map content on window close
+            this.Closed += new EventHandler(WindowClosed);
 
 			previousWidth = MapSection.ActualWidth;
 			previousHeight = MapSection.ActualHeight;
@@ -66,7 +82,114 @@ namespace ETD.ViewsPresenters
             Frame AIFrame = new Frame();
             AIFrame.Content = AIPmapSection;
             AIPSection.Child = AIFrame;
+
+            //Populating the Schedule section
+            /*Frame ScheduleFrame = new Frame();
+            ScheduleFrame.Content = ScheduleSection;
+            MapSection.Child = ScheduleFrame;*/
 		}
+
+		//Ping server to test connection and update registed volunteers - Executes every 10 seconds
+		public void refresh(object sender, EventArgs e)
+		{
+			UpdateRegistered();
+		}
+
+        //window closed
+        public void WindowClosed(object sender, System.EventArgs e)
+        {
+            MessageBox.Show("Saving map..");
+
+           // Absolute path doesnt work..
+           // Saving to desktop directory for now
+            String AbsolutePath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase);
+            String Filename = @"\Maps\test.png";
+            String test = AbsolutePath + Filename;
+           // MessageBox.Show((AbsolutePath + Filename).ToString());
+         
+            Rect AIbounds = VisualTreeHelper.GetDescendantBounds(AIPmapSection);
+            Rect Mapbounds = VisualTreeHelper.GetDescendantBounds(mapSection);
+            var AIFileName = "AIInfo_" + DateTime.Now.ToString("yyyyMMdd_hhss");
+            var MapFileName = "Map_" + DateTime.Now.ToString("yyyyMMdd_hhss");
+            var MergedMapName = "ModMap_" + DateTime.Now.ToString("yyyyMMdd_hhss");
+            var desktopFolder = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+       
+           // MessageBox.Show("mapbounds:"+ Mapbounds.ToString());
+           // MessageBox.Show("Aibounds:" + AIbounds.ToString());
+
+            double dpi = 96d;
+            if (AIbounds.ToString() != "Empty" && Mapbounds.ToString() != "Empty")
+            {
+                RenderTargetBitmap rtb = new RenderTargetBitmap((int)AIbounds.Width, (int)AIbounds.Height, dpi, dpi, System.Windows.Media.PixelFormats.Default);
+                RenderTargetBitmap rtb2 = new RenderTargetBitmap((int)Mapbounds.Width, (int)Mapbounds.Height, dpi, dpi, System.Windows.Media.PixelFormats.Default);
+
+                //ai
+                DrawingVisual dv = new DrawingVisual();
+                using (DrawingContext dc = dv.RenderOpen())
+                {
+                    VisualBrush vb = new VisualBrush(AIPmapSection.AdditionalMap);
+                    dc.DrawRectangle(vb, null, new Rect(new System.Windows.Point(), AIbounds.Size));
+                }
+
+                //map
+                DrawingVisual dv2 = new DrawingVisual();
+                using (DrawingContext dc2 = dv2.RenderOpen())
+                {
+                    VisualBrush vb2 = new VisualBrush(mapSection.Map);
+                    dc2.DrawRectangle(vb2, null, new Rect(new System.Windows.Point(), Mapbounds.Size));
+                }
+
+                //ai
+                rtb.Render(dv);
+                BitmapEncoder pngEncoder = new PngBitmapEncoder();
+                pngEncoder.Frames.Add(BitmapFrame.Create(rtb));
+
+                //map
+                rtb2.Render(dv2);
+                BitmapEncoder pngEncoder2 = new PngBitmapEncoder();
+                pngEncoder2.Frames.Add(BitmapFrame.Create(rtb2));
+
+                try
+                {
+                    System.IO.MemoryStream ms = new System.IO.MemoryStream();
+                    System.IO.MemoryStream ms2 = new System.IO.MemoryStream();
+
+                    pngEncoder.Save(ms);
+                    ms.Close();
+                    pngEncoder2.Save(ms2);
+                    ms2.Close();
+                    
+                    System.IO.File.WriteAllBytes(desktopFolder  + AIFileName + ".png", ms.ToArray());
+                    System.IO.File.WriteAllBytes(desktopFolder  + MapFileName + ".png", ms2.ToArray());
+
+                    System.Drawing.Image AIimg = System.Drawing.Image.FromFile(desktopFolder  + AIFileName + ".png");
+                    System.Drawing.Image Mapimg = System.Drawing.Image.FromFile(desktopFolder  + MapFileName + ".png");
+                    String FinalImage = desktopFolder  + MergedMapName + ".png";
+
+                    int width = Mapimg.Width;
+                    int height = Mapimg.Height;
+
+                    Bitmap FinalImg = new Bitmap(width, height);
+                    Graphics g = Graphics.FromImage(FinalImg);
+
+                    g.DrawImage(Mapimg, new System.Drawing.Point(0, 0));
+                    g.DrawImage(AIimg, new System.Drawing.Point(0, 0));
+                    g.Dispose();
+                    AIimg.Dispose();
+                    Mapimg.Dispose();
+
+                    FinalImg.Save(FinalImage, System.Drawing.Imaging.ImageFormat.Png);
+                    FinalImg.Dispose();
+                }
+                catch (Exception err)
+                {
+                    MessageBox.Show(err.ToString(), "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+
+        }
+         
+
 
 		//Window size or state changed - Adjusting the team section height
 		public void setSectionsHeight(object sender, EventArgs e)
@@ -137,6 +260,7 @@ namespace ETD.ViewsPresenters
 			mapSection.DeletePin(pinName);
 		}
 
+  
 
 		//Add equipment to team
 		public void AddTeamEquipment(Equipment equip, String teamName)
@@ -144,6 +268,7 @@ namespace ETD.ViewsPresenters
 			teamsSection.AddTeamEquipment(equip, teamName);
 		}
 
+        //Change intervention deadlines
 		private void ChangeDeadlines(object sender, RoutedEventArgs e)
 		{
 			bool success = true;
@@ -174,33 +299,51 @@ namespace ETD.ViewsPresenters
 				MessageBox.Show("The deadlines have been changed.");
 			}
 		}
+
+        //Create additional shapes on the map
         public void CreateAdditionnalInfoPin(object sender, RoutedEventArgs e)
         {
-            
-            ComboBoxItem selectedItem = (ComboBoxItem)AI.SelectedItem;
-            if (selectedItem != null)
+            ComboBoxItem item = sender as ComboBoxItem;
+            ComboBox parent = item.Parent as ComboBox;
+            foreach (ComboBoxItem mi in parent.Items)
             {
-                AIPmapSection.CreateAdditionnalInfoPin("" + selectedItem.Name, AddtionalInfoSize);
-            }
-            else
-            {
-                MessageBox.Show("Please select a shape to add.");
-            }
+                if (mi!=null && mi.IsSelected )
+                {
+                    AIPmapSection.CreateAdditionnalInfoPin("" + mi.Name, AddtionalInfoSize);
+                    isdrawing = false;
+                }
+            }  
         }
-
+        
         public void CreateAdditionnalInfoPin(String AI,int size)
         {
             AIPmapSection.CreateAdditionnalInfoPin(AI,size);
         }
 
+        //delete additional pins
         public void AIDeletePin(object sender, RoutedEventArgs e)
         {
             AIPmapSection.AIDeletePin(sender, e);
         }
 
-		private void ModeChange(object sender, SelectionChangedEventArgs e)
+        //switch between Regular mode and Edit mode
+        private void ModeChange(object sender, RoutedEventArgs e)
 		{
-
+            ComboBoxItem item = sender as ComboBoxItem;
+            ComboBox parent = item.Parent as ComboBox;
+            foreach (ComboBoxItem mi in parent.Items)
+            {  
+                if (mi.Content.Equals("Regular Mode") && (mi.IsSelected))
+                {
+                    AI.Visibility = Visibility.Collapsed;
+                    AIPmapSection.IsEnabled = false;
+                }
+                else if (mi.Content.Equals("Edit Mode") && (mi.IsSelected ))
+                {
+                    AI.Visibility = Visibility.Visible;
+                    AIPmapSection.IsEnabled = true;
+                }
+            }  
 		}
 
 		internal void AddResource(String teamName, String interventionName)
@@ -217,10 +360,91 @@ namespace ETD.ViewsPresenters
         {
             mapSection.ReportArrived(interventionName, rowNumber);
         }
+        
+        internal void UpdateSectors()
+        {
+            ScheduleSection.UpdateSectors();
+        }
 
         internal void CreateIntervention()
         {
             interventionsSection.CreateIntervention();
         }
-	}
+
+		public void PopupLostFocus(object sender, EventArgs e)
+		{
+			Popup popup = (Popup)sender;
+			popup.IsOpen = false;
+		}
+
+		private void ShowGPSLocations(object sender, RoutedEventArgs e)
+		{
+			UpdateRegistered().Wait();
+			Dispatcher.Invoke(() =>
+			{
+				new FormPopup(this, new RegisteredVolunteersForm(registeredVolunteers));
+			});
+			newRegisteredCTR.Content = "0";
+		}
+
+		//Pinging server for registered volunteers and interpret the return
+		private Task UpdateRegistered()
+		{
+			Task<String[]> UpdateRegisteredTask = new Task<string[]>(NetworkServices.UpdateRegisted);
+			UpdateRegisteredTask.ContinueWith(task => UpdateRegisteredResultAnalysis(task.Result));
+			UpdateRegisteredTask.Start();
+			return UpdateRegisteredTask;
+		}
+
+		//Interpret the servers return
+		private void UpdateRegisteredResultAnalysis(String[] reply)
+		{
+			if(reply == null)
+			{
+				NotifyConnectionFail();
+			}
+			else if(reply.Length > 0)
+			{
+				NotifyConnectionSuccess();
+				int newCtr = 0;
+				for (int i = 1; i < (reply.Length - 1); i++)
+				{
+					String[] volunteerInfo = reply[i].Split('|');
+					if (!registeredVolunteers.ContainsKey(volunteerInfo[0]))
+					{
+						registeredVolunteers.Add(volunteerInfo[0], volunteerInfo[1]);
+						newCtr++;
+					}
+					else
+					{
+						registeredVolunteers[volunteerInfo[0]] = volunteerInfo[1];
+					}
+				}
+				Dispatcher.Invoke(() => newRegisteredCTR.Content = "" + newCtr);
+			}
+		}
+
+		//UI work to notify of connection success
+		private void NotifyConnectionSuccess()
+		{
+			Dispatcher.Invoke(() => 
+			{
+				GPSLocationsTextBlock.Background = new SolidColorBrush(Colors.Green);
+				GPSLocationsTextBlock.Foreground = new SolidColorBrush(Colors.White);
+				GPSLocationsTextBlock.IsEnabled = true;
+			});
+		}
+
+		//UI work to notify of connection failure
+		private void NotifyConnectionFail()
+		{
+			Dispatcher.Invoke(() => 
+			{
+				GPSLocationsTextBlock.Background = new SolidColorBrush(Colors.Red);
+				GPSLocationsTextBlock.Foreground = new SolidColorBrush(Colors.White);
+				GPSLocationsTextBlock.IsEnabled = false;
+			});
+		}
+    }
+
 }

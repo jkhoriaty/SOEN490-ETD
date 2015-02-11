@@ -1,0 +1,6 @@
+D:\Users\jadk9_000\Desktop\Dropbox\Concordia - Winter 2015\SOEN 490\Project Repository\Android\MyApplication\app\build\intermediates\classes\debug
+D:\Users\jadk9_000\Desktop\Dropbox\Concordia - Winter 2015\SOEN 490\Project Repository\Android\MyApplication\app\build\intermediates\pre-dexed\debug\support-annotations-21.0.3-c1013852eb9589f4b741e745c91c5f29dcdd3d11.jar
+D:\Users\jadk9_000\Desktop\Dropbox\Concordia - Winter 2015\SOEN 490\Project Repository\Android\MyApplication\app\build\intermediates\pre-dexed\debug\internal_impl-21.0.3-625b380cb9121816777fcd4bc3fc7fa289c63a72.jar
+D:\Users\jadk9_000\Desktop\Dropbox\Concordia - Winter 2015\SOEN 490\Project Repository\Android\MyApplication\app\build\intermediates\pre-dexed\debug\classes-7f63b63e0f2035afa1e7664d2b08e61efd336d0d.jar
+D:\Users\jadk9_000\Desktop\Dropbox\Concordia - Winter 2015\SOEN 490\Project Repository\Android\MyApplication\app\build\intermediates\pre-dexed\debug\classes-ad5531876849e11a8a577ef5f7d42be4124e98ef.jar
+D:\Users\jadk9_000\Desktop\Dropbox\Concordia - Winter 2015\SOEN 490\Project Repository\Android\MyApplication\app\build\intermediates\pre-dexed\debug\classes-ef8e1adf7587a7e5af9e3ed3e221099d5d98a411.jar

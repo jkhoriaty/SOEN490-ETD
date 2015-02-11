@@ -14,7 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ETD.ViewsPresenters;
 using ETD.Models.Objects;
-using ETD.Models.Services;
+using ETD.Services;
 
 namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 {
@@ -115,6 +115,7 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 
 				//Displaying the team on the main window
 				caller.DisplayTeamInfo(team);
+                caller.UpdateSectors();
 
                 //Use this team to link it to map
 			}
