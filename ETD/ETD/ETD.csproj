@@ -41,6 +41,16 @@
     <Compile Include="Models\Objects\AdditionalInfo.cs" />
     <Compile Include="Models\Grids\AdditionalInfoGrid.cs" />
     <Compile Include="Models\Grids\EquipmentGrid.cs" />
+
+    <Compile Include="Models\Objects\FollowUpInfo.cs" />
+    <Compile Include="Models\Objects\Intervention.cs" />
+    <Compile Include="Models\Grids\InterventionGrid.cs" />
+    <Compile Include="Models\Grids\TeamGrid.cs" />
+    <Compile Include="Models\Services\TextboxHandler.cs" />
+    <Compile Include="ViewsPresenters\FollowUpSection\FollowUpSectionForm.xaml.cs">
+      <DependentUpon>FollowUpSectionForm.xaml</DependentUpon>
+      <DependentUpon>FollowUpSectionForm.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Models\Objects\InitialInfo.cs" />
     <Compile Include="Models\Objects\Intervention.cs" />
     <Compile Include="Models\Grids\InterventionGrid.cs" />
@@ -55,6 +65,7 @@
     <Compile Include="Services\TextboxHandler.cs" />
     <Compile Include="ViewsPresenters\InitialSetup.xaml.cs">
       <DependentUpon>InitialSetup.xaml</DependentUpon>
+
     </Compile>
     <Compile Include="ViewsPresenters\InterventionsSection\InterventionForm\ABCInterventionForm\ABCInterventionFormPage.xaml.cs">
       <DependentUpon>ABCInterventionFormPage.xaml</DependentUpon>
@@ -101,6 +112,8 @@
     </Compile>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -136,6 +149,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -162,7 +176,13 @@
     ViewsPresenters
   -->
   <ItemGroup>
+
+    <Page Include="ViewsPresenters\FollowUpSection\FollowUpSectionForm.xaml">
+<SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ViewsPresenters\InitialSetup.xaml">
+
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -281,6 +301,9 @@
     <Content Include="Icons\line.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Icons\lineCanvas.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Icons\Medicine_available.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -291,6 +314,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Icons\Medicine_unavailable.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\Ramp.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Icons\rectangle.png">
@@ -396,6 +422,9 @@
     <Content Include="Resources\Vocabulary.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Maps\" />
   </ItemGroup>
   <!--
     Icons

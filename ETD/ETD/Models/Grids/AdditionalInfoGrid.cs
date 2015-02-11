@@ -9,6 +9,7 @@ using System.Windows.Shapes;
 using ETD.Models.Objects;
 using ETD.Services;
 
+
 namespace ETD.Models.Grids
 {
     public class AdditionalInfoGrid : Grid
@@ -30,7 +31,7 @@ namespace ETD.Models.Grids
             this.MouseMove += new MouseEventHandler(AIPmap.DragMove);
             this.ContextMenu = AIPmap.Resources["AIcontext"] as ContextMenu;
             (this.ContextMenu.Items[0] as MenuItem).IsChecked = true;
-
+            
             Rectangle imageRectangle = new Rectangle();
             imageRectangle.Width = size;
             imageRectangle.Height = size;
@@ -40,11 +41,13 @@ namespace ETD.Models.Grids
             imageRectangle.Fill = img;
             this.Children.Add(imageRectangle);
         }
+ 
 
         public void ScalePin(String size)
         {
             if (size.Equals("small"))
             {
+
                 MessageBox.Show("hi");
                 Rectangle imageRectangle = new Rectangle();
                 AdditionalInfos AIP = (AdditionalInfos)Enum.Parse(typeof(AdditionalInfos), this.Name);
@@ -54,6 +57,7 @@ namespace ETD.Models.Grids
                 imageRectangle.Fill = img;
                 gr.setAISize(90);
                 this.AddtionalInfoSize = 90;
+
             }
 
             if (size.Equals("medium"))
@@ -70,5 +74,42 @@ namespace ETD.Models.Grids
         }
 
       
+    }
+
+    class AdditionalInfoGridLines : Grid
+    {
+        public AdditionalInfo gr;
+
+        public AdditionalInfoGridLines(AdditionalInfo AI, AdditionalInfoPage AIPmap, double w, double h)
+            : base()
+        {
+            this.gr = AI;
+            this.Name = AI.getAdditionalinfoName();
+            this.Tag = "line";
+            this.Width = w;
+            this.Height = h;
+
+            ///////////////////////////////////////////////////////////////////////////////////////////////////
+
+         //   this.MouseLeftButtonDown += new MouseButtonEventHandler(AIPmap.DrawingStart);
+           // this.MouseRightButtonDown += new MouseButtonEventHandler(AIPmap.EraseLine);
+          //  this.MouseLeftButtonUp += new MouseButtonEventHandler(AIPmap.DrawingStop);
+         //   this.MouseMove += new MouseEventHandler(AIPmap.Move);
+         //   this.MouseUp += new MouseButtonEventHandler(AIPmap.DrawingMove);
+       
+            ///////////////////////////////////////////////////////////////////////////////////////////////////
+
+            this.ContextMenu = AIPmap.Resources["AIcontext"] as ContextMenu;
+            (this.ContextMenu.Items[0] as MenuItem).IsChecked = true;
+            Rectangle imageRectangle = new Rectangle();
+            imageRectangle.Width = w;
+            imageRectangle.Height = h;
+            AdditionalInfos AIP = (AdditionalInfos)Enum.Parse(typeof(AdditionalInfos), this.Name);
+            ImageBrush img = new ImageBrush();
+            img.ImageSource = TechnicalServices.getImage(AIP);
+            imageRectangle.Fill = img;
+            this.Children.Add(imageRectangle);
+        }
+
     }
 }

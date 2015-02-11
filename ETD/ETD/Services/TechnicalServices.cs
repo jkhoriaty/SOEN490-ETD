@@ -63,12 +63,11 @@ namespace ETD.Services
         {
             {AdditionalInfos.camp, @"\Icons\camp.png"},
             {AdditionalInfos.circle, @"\Icons\circle.png"},
-            {AdditionalInfos.line, @"\Icons\line.png"},
+            {AdditionalInfos.line, @"\Icons\lineCanvas.png"},
             {AdditionalInfos.rectangle, @"\Icons\rectangle.png"},
             {AdditionalInfos.square, @"\Icons\square.png"},
-            {AdditionalInfos.stairs, @"\Icons\stairs.png"}
-            //{AdditionalInfo.ramp, },
-            //{AdditionalInfo.text, }
+            {AdditionalInfos.stairs, @"\Icons\stairs.png"},
+            {AdditionalInfos.ramp, @"\Icons\Ramp.png"}
         };
 
 		private static Dictionary<String, String> alphabet = new Dictionary<String, String>

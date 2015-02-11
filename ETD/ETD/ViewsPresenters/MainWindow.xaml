@@ -31,6 +31,24 @@
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
                 <!-- Here go all the buttons -->
                 <Button Content="Load Map" Name="Load_Map" Click="LoadMap" Margin="2,0,2,0"/>
+
+  
+                <ComboBox Visibility="Collapsed" Grid.Column="0" Name="AI" Width="130" Margin="1,0,1,0" VerticalAlignment="Center">
+                    <ComboBoxItem Content="circle" Name="circle" Selected="CreateAdditionnalInfoPin"/>
+                    <ComboBoxItem Content="rectangle" Name="rectangle" Selected="CreateAdditionnalInfoPin"/>
+                    <ComboBoxItem Content="stairs" Name="stairs" Selected="CreateAdditionnalInfoPin"/>
+                    <ComboBoxItem Content="camp" Name="camp" Selected="CreateAdditionnalInfoPin"/>
+                    <ComboBoxItem Content="line" Name="line" Selected="CreateAdditionnalInfoPin"/>
+                    <ComboBoxItem Content="square" Name="square" Selected="CreateAdditionnalInfoPin"/>
+                    <ComboBoxItem Content="ramp" Name="ramp" Selected="CreateAdditionnalInfoPin"/>
+                </ComboBox>
+
+                <ComboBox  Name="modeChange" Width="140" >
+                    <ComboBoxItem Content="Regular Mode" Selected="ModeChange" />
+                    <ComboBoxItem Content="Edit Mode" Selected="ModeChange"/>
+				</ComboBox>
+                
+
                 <Border BorderThickness="0.5" BorderBrush="Black" Margin="3,0,3,0" VerticalAlignment="Stretch"/>
                 <ComboBox Visibility="Collapsed" Name="AI" Width="130" Margin="1,0,1,0" VerticalAlignment="Center">
                     <ComboBoxItem Content="circle" Name="circle"/>
@@ -47,6 +65,7 @@
                 <Border BorderThickness="0.5" BorderBrush="Black" Margin="3,0,3,0" VerticalAlignment="Stretch"/>
                 <Button Content="GPS Locations" Name="GPSLocationsTextBlock" Click="ShowGPSLocations" IsEnabled="False"/>
                 <Label Content="0" Name="newRegisteredCTR" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+
 			</StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
                 <!-- Here go all the buttons -->
@@ -65,7 +84,12 @@
                     <ComboBoxItem Content="Mounted Stretcher" Name="mountedStretcher"/>
                     <ComboBoxItem Content="Wheelchair" Name="wheelchair"/>
                 </ComboBox>
+
+                <Button Grid.Column="1" Content="Add Equipment" Click="CreateEquipmentPin" Margin="1,0,1,0" VerticalAlignment="Center"/>
+
+
                 <Button Content="Add Equipement" Click="CreateEquipmentPin" Margin="1,0,1,0" VerticalAlignment="Center"/>
+
             </StackPanel>
         </Grid>
 
@@ -78,6 +102,7 @@
         </Border>
         <Border Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="2" Name="InterventionsSection" BorderBrush="Black" BorderThickness="1" VerticalAlignment="Bottom" Height="200" Padding="2">
             <!-- Here goes the InterventionsSection frame -->
+         
         </Border>
     </Grid>
 </Window>

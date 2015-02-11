@@ -1,4 +1,4 @@
-﻿//using ETD.Models;
+﻿using ETD.Models;
 using ETD.ViewsPresenters.MapSection.PinManagement;
 using System;
 using System.Collections.Generic;
@@ -29,8 +29,11 @@ namespace ETD.ViewsPresenters.MapSection
 			this.mainWindow = mainWindow;
 			pinEditor = new PinEditor(this);
             pinHandler = new AIPinHandler(this);
+            AdditionalMap.Focus();
 		}
+
     
+
 		//Loading of map as a result to the user clicking the "Load Map" button
         //Loading the map should only be done on the AdditionalInfoPAge.xaml rather than MapSectionPage.xaml
 		public void SetMap(BitmapImage coloredImage)
@@ -41,12 +44,10 @@ namespace ETD.ViewsPresenters.MapSection
 			grayBitmap.Source = coloredImage;
 			grayBitmap.DestinationFormat = PixelFormats.Gray8;
 			grayBitmap.EndInit();
-
 			//Displaying the map as the background
             AdditionalMap.Background = new ImageBrush(grayBitmap);
 		}
 		
-	
 
 		public void SetPinPosition(Grid g, double X, double Y)
 		{
@@ -58,6 +59,31 @@ namespace ETD.ViewsPresenters.MapSection
 			pinHandler.DragStart(sender, e);
 		}
 
+        ///////////////////////////////////////////////////////////////////////////////////////////////////
+        internal void DrawingStart(object sender, MouseButtonEventArgs e)
+        {
+            pinHandler.DrawingStart(sender, e);
+        }
+
+        internal void DrawingMove(object sender, MouseEventArgs e)
+        {
+            pinHandler.DrawingMove(sender, e);
+        }
+        internal void Move(object sender, MouseEventArgs e)
+        {
+            pinHandler.Move(sender, e);
+        }
+        internal void DrawingStop(object sender, MouseButtonEventArgs e)
+        {
+            pinHandler.DrawingStop(sender, e);
+        }
+
+
+        internal void ChangeColor(object sender, MouseWheelEventArgs e)
+        {
+            pinHandler.ChangeColor(sender, e);
+        }
+        ///////////////////////////////////////////////////////////////////////////////////////////////////
 		internal void DragStop(object sender, MouseButtonEventArgs e)
 		{
 			pinHandler.DragStop(sender, e);
@@ -68,10 +94,6 @@ namespace ETD.ViewsPresenters.MapSection
 			pinHandler.DragMove(sender, e);
 		}
 
-		//public void DetectCollision(Grid movedItem, double movedItem_X, double movedItem_Y)
-		//{
-		//	pinHandler.DetectCollision(movedItem, movedItem_X, movedItem_Y);
-		//}
 
 		//When the window is resized, the pins need to move to stay in the window
 		public void movePins(double widthRatio, double heightRatio)
@@ -79,11 +101,6 @@ namespace ETD.ViewsPresenters.MapSection
 			pinHandler.movePins(widthRatio, heightRatio);
 		}
 
-
-        /// <summary>
-        /// //////////////////////////////////////////////////////////
-        /// </summary>
-        /// <param name="AI"></param>
         public void CreateAdditionnalInfoPin(String AI,int size)
         {
             pinEditor.CreateAdditionnalInfoPin(AI,size);
@@ -93,11 +110,6 @@ namespace ETD.ViewsPresenters.MapSection
 		{
             pinEditor.AIDeletePin(sender, e);
 		}
-
-        internal void ScalePin(object sender, RoutedEventArgs e)
-        {
-            pinEditor.ScalePin(sender,e);
-        }
 
 	}
 }
