@@ -30,26 +30,8 @@
         <Grid Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
                 <!-- Here go all the buttons -->
-                <Button Content="Load Map" Name="Load_Map" Click="LoadMap" Margin="2,0,2,0"/>
-
-  
-                <ComboBox Visibility="Collapsed" Grid.Column="0" Name="AI" Width="130" Margin="1,0,1,0" VerticalAlignment="Center">
-                    <ComboBoxItem Content="circle" Name="circle" Selected="CreateAdditionnalInfoPin"/>
-                    <ComboBoxItem Content="rectangle" Name="rectangle" Selected="CreateAdditionnalInfoPin"/>
-                    <ComboBoxItem Content="stairs" Name="stairs" Selected="CreateAdditionnalInfoPin"/>
-                    <ComboBoxItem Content="camp" Name="camp" Selected="CreateAdditionnalInfoPin"/>
-                    <ComboBoxItem Content="line" Name="line" Selected="CreateAdditionnalInfoPin"/>
-                    <ComboBoxItem Content="square" Name="square" Selected="CreateAdditionnalInfoPin"/>
-                    <ComboBoxItem Content="ramp" Name="ramp" Selected="CreateAdditionnalInfoPin"/>
-                </ComboBox>
-
-                <ComboBox  Name="modeChange" Width="140" >
-                    <ComboBoxItem Content="Regular Mode" Selected="ModeChange" />
-                    <ComboBoxItem Content="Edit Mode" Selected="ModeChange"/>
-				</ComboBox>
-                
-
-                <Border BorderThickness="0.5" BorderBrush="Black" Margin="3,0,3,0" VerticalAlignment="Stretch"/>
+				<Button Content="Load Map" Name="Load_Map" Click="LoadMap" Margin="2,0,2,0"/>
+				<Border BorderThickness="0.5" BorderBrush="Black" Margin="3,0,3,0" VerticalAlignment="Stretch"/>
                 <ComboBox Visibility="Collapsed" Name="AI" Width="130" Margin="1,0,1,0" VerticalAlignment="Center">
                     <ComboBoxItem Content="circle" Name="circle"/>
                     <ComboBoxItem Content="rectangle" Name="rectangle"/>
@@ -76,19 +58,15 @@
                 <TextBox Name="MovingDeadline" Text="5" Width="20" Margin="1,0,1,0" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
                 <Button Content="Submit" Margin="1,0,1,0" VerticalAlignment="Center" Click="ChangeDeadlines"/>
                 <Border BorderThickness="0.5" BorderBrush="Black" Margin="3,0,3,0" VerticalAlignment="Stretch"/>
-                <ComboBox Name="EquipmentAdd" HorizontalAlignment="Stretch" Width="130" Margin="1,0,1,0" VerticalAlignment="Center">
-                    <ComboBoxItem Content="Ambulance Cart" Name="ambulanceCart"/>
-                    <ComboBoxItem Content="Sitting Cart" Name="sittingCart"/>
-                    <ComboBoxItem Content="Epipen" Name="epipen"/>
-                    <ComboBoxItem Content="Transport Stretcher" Name="transportStretcher"/>
-                    <ComboBoxItem Content="Mounted Stretcher" Name="mountedStretcher"/>
-                    <ComboBoxItem Content="Wheelchair" Name="wheelchair"/>
-                </ComboBox>
-
-                <Button Grid.Column="1" Content="Add Equipment" Click="CreateEquipmentPin" Margin="1,0,1,0" VerticalAlignment="Center"/>
-
-
-                <Button Content="Add Equipement" Click="CreateEquipmentPin" Margin="1,0,1,0" VerticalAlignment="Center"/>
+				<ComboBox Name="EquipmentAdd" HorizontalAlignment="Stretch" Width="130" Margin="1,0,1,0" VerticalAlignment="Center">
+					<ComboBoxItem Content="Ambulance Cart" Name="ambulanceCart"/>
+					<ComboBoxItem Content="Sitting Cart" Name="sittingCart"/>
+					<ComboBoxItem Content="Epipen" Name="epipen"/>
+					<ComboBoxItem Content="Transport Stretcher" Name="transportStretcher"/>
+					<ComboBoxItem Content="Mounted Stretcher" Name="mountedStretcher"/>
+					<ComboBoxItem Content="Wheelchair" Name="wheelchair"/>
+				</ComboBox>
+				<Button Content="Add Equipement" Click="CreateEquipmentPin" Margin="1,0,1,0" VerticalAlignment="Center"/>
 
             </StackPanel>
         </Grid>

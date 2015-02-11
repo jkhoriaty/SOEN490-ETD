@@ -351,7 +351,7 @@
                 <DockPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="40">
                         <TextBox Text="hh" Width="40" Name="Timestamphhs10" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
-                        <Button Width="29" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="Timestamps10" Click="Timestamp_Click"/>
+                        <Button Width="29" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="Timestamps10" Click="TimestampSuivi_Click"/>
                         <TextBox Text="mm" Width="40" Name="Timestampmms10" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
                     </StackPanel>
                 </DockPanel>

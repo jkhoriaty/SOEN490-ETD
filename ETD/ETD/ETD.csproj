@@ -46,15 +46,11 @@
     <Compile Include="Models\Objects\Intervention.cs" />
     <Compile Include="Models\Grids\InterventionGrid.cs" />
     <Compile Include="Models\Grids\TeamGrid.cs" />
-    <Compile Include="Models\Services\TextboxHandler.cs" />
     <Compile Include="ViewsPresenters\FollowUpSection\FollowUpSectionForm.xaml.cs">
       <DependentUpon>FollowUpSectionForm.xaml</DependentUpon>
       <DependentUpon>FollowUpSectionForm.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\Objects\InitialInfo.cs" />
-    <Compile Include="Models\Objects\Intervention.cs" />
-    <Compile Include="Models\Grids\InterventionGrid.cs" />
-    <Compile Include="Models\Grids\TeamGrid.cs" />
     <Compile Include="Models\Objects\Observable.cs" />
     <Compile Include="Models\Objects\Observer.cs" />
     <Compile Include="Models\Objects\PatrolShift.cs" />

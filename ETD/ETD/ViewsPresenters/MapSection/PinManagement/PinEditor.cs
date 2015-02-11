@@ -243,11 +243,6 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 			}
 		}
 
-		private void CheckRight(MenuItem mi, TeamGrid fe)
-		{
-			mi.IsChecked = ((Statuses)Enum.Parse(typeof(Statuses), mi.Header.ToString().ToLower()) == fe.team.getStatus());
-		}
-
         private void CheckRight(MenuItem mi)
         {
             mi.IsChecked = (mi.Header.Equals(mapSection.zoomLevel));

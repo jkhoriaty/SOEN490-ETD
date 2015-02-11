@@ -8,6 +8,6 @@ namespace ETD.Models.Objects
 {
 	interface Observer
 	{
-		public void ObservedObjectUpdated();
+		void ObservedObjectUpdated();
 	}
 }
