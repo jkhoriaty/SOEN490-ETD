@@ -48,8 +48,7 @@
     <Compile Include="Models\Grids\TeamGrid.cs" />
     <Compile Include="Models\Services\TextboxHandler.cs" />
     <Compile Include="ViewsPresenters\FollowUpSection\FollowUpSectionForm.xaml.cs">
-    <DependentUpon>FollowUpSectionForm.xaml</DependentUpon>
-    </Compile>
+      <DependentUpon>FollowUpSectionForm.xaml</DependentUpon>
 
     <Compile Include="Models\Objects\InitialInfo.cs" />
     <Compile Include="Models\Objects\Intervention.cs" />
@@ -176,9 +175,7 @@
   <ItemGroup>
 
     <Page Include="ViewsPresenters\FollowUpSection\FollowUpSectionForm.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
+
     <Page Include="ViewsPresenters\InitialSetup.xaml">
 
       <SubType>Designer</SubType>
