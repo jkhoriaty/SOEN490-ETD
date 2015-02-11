@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ETD.Models.Objects;
-using ETD.Models.Services;
+using ETD.Services;
 
 namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.ResourcesInterventionForm
 {
@@ -27,16 +27,22 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.ResourcesInt
 		private Dictionary<String, TextBox[]> movingMap = new Dictionary<String, TextBox[]>();
 		private Dictionary<String, TextBox[]> arrivalMap = new Dictionary<String, TextBox[]>();
 		private Dictionary<String, TextBox[]> informationMap = new Dictionary<String, TextBox[]>();
+		private List<Button> movingButtons = new List<Button>();
+		private List<Button> arrivalButtons = new List<Button>();
+		private int addResourcesOffset = 0;
 
 		public ResourcesInterventionFormPage(InterventionFormPage interventionForm, Intervention intervention)
 		{
 			InitializeComponent();
+			Resources1.TextChanged += ResourcesChanged;
 			this.interventionForm = interventionForm;
 			this.intervention = intervention;
 
 			setupMovingMap();
 			setupArrivalMap();
 			setupInformationMap();
+			setupMovingButtons();
+			setupArrivalButtons();
 		}
 
 		private void setupMovingMap()
@@ -81,6 +87,34 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.ResourcesInt
 			informationMap.Add("Moving10", TextBoxHandler.textboxArray(Team10, Resources10));
 		}
 
+		private void setupMovingButtons()
+		{
+			movingButtons.Add(Moving1);
+			movingButtons.Add(Moving2);
+			movingButtons.Add(Moving3);
+			movingButtons.Add(Moving4);
+			movingButtons.Add(Moving5);
+			movingButtons.Add(Moving6);
+			movingButtons.Add(Moving7);
+			movingButtons.Add(Moving8);
+			movingButtons.Add(Moving9);
+			movingButtons.Add(Moving10);
+		}
+
+		private void setupArrivalButtons()
+		{
+			arrivalButtons.Add(Arrival1);
+			arrivalButtons.Add(Arrival2);
+			arrivalButtons.Add(Arrival3);
+			arrivalButtons.Add(Arrival4);
+			arrivalButtons.Add(Arrival5);
+			arrivalButtons.Add(Arrival6);
+			arrivalButtons.Add(Arrival7);
+			arrivalButtons.Add(Arrival8);
+			arrivalButtons.Add(Arrival9);
+			arrivalButtons.Add(Arrival10);
+		}
+
 		private void TextBoxes_GotFocus(object sender, RoutedEventArgs e)
 		{
 			TextBoxHandler.GotFocus(sender, e);
@@ -92,7 +126,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.ResourcesInt
 		}
 
 		//Display an extra resource line when filling out the last available line
-		private void TextBoxes_TextChanged(object sender, RoutedEventArgs e)
+		private void TeamChanged(object sender, RoutedEventArgs e)
 		{
 			TextBox tb = (TextBox)sender;
 			if(tb.Name.Equals("Team1"))
@@ -178,14 +212,25 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.ResourcesInt
 			}
 		}
 
+		private void ResourcesChanged(object sender, TextChangedEventArgs e)
+		{
+			TextBox resource = (TextBox)sender;
+			movingButtons.ElementAt(Grid.GetRow(resource)-1).RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+		}
+
 		private void UpdateResource(int position, TextBox MovinghhBox, TextBox MovingmmBox, TextBox ArrivalhhBox, TextBox ArrivalmmBox, TextBox Resource, TextBox Team)
 		{
 			int movinghh = 0;
 			int movingmm = 0;
 			if (!MovinghhBox.Text.Equals("hh") && !MovingmmBox.Text.Equals("mm"))
 			{
-				movinghh = int.Parse(MovinghhBox.Text);
-				movingmm = int.Parse(MovingmmBox.Text);
+				try
+				{
+					movinghh = int.Parse(MovinghhBox.Text);
+					movingmm = int.Parse(MovingmmBox.Text);
+				}
+				catch(Exception e)
+				{ return; }
 			}
 			DateTime moving = DateTime.Now;
 			moving = moving.Date + new TimeSpan(movinghh, movingmm, 0);
@@ -211,7 +256,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.ResourcesInt
 				TextBoxHandler.setNow(movingMap[bt.Name][0], movingMap[bt.Name][1]);
 			}
 
-			if(Team1.Text.Equals("") || Resources1.Text.Equals(""))
+            if (informationMap[bt.Name][0].Text.Equals(""))
 			{
 				MessageBox.Show("Please set the team and resource name before submitting time.");
 			}
@@ -224,13 +269,17 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.ResourcesInt
 					int hh = int.Parse(movingMap[bt.Name][0].Text);
 					int mm = int.Parse(movingMap[bt.Name][1].Text);
 					DateTime startTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, hh, mm, DateTime.Now.Second);
-					int offset = (int)DateTime.Now.Subtract(startTime).TotalMinutes;
+					int offset = (int)DateTime.Now.Subtract(startTime).TotalSeconds;
 					if(offset < 0)
 					{
 						MessageBox.Show("The time inserted is in the future!");
 					}
 					else
 					{
+						if(DateTime.Now.Hour == hh && DateTime.Now.Minute == mm)
+						{
+							offset = 0;
+						}
 						interventionForm.CreateTimer(Grid.GetRow(bd), informationMap[bt.Name][0].Text, informationMap[bt.Name][1].Text, offset);
 					}
 					
@@ -271,6 +320,31 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.ResourcesInt
 			catch (Exception ex)
 			{
 				MessageBox.Show("The text inserted in the time boxes is not valid");
+			}
+
+            interventionForm.ReportArrived(Grid.GetRow(bd) - 1);
+		}
+
+		internal void AddResources(string teamName)
+		{
+			informationMap.ElementAt(addResourcesOffset).Value[0].Text = teamName;
+			movingButtons.ElementAt(addResourcesOffset).RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+			if (addResourcesOffset != 0)
+			{
+				informationMap.ElementAt(addResourcesOffset).Value[1].Focus();
+			}
+			addResourcesOffset++;
+		}
+
+		internal void ReportArrival(String teamName)
+		{
+			for(int i = 0; i < informationMap.Count; i++)
+			{
+				if(informationMap.ElementAt(i).Value[0].Text.Equals(teamName))
+				{
+					arrivalButtons.ElementAt(i).RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+					return;
+				}
 			}
 		}
 	}

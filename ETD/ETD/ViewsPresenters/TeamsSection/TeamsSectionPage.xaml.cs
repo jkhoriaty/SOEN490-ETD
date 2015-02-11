@@ -16,7 +16,8 @@ using System.Windows.Shapes;
 using ETD.ViewsPresenters.TeamsSection.TeamForm;
 using ETD.ViewsPresenters.TeamsSection.TeamInfo;
 using ETD.Models.Objects;
-using ETD.Models.Services;
+using ETD.Services;
+using System.Windows.Threading;
 
 namespace ETD.ViewsPresenters.TeamsSection
 {
@@ -25,13 +26,44 @@ namespace ETD.ViewsPresenters.TeamsSection
 	/// </summary>
 	public partial class TeamsSectionPage : Page
 	{
+
 		private MainWindow mainWindow;
 		private static Dictionary<String, StackPanel> teamEquipmentStacks = new Dictionary<String, StackPanel>();
+		private DispatcherTimer dispatcherTimer = new DispatcherTimer();
+        private StackPanel movingPanel;
+        private bool _isDragInProg;
 
 		public TeamsSectionPage(MainWindow mainWindow)
 		{
 			InitializeComponent();
 			this.mainWindow = mainWindow;
+            this.AllowDrop = true;
+            //this.DragEnter += new DragEventHandler(dragEnter);
+            //this.DragLeave += new DragEventHandler(dragDrop);
+			dispatcherTimer.Tick += new EventHandler(refresh);
+			dispatcherTimer.Interval = new TimeSpan(0, 0, 10); //Update every minute
+			dispatcherTimer.Start();
+		}
+
+		private void refresh(object sender, EventArgs e)
+		{
+			foreach(KeyValuePair<String, Team> team in Team.teamsList)
+			{
+				foreach(TeamMember teamMember in team.Value.getMemberList())
+				{
+
+					DateTime now = DateTime.Now.AddMinutes(15);
+                    DateTime current = DateTime.Now;
+                    if (DateTime.Compare(current, teamMember.getDeparture()) >= 0)
+                    {
+                        teamMember.getNameGrid().Background = new SolidColorBrush(Colors.Red);
+                    }
+					else if(DateTime.Compare(now, teamMember.getDeparture()) >= 0)
+					{
+						teamMember.getNameGrid().Background = new SolidColorBrush(Colors.Yellow);
+					}                   
+				}
+			}
 		}
 
 		//Adjusting the team section height
@@ -72,26 +104,7 @@ namespace ETD.ViewsPresenters.TeamsSection
 		{
 			teamEquipmentStacks.Add(teamName, equipmentStack);
 		}
-
-        /* TO BE COMPLETED
-        //Add timer to notify 15mins prior to the end of shift
-        public void setTimer(TeamMember member, ToolTip departTime) 
-        {
-            DateTime departure = member.getDeparture();
-            TimeSpan timeLeft = departure - DateTime.Now;
-            TimeSpan fifteen = TimeSpan.FromMinutes(15);
-            if (timeLeft < TimeSpan.Zero)
-            {
-                //departTime.SetToolTip(this,"Departure Time");
-            }
-            else if (timeLeft < fifteen)
-            {
-               // departTime.ToolTip = timeLeft;
-            }
-            
-        }
-        */
-
+   
 		//Deleting the team upon right click on the label
 		public void RemoveTeam(String teamName)
 		{
@@ -105,8 +118,9 @@ namespace ETD.ViewsPresenters.TeamsSection
 					break;
 				}
 			}
-			Team.teams.Remove(teamName);
+			Team.teamsList.Remove(teamName);
 			mainWindow.DeletePin(teamName);
+            TeamFormPage.removeTeamName(teamName);
 		}
 
 		//Adding equipment to specified team equipment stack
@@ -116,7 +130,7 @@ namespace ETD.ViewsPresenters.TeamsSection
 			if (teamEquipmentStacks[teamName].Children.Count <= 3)
 			{
 				Rectangle imageRectangle = new Rectangle();
-				imageRectangle.Name = equip.ToString();
+				imageRectangle.Name = equip.getEquipmentName().ToString();
 				imageRectangle.Tag = teamName;
 				imageRectangle.Width = 27;
 				imageRectangle.Height = 27;
@@ -135,7 +149,7 @@ namespace ETD.ViewsPresenters.TeamsSection
 				//Getting the appropriate equipment StackPanel
 				teamEquipmentStacks[teamName].Children.Add(imageRectangle);
 
-				Team.teams[teamName].addEquipment(equip);
+				Team.teamsList[teamName].addEquipment(equip);
 			}
 			else
 			{
@@ -151,10 +165,43 @@ namespace ETD.ViewsPresenters.TeamsSection
             //Type equipType = Type.GetType(equipment.Name.ToString());
             Equipment equip = new Equipment((Equipments)Enum.Parse(typeof(Equipments), equipment.Name.ToString()));
 			StackPanel equipmentStackPanel = (StackPanel)equipment.Parent;
-			Team.teams["" + equipment.Tag].removeEquipment(equip);
+			Team.teamsList["" + equipment.Tag].removeEquipment(equip);
 			equipmentStackPanel.Children.Remove(equipment);
 			mainWindow.CreateEquipmentPin(equipment.Name);
 
 		}
-	}
+
+        internal void dragStart(object sender, DragEventArgs e)
+        {
+            StackPanel s = (StackPanel)sender;
+            _isDragInProg = s.CaptureMouse();
+            movingPanel = s;
+
+        }
+
+        internal void dragStop(object sender, MouseButtonEventArgs e)
+        {
+            StackPanel s = (StackPanel)sender;
+            if (s != movingPanel)
+            {
+                return;
+            }
+            s.ReleaseMouseCapture();
+            _isDragInProg = false;
+            //var mousePos = e.GetPosition(this.map)
+        }
+
+        internal void dragMove(object sender, MouseEventArgs e)
+        {
+            if (!_isDragInProg) return;
+            StackPanel s = (StackPanel)sender;          
+        }
+        
+        
+        internal void UpdateSectors()
+        {
+            mainWindow.UpdateSectors();
+        }
+
+    }
 }

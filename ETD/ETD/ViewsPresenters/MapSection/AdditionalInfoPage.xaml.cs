@@ -31,7 +31,9 @@ namespace ETD.ViewsPresenters.MapSection
             pinHandler = new AIPinHandler(this);
             AdditionalMap.Focus();
 		}
- 
+
+    
+
 		//Loading of map as a result to the user clicking the "Load Map" button
         //Loading the map should only be done on the AdditionalInfoPAge.xaml rather than MapSectionPage.xaml
 		public void SetMap(BitmapImage coloredImage)
@@ -92,11 +94,6 @@ namespace ETD.ViewsPresenters.MapSection
 			pinHandler.DragMove(sender, e);
 		}
 
-
-        internal void CheckRight(object sender, RoutedEventArgs e)
-        {
-			pinEditor.EditMenuItems(sender, e);
-        }
 
 		//When the window is resized, the pins need to move to stay in the window
 		public void movePins(double widthRatio, double heightRatio)

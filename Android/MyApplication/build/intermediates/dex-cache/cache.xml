@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="D:\Users\jadk9_000\Desktop\Dropbox\Concordia - Winter 2015\SOEN 490\Project Repository\Android\MyApplication\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\libs\internal_impl-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
+        <dex dex="D:\Users\jadk9_000\Desktop\Dropbox\Concordia - Winter 2015\SOEN 490\Project Repository\Android\MyApplication\app\build\intermediates\pre-dexed\debug\internal_impl-21.0.3-625b380cb9121816777fcd4bc3fc7fa289c63a72.jar" />
+    </item>
+    <item
+        jar="D:\Users\jadk9_000\Desktop\Dropbox\Concordia - Winter 2015\SOEN 490\Project Repository\Android\MyApplication\app\build\intermediates\exploded-aar\com.google.android.gms\play-services\6.5.87\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="dd9247ea0fabe8ee479638c4b4a23e93752be256">
+        <dex dex="D:\Users\jadk9_000\Desktop\Dropbox\Concordia - Winter 2015\SOEN 490\Project Repository\Android\MyApplication\app\build\intermediates\pre-dexed\debug\classes-ef8e1adf7587a7e5af9e3ed3e221099d5d98a411.jar" />
+    </item>
+    <item
+        jar="D:\Users\jadk9_000\Desktop\Dropbox\Concordia - Winter 2015\SOEN 490\Project Repository\Android\MyApplication\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
+        <dex dex="D:\Users\jadk9_000\Desktop\Dropbox\Concordia - Winter 2015\SOEN 490\Project Repository\Android\MyApplication\app\build\intermediates\pre-dexed\debug\classes-ad5531876849e11a8a577ef5f7d42be4124e98ef.jar" />
+    </item>
+    <item
+        jar="D:\Users\jadk9_000\AppData\Local\Android\Sdk\extras\android\m2repository\com\android\support\support-annotations\21.0.3\support-annotations-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
+        <dex dex="D:\Users\jadk9_000\Desktop\Dropbox\Concordia - Winter 2015\SOEN 490\Project Repository\Android\MyApplication\app\build\intermediates\pre-dexed\debug\support-annotations-21.0.3-c1013852eb9589f4b741e745c91c5f29dcdd3d11.jar" />
+    </item>
+    <item
+        jar="D:\Users\jadk9_000\Desktop\Dropbox\Concordia - Winter 2015\SOEN 490\Project Repository\Android\MyApplication\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\21.0.3\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
+        <dex dex="D:\Users\jadk9_000\Desktop\Dropbox\Concordia - Winter 2015\SOEN 490\Project Repository\Android\MyApplication\app\build\intermediates\pre-dexed\debug\classes-7f63b63e0f2035afa1e7664d2b08e61efd336d0d.jar" />
+    </item>
+
+</items>

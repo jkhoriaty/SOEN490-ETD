@@ -7,7 +7,7 @@ using System.Windows.Media;
 using System.Windows.Media.Effects;
 using System.Windows.Shapes;
 using ETD.Models.Objects;
-using ETD.Models.Services;
+using ETD.Services;
 
 namespace ETD.Models.Grids
 {
@@ -26,7 +26,8 @@ namespace ETD.Models.Grids
             this.MouseLeftButtonDown += new MouseButtonEventHandler(mapSection.DragStart);
             this.MouseLeftButtonUp += new MouseButtonEventHandler(mapSection.DragStop);
             this.MouseMove += new MouseEventHandler(mapSection.DragMove);
-            this.ContextMenu = mapSection.Resources["TeamContext"] as ContextMenu;
+            this.ContextMenu = mapSection.Resources["ContextMenu"] as ContextMenu;
+			this.ContextMenuOpening += new ContextMenuEventHandler(mapSection.CheckRight);
             (this.ContextMenu.Items[0] as MenuItem).IsChecked = true;
 
             imageRectangle = new Rectangle();
@@ -58,6 +59,11 @@ namespace ETD.Models.Grids
             ImageBrush img = new ImageBrush();
             img.ImageSource = TechnicalServices.getImage(team, team.getStatus());
             imageRectangle.Fill = img;
+        }
+
+        public string GetStatus()
+        {
+            return team.getStatus().ToString();
         }
     }
 }

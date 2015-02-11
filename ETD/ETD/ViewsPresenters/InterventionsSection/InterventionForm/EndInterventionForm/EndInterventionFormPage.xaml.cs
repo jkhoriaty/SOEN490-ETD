@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ETD.Models.Objects;
-using ETD.Models.Services;
+using ETD.Services;
 
 namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndInterventionForm
 {
@@ -52,6 +52,22 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
 				int mm = int.Parse(Endmm.Text);
 				DateTime endTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, hh, mm, DateTime.Now.Second);
 				int offset = (int)DateTime.Now.Subtract(endTime).TotalMinutes;
+                
+                Intervention.Resource[] resources = this.intervention.getResources();
+                            
+                for (int i = 0; i < TeamsSection.TeamForm.TeamFormPage.activeTeamsList.Count; i++)
+                {
+                    try
+                    {
+                        Team.teamsList[TeamsSection.TeamForm.TeamFormPage.activeTeamsList[i]].getTeamGrid().ChangeStatus("unavailable");
+                    }
+                    catch (ArgumentNullException)
+                    {
+
+                    }
+                   
+                }
+
 				if (offset < 0)
 				{
 					MessageBox.Show("The time inserted is in the future!");
@@ -60,9 +76,9 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
 				{
 					ComboBoxItem conclusion = (ComboBoxItem)ConclusionBox.SelectedItem;
 
-					if ((conclusion.Name.Equals("call911") || conclusion.Name.Equals("other")) && AdditionalInformation.Text.Equals(""))
+					if (Grid.GetColumnSpan(ComboBoxBorder) == 1 && TextBoxHandler.isDefaultText(AdditionalInformation))
 					{
-						throw new Exception();
+						MessageBox.Show("No conclusion is set!");
 					}
 					else
 					{
@@ -74,10 +90,6 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
 			catch (FormatException ex)
 			{
 				MessageBox.Show("The text inserted in the time boxes is not valid");
-			}
-			catch(Exception ex)
-			{
-				MessageBox.Show("No conclusion is set!");
 			}
 		}
 
@@ -214,16 +226,95 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
 		private void Call_Click(object sender, RoutedEventArgs e)
 		{
 			TextBoxHandler.setNow(Call911hh, Call911mm);
+            
+            try
+            {
+                int hh = int.Parse(Call911hh.Text);
+                int mm = int.Parse(Call911mm.Text);
+                DateTime startTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, hh, mm, DateTime.Now.Second);
+                int offset = (int)DateTime.Now.Subtract(startTime).TotalSeconds;
+                if (offset < 0)
+                {
+                    MessageBox.Show("The time inserted is in the future!");
+                }
+                else
+                {
+                    interventionForm.CreateTimer(11, "911", "Call", offset);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("The text inserted in the time boxes is not valid");
+            }
+            
 		}
 
 		private void FirstResponder_Click(object sender, RoutedEventArgs e)
 		{
-			TextBoxHandler.setNow(FirstResponderArrivalhh, FirstResponderArrivalmm);
+            if (interventionForm.IsTimerRunning(11))
+            {
+                TextBoxHandler.setNow(FirstResponderArrivalhh, FirstResponderArrivalmm);
+
+                try
+                {
+                    int hh = int.Parse(FirstResponderArrivalhh.Text);
+                    int mm = int.Parse(FirstResponderArrivalmm.Text);
+                    DateTime startTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, hh, mm, DateTime.Now.Second);
+                    int offset = (int)DateTime.Now.Subtract(startTime).TotalMinutes;
+                    if (offset < 0)
+                    {
+                        MessageBox.Show("The time inserted is in the future!");
+                    }
+                    else
+                    {
+                        interventionForm.RenameTimer(11, "911", "First Responder");
+                        interventionForm.CloneTimer(12, "911", "Ambulance", offset, 11);
+                        interventionForm.StopTimer(11, offset);
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("The text inserted in the time boxes is not valid");
+                }
+            }
 		}
 
 		private void Ambulance_Click(object sender, RoutedEventArgs e)
 		{
-			TextBoxHandler.setNow(AmbulanceArrivalhh, AmbulanceArrivalmm);
+            if (interventionForm.IsTimerRunning(11) || interventionForm.IsTimerRunning(12))
+            {
+                TextBoxHandler.setNow(AmbulanceArrivalhh, AmbulanceArrivalmm);
+
+                try
+                {
+                    int hh = int.Parse(AmbulanceArrivalhh.Text);
+                    int mm = int.Parse(AmbulanceArrivalmm.Text);
+                    DateTime startTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, hh, mm, DateTime.Now.Second);
+                    int offset = (int)DateTime.Now.Subtract(startTime).TotalMinutes;
+                    if (offset < 0)
+                    {
+                        MessageBox.Show("The time inserted is in the future!");
+                    }
+                    else
+                    {
+                        if (!interventionForm.IsTimerRunning(12))
+                        {
+                            interventionForm.RenameTimer(11, "911", "Ambulance");
+                            interventionForm.StopTimer(11, offset);
+                        }
+                        else
+                            interventionForm.StopTimer(12, offset);
+
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("The text inserted in the time boxes is not valid");
+                }
+            }
 		}
 	}
 }

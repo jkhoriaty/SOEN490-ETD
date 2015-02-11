@@ -14,7 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ETD.ViewsPresenters;
 using ETD.Models.Objects;
-using ETD.Models.Services;
+using ETD.Services;
 
 namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 {
@@ -27,7 +27,7 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 		public int currentNumberOfMembers = 1; //Used to track the number of members on the TeamForm
 		private List<Control> textboxLastValidationFailed = null;
 		private List<Border> comboboxLastValidationFailed = null;
-		private static List<String> activeTeamsList = new List<String>();
+		public static List<String> activeTeamsList = new List<String>();
 
         public TeamFormPage(TeamsSectionPage caller)
         {
@@ -78,17 +78,17 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 				DateTime dateNow = DateTime.Now;
 
 				//Create team
-				String team_name = teamName.Text;
-				activeTeamsList.Add(team_name);
-				if(team_name.Length == 1)
-				{
-					team_name = team_name.ToUpper();
-				}
+                String team_name = teamName.Text;
+                if (team_name.Length == 1)
+                {
+                    team_name = team_name.ToUpper();
+                }
+				activeTeamsList.Add(team_name);			
 				Team team = new Team(team_name);
 
 				//Create first member
 				String mem_1_name = teamMember1.Text;
-				DateTime mem_1_departure = new DateTime(dateNow.Year, dateNow.Month, dateNow.Day, int.Parse(departurehh1.Text), int.Parse(departuremm1.Text), dateNow.Second);
+				DateTime mem_1_departure = checkDepartureTime(new DateTime(dateNow.Year, dateNow.Month, dateNow.Day, int.Parse(departurehh1.Text), int.Parse(departuremm1.Text), dateNow.Second));
 				Trainings mem_1_lvlOfTraining = (Trainings)lvlOfTraining1.SelectedIndex;
 				TeamMember mem_1 = new TeamMember(mem_1_name, mem_1_lvlOfTraining, mem_1_departure);
 				team.addMember(mem_1);
@@ -97,7 +97,7 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 				String mem_2_name = teamMember2.Text;
 				if (mem_2_name != "Team Member Name")
 				{
-					DateTime mem_2_departure = new DateTime(dateNow.Year, dateNow.Month, dateNow.Day, int.Parse(departurehh2.Text), int.Parse(departuremm2.Text), dateNow.Second);
+					DateTime mem_2_departure = checkDepartureTime(new DateTime(dateNow.Year, dateNow.Month, dateNow.Day, int.Parse(departurehh2.Text), int.Parse(departuremm2.Text), dateNow.Second));
 					Trainings mem_2_lvlOfTraining = (Trainings) lvlOfTraining2.SelectedIndex;
 					TeamMember mem_2 = new TeamMember(mem_2_name, mem_2_lvlOfTraining, mem_2_departure);
 					team.addMember(mem_2);
@@ -107,7 +107,7 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 				String mem_3_name = teamMember3.Text;
 				if (mem_3_name != "Team Member Name")
 				{
-					DateTime mem_3_departure = new DateTime(dateNow.Year, dateNow.Month, dateNow.Day, int.Parse(departurehh3.Text), int.Parse(departuremm3.Text), dateNow.Second);
+					DateTime mem_3_departure = checkDepartureTime(new DateTime(dateNow.Year, dateNow.Month, dateNow.Day, int.Parse(departurehh3.Text), int.Parse(departuremm3.Text), dateNow.Second));
 					Trainings mem_3_lvlOfTraining = (Trainings)lvlOfTraining3.SelectedIndex;
 					TeamMember mem_3 = new TeamMember(mem_3_name, mem_3_lvlOfTraining, mem_3_departure);
 					team.addMember(mem_3);
@@ -115,6 +115,7 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 
 				//Displaying the team on the main window
 				caller.DisplayTeamInfo(team);
+                caller.UpdateSectors();
 
                 //Use this team to link it to map
 			}
@@ -157,7 +158,7 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 			//Make sure that there are no other team with the same name
 			foreach(String item in activeTeamsList)
 			{
-				if(item.Equals(teamName.Text))
+                if (item.Equals(teamName.Text) || item.Equals(teamName.Text.ToLower()) || item.Equals(teamName.Text.ToUpper()))
 				{
 					textboxFailedValidation.Add(teamName);
 				}
@@ -330,6 +331,24 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 			{
 				return true;
 			}
+		}
+
+        internal static void removeTeamName(String teamName)
+        {
+            activeTeamsList.Remove(teamName);
+        }
+
+		public DateTime checkDepartureTime(DateTime departureTime)
+		{
+			if (departureTime.Hour < DateTime.Now.Hour)
+			{
+				departureTime = departureTime.AddDays(1);
+			}
+            else if (departureTime.Hour == DateTime.Now.Hour && departureTime.Minute < DateTime.Now.Minute)
+            {
+                departureTime = departureTime.AddDays(1);
+            }
+			return departureTime;
 		}
     }
 }

@@ -12,7 +12,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using ETD.ViewsPresenters.InterventionsSection;
 using ETD.ViewsPresenters.InterventionsSection.InterventionForm.TimersInterventionForm;
 using ETD.ViewsPresenters.InterventionsSection.InterventionForm.DetailsInterventionForm;
 using ETD.ViewsPresenters.InterventionsSection.InterventionForm.ResourcesInterventionForm;
@@ -164,6 +163,48 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm
 		public void StopTimer(int position, int offset)
 		{
 			timersPage.StopTimer(position, offset);
+		}
+
+        public void RenameTimer(int position, String team, String resource)
+        {
+            timersPage.RenameTimer(position, team, resource);
+        }
+		
+        public bool IsTimerRunning(int position)
+        {
+            return timersPage.IsRunning(position);
+        }
+
+        public void CloneTimer(int position, String team, String resource, int offset, int original)
+        {
+            timersPage.CloneTimer(position, team, resource, offset, original);
+        }
+
+		internal void AddResource(String teamName)
+		{
+			resources.Focus();
+			resourcesPage.AddResources(teamName);
+		}
+
+		internal void ReportArrival(String teamName)
+		{
+			timers.Focus();
+			resourcesPage.ReportArrival(teamName);
+		}
+
+        internal void ReportArrived(int rowNumber)
+        {
+            interventionSection.ReportArrived(this, rowNumber);
+        }
+        
+		public static void setInterventionDeadline(int deadline)
+		{
+			TimersInterventionFormPage.setInterventionDeadline(deadline);
+		}
+
+		public static void setMovingDeadline(int deadline)
+		{
+			TimersInterventionFormPage.setMovingDeadline(deadline);
 		}
     }
 }

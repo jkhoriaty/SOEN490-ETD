@@ -42,6 +42,7 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 		public void CreateTeamPin(Team team)
 		{
 			TeamGrid mainContainer = new TeamGrid(team, mapSection, teamSize);
+            team.setTeamGrid(mainContainer);
 			mapSection.Map.Children.Add(mainContainer);
             
 			//Setting pin in the top-left corner and making sure it does not cover any other item
@@ -85,9 +86,27 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 				if (grid.Name.Equals(pinName))
 				{
 					mapSection.Map.Children.Remove(grid);
+					if(grid.Tag.Equals("intervention"))
+					{
+						//Remove the border of the intervention as well
+						foreach (Grid g in mapSection.Map.Children)
+						{
+							if (g.Name.Equals(pinName))
+							{
+								mapSection.Map.Children.Remove(g);
+								return;
+							}
+						}
+					}
 					return;
 				}
 			}
+		}
+
+		//Different signature to handle the removal of the exact equipment and not one with a similar name
+		public void DeletePin(Grid pin)
+		{
+			mapSection.Map.Children.Remove(pin);
 		}
 
         public void ChangeStatus(object sender, RoutedEventArgs e)
@@ -106,10 +125,15 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
                     if (team != null)
                     {
                         team.ChangeStatus(item.Header.ToString().ToLower());
+						if(item.Header.ToString().Equals("Intervening"))
+						{
+							mapSection.ReportArrival(team);
+						}
                     }
                 }
             }
         }
+
 
 
         public void CheckRight(object sender, RoutedEventArgs e)
@@ -130,30 +154,32 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 			mi.IsChecked = ((Statuses)Enum.Parse(typeof(Statuses), mi.Header.ToString().ToLower()) == fe.team.getStatus());
 		}
 
+
         //create additionnal info pin on the AdditionalInfoPage.xaml
-        public void CreateAdditionnalInfoPin(String AI,int size)
+        public void CreateAdditionnalInfoPin(String AI, int size)
         {
-           
+
             AdditionalInfo AI2 = new AdditionalInfo(AI);
             AdditionalInfoGrid mainContainer = new AdditionalInfoGrid(AI2, AIPmap, AddtionalInfoSize);
 
-            if (AI.Equals("line") )
-           {
-               //if button released, mouse not drawing
-               //if button pressed, save point
-               //if button relesed, save end point and draw line
-               isdrawing = true;
 
-                   AIPmap.AdditionalMap.MouseLeftButtonDown += new MouseButtonEventHandler(AIPmap.DrawingStart);
-                   AIPmap.AdditionalMap.MouseLeftButtonUp += new MouseButtonEventHandler(AIPmap.DrawingStop);
-                   AIPmap.AdditionalMap.MouseMove += new MouseEventHandler(AIPmap.Move);
-                   AIPmap.AdditionalMap.MouseUp += new MouseButtonEventHandler(AIPmap.DrawingMove);
-                   AIPmap.AdditionalMap.MouseWheel += new MouseWheelEventHandler(AIPmap.ChangeColor);
-            
-               double lwidth = AIPmap.AdditionalMap.ActualWidth;
-               double lheight = AIPmap.AdditionalMap.ActualHeight;
-               AdditionalInfoGridLines line = new AdditionalInfoGridLines(AI2, AIPmap, lwidth, lheight);
-               
+            if (AI.Equals("line"))
+            {
+                //if button released, mouse not drawing
+                //if button pressed, save point
+                //if button relesed, save end point and draw line
+                isdrawing = true;
+
+                AIPmap.AdditionalMap.MouseLeftButtonDown += new MouseButtonEventHandler(AIPmap.DrawingStart);
+                AIPmap.AdditionalMap.MouseLeftButtonUp += new MouseButtonEventHandler(AIPmap.DrawingStop);
+                AIPmap.AdditionalMap.MouseMove += new MouseEventHandler(AIPmap.Move);
+                AIPmap.AdditionalMap.MouseUp += new MouseButtonEventHandler(AIPmap.DrawingMove);
+                AIPmap.AdditionalMap.MouseWheel += new MouseWheelEventHandler(AIPmap.ChangeColor);
+
+                double lwidth = AIPmap.AdditionalMap.ActualWidth;
+                double lheight = AIPmap.AdditionalMap.ActualHeight;
+                AdditionalInfoGridLines line = new AdditionalInfoGridLines(AI2, AIPmap, lwidth, lheight);
+
                 //line obj doesnt exist
                 if (!ContainsLine)
                 {
@@ -161,28 +187,17 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
                     ContainsLine = true;
                 }
 
-                //line obj  exist
-                else
-                {
-                    return;
-                }
-       
-            }
-            else
-           {
-               isdrawing = false;
-               AIPmap.AdditionalMap.MouseLeftButtonDown -= new MouseButtonEventHandler(AIPmap.DrawingStart);
-               AIPmap.AdditionalMap.MouseLeftButtonUp -= new MouseButtonEventHandler(AIPmap.DrawingStop);
-               AIPmap.AdditionalMap.MouseMove -= new MouseEventHandler(AIPmap.Move);
-               AIPmap.AdditionalMap.MouseUp -= new MouseButtonEventHandler(AIPmap.DrawingMove);
 
-   
                 AIPmap.AdditionalMap.Children.Add(mainContainer);
+
                 //Setting pin in the bottom-left corner and making sure it does not cover any other item
                 AIPmap.SetPinPosition(mainContainer, (AddtionalInfoSize / 2), (AIPmap.AdditionalMap.ActualHeight - (AddtionalInfoSize / 2)));
                 //AIPmap.DetectCollision(mainContainer, (AddtionalInfoSize / 2), (AIPmap.AdditionalMap.ActualHeight - (AddtionalInfoSize / 2)));
             }
         }
+
+     
+
 
 
 
@@ -192,6 +207,7 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
         //end - retrieved on second mouse click  
 
  
+
         //Deleting pin from the additional info page
         public void AIDeletePin(object sender, RoutedEventArgs e)
         {
@@ -205,9 +221,8 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
         }
 
 		//Filter itmes and edit the appropriate status
-		public void EditMenuItems(object sender, RoutedEventArgs e)
+		public void EditMenuItems(ContextMenu cm)
 		{
-			ContextMenu cm = (ContextMenu)sender;
 			foreach (MenuItem mi in cm.Items)
 			{
 				mi.Visibility = Visibility.Collapsed;
@@ -220,7 +235,22 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 				{
 					mi.Visibility = Visibility.Visible;
 				}
+                else if (!(cm.PlacementTarget is TeamGrid || cm.PlacementTarget is EquipmentGrid) && mi.Tag.Equals("map"))
+                {
+                    mi.Visibility = Visibility.Visible;
+                    CheckRight(mi);
+                }
 			}
 		}
+
+		private void CheckRight(MenuItem mi, TeamGrid fe)
+		{
+			mi.IsChecked = ((Statuses)Enum.Parse(typeof(Statuses), mi.Header.ToString().ToLower()) == fe.team.getStatus());
+		}
+
+        private void CheckRight(MenuItem mi)
+        {
+            mi.IsChecked = (mi.Header.Equals(mapSection.zoomLevel));
+        }
 	}
 }

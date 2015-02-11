@@ -10,15 +10,15 @@ using System.Windows.Media;
 using System.Windows.Shapes;
 using System.Windows;
 using System.Windows.Media.Effects;
-using ETD.Models.Services;
+using ETD.Services;
 
 namespace ETD.Models.Grids
 {
-	class InterventionGrid : Grid
+	public class InterventionGrid : Grid
 	{
         public InterventionGrid(int interventionNumber, MapSectionPage mapSection, int size) : base()
         {
-			this.Name = "intervention_" + interventionNumber;
+			this.Name = "Intervention_" + interventionNumber;
 			this.Tag = "intervention";
 			this.Width = size;
 			this.Height = size;

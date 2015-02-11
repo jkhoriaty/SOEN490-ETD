@@ -17,9 +17,16 @@ using ETD.ViewsPresenters.TeamsSection;
 using ETD.ViewsPresenters.MapSection;
 using ETD.ViewsPresenters.InterventionsSection;
 using ETD.Models.Objects;
-using ETD.ViewsPresenters.InterventionsSection.InterventionForm.TimersInterventionForm;
 using System.Windows.Threading;
+
 using System.Drawing;
+
+using ETD.ViewsPresenters.ScheduleSection;
+using ETD.Services;
+using System.Threading;
+using System.Windows.Controls.Primitives;
+using ETD.Models.PopupForms;
+
 
 namespace ETD.ViewsPresenters
 {
@@ -32,10 +39,13 @@ namespace ETD.ViewsPresenters
 		private MapSectionPage mapSection;
 		private InterventionSectionPage interventionsSection;
         private AdditionalInfoPage AIPmapSection;
+        private ScheduleSectionPage ScheduleSection;
         private int AddtionalInfoSize;
         private bool isdrawing = false;
 		private double previousWidth;
 		private double previousHeight;
+
+		private Dictionary<String, String> registeredVolunteers = new Dictionary<String, String>();
 
 		public MainWindow()
 		{
@@ -44,6 +54,7 @@ namespace ETD.ViewsPresenters
 			mapSection = new MapSectionPage(this);
 			interventionsSection = new InterventionSectionPage(this);
             AIPmapSection = new AdditionalInfoPage(this);
+            ScheduleSection = new ScheduleSectionPage(this);
 
             //save map content on window close
             this.Closed += new EventHandler(WindowClosed);
@@ -71,6 +82,17 @@ namespace ETD.ViewsPresenters
             Frame AIFrame = new Frame();
             AIFrame.Content = AIPmapSection;
             AIPSection.Child = AIFrame;
+
+            //Populating the Schedule section
+            /*Frame ScheduleFrame = new Frame();
+            ScheduleFrame.Content = ScheduleSection;
+            MapSection.Child = ScheduleFrame;*/
+		}
+
+		//Ping server to test connection and update registed volunteers - Executes every 10 seconds
+		public void refresh(object sender, EventArgs e)
+		{
+			UpdateRegistered();
 		}
 
         //window closed
@@ -272,8 +294,8 @@ namespace ETD.ViewsPresenters
 			}
 			else
 			{
-				TimersInterventionFormPage.interventionDeadline = interventionDeadline;
-				TimersInterventionFormPage.movingDeadline = movingDeadline;
+				InterventionSectionPage.setInterventionDeadline(interventionDeadline);
+				InterventionSectionPage.setMovingDeadline(movingDeadline);
 				MessageBox.Show("The deadlines have been changed.");
 			}
 		}
@@ -324,7 +346,110 @@ namespace ETD.ViewsPresenters
             }  
 		}
 
+
    
    
 	}
+
+		internal void AddResource(String teamName, String interventionName)
+		{
+			interventionsSection.AddResource(teamName, interventionName);
+		}
+
+		internal void ReportArrival(String teamName, String interventionName)
+		{
+			interventionsSection.ReportArrival(teamName, interventionName);
+		}
+
+        internal void ReportArrived(string interventionName, int rowNumber)
+        {
+            mapSection.ReportArrived(interventionName, rowNumber);
+        }
+        
+        internal void UpdateSectors()
+        {
+            ScheduleSection.UpdateSectors();
+        }
+
+        internal void CreateIntervention()
+        {
+            interventionsSection.CreateIntervention();
+        }
+
+		public void PopupLostFocus(object sender, EventArgs e)
+		{
+			Popup popup = (Popup)sender;
+			popup.IsOpen = false;
+		}
+
+		private void ShowGPSLocations(object sender, RoutedEventArgs e)
+		{
+			UpdateRegistered().Wait();
+			Dispatcher.Invoke(() =>
+			{
+				new FormPopup(this, new RegisteredVolunteersForm(registeredVolunteers));
+			});
+			newRegisteredCTR.Content = "0";
+		}
+
+		//Pinging server for registered volunteers and interpret the return
+		private Task UpdateRegistered()
+		{
+			Task<String[]> UpdateRegisteredTask = new Task<string[]>(NetworkServices.UpdateRegisted);
+			UpdateRegisteredTask.ContinueWith(task => UpdateRegisteredResultAnalysis(task.Result));
+			UpdateRegisteredTask.Start();
+			return UpdateRegisteredTask;
+		}
+
+		//Interpret the servers return
+		private void UpdateRegisteredResultAnalysis(String[] reply)
+		{
+			if(reply == null)
+			{
+				NotifyConnectionFail();
+			}
+			else if(reply.Length > 0)
+			{
+				NotifyConnectionSuccess();
+				int newCtr = 0;
+				for (int i = 1; i < (reply.Length - 1); i++)
+				{
+					String[] volunteerInfo = reply[i].Split('|');
+					if (!registeredVolunteers.ContainsKey(volunteerInfo[0]))
+					{
+						registeredVolunteers.Add(volunteerInfo[0], volunteerInfo[1]);
+						newCtr++;
+					}
+					else
+					{
+						registeredVolunteers[volunteerInfo[0]] = volunteerInfo[1];
+					}
+				}
+				Dispatcher.Invoke(() => newRegisteredCTR.Content = "" + newCtr);
+			}
+		}
+
+		//UI work to notify of connection success
+		private void NotifyConnectionSuccess()
+		{
+			Dispatcher.Invoke(() => 
+			{
+				GPSLocationsTextBlock.Background = new SolidColorBrush(Colors.Green);
+				GPSLocationsTextBlock.Foreground = new SolidColorBrush(Colors.White);
+				GPSLocationsTextBlock.IsEnabled = true;
+			});
+		}
+
+		//UI work to notify of connection failure
+		private void NotifyConnectionFail()
+		{
+			Dispatcher.Invoke(() => 
+			{
+				GPSLocationsTextBlock.Background = new SolidColorBrush(Colors.Red);
+				GPSLocationsTextBlock.Foreground = new SolidColorBrush(Colors.White);
+				GPSLocationsTextBlock.IsEnabled = false;
+			});
+		}
+    }
+
 }

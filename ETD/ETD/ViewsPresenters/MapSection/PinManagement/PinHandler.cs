@@ -57,9 +57,9 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 			_isRectDragInProg = g.CaptureMouse();
 			movingGrid = g;
 
-			if(RelatedIntervention(g) != null)
+			if(RelatedInterventionBorder(g) != null)
 			{
-				relatedIntervention = RelatedIntervention(g);
+				relatedIntervention = RelatedInterventionBorder(g);
 				previousX = getX(g);
 				previousY = getY(g);
 			}
@@ -84,7 +84,8 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 			if(g.Tag.Equals("team"))
 			{
 				TeamGrid team = (TeamGrid)g;
-				team.ChangeStatus("moving");
+                if (team.GetStatus() != "intervening")
+				    team.ChangeStatus("moving");
 			}
 
 			//If the pin dragged is a team that was in an intervention
@@ -208,8 +209,8 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 						continue;
 					}
 
-					bool related = false;
 					//If collision detection is being done on an intervention border, ignore collision with all pins related to it
+					bool related = false;
 					if(movedPin.Tag.Equals("border"))
 					{
 						foreach(KeyValuePair<Grid, BorderGrid> interventionBorderPair in interventionBorders)
@@ -258,6 +259,7 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 						}
 						activeTeams[fixedPin].Add(movedPin);
 						DrawInterventionBorder(fixedPin);
+						mapSection.AddResource(movedPin.Name, fixedPin.Name);
 						return;
 					}
 
@@ -486,7 +488,7 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 			DetectCollision(interventionBorders[fixedPin], border_X, border_Y);
 		}
 
-		private Grid RelatedIntervention(Grid team)
+		internal Grid RelatedInterventionBorder(Grid team)
 		{
 			foreach(KeyValuePair<Grid, BorderGrid> interventionBorderPair in interventionBorders)
 			{
@@ -497,5 +499,37 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 			}
 			return null;
 		}
+
+		internal Grid RelatedIntervention(Grid team)
+		{
+			foreach (KeyValuePair<Grid, BorderGrid> interventionBorderPair in interventionBorders)
+			{
+				if (activeTeams[interventionBorderPair.Key].Contains(team))
+				{
+					return interventionBorderPair.Key;
+				}
+			}
+			return null;
+		}
+
+        internal void ReportArrived(string interventionName, int rowNumber)
+        {
+            foreach(KeyValuePair<Grid, List<Grid>> intervention in activeTeams)
+            {
+                if (intervention.Key.Name.Equals(interventionName))
+                {
+                    TeamGrid team = (TeamGrid)intervention.Value[rowNumber];
+                    team.ChangeStatus("intervening");
+
+                    return;
+                }
+            }
+        }
+
+        internal void AppointTeamToIntervention(Grid team, Grid intervention)
+        {
+            setPinPosition(intervention, getX(team), getY(team));
+            DetectCollision(team, getX(team), getY(team));
+        }
 	}
 }

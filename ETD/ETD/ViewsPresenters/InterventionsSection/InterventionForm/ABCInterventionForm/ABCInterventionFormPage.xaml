@@ -60,9 +60,9 @@
 		</StackPanel>
 		<ComboBox Grid.Column="1" Grid.Row="3" Name="CirculationBox" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
 			<ComboBoxItem Content="Normal"/>
-			<ComboBoxItem Content="RSP"/>
+			<ComboBoxItem Content="Chest Pain"/>
 			<ComboBoxItem Content="Hemorrhage"/>
-			<ComboBoxItem Content="Absent"/>
+			<ComboBoxItem Content="No Pulse"/>
 		</ComboBox>
 		<StackPanel Grid.Column="2" Grid.Row="3" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
 			<TextBox Name="CirculationFrequency" Width="25"/>

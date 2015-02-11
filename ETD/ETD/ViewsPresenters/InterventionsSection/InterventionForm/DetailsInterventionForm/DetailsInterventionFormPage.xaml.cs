@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ETD.Models.Objects;
-using ETD.Models.Services;
+using ETD.Services;
 
 namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.DetailsInterventionForm
 {
@@ -58,7 +58,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.DetailsInter
 			{
 				Grid.SetColumnSpan(Complaint, 1);
 				OtherChiefComplaint.Visibility = Visibility.Visible;
-				interventionForm.setComplaint("" + OtherChiefComplaint);
+				interventionForm.setComplaint("" + OtherChiefComplaint.Text);
 			}
 			else
 			{
@@ -145,6 +145,11 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.DetailsInter
 			{
 				MessageBox.Show("The text inserted in the time boxes is not valid");
 			}
+		}
+
+		private void OtherChiefComplaint_TextChanged(object sender, TextChangedEventArgs e)
+		{
+			interventionForm.setComplaint("" + OtherChiefComplaint.Text);
 		}
 	}
 }

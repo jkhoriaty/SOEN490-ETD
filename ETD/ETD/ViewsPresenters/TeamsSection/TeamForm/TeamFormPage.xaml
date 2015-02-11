@@ -56,7 +56,7 @@
 					<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 						<TextBox Name="departurehh2" Width="30" Text="hh" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus" MaxLength="2"></TextBox>
 						<Label Content=":"/>
-						<TextBox Name="departuremm2" Width="30" Text="mm" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus" MaxLength="2"></TextBox>
+						<TextBox Name="departuremm2" Width="30" Text="00" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus" MaxLength="2"></TextBox>
 					</StackPanel>
 				</UniformGrid>
 				<Grid>
@@ -85,7 +85,7 @@
 					<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 						<TextBox Name="departurehh3" Width="30" Text="hh" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus" MaxLength="2"></TextBox>
 						<Label Content=":"/>
-						<TextBox Name="departuremm3" Width="30" Text="mm" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus" MaxLength="2"></TextBox>
+						<TextBox Name="departuremm3" Width="30" Text="00" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus" MaxLength="2"></TextBox>
 					</StackPanel>
 				</UniformGrid>
 				<Grid>

@@ -9,7 +9,7 @@ namespace ETD.Models.Objects
 	public enum Consciousness { alert, verbal, painful, unconscious, notSet };
 	public enum Airways { clear, partiallyObstructed, completelyObstructed, notSet };
 	public enum Breathing { normal, difficulty, absent, notSet };
-	public enum Circulation { normal, rsp, hemorrhage, absent, notSet };
+	public enum Circulation { normal, chestPain, hemorrhage, noPulse, notSet };
 	public enum Conclusions { returnToSite, returnToHome, referredToDoctor, equipmentDistribution, hospital, patientNotFound, noInterventions, other, notSet };
 
     public class Intervention
@@ -52,6 +52,7 @@ namespace ETD.Models.Objects
 		{
 			interventionNumber = ++lastIntervention;
             this.timeOfCall = DateTime.Now;
+            additionalInfo = new AdditionalInformation[10];
 		}
 
 		public struct Resource
@@ -68,6 +69,16 @@ namespace ETD.Models.Objects
 				this.moving = moving;
 				this.arrival = arrival;
 			}
+
+            public String getResourceName()
+            {
+                return resourceName;
+            }
+
+            public String getTeamName()
+            {
+                return team;
+            }
 		}
 
 		public struct ABC
@@ -223,13 +234,12 @@ namespace ETD.Models.Objects
 
         public void setAdditionalInfo(int position, AdditionalInformation info)
         {
-			//Have to fix
-            //this.additionalInfo[position] = info;
+            this.additionalInfo[position] = info;
         }
 
-		public AdditionalInformation[] getAdditionalInfo()
+		public AdditionalInformation getAdditionalInfo(int position)
         {
-            return this.additionalInfo;
+            return this.additionalInfo[position];
         }
 
 		public void setConclusion(Conclusions conclusion)

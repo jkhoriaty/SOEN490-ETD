@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Controls;
 
 namespace ETD.Models.Objects
 {
@@ -12,6 +13,7 @@ namespace ETD.Models.Objects
         public String name;
         public Trainings trainingLevel;
         public DateTime departure;
+		private Grid nameGrid;
 
         public TeamMember(String name, Trainings training, DateTime departure)
         {
@@ -33,6 +35,16 @@ namespace ETD.Models.Objects
 		public Trainings getTrainingLevel()
 		{
 			return trainingLevel;
+		}
+
+		public void setNameGrid(Grid gd)
+		{
+			this.nameGrid = gd;
+		}
+
+		public Grid getNameGrid()
+		{
+			return nameGrid;
 		}
     }
 }
