@@ -20,6 +20,11 @@ namespace ETD.ViewsPresenters
     /// </summary>
     public partial class InitialSetup : Window
     {
+        String shiftStartStr;
+        DateTime shiftStart;
+        String shiftEndStr;
+        DateTime shiftEnd;
+
         public InitialSetup()
         {
             InitializeComponent();
@@ -28,12 +33,7 @@ namespace ETD.ViewsPresenters
         private void Submit_Click(object sender, RoutedEventArgs e)
         {
             if(isFormValid())
-            {
-                String shiftStartStr = shiftStartDate.SelectedDate.Value.ToShortDateString() +" " + shiftStartTimehh.Text + ":" + shiftStartTimemm.Text;
-                DateTime shiftStart = Convert.ToDateTime(shiftStartStr);
-                String shiftEndStr = shiftEndDate.SelectedDate.Value.ToShortDateString() + " " + shiftEndTimehh.Text + ":" + shiftEndTimemm.Text;
-                DateTime shiftEnd= Convert.ToDateTime(shiftEndStr);
-
+            {                
                 ETD.Models.Objects.InitialInfo initInfo = new ETD.Models.Objects.InitialInfo(operationName.Text, acronym.Text, shiftStart, shiftEnd, dispatcherName.Text);
                 
                 MainWindow mw = new MainWindow();
@@ -104,6 +104,18 @@ namespace ETD.ViewsPresenters
                 MessageBox.Show("Invalid dispatcher name.");
                 return false;
             }
+
+            //check startTime < endTime
+            shiftStartStr = shiftStartDate.SelectedDate.Value.ToShortDateString() + " " + shiftStartTimehh.Text + ":" + shiftStartTimemm.Text;
+            shiftEndStr = shiftEndDate.SelectedDate.Value.ToShortDateString() + " " + shiftEndTimehh.Text + ":" + shiftEndTimemm.Text;
+            shiftStart = Convert.ToDateTime(shiftStartStr);
+            shiftEnd = Convert.ToDateTime(shiftEndStr);
+            if (shiftStart >= shiftEnd)
+            {
+                MessageBox.Show("Invalid. Start time cannot be greater than end time.");
+                return false;
+            }
+
 
             //date
             if (shiftStartDate.Text == "")
