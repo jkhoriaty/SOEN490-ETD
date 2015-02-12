@@ -44,9 +44,9 @@ namespace ETD.ViewsPresenters
 
         private Boolean isFormValid()
         {
-            //operation name regex
-            Regex nameRgx = new Regex(@"^[a-zA-Z]+$");
-            if (!nameRgx.Match(operationName.Text).Success)
+            //operation name 
+            
+            if (operationName.Text == "")
             {
                 MessageBox.Show("Invalid operation name.");
                 return false;
@@ -77,6 +77,7 @@ namespace ETD.ViewsPresenters
             }
 
             //dispatcher
+            Regex nameRgx = new Regex(@"^[a-zA-Z '-]+$");
             if (!nameRgx.Match(dispatcherName.Text).Success)
             {
                 MessageBox.Show("Invalid dispatcher name.");
