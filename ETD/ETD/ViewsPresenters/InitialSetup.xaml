@@ -25,15 +25,15 @@
         <DatePicker Grid.Row="2" Grid.Column="1" Name="shiftStartDate"></DatePicker>
         <Label Grid.Row="3" Grid.Column="0">Shift Start Time</Label>
             <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal">
-                <TextBox Name="shiftStartTimehh" Width="30" MaxLength="2">hh</TextBox>
-                <TextBox Name="shiftStartTimemm" Width="30" MaxLength="2">mm</TextBox>
+                <TextBox Name="shiftStartTimehh" Width="30" MaxLength="2" GotFocus="text_enter" LostFocus="text_fillhh">hh</TextBox>
+                <TextBox Name="shiftStartTimemm" Width="30" MaxLength="2" GotFocus="text_enter" LostFocus="text_fillmm">mm</TextBox>
             </StackPanel>
             <Label Grid.Row="4" Grid.Column="0">Shift End Date</Label>
         <DatePicker Grid.Row="4" Grid.Column="1" Name="shiftEndDate"></DatePicker>
         <Label Grid.Row="5" Grid.Column="0">Shift End Time</Label>
             <StackPanel Grid.Row="5" Grid.Column="1" Orientation="Horizontal">
-                <TextBox Name="shiftEndTimehh" Width="30" MaxLength="2">hh</TextBox>
-                <TextBox Name="shiftEndTimemm" Width="30" MaxLength="2">mm</TextBox>
+                <TextBox Name="shiftEndTimehh" Width="30" MaxLength="2" GotFocus="text_enter" LostFocus="text_fillhh">hh</TextBox>
+                <TextBox Name="shiftEndTimemm" Width="30" MaxLength="2" GotFocus="text_enter" LostFocus="text_fillmm">mm</TextBox>
             </StackPanel>
             <Label Grid.Row="6" Grid.Column="0">Dispatcher Name</Label>
         <TextBox Grid.Row="6" Grid.Column="1" Name="dispatcherName"></TextBox>

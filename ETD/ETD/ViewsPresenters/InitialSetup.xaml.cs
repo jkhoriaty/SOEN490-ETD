@@ -42,6 +42,27 @@ namespace ETD.ViewsPresenters
             }
         }
 
+        internal void text_enter(object sender, RoutedEventArgs e)
+        {
+            TextBox box = sender as TextBox;
+            if (((box.Text) == "hh") || ((box.Text) == "mm"))
+            box.Clear();
+        }
+
+        internal void text_fillhh(object sender, RoutedEventArgs e)
+        {
+            TextBox box = sender as TextBox;
+            if (string.IsNullOrWhiteSpace(box.Text))
+                box.Text = "hh";
+        }
+
+        internal void text_fillmm(object sender, RoutedEventArgs e)
+        {
+            TextBox box = sender as TextBox;
+            if (string.IsNullOrWhiteSpace(box.Text))
+            box.Text = "mm";
+        }
+
         private Boolean isFormValid()
         {
             //operation name 
@@ -97,5 +118,6 @@ namespace ETD.ViewsPresenters
             }
             return true;
         }
+
     }
 }
