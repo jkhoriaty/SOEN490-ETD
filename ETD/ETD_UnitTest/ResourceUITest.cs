@@ -22,8 +22,8 @@ namespace ETD_UnitTest
             DateTime departure = new DateTime(2014, 11, 20);
             TeamMember MemberA = new TeamMember("John", Trainings.firstResponder, departure);
             TeamMember MemberB = new TeamMember("Alex", Trainings.firstAid, departure);
-            b.addMember(MemberA);
-            b.addMember(MemberB);           
+            b.AddMember(MemberA);
+            b.AddMember(MemberB);           
             TeamGrid tg = new TeamGrid(b, mapSection, teamSize);
             Assert.AreEqual(tg.Name, b.getName());
         }        

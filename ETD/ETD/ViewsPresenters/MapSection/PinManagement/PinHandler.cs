@@ -1,5 +1,4 @@
-﻿using ETD.Models.Grids;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using ETD.Models.CustomUIObjects;
 
 namespace ETD.ViewsPresenters.MapSection.PinManagement
 {
@@ -21,7 +21,7 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 		private double previousX;
 		private double previousY;
 		private Dictionary<Grid, List<Grid>> activeTeams = new Dictionary<Grid, List<Grid>>();
-		private Dictionary<Grid, BorderGrid> interventionBorders = new Dictionary<Grid, BorderGrid>();
+		private Dictionary<Grid, InterventionContainer> interventionBorders = new Dictionary<Grid, InterventionContainer>();
 
 		public PinHandler(MapSectionPage mapSection)
 		{
@@ -67,7 +67,7 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 
 		//Left Mouse Button Up: Any pin
 		internal void DragStop(object sender, MouseButtonEventArgs e)
-		{
+		{/*
 			Grid g = (Grid)sender;
 
 			//Avoid in having method called on object being collided with
@@ -120,12 +120,12 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 			//Resetting values
 			relatedIntervention = null;
 			previousX = -1;
-			previousY = -1;
+			previousY = -1;*/
 		}
 
 		//Mouse Move
 		internal void DragMove(object sender, MouseEventArgs e)
-		{
+		{/*
 			//If no rectangle are clicked, exit method
 			if (!_isRectDragInProg) return;
 
@@ -162,11 +162,11 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 			{
 				setPinPosition(interventionBorders[g], getX(g), Canvas.GetTop(g) + (interventionBorders[g].Height / 2));
 				PlaceInterventionPins(g);
-			}
+			}*/
 		}
 
 		public void DetectCollision(Grid movedPin, double movedPin_X, double movedPin_Y)
-		{
+		{/*
 			//Replacing item within horizontal bounds
 			if (movedPin_X > (mapSection.Map.ActualWidth - (movedPin.Width / 2))) //Right
 			{
@@ -397,12 +397,12 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 			if(interventionBorders.ContainsKey(movedPin))
 			{
 				DetectCollision(interventionBorders[movedPin], movedPin_X, movedPin_Y - (movedPin.Height / 2) + (interventionBorders[movedPin].Height / 2));
-			}
+			}*/
 		}
 
 		public void movePins(double widthRatio, double heightRatio)
 		{
-			var allPins = mapSection.Map.Children.OfType<Grid>().ToList();
+			/*var allPins = mapSection.Map.Children.OfType<Grid>().ToList();
 
 			foreach (var pin in allPins)
 			{
@@ -411,7 +411,7 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 
 				setPinPosition(pin, movedPin_X, movedPin_Y);
 				DetectCollision(pin, movedPin_X, movedPin_Y);
-			}
+			}*/
 		}
 
 		private void PlaceInterventionPins(Grid fixedPin)
@@ -440,7 +440,7 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 
 		//Handles drawing an intervention border, adding all teams to it and detecting collision on it
 		private void DrawInterventionBorder(Grid fixedPin)
-		{
+		{/*
 			//Determine the number of rows and number of columns of items that the border is going to have
 			int rows = 1;
 			int columns = 1;
@@ -485,35 +485,35 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 
 			//Populating the border with the teams affected to the intervention
 			PlaceInterventionPins(fixedPin);
-			DetectCollision(interventionBorders[fixedPin], border_X, border_Y);
+			DetectCollision(interventionBorders[fixedPin], border_X, border_Y);*/
 		}
 
 		internal Grid RelatedInterventionBorder(Grid team)
-		{
+		{/*
 			foreach(KeyValuePair<Grid, BorderGrid> interventionBorderPair in interventionBorders)
 			{
 				if(activeTeams[interventionBorderPair.Key].Contains(team))
 				{
 					return interventionBorderPair.Value;
 				}
-			}
+			}*/
 			return null;
 		}
 
 		internal Grid RelatedIntervention(Grid team)
-		{
+		{/*
 			foreach (KeyValuePair<Grid, BorderGrid> interventionBorderPair in interventionBorders)
 			{
 				if (activeTeams[interventionBorderPair.Key].Contains(team))
 				{
 					return interventionBorderPair.Key;
 				}
-			}
+			}*/
 			return null;
 		}
 
         internal void ReportArrived(string interventionName, int rowNumber)
-        {
+        {/*
             foreach(KeyValuePair<Grid, List<Grid>> intervention in activeTeams)
             {
                 if (intervention.Key.Name.Equals(interventionName))
@@ -523,7 +523,7 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 
                     return;
                 }
-            }
+            }*/
         }
 
         internal void AppointTeamToIntervention(Grid team, Grid intervention)

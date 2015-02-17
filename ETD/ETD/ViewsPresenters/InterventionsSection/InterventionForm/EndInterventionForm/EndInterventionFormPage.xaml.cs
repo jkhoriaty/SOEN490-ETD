@@ -59,7 +59,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
                 {
                     try
                     {
-                        Team.teamsList[TeamsSection.TeamForm.TeamFormPage.activeTeamsList[i]].getTeamGrid().ChangeStatus("unavailable");
+                        //Team.teamList[TeamsSection.TeamForm.TeamFormPage.activeTeamsList[i]].getTeamGrid().ChangeStatus("unavailable");
                     }
                     catch (ArgumentNullException)
                     {

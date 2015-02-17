@@ -1,5 +1,4 @@
-﻿using ETD.Models.Grids;
-using ETD.Models.Objects;
+﻿using ETD.Models.Objects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,7 +40,7 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 		//Creating a new team pin as a result to the successfull submission of the team form
 		public void CreateTeamPin(Team team)
 		{
-			TeamGrid mainContainer = new TeamGrid(team, mapSection, teamSize);
+			/*TeamGrid mainContainer = new TeamGrid(team, mapSection, teamSize);
             team.setTeamGrid(mainContainer);
 			mapSection.Map.Children.Add(mainContainer);
             
@@ -51,12 +50,12 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 			//The tag of the pin is modified before being added so that the team does not get added to a intervention
 			mainContainer.Tag = "intervention";
 			mapSection.DetectCollision(mainContainer, (teamSize / 2), (teamSize / 2));
-			mainContainer.Tag = "team";
+			mainContainer.Tag = "team";*/
 		}
 
 		public void CreateEquipmentPin(String equipmentName)
 		{
-			EquipmentGrid mainContainer = new EquipmentGrid(equipmentName, mapSection, equipmentSize);
+			/*EquipmentGrid mainContainer = new EquipmentGrid(equipmentName, mapSection, equipmentSize);
 			mapSection.Map.Children.Add(mainContainer);
 
 			//Setting pin in the top-right corner and making sure it does not cover any other item
@@ -65,22 +64,22 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 			//The tag of the pin is modified before being added so that the equipment does not get added to a member and possibly stuck in a modal MessageBox loop
 			mainContainer.Tag = "intervention";
 			mapSection.DetectCollision(mainContainer, (mapSection.Map.ActualWidth - (equipmentSize / 2)), (equipmentSize / 2));
-			mainContainer.Tag = "equipment";
+			mainContainer.Tag = "equipment";*/
 		}
 
 		public void CreateInterventionPin(int interventionNumber)
 		{
-			InterventionGrid mainContainer = new InterventionGrid(interventionNumber, mapSection, interventionSize);
+			/*InterventionGrid mainContainer = new InterventionGrid(interventionNumber, mapSection, interventionSize);
 			mapSection.Map.Children.Add(mainContainer);
 
 			//Setting pin in the bottom-left corner and making sure it does not cover any other item
 			mapSection.SetPinPosition(mainContainer, (interventionSize / 2), (mapSection.Map.ActualHeight - (interventionSize / 2)));
-			mapSection.DetectCollision(mainContainer, (interventionSize / 2), (mapSection.Map.ActualHeight - (interventionSize / 2)));
+			mapSection.DetectCollision(mainContainer, (interventionSize / 2), (mapSection.Map.ActualHeight - (interventionSize / 2)));*/
 		}
 
 		//Deleting pin using its name
 		public void DeletePin(String pinName)
-		{
+		{/*
 			foreach (Grid grid in mapSection.Map.Children)
 			{
 				if (grid.Name.Equals(pinName))
@@ -100,17 +99,17 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 					}
 					return;
 				}
-			}
+			}*/
 		}
 
 		//Different signature to handle the removal of the exact equipment and not one with a similar name
 		public void DeletePin(Grid pin)
 		{
-			mapSection.Map.Children.Remove(pin);
+			//mapSection.Map.Children.Remove(pin);
 		}
 
         public void ChangeStatus(object sender, RoutedEventArgs e)
-        {
+        {/*
             MenuItem item = sender as MenuItem;
             if (item != null)
             {
@@ -131,13 +130,13 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 						}
                     }
                 }
-            }
+            }*/
         }
 
 
 
         public void CheckRight(object sender, RoutedEventArgs e)
-        {
+        {/*
             ContextMenu cm = sender as ContextMenu;
             TeamGrid fe = cm.PlacementTarget as TeamGrid;
 
@@ -146,20 +145,20 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
                 mi.IsChecked = ((Statuses)Enum.Parse(typeof(Statuses), mi.Header.ToString().ToLower()) == fe.team.getStatus());
    
             }
-
+			*/
         }
 
-		internal void CheckRight(MenuItem mi, TeamGrid fe)
+		/*internal void CheckRight(MenuItem mi, TeamGrid fe)
 		{
 			mi.IsChecked = ((Statuses)Enum.Parse(typeof(Statuses), mi.Header.ToString().ToLower()) == fe.team.getStatus());
-		}
+		}*/
 
 
         //create additionnal info pin on the AdditionalInfoPage.xaml
         public void CreateAdditionnalInfoPin(String AI, int size)
         {
 
-            AdditionalInfo AI2 = new AdditionalInfo(AI);
+           /* AdditionalInfo AI2 = new AdditionalInfo(AI);
             AdditionalInfoGrid mainContainer = new AdditionalInfoGrid(AI2, AIPmap, AddtionalInfoSize);
 
 
@@ -193,7 +192,7 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
                 //Setting pin in the bottom-left corner and making sure it does not cover any other item
                 AIPmap.SetPinPosition(mainContainer, (AddtionalInfoSize / 2), (AIPmap.AdditionalMap.ActualHeight - (AddtionalInfoSize / 2)));
                 //AIPmap.DetectCollision(mainContainer, (AddtionalInfoSize / 2), (AIPmap.AdditionalMap.ActualHeight - (AddtionalInfoSize / 2)));
-            }
+            }*/
         }
 
      
@@ -211,18 +210,18 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
         //Deleting pin from the additional info page
         public void AIDeletePin(object sender, RoutedEventArgs e)
         {
-
+			/*
                 foreach (AdditionalInfoGrid grid in AIPmap.AdditionalMap.Children)
                  { 
                           AIPmap.AdditionalMap.Children.Remove(grid);
                           return;    
                   }
-          
+          */
         }
 
 		//Filter itmes and edit the appropriate status
 		public void EditMenuItems(ContextMenu cm)
-		{
+		{/*
 			foreach (MenuItem mi in cm.Items)
 			{
 				mi.Visibility = Visibility.Collapsed;
@@ -240,7 +239,7 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
                     mi.Visibility = Visibility.Visible;
                     CheckRight(mi);
                 }
-			}
+			}*/
 		}
 
         private void CheckRight(MenuItem mi)

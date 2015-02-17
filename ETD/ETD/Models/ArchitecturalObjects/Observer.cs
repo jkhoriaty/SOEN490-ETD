@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ETD.Models.Objects
+namespace ETD.Models.ArchitecturalObjects
 {
-	interface Observer
+	public interface Observer
 	{
 		void ObservedObjectUpdated();
 	}

@@ -34,7 +34,7 @@ namespace ETD.ViewsPresenters
         {
             if(isFormValid())
             {                
-                ETD.Models.Objects.InitialInfo initInfo = new ETD.Models.Objects.InitialInfo(operationName.Text, acronym.Text, shiftStart, shiftEnd, dispatcherName.Text);
+                ETD.Models.Objects.Operation initInfo = new ETD.Models.Objects.Operation(operationName.Text, acronym.Text, shiftStart, shiftEnd, dispatcherName.Text);
                 
                 MainWindow mw = new MainWindow();
                 mw.Show();

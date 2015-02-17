@@ -21,7 +21,7 @@ namespace ETD.ViewsPresenters.ScheduleSection.SectorsTable
     /// Interaction logic for SectorsTablePage.xaml
     /// </summary>
     public partial class SectorsTablePage : Page
-    {
+    {/*
         ScheduleSectionPage parent;
         Scheduler scheduler;
         bool activated;
@@ -42,7 +42,7 @@ namespace ETD.ViewsPresenters.ScheduleSection.SectorsTable
                 }
                 if(uie.GetType().Equals(typeof(ComboBox)))
                 {
-                    foreach(String n in Team.teamsList.Keys)
+                    foreach(String n in Team.teamList.Keys)
                     {
                         (uie as ComboBox).Items.Add(n);
                     }
@@ -110,7 +110,7 @@ namespace ETD.ViewsPresenters.ScheduleSection.SectorsTable
                     }
                     else if (Grid.GetColumn(uie) == column)
                     {
-                        scheduler.AddShift(sector, Team.teamsList[(uie as ComboBox).SelectedItem as string], Convert.ToInt32(hour), Convert.ToInt32(minutes));
+                        scheduler.AddShift(sector, Team.teamList[(uie as ComboBox).SelectedItem as string], Convert.ToInt32(hour), Convert.ToInt32(minutes));
                     }
                 }
             }
@@ -184,7 +184,7 @@ namespace ETD.ViewsPresenters.ScheduleSection.SectorsTable
                 }
                 if (uie.GetType().Equals(typeof(ComboBox)))
                 {
-                    foreach (String n in Team.teamsList.Keys)
+                    foreach (String n in Team.teamList.Keys)
                     {
                         (uie as ComboBox).Items.Add(n);
                     }
@@ -208,13 +208,13 @@ namespace ETD.ViewsPresenters.ScheduleSection.SectorsTable
             {
                 if (uie.GetType().Equals(typeof(ComboBox)))
                 {
-                    foreach (String n in Team.teamsList.Keys)
+                    foreach (String n in Team.teamList.Keys)
                     {
                         if (!(uie as ComboBox).Items.Contains(n))
                         (uie as ComboBox).Items.Add(n);
                     }
                 }
             }
-        }
+        }*/
     }
 }

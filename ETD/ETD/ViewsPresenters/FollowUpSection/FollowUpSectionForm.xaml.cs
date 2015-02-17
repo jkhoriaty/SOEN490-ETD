@@ -23,7 +23,7 @@ namespace ETD.ViewsPresenters.FollowUpSection
     public partial class FollowUpSectionForm : Page
     {
         private FollowUpSectionForm FollowUpPage;
-        private FollowUpInfo FollowUpInfo;
+        private Request FollowUpInfo;
         private Dictionary<String, TextBox> ClientMap = new Dictionary<String, TextBox>();
         private Dictionary<String, TextBox> DemandeMap = new Dictionary<String, TextBox>();
         private Dictionary<String, TextBox> PriseEnChargeMap = new Dictionary<String, TextBox>();
@@ -163,7 +163,7 @@ namespace ETD.ViewsPresenters.FollowUpSection
             timestampSuivi = timestampSuivi.Date + new TimeSpan(timestampshh, timestampsmm, 0);
             timestampFait = timestampFait.Date + new TimeSpan(timestampfhh, timestampfmm, 0);
 
-            FollowUpInfo.SetFollowUpInfo(position, new FollowUpInfo(Clientbox.Text, DemandeBox.Text, PriseEnChargeMapBox.Text, timestampSuivi, timestampFait));
+            FollowUpInfo.SetFollowUpInfo(position, new Request(Clientbox.Text, DemandeBox.Text, PriseEnChargeMapBox.Text, timestampSuivi, timestampFait));
 
         }
 

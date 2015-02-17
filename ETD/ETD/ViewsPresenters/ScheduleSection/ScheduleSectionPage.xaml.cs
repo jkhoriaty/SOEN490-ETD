@@ -20,7 +20,7 @@ namespace ETD.ViewsPresenters.ScheduleSection
     /// Interaction logic for ScheduleSectionPage.xaml
     /// </summary>
     public partial class ScheduleSectionPage : Page
-    {
+    {/*
         private MainWindow parent;
         private int tabs = 1;
         private List<SectorsTablePage> tables = new List<SectorsTablePage>();
@@ -60,6 +60,6 @@ namespace ETD.ViewsPresenters.ScheduleSection
             {
                 stp.UpdateSectors();
             }
-        }
+        }*/
     }
 }

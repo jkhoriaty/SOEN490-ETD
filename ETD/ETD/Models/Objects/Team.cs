@@ -3,21 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ETD.Models.Grids;
+using ETD.Models.CustomUIObjects;
+using ETD.Models.ArchitecturalObjects;
 
 namespace ETD.Models.Objects
 {
 	public enum Statuses {available, moving, intervening, unavailable};
 
-    public class Team
+    public class Team : Observable
     {
-		public static Dictionary<String, Team> teamsList = new Dictionary<String, Team>();
+		static List<Team> teamList = new List<Team>();
 
         String name;
 		List<TeamMember> memberList = new List<TeamMember>();
         List<Equipment> equipmentList = new List<Equipment>();
 		Statuses status;
-        TeamGrid teamGrid;
 
 		Trainings highestLevelOfTraining = 0;
 
@@ -26,10 +26,12 @@ namespace ETD.Models.Objects
             this.name = name;
 			status = Statuses.available;
 
-			teamsList.Add(name, this);
+			teamList.Add(this);
+			NotifyAll();
         }
 
-        public bool addMember(TeamMember mem)
+		//Adding a maximum of 3 members to the team
+        public bool AddMember(TeamMember mem)
         {
             if(memberList.Count <= 2)
             {
@@ -38,43 +40,53 @@ namespace ETD.Models.Objects
 				{
 					highestLevelOfTraining = mem.getTrainingLevel();
 				}
+				NotifyAll();
                 return true;
             }
             return false;
         }
 
-        public void setTeamGrid(Grids.TeamGrid tg)
-        {
-            teamGrid = tg;
-        }
-
-        public Grids.TeamGrid getTeamGrid()
-        {
-            return teamGrid;
-        }
-		
-		public bool addEquipment(Equipment equipment)
+		//Adding a maximum of 3 equipments to the team
+		public bool AddEquipment(Equipment equipment)
         {
             if (equipmentList.Count < 3)
             {
 				equipmentList.Add(equipment);
+				NotifyAll();
                 return true;
             }
             return false;
         }
 
-        public void removeEquipment(Equipment equipment)
+		//Removing equipment from the team list
+        public void RemoveEquipment(Equipment equipment)
         {
 			equipmentList.Remove(equipment);
+			NotifyAll();
 		}
 
-		//
-		//Getters and Setters
-		//
+		/*
+		 * Setters
+		 */
         public void setName(String name)
         {
             this.name = name;
+			NotifyAll();
         }
+
+        public void setStatus(Statuses s)
+        {
+            this.status = s;
+			NotifyAll();
+        }
+
+		/*
+		 * Getters
+		 */
+		public static List<Team> getTeamList()
+		{
+			return teamList;
+		}
 
         public String getName()
         {
@@ -96,12 +108,6 @@ namespace ETD.Models.Objects
         public Statuses getStatus()
         {
             return status;
-        }
-
-        public void setStatus(Statuses s)
-        {
-            this.status = s;
-            
         }
 
 		public Trainings getHighestLevelOfTraining()

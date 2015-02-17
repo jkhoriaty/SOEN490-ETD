@@ -6,7 +6,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
 	Title="ScheduleSectionPage" Width="300" Height="300">
-
+<!--
     <Grid>
         <TabControl Name="SchedulesTab" TabStripPlacement="Bottom" >
             <TabItem Name="Schedule1" Header="1">
@@ -15,5 +15,5 @@
         </TabControl>
         <Button Name="addButton" Content="+" Width="20" Height="20" Padding="0" Click="Button_Click" Margin="270,280,10,0"/>
 
-    </Grid>
+    </Grid>-->
 </Page>

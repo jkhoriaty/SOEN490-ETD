@@ -8,7 +8,7 @@ namespace ETD.Models.Objects
 {
     class PatrolShift
     {
-        private DateTime startTime, endTime;
+        /*private DateTime startTime, endTime;
         private String sectorName;
         private Team patroller;
 
@@ -53,6 +53,6 @@ namespace ETD.Models.Objects
         public DateTime GetEndTime()
         {
             return this.endTime;
-        }
+        }*/
     }
 }

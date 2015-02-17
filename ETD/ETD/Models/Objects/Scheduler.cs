@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace ETD.Models.Objects
 {
     class Scheduler
-    {
+    {/*
         private List<PatrolShift> ActivePatrols;
         private List<PatrolShift> InactivePatrols;
 
@@ -39,6 +39,6 @@ namespace ETD.Models.Objects
         {
             List<String> suggestions = new List<string>();
             return suggestions;
-        }
+        }*/
     }
 }

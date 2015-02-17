@@ -37,22 +37,22 @@
     Auto Generated
   -->
   <ItemGroup>
-    <Compile Include="Models\Grids\BorderGrid.cs" />
+    <Compile Include="Models\CustomUIObjects\InterventionContainer.cs" />
+    <Compile Include="Models\CustomUIObjects\EquipmentPin.cs" />
+    <Compile Include="Models\CustomUIObjects\InterventionPin.cs" />
+    <Compile Include="Models\CustomUIObjects\Pin.cs" />
+    <Compile Include="Models\CustomUIObjects\TeamPin.cs" />
     <Compile Include="Models\Objects\AdditionalInfo.cs" />
-    <Compile Include="Models\Grids\AdditionalInfoGrid.cs" />
-    <Compile Include="Models\Grids\EquipmentGrid.cs" />
-
-    <Compile Include="Models\Objects\FollowUpInfo.cs" />
+    <Compile Include="Models\CustomUIObjects\AdditionalInfoGrid.cs" />
+    <Compile Include="Models\Objects\Request.cs" />
     <Compile Include="Models\Objects\Intervention.cs" />
-    <Compile Include="Models\Grids\InterventionGrid.cs" />
-    <Compile Include="Models\Grids\TeamGrid.cs" />
     <Compile Include="ViewsPresenters\FollowUpSection\FollowUpSectionForm.xaml.cs">
       <DependentUpon>FollowUpSectionForm.xaml</DependentUpon>
       <DependentUpon>FollowUpSectionForm.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Models\Objects\InitialInfo.cs" />
-    <Compile Include="Models\Objects\Observable.cs" />
-    <Compile Include="Models\Objects\Observer.cs" />
+    <Compile Include="Models\Objects\Operation.cs" />
+    <Compile Include="Models\ArchitecturalObjects\Observable.cs" />
+    <Compile Include="Models\ArchitecturalObjects\Observer.cs" />
     <Compile Include="Models\Objects\PatrolShift.cs" />
     <Compile Include="Models\Objects\Scheduler.cs" />
     <Compile Include="Models\PopupForms\FormPopup.cs" />
@@ -61,7 +61,6 @@
     <Compile Include="Services\TextboxHandler.cs" />
     <Compile Include="ViewsPresenters\InitialSetup.xaml.cs">
       <DependentUpon>InitialSetup.xaml</DependentUpon>
-
     </Compile>
     <Compile Include="ViewsPresenters\InterventionsSection\InterventionForm\ABCInterventionForm\ABCInterventionFormPage.xaml.cs">
       <DependentUpon>ABCInterventionFormPage.xaml</DependentUpon>
@@ -158,8 +157,6 @@
     Models
   -->
   <ItemGroup>
-    <Compile Include="Services\IObservable.cs" />
-    <Compile Include="Services\IObserver.cs" />
     <Compile Include="Services\LanguageSelector.cs" />
     <Compile Include="Models\Objects\Equipment.cs" />
     <Compile Include="Services\TechnicalServices.cs" />
@@ -172,13 +169,11 @@
     ViewsPresenters
   -->
   <ItemGroup>
-
     <Page Include="ViewsPresenters\FollowUpSection\FollowUpSectionForm.xaml">
-<SubType>Designer</SubType>
+      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ViewsPresenters\InitialSetup.xaml">
-
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -329,6 +324,7 @@
     </Content>
     <Content Include="Resources\Vocabulary.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <!--
@@ -407,18 +403,10 @@
     <Content Include="Icons\WheelChair.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Vocabulary.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <!--
     Icons
   -->
-  <ItemGroup>
-    <Content Include="Resources\Vocabulary.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
   <ItemGroup>
     <Folder Include="Maps\" />
   </ItemGroup>

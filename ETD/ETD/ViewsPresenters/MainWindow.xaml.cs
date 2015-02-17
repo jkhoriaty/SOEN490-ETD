@@ -54,7 +54,7 @@ namespace ETD.ViewsPresenters
 			mapSection = new MapSectionPage(this);
 			interventionsSection = new InterventionSectionPage(this);
             AIPmapSection = new AdditionalInfoPage(this);
-            ScheduleSection = new ScheduleSectionPage(this);
+            //ScheduleSection = new ScheduleSectionPage(this);
 
             //save map content on window close
             this.Closed += new EventHandler(WindowClosed);
@@ -135,7 +135,7 @@ namespace ETD.ViewsPresenters
                 DrawingVisual dv2 = new DrawingVisual();
                 using (DrawingContext dc2 = dv2.RenderOpen())
                 {
-                    VisualBrush vb2 = new VisualBrush(mapSection.Map);
+                    VisualBrush vb2 = new VisualBrush(mapSection.Canvas_map);
                     dc2.DrawRectangle(vb2, null, new Rect(new System.Windows.Point(), Mapbounds.Size));
                 }
 
@@ -220,12 +220,6 @@ namespace ETD.ViewsPresenters
 
 				mapSection.SetMap(coloredImage);
 			}
-		}
-
-		//Called after successful submission and processing of the team form
-		public void CreateTeamPin(Team team)
-		{
-			mapSection.CreateTeamPin(team);
 		}
 
 		//Click: Create any type equipement
@@ -361,10 +355,10 @@ namespace ETD.ViewsPresenters
             mapSection.ReportArrived(interventionName, rowNumber);
         }
         
-        internal void UpdateSectors()
+        /*internal void UpdateSectors()
         {
             ScheduleSection.UpdateSectors();
-        }
+        }*/
 
         internal void CreateIntervention()
         {

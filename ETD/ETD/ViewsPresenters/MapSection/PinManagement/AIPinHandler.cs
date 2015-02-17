@@ -10,7 +10,6 @@ using System.Windows.Controls.Primitives;
 using System.Drawing;
 using System.Windows.Media;
 using System.Windows.Shapes;
-using ETD.Models.Grids;
 using ETD.Services;
 using ETD.Models.Objects;
 

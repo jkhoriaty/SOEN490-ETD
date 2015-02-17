@@ -6,6 +6,7 @@ namespace ETD.Services
 {
     public class LanguageSelector
     {
+		/*
         const String French = "French";
         const String English = "English";
         static private String currentLang = LanguageSelector.English;
@@ -42,6 +43,6 @@ namespace ETD.Services
             }
         }
 
-
+		*/
     }
 }

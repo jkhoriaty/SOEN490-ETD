@@ -1,5 +1,5 @@
 ﻿using ETD.Models.Objects;
-using ETD.Models.Grids;
+using ETD.Models.ArchitecturalObjects;
 using ETD.ViewsPresenters.MapSection.PinManagement;
 using System;
 using System.Collections.Generic;
@@ -11,6 +11,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using ETD.Models.CustomUIObjects;
 
 namespace ETD.ViewsPresenters.MapSection
 {
@@ -18,13 +19,17 @@ namespace ETD.ViewsPresenters.MapSection
 	/// <summary>
 	/// Interaction logic for MapSectionPage.xaml
 	/// </summary>
-	public partial class MapSectionPage : Page
+	public partial class MapSectionPage : Page, Observer
 	{
 		MainWindow mainWindow;
 		PinEditor pinEditor;
 		PinHandler pinHandler;
+
+		Dictionary<String, double[]> teamPinPositionList = new Dictionary<String, double[]>();
+
         ImageBrush imgbrush;
         internal String zoomLevel = "100%";
+
         double mouseX;
         double mouseY;
         double TTX;
@@ -36,35 +41,10 @@ namespace ETD.ViewsPresenters.MapSection
 			this.mainWindow = mainWindow;
 			pinEditor = new PinEditor(this);
 			pinHandler = new PinHandler(this);
-            Map.ContextMenu = Resources["ContextMenu"] as ContextMenu;
-		}
+            Canvas_map.ContextMenu = Resources["ContextMenu"] as ContextMenu;
 
-        public void Zoom(object sender, EventArgs e)
-        {
-            MenuItem mi = (MenuItem)sender;
-            zoomLevel = (String)mi.Header;
-            switch(zoomLevel)
-            {
-                case "100%":
-                    ScaleMap(1);
-                    break;
-                case "120%":
-                    ScaleMap(1.2);
-                    break;
-                case "140%":
-                    ScaleMap(1.4);
-                    break;
-                case "160%":
-                    ScaleMap(1.6);
-                    break;
-                case "180%":
-                    ScaleMap(1.8);
-                    break;
-                case "200%":
-                    ScaleMap(2);
-                    break;
-            }
-        }
+			Team.RegisterObserver(this);
+		}
 
 		//Loading of map as a result to the user clicking the "Load Map" button
 		public void SetMap(BitmapImage coloredImage)
@@ -78,55 +58,27 @@ namespace ETD.ViewsPresenters.MapSection
 
 			//Displaying the map as the background
             imgbrush = new ImageBrush(grayBitmap);
-			Map.Background = imgbrush;
-
+			Canvas_map.Background = imgbrush;
 		}
 
-        private void Map_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            var mousePos = e.GetPosition(Map);
-            mouseX = mousePos.X;
-            mouseY = mousePos.Y;
-        }
-
-        public void ScaleMapDefault()
-        {
-            ScaleTransform ST = new ScaleTransform();
-            ST.ScaleX = 1;
-            ST.ScaleY = 1;
-            imgbrush.RelativeTransform = ST;
-
-            TranslateTransform TT;
-
-            TT = new TranslateTransform(-TTX, -TTY);
-            imgbrush.Transform = TT;
-        }
-
-        public void ScaleMap(double ratio)
-        {
-            ScaleMapDefault();
-            if (ratio != 1)
-            {
-                ScaleTransform ST = new ScaleTransform();
-                ST.ScaleX = ratio;
-                ST.ScaleY = ratio;
-                imgbrush.RelativeTransform = ST;
-
-                TranslateTransform TT;
-
-                TTX = -mouseX * ratio + Map.ActualWidth / 2;
-                TTY = -mouseY * ratio + Map.ActualHeight / 2;
-
-                TT = new TranslateTransform(TTX, TTY);
-                imgbrush.Transform = TT;
-            }
-            
-        }
-		
-		//Pushing request to children classes
-		public void CreateTeamPin(Team team)
+		//Callback when Team object modified
+		public void ObservedObjectUpdated()
 		{
-			pinEditor.CreateTeamPin(team);
+			Canvas_map.Children.Clear();
+			foreach(Team team in Team.getTeamList())
+			{
+				TeamPin teamPin = new TeamPin(team, this);
+				Canvas_map.Children.Add(teamPin);
+
+				//Setting the pin to it's previous position, if it exists, or to the top-left corner
+				if(!teamPinPositionList.ContainsKey(team.getName()))
+				{
+					double[] teamPinCoordinates = { teamPin.Width / 2, teamPin.Height / 2 };
+					teamPinPositionList.Add(team.getName(), teamPinCoordinates);
+				}
+				teamPin.setPinPosition(teamPinPositionList[team.getName()][0], teamPinPositionList[team.getName()][0]);
+				teamPin.DetectCollision(Canvas_map);
+			}
 		}
 
 		public void CreateEquipmentPin(String equipmentName)
@@ -175,12 +127,12 @@ namespace ETD.ViewsPresenters.MapSection
 			mainWindow.AddTeamEquipment(equipment, teamName);
 		}
 
-        internal void ChangeStatus(object sender, RoutedEventArgs e)
+        internal void ChangeStatus_Click(object sender, RoutedEventArgs e)
         {
             pinEditor.ChangeStatus(sender, e);
         }
 
-        internal void EditMenuItems(object sender, RoutedEventArgs e)
+        internal void EditMenuItems_Opened(object sender, RoutedEventArgs e)
         {
 			ContextMenu cm = (ContextMenu)sender;
 			pinEditor.EditMenuItems(cm);
@@ -188,8 +140,8 @@ namespace ETD.ViewsPresenters.MapSection
 
 		public void CheckRight(object sender, ContextMenuEventArgs e)
 		{
-			TeamGrid fe = (TeamGrid)sender;
-			pinEditor.EditMenuItems(fe.ContextMenu);
+			//TeamGrid fe = (TeamGrid)sender;
+			//pinEditor.EditMenuItems(fe.ContextMenu);
 		}
 
 		//When the window is resized, the pins need to move to stay in the window
@@ -198,7 +150,7 @@ namespace ETD.ViewsPresenters.MapSection
 			pinHandler.movePins(widthRatio, heightRatio);
 		}
 
-		private void DeleteEquipment(object sender, RoutedEventArgs e)
+		private void DeleteEquipment_Click(object sender, RoutedEventArgs e)
 		{
 			MenuItem item = sender as MenuItem;
 			if (item != null)
@@ -206,8 +158,8 @@ namespace ETD.ViewsPresenters.MapSection
 				ContextMenu parent = item.Parent as ContextMenu;
 				if (parent != null)
 				{
-					EquipmentGrid grid = (EquipmentGrid)parent.PlacementTarget;
-					pinEditor.DeletePin(grid);
+					//EquipmentGrid grid = (EquipmentGrid)parent.PlacementTarget;
+					//pinEditor.DeletePin(grid);
 				}
 			}
 		}
@@ -223,7 +175,7 @@ namespace ETD.ViewsPresenters.MapSection
 			if(intervention == null)
 			{
                 mainWindow.CreateIntervention();
-                pinHandler.AppointTeamToIntervention(team, (Grid) Map.Children[Map.Children.Count - 1]);
+                //pinHandler.AppointTeamToIntervention(team, (Grid) Map.Children[Map.Children.Count - 1]);
                 intervention = pinHandler.RelatedIntervention(team);
 			}
 			mainWindow.ReportArrival(team.Name, intervention.Name);
@@ -232,6 +184,76 @@ namespace ETD.ViewsPresenters.MapSection
         internal void ReportArrived(string interventionName, int rowNumber)
         {
             pinHandler.ReportArrived(interventionName, rowNumber);
+        }
+
+		//Upon right click store mouse position to know where to zoom
+        private void Map_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            var mousePos = e.GetPosition(Canvas_map);
+            mouseX = mousePos.X;
+            mouseY = mousePos.Y;
+        }
+		
+
+		public void Zoom_Click(object sender, EventArgs e)
+        {
+            MenuItem mi = (MenuItem)sender;
+            zoomLevel = (String)mi.Header;
+            switch(zoomLevel)
+            {
+                case "100%":
+                    ScaleMap(1);
+                    break;
+                case "120%":
+                    ScaleMap(1.2);
+                    break;
+                case "140%":
+                    ScaleMap(1.4);
+                    break;
+                case "160%":
+                    ScaleMap(1.6);
+                    break;
+                case "180%":
+                    ScaleMap(1.8);
+                    break;
+                case "200%":
+                    ScaleMap(2);
+                    break;
+            }
+        }
+		
+		public void ScaleMapDefault()
+        {
+            ScaleTransform ST = new ScaleTransform();
+            ST.ScaleX = 1;
+            ST.ScaleY = 1;
+            imgbrush.RelativeTransform = ST;
+
+            TranslateTransform TT;
+
+            TT = new TranslateTransform(-TTX, -TTY);
+            imgbrush.Transform = TT;
+        }
+
+        public void ScaleMap(double ratio)
+        {
+            ScaleMapDefault();
+            if (ratio != 1)
+            {
+                ScaleTransform ST = new ScaleTransform();
+                ST.ScaleX = ratio;
+                ST.ScaleY = ratio;
+                imgbrush.RelativeTransform = ST;
+
+                TranslateTransform TT;
+
+                TTX = -mouseX * ratio + Canvas_map.ActualWidth / 2;
+				TTY = -mouseY * ratio + Canvas_map.ActualHeight / 2;
+
+                TT = new TranslateTransform(TTX, TTY);
+                imgbrush.Transform = TT;
+            }
+            
         }
 	}
 }

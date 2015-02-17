@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ETD.Models.Objects
 {
-    public class InitialInfo
+    public class Operation
     {
         private String operationName;
         private String acronym;
@@ -14,7 +14,7 @@ namespace ETD.Models.Objects
         private DateTime shiftEnd;
         private String dispatcherName;
 
-        public InitialInfo(String operationName, String acronym, DateTime shiftStart, DateTime shiftEnd, String dispatcherName)
+        public Operation(String operationName, String acronym, DateTime shiftStart, DateTime shiftEnd, String dispatcherName)
 		{
             this.operationName = operationName;
             this.acronym = acronym;

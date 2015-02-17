@@ -12,12 +12,12 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
 using ETD.ViewsPresenters.TeamsSection.TeamForm;
 using ETD.ViewsPresenters.TeamsSection.TeamInfo;
 using ETD.Models.Objects;
 using ETD.Services;
 using System.Windows.Threading;
+using ETD.Models.ArchitecturalObjects;
 
 
 namespace ETD.ViewsPresenters.TeamsSection
@@ -25,16 +25,13 @@ namespace ETD.ViewsPresenters.TeamsSection
 	/// <summary>
 	/// Interaction logic for TeamsSectionPage.xaml
 	/// </summary>
-	public partial class TeamsSectionPage : Page
+	public partial class TeamsSectionPage : Page, Observer
 	{
-
 		private MainWindow mainWindow;
 		private static Dictionary<String, StackPanel> teamEquipmentStacks = new Dictionary<String, StackPanel>();
 		private DispatcherTimer dispatcherTimer = new DispatcherTimer();
-        //private bool _isDragInProg;
-        //private bool _isDragDown;
-        //private Point _startPoint;
-        //private UIElement _dragSource;
+
+		private Frame createTeamForm;
 
 		public TeamsSectionPage(MainWindow mainWindow)
 		{
@@ -43,13 +40,15 @@ namespace ETD.ViewsPresenters.TeamsSection
 			dispatcherTimer.Tick += new EventHandler(refresh);
 			dispatcherTimer.Interval = new TimeSpan(0, 0, 10); //Update every minute
 			dispatcherTimer.Start();
+
+			Team.RegisterObserver(this);
 		}
 
 		private void refresh(object sender, EventArgs e)
 		{
-			foreach(KeyValuePair<String, Team> team in Team.teamsList)
+			foreach(Team team in Team.getTeamList())
 			{
-				foreach(TeamMember teamMember in team.Value.getMemberList())
+				foreach(TeamMember teamMember in team.getMemberList())
 				{
 
 					DateTime now = DateTime.Now.AddMinutes(15);
@@ -76,51 +75,50 @@ namespace ETD.ViewsPresenters.TeamsSection
 		//Clicking on the add team button
 		private void DisplayCreateTeamForm(object sender, RoutedEventArgs e)
 		{
-			Frame frame = new Frame();
-			frame.Content = new TeamFormPage(this);
-			TeamList.Children.Add(frame);
+			createTeamForm = new Frame();
+			createTeamForm.Content = new TeamFormPage(this);
+			StackPanel_teamList.Children.Add(createTeamForm);
 			CreateTeamButton.IsEnabled = false;
 		}
 
 		//Hiding form after submit or cancel
 		public void HideCreateTeamForm()
 		{
-			TeamList.Children.RemoveAt(TeamList.Children.Count - 1);
+			StackPanel_teamList.Children.Remove(createTeamForm);
 			CreateTeamButton.IsEnabled = true;
 		}
 
-		//Displaying the team upon form submit
-		public void DisplayTeamInfo(Team team)
+		public void ObservedObjectUpdated()
 		{
-			HideCreateTeamForm();
-			Frame frame = new Frame();
-			frame.Content = new TeamInfoPage(this, team);
-            frame.AllowDrop = true;
-            frame.Content = this.Parent;
-			TeamList.Children.Add(frame);
-			mainWindow.CreateTeamPin(team);
+			StackPanel_teamList.Children.Clear();
+			foreach(Team team in Team.getTeamList())
+			{
+				Frame frame = new Frame();
+				frame.Content = new TeamInfoPage(this, team);
+				StackPanel_teamList.Children.Add(frame);
+			}
 		}
 
 		//Registering the team equipment StackPanel to be able to add equipment to each team
 		public void registerStackPanel(String teamName, StackPanel equipmentStack)
 		{
-			teamEquipmentStacks.Add(teamName, equipmentStack);
+			//teamEquipmentStacks.Add(teamName, equipmentStack);
 		}
    
 		//Deleting the team upon right click on the label
 		public void RemoveTeam(String teamName)
 		{
-			foreach (Frame item in TeamList.Children)
+			foreach (Frame item in StackPanel_teamList.Children)
 			{
 				Page team = (Page)item.Content;
 				if (team.Name.Equals(teamName))
 				{
 					teamEquipmentStacks.Remove(teamName);
-					TeamList.Children.Remove(item);
+					StackPanel_teamList.Children.Remove(item);
 					break;
 				}
 			}
-			Team.teamsList.Remove(teamName);
+			//Team.getTeamList().Remove(teamName);
 			mainWindow.DeletePin(teamName);
             TeamFormPage.removeTeamName(teamName);
 		}
@@ -151,7 +149,7 @@ namespace ETD.ViewsPresenters.TeamsSection
 				//Getting the appropriate equipment StackPanel
 				teamEquipmentStacks[teamName].Children.Add(imageRectangle);
 
-				Team.teamsList[teamName].addEquipment(equip);
+				//Team.teamList[teamName].AddEquipment(equip);
 			}
 			else
 			{
@@ -167,7 +165,7 @@ namespace ETD.ViewsPresenters.TeamsSection
             //Type equipType = Type.GetType(equipment.Name.ToString());
             Equipment equip = new Equipment((Equipments)Enum.Parse(typeof(Equipments), equipment.Name.ToString()));
 			StackPanel equipmentStackPanel = (StackPanel)equipment.Parent;
-			Team.teamsList["" + equipment.Tag].removeEquipment(equip);
+			//Team.teamList["" + equipment.Tag].RemoveEquipment(equip);
 			equipmentStackPanel.Children.Remove(equipment);
 			mainWindow.CreateEquipmentPin(equipment.Name);
 
@@ -193,7 +191,7 @@ namespace ETD.ViewsPresenters.TeamsSection
         internal void frameSelection(object sender, MouseEventArgs e)
         {
             UIElement frame = e.Source as UIElement;
-            TeamList.KeyDown += new KeyEventHandler(frameKeyDown); 
+			StackPanel_teamList.KeyDown += new KeyEventHandler(frameKeyDown); 
             if (!frame.Focus())
             {
                 frame.Focus();
@@ -205,15 +203,15 @@ namespace ETD.ViewsPresenters.TeamsSection
         internal void frameMoveDown(UIElement element)
         {
             int elementIndex = 0;
-            int count = TeamList.Children.Count; //get number of elements in stackpanel
+			int count = StackPanel_teamList.Children.Count; //get number of elements in stackpanel
             int index;
-            if (TeamList.Children.Contains(element))
+			if (StackPanel_teamList.Children.Contains(element))
             {
-                index = TeamList.Children.IndexOf(element);
+				index = StackPanel_teamList.Children.IndexOf(element);
                 if (index < count-1)
                 elementIndex = index+1;
-                TeamList.Children.Remove(element);
-                TeamList.Children.Insert(elementIndex, element);
+				StackPanel_teamList.Children.Remove(element);
+				StackPanel_teamList.Children.Insert(elementIndex, element);
             }
  
         }
@@ -221,17 +219,17 @@ namespace ETD.ViewsPresenters.TeamsSection
         internal void frameMoveUp(UIElement element)
         {
             int elementIndex = 0;
-            int count = TeamList.Children.Count; //get number of elements in stackpanel
+			int count = StackPanel_teamList.Children.Count; //get number of elements in stackpanel
             int index;
-            if (TeamList.Children.Contains(element))
+			if (StackPanel_teamList.Children.Contains(element))
             {
-                index = TeamList.Children.IndexOf(element);
+				index = StackPanel_teamList.Children.IndexOf(element);
                 if (index > 0)
                     elementIndex = index - 1;
                 else if (index == 0)
                     elementIndex = count - 1;
-                TeamList.Children.Remove(element);
-                TeamList.Children.Insert(elementIndex, element);
+				StackPanel_teamList.Children.Remove(element);
+				StackPanel_teamList.Children.Insert(elementIndex, element);
             }
         }
         /*

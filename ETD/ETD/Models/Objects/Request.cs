@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ETD.Models.Objects
 {
-    public class FollowUpInfo
+    public class Request
     {
 
       private String Client;
@@ -14,24 +14,24 @@ namespace ETD.Models.Objects
       private String PriseEnCharge;
       private DateTime SuiviTimeStamp;
       private DateTime FaitTimeStamp;
-      private FollowUpInfo[] followUpInfo;
+      private Request[] followUpInfo;
 
-       public FollowUpInfo(String client,String demande,String priseendcharge, DateTime SuiviTime, DateTime FaitTime)
+       public Request(String client,String demande,String priseencharge, DateTime SuiviTime, DateTime FaitTime)
        {
            this.Client = client;
            this.Demande = demande;
-           this.PriseEnCharge = priseendcharge;
+           this.PriseEnCharge = priseencharge;
            this.SuiviTimeStamp = SuiviTime;
            this.FaitTimeStamp = FaitTime;
        }
 
 
-        public void SetFollowUpInfo(int position, FollowUpInfo followUpinfo)
+        public void SetFollowUpInfo(int position, Request followUpinfo)
         {
             this.followUpInfo[position] = followUpinfo;
         }
 
-        public FollowUpInfo[] getFollowUpInfo()
+        public Request[] getFollowUpInfo()
         {
             return this.followUpInfo;
         }

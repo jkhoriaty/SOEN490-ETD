@@ -7,23 +7,23 @@
       d:DesignHeight="300" d:DesignWidth="300"
 	Title="MapSectionPage">
 
-	<Canvas Name="Map" MouseRightButtonDown="Map_MouseRightButtonDown">
+	<Canvas Name="Canvas_map" MouseRightButtonDown="Map_MouseRightButtonDown">
         
 	</Canvas>
 	
     <Page.Resources>
-		<ContextMenu x:Key="ContextMenu" Opened="EditMenuItems">
-			<MenuItem Header="Available" Tag="team" Click="ChangeStatus"/>
-			<MenuItem Header="Moving" Tag="team" Click="ChangeStatus"/>
-			<MenuItem Header="Intervening" Tag="team" Click="ChangeStatus"/>
-			<MenuItem Header="Unavailable" Tag="team" Click="ChangeStatus"/>
-			<MenuItem Header="Delete Equipment" Tag="equipment" Click="DeleteEquipment"/>
-            <MenuItem Header="100%" Tag="map" Click="Zoom"/>
-            <MenuItem Header="120%" Tag="map" Click="Zoom"/>
-            <MenuItem Header="140%" Tag="map" Click="Zoom"/>
-            <MenuItem Header="160%" Tag="map" Click="Zoom"/>
-            <MenuItem Header="180%" Tag="map" Click="Zoom"/>
-            <MenuItem Header="200%" Tag="map" Click="Zoom"/>
+		<ContextMenu x:Key="ContextMenu" Opened="EditMenuItems_Opened">
+			<MenuItem Header="Available" Tag="team" Click="ChangeStatus_Click"/>
+			<MenuItem Header="Moving" Tag="team" Click="ChangeStatus_Click"/>
+			<MenuItem Header="Intervening" Tag="team" Click="ChangeStatus_Click"/>
+			<MenuItem Header="Unavailable" Tag="team" Click="ChangeStatus_Click"/>
+			<MenuItem Header="Delete Equipment" Tag="equipment" Click="DeleteEquipment_Click"/>
+            <MenuItem Header="100%" Tag="map" Click="Zoom_Click"/>
+			<MenuItem Header="120%" Tag="map" Click="Zoom_Click"/>
+			<MenuItem Header="140%" Tag="map" Click="Zoom_Click"/>
+			<MenuItem Header="160%" Tag="map" Click="Zoom_Click"/>
+			<MenuItem Header="180%" Tag="map" Click="Zoom_Click"/>
+			<MenuItem Header="200%" Tag="map" Click="Zoom_Click"/>
 		</ContextMenu>
     </Page.Resources>
 </Page>

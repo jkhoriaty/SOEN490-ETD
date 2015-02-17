@@ -10,14 +10,12 @@ using System.Windows.Media;
 using System.Windows.Media.Effects;
 using System.Windows.Shapes;
 
-namespace ETD.Models.Grids
+namespace ETD.Models.CustomUIObjects
 {
-	class BorderGrid : Grid
+	class InterventionContainer : Grid
 	{
-		public BorderGrid(String name, double width, double height)
+		public InterventionContainer(String name, double width, double height)
 		{
-			this.Name = name;
-			this.Tag = "border";
 			this.Width = width;
 			this.Height = height;
 

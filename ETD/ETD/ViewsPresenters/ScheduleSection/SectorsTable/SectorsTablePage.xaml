@@ -6,7 +6,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
 	Title="SectorsTablePage">
-
+<!--
     <Grid Name="SectorGrid">
         <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Width="Auto" Height="Auto" />
         <Label Content="Sectors" HorizontalAlignment="Left" Grid.Row="0" Grid.Column="0"/>
@@ -146,5 +146,5 @@
             <RowDefinition Height="1*" Name="Sector10Row" />
         </Grid.RowDefinitions>
      
-    </Grid>
+    </Grid> -->
 </Page>
