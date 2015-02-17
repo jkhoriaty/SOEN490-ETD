@@ -1,4 +1,5 @@
-﻿using ETD.Services;
+﻿using ETD.Models.Objects;
+using ETD.Services;
 using ETD.ViewsPresenters.MapSection;
 using System;
 using System.Collections.Generic;
@@ -11,12 +12,16 @@ namespace ETD.Models.CustomUIObjects
 {
 	class InterventionPin : Pin
 	{
-		static int size = 40;
+		private static int size = 40;
 
-		public InterventionPin(int interventionNumber, MapSectionPage mapSection) : base(mapSection, size)
+		private Intervention intervention;
+
+		public InterventionPin(Intervention intervention, MapSectionPage mapSection) : base(intervention, mapSection, size)
 		{
 			base.setImage(TechnicalServices.getImage("intervention"));
-			base.setText(interventionNumber.ToString());
+			base.setText(intervention.getInterventionNumber().ToString());
+
+			this.intervention = intervention; //Providing a link to the team that this pin represents
 		}
 	}
 }

@@ -16,29 +16,35 @@ namespace ETD.Models.CustomUIObjects
 {
 	class Pin : Grid
 	{
-		static List<Pin> pinList = new List<Pin>();
+		private static List<Pin> pinList = new List<Pin>(); //Contains all pins, used for collision detection
+		private static Dictionary<object, double[]> pinPositionList = new Dictionary<object, double[]>(); //Used to recover previous pin position after ObservedObjectUpdated callback that clears the whole map
 
-		Rectangle imageRectangle;
+		private object relatedObject;
 
 		//Creating Grid with passed parameters
-		public Pin(MapSectionPage mapSection, int size) : base()
+		public Pin(object relatedObject, MapSectionPage mapSection, int size) : base()
 		{
+			//Setting relatedObject, used for position recovery
+			this.relatedObject = relatedObject;
+
+			//Initializing grid attibutes
 			this.Width = size;
 			this.Height = size;
-			this.MouseLeftButtonDown += new MouseButtonEventHandler(mapSection.DragStart);
-			this.MouseLeftButtonUp += new MouseButtonEventHandler(mapSection.DragStop);
-			this.MouseMove += new MouseEventHandler(mapSection.DragMove);
+			this.MouseLeftButtonDown += new MouseButtonEventHandler(mapSection.DragStart_MouseLeftButtonDown);
+			this.MouseMove += new MouseEventHandler(mapSection.DragMove_MouseMove);
+			this.MouseLeftButtonUp += new MouseButtonEventHandler(mapSection.DragStop_MouseLeftButtonUp);
 			this.ContextMenu = mapSection.Resources["ContextMenu"] as ContextMenu;
 			this.ContextMenuOpening += new ContextMenuEventHandler(mapSection.CheckRight);
 			(this.ContextMenu.Items[0] as MenuItem).IsChecked = true;
 
+			//Adding the pin to the list of all pins
 			pinList.Add(this);
 		}
 
 		//Setting the background image to the passed image
 		public void setImage(BitmapImage image)
 		{
-			imageRectangle = new Rectangle();
+			Rectangle imageRectangle = new Rectangle();
 			imageRectangle.Width = this.Width;
 			imageRectangle.Height = this.Height;
 			ImageBrush img = new ImageBrush();
@@ -65,24 +71,68 @@ namespace ETD.Models.CustomUIObjects
 			viewbox.Child = nameLabel;
 		}
 
+		//If a pin already exists when the map is being rendered, return this position so it can be set to it
+		public static double[] getPreviousPinPosition(object pinObject)
+		{
+			if (pinPositionList.ContainsKey(pinObject))
+			{
+				return pinPositionList[pinObject];
+			}
+			else
+			{
+				return null;
+			}
+		}
+
 		//Setting the pin position to X and Y coordinates
 		public void setPinPosition(double X, double Y)
 		{
 			Canvas.SetLeft(this, X - (this.Width / 2));
 			Canvas.SetTop(this, Y - (this.Height / 2));
+
+			//Updating the pinPositionList so that it reflects the actual last position of a pin
+			UpdatePinPosition(X, Y);
 		}
 
+		//Updating or creating the last position of a pin
+		private void UpdatePinPosition(double X, double Y)
+		{
+			if (pinPositionList.ContainsKey(relatedObject))
+			{
+				pinPositionList[relatedObject] = new double[] { X, Y };
+			}
+			else
+			{
+				pinPositionList.Add(relatedObject, new double[] { X, Y });
+			}
+		}
+
+		//Get the X value of the center of the grid
 		private double getX()
 		{
 			return Canvas.GetLeft(this) + (this.Width / 2);
 		}
 
+		//Get the Y value of the center of the grid
 		private double getY()
 		{
 			return Canvas.GetTop(this) + (this.Height / 2);
 		}
 
-		public void DetectCollision(Canvas Canvas_map)
+		//Clearing all pins off of the map and clearing the list of all pins
+		public static void ClearAllPins(Canvas Canvas_map)
+		{
+			Canvas_map.Children.Clear();
+			pinList.Clear();
+		}
+
+		private bool PinOfType(String type)
+		{
+			return this.GetType().Equals("ETD.Models.CustomUIObjects." + type);
+		}
+
+		//Collision detection and resolution on the pin
+		public void CollisionDetectionAndResolution(Canvas Canvas_map)
 		{
 			double movedPin_X = this.getX();
 			double movedPin_Y = this.getY();

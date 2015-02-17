@@ -30,6 +30,12 @@ namespace ETD.Models.Objects
 			NotifyAll();
         }
 
+		//Delete Team
+		public void DeleteTeam(Team team)
+		{
+
+		}
+
 		//Adding a maximum of 3 members to the team
         public bool AddMember(TeamMember mem)
         {

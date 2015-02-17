@@ -130,7 +130,7 @@ namespace ETD.ViewsPresenters.TeamsSection
 			if (teamEquipmentStacks[teamName].Children.Count <= 3)
 			{
 				Rectangle imageRectangle = new Rectangle();
-				imageRectangle.Name = equip.getEquipmentName().ToString();
+				//imageRectangle.Name = equip.getEquipmentName().ToString();
 				imageRectangle.Tag = teamName;
 				imageRectangle.Width = 27;
 				imageRectangle.Height = 27;
@@ -143,7 +143,7 @@ namespace ETD.ViewsPresenters.TeamsSection
 
 				//Getting the background image to the rectangle
 				ImageBrush equipmentImage = new ImageBrush();
-				equipmentImage.ImageSource = TechnicalServices.getImage(equip.getEquipmentName());
+				//equipmentImage.ImageSource = TechnicalServices.getImage(equip.getEquipmentName());
 				imageRectangle.Fill = equipmentImage;
 
 				//Getting the appropriate equipment StackPanel
@@ -163,7 +163,7 @@ namespace ETD.ViewsPresenters.TeamsSection
 		{
 			Rectangle equipment = (Rectangle)sender;
             //Type equipType = Type.GetType(equipment.Name.ToString());
-            Equipment equip = new Equipment((Equipments)Enum.Parse(typeof(Equipments), equipment.Name.ToString()));
+            //Equipment equip = new Equipment((Equipments)Enum.Parse(typeof(Equipments), equipment.Name.ToString()));
 			StackPanel equipmentStackPanel = (StackPanel)equipment.Parent;
 			//Team.teamList["" + equipment.Tag].RemoveEquipment(equip);
 			equipmentStackPanel.Children.Remove(equipment);

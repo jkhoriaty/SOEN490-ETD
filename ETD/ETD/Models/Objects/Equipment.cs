@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ETD.Models.ArchitecturalObjects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,19 +9,31 @@ namespace ETD.Models.Objects
 {
 	public enum Equipments {ambulanceCart, sittingCart, epipen, transportStretcher, mountedStretcher, wheelchair};
 
-	public class Equipment
+	public class Equipment : Observable
     {
+		private static List<Equipment> equipmentList = new List<Equipment>();
 
-	   public Equipments EquipmentName;
+		private Equipments equipmentType;
 
-       public Equipment(Equipments name)
-       {
-           EquipmentName = name;
-       }
+		public Equipment(String name)
+		{
+			equipmentType = (Equipments)Enum.Parse(typeof(Equipments), name);
+			
+			equipmentList.Add(this);
+			NotifyAll();
+		}
 
-       public Equipments getEquipmentName()
-       {
-           return EquipmentName;
-       }
+		/*
+		 * Getters
+		 */
+		public Equipments getEquipmentType()
+		{
+			return equipmentType;
+		}
+
+		public static List<Equipment> getEquipmentList()
+		{
+			return equipmentList;
+		}
     }
 }

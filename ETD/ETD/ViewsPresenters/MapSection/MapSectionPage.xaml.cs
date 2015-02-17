@@ -25,7 +25,9 @@ namespace ETD.ViewsPresenters.MapSection
 		PinEditor pinEditor;
 		PinHandler pinHandler;
 
-		Dictionary<String, double[]> teamPinPositionList = new Dictionary<String, double[]>();
+		//Drag-and-Drop related variable
+		private bool pinDragInProgress;
+		private Pin draggedPin;
 
         ImageBrush imgbrush;
         internal String zoomLevel = "100%";
@@ -44,10 +46,11 @@ namespace ETD.ViewsPresenters.MapSection
             Canvas_map.ContextMenu = Resources["ContextMenu"] as ContextMenu;
 
 			Team.RegisterObserver(this);
+			Equipment.RegisterObserver(this);
 		}
 
 		//Loading of map as a result to the user clicking the "Load Map" button
-		public void SetMap(BitmapImage coloredImage)
+		public void setMap(BitmapImage coloredImage)
 		{
 			//Making the picture grayscale
 			FormatConvertedBitmap grayBitmap = new FormatConvertedBitmap();
@@ -61,34 +64,107 @@ namespace ETD.ViewsPresenters.MapSection
 			Canvas_map.Background = imgbrush;
 		}
 
-		//Callback when Team object modified
+		//Callback when any of the observed objects modified i.e. creation and addition of all pins (including new pins, excluding deleted pins)
 		public void ObservedObjectUpdated()
 		{
-			Canvas_map.Children.Clear();
+			Pin.ClearAllPins(Canvas_map); //Clearing all pins from the map
+
+			//Creating all team pins and adding the map to their previous or a new position while detecting newly created collisions
 			foreach(Team team in Team.getTeamList())
 			{
 				TeamPin teamPin = new TeamPin(team, this);
 				Canvas_map.Children.Add(teamPin);
 
 				//Setting the pin to it's previous position, if it exists, or to the top-left corner
-				if(!teamPinPositionList.ContainsKey(team.getName()))
+				double[] previousPinPosition = Pin.getPreviousPinPosition(team);
+				if (previousPinPosition == null)
 				{
-					double[] teamPinCoordinates = { teamPin.Width / 2, teamPin.Height / 2 };
-					teamPinPositionList.Add(team.getName(), teamPinCoordinates);
+					previousPinPosition = new double[]{ teamPin.Width / 2, teamPin.Height / 2 }; //Top-left corner
 				}
-				teamPin.setPinPosition(teamPinPositionList[team.getName()][0], teamPinPositionList[team.getName()][0]);
-				teamPin.DetectCollision(Canvas_map);
+				teamPin.setPinPosition(previousPinPosition[0], previousPinPosition[1]);
+				teamPin.CollisionDetectionAndResolution(Canvas_map);
+			}
+
+			//Creating all equipment pins and adding the map to their previous or a new position while detecting newly created collisions
+			foreach (Equipment equipment in Equipment.getEquipmentList())
+			{
+				EquipmentPin equipmentPin = new EquipmentPin(equipment, this);
+				Canvas_map.Children.Add(equipmentPin);
+
+				//Setting the pin to it's previous position, if it exists, or to the top-left corner
+				double[] previousPinPosition = Pin.getPreviousPinPosition(equipment);
+				if (previousPinPosition == null)
+				{
+					previousPinPosition = new double[]{ Canvas_map.ActualWidth - (equipmentPin.Width / 2), (equipmentPin.Height / 2) }; //Top-right corner
+				}
+				equipmentPin.setPinPosition(previousPinPosition[0], previousPinPosition[1]);
+				equipmentPin.CollisionDetectionAndResolution(Canvas_map);
+			}
+
+			//Creating all intervention pins and adding the map to their previous or a new position while detecting newly created collisions
+			foreach (Intervention intervention in Intervention.getInterventionList())
+			{
+				InterventionPin interventionPin = new InterventionPin(intervention, this);
+				Canvas_map.Children.Add(interventionPin);
+
+				//Setting the pin to it's previous position, if it exists, or to the top-left corner
+				double[] previousPinPosition = Pin.getPreviousPinPosition(intervention);
+				if (previousPinPosition == null)
+				{
+					previousPinPosition = new double[] { (interventionPin.Width / 2), Canvas_map.ActualHeight - (interventionPin.Height / 2) }; //Bottom-right corner
+				}
+				interventionPin.setPinPosition(previousPinPosition[0], previousPinPosition[1]);
+				interventionPin.CollisionDetectionAndResolution(Canvas_map);
 			}
 		}
-
-		public void CreateEquipmentPin(String equipmentName)
+		
+		//Drag starting when mouse left button is clicked
+		internal void DragStart_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
 		{
-			pinEditor.CreateEquipmentPin(equipmentName);
+			Pin pin = (Pin)sender;
+
+			pinDragInProgress = pin.CaptureMouse();
+			draggedPin = pin;
 		}
 
-		public void CreateInterventionPin(int interventionNumber)
+		//Drag ongoing when mouse is moving and left mouse button is clicked
+		internal void DragMove_MouseMove(object sender, MouseEventArgs e)
 		{
-			pinEditor.CreateInterventionPin(interventionNumber);
+			//If left mouse button is not clicked exit method
+			if(!pinDragInProgress)
+			{
+				return;
+			}
+
+			Pin pin = (Pin)sender;
+
+			//Get the position of the mouse relative to the Canvas
+			var mousePos = e.GetPosition(Canvas_map);
+
+			//Making sure it is not dragged out of bounds
+			if (mousePos.X < (pin.Width / 2) || (Canvas_map.ActualWidth - (pin.Width / 2)) < mousePos.X || mousePos.Y < (pin.Height / 2) || (Canvas_map.ActualHeight - (pin.Height / 2)) < mousePos.Y)
+			{
+				return;
+			}
+
+			pin.setPinPosition(mousePos.X, mousePos.Y);
+		}
+
+		//Drag stopped when left mouse button is released
+		internal void DragStop_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+		{
+			Pin pin = (Pin)sender;
+
+			//Handling situation where method is called on the pin that is not being dragged
+			if (pin != draggedPin)
+			{
+				return;
+			}
+
+			pin.ReleaseMouseCapture();
+			pinDragInProgress = false;
+
+			pin.CollisionDetectionAndResolution(Canvas_map);
 		}
 
 		public void DeletePin(String pinName)
@@ -99,21 +175,6 @@ namespace ETD.ViewsPresenters.MapSection
 		{
 			pinHandler.setPinPosition(g, X, Y);
 		}
-		
-		internal void DragStart(object sender, MouseButtonEventArgs e)
-		{
-			pinHandler.DragStart(sender, e);
-		}
-
-		internal void DragStop(object sender, MouseButtonEventArgs e)
-		{
-			pinHandler.DragStop(sender, e);
-		}
-
-		internal void DragMove(object sender, MouseEventArgs e)
-		{
-			pinHandler.DragMove(sender, e);
-		}
 
 		public void DetectCollision(Grid movedItem, double movedItem_X, double movedItem_Y)
 		{
@@ -123,8 +184,8 @@ namespace ETD.ViewsPresenters.MapSection
 		//Pushing request to mainWindow
 		public void AddTeamEquipment(String equip, String teamName)
 		{
-            Equipment equipment = new Equipment((Equipments)Enum.Parse(typeof(Equipments), equip));
-			mainWindow.AddTeamEquipment(equipment, teamName);
+            /*Equipment equipment = new Equipment((Equipments)Enum.Parse(typeof(Equipments), equip));
+			mainWindow.AddTeamEquipment(equipment, teamName);*/
 		}
 
         internal void ChangeStatus_Click(object sender, RoutedEventArgs e)

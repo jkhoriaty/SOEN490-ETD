@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ETD.Models.ArchitecturalObjects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,9 +13,10 @@ namespace ETD.Models.Objects
 	public enum Circulation { normal, chestPain, hemorrhage, noPulse, notSet };
 	public enum Conclusions { returnToSite, returnToHome, referredToDoctor, equipmentDistribution, hospital, patientNotFound, noInterventions, other, notSet };
 
-    public class Intervention
+    public class Intervention : Observable
     {
 		private static int lastIntervention = 0;
+		private static List<Intervention> interventionList = new List<Intervention>();
 
 		private int interventionNumber;
 
@@ -53,6 +55,14 @@ namespace ETD.Models.Objects
 			interventionNumber = ++lastIntervention;
             this.timeOfCall = DateTime.Now;
             additionalInfo = new AdditionalInformation[10];
+
+			interventionList.Add(this);
+			NotifyAll();
+		}
+
+		public static List<Intervention> getInterventionList()
+		{
+			return interventionList;
 		}
 
 		public struct Resource

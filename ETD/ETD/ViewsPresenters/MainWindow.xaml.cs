@@ -98,7 +98,7 @@ namespace ETD.ViewsPresenters
         //window closed
         public void WindowClosed(object sender, System.EventArgs e)
         {
-            MessageBox.Show("Saving map..");
+            //MessageBox.Show("Saving map..");
 
            // Absolute path doesnt work..
            // Saving to desktop directory for now
@@ -218,7 +218,7 @@ namespace ETD.ViewsPresenters
 				System.IO.FileInfo File = new System.IO.FileInfo(openFileDialog.FileName);
 				coloredImage = new BitmapImage(new Uri(openFileDialog.FileName));
 
-				mapSection.SetMap(coloredImage);
+				mapSection.setMap(coloredImage);
 			}
 		}
 
@@ -228,7 +228,7 @@ namespace ETD.ViewsPresenters
 			ComboBoxItem selectedItem = (ComboBoxItem)EquipmentAdd.SelectedItem;
 			if (selectedItem != null)
 			{
-				mapSection.CreateEquipmentPin("" + selectedItem.Name);
+				new Equipment("" + selectedItem.Name);
 			}
 			else
 			{
@@ -239,13 +239,7 @@ namespace ETD.ViewsPresenters
 		//Recreating equipment after removal from the team
 		public void CreateEquipmentPin(String equipmentName)
 		{
-			mapSection.CreateEquipmentPin(equipmentName);
-		}
-
-		//Creating intervention pin
-		public void CreateInterventionPin(int interventionNumber)
-		{
-			mapSection.CreateInterventionPin(interventionNumber);
+			//mapSection.CreateEquipmentPin(equipmentName);
 		}
 
 		//Deleting pin using its name (e.g. when a team is deleted)

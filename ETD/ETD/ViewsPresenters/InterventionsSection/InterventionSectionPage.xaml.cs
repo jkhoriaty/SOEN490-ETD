@@ -58,12 +58,10 @@ namespace ETD.ViewsPresenters.InterventionsSection
         internal void CreateIntervention()
         {
             Intervention intervention = new Intervention();
-			mainWindow.CreateInterventionPin(intervention.getInterventionNumber());
 
 			Frame frame = new Frame();
 			InterventionFormPage form = new InterventionFormPage(this, intervention);
 			frame.Content = form;
-			frame.Name = "Intervention_" + form.getInterventionNumber();
 			frame.Tag = "Ongoing";
 			if(!InterventionFilterLabel.Content.Equals("Ongoing"))
 			{

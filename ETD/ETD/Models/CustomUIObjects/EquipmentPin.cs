@@ -11,12 +11,15 @@ namespace ETD.Models.CustomUIObjects
 {
 	class EquipmentPin : Pin
 	{
-		static int size = 30;
+		private static int size = 30;
 
-		public EquipmentPin(String equipmentName, MapSectionPage mapSection) : base(mapSection, size)
+		private Equipment equipment;
+
+		public EquipmentPin(Equipment equipment, MapSectionPage mapSection) : base(equipment, mapSection, size)
 		{
-			Equipments equipment = (Equipments)Enum.Parse(typeof(Equipments), equipmentName);
-			base.setImage(TechnicalServices.getImage(equipment));
+			base.setImage(TechnicalServices.getImage(equipment.getEquipmentType()));
+
+			this.equipment = equipment; //Providing a link to the equipment that this pin represents
 		}
 	}
 }
