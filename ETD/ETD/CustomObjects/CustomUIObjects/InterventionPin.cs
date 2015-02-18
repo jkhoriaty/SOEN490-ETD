@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 
-namespace ETD.Models.CustomUIObjects
+namespace ETD.CustomObjects.CustomUIObjects
 {
 	class InterventionPin : Pin
 	{

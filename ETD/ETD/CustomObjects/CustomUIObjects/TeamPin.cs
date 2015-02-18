@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace ETD.Models.CustomUIObjects
+namespace ETD.CustomObjects.CustomUIObjects
 {
 	class TeamPin : Pin
 	{

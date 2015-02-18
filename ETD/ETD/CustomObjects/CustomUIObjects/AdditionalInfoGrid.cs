@@ -10,7 +10,7 @@ using ETD.Models.Objects;
 using ETD.Services;
 
 
-namespace ETD.Models.CustomUIObjects
+namespace ETD.CustomObjects.CustomUIObjects
 {
     public class AdditionalInfoGrid : Grid
     {

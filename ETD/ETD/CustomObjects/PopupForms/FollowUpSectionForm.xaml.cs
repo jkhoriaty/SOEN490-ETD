@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 using ETD.Models.Objects;
 using ETD.Services;
 
-namespace ETD.ViewsPresenters.FollowUpSection
+namespace ETD.CustomObjects.PopupForms
 {
     /// <summary>
     /// Interaction logic for FollowUpSectionForm.xaml

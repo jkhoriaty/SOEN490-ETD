@@ -9,7 +9,7 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Media;
 
-namespace ETD.Models.PopupForms
+namespace ETD.CustomObjects.PopupForms
 {
 	class FormPopup : Popup
 	{

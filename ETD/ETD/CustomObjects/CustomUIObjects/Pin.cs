@@ -12,7 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows;
 
-namespace ETD.Models.CustomUIObjects
+namespace ETD.CustomObjects.CustomUIObjects
 {
 	class Pin : Grid
 	{
