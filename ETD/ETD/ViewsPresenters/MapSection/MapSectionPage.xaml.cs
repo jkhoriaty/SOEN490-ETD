@@ -102,7 +102,7 @@ namespace ETD.ViewsPresenters.MapSection
 			}
 
 			//Creating all intervention pins and adding the map to their previous or a new position while detecting newly created collisions
-			foreach (Intervention intervention in Intervention.getInterventionList())
+			foreach (Intervention intervention in Intervention.getActiveInterventionList())
 			{
 				InterventionPin interventionPin = new InterventionPin(intervention, this);
 				Canvas_map.Children.Add(interventionPin);
@@ -165,20 +165,6 @@ namespace ETD.ViewsPresenters.MapSection
 			pinDragInProgress = false;
 
 			pin.CollisionDetectionAndResolution(Canvas_map);
-		}
-
-		public void DeletePin(String pinName)
-		{
-			pinEditor.DeletePin(pinName);
-		}
-		public void SetPinPosition(Grid g, double X, double Y)
-		{
-			pinHandler.setPinPosition(g, X, Y);
-		}
-
-		public void DetectCollision(Grid movedItem, double movedItem_X, double movedItem_Y)
-		{
-			pinHandler.DetectCollision(movedItem, movedItem_X, movedItem_Y);
 		}
 
 		//Pushing request to mainWindow

@@ -6,7 +6,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
 	Title="TeamInfoPage"
-	Name="page">
+	Name="Page_teamInfo">
 
     <Border BorderBrush="Black" BorderThickness="1" CornerRadius="5" Margin="0,5,0,0">
 		<StackPanel Name="informations">

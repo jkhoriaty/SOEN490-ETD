@@ -24,7 +24,6 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamInfo
 	{
 		TeamsSectionPage teamsSection;
         Team team;
-        
 
 		public TeamInfoPage(TeamsSectionPage teamsSection, Team team)
 		{
@@ -38,7 +37,6 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamInfo
 		//Filling up the page with the information on the team
 		private void populateInfo(Team team)
 		{
-			page.Name = "" + team.getName();
 			teamName.Name = team.getName();
 			if (team.getName().Length == 1)
 			{
@@ -88,12 +86,7 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamInfo
 		//Right click on the team to remove it from the team list
 		internal void DeleteTeam(object sender, RoutedEventArgs e)
 		{
-			MenuItem menu = (MenuItem)sender;
-            ContextMenu context = (ContextMenu)menu.Parent;
-            TextBlock label = (TextBlock)context.PlacementTarget;
-			teamsSection.RemoveTeam(label.Name);
+			Team.DeleteTeam(team);
 		}
-
-
 	}
 }

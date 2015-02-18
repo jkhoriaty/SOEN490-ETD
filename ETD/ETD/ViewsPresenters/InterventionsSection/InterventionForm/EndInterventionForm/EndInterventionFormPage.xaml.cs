@@ -55,7 +55,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
                 
                 Intervention.Resource[] resources = this.intervention.getResources();
                             
-                for (int i = 0; i < TeamsSection.TeamForm.TeamFormPage.activeTeamsList.Count; i++)
+                /*for (int i = 0; i < TeamsSection.TeamForm.TeamFormPage.activeTeamsList.Count; i++)
                 {
                     try
                     {
@@ -66,7 +66,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
 
                     }
                    
-                }
+                }*/
 
 				if (offset < 0)
 				{
@@ -82,6 +82,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
 					}
 					else
 					{
+						intervention.Completed();
 						interventionForm.CompleteIntervention(offset);
 					}
 				}

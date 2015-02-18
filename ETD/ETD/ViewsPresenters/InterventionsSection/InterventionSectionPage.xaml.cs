@@ -62,6 +62,7 @@ namespace ETD.ViewsPresenters.InterventionsSection
 			Frame frame = new Frame();
 			InterventionFormPage form = new InterventionFormPage(this, intervention);
 			frame.Content = form;
+			frame.Name = "Intervention_" + form.getInterventionNumber();
 			frame.Tag = "Ongoing";
 			if(!InterventionFilterLabel.Content.Equals("Ongoing"))
 			{
@@ -82,9 +83,6 @@ namespace ETD.ViewsPresenters.InterventionsSection
 					frame.Visibility = Visibility.Collapsed;
 				}
 			}
-
-			//Deleting the intervention pin
-			mainWindow.DeletePin("Intervention_" + interventionNumber);
 		}
 
 		//Showing and hiding the appropriate intervention forms

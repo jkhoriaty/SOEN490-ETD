@@ -27,7 +27,6 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 		public int currentNumberOfMembers = 1; //Used to track the number of members on the TeamForm
 		private List<Control> textboxLastValidationFailed = null;
 		private List<Border> comboboxLastValidationFailed = null;
-		public static List<String> activeTeamsList = new List<String>();
 
         public TeamFormPage(TeamsSectionPage caller)
         {
@@ -82,8 +81,7 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
                 if (team_name.Length == 1)
                 {
                     team_name = team_name.ToUpper();
-                }
-				activeTeamsList.Add(team_name);			
+                }		
 				Team team = new Team(team_name);
 
 				//Create first member
@@ -154,12 +152,9 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 			}
 
 			//Make sure that there are no other team with the same name
-			foreach(String item in activeTeamsList)
+			if(Team.TeamListContains(teamName.Text))
 			{
-                if (item.Equals(teamName.Text) || item.Equals(teamName.Text.ToLower()) || item.Equals(teamName.Text.ToUpper()))
-				{
-					textboxFailedValidation.Add(teamName);
-				}
+				textboxFailedValidation.Add(teamName);
 			}
 			
 			//Team Member 1
@@ -330,11 +325,6 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 				return true;
 			}
 		}
-
-        internal static void removeTeamName(String teamName)
-        {
-            activeTeamsList.Remove(teamName);
-        }
 
 		public DateTime checkDepartureTime(DateTime departureTime)
 		{

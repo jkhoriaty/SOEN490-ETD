@@ -50,14 +50,13 @@ namespace ETD.ViewsPresenters
 		public MainWindow()
 		{
 			InitializeComponent();
+			FormPopup.RegisterMainWindow(this);
+
 			teamsSection = new TeamsSectionPage(this);
 			mapSection = new MapSectionPage(this);
 			interventionsSection = new InterventionSectionPage(this);
             AIPmapSection = new AdditionalInfoPage(this);
             //ScheduleSection = new ScheduleSectionPage(this);
-
-            //save map content on window close
-            this.Closed += new EventHandler(WindowClosed);
 
 			previousWidth = MapSection.ActualWidth;
 			previousHeight = MapSection.ActualHeight;
@@ -236,20 +235,6 @@ namespace ETD.ViewsPresenters
 			}
 		}
 
-		//Recreating equipment after removal from the team
-		public void CreateEquipmentPin(String equipmentName)
-		{
-			//mapSection.CreateEquipmentPin(equipmentName);
-		}
-
-		//Deleting pin using its name (e.g. when a team is deleted)
-		public void DeletePin(String pinName)
-		{
-			mapSection.DeletePin(pinName);
-		}
-
-  
-
 		//Add equipment to team
 		public void AddTeamEquipment(Equipment equip, String teamName)
 		{
@@ -370,7 +355,7 @@ namespace ETD.ViewsPresenters
 			UpdateRegistered().Wait();
 			Dispatcher.Invoke(() =>
 			{
-				new FormPopup(this, new RegisteredVolunteersForm(registeredVolunteers));
+				//new FormPopup(this, new RegisteredVolunteersForm(registeredVolunteers));
 			});
 			newRegisteredCTR.Content = "0";
 		}

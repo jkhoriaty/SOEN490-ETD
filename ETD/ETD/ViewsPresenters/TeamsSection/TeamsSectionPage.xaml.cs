@@ -73,19 +73,20 @@ namespace ETD.ViewsPresenters.TeamsSection
 		}
 
 		//Clicking on the add team button
-		private void DisplayCreateTeamForm(object sender, RoutedEventArgs e)
+		private void DisplayCreateTeamForm_Click(object sender, RoutedEventArgs e)
 		{
 			createTeamForm = new Frame();
 			createTeamForm.Content = new TeamFormPage(this);
 			StackPanel_teamList.Children.Add(createTeamForm);
-			CreateTeamButton.IsEnabled = false;
+			Button_CreateTeam.IsEnabled = false;
 		}
 
 		//Hiding form after submit or cancel
 		public void HideCreateTeamForm()
 		{
 			StackPanel_teamList.Children.Remove(createTeamForm);
-			CreateTeamButton.IsEnabled = true;
+			Button_CreateTeam.IsEnabled = true;
+			createTeamForm = null;
 		}
 
 		public void ObservedObjectUpdated()
@@ -97,30 +98,18 @@ namespace ETD.ViewsPresenters.TeamsSection
 				frame.Content = new TeamInfoPage(this, team);
 				StackPanel_teamList.Children.Add(frame);
 			}
+
+			//Restoring the form if a NotifyAll was called when the form was open
+			if(createTeamForm != null)
+			{
+				DisplayCreateTeamForm_Click(new object(), new RoutedEventArgs());
+			}
 		}
 
 		//Registering the team equipment StackPanel to be able to add equipment to each team
 		public void registerStackPanel(String teamName, StackPanel equipmentStack)
 		{
 			//teamEquipmentStacks.Add(teamName, equipmentStack);
-		}
-   
-		//Deleting the team upon right click on the label
-		public void RemoveTeam(String teamName)
-		{
-			foreach (Frame item in StackPanel_teamList.Children)
-			{
-				Page team = (Page)item.Content;
-				if (team.Name.Equals(teamName))
-				{
-					teamEquipmentStacks.Remove(teamName);
-					StackPanel_teamList.Children.Remove(item);
-					break;
-				}
-			}
-			//Team.getTeamList().Remove(teamName);
-			mainWindow.DeletePin(teamName);
-            TeamFormPage.removeTeamName(teamName);
 		}
 
 		//Adding equipment to specified team equipment stack
@@ -154,7 +143,7 @@ namespace ETD.ViewsPresenters.TeamsSection
 			else
 			{
 				MessageBox.Show("You cannot add more than 3 pieces of equipment to a team. The equipment is going to be readded to the map.");
-				mainWindow.CreateEquipmentPin(equip.ToString());
+				//mainWindow.CreateEquipmentPin(equip.ToString());
 			}
 		}
 
@@ -167,7 +156,7 @@ namespace ETD.ViewsPresenters.TeamsSection
 			StackPanel equipmentStackPanel = (StackPanel)equipment.Parent;
 			//Team.teamList["" + equipment.Tag].RemoveEquipment(equip);
 			equipmentStackPanel.Children.Remove(equipment);
-			mainWindow.CreateEquipmentPin(equipment.Name);
+			//mainWindow.CreateEquipmentPin(equipment.Name);
 
 		}
        

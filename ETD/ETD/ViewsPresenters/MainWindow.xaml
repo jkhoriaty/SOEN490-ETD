@@ -6,6 +6,7 @@
 		WindowState="Maximized"
 		SizeChanged="setSectionsHeight"
 		StateChanged="setSectionsHeight"
+		Closed="WindowClosed"
 		MinWidth="1200"
 		Width="1200"
 		MinHeight="700"

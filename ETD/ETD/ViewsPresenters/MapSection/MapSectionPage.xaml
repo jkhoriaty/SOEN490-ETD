@@ -6,12 +6,14 @@
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
 	Title="MapSectionPage">
-
-	<Canvas Name="Canvas_map" MouseRightButtonDown="Map_MouseRightButtonDown">
-        
-	</Canvas>
 	
-    <Page.Resources>
+	<Canvas Name="AI">
+		<Canvas Name="Canvas_map" MouseRightButtonDown="Map_MouseRightButtonDown">
+
+		</Canvas>
+	</Canvas>
+
+	<Page.Resources>
 		<ContextMenu x:Key="ContextMenu" Opened="EditMenuItems_Opened">
 			<MenuItem Header="Available" Tag="team" Click="ChangeStatus_Click"/>
 			<MenuItem Header="Moving" Tag="team" Click="ChangeStatus_Click"/>

@@ -16,7 +16,8 @@ namespace ETD.Models.Objects
     public class Intervention : Observable
     {
 		private static int lastIntervention = 0;
-		private static List<Intervention> interventionList = new List<Intervention>();
+		private static List<Intervention> activeInterventionList = new List<Intervention>();
+		private static List<Intervention> completedInterventionList = new List<Intervention>();
 
 		private int interventionNumber;
 
@@ -56,13 +57,20 @@ namespace ETD.Models.Objects
             this.timeOfCall = DateTime.Now;
             additionalInfo = new AdditionalInformation[10];
 
-			interventionList.Add(this);
+			activeInterventionList.Add(this);
 			NotifyAll();
 		}
 
-		public static List<Intervention> getInterventionList()
+		public void Completed()
 		{
-			return interventionList;
+			activeInterventionList.Remove(this);
+			completedInterventionList.Add(this);
+			NotifyAll();
+		}
+
+		public static List<Intervention> getActiveInterventionList()
+		{
+			return activeInterventionList;
 		}
 
 		public struct Resource

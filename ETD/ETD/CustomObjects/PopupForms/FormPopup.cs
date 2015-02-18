@@ -13,7 +13,9 @@ namespace ETD.Models.PopupForms
 {
 	class FormPopup : Popup
 	{
-		private Border CommonConstructor(MainWindow mainWindow)
+		private static MainWindow mainWindow;
+
+		public FormPopup(Page page)
 		{
 			this.AllowsTransparency = true;
 			this.HorizontalOffset = 253;
@@ -31,12 +33,14 @@ namespace ETD.Models.PopupForms
 			border.CornerRadius = new CornerRadius(5);
 			this.Child = border;
 
-			return border;
+			Frame frame = new Frame();
+			frame.Content = page;
+			border.Child = frame;
 		}
 
-		public FormPopup(MainWindow mainWindow, Grid form)
+		public static void RegisterMainWindow(MainWindow root)
 		{
-			(CommonConstructor(mainWindow)).Child = form;
+			mainWindow = root;
 		}
 	}
 }

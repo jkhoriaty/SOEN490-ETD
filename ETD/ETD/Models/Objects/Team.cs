@@ -31,9 +31,22 @@ namespace ETD.Models.Objects
         }
 
 		//Delete Team
-		public void DeleteTeam(Team team)
+		public static void DeleteTeam(Team team)
 		{
+			teamList.Remove(team);
+			NotifyAll();
+		}
 
+		public static bool TeamListContains(String teamName)
+		{
+			foreach(Team team in teamList)
+			{
+				if(team.getName().Equals(teamName))
+				{
+					return true;
+				}
+			}
+			return false;
 		}
 
 		//Adding a maximum of 3 members to the team
