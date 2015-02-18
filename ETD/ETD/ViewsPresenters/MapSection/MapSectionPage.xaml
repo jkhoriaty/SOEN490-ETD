@@ -7,10 +7,8 @@
       d:DesignHeight="300" d:DesignWidth="300"
 	Title="MapSectionPage">
 	
-	<Canvas Name="AI">
-		<Canvas Name="Canvas_map" MouseRightButtonDown="Map_MouseRightButtonDown">
+	<Canvas Name="Canvas_map" MouseRightButtonDown="Map_MouseRightButtonDown">
 
-		</Canvas>
 	</Canvas>
 
 	<Page.Resources>
