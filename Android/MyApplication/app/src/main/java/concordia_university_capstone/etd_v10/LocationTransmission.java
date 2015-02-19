@@ -42,11 +42,13 @@ public class LocationTransmission extends ActionBarActivity implements GoogleApi
                     isBroadCasting = true;
                     locationTransmission.setText("Stop Transmitting Location");
                     startLocationUpdates(v);
+                    startService(new Intent(getBaseContext(),BackgroundLocation.class));
                 }
                 else{
                     isBroadCasting = false;
                     locationTransmission.setText("Start Transmitting Location");
                     stopLocationUpdates(v);
+                    stopService(new Intent(getBaseContext(),BackgroundLocation.class));
                 }
             }
         });
