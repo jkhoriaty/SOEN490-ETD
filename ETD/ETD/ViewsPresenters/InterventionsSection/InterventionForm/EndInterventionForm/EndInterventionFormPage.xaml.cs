@@ -53,7 +53,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
 				DateTime endTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, hh, mm, DateTime.Now.Second);
 				int offset = (int)DateTime.Now.Subtract(endTime).TotalMinutes;
                 
-                Intervention.Resource[] resources = this.intervention.getResources();
+                Resource[] resources = this.intervention.getResources();
                             
                 /*for (int i = 0; i < TeamsSection.TeamForm.TeamFormPage.activeTeamsList.Count; i++)
                 {
@@ -138,14 +138,14 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
 
 		public void PersistencyUpdate()
 		{
-			Conclusions conclusion;
+			String conclusion;
 			if (ConclusionBox.SelectedIndex == -1)
 			{
-				conclusion = (Conclusions)8;
+				conclusion = "notSet";
 			}
 			else
 			{
-				conclusion = (Conclusions)ConclusionBox.SelectedIndex;
+			    conclusion = ConclusionBox.Text; //(String)ConclusionBox.SelectedIndex;
 			}
 			intervention.setConclusion(conclusion);
 

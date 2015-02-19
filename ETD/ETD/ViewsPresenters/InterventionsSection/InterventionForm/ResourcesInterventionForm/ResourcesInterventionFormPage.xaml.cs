@@ -245,7 +245,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.ResourcesInt
 			DateTime arrival = DateTime.Now;
 			arrival = arrival.Date + new TimeSpan(arrivalhh, arrivalmm, 0);
 
-			intervention.setResources(position, new Intervention.Resource(Resource.Text, Team.Text, moving, arrival));
+			intervention.setResources(position, new Resource(Resource.Text, Team.Text, moving, arrival));
 		}
 
 		private void Moving_Click(object sender, RoutedEventArgs e)

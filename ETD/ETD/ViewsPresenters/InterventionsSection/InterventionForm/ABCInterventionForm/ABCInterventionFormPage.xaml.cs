@@ -33,54 +33,54 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.ABCIntervent
 
 		public void PersistencyUpdate()
 		{
-			Consciousness consciousness;
+			String consciousness;
 			if(ConsciousnessBox.SelectedIndex == -1)
 			{
-				consciousness = (Consciousness)4;
+				consciousness = "notSet";
 			}
 			else
 			{
-				consciousness = (Consciousness)ConsciousnessBox.SelectedIndex;
+				consciousness = ConsciousnessBox.Text;
 			}
 			bool disoriented = (bool)Disoriented.IsChecked;
 
-			Airways airways;
+			String airways;
 			if(AirwaysBox.SelectedIndex == -1)
 			{
-				airways = (Airways)3;
+				airways = "notSet";
 			}
 			else
 			{
-				airways = (Airways)AirwaysBox.SelectedIndex;
+				airways = AirwaysBox.Text;
 			}
 
-			Breathing breathing;
+			String breathing;
 			if (BreathingBox.SelectedIndex == -1)
 			{
-				breathing = (Breathing)3;
+				breathing = "notSet";
 			}
 			else
 			{
-				breathing = (Breathing)BreathingBox.SelectedIndex;
+				breathing = BreathingBox.Text;
 			}
 			int breathingFrequency = -1;
 			try { breathingFrequency = int.Parse(BreathingFrequency.Text); }
 			catch (Exception e) { }
 
-			Circulation circulation;
+			String circulation;
 			if(CirculationBox.SelectedIndex == -1)
 			{
-				circulation = (Circulation)4;
+				circulation = "notSet";
 			}
 			else
 			{
-				circulation = (Circulation)CirculationBox.SelectedIndex;
+				circulation = CirculationBox.Text;
 			}
 			int circulationFrequency = -1;
 			try { circulationFrequency = int.Parse(CirculationFrequency.Text); }
 			catch (Exception e) { }
 
-			intervention.setABC(new Intervention.ABC(consciousness, disoriented, airways, breathing, breathingFrequency, circulation, circulationFrequency));
+			intervention.setABC(new ABC(consciousness, disoriented, airways, breathing, breathingFrequency, circulation, circulationFrequency));
 		}
 	}
 }
