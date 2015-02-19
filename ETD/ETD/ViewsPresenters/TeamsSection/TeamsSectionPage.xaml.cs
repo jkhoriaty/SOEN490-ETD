@@ -38,7 +38,7 @@ namespace ETD.ViewsPresenters.TeamsSection
 			InitializeComponent();
 			this.mainWindow = mainWindow;
 			dispatcherTimer.Tick += new EventHandler(refresh);
-			dispatcherTimer.Interval = new TimeSpan(0, 0, 10); //Update every minute
+			dispatcherTimer.Interval = new TimeSpan(0, 0, 10); //Update every 10 seconds
 			dispatcherTimer.Start();
 
 			Team.RegisterObserver(this);
@@ -107,7 +107,7 @@ namespace ETD.ViewsPresenters.TeamsSection
 		}
 
 		//Registering the team equipment StackPanel to be able to add equipment to each team
-		public void registerStackPanel(String teamName, StackPanel equipmentStack)
+		public void RegisterStackPanel(String teamName, StackPanel equipmentStack)
 		{
 			//teamEquipmentStacks.Add(teamName, equipmentStack);
 		}
@@ -160,27 +160,27 @@ namespace ETD.ViewsPresenters.TeamsSection
 
 		}
        
-        internal void frameKeyDown(object sender, KeyEventArgs e)
+        internal void FrameKeyDown(object sender, KeyEventArgs e)
         {
             UIElement frame = e.Source as UIElement;
 
             if (e.Key == Key.Down)
             {
-                frameMoveDown(frame);
+                FrameMoveDown(frame);
                 e.Handled = true;
             }
 
             else if (e.Key == Key.Up)
             {
-                frameMoveUp(frame);
+                FrameMoveUp(frame);
                 e.Handled = true;
             }
         }
 
-        internal void frameSelection(object sender, MouseEventArgs e)
+        internal void FrameSelection(object sender, MouseEventArgs e)
         {
             UIElement frame = e.Source as UIElement;
-			StackPanel_teamList.KeyDown += new KeyEventHandler(frameKeyDown); 
+			StackPanel_teamList.KeyDown += new KeyEventHandler(FrameKeyDown); 
             if (!frame.Focus())
             {
                 frame.Focus();
@@ -189,7 +189,7 @@ namespace ETD.ViewsPresenters.TeamsSection
             e.Handled = true;
         }
 
-        internal void frameMoveDown(UIElement element)
+        internal void FrameMoveDown(UIElement element)
         {
             int elementIndex = 0;
 			int count = StackPanel_teamList.Children.Count; //get number of elements in stackpanel
@@ -205,7 +205,7 @@ namespace ETD.ViewsPresenters.TeamsSection
  
         }
 
-        internal void frameMoveUp(UIElement element)
+        internal void FrameMoveUp(UIElement element)
         {
             int elementIndex = 0;
 			int count = StackPanel_teamList.Children.Count; //get number of elements in stackpanel
@@ -221,99 +221,7 @@ namespace ETD.ViewsPresenters.TeamsSection
 				StackPanel_teamList.Children.Insert(elementIndex, element);
             }
         }
-        /*
-        internal void dragEnter(object sender, DragEventArgs e)
-        {
-            if (e.Data.GetDataPresent(DataFormats.Text))
-            {
-                e.Effects = DragDropEffects.Copy;
-            }
-            else
-            {
-                e.Effects = DragDropEffects.None;
-            }
-            e.Handled = true;
-        }
-
-        internal void dragDrop(object sender, DragEventArgs e)
-        {
-            UIElement drop = sender as UIElement;
-            if (drop != null)
-            {
-                if (e.Data.GetDataPresent(DataFormats.StringFormat)) 
-                {
-                    UIElement droptarget = (UIElement)e.Source;
-                    MessageBox.Show(droptarget.ToString());
-                    int dropIndex = -1; 
-                    int i = 0;
-                    foreach (UIElement element in TeamList.Children)
-                    {
-                        if (element.Equals(droptarget))
-                        {
-                            dropIndex = i;
-                            break;
-                        }
-                        i++;
-                    }
-                    if (dropIndex != -1)
-                    {
-                        TeamList.Children.Remove(_dragSource);
-                        TeamList.Children.Insert(dropIndex, _dragSource);
-                    }
-                    
-                    _dragSource.ReleaseMouseCapture();
-                    _isDragInProg = false;
-                    _isDragDown = false;
-                }
-            }
-        }
-
-        internal void previewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.Source == TeamList)
-            {
-            }
-            else
-            {      
-                _isDragDown = true;
-                _startPoint = e.GetPosition(TeamList);
-            }
-        }
-        
-        
-        internal void UpdateSectors()
-        {
-            mainWindow.UpdateSectors();
-        }
-
-        internal void previewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {         
-                _isDragDown = false;
-                _isDragInProg = false;
-                if (_dragSource != null)
-                _dragSource.ReleaseMouseCapture();          
-        }
-
-        internal void previewMouseMove(object sender, MouseEventArgs e) 
-        {
-            if (_isDragDown)
-            {               
-                if ((_isDragInProg == false) && ((Math.Abs(e.GetPosition(TeamList).X - _startPoint.X) > SystemParameters.MinimumHorizontalDragDistance) || (Math.Abs(e.GetPosition(TeamList).Y - _startPoint.Y) > SystemParameters.MinimumVerticalDragDistance))) 
-                {
-                    UIElement drop = sender as UIElement;
-                    UIElement data = new UIElement();
-                    _isDragInProg = true;
-                    _dragSource = (UIElement)e.Source;
-                    _dragSource.CaptureMouse();
-                    //DragDrop.DoDragDrop(drop, drop.ToString(), DragDropEffects.Move);
-                    //MessageBox.Show(drop.ToString());
-                    //MessageBox.Show(_dragSource.ToString());
-                    DragDrop.DoDragDrop(this, data, DragDropEffects.Copy | DragDropEffects.Move);
-                }
-            }
-            e.Handled = true;
-        }
-        */
+      
 	}
 }
 

@@ -30,12 +30,12 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamInfo
 			InitializeComponent();
 			this.teamsSection = teamsSection;
 			this.team = team;
-			populateInfo(team);
+			PopulateInfo(team);
             teamName.ContextMenu = (ContextMenu)TeamContextName;
 		}
 
 		//Filling up the page with the information on the team
-		private void populateInfo(Team team)
+		private void PopulateInfo(Team team)
 		{
 			teamName.Name = team.getName();
 			if (team.getName().Length == 1)
@@ -69,7 +69,7 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamInfo
 				memberTraining.Fill = img2;
 			}
 
-			teamsSection.registerStackPanel(team.getName(), equipmentStackPanel);
+			teamsSection.RegisterStackPanel(team.getName(), equipmentStackPanel);
 		}
 
 		private String DepartureTimeToString(TeamMember member)
