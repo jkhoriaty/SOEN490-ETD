@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ETD.Models.Objects
 {
@@ -20,6 +21,7 @@ namespace ETD.Models.Objects
 		private static List<Intervention> completedInterventionList = new List<Intervention>();
 
 		private int interventionNumber;
+		private List<Team> interveningTeamList = new List<Team>();
 
         private DateTime timeOfCall = DateTime.Now;
         private String callerName;
@@ -58,6 +60,7 @@ namespace ETD.Models.Objects
             additionalInfo = new AdditionalInformation[10];
 
 			activeInterventionList.Add(this);
+			MessageBox.Show("Create intervention notify");
 			NotifyAll();
 		}
 
@@ -71,6 +74,29 @@ namespace ETD.Models.Objects
 		public static List<Intervention> getActiveInterventionList()
 		{
 			return activeInterventionList;
+		}
+
+		public static List<Intervention> getCompletedInterventionList()
+		{
+			return completedInterventionList;
+		}
+
+		public void AddTeam(Team team)
+		{
+			interveningTeamList.Add(team);
+			MessageBox.Show("Add team to intervention notify");
+			NotifyAll();
+		}
+
+		public void RemoveTeam(Team team)
+		{
+			interveningTeamList.Remove(team);
+			NotifyAll();
+		}
+
+		public List<Team> getInterveningTeamList()
+		{
+			return interveningTeamList;
 		}
 
 		public struct Resource
