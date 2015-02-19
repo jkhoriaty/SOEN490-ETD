@@ -37,14 +37,14 @@ namespace ETD.ViewsPresenters.TeamsSection
 		{
 			InitializeComponent();
 			this.mainWindow = mainWindow;
-			dispatcherTimer.Tick += new EventHandler(refresh);
+			dispatcherTimer.Tick += new EventHandler(Refresh);
 			dispatcherTimer.Interval = new TimeSpan(0, 0, 10); //Update every 10 seconds
 			dispatcherTimer.Start();
 
 			Team.RegisterObserver(this);
 		}
 
-		private void refresh(object sender, EventArgs e)
+		private void Refresh(object sender, EventArgs e)
 		{
 			foreach(Team team in Team.getTeamList())
 			{
@@ -66,7 +66,7 @@ namespace ETD.ViewsPresenters.TeamsSection
 		}
 
 		//Adjusting the team section height
-		public void setTeamsSectionHeight(Border TeamsSection)
+		public void SetTeamsSectionHeight(Border TeamsSection)
 		{
 			//11 to account for padding of 2 on top and 2 on the bottom in addition to 7 in margin to the CreateTeamButtonBorder
 			Scroller.MaxHeight = TeamsSection.ActualHeight - TeamsSectionLabel.ActualHeight - CreateTeamButtonBorder.ActualHeight - 11;

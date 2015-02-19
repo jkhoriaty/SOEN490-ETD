@@ -8,7 +8,7 @@
 	Title="TeamsSectionPage">
 
 	<StackPanel>
-		<Label Name="TeamsSectionLabel" Content="Teams" FontWeight="ExtraBlack" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24"/>
+		<Label Name="TeamsSectionLabel" Content="Teams" x:Uid="Label_TeamName" FontWeight="ExtraBlack" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24"/>
 		<ScrollViewer Name="Scroller" VerticalScrollBarVisibility="Auto">
             <StackPanel Name="StackPanel_teamList" MouseLeftButtonDown="FrameSelection">
 				<!-- Team display is here -->

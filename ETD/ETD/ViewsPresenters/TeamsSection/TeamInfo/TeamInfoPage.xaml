@@ -15,7 +15,7 @@
                     <TextBlock Name="teamName" HorizontalAlignment="Left" FontWeight="Bold" FontSize="20" Foreground="White" Margin="3,0,0,0">
                         <TextBlock.ContextMenu>
                             <ContextMenu Name="TeamContextName">
-                                <MenuItem Header="Delete Team" Tag="team" Click="DeleteTeam"/>
+                                <MenuItem Header="Delete Team" Tag="team" Click="DeleteTeam" x:Uid="MenuItem_DeleteTeam"/>
                             </ContextMenu>
                         </TextBlock.ContextMenu>
                     </TextBlock>

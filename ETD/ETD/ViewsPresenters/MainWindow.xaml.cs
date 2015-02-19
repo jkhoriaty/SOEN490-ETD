@@ -191,7 +191,7 @@ namespace ETD.ViewsPresenters
 		//Window size or state changed - Adjusting the team section height
 		public void setSectionsHeight(object sender, EventArgs e)
 		{
-			teamsSection.setTeamsSectionHeight(TeamsSection);
+			teamsSection.SetTeamsSectionHeight(TeamsSection);
 			interventionsSection.setInterventionsSectionWidth(InterventionsSection);
 
 			mapSection.movePins((MapSection.ActualWidth / previousWidth), (MapSection.ActualHeight / previousHeight));
