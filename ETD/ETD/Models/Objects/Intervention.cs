@@ -8,11 +8,11 @@ using System.Windows;
 
 namespace ETD.Models.Objects
 {
-	public enum Consciousness { alert, verbal, painful, unconscious, notSet };
-	public enum Airways { clear, partiallyObstructed, completelyObstructed, notSet };
-	public enum Breathing { normal, difficulty, absent, notSet };
-	public enum Circulation { normal, chestPain, hemorrhage, noPulse, notSet };
-	public enum Conclusions { returnToSite, returnToHome, referredToDoctor, equipmentDistribution, hospital, patientNotFound, noInterventions, other, notSet };
+	//public enum Consciousness { alert, verbal, painful, unconscious, notSet };
+	//public enum Airways { clear, partiallyObstructed, completelyObstructed, notSet };
+	//public enum Breathing { normal, difficulty, absent, notSet };
+	//public enum Circulation { normal, chestPain, hemorrhage, noPulse, notSet };
+	//public enum Conclusions { returnToSite, returnToHome, referredToDoctor, equipmentDistribution, hospital, patientNotFound, noInterventions, other, notSet };
 
     public class Intervention : Observable
     {
@@ -38,42 +38,42 @@ namespace ETD.Models.Objects
 
 		private ABC abc;
 
-        private AdditionalInformation[] additionalInfo;
+        private InterventionAdditionalInfo[] additionalInfo;
 
-		private Conclusions conclusion;
-		private String conclusionAdditionalInfo;
-		private DateTime conclusionTime;
+        private String conclusion;
+        private String conclusionAdditionalInfo;
+        private DateTime conclusionTime;
 
-		private DateTime call911Time;
-		private String meetingPoint;
-		private String firstResponderCompany;
-		private String firstResponderVehicle;
-		private DateTime firstResponderArrivalTime;
-		private String ambulanceCompany;
-		private String ambulanceVehicle;
-		private DateTime ambulanceArrivalTime;
+        private DateTime call911Time;
+        private String meetingPoint;
+        private String firstResponderCompany;
+        private String firstResponderVehicle;
+        private DateTime firstResponderArrivalTime;
+        private String ambulanceCompany;
+        private String ambulanceVehicle;
+        private DateTime ambulanceArrivalTime;
 
-		public Intervention()
-		{
-			interventionNumber = ++lastIntervention;
+        public Intervention()
+        {
+            interventionNumber = ++lastIntervention;
             this.timeOfCall = DateTime.Now;
-            additionalInfo = new AdditionalInformation[10];
+            additionalInfo = new InterventionAdditionalInfo[10];
 
-			activeInterventionList.Add(this);
+            activeInterventionList.Add(this);
 			MessageBox.Show("Create intervention notify");
-			NotifyAll();
-		}
+            NotifyAll();
+        }
 
-		public void Completed()
-		{
-			activeInterventionList.Remove(this);
-			completedInterventionList.Add(this);
-			NotifyAll();
-		}
+        public void Completed()
+        {
+            activeInterventionList.Remove(this);
+            completedInterventionList.Add(this);
+            NotifyAll();
+        }
 
-		public static List<Intervention> getActiveInterventionList()
-		{
-			return activeInterventionList;
+        public static List<Intervention> getActiveInterventionList()
+        {
+            return activeInterventionList;
 		}
 
 		public static List<Intervention> getCompletedInterventionList()
@@ -97,72 +97,12 @@ namespace ETD.Models.Objects
 		public List<Team> getInterveningTeamList()
 		{
 			return interveningTeamList;
-		}
+        }
 
-		public struct Resource
-		{
-			private String resourceName;
-			private String team;
-			private DateTime moving;
-			private DateTime arrival;
-
-			public Resource(String resourceName, String team, DateTime moving, DateTime arrival)
-			{
-				this.resourceName = resourceName;
-				this.team = team;
-				this.moving = moving;
-				this.arrival = arrival;
-			}
-
-            public String getResourceName()
-            {
-                return resourceName;
-            }
-
-            public String getTeamName()
-            {
-                return team;
-            }
-		}
-
-		public struct ABC
-		{
-			private Consciousness consciousness;
-			private bool disoriented;
-			private Airways airways;
-			private Breathing breathing;
-			private int breathingFrequency;
-			private Circulation circulation;
-			private int circulationFrequency;
-
-			public ABC(Consciousness consciousness, bool disoriented, Airways airways, Breathing breathing, int breathingFrequency, Circulation circulation, int circulationFrequency)
-			{
-				this.consciousness = consciousness;
-				this.disoriented = disoriented;
-				this.airways = airways;
-				this.breathing = breathing;
-				this.breathingFrequency = breathingFrequency;
-				this.circulation = circulation;
-				this.circulationFrequency = circulationFrequency;
-			}
-		}
-
-		public struct AdditionalInformation
-		{
-			private String information;
-			private DateTime timestamp;
-
-			public AdditionalInformation(String information, DateTime timestamp)
-			{
-				this.information = information;
-				this.timestamp = timestamp;
-			}
-		}
-
-		public void setInterventionNumber(int interventionNumber)
-		{
-			this.interventionNumber = interventionNumber;
-		}
+        public void setInterventionNumber(int interventionNumber)
+        {
+            this.interventionNumber = interventionNumber;
+        }
 
 		public int getInterventionNumber()
 		{
@@ -276,22 +216,22 @@ namespace ETD.Models.Objects
 			return abc;
 		}
 
-        public void setAdditionalInfo(int position, AdditionalInformation info)
+        public void setAdditionalInfo(int position, InterventionAdditionalInfo info)
         {
             this.additionalInfo[position] = info;
         }
 
-		public AdditionalInformation getAdditionalInfo(int position)
+		public InterventionAdditionalInfo getAdditionalInfo(int position)
         {
             return this.additionalInfo[position];
         }
 
-		public void setConclusion(Conclusions conclusion)
+		public void setConclusion(String conclusion)
 		{
 			this.conclusion = conclusion;
 		}
 
-		public Conclusions getConclusion()
+		public String getConclusion()
 		{
 			return conclusion;
 		}
