@@ -18,17 +18,19 @@ import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 
 
-public class LocationTransmission extends ActionBarActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener
+public class LocationTransmission extends ActionBarActivity
 {
 	String deviceID;
 	String serverIP;
 	int serverPort;
 
-	GoogleApiClient apiClient;
-	LocationRequest locationRequest;
+	//GoogleApiClient apiClient;
+	//LocationRequest locationRequest;
 
     Button locationTransmission;
     Boolean isBroadCasting = false;
+    //public Intent intent = getIntent();
+    Intent serviceIntent;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -41,29 +43,54 @@ public class LocationTransmission extends ActionBarActivity implements GoogleApi
                 if(!isBroadCasting){
                     isBroadCasting = true;
                     locationTransmission.setText("Stop Transmitting Location");
-                    startLocationUpdates(v);
-                    startService(new Intent(getBaseContext(),BackgroundLocation.class));
+                    //startLocationUpdates(v);
+                    //startService(new Intent(getBaseContext(),BackgroundLocation.class));
+                    startTransmitting();
                 }
                 else{
                     isBroadCasting = false;
                     locationTransmission.setText("Start Transmitting Location");
-                    stopLocationUpdates(v);
-                    stopService(new Intent(getBaseContext(),BackgroundLocation.class));
+                    //stopLocationUpdates(v);
+                    //stopService(new Intent(getBaseContext(),BackgroundLocation.class));
+                    stopTransmitting();
                 }
             }
         });
 
-		Intent intent = getIntent();
+		/*Intent intent = getIntent();
 		deviceID = intent.getStringExtra("deviceID");
 		serverIP = intent.getStringExtra("serverIP");
 		serverPort = intent.getIntExtra("serverPort", -1);
 
 		buildGoogleApiClient();
 
-		createLocationRequest();
+		createLocationRequest();*/
 	}
 
-	protected synchronized void buildGoogleApiClient()
+    private void startTransmitting() {
+        try{
+            startService(serviceIntent);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            Toast.makeText(getApplicationContext(), e.getClass().getName() + " " + e.getMessage(), Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void stopTransmitting(){
+        try
+        {
+            stopService(serviceIntent);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            Toast.makeText(getApplicationContext(), e.getClass().getName() + " " + e.getMessage(), Toast.LENGTH_LONG).show();
+        }
+    }
+
+    /*protected synchronized void buildGoogleApiClient()
 	{
 		apiClient = new GoogleApiClient.Builder(this)
 				.addConnectionCallbacks(this)
@@ -78,16 +105,22 @@ public class LocationTransmission extends ActionBarActivity implements GoogleApi
 		locationRequest.setInterval(10000);
 		locationRequest.setFastestInterval(1000);
 		locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-	}
+	}*/
 
 	@Override
 	protected void onStart()
 	{
 		super.onStart();
-		apiClient.connect();
+        try {
+            serviceIntent = new Intent(this, BackgroundLocation.class);
+            startService(serviceIntent);
+        }catch (Exception e)
+        {
+            Toast.makeText(this, "can not create service", Toast.LENGTH_SHORT).show();
+        }
 	}
 
-	@Override
+	/*@Override
 	protected void onStop()
 	{
 		super.onStop();
@@ -131,5 +164,5 @@ public class LocationTransmission extends ActionBarActivity implements GoogleApi
 	public void onLocationChanged(Location location)
 	{
 		new Thread(new LocationSenderThread(serverIP, serverPort, deviceID, location)).start();
-	}
+	}*/
 }
