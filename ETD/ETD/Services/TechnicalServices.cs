@@ -59,15 +59,15 @@ namespace ETD.Services
 		};
 
 
-        private static Dictionary<AdditionalInfos, String> AdditionalInfoPath = new Dictionary<AdditionalInfos, String>
+        private static Dictionary<MapMods, String> MapModPath = new Dictionary<MapMods, String>
         {
-            {AdditionalInfos.camp, @"\Icons\camp.png"},
-            {AdditionalInfos.circle, @"\Icons\circle.png"},
-            {AdditionalInfos.line, @"\Icons\lineCanvas.png"},
-            {AdditionalInfos.rectangle, @"\Icons\rectangle.png"},
-            {AdditionalInfos.square, @"\Icons\square.png"},
-            {AdditionalInfos.stairs, @"\Icons\stairs.png"},
-            {AdditionalInfos.ramp, @"\Icons\Ramp.png"}
+            {MapMods.camp, @"\Icons\camp.png"},
+            {MapMods.circle, @"\Icons\circle.png"},
+            {MapMods.line, @"\Icons\lineCanvas.png"},
+            {MapMods.rectangle, @"\Icons\rectangle.png"},
+            {MapMods.square, @"\Icons\square.png"},
+            {MapMods.stairs, @"\Icons\stairs.png"},
+            {MapMods.ramp, @"\Icons\Ramp.png"}
         };
 
 		private static Dictionary<String, String> alphabet = new Dictionary<String, String>
@@ -157,9 +157,9 @@ namespace ETD.Services
 
 
         //Return image of additionnal info
-        public static BitmapImage getImage(AdditionalInfos AI)
+        public static BitmapImage getImage(MapMods AI)
         {
-            BitmapImage img = new BitmapImage(new Uri(AbsolutePath + AdditionalInfoPath[AI]));
+            BitmapImage img = new BitmapImage(new Uri(AbsolutePath + MapModPath[AI]));
             return img;
 
         }

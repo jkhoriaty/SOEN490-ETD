@@ -38,6 +38,7 @@ namespace ETD.ViewsPresenters
 		private InterventionSectionPage interventionsSection;
         private AdditionalInfoPage AIPmapSection;
         private ScheduleSectionPage ScheduleSection;
+        private FollowUpSectionForm FollowupSection;
         private int AddtionalInfoSize;
         private bool isdrawing = false;
 		private double previousWidth;
@@ -84,6 +85,8 @@ namespace ETD.ViewsPresenters
             /*Frame ScheduleFrame = new Frame();
             ScheduleFrame.Content = ScheduleSection;
             MapSection.Child = ScheduleFrame;*/
+
+            
 		}
 
 		//Ping server to test connection and update registed volunteers - Executes every 10 seconds
@@ -288,14 +291,15 @@ namespace ETD.ViewsPresenters
         
         public void CreateAdditionnalInfoPin(String AI,int size)
         {
-            AIPmapSection.CreateAdditionnalInfoPin(AI,size);
+          //  AIPmapSection.CreateAdditionnalInfoPin(AI,size);
         }
 
-        //delete additional pins
+       // delete additional pins
         public void AIDeletePin(object sender, RoutedEventArgs e)
         {
-            AIPmapSection.AIDeletePin(sender, e);
+          //  AIPmapSection.AIDeletePin(sender, e);
         }
+        
 
         //switch between Regular mode and Edit mode
         private void ModeChange(object sender, RoutedEventArgs e)
@@ -370,7 +374,7 @@ namespace ETD.ViewsPresenters
         //Displays follow up section page
         private void ShowFollowUpSection(object sender, RoutedEventArgs e)
         {
-            //new FormPopup(this, new FollowUpSectionForm(FollowUpPage));
+            //new FormPopup(this, new FollowUpSectionForm(FollowupSection));
         }
 
 		//Interpret the servers return

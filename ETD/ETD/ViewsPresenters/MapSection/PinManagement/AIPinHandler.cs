@@ -26,23 +26,30 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 
         public AIPinHandler(AdditionalInfoPage AIP)
         {
-            this.AIPmap = AIP;
+            //this.AIPmap = AIP;
         }
-
+        
+        
 		//Setting position of pin
 		public void SetPinPosition(Grid g, double X, double Y)
 		{
+            /*
 			Canvas.SetLeft(g, (X - (g.Width / 2)));
 			Canvas.SetTop(g, (Y - (g.Width / 2)));
+            */
 		}
+        
 
 		public void DragStart(object sender, MouseButtonEventArgs e)
 		{
+            /*
 			Grid g = (Grid)sender;
 
 			_isRectDragInProg = g.CaptureMouse();
 			movingGrid = g;
+            /*
 		}
+        
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // Set drawing status
@@ -55,14 +62,17 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 
         public void DrawingStart(object sender, MouseButtonEventArgs e)
         {
+            /*
             IsDrawing = true;
             //get starting point
                 NewPt1 = e.GetPosition(AIPmap.AdditionalMap);
+            */
         }
 
         //draw the line
         internal void DrawingMove(object sender, System.Windows.Input.MouseEventArgs e)
         {
+            /*
             newline = new Line();
             newline.Stroke = System.Windows.Media.Brushes.Black;
             newline.StrokeThickness = 4;
@@ -73,11 +83,12 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
  
             Lines.Add(newline);
             AIPmap.AdditionalMap.Children.Add(newline);
+            */
         }
 
         internal void Move(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            
+            /*
             if (e.LeftButton == MouseButtonState.Pressed)
             {
                  NewPt2 = e.GetPosition(AIPmap.AdditionalMap);
@@ -101,15 +112,17 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
                         Lines.RemoveAt(i);
                     }
             }
+            */
         }
 
         internal void DrawingStop(object sender, MouseButtonEventArgs e)
         {
-            IsDrawing = false;
+           // IsDrawing = false;
         }
 
         public void ChangeColor(object sender, MouseWheelEventArgs e)
         {
+            /*
             //scroll up
             if (e.Delta > 0)
             {
@@ -120,7 +133,7 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
             {
                 newline.Stroke = System.Windows.Media.Brushes.Black;
             }
-          
+          */
         }
 
 
@@ -129,6 +142,7 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 		//Left Mouse Button Up: Any pin
 		internal void DragStop(object sender, MouseButtonEventArgs e)
 		{
+            /*
 			Grid g = (Grid)sender;
 
 			//Avoid in having method called on object being collided with
@@ -143,12 +157,14 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 			var mousePos = e.GetPosition(AIPmap.AdditionalMap);
 
 			//Calling collision detection and resolution for the dropped object
-			DetectCollision(g, mousePos.X, mousePos.Y);
+		//	DetectCollision(g, mousePos.X, mousePos.Y);
+            */
 		}
 
 		//Mouse Move
 		internal void DragMove(object sender, MouseEventArgs e)
 		{
+            /*
             // Set the new cursor.
             Cursor new_cursor = Cursors.Cross;
             if (AIPmap.Cursor != new_cursor)
@@ -175,8 +191,9 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 			}
 
 			SetPinPosition(g, mousePos.X, mousePos.Y);
+            */
 		}
-
+/*
 		public void DetectCollision(Grid movedPin, double movedPin_X, double movedPin_Y)
 		{
 			//Replacing item within horizontal bounds
@@ -347,10 +364,11 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 			//Drop the rectangle if there are not collision or after resolution of collision
 			SetPinPosition(movedPin, movedPin_X, movedPin_Y);
 		}
+        */
 
 		public void movePins(double widthRatio, double heightRatio)
 		{
-            var allPins = AIPmap.AdditionalMap.Children.OfType<Grid>().ToList();
+         /*   var allPins = AIPmap.AdditionalMap.Children.OfType<Grid>().ToList();
 
 			foreach (var pin in allPins)
 			{
@@ -360,8 +378,9 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 				SetPinPosition(pin, movedPin_X, movedPin_Y);
 				DetectCollision(pin, movedPin_X, movedPin_Y);
 			}
+          * */
 		}
-
+        
 
 
 

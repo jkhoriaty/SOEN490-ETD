@@ -21,6 +21,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 
 		private object relatedObject;
 
+
 		//Creating Grid with passed parameters
 		public Pin(object relatedObject, MapSectionPage mapSection, int size) : base()
 		{
@@ -40,6 +41,41 @@ namespace ETD.CustomObjects.CustomUIObjects
 			//Adding the pin to the list of all pins
 			pinList.Add(this);
 		}
+
+        //Normal Map modification items(  camp, circle, line, ramp, rectangle, square, stairs )
+        public Pin(object relatedAiObject, AdditionalInfoPage aiSection, int size)
+        {
+            //Setting relatedObject, used for position recovery
+            this.relatedObject = relatedAiObject;
+            
+            //Initializing grid attibutes
+            this.Width = size;
+            this.Height = size;
+
+            this.MouseLeftButtonDown += new MouseButtonEventHandler(aiSection.DragStart);
+            this.MouseLeftButtonUp += new MouseButtonEventHandler(aiSection.DragStop);
+            this.MouseMove += new MouseEventHandler(aiSection.DragMove);
+           /* this.ContextMenu = aiSection.Resources["AIcontext"] as ContextMenu;
+            (this.ContextMenu.Items[0] as MenuItem).IsChecked = true;
+            */
+
+        }
+        
+        //Line items
+        public Pin(object relatedAiObject, AdditionalInfoPage aiSection, double width, double height)
+        {
+            //Initializing grid attibutes
+            this.Width = width;
+            this.Height = height;
+
+            this.MouseLeftButtonDown += new MouseButtonEventHandler(aiSection.DrawingStart);
+            this.MouseLeftButtonUp += new MouseButtonEventHandler(aiSection.DrawingStop);
+            this.MouseMove += new MouseEventHandler(aiSection.Move);
+            this.MouseUp += new MouseButtonEventHandler(aiSection.DrawingMove);
+            this.MouseWheel += new MouseWheelEventHandler(aiSection.ChangeColor);
+            
+        }
+        
 
 		//Setting the background image to the passed image
 		public void setImage(BitmapImage image)

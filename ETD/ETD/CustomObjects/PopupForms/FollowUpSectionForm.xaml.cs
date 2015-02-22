@@ -169,7 +169,7 @@ namespace ETD.CustomObjects.PopupForms
         }
         */
 
-        private void UpdateAdditionalInformation(int position, TextBox Clientbox, TextBox DemandeBox, TextBox PriseEnChargeMapBox, 
+        private void UpdateFollowUpInformation(int position, TextBox Clientbox, TextBox DemandeBox, TextBox PriseEnChargeMapBox, 
                                                  TextBox TimestamphhsBox, TextBox TimestampmmsBox, TextBox TimestamphhfBox, TextBox TimestampmmfBox)
         {
             //Suivi timestamp
@@ -204,52 +204,52 @@ namespace ETD.CustomObjects.PopupForms
         {
             if (!Client1.Text.Equals(""))
             {
-                UpdateAdditionalInformation(1, Client1, Demande1, PriseEnCharge1, Timestamphhs1, Timestampmms1, Timestamphhf1, Timestampmmf1);
+                UpdateFollowUpInformation(1, Client1, Demande1, PriseEnCharge1, Timestamphhs1, Timestampmms1, Timestamphhf1, Timestampmmf1);
             }
 
             if (!Client1.Text.Equals(""))
             {
-                UpdateAdditionalInformation(2, Client2, Demande2, PriseEnCharge2, Timestamphhs2, Timestampmms2, Timestamphhf2, Timestampmmf2);
+                UpdateFollowUpInformation(2, Client2, Demande2, PriseEnCharge2, Timestamphhs2, Timestampmms2, Timestamphhf2, Timestampmmf2);
             }
 
             if (!Client1.Text.Equals(""))
             {
-                UpdateAdditionalInformation(3, Client3, Demande3, PriseEnCharge3, Timestamphhs3, Timestampmms3, Timestamphhf3, Timestampmmf3);
+                UpdateFollowUpInformation(3, Client3, Demande3, PriseEnCharge3, Timestamphhs3, Timestampmms3, Timestamphhf3, Timestampmmf3);
             }
 
             if (!Client1.Text.Equals(""))
             {
-                UpdateAdditionalInformation(4, Client4, Demande4, PriseEnCharge4, Timestamphhs4, Timestampmms4, Timestamphhf4, Timestampmmf4);
+                UpdateFollowUpInformation(4, Client4, Demande4, PriseEnCharge4, Timestamphhs4, Timestampmms4, Timestamphhf4, Timestampmmf4);
             }
 
             if (!Client1.Text.Equals(""))
             {
-                UpdateAdditionalInformation(5, Client5, Demande5, PriseEnCharge5, Timestamphhs5, Timestampmms5, Timestamphhf5, Timestampmmf5);
+                UpdateFollowUpInformation(5, Client5, Demande5, PriseEnCharge5, Timestamphhs5, Timestampmms5, Timestamphhf5, Timestampmmf5);
             }
 
             if (!Client1.Text.Equals(""))
             {
-                UpdateAdditionalInformation(6, Client6, Demande6, PriseEnCharge6, Timestamphhs6, Timestampmms6, Timestamphhf6, Timestampmmf6);
+                UpdateFollowUpInformation(6, Client6, Demande6, PriseEnCharge6, Timestamphhs6, Timestampmms6, Timestamphhf6, Timestampmmf6);
             }
 
             if (!Client1.Text.Equals(""))
             {
-                UpdateAdditionalInformation(7, Client7, Demande7, PriseEnCharge7, Timestamphhs7, Timestampmms7, Timestamphhf7, Timestampmmf7);
+                UpdateFollowUpInformation(7, Client7, Demande7, PriseEnCharge7, Timestamphhs7, Timestampmms7, Timestamphhf7, Timestampmmf7);
             }
 
             if (!Client1.Text.Equals(""))
             {
-                UpdateAdditionalInformation(8, Client8, Demande8, PriseEnCharge8, Timestamphhs8, Timestampmms8, Timestamphhf8, Timestampmmf8);
+                UpdateFollowUpInformation(8, Client8, Demande8, PriseEnCharge8, Timestamphhs8, Timestampmms8, Timestamphhf8, Timestampmmf8);
             }
 
             if (!Client1.Text.Equals(""))
             {
-                UpdateAdditionalInformation(9, Client9, Demande9, PriseEnCharge9, Timestamphhs9, Timestampmms9, Timestamphhf9, Timestampmmf9);
+                UpdateFollowUpInformation(9, Client9, Demande9, PriseEnCharge9, Timestamphhs9, Timestampmms9, Timestamphhf9, Timestampmmf9);
             }
 
             if (!Client1.Text.Equals(""))
             {
-                UpdateAdditionalInformation(10, Client10, Demande10, PriseEnCharge10, Timestamphhs10, Timestampmms10, Timestamphhf10, Timestampmmf10);
+                UpdateFollowUpInformation(10, Client10, Demande10, PriseEnCharge10, Timestamphhs10, Timestampmms10, Timestamphhf10, Timestampmmf10);
             }
 
         }
