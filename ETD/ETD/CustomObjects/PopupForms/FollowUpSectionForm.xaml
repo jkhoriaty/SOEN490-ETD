@@ -4,260 +4,453 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       mc:Ignorable="d" 
-      d:DesignHeight="400" d:DesignWidth="1000"
+      d:DesignHeight="400" d:DesignWidth="1200"
 	Title="FollowUpSection">
 
     <ScrollViewer>
         <Grid Background="White">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1.40*"/>
-            <ColumnDefinition Width="3*"/>
-            <ColumnDefinition Width="1.9*"/>
-            <ColumnDefinition Width="0.9*"/>
-            <ColumnDefinition Width="0.9*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
-
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="88*"/>
+                <ColumnDefinition Width="132*"/>
+                <ColumnDefinition Width="132*"/>
+                <ColumnDefinition Width="215*"/>
+                <ColumnDefinition Width="165*"/>
+                <ColumnDefinition Width="88*"/>
+                <ColumnDefinition Width="88*"/>
+            </Grid.ColumnDefinitions>
             
-        </Grid.RowDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+
+
+            </Grid.RowDefinitions>
 
             <!-- ______________________________Header content______________________________ -->
-            
-        <Border  Grid.Column="0" Grid.Row="0" BorderBrush="Black" BorderThickness="1,1,1,1">
-            <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal">
-            <TextBlock Text="Client" FontSize="30" VerticalAlignment="Center" RenderTransformOrigin="1.294,0.509"/>
-            </StackPanel>
-        </Border>
 
-        <Border  Grid.Column="1" Grid.Row="0" BorderBrush="Black" BorderThickness="0,1,1,1">
-            <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal">
-            <TextBlock Text="Demande" FontSize="30" VerticalAlignment="Center" RenderTransformOrigin="1.294,0.509"/>
-            </StackPanel>
-        </Border>
-            
-       <Border  Grid.Column="2" Grid.Row="0" BorderBrush="Black" BorderThickness="0,1,1,1">
-            <StackPanel Grid.Column="2" Grid.Row="0" Orientation="Horizontal">
-            <TextBlock Text="Prise en charge" FontSize="30" VerticalAlignment="Center" RenderTransformOrigin="1.294,0.509"/>
-            </StackPanel>
-        </Border>
-            
-        <Border  Grid.Column="3" Grid.Row="0" BorderBrush="Black" BorderThickness="0,1,1,1">
-            <StackPanel Grid.Column="3" Grid.Row="0" Orientation="Horizontal">
-            <TextBlock Text="Suivi" FontSize="30" VerticalAlignment="Center" RenderTransformOrigin="1.294,0.509"/>
-            </StackPanel>
-        </Border>
+            <Border  Grid.Column="0" Grid.Row="0" BorderBrush="Black" BorderThickness="1,1,1,1">
+                <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal">
+                    <TextBlock Text="Heure" FontSize="30" VerticalAlignment="Center" RenderTransformOrigin="1.294,0.509"/>
+                </StackPanel>
+            </Border>
 
-        <Border  Grid.Column="4" Grid.Row="0" BorderBrush="Black" BorderThickness="0,1,1,1">
-            <StackPanel Grid.Column="4" Grid.Row="0" Orientation="Horizontal">
-            <TextBlock Text="Fait" FontSize="30" VerticalAlignment="Center" RenderTransformOrigin="1.294,0.509"/>
-            </StackPanel>
-        </Border>
+            <Border  Grid.Column="1" Grid.Row="0" BorderBrush="Black" BorderThickness="1,1,1,1">
+                <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal">
+                    <TextBlock Text="Client" FontSize="30" VerticalAlignment="Center" RenderTransformOrigin="1.294,0.509"/>
+                </StackPanel>
+            </Border>
 
-            <!--______________________________Client content______________________________ -->  
-            
-            <Border Grid.Row="1" Grid.Column="0" BorderBrush="Black" BorderThickness="1,0,0,1">
+            <Border  Grid.Column="2" Grid.Row="0" BorderBrush="Black" BorderThickness="1,1,1,1">
+                <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal">
+                    <TextBlock Text="Destinateur" FontSize="30" VerticalAlignment="Center" RenderTransformOrigin="1.294,0.509"/>
+                </StackPanel>
+            </Border>
+
+            <Border  Grid.Column="3" Grid.Row="0" BorderBrush="Black" BorderThickness="0,1,1,1">
+                <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal">
+                    <TextBlock Text="Demande" FontSize="30" VerticalAlignment="Center" RenderTransformOrigin="1.294,0.509"/>
+                </StackPanel>
+            </Border>
+
+            <Border  Grid.Column="4" Grid.Row="0" BorderBrush="Black" BorderThickness="0,1,1,1">
+                <StackPanel Grid.Column="2" Grid.Row="0" Orientation="Horizontal">
+                    <TextBlock Text="Prise en charge" FontSize="30" VerticalAlignment="Center" RenderTransformOrigin="1.294,0.509"/>
+                </StackPanel>
+            </Border>
+
+            <Border  Grid.Column="5" Grid.Row="0" BorderBrush="Black" BorderThickness="0,1,1,1">
+                <StackPanel Grid.Column="3" Grid.Row="0" Orientation="Horizontal">
+                    <TextBlock Text="Suivi" FontSize="30" VerticalAlignment="Center" RenderTransformOrigin="1.294,0.509"/>
+                </StackPanel>
+            </Border>
+
+            <Border  Grid.Column="6" Grid.Row="0" BorderBrush="Black" BorderThickness="0,1,1,1">
+                <StackPanel Grid.Column="4" Grid.Row="0" Orientation="Horizontal">
+                    <TextBlock Text="Fait" FontSize="30" VerticalAlignment="Center" RenderTransformOrigin="1.294,0.509"/>
+                </StackPanel>
+            </Border>
+
+            <!--______________________________Heure content_______________________________ -->
+
+
+
+            <Border Grid.Row="1" Grid.Column="0" BorderBrush="Black" BorderThickness="0,0,1,1">
+                <DockPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="40">
+                        <TextBox Text="hh" Width="40" Name="TimestamphhT1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="29" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT1" Click="TimestampTime_Click"/>
+                        <TextBox Text="mm" Width="40" Name="TimestampmmT1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+
+            <Border Grid.Row="2" Grid.Column="0" BorderBrush="Black" BorderThickness="0,0,1,1">
+                <DockPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="40">
+                        <TextBox Text="hh" Width="40" Name="TimestamphhT2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="29" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT2" Click="TimestampTime_Click"/>
+                        <TextBox Text="mm" Width="40" Name="TimestampmmT2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+
+            <Border Grid.Row="3" Grid.Column="0" BorderBrush="Black" BorderThickness="0,0,1,1">
+                <DockPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="40">
+                        <TextBox Text="hh" Width="40" Name="TimestamphhT3" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="29" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT3" Click="TimestampTime_Click"/>
+                        <TextBox Text="mm" Width="40" Name="TimestampmmT3" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+
+            <Border Grid.Row="4" Grid.Column="0" BorderBrush="Black" BorderThickness="0,0,1,1">
+                <DockPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="40">
+                        <TextBox Text="hh" Width="40" Name="TimestamphhT4" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="29" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT4" Click="TimestampTime_Click"/>
+                        <TextBox Text="mm" Width="40" Name="TimestampmmT4" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+
+            <Border Grid.Row="5" Grid.Column="0" BorderBrush="Black" BorderThickness="0,0,1,1">
+                <DockPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="40">
+                        <TextBox Text="hh" Width="40" Name="TimestamphhT5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="29" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT5" Click="TimestampTime_Click"/>
+                        <TextBox Text="mm" Width="40" Name="TimestampmmT5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+
+            <Border Grid.Row="6" Grid.Column="0" BorderBrush="Black" BorderThickness="0,0,1,1">
+                <DockPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="40">
+                        <TextBox Text="hh" Width="40" Name="TimestamphhT6" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="29" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT6" Click="TimestampTime_Click"/>
+                        <TextBox Text="mm" Width="40" Name="TimestampmmT6" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+
+            <Border Grid.Row="7" Grid.Column="0" BorderBrush="Black" BorderThickness="0,0,1,1">
+                <DockPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="40">
+                        <TextBox Text="hh" Width="40" Name="TimestamphhT7" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="29" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT7" Click="TimestampTime_Click"/>
+                        <TextBox Text="mm" Width="40" Name="TimestampmmT7" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+
+            <Border Grid.Row="8" Grid.Column="0" BorderBrush="Black" BorderThickness="0,0,1,1">
+                <DockPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="40">
+                        <TextBox Text="hh" Width="40" Name="TimestamphhT8" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="29" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT8" Click="TimestampTime_Click"/>
+                        <TextBox Text="mm" Width="40" Name="TimestampmmT8" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+
+            <Border Grid.Row="9" Grid.Column="0" BorderBrush="Black" BorderThickness="0,0,1,1">
+                <DockPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="40">
+                        <TextBox Text="hh" Width="40" Name="TimestamphhT9" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="29" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT9" Click="TimestampTime_Click"/>
+                        <TextBox Text="mm" Width="40" Name="TimestampmmT9" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+
+            <Border Grid.Row="9" Grid.Column="0" BorderBrush="Black" BorderThickness="0,0,1,1">
+                <DockPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="40">
+                        <TextBox Text="hh" Width="40" Name="TimestamphhT10" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="29" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT10" Click="TimestampTime_Click"/>
+                        <TextBox Text="mm" Width="40" Name="TimestampmmT10" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+
+
+
+            <!--______________________________Client content______________________________ -->
+
+            <Border Grid.Row="1" Grid.Column="1" BorderBrush="Black" BorderThickness="1,0,0,1">
                 <DockPanel>
                     <TextBox Name="Client1" TextWrapping="Wrap" AcceptsReturn="True" BorderBrush="Black" BorderThickness="0,0,1,0" GotFocus="FollowUpInfo_GotFocus"/>
                 </DockPanel>
             </Border>
-            
-            <Border Grid.Row="2" Grid.Column="0" BorderBrush="Black" BorderThickness="1,0,0,1">
+
+            <Border Grid.Row="2" Grid.Column="1" BorderBrush="Black" BorderThickness="1,0,0,1">
                 <DockPanel>
                     <TextBox Name="Client2" TextWrapping="Wrap" AcceptsReturn="True" BorderBrush="Black" BorderThickness="0,0,1,0" GotFocus="FollowUpInfo_GotFocus"/>
                 </DockPanel>
             </Border>
 
-            <Border Grid.Row="3" Grid.Column="0" BorderBrush="Black" BorderThickness="1,0,0,1">
+            <Border Grid.Row="3" Grid.Column="1" BorderBrush="Black" BorderThickness="1,0,0,1">
                 <DockPanel>
                     <TextBox Name="Client3" TextWrapping="Wrap" AcceptsReturn="True" BorderBrush="Black" BorderThickness="0,0,1,0" GotFocus="FollowUpInfo_GotFocus"/>
                 </DockPanel>
             </Border>
 
-            <Border Grid.Row="4" Grid.Column="0" BorderBrush="Black" BorderThickness="1,0,0,1">
+            <Border Grid.Row="4" Grid.Column="1" BorderBrush="Black" BorderThickness="1,0,0,1">
                 <DockPanel>
                     <TextBox Name="Client4" TextWrapping="Wrap" AcceptsReturn="True" BorderBrush="Black" BorderThickness="0,0,1,0" GotFocus="FollowUpInfo_GotFocus"/>
                 </DockPanel>
             </Border>
 
-            <Border Grid.Row="5" Grid.Column="0" BorderBrush="Black" BorderThickness="1,0,0,1">
+            <Border Grid.Row="5" Grid.Column="1" BorderBrush="Black" BorderThickness="1,0,0,1">
                 <DockPanel>
                     <TextBox Name="Client5" TextWrapping="Wrap" AcceptsReturn="True" BorderBrush="Black" BorderThickness="0,0,1,0" GotFocus="FollowUpInfo_GotFocus"/>
                 </DockPanel>
             </Border>
 
-            <Border Grid.Row="6" Grid.Column="0" BorderBrush="Black" BorderThickness="1,0,0,1">
+            <Border Grid.Row="6" Grid.Column="1" BorderBrush="Black" BorderThickness="1,0,0,1">
                 <DockPanel>
                     <TextBox Name="Client6" TextWrapping="Wrap" AcceptsReturn="True" BorderBrush="Black" BorderThickness="0,0,1,0" GotFocus="FollowUpInfo_GotFocus"/>
                 </DockPanel>
             </Border>
 
-            <Border Grid.Row="7" Grid.Column="0" BorderBrush="Black" BorderThickness="1,0,0,1">
+            <Border Grid.Row="7" Grid.Column="1" BorderBrush="Black" BorderThickness="1,0,0,1">
                 <DockPanel>
                     <TextBox Name="Client7" TextWrapping="Wrap" AcceptsReturn="True" BorderBrush="Black" BorderThickness="0,0,1,0" GotFocus="FollowUpInfo_GotFocus"/>
                 </DockPanel>
             </Border>
 
-            <Border Grid.Row="8" Grid.Column="0" BorderBrush="Black" BorderThickness="1,0,0,1">
+            <Border Grid.Row="8" Grid.Column="1" BorderBrush="Black" BorderThickness="1,0,0,1">
                 <DockPanel>
                     <TextBox Name="Client8" TextWrapping="Wrap" AcceptsReturn="True" BorderBrush="Black" BorderThickness="0,0,1,0" GotFocus="FollowUpInfo_GotFocus"/>
                 </DockPanel>
             </Border>
 
-            <Border Grid.Row="9" Grid.Column="0" BorderBrush="Black" BorderThickness="1,0,0,1">
+            <Border Grid.Row="9" Grid.Column="1" BorderBrush="Black" BorderThickness="1,0,0,1">
                 <DockPanel>
                     <TextBox Name="Client9" TextWrapping="Wrap" AcceptsReturn="True" BorderBrush="Black" BorderThickness="0,0,1,0" GotFocus="FollowUpInfo_GotFocus"/>
                 </DockPanel>
             </Border>
 
-            <Border Grid.Row="10" Grid.Column="0" BorderBrush="Black" BorderThickness="1,0,0,1">
+            <Border Grid.Row="9" Grid.Column="1" BorderBrush="Black" BorderThickness="1,0,0,1">
                 <DockPanel>
                     <TextBox Name="Client10" TextWrapping="Wrap" AcceptsReturn="True" BorderBrush="Black" BorderThickness="0,0,1,0" GotFocus="FollowUpInfo_GotFocus"/>
                 </DockPanel>
             </Border>
 
-            
+            <!--____________________________Destinateur content__________________________ -->
+
+            <Border Grid.Row="1" Grid.Column="2" BorderBrush="Black" BorderThickness="0,0,0,1">
+                <DockPanel>
+                    <TextBox Name="Destinateur1" TextWrapping="Wrap" AcceptsReturn="True" BorderBrush="Black" BorderThickness="0,0,1,0" GotFocus="FollowUpInfo_GotFocus"/>
+                </DockPanel>
+            </Border>
+
+            <Border Grid.Row="2" Grid.Column="2" BorderBrush="Black" BorderThickness="1,0,0,1">
+                <DockPanel>
+                    <TextBox Name="Destinateur2" TextWrapping="Wrap" AcceptsReturn="True" BorderBrush="Black" BorderThickness="0,0,1,0" GotFocus="FollowUpInfo_GotFocus"/>
+                </DockPanel>
+            </Border>
+
+            <Border Grid.Row="3" Grid.Column="2" BorderBrush="Black" BorderThickness="1,0,0,1">
+                <DockPanel>
+                    <TextBox Name="Destinateur3" TextWrapping="Wrap" AcceptsReturn="True" BorderBrush="Black" BorderThickness="0,0,1,0" GotFocus="FollowUpInfo_GotFocus"/>
+                </DockPanel>
+            </Border>
+
+            <Border Grid.Row="4" Grid.Column="2" BorderBrush="Black" BorderThickness="1,0,0,1">
+                <DockPanel>
+                    <TextBox Name="Destinateur4" TextWrapping="Wrap" AcceptsReturn="True" BorderBrush="Black" BorderThickness="0,0,1,0" GotFocus="FollowUpInfo_GotFocus"/>
+                </DockPanel>
+            </Border>
+
+            <Border Grid.Row="5" Grid.Column="2" BorderBrush="Black" BorderThickness="1,0,0,1">
+                <DockPanel>
+                    <TextBox Name="Destinateur5" TextWrapping="Wrap" AcceptsReturn="True" BorderBrush="Black" BorderThickness="0,0,1,0" GotFocus="FollowUpInfo_GotFocus"/>
+                </DockPanel>
+            </Border>
+
+            <Border Grid.Row="6" Grid.Column="2" BorderBrush="Black" BorderThickness="1,0,0,1">
+                <DockPanel>
+                    <TextBox Name="Destinateur6" TextWrapping="Wrap" AcceptsReturn="True" BorderBrush="Black" BorderThickness="0,0,1,0" GotFocus="FollowUpInfo_GotFocus"/>
+                </DockPanel>
+            </Border>
+
+            <Border Grid.Row="7" Grid.Column="2" BorderBrush="Black" BorderThickness="1,0,0,1">
+                <DockPanel>
+                    <TextBox Name="Destinateur7" TextWrapping="Wrap" AcceptsReturn="True" BorderBrush="Black" BorderThickness="0,0,1,0" GotFocus="FollowUpInfo_GotFocus"/>
+                </DockPanel>
+            </Border>
+
+            <Border Grid.Row="8" Grid.Column="2" BorderBrush="Black" BorderThickness="1,0,0,1">
+                <DockPanel>
+                    <TextBox Name="Destinateur8" TextWrapping="Wrap" AcceptsReturn="True" BorderBrush="Black" BorderThickness="0,0,1,0" GotFocus="FollowUpInfo_GotFocus"/>
+                </DockPanel>
+            </Border>
+
+            <Border Grid.Row="9" Grid.Column="2" BorderBrush="Black" BorderThickness="1,0,0,1">
+                <DockPanel>
+                    <TextBox Name="Destinateur9" TextWrapping="Wrap" AcceptsReturn="True" BorderBrush="Black" BorderThickness="0,0,1,0" GotFocus="FollowUpInfo_GotFocus"/>
+                </DockPanel>
+            </Border>
+
+            <Border Grid.Row="9" Grid.Column="2" BorderBrush="Black" BorderThickness="1,0,0,1">
+                <DockPanel>
+                    <TextBox Name="Destinateur10" TextWrapping="Wrap" AcceptsReturn="True" BorderBrush="Black" BorderThickness="0,0,1,0" GotFocus="FollowUpInfo_GotFocus"/>
+                </DockPanel>
+            </Border>
+
+
 
             <!-- ___________________________Demande content______________________________ -->
-            
-            <Border Grid.Row="1" Grid.Column="1" BorderBrush="Black" BorderThickness="0,0,0,1">
+
+            <Border Grid.Row="1" Grid.Column="3" BorderBrush="Black" BorderThickness="0,0,0,1">
                 <DockPanel>
                     <TextBox Name="Demande1" TextWrapping="Wrap" AcceptsReturn="True" BorderBrush="Black" BorderThickness="0,0,1,0" GotFocus="FollowUpInfo_GotFocus"/>
                 </DockPanel>
             </Border>
 
-            <Border Grid.Row="2" Grid.Column="1" BorderBrush="Black" BorderThickness="0,0,0,1">
+            <Border Grid.Row="2" Grid.Column="3" BorderBrush="Black" BorderThickness="0,0,0,1">
                 <DockPanel>
                     <TextBox Name="Demande2" TextWrapping="Wrap" AcceptsReturn="True" BorderBrush="Black" BorderThickness="0,0,1,0" GotFocus="FollowUpInfo_GotFocus"/>
                 </DockPanel>
             </Border>
 
-            <Border Grid.Row="3" Grid.Column="1" BorderBrush="Black" BorderThickness="0,0,0,1">
+            <Border Grid.Row="3" Grid.Column="3" BorderBrush="Black" BorderThickness="0,0,0,1">
                 <DockPanel>
                     <TextBox Name="Demande3" TextWrapping="Wrap" AcceptsReturn="True" BorderBrush="Black" BorderThickness="0,0,1,0" GotFocus="FollowUpInfo_GotFocus"/>
                 </DockPanel>
             </Border>
 
-            <Border Grid.Row="4" Grid.Column="1" BorderBrush="Black" BorderThickness="0,0,0,1">
+            <Border Grid.Row="4" Grid.Column="3" BorderBrush="Black" BorderThickness="0,0,0,1">
                 <DockPanel>
                     <TextBox Name="Demande4" TextWrapping="Wrap" AcceptsReturn="True" BorderBrush="Black" BorderThickness="0,0,1,0" GotFocus="FollowUpInfo_GotFocus"/>
                 </DockPanel>
             </Border>
 
-            <Border Grid.Row="5" Grid.Column="1" BorderBrush="Black" BorderThickness="0,0,0,1">
+            <Border Grid.Row="5" Grid.Column="3" BorderBrush="Black" BorderThickness="0,0,0,1">
                 <DockPanel>
                     <TextBox Name="Demande5" TextWrapping="Wrap" AcceptsReturn="True" BorderBrush="Black" BorderThickness="0,0,1,0" GotFocus="FollowUpInfo_GotFocus"/>
                 </DockPanel>
             </Border>
 
-            <Border Grid.Row="6" Grid.Column="1" BorderBrush="Black" BorderThickness="0,0,0,1">
+            <Border Grid.Row="6" Grid.Column="3" BorderBrush="Black" BorderThickness="0,0,0,1">
                 <DockPanel>
                     <TextBox Name="Demande6" TextWrapping="Wrap" AcceptsReturn="True" BorderBrush="Black" BorderThickness="0,0,1,0" GotFocus="FollowUpInfo_GotFocus"/>
                 </DockPanel>
             </Border>
 
-            <Border Grid.Row="7" Grid.Column="1" BorderBrush="Black" BorderThickness="0,0,0,1">
+            <Border Grid.Row="7" Grid.Column="3" BorderBrush="Black" BorderThickness="0,0,0,1">
                 <DockPanel>
                     <TextBox Name="Demande7" TextWrapping="Wrap" AcceptsReturn="True" BorderBrush="Black" BorderThickness="0,0,1,0" GotFocus="FollowUpInfo_GotFocus"/>
                 </DockPanel>
             </Border>
 
-            <Border Grid.Row="8" Grid.Column="1" BorderBrush="Black" BorderThickness="0,0,0,1">
+            <Border Grid.Row="8" Grid.Column="3" BorderBrush="Black" BorderThickness="0,0,0,1">
                 <DockPanel>
                     <TextBox Name="Demande8" TextWrapping="Wrap" AcceptsReturn="True" BorderBrush="Black" BorderThickness="0,0,1,0" GotFocus="FollowUpInfo_GotFocus"/>
                 </DockPanel>
             </Border>
 
-            <Border Grid.Row="9" Grid.Column="1" BorderBrush="Black" BorderThickness="0,0,0,1">
+            <Border Grid.Row="9" Grid.Column="3" BorderBrush="Black" BorderThickness="0,0,0,1">
                 <DockPanel>
                     <TextBox Name="Demande9" TextWrapping="Wrap" AcceptsReturn="True" BorderBrush="Black" BorderThickness="0,0,1,0" GotFocus="FollowUpInfo_GotFocus"/>
                 </DockPanel>
             </Border>
 
-            <Border Grid.Row="10" Grid.Column="1" BorderBrush="Black" BorderThickness="0,0,0,1">
+            <Border Grid.Row="9" Grid.Column="3" BorderBrush="Black" BorderThickness="0,0,0,1">
                 <DockPanel>
                     <TextBox Name="Demande10" TextWrapping="Wrap" AcceptsReturn="True" BorderBrush="Black" BorderThickness="0,0,1,0" GotFocus="FollowUpInfo_GotFocus"/>
                 </DockPanel>
             </Border>
 
-         
+
 
             <!-- _________________________________Prise en charge content______________________________ -->
-            
-            <Border Grid.Row="1" Grid.Column="2" BorderBrush="Black" BorderThickness="0,0,0,1">
+
+            <Border Grid.Row="1" Grid.Column="4" BorderBrush="Black" BorderThickness="0,0,0,1">
                 <DockPanel>
                     <TextBox  Name="PriseEnCharge1" TextWrapping="Wrap" AcceptsReturn="True" BorderBrush="Black" BorderThickness="0,0,1,0" GotFocus="FollowUpInfo_GotFocus"/>
                 </DockPanel>
             </Border>
 
-            <Border Grid.Row="2" Grid.Column="2" BorderBrush="Black" BorderThickness="0,0,0,1">
+            <Border Grid.Row="2" Grid.Column="4" BorderBrush="Black" BorderThickness="0,0,0,1">
                 <DockPanel>
                     <TextBox  Name="PriseEnCharge2" TextWrapping="Wrap" AcceptsReturn="True" BorderBrush="Black" BorderThickness="0,0,1,0" GotFocus="FollowUpInfo_GotFocus"/>
                 </DockPanel>
             </Border>
 
-            <Border Grid.Row="3" Grid.Column="2" BorderBrush="Black" BorderThickness="0,0,0,1">
+            <Border Grid.Row="3" Grid.Column="4" BorderBrush="Black" BorderThickness="0,0,0,1">
                 <DockPanel>
                     <TextBox  Name="PriseEnCharge3" TextWrapping="Wrap" AcceptsReturn="True" BorderBrush="Black" BorderThickness="0,0,1,0" GotFocus="FollowUpInfo_GotFocus"/>
                 </DockPanel>
             </Border>
 
-            <Border Grid.Row="4" Grid.Column="2" BorderBrush="Black" BorderThickness="0,0,0,1">
+            <Border Grid.Row="4" Grid.Column="4" BorderBrush="Black" BorderThickness="0,0,0,1">
                 <DockPanel>
                     <TextBox  Name="PriseEnCharge4" TextWrapping="Wrap" AcceptsReturn="True" BorderBrush="Black" BorderThickness="0,0,1,0" GotFocus="FollowUpInfo_GotFocus"/>
                 </DockPanel>
             </Border>
 
-            <Border Grid.Row="5" Grid.Column="2" BorderBrush="Black" BorderThickness="0,0,0,1">
+            <Border Grid.Row="5" Grid.Column="4" BorderBrush="Black" BorderThickness="0,0,0,1">
                 <DockPanel>
                     <TextBox  Name="PriseEnCharge5" TextWrapping="Wrap" AcceptsReturn="True" BorderBrush="Black" BorderThickness="0,0,1,0" GotFocus="FollowUpInfo_GotFocus"/>
                 </DockPanel>
             </Border>
 
-            <Border Grid.Row="6" Grid.Column="2" BorderBrush="Black" BorderThickness="0,0,0,1">
+            <Border Grid.Row="6" Grid.Column="4" BorderBrush="Black" BorderThickness="0,0,0,1">
                 <DockPanel>
                     <TextBox  Name="PriseEnCharge6" TextWrapping="Wrap" AcceptsReturn="True" BorderBrush="Black" BorderThickness="0,0,1,0" GotFocus="FollowUpInfo_GotFocus"/>
                 </DockPanel>
             </Border>
 
-            <Border Grid.Row="7" Grid.Column="2" BorderBrush="Black" BorderThickness="0,0,0,1">
+            <Border Grid.Row="7" Grid.Column="4" BorderBrush="Black" BorderThickness="0,0,0,1">
                 <DockPanel>
                     <TextBox  Name="PriseEnCharge7" TextWrapping="Wrap" AcceptsReturn="True" BorderBrush="Black" BorderThickness="0,0,1,0" GotFocus="FollowUpInfo_GotFocus"/>
                 </DockPanel>
             </Border>
 
-            <Border Grid.Row="8" Grid.Column="2" BorderBrush="Black" BorderThickness="0,0,0,1">
+            <Border Grid.Row="8" Grid.Column="4" BorderBrush="Black" BorderThickness="0,0,0,1">
                 <DockPanel>
                     <TextBox  Name="PriseEnCharge8" TextWrapping="Wrap" AcceptsReturn="True" BorderBrush="Black" BorderThickness="0,0,1,0" GotFocus="FollowUpInfo_GotFocus"/>
                 </DockPanel>
             </Border>
 
-            <Border Grid.Row="9" Grid.Column="2" BorderBrush="Black" BorderThickness="0,0,0,1">
+            <Border Grid.Row="9" Grid.Column="4" BorderBrush="Black" BorderThickness="0,0,0,1">
                 <DockPanel>
                     <TextBox  Name="PriseEnCharge9" TextWrapping="Wrap" AcceptsReturn="True" BorderBrush="Black" BorderThickness="0,0,1,0" GotFocus="FollowUpInfo_GotFocus"/>
                 </DockPanel>
             </Border>
 
-            <Border Grid.Row="10" Grid.Column="2" BorderBrush="Black" BorderThickness="0,0,0,1">
+            <Border Grid.Row="9" Grid.Column="4" BorderBrush="Black" BorderThickness="0,0,0,1">
                 <DockPanel>
                     <TextBox  Name="PriseEnCharge10" TextWrapping="Wrap" AcceptsReturn="True" BorderBrush="Black" BorderThickness="0,0,1,0" GotFocus="FollowUpInfo_GotFocus"/>
                 </DockPanel>
             </Border>
 
-         
+
 
             <!-- ______________________________Suivi content______________________________ -->
-            
-            <Border Grid.Row="1" Grid.Column="3" BorderBrush="Black" BorderThickness="0,0,0,1">
+
+            <Border Grid.Row="1" Grid.Column="5" BorderBrush="Black" BorderThickness="0,0,0,1">
                 <DockPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="40">
                         <TextBox Text="hh" Width="40" Name="Timestamphhs1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
@@ -267,7 +460,7 @@
                 </DockPanel>
             </Border>
 
-            <Border Grid.Row="2" Grid.Column="3" BorderBrush="Black" BorderThickness="0,0,0,1">
+            <Border Grid.Row="2" Grid.Column="5" BorderBrush="Black" BorderThickness="0,0,0,1">
                 <DockPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="40">
                         <TextBox Text="hh" Width="40" Name="Timestamphhs2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
@@ -277,7 +470,7 @@
                 </DockPanel>
             </Border>
 
-            <Border Grid.Row="3" Grid.Column="3" BorderBrush="Black" BorderThickness="0,0,0,1">
+            <Border Grid.Row="3" Grid.Column="5" BorderBrush="Black" BorderThickness="0,0,0,1">
                 <DockPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="40">
                         <TextBox Text="hh" Width="40" Name="Timestamphhs3" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
@@ -287,7 +480,7 @@
                 </DockPanel>
             </Border>
 
-            <Border Grid.Row="4" Grid.Column="3" BorderBrush="Black" BorderThickness="0,0,0,1">
+            <Border Grid.Row="4" Grid.Column="5" BorderBrush="Black" BorderThickness="0,0,0,1">
                 <DockPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="40">
                         <TextBox Text="hh" Width="40" Name="Timestamphhs4" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
@@ -297,7 +490,7 @@
                 </DockPanel>
             </Border>
 
-            <Border Grid.Row="5" Grid.Column="3" BorderBrush="Black" BorderThickness="0,0,0,1">
+            <Border Grid.Row="5" Grid.Column="5" BorderBrush="Black" BorderThickness="0,0,0,1">
                 <DockPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="40">
                         <TextBox Text="hh" Width="40" Name="Timestamphhs5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
@@ -307,7 +500,7 @@
                 </DockPanel>
             </Border>
 
-            <Border Grid.Row="6" Grid.Column="3" BorderBrush="Black" BorderThickness="0,0,0,1">
+            <Border Grid.Row="6" Grid.Column="5" BorderBrush="Black" BorderThickness="0,0,0,1">
                 <DockPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="40">
                         <TextBox Text="hh" Width="40" Name="Timestamphhs6" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
@@ -317,7 +510,7 @@
                 </DockPanel>
             </Border>
 
-            <Border Grid.Row="7" Grid.Column="3" BorderBrush="Black" BorderThickness="0,0,0,1">
+            <Border Grid.Row="7" Grid.Column="5" BorderBrush="Black" BorderThickness="0,0,0,1">
                 <DockPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="40">
                         <TextBox Text="hh" Width="40" Name="Timestamphhs7" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
@@ -327,7 +520,7 @@
                 </DockPanel>
             </Border>
 
-            <Border Grid.Row="8" Grid.Column="3" BorderBrush="Black" BorderThickness="0,0,0,1">
+            <Border Grid.Row="8" Grid.Column="5" BorderBrush="Black" BorderThickness="0,0,0,1">
                 <DockPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="40">
                         <TextBox Text="hh" Width="40" Name="Timestamphhs8" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
@@ -337,7 +530,7 @@
                 </DockPanel>
             </Border>
 
-            <Border Grid.Row="9" Grid.Column="3" BorderBrush="Black" BorderThickness="0,0,0,1">
+            <Border Grid.Row="9" Grid.Column="5" BorderBrush="Black" BorderThickness="0,0,0,1">
                 <DockPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="40">
                         <TextBox Text="hh" Width="40" Name="Timestamphhs9" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
@@ -347,7 +540,7 @@
                 </DockPanel>
             </Border>
 
-            <Border Grid.Row="10" Grid.Column="3" BorderBrush="Black" BorderThickness="0,0,0,1">
+            <Border Grid.Row="9" Grid.Column="5" BorderBrush="Black" BorderThickness="0,0,0,1">
                 <DockPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="40">
                         <TextBox Text="hh" Width="40" Name="Timestamphhs10" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
@@ -357,11 +550,11 @@
                 </DockPanel>
             </Border>
 
-        
+
 
             <!-- ______________________________Fait content______________________________ -->
-            
-            <Border Grid.Row="1" Grid.Column="4" BorderBrush="Black" BorderThickness="0,0,1,1">
+
+            <Border Grid.Row="1" Grid.Column="6" BorderBrush="Black" BorderThickness="0,0,1,1">
                 <DockPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="40">
                         <TextBox Text="hh" Width="40" Name="Timestamphhf1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
@@ -372,7 +565,7 @@
             </Border>
 
 
-            <Border Grid.Row="2" Grid.Column="4" BorderBrush="Black" BorderThickness="0,0,1,1">
+            <Border Grid.Row="2" Grid.Column="6" BorderBrush="Black" BorderThickness="0,0,1,1">
                 <DockPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="40">
                         <TextBox Text="hh" Width="40" Name="Timestamphhf2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
@@ -383,7 +576,7 @@
             </Border>
 
 
-            <Border Grid.Row="3" Grid.Column="4" BorderBrush="Black" BorderThickness="0,0,1,1">
+            <Border Grid.Row="3" Grid.Column="6" BorderBrush="Black" BorderThickness="0,0,1,1">
                 <DockPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="40">
                         <TextBox Text="hh" Width="40" Name="Timestamphhf3" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
@@ -394,7 +587,7 @@
             </Border>
 
 
-            <Border Grid.Row="4" Grid.Column="4" BorderBrush="Black" BorderThickness="0,0,1,1">
+            <Border Grid.Row="4" Grid.Column="6" BorderBrush="Black" BorderThickness="0,0,1,1">
                 <DockPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="40">
                         <TextBox Text="hh" Width="40" Name="Timestamphhf4" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
@@ -405,7 +598,7 @@
             </Border>
 
 
-            <Border Grid.Row="5" Grid.Column="4" BorderBrush="Black" BorderThickness="0,0,1,1">
+            <Border Grid.Row="5" Grid.Column="6" BorderBrush="Black" BorderThickness="0,0,1,1">
                 <DockPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="40">
                         <TextBox Text="hh" Width="40" Name="Timestamphhf5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
@@ -416,7 +609,7 @@
             </Border>
 
 
-            <Border Grid.Row="6" Grid.Column="4" BorderBrush="Black" BorderThickness="0,0,1,1">
+            <Border Grid.Row="6" Grid.Column="6" BorderBrush="Black" BorderThickness="0,0,1,1">
                 <DockPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="40">
                         <TextBox Text="hh" Width="40" Name="Timestamphhf6" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
@@ -427,7 +620,7 @@
             </Border>
 
 
-            <Border Grid.Row="7" Grid.Column="4" BorderBrush="Black" BorderThickness="0,0,1,1">
+            <Border Grid.Row="7" Grid.Column="6" BorderBrush="Black" BorderThickness="0,0,1,1">
                 <DockPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="40">
                         <TextBox Text="hh" Width="40" Name="Timestamphhf7" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
@@ -438,7 +631,7 @@
             </Border>
 
 
-            <Border Grid.Row="8" Grid.Column="4" BorderBrush="Black" BorderThickness="0,0,1,1">
+            <Border Grid.Row="8" Grid.Column="6" BorderBrush="Black" BorderThickness="0,0,1,1">
                 <DockPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="40">
                         <TextBox Text="hh" Width="40" Name="Timestamphhf8" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
@@ -449,7 +642,7 @@
             </Border>
 
 
-            <Border Grid.Row="9" Grid.Column="4" BorderBrush="Black" BorderThickness="0,0,1,1">
+            <Border Grid.Row="9" Grid.Column="6" BorderBrush="Black" BorderThickness="0,0,1,1">
                 <DockPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="40">
                         <TextBox Text="hh" Width="40" Name="Timestamphhf9" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
@@ -460,7 +653,7 @@
             </Border>
 
 
-            <Border Grid.Row="10" Grid.Column="4" BorderBrush="Black" BorderThickness="0,0,1,1">
+            <Border Grid.Row="9" Grid.Column="6" BorderBrush="Black" BorderThickness="0,0,1,1">
                 <DockPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="40">
                         <TextBox Text="hh" Width="40" Name="Timestamphhf10" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
@@ -471,7 +664,7 @@
             </Border>
 
 
-      
+
 
 
 

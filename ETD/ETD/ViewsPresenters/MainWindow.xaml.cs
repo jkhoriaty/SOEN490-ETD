@@ -367,6 +367,12 @@ namespace ETD.ViewsPresenters
 			return UpdateRegisteredTask;
 		}
 
+        //Displays follow up section page
+        private void ShowFollowUpSection(object sender, RoutedEventArgs e)
+        {
+            //new FormPopup(this, new FollowUpSectionForm(FollowUpPage));
+        }
+
 		//Interpret the servers return
 		private void UpdateRegisteredResultAnalysis(String[] reply)
 		{

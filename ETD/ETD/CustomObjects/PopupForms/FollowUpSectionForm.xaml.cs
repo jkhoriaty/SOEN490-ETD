@@ -24,12 +24,14 @@ namespace ETD.CustomObjects.PopupForms
     {
         private FollowUpSectionForm FollowUpPage;
         private Request FollowUpInfo;
+        private Dictionary<String, TextBox[]> TimeStampMap = new Dictionary<String, TextBox[]>();
         private Dictionary<String, TextBox> ClientMap = new Dictionary<String, TextBox>();
+        private Dictionary<String, TextBox> DestinateurMap = new Dictionary<String, TextBox>();
         private Dictionary<String, TextBox> DemandeMap = new Dictionary<String, TextBox>();
         private Dictionary<String, TextBox> PriseEnChargeMap = new Dictionary<String, TextBox>();
         private Dictionary<String, TextBox[]> SuiviTimeStampMap = new Dictionary<String, TextBox[]>();
         private Dictionary<String, TextBox[]> FaitTimeStampMap = new Dictionary<String, TextBox[]>();
-        private Dictionary<String, String> TimesEquivalentKeyMap = new Dictionary<String, String>();
+        //private Dictionary<String, String> TimesEquivalentKeyMap = new Dictionary<String, String>();
 
 
 
@@ -38,14 +40,29 @@ namespace ETD.CustomObjects.PopupForms
             InitializeComponent();
             this.FollowUpPage = FollowUpPage;
 
+            setupTimeMap();
             setupClientMap();
+            setupDestinateurMap();
             setupDemandeMap();
             setupPriseEnChargeMap();
-
             setupSuiviTimeStampMap();
-            setupTimesEquivalentKeyMap();
+            //setupTimesEquivalentKeyMap();
             setupFaitTimeStampMap();
 
+        }
+
+        private void setupTimeMap()
+        {
+            TimeStampMap.Add("TimestampT1", TextBoxHandler.textboxArray(TimestamphhT1, TimestampmmT1));
+            TimeStampMap.Add("TimestampT2", TextBoxHandler.textboxArray(TimestamphhT2, TimestampmmT2));
+            TimeStampMap.Add("TimestampT3", TextBoxHandler.textboxArray(TimestamphhT3, TimestampmmT3));
+            TimeStampMap.Add("TimestampT4", TextBoxHandler.textboxArray(TimestamphhT4, TimestampmmT4));
+            TimeStampMap.Add("TimestampT5", TextBoxHandler.textboxArray(TimestamphhT5, TimestampmmT5));
+            TimeStampMap.Add("TimestampT6", TextBoxHandler.textboxArray(TimestamphhT6, TimestampmmT6));
+            TimeStampMap.Add("TimestampT7", TextBoxHandler.textboxArray(TimestamphhT7, TimestampmmT7));
+            TimeStampMap.Add("TimestampT8", TextBoxHandler.textboxArray(TimestamphhT8, TimestampmmT8));
+            TimeStampMap.Add("TimestampT9", TextBoxHandler.textboxArray(TimestamphhT9, TimestampmmT9));
+            TimeStampMap.Add("TimestampT10", TextBoxHandler.textboxArray(TimestamphhT10, TimestampmmT10));
         }
 
    
@@ -62,6 +79,20 @@ namespace ETD.CustomObjects.PopupForms
             ClientMap.Add("Client9", Client9);
             ClientMap.Add("Client10", Client10);
 
+        }
+
+        private void setupDestinateurMap()
+        {
+            DestinateurMap.Add("Destinateur1", Destinateur1);
+            DestinateurMap.Add("Destinateur2", Destinateur2);
+            DestinateurMap.Add("Destinateur3", Destinateur3);
+            DestinateurMap.Add("Destinateur4", Destinateur4);
+            DestinateurMap.Add("Destinateur5", Destinateur5);
+            DestinateurMap.Add("Destinateur6", Destinateur6);
+            DestinateurMap.Add("Destinateur7", Destinateur7);
+            DestinateurMap.Add("Destinateur8", Destinateur8);
+            DestinateurMap.Add("Destinateur9", Destinateur9);
+            DestinateurMap.Add("Destinateur10", Destinateur10);
         }
 
         private void setupDemandeMap()
@@ -122,6 +153,7 @@ namespace ETD.CustomObjects.PopupForms
             FaitTimeStampMap.Add("Timestampf10", TextBoxHandler.textboxArray(Timestamphhf10, Timestampmmf10));
         }
 
+        /*
         private void setupTimesEquivalentKeyMap()
         {
             TimesEquivalentKeyMap.Add("Timestamps1", "Timestampf1");
@@ -135,6 +167,7 @@ namespace ETD.CustomObjects.PopupForms
             TimesEquivalentKeyMap.Add("Timestamps9", "Timestampf9");
             TimesEquivalentKeyMap.Add("Timestamps10", "Timestampf10");
         }
+        */
 
         private void UpdateAdditionalInformation(int position, TextBox Clientbox, TextBox DemandeBox, TextBox PriseEnChargeMapBox, 
                                                  TextBox TimestamphhsBox, TextBox TimestampmmsBox, TextBox TimestamphhfBox, TextBox TimestampmmfBox)
@@ -249,6 +282,11 @@ namespace ETD.CustomObjects.PopupForms
             TextBoxHandler.setNow(SuiviTimeStampMap[bt.Name][0], SuiviTimeStampMap[bt.Name][1]);
         }
 
+        public void TimestampTime_Click(object sender, RoutedEventArgs e)
+        {
+            Button bt = (Button)sender;
+            TextBoxHandler.setNow(TimeStampMap[bt.Name][0], TimeStampMap[bt.Name][1]);
+        }
     }
 
 }
