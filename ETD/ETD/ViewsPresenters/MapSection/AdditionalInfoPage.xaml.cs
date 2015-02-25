@@ -39,6 +39,7 @@ namespace ETD.ViewsPresenters.MapSection
         private System.Windows.Point NewPt1, NewPt2;
         private List<Line> Lines = new List<Line>();
         private Line newline;
+        private bool ContainsLine = false;
 
         public AdditionalInfoPage(MainWindow mainWindow)
 		{
@@ -260,8 +261,30 @@ namespace ETD.ViewsPresenters.MapSection
 
         }
 
-        public void CreateAdditionnalInfoPin(String AI, int size)
+        public void createMapModificationPin(String AI)
         {
+
+            MapMod mapMod = new MapMod(AI);
+            MapModPin MapModPin = new MapModPin(mapMod, AIPmap);
+
+            if (AI.Equals("line"))
+            {
+                MapModPin lineMapModPin = new MapModPin(mapMod, AIPmap, AdditionalMap.ActualWidth,AdditionalMap.ActualHeight);
+
+                //line obj doesnt exist
+                if (!ContainsLine)
+                {
+                    AIPmap.AdditionalMap.Children.Add(lineMapModPin);
+                    ContainsLine = true;
+                }
+
+            }
+            else
+            {
+                AIPmap.AdditionalMap.Children.Add(MapModPin);
+                MapModPin.setPinPosition(MapModPin.ActualHeight/2 , (AdditionalMap.ActualHeight - (MapModPin.ActualHeight/2))); 
+            }
+
             /* AdditionalInfo AI2 = new AdditionalInfo(AI);
             AdditionalInfoGrid mainContainer = new AdditionalInfoGrid(AI2, AIPmap, AddtionalInfoSize);
 

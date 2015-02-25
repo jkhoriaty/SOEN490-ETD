@@ -39,12 +39,13 @@
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
                 <!-- Here go all the buttons right-->
 				<ComboBox Visibility="Collapsed" Name="AI" Width="130" Margin="1,0,1,0" VerticalAlignment="Center">
-					<ComboBoxItem Content="circle" Name="circle"/>
-					<ComboBoxItem Content="rectangle" Name="rectangle"/>
-					<ComboBoxItem Content="stairs" Name="stairs"/>
-					<ComboBoxItem Content="camp" Name="camp"/>
-					<ComboBoxItem Content="line" Name="line"/>
-					<ComboBoxItem Content="square" Name="square"/>
+                    <ComboBoxItem Content="default" Name="default" />
+					<ComboBoxItem Content="circle" Name="circle" Selected="CreateMapModificationPin"/>
+                    <ComboBoxItem Content="rectangle" Name="rectangle" Selected="CreateMapModificationPin"/>
+                    <ComboBoxItem Content="stairs" Name="stairs" Selected="CreateMapModificationPin"/>
+                    <ComboBoxItem Content="camp" Name="camp" Selected="CreateMapModificationPin"/>
+                    <ComboBoxItem Content="line" Name="line" Selected="CreateMapModificationPin"/>
+                    <ComboBoxItem Content="square" Name="square" Selected="CreateMapModificationPin"/>
 				</ComboBox>
 				<ComboBox Name="modeCB" SelectionChanged="ModeChange" Width="140">
 					<ComboBoxItem Content="Regular Mode"/>
