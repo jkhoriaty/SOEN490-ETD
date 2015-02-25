@@ -44,8 +44,8 @@
     <Compile Include="CustomObjects\CustomUIObjects\Pin.cs" />
     <Compile Include="CustomObjects\CustomUIObjects\TeamPin.cs" />
     <Compile Include="Models\Objects\ABC.cs" />
-    <Compile Include="Models\Objects\MapMod.cs" />
     <Compile Include="Models\Objects\InterventionAdditionalInfo.cs" />
+    <Compile Include="Models\Objects\MapMod.cs" />
     <Compile Include="Models\Objects\Request.cs" />
     <Compile Include="Models\Objects\Intervention.cs" />
     <Compile Include="CustomObjects\PopupForms\FollowUpSectionForm.xaml.cs">
