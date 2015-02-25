@@ -146,7 +146,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.AdditionalIn
 			DateTime timestamp = DateTime.Now;
 			timestamp = timestamp.Date + new TimeSpan(timestamphh, timestampmm, 0);
 
-			intervention.setAdditionalInfo(position, new Intervention.AdditionalInformation(AdditionalInformation.Text, timestamp));
+			intervention.setAdditionalInfo(position, new InterventionAdditionalInfo(AdditionalInformation.Text, timestamp));
 		}
 
 		private void AdditionalInformation_GotFocus(object sender, RoutedEventArgs e)
