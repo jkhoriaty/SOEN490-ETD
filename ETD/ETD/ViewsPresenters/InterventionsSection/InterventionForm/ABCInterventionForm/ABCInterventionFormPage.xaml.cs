@@ -204,7 +204,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.ABCIntervent
             abc.setBreathing(breathing);
         }
 
-        private void BreathingFrequency_LostFocus(object sender, TextChangedEventArgs e)
+        private void BreathingFrequency_LostFocus(object sender, RoutedEventArgs e)
         {
             int breathingFrequency = -1;
             try { breathingFrequency = int.Parse(((TextBox)sender).Text); }
@@ -228,7 +228,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.ABCIntervent
             abc.setCirculation(circulation);
         }
 
-        private void CirculationFrequency_LostFocus(object sender, TextChangedEventArgs e)
+        private void CirculationFrequency_LostFocus(object sender, RoutedEventArgs e)
         {
             int circulationFrequency = -1;
             try { circulationFrequency = int.Parse(((TextBox)sender).Text); }
