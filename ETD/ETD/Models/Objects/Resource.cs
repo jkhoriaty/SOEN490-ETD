@@ -30,5 +30,15 @@ namespace ETD.Models.Objects
         {
             return team;
         }
+
+        public DateTime getMovingTime()
+        {
+            return moving;
+        }
+
+        public DateTime getArrivalTime()
+        {
+            return arrival;
+        }
     }
 }

@@ -134,7 +134,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm
 		{
             
 			detailsPage.PersistencyUpdate();
-			resourcesPage.PersistencyUpdate();
+			//resourcesPage.PersistencyUpdate();
 			//abcPage.PersistencyUpdate();
 			//additionalInfoPage.PersistencyUpdate();
 			endPage.PersistencyUpdate();
@@ -216,6 +216,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm
             detailsFrame.IsEnabled = false;
             resourcesFrame.IsEnabled = false;
             abcFrame.IsEnabled = false;
+            additionalInfoFrame.IsEnabled = false;
             endFrame.IsEnabled = false;
         }
     }
