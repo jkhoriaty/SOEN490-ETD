@@ -4,6 +4,9 @@ using ETD.Models;
 using ETD.ViewsPresenters.MapSection;
 using ETD.ViewsPresenters.MapSection.PinManagement;
 using ETD.ViewsPresenters;
+using ETD.Models.Objects;
+using ETD.Models.Services;
+using ETD.Models.Grids;
 namespace ETD_UnitTest
 {
     [TestClass]

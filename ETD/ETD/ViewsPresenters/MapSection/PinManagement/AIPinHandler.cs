@@ -46,24 +46,113 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 		}
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        // Set drawing status
+        // variables for drawing lines 
         private bool IsDrawing = false;
-        // Get starting and end point of a line
         private System.Windows.Point NewPt1, NewPt2;
-        // Store added lines
         private List<Line> Lines = new List<Line>();
         private Line newline;
 
-        public void DrawingStart(object sender, MouseButtonEventArgs e)
+        //variables for drawing shapes
+        private List<object> objectList = new List<object>();
+        private System.Windows.Shapes.Shape mapModObject;
+        private int _startX, _startY;
+        private System.Drawing.Rectangle _rect;
+
+
+        public void DrawingStart(object sender,MouseEventArgs e)
         {
+            
             IsDrawing = true;
             //get starting point
                 NewPt1 = e.GetPosition(AIPmap.AdditionalMap);
+            
+                _startX =Convert.ToInt32( NewPt1.X);
+                _startY = Convert.ToInt32(NewPt1.Y);
+             
         }
-
+     
         //draw the line
-        internal void DrawingMove(object sender, System.Windows.Input.MouseEventArgs e)
+        internal void DrawingMove(object sender, MouseEventArgs e)
         {
+              
+            /*NewPt2 = e.GetPosition(AIPmap.AdditionalMap);
+            //The x-value of our rectangle should be the minimum between the start x-value and the current x-position
+            int x = Convert.ToInt32(Math.Min(_startX, NewPt2.X));
+            //The y-value of our rectangle should also be the minimum between the start y-value and current y-value
+            int y = Convert.ToInt32(Math.Min(_startY, NewPt2.Y));
+            */
+
+            //The width of our rectangle should be the maximum between the start x-position and current x-position minus
+            //the minimum of start x-position and current x-position
+            int width =Convert.ToInt32( Math.Max(_startX, NewPt2.X) - Math.Min(_startX, NewPt2.X));
+
+            //For the height value, it's basically the same thing as above, but now with the y-values:
+            int height = Convert.ToInt32(Math.Max(_startY, NewPt2.Y) - Math.Min(_startY, NewPt2.Y));
+
+            //_rect = new System.Drawing.Rectangle(x, y, width, height);
+            
+            //rectangle - square
+            mapModObject = new System.Windows.Shapes.Rectangle();
+            mapModObject.Width = width;
+            mapModObject.Height = height;
+            mapModObject.Stroke = System.Windows.Media.Brushes.Black;
+            mapModObject.StrokeThickness = 4;
+           
+            if (NewPt2.X < NewPt1.X) //draw from right to left
+            {
+                mapModObject.Margin = new Thickness(NewPt2.X, NewPt2.Y, NewPt1.X, NewPt1.Y);
+            }
+            else //draw from left to right 
+            {
+                mapModObject.Margin = new Thickness(NewPt1.X, NewPt1.Y, NewPt2.X, NewPt2.Y);
+            }
+          
+            /*one method to create rectangle and circle
+
+             *   
+             * if(this.Name.Equals("circle") )
+             * {
+             *      mapModObject = new System.Windows.Shapes.Ellipse();
+             *      mapModObject.Stroke = System.Windows.Media.Brushes.Black;
+                    mapModObject.StrokeThickness = 4;
+             * }
+             if(this.Name.Equals("rectangle") )
+             * {
+             *      mapModObject = new System.Windows.Shapes.Rectangle();
+             *      mapModObject.Stroke = System.Windows.Media.Brushes.Black;
+                    mapModObject.StrokeThickness = 4;
+             * }
+             * else //ramp,stairs,camp
+             * {
+             *      mapModObject = new System.Windows.Shapes.Rectangle();
+             *      ImageBrush mapModImg = new ImageBrush();
+                    MapMods mapMod = (MapMods)Enum.Parse(typeof(MapMods), this.Name);
+                    mapModImg.ImageSource = TechnicalServices.getImage(mapMod);
+                    mapModObject.Fill = mapModImg;
+             * }
+
+            mapModObject.Width = width;
+            mapModObject.Height = height;
+             * 
+            if (NewPt2.X < NewPt1.X) //draw from right to left
+            {
+               mapModObject.Margin = new Thickness(NewPt2.X, NewPt2.Y, NewPt1.X, NewPt1.Y);
+            }
+            else //draw from left to right 
+            {
+               mapModObject.Margin = new Thickness(NewPt1.X, NewPt1.Y,NewPt2.X,NewPt2.Y);
+            }
+
+             * AIPmap.AdditionalMap.Children.Add(mapModObject);
+            */
+
+            objectList.Add(mapModObject);
+            //objectList.Add(circle);  
+            AIPmap.AdditionalMap.Children.Add(mapModObject);
+            //AIPmap.AdditionalMap.Children.Add(circle);
+           
+             /*line
+            
             newline = new Line();
             newline.Stroke = System.Windows.Media.Brushes.Black;
             newline.StrokeThickness = 4;
@@ -72,8 +161,20 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
             newline.X2 = NewPt2.X;
             newline.Y2 = NewPt2.Y;
  
-            Lines.Add(newline);
+            //Lines.Add(newline);
+            objectList.Add(newline);
             AIPmap.AdditionalMap.Children.Add(newline);
+             */
+        }
+
+        protected void OnPaint(System.Windows.Forms.PaintEventArgs e)
+        {
+            //Create a new 'pen' to draw our rectangle with, give it the color red and a width of 2
+            using (System.Drawing.Pen pen = new System.Drawing.Pen(System.Drawing.Brushes.Red, 2))
+            {
+                //Draw the rectangle on our form with the pen
+                e.Graphics.DrawRectangle(pen, _rect);
+            }
         }
 
         internal void Move(object sender, System.Windows.Input.MouseEventArgs e)
@@ -85,13 +186,27 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
             }
 
             //false, no element
-            bool isEmpty = !Lines.Any();
+            //bool isEmpty = !Lines.Any();
+            bool isEmpty = objectList.Any();
 
             //erase line when the escape key is pressed and the mouse is moving
             if (Keyboard.IsKeyDown(Key.Escape) && !isEmpty)
             {
+               
+                int objectIndex = objectList.Count -1;
+                AIPmap.AdditionalMap.Children.RemoveAt(objectList.Count);
+
+                if (objectIndex == 0 && objectList[0] != null)
+               {
+                   objectList.RemoveAt(0);
+               }
+               else
+               {
+                   objectList.RemoveAt(objectIndex);
+               }
+            /*
                 int i = Lines.Count - 1;
-                AIPmap.AdditionalMap.Children.RemoveAt(Lines.Count);
+                AIPmap.AdditionalMap.Children.RemoveAt(Lines.Count); 
 
                     if (i == 0 && Lines[0] != null)
                     {
@@ -101,6 +216,7 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
                     {
                         Lines.RemoveAt(i);
                     }
+              */
             }
         }
 
@@ -114,19 +230,43 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
             //scroll up
             if (e.Delta > 0)
             {
-                newline.Stroke = System.Windows.Media.Brushes.Red;
+                /*if (newline != null)
+                {
+                    newline.Stroke = System.Windows.Media.Brushes.Red;
+                }
+*/
+                if (objectList != null)
+                {
+                    foreach (Shape ob in objectList)
+                    {
+                        ob.Stroke = System.Windows.Media.Brushes.Red;
+                    }
+                    
+                }
+                
             }
             //scroll down to original color
             else
-            {
-                newline.Stroke = System.Windows.Media.Brushes.Black;
+            {/*
+                if (newline != null)
+                {
+                    newline.Stroke = System.Windows.Media.Brushes.Black;
+                }
+            */
+                if (objectList != null)
+                {
+                    foreach (Shape ob in objectList)
+                    {
+                        ob.Stroke = System.Windows.Media.Brushes.Black;
+                    }
+                }
             }
           
         }
 
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+        
 		//Left Mouse Button Up: Any pin
 		internal void DragStop(object sender, MouseButtonEventArgs e)
 		{
@@ -364,7 +504,7 @@ namespace ETD.ViewsPresenters.MapSection.PinManagement
 		}
 
 
-
+        
 
 
 	}

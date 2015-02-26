@@ -76,7 +76,7 @@ namespace ETD.ViewsPresenters
         //window closed
         public void WindowClosed(object sender, System.EventArgs e)
         {
-            MessageBox.Show("Saving map..");
+          //  MessageBox.Show("Saving map..");
 
            // Absolute path doesnt work..
            // Saving to desktop directory for now

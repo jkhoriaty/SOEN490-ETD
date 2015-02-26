@@ -14,7 +14,7 @@ namespace ETD.Models.Objects
       private String PriseEnCharge;
       private DateTime SuiviTimeStamp;
       private DateTime FaitTimeStamp;
-      private FollowUpInfo[] FollowUpInfo;
+      private FollowUpInfo[] FollowUpInfoList;
 
        public FollowUpInfo(String client,String demande,String priseendcharge, DateTime SuiviTime, DateTime FaitTime)
        {
@@ -28,12 +28,12 @@ namespace ETD.Models.Objects
 
         public void SetFollowUpInfo(int position, FollowUpInfo followUpinfo)
         {
-            this.FollowUpInfo[position] = followUpinfo;
+            this.FollowUpInfoList[position] = followUpinfo;
         }
 
         public FollowUpInfo[] getFollowUpInfo()
         {
-            return this.FollowUpInfo;
+            return this.FollowUpInfoList;
         }
 
 

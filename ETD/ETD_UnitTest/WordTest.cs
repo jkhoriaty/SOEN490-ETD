@@ -1,6 +1,8 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ETD.Models;
+using ETD.Models.Objects;
+using ETD.Models.Services;
 
 namespace ETD_UnitTest
 {

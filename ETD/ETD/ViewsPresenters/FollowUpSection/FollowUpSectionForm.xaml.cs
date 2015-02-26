@@ -249,6 +249,10 @@ namespace ETD.ViewsPresenters.FollowUpSection
             TextBoxHandler.setNow(SuiviTimeStampMap[bt.Name][0], SuiviTimeStampMap[bt.Name][1]);
         }
 
+        public void Timestamp_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 
 }

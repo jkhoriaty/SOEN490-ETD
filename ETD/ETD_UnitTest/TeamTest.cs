@@ -1,7 +1,9 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ETD.Models;
-
+using ETD.Models.Objects;
+using ETD.Models.Services;
+using ETD.Models.Grids;
 namespace ETD_UnitTest
 {
     [TestClass]

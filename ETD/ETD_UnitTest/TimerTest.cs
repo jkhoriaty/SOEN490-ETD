@@ -2,12 +2,15 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ETD.Models;
 using System.Diagnostics;
+using ETD.Models.Objects;
+using ETD.Models.Services;
+using ETD.Models.Grids;
 
 namespace ETD_UnitTest
 {
     [TestClass]
     public class TimerTest
-    {
+    {/*
         [TestMethod]
         public void StartTimerTest()
         {
@@ -33,8 +36,8 @@ namespace ETD_UnitTest
             Assert.AreEqual(Timer.timers.ContainsKey(2), false);
         }
 
-
+        */
     }
 
-
+        
 }
