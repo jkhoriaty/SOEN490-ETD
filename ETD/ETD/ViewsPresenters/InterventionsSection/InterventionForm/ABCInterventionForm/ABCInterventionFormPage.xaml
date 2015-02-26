@@ -51,7 +51,7 @@
 			<ComboBoxItem Content="Absent"/>
 		</ComboBox>
 		<StackPanel Grid.Column="2" Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-			<TextBox Name="BreathingFrequency" Width="25" TextChanged="BreathingFrequency_TextChanged"/>
+            <TextBox Name="BreathingFrequency" Width="25" LostFocus="BreathingFrequency_LostFocus"/>
 			<Label Content="/minute"/>
 		</StackPanel>
 		<StackPanel Grid.Column="0" Grid.Row="3" Orientation="Horizontal">
@@ -65,7 +65,7 @@
 			<ComboBoxItem Content="No Pulse"/>
 		</ComboBox>
 		<StackPanel Grid.Column="2" Grid.Row="3" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-			<TextBox Name="CirculationFrequency" Width="25" TextChanged="CirculationFrequency_TextChanged"/>
+            <TextBox Name="CirculationFrequency" Width="25" LostFocus="CirculationFrequency_LostFocus"/>
 			<Label Content="/minute"/>
 		</StackPanel>
 	</Grid>
