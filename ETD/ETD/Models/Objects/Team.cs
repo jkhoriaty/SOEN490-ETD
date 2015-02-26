@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 using ETD.CustomObjects.CustomUIObjects;
 using ETD.Models.ArchitecturalObjects;
 
+/// <summary>
+/// Team Model Object
+/// </summary>
 namespace ETD.Models.Objects
 {
 	public enum Statuses {available, moving, intervening, unavailable};
