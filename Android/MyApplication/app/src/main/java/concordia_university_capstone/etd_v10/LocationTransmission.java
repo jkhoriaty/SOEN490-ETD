@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -24,12 +25,10 @@ public class LocationTransmission extends ActionBarActivity
 	String serverIP;
 	int serverPort;
 
-	//GoogleApiClient apiClient;
-	//LocationRequest locationRequest;
-
     Button locationTransmission;
+    Button backToLogin;
+    CheckBox checkBox;
     Boolean isBroadCasting = false;
-    //public Intent intent = getIntent();
     Intent serviceIntent;
 
 	@Override
@@ -38,42 +37,41 @@ public class LocationTransmission extends ActionBarActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_location_transmission);
         locationTransmission = (Button) findViewById(R.id.button1);
+        checkBox = (CheckBox) findViewById(R.id.checkBox1);
+        backToLogin = (Button) findViewById(R.id.backButton);
+
         locationTransmission.setOnClickListener(new View.OnClickListener() {
             public void onClick (View v){
                 if(!isBroadCasting){
                     isBroadCasting = true;
                     locationTransmission.setText("Stop Transmitting Location");
-                    //startLocationUpdates(v);
-                    //startService(new Intent(getBaseContext(),BackgroundLocation.class));
                     startTransmitting();
                 }
                 else{
                     isBroadCasting = false;
                     locationTransmission.setText("Start Transmitting Location");
-                    //stopLocationUpdates(v);
-                    //stopService(new Intent(getBaseContext(),BackgroundLocation.class));
                     stopTransmitting();
                 }
             }
         });
-
-		/*Intent intent = getIntent();
-		deviceID = intent.getStringExtra("deviceID");
-		serverIP = intent.getStringExtra("serverIP");
-		serverPort = intent.getIntExtra("serverPort", -1);
-
-		buildGoogleApiClient();
-
-		createLocationRequest();*/
 	}
+
+    public void Back (View view)
+    {
+        checkBox.setChecked(false);
+        setContentView(R.layout.activity_login);
+        Toast.makeText(this, "Session disconnected.", Toast.LENGTH_SHORT).show();
+    }
 
     private void startTransmitting() {
         try{
             startService(serviceIntent);
+            checkBox.setChecked(true);
         }
         catch (Exception e)
         {
             e.printStackTrace();
+            checkBox.setChecked(false);
             Toast.makeText(getApplicationContext(), e.getClass().getName() + " " + e.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
@@ -82,30 +80,15 @@ public class LocationTransmission extends ActionBarActivity
         try
         {
             stopService(serviceIntent);
+            checkBox.setChecked(false);
         }
         catch (Exception e)
         {
             e.printStackTrace();
+            checkBox.setChecked(true);
             Toast.makeText(getApplicationContext(), e.getClass().getName() + " " + e.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
-
-    /*protected synchronized void buildGoogleApiClient()
-	{
-		apiClient = new GoogleApiClient.Builder(this)
-				.addConnectionCallbacks(this)
-				.addOnConnectionFailedListener(this)
-				.addApi(LocationServices.API)
-				.build();
-	}
-
-	protected void createLocationRequest()
-	{
-		locationRequest = new LocationRequest();
-		locationRequest.setInterval(10000);
-		locationRequest.setFastestInterval(1000);
-		locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-	}*/
 
 	@Override
 	protected void onStart()
@@ -119,50 +102,4 @@ public class LocationTransmission extends ActionBarActivity
             Toast.makeText(this, "can not create service", Toast.LENGTH_SHORT).show();
         }
 	}
-
-	/*@Override
-	protected void onStop()
-	{
-		super.onStop();
-		if(apiClient.isConnected())
-		{
-			apiClient.disconnect();
-		}
-	}
-
-	@Override
-	public void onConnected(Bundle connectionHint)
-	{
-		Log.i("ConnectionTestProcess", "Connection succeeded");
-	}
-
-	@Override
-	public void onConnectionFailed(ConnectionResult result)
-	{
-		Log.i("ConnectionTestProcess", "Connection failed: ConnectionResult.getErrorCode() = " + result.getErrorCode());
-	}
-
-	@Override
-	public void onConnectionSuspended(int cause)
-	{
-		Log.i("ConnectionTestProcess", "Connection suspended");
-		apiClient.connect();
-	}
-
-	public void startLocationUpdates(View view)
-	{
-		LocationServices.FusedLocationApi.requestLocationUpdates(apiClient, locationRequest, this);
-	}
-
-    public void stopLocationUpdates(View view)
-    {
-        LocationServices.FusedLocationApi.removeLocationUpdates(apiClient, this);
-
-    }
-
-	@Override
-	public void onLocationChanged(Location location)
-	{
-		new Thread(new LocationSenderThread(serverIP, serverPort, deviceID, location)).start();
-	}*/
 }

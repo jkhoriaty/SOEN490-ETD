@@ -6,6 +6,7 @@ import android.location.Location;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
+import android.widget.CheckBox;
 import android.widget.Toast;
 import android.view.View;
 
@@ -48,7 +49,6 @@ public class BackgroundLocation extends Service implements GoogleApiClient.Conne
     @Override
     public int onStartCommand(Intent intent, int flags, int startID)
     {
-        //Intent intent = getIntent();
         deviceID = intent.getStringExtra("deviceID");
         serverIP = intent.getStringExtra("serverIP");
         serverPort = intent.getIntExtra("serverPort", -1);

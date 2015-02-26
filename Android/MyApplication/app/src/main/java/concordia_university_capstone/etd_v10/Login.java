@@ -30,7 +30,7 @@ public class Login extends ActionBarActivity implements UDPHandshakeCallbacks
         name = (EditText) findViewById(R.id.editText1);
     }
 
-    public void login(View view)
+    public void Login(View view)
     {
 	    //Validate the name before sending request to the server
         if (name.getText().toString().matches("^[a-zA-Z]+$"))
