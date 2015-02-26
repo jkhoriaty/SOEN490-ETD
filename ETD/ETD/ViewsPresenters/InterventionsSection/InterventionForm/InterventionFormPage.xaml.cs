@@ -61,7 +61,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm
 			timersPage = new TimersInterventionFormPage(this, intervention);
 			detailsPage = new DetailsInterventionFormPage(this, intervention);
 			resourcesPage = new ResourcesInterventionFormPage(this, intervention);
-			abcPage = new ABCInterventionFormPage(this, intervention);
+			abcPage = new ABCInterventionFormPage(this, intervention.getABC());
 			additionalInfoPage = new AdditionalInfoInterventionFormPage(this, intervention);
 			endPage = new EndInterventionFormPage(this, intervention);
 
@@ -127,11 +127,13 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm
 		//Runs once per minute - Registers all changes in the form to the intervention object
 		public void PersistencyUpdate(object sender, EventArgs e)
 		{
+            
 			detailsPage.PersistencyUpdate();
 			resourcesPage.PersistencyUpdate();
-			abcPage.PersistencyUpdate();
+			//abcPage.PersistencyUpdate();
 			additionalInfoPage.PersistencyUpdate();
 			endPage.PersistencyUpdate();
+             
 		}
 
 		//Hiding intervention form after completion

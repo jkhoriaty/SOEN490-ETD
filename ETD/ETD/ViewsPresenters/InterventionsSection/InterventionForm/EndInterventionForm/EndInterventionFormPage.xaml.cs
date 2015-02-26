@@ -83,6 +83,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
 					else
 					{
 						intervention.Completed();
+                        intervention.setConclusionTime(endTime);
 						interventionForm.CompleteIntervention(offset);
 					}
 				}

@@ -58,6 +58,7 @@ namespace ETD.Models.Objects
             interventionNumber = ++lastIntervention;
             this.timeOfCall = DateTime.Now;
             additionalInfo = new InterventionAdditionalInfo[10];
+            this.abc = new ABC();
 
             activeInterventionList.Add(this);
 			MessageBox.Show("Create intervention notify");
@@ -343,7 +344,7 @@ namespace ETD.Models.Objects
                 return DateTime.Now - timeOfCall;
             }
             else
-            {
+            { 
                 return conclusionTime - timeOfCall;
             }
         }
