@@ -7,6 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+/// <summary>
+/// Equipment Model Object
+/// </summary>
+
 namespace ETD.CustomObjects.CustomUIObjects
 {
 	class EquipmentPin : Pin
