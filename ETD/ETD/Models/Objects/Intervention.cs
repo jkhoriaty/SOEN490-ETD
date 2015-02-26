@@ -21,7 +21,7 @@ namespace ETD.Models.Objects
 		private static List<Intervention> completedInterventionList = new List<Intervention>();
 
 		private int interventionNumber;
-		private List<Team> interveningTeamList = new List<Team>();
+		private List<Team> interveningTeamList;
 
         private DateTime timeOfCall;
         private String callerName;
@@ -34,7 +34,7 @@ namespace ETD.Models.Objects
 		private String chiefComplaint;
 		private String otherChiefComplaint;
 
-        private Resource[] resources = new Resource[10];
+        private Resource[] resources;
 
 		private ABC abc;
 
@@ -55,9 +55,11 @@ namespace ETD.Models.Objects
 
         public Intervention()
         {
-            interventionNumber = ++lastIntervention;
+            this.interveningTeamList = new List<Team>();
+            this.resources = new Resource[10];
+            this.interventionNumber = ++lastIntervention;
             this.timeOfCall = DateTime.Now;
-            additionalInfo = new InterventionAdditionalInfo[10];
+            this.additionalInfo = new InterventionAdditionalInfo[10];
             this.abc = new ABC();
 
             activeInterventionList.Add(this);
@@ -226,6 +228,10 @@ namespace ETD.Models.Objects
         {
             return this.additionalInfo[position];
         }
+        public InterventionAdditionalInfo[] getAllAdditionalInfo()
+        {
+            return this.additionalInfo;
+        }
 
 		public void setConclusion(String conclusion)
 		{
@@ -347,6 +353,16 @@ namespace ETD.Models.Objects
             { 
                 return conclusionTime - timeOfCall;
             }
+        }
+
+        public bool IsActive()
+        {
+            return activeInterventionList.Contains(this);
+        }
+
+        public bool IsCompleted()
+        {
+            return completedInterventionList.Contains(this);
         }
     }
 }

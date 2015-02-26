@@ -89,6 +89,11 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm
 			endFrame.Content = endPage;
 			end.Content = endFrame;
 
+            if(intervention.IsCompleted())
+            {
+                DisableForms();
+            }
+            
             details.Focus();
 		}
 
@@ -131,7 +136,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm
 			detailsPage.PersistencyUpdate();
 			resourcesPage.PersistencyUpdate();
 			//abcPage.PersistencyUpdate();
-			additionalInfoPage.PersistencyUpdate();
+			//additionalInfoPage.PersistencyUpdate();
 			endPage.PersistencyUpdate();
              
 		}
@@ -144,11 +149,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm
 			{
 				interventionSection.CompleteIntervention(getInterventionNumber());
 
-				timersFrame.IsEnabled = false;
-				detailsFrame.IsEnabled = false;
-				resourcesFrame.IsEnabled = false;
-				abcFrame.IsEnabled = false;
-				endFrame.IsEnabled = false;
+                DisableForms();
 			}
 		}
 
@@ -208,5 +209,14 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm
 		{
 			TimersInterventionFormPage.setMovingDeadline(deadline);
 		}
+
+        private void DisableForms()
+        {
+            timersFrame.IsEnabled = false;
+            detailsFrame.IsEnabled = false;
+            resourcesFrame.IsEnabled = false;
+            abcFrame.IsEnabled = false;
+            endFrame.IsEnabled = false;
+        }
     }
 }

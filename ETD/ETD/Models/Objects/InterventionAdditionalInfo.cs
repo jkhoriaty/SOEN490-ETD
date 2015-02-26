@@ -16,5 +16,15 @@ namespace ETD.Models.Objects
             this.information = information;
             this.timestamp = timestamp;
         }
+
+        public String getInformation()
+        {
+            return this.information;
+        }
+
+        public DateTime getTimestamp()
+        {
+            return this.timestamp;
+        }
     }
 }
