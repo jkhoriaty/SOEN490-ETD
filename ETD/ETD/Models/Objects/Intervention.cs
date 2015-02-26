@@ -23,7 +23,7 @@ namespace ETD.Models.Objects
 		private int interventionNumber;
 		private List<Team> interveningTeamList = new List<Team>();
 
-        private DateTime timeOfCall = DateTime.Now;
+        private DateTime timeOfCall;
         private String callerName;
         private String location;
         private String natureOfCall;
@@ -335,5 +335,17 @@ namespace ETD.Models.Objects
 		{
 			return ambulanceArrivalTime;
 		}
+
+        public TimeSpan getElapsed()
+        {
+            if (activeInterventionList.Contains(this))
+            {
+                return DateTime.Now - timeOfCall;
+            }
+            else
+            {
+                return conclusionTime - timeOfCall;
+            }
+        }
     }
 }

@@ -157,7 +157,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
 				conclusionmm = int.Parse(Endmm.Text);
 			}
 			DateTime conclusionTime = DateTime.Now;
-			conclusionTime = conclusionTime.Date + new TimeSpan(conclusionhh, conclusionmm, 0);
+			conclusionTime = conclusionTime.Date + new TimeSpan(conclusionhh, conclusionmm, conclusionTime.Second);
 			intervention.setConclusionTime(conclusionTime);
 
 			if(selectionChanged)

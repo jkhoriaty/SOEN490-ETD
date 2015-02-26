@@ -16,13 +16,14 @@ using ETD.ViewsPresenters.InterventionsSection.InterventionForm;
 using ETD.Models.Objects;
 using System.Threading;
 using System.Windows.Threading;
+using ETD.Models.ArchitecturalObjects;
 
 namespace ETD.ViewsPresenters.InterventionsSection
 {
 	/// <summary>
 	/// Interaction logic for InterventionSectionPage.xaml
 	/// </summary>
-	public partial class InterventionSectionPage : Page
+	public partial class InterventionSectionPage : Page, Observer
 	{
 		private MainWindow mainWindow;
         List<String[]> addResource_Buffer = new List<String[]>();
@@ -42,6 +43,8 @@ namespace ETD.ViewsPresenters.InterventionsSection
             reportArrival_DispatcherTimer = new DispatcherTimer();
             reportArrival_DispatcherTimer.Tick += new EventHandler(ReportArrival_Refresh);
             reportArrival_DispatcherTimer.Interval = new TimeSpan(0, 0, 1); //Update every second
+
+            Intervention.RegisterObserver(this);
 		}
 
 		//Adjusting the intervention section width
@@ -52,7 +55,8 @@ namespace ETD.ViewsPresenters.InterventionsSection
 
 		private void CreateIntervention_Click(object sender, RoutedEventArgs e)
 		{
-            CreateIntervention();
+            //CreateIntervention();
+            Intervention intervention = new Intervention(); 
 		}
 
         internal void CreateIntervention()
@@ -208,6 +212,38 @@ namespace ETD.ViewsPresenters.InterventionsSection
                 }
             }
             return null;
+        }
+
+        public void ObservedObjectUpdated()
+        {
+            InterventionsList.Children.Clear();
+            foreach (Intervention intervention in Intervention.getActiveInterventionList())
+            {
+                Frame frame = new Frame();
+                InterventionFormPage form = new InterventionFormPage(this, intervention);
+                frame.Content = form;
+                frame.Name = "Intervention_" + form.getInterventionNumber();
+                frame.Tag = "Ongoing";
+                if (!InterventionFilterLabel.Content.Equals("Ongoing"))
+                {
+                    frame.Visibility = Visibility.Collapsed;
+                }
+                InterventionsList.Children.Add(frame);
+            }
+            foreach (Intervention intervention in Intervention.getCompletedInterventionList())
+            {
+                Frame frame = new Frame();
+                InterventionFormPage form = new InterventionFormPage(this, intervention);
+                //form.CompleteIntervention(0);
+                frame.Content = form;
+                frame.Name = "Intervention_" + form.getInterventionNumber();
+                frame.Tag = "Completed";
+                if (!InterventionFilterLabel.Content.Equals("Completed"))
+                {
+                    frame.Visibility = Visibility.Collapsed;
+                }
+                InterventionsList.Children.Add(frame);
+            }
         }
 	}
 }

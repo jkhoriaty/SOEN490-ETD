@@ -29,6 +29,11 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.ABCIntervent
 			InitializeComponent();
 			this.interventionForm = interventionForm;
 			this.intervention = intervention;
+            ABC abc = intervention.getABC();
+
+            
+
+
 		}
 
 		public void PersistencyUpdate()

@@ -75,7 +75,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.DetailsInter
 				DateTime callTime = intervention.getTimeOfCall();
 				int hours = int.Parse(Callhh.Text);
 				int minutes = int.Parse(Callmm.Text);
-				callTime = callTime.Date + (new TimeSpan(hours, minutes, 0));
+				callTime = callTime.Date + (new TimeSpan(hours, minutes, callTime.Second));
 				intervention.setTimeOfCall(callTime);
 			}
 			catch (Exception e) { }

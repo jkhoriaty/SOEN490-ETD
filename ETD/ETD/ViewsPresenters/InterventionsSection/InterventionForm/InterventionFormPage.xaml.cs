@@ -58,7 +58,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm
 			dispatcherTimer.Interval += new TimeSpan(0, 0, 30);
 			dispatcherTimer.Start();
 
-			timersPage = new TimersInterventionFormPage(this);
+			timersPage = new TimersInterventionFormPage(this, intervention);
 			detailsPage = new DetailsInterventionFormPage(this, intervention);
 			resourcesPage = new ResourcesInterventionFormPage(this, intervention);
 			abcPage = new ABCInterventionFormPage(this, intervention);
