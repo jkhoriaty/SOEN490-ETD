@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Error>
+  <ValidationFormError>
+    <fr></fr>
+    <en>Validation has failed. Please change the boxes with a red border.</en>
+  </ValidationFormError>
+</Error>
