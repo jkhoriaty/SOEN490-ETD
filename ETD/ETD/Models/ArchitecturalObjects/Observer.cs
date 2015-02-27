@@ -8,6 +8,6 @@ namespace ETD.Models.ArchitecturalObjects
 {
 	public interface Observer
 	{
-		void ObservedObjectUpdated();
+		void Update();
 	}
 }

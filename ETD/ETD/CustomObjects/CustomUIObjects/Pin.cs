@@ -16,12 +16,14 @@ namespace ETD.CustomObjects.CustomUIObjects
 {
 	class Pin : Grid
 	{
-		private static List<Pin> pinList = new List<Pin>(); //Contains all pins, used for collision detection
-		private static Dictionary<object, double[]> pinPositionList = new Dictionary<object, double[]>(); //Used to recover previous pin position after ObservedObjectUpdated callback that clears the whole map
+		internal static List<Pin> pinList = new List<Pin>(); //Contains all pins, used for collision detection
+		private static Dictionary<object, double[]> pinPositionList = new Dictionary<object, double[]>(); //Used to recover previous pin position after Update callback that clears the whole map
+
+		private static Pin draggedPin;
 
 		private object relatedObject;
 
-		//Creating Grid with passed parameters
+		//Creating regular pin
 		public Pin(object relatedObject, MapSectionPage mapSection, int size) : base()
 		{
 			//Setting relatedObject, used for position recovery
@@ -38,6 +40,15 @@ namespace ETD.CustomObjects.CustomUIObjects
 			(this.ContextMenu.Items[0] as MenuItem).IsChecked = true;
 
 			//Adding the pin to the list of all pins
+			pinList.Add(this);
+		}
+
+		//Constructor for Creating border pin
+		public Pin(InterventionPin interventionPin)
+		{
+			this.relatedObject = interventionPin;
+
+			//Adding the border pin to the list of all pins
 			pinList.Add(this);
 		}
 
@@ -108,13 +119,13 @@ namespace ETD.CustomObjects.CustomUIObjects
 		}
 
 		//Get the X value of the center of the grid
-		private double getX()
+		internal double getX()
 		{
 			return Canvas.GetLeft(this) + (this.Width / 2);
 		}
 
 		//Get the Y value of the center of the grid
-		private double getY()
+		internal double getY()
 		{
 			return Canvas.GetTop(this) + (this.Height / 2);
 		}
@@ -126,40 +137,73 @@ namespace ETD.CustomObjects.CustomUIObjects
 			pinList.Clear();
 		}
 
-		private bool PinOfType(String type)
+		internal bool IsOfType(String type)
 		{
-			return this.GetType().Equals("ETD.Models.CustomUIObjects." + type);
+			return this.GetType().ToString().Equals("ETD.CustomObjects.CustomUIObjects." + type);
+		}
+
+		//Drag starting (when mouse left button is clicked)
+		public virtual void DragStart()
+		{
+			draggedPin = this;
+		}
+
+		//Drag in progress
+		public virtual void DragMove(Canvas Canvas_map, MouseEventArgs e)
+		{
+			//Get the position of the mouse relative to the Canvas
+			var mousePosition = e.GetPosition(Canvas_map);
+
+			//Keep the object within bounds even when user tries to drag it outside of them
+			if (mousePosition.X < (this.Width / 2) || (Canvas_map.ActualWidth - (this.Width / 2)) < mousePosition.X || mousePosition.Y < (this.Height / 2) || (Canvas_map.ActualHeight - (this.Height / 2)) < mousePosition.Y)
+			{
+				return;
+			}
+
+			//If all conditions are met, place the object at the mouse position
+			this.setPinPosition(mousePosition.X, mousePosition.Y);
+		}
+
+		//Object dropped (Left mouse button released)
+		public virtual void DragStop(Canvas Canvas_map, MouseButtonEventArgs e)
+		{
+			//Handling situation where method is called on the pin that was not being dragged
+			if (this != draggedPin)
+			{
+				return;
+			}
+			this.ReleaseMouseCapture();
+
+			CollisionDetectionAndResolution(Canvas_map);
+		}
+
+		//Returns true if this pin (the moved pin) overlaps the fixed pin passed as an argument more than 25%, false otherwise
+		internal bool SufficientOverlap(Pin fixedPin)
+		{
+			if (this.getX() > (fixedPin.getX() - (this.Width / 2)) && this.getX() < (fixedPin.getX() + (this.Width / 2)) && this.getY() > (fixedPin.getY() - (this.Height / 2)) && this.getY() < (fixedPin.getY() + (this.Height / 2)))
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+		internal void CollisionDetectionAndResolution(Canvas Canvas_map)
+		{
+			CollisionDetectionAndResolution(Canvas_map, false);
 		}
 
 		//Collision detection and resolution on the pin
-		public void CollisionDetectionAndResolution(Canvas Canvas_map)
+		internal void CollisionDetectionAndResolution(Canvas Canvas_map, bool defaultPosition)
 		{
+			MessageBox.Show("" + this);
 			double movedPin_X = this.getX();
 			double movedPin_Y = this.getY();
 
-			//Replacing item within horizontal bounds
-			if (movedPin_X > (Canvas_map.ActualWidth - (this.Width / 2))) //Right
-			{
-				movedPin_X = Canvas_map.ActualWidth - (this.Width / 2);
-			}
-			else if (movedPin_X < (this.Width / 2)) //Left
-			{
-				movedPin_X = (this.Width / 2);
-			}
-
-			//Replacing item within vertical bounds
-			if (movedPin_Y > (Canvas_map.ActualHeight - (this.Height / 2))) //Bottom
-			{
-				movedPin_Y = Canvas_map.ActualHeight - (this.Height / 2);
-			}
-			else if (movedPin_Y < (this.Height / 2)) //Top
-			{
-				movedPin_Y = (this.Height / 2);
-			}
-
 			bool collisionDetected = true;
 			int verificationCount = 0;
-			Grid intervention = null;
 
 			//Loop to make sure that last verification ensures no collision with any object
 			while (collisionDetected == true)
@@ -167,8 +211,9 @@ namespace ETD.CustomObjects.CustomUIObjects
 				collisionDetected = false;
 				verificationCount++;
 
+				List<Pin> pinListCopy = new List<Pin>(pinList);
 				//Iterating throught all pins
-				foreach (Pin fixedPin in pinList)
+				foreach (Pin fixedPin in pinListCopy)
 				{
 					//Skipping collision-detection with itself
 					if (fixedPin == this)
@@ -176,28 +221,15 @@ namespace ETD.CustomObjects.CustomUIObjects
 						continue;
 					}
 
-					//If collision detection is being done on an intervention border, ignore collision with all pins related to it
-					bool related = false;
-					/*if (this.GetType().Equals("ETD.Models.CustomUIObjects.InterventionContainer"))
+					//Handling all special cases no matter what the movedPin is except if it just got added
+					if (!defaultPosition)
 					{
-						foreach (KeyValuePair<Grid, BorderGrid> interventionBorderPair in interventionBorders)
+						bool skipCollisionDetection = HandleSpecialCollisions(fixedPin);
+
+						if (skipCollisionDetection)
 						{
-							if (interventionBorderPair.Value == this && (activeTeams[interventionBorderPair.Key].Contains(fixedPin) || fixedPin == interventionBorderPair.Key))
-							{
-								intervention = interventionBorderPair.Key;
-								related = true;
-							}
+							continue;
 						}
-					}
-
-					if (this.GetType().Equals("ETD.Models.CustomUIObjects.InterventionPin") && fixedPin.GetType().Equals("ETD.Models.CustomUIObjects.InterventionContainer")  && interventionBorders.ContainsKey(this) && interventionBorders[this] == fixedPin)
-					{
-						related = true;
-					}*/
-
-					if (related)
-					{
-						continue;
 					}
 
 					//Getting the position of where the rectangle has been dropped (center point)
@@ -205,30 +237,13 @@ namespace ETD.CustomObjects.CustomUIObjects
 					double fixedPin_Y = fixedPin.getY();
 
 					//If equipment is dropped on team and it overlaps more than 25% (assumption: not by mistake)
-					if (this.GetType().Equals("ETD.Models.CustomUIObjects.EquipmentPin") && fixedPin.GetType().Equals("ETD.Models.CustomUIObjects.TeamPin") && movedPin_X > (fixedPin_X - (this.Width / 2)) && movedPin_X < (fixedPin_X + (this.Width / 2)) && movedPin_Y > (fixedPin_Y - (this.Height / 2)) && movedPin_Y < (fixedPin_Y + (this.Height / 2)))
+					/*if (this.GetType().Equals("ETD.Models.CustomUIObjects.EquipmentPin") && fixedPin.GetType().Equals("ETD.Models.CustomUIObjects.TeamPin") && movedPin_X > (fixedPin_X - (this.Width / 2)) && movedPin_X < (fixedPin_X + (this.Width / 2)) && movedPin_Y > (fixedPin_Y - (this.Height / 2)) && movedPin_Y < (fixedPin_Y + (this.Height / 2)))
 					{
 						//mapSection.AddTeamEquipment(this.Name, fixedPin.Name);
 						Canvas parent = (Canvas)this.Parent;
 						parent.Children.Remove(this);
 						return;
-					}
-
-					//If a team is dropped on an intervention and it overlaps more than 25% of the moved pin
-					if (this.GetType().Equals("ETD.Models.CustomUIObjects.TeamPin") && fixedPin.GetType().Equals("ETD.Models.CustomUIObjects.InterventionPin") && movedPin_X > (fixedPin_X - (fixedPin.Width / 2)) && movedPin_X < (fixedPin_X + (fixedPin.Width / 2)) && movedPin_Y > (fixedPin_Y - (fixedPin.Height / 2)) && movedPin_Y < (fixedPin_Y + (fixedPin.Height / 2)))
-					{/*
-						//Add the team to the intervention, create or change the intervention border appropriately
-						if (!interventionBorders.ContainsKey(fixedPin))
-						{
-							BorderGrid borderGrid = new BorderGrid(fixedPin.Name, fixedPin.Width, fixedPin.Height + this.Height);
-							Canvas_map.Children.Add(borderGrid);
-							interventionBorders.Add(fixedPin, borderGrid);
-							activeTeams.Add(fixedPin, new List<Grid>());
-						}
-						activeTeams[fixedPin].Add(this);
-						DrawInterventionBorder(fixedPin);
-						mapSection.AddResource(this.Name, fixedPin.Name);
-						return;*/
-					}
+					}*/
 
 					//Checking if the dropped rectangle is within the bounds of any other rectangle
 					while (movedPin_X > (fixedPin_X - ((this.Width / 2) + (fixedPin.Width / 2))) && movedPin_X < (fixedPin_X + ((this.Width / 2) + (fixedPin.Width / 2))) && movedPin_Y > (fixedPin_Y - ((this.Height / 2) + (fixedPin.Height / 2))) && movedPin_Y < (fixedPin_Y + ((this.Height / 2) + (fixedPin.Height / 2))))
@@ -287,10 +302,9 @@ namespace ETD.CustomObjects.CustomUIObjects
 							}
 						}
 
-						//Handling situation where object is dropped between two others and is just bouncing around, placing object in the middle
+						//Handling situation where object is dropped between two others and is just bouncing around, moving it left or right depending on the part of the map the pin is on
 						if (verificationCount > 100)
 						{
-							MessageBox.Show("The dropped object is dropped between two objects and is bouncing around with no progress. Resetting it.");
 							if (movedPin_Y < (Canvas_map.ActualHeight / 2))
 							{
 								movedPin_Y += fixedPin.Height;
@@ -347,24 +361,26 @@ namespace ETD.CustomObjects.CustomUIObjects
 							}
 						}
 					}
-
 				}
 			}
 
 			//Drop the rectangle if there are not collision or after resolution of collision
 			setPinPosition(movedPin_X, movedPin_Y);
-			/*
-			//If the border has moved, replace all items back in the border
-			if (this.GetType().Equals("ETD.Models.CustomUIObjects.InterventionContainer") && intervention != null)
-			{
-				setPinPosition(intervention, movedPin_X, movedPin_Y - (this.Height / 2) + (intervention.Height / 2));
-				PlaceInterventionPins(intervention);
-			}
 
-			if (interventionBorders.ContainsKey(this))
-			{
-				DetectCollision(interventionBorders[this], movedPin_X, movedPin_Y - (this.Height / 2) + (interventionBorders[this].Height / 2));
-			}*/
+			//Trigger after collision detection special tasks
+			AfterCollisionDetection(Canvas_map);
+		}
+		
+		//Handling special cases of collision detection, default: nothing has been handled
+		internal virtual bool HandleSpecialCollisions(Pin fixedPin)
+		{
+			return false;
+		}
+
+		//Handling cases where some pins need to trigger actions for the correct placement of all pins, default: do nothing
+		internal virtual void AfterCollisionDetection(Canvas Canvas_map)
+		{
+			return;
 		}
 	}
 }

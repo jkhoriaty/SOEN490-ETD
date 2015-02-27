@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ETD.CustomObjects.CustomUIObjects;
 using ETD.Models.ArchitecturalObjects;
+using System.Windows;
 
 namespace ETD.Models.Objects
 {
@@ -12,6 +13,8 @@ namespace ETD.Models.Objects
 
     public class Team : Observable
     {
+		private static List<Observer> observerList = new List<Observer>();
+
 		static List<Team> teamList = new List<Team>();
 
         String name;
@@ -23,6 +26,7 @@ namespace ETD.Models.Objects
 
         public Team(String name)
         {
+			MessageBox.Show("Create team notify");
             this.name = name;
 			status = Statuses.available;
 
@@ -59,6 +63,7 @@ namespace ETD.Models.Objects
 				{
 					highestLevelOfTraining = mem.getTrainingLevel();
 				}
+				MessageBox.Show("Add team member notify");
 				NotifyAll();
                 return true;
             }
@@ -93,9 +98,10 @@ namespace ETD.Models.Objects
 			NotifyAll();
         }
 
-        public void setStatus(Statuses s)
+        public void setStatus(String s)
         {
-            this.status = s;
+			this.status = (Statuses)Enum.Parse(typeof(Statuses), s); ;
+			MessageBox.Show("Set status team notify");
 			NotifyAll();
         }
 

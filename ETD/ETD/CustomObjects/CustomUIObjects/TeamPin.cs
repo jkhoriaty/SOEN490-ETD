@@ -8,14 +8,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace ETD.CustomObjects.CustomUIObjects
 {
 	class TeamPin : Pin
 	{
-		private static int size = 40;
+		internal static int size = 40;
 
 		private Team team;
+		private InterventionPin interventionPin;
 
 		public TeamPin(Team team, MapSectionPage mapSection) : base(team, mapSection, size)
 		{
@@ -23,6 +25,53 @@ namespace ETD.CustomObjects.CustomUIObjects
 			base.setText(team.getName());
 
 			this.team = team; //Providing a link to the team that this pin represents
+		}
+
+		internal Team getTeam()
+		{
+			return team;
+		}
+
+		public override void DragStop(Canvas Canvas_map, MouseButtonEventArgs e)
+		{
+			base.DragStop(Canvas_map, e);
+
+			if (interventionPin != null && interventionPin.getInterventionContainer() != null)
+			{
+				if(SufficientOverlap(interventionPin.getInterventionContainer())) //Considered accidental drag-and-drop
+				{
+					MessageBox.Show("here");
+					interventionPin.getInterventionContainer().PlaceAll();
+				}
+				else
+				{
+					MessageBox.Show("there");
+					interventionPin.getIntervention().RemoveTeam(team);
+					team.setStatus("unavailable");
+					interventionPin = null;
+				}
+			}
+			else
+			{
+				team.setStatus("moving");
+			}
+		}
+
+		internal override bool HandleSpecialCollisions(Pin fixedPin)
+		{
+			//SpecialCollision: Team is dropped on intervention, add team to intervention
+			if(fixedPin.IsOfType("InterventionPin") && SufficientOverlap(fixedPin))
+			{
+				MessageBox.Show("Called");
+				interventionPin = (InterventionPin)fixedPin;
+				interventionPin.getIntervention().AddTeam(team);
+				interventionPin.getInterventionContainer();
+				return true;
+			}
+			else
+			{
+				return false;
+			}
 		}
 	}
 }

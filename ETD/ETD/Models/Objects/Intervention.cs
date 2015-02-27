@@ -16,6 +16,8 @@ namespace ETD.Models.Objects
 
     public class Intervention : Observable
     {
+		public static List<Observer> observerList = new List<Observer>();
+
 		private static int lastIntervention = 0;
 		private static List<Intervention> activeInterventionList = new List<Intervention>();
 		private static List<Intervention> completedInterventionList = new List<Intervention>();

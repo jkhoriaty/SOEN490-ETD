@@ -89,7 +89,7 @@ namespace ETD.ViewsPresenters.TeamsSection
 			createTeamForm = null;
 		}
 
-		public void ObservedObjectUpdated()
+		public void Update()
 		{
 			StackPanel_teamList.Children.Clear();
 			foreach(Team team in Team.getTeamList())

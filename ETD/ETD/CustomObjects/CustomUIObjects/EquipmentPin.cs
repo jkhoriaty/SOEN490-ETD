@@ -11,7 +11,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 {
 	class EquipmentPin : Pin
 	{
-		private static int size = 30;
+		internal static int size = 30;
 
 		private Equipment equipment;
 
