@@ -31,7 +31,31 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
 			InitializeComponent();
 			this.interventionForm = interventionForm;
 			this.intervention = intervention;
+            FillForm(intervention);
 		}
+
+        private void FillForm(Intervention intervention)
+        {
+            if (intervention.getConclusion() != null)
+            {
+                int index = -1;
+                foreach (ComboBoxItem cb in ConclusionBox.Items)
+                {
+                    index++;
+                    if (cb.Content.ToString() == intervention.getConclusion())
+                    {
+                        break;
+                    }
+                }
+                ConclusionBox.SelectedIndex = index;
+            }
+            if (intervention.getConclusionTime().Hour != 0 && intervention.getConclusionTime().Minute != 0)
+            {
+                Endhh.Text = intervention.getConclusionTime().Hour.ToString();
+                Endmm.Text = intervention.getConclusionTime().Minute.ToString();
+            }
+        }
+
 
 		private void TextBoxes_GotFocus(object sender, RoutedEventArgs e)
 		{
@@ -41,6 +65,12 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
 		private void TextBoxes_LostFocus(object sender, RoutedEventArgs e)
 		{
 			TextBoxHandler.LostFocus(sender, e);
+            try
+            {
+                DateTime concTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, Convert.ToInt32(Endhh.Text), Convert.ToInt32(Endmm.Text), 0);
+                intervention.setConclusionTime(concTime);
+            }
+            catch { }
 		}
 
 		//Submitting end of intervention
@@ -105,6 +135,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
 
 			ComboBox comboBox = (ComboBox)sender;
 			ComboBoxItem item = (ComboBoxItem)comboBox.SelectedItem;
+            intervention.setConclusion(item.Content.ToString());
 			if (item.Name.Equals("call911") || item.Name.Equals("other") || item.Name.Equals("doctor"))
 			{
 				Grid.SetColumnSpan(ComboBoxBorder, 1);
@@ -223,6 +254,12 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
 		private void End_Click(object sender, RoutedEventArgs e)
 		{
 			TextBoxHandler.setNow(Endhh, Endmm);
+            try
+            {
+                DateTime concTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, Convert.ToInt32(Endhh.Text), Convert.ToInt32(Endmm.Text), 0);
+                intervention.setConclusionTime(concTime);
+            }
+            catch { }
 		}
 
 		private void Call_Click(object sender, RoutedEventArgs e)
