@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using ETD.ViewsPresenters.InterventionsSection.InterventionForm;
 using System.Windows.Threading;
 using System.Diagnostics;
+using ETD.Models.Objects;
 
 namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.TimersInterventionForm
 {
@@ -25,6 +26,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.TimersInterv
 	{
         private const int TIMER_LIMIT = 13;
         private InterventionFormPage interventionForm;
+        private Intervention intervention;
 		private int timerPosition = 1;
 
 
@@ -40,10 +42,11 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.TimersInterv
 		private static int interventionDeadline = 30;
 		private static int movingDeadline = 5;
 
-		public TimersInterventionFormPage(InterventionFormPage interventionForm)
+		public TimersInterventionFormPage(InterventionFormPage interventionForm, Intervention intervention)
 		{
 			InitializeComponent();
 			this.interventionForm = interventionForm;
+            this.intervention = intervention;
 
 			for (int i = 0; i < endOffsets.Length; i++)
 			{
@@ -55,7 +58,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.TimersInterv
 			dispatcherTimer.Interval = new TimeSpan(0, 0, 1); //Update every second
 			dispatcherTimer.Start();
 
-			CreateOverallTimer(0);
+            CreateOverallTimer((int)intervention.getElapsed().TotalSeconds);
 		}
 
 		//Method ran every second
@@ -105,9 +108,9 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.TimersInterv
 		//Create the intervention timer
 		public void CreateOverallTimer(int offset)
 		{
+            offsets[0] = offset;
 			if (stopwatches[0] != null)
 			{
-				offsets[0] = offset;
 				stopwatches[0].Restart();
 			}
 			else
@@ -150,7 +153,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.TimersInterv
 				statusLabels[0] = status;
 				setStatus(0, "Ongoing");
 
-				Stopwatch stopwatch = new Stopwatch();
+                Stopwatch stopwatch = new Stopwatch();
 				stopwatches[0] = stopwatch;
 				stopwatch.Start();
 			}
@@ -300,7 +303,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.TimersInterv
 
 		public bool StopOverallTimer(int offset)
 		{
-			int timeFromStart = stopwatches[0].Elapsed.Minutes + offsets[0];
+			int timeFromStart = stopwatches[0].Elapsed.Seconds + offsets[0];
 			if (timeFromStart >= offset)
 			{
 				endOffsets[0] = offset;

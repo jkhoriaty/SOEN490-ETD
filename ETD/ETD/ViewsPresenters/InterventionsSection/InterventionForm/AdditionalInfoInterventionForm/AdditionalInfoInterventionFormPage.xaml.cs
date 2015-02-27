@@ -27,16 +27,19 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.AdditionalIn
 		private Dictionary<String, TextBox> additionnalInformationMap = new Dictionary<String, TextBox>();
 		private Dictionary<String, TextBox[]> timestampMap = new Dictionary<String, TextBox[]>();
 		private Dictionary<String, String> equivalentKeyMap = new Dictionary<String, String>();
+        private bool changed;
 
 		public AdditionalInfoInterventionFormPage(InterventionFormPage interventionForm, Intervention intervention)
 		{
 			InitializeComponent();
+            changed = false;
 			this.interventionForm = interventionForm;
 			this.intervention = intervention;
 
 			setupAdditionnalInformationMap();
 			setupTimestampMap();
 			setupEquivalentKeyMap();
+            FillForm();
 		}
 
 		private void setupAdditionnalInformationMap()
@@ -80,6 +83,23 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.AdditionalIn
 			equivalentKeyMap.Add("AdditionalInformation8", "Timestamp8");
 			equivalentKeyMap.Add("AdditionalInformation9", "Timestamp9");
 		}
+
+        private void FillForm()
+        {
+            InterventionAdditionalInfo[] interventionAI = intervention.getAllAdditionalInfo();
+
+            for(int i = 0; i < interventionAI.Length; i++)
+            {
+                if(interventionAI[i] != null)
+                {
+                    additionnalInformationMap["AdditionalInformation" + i].Text = interventionAI[i].getInformation();
+                    DateTime time = interventionAI[i].getTimestamp();
+                    timestampMap["Timestamp" + i][0].Text = time.Hour.ToString();
+                    timestampMap["Timestamp" + i][1].Text = time.Minute.ToString();
+                }
+            }
+            
+        }
 
 		public void PersistencyUpdate()
 		{
@@ -146,12 +166,13 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.AdditionalIn
 			DateTime timestamp = DateTime.Now;
 			timestamp = timestamp.Date + new TimeSpan(timestamphh, timestampmm, 0);
 
-			intervention.setAdditionalInfo(position, new Intervention.AdditionalInformation(AdditionalInformation.Text, timestamp));
+			intervention.setAdditionalInfo(position, new InterventionAdditionalInfo(AdditionalInformation.Text, timestamp));
 		}
 
 		private void AdditionalInformation_GotFocus(object sender, RoutedEventArgs e)
 		{
 			TextBox tb = (TextBox)sender;
+            
 			if(tb.Text.Equals(""))
 			{
 				TextBoxHandler.setNow(timestampMap[equivalentKeyMap[tb.Name]][0], timestampMap[equivalentKeyMap[tb.Name]][1]);
@@ -173,5 +194,21 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.AdditionalIn
 			Button bt = (Button)sender;
 			TextBoxHandler.setNow(timestampMap[bt.Name][0], timestampMap[bt.Name][1]);
 		}
+
+        private void AdditionalInformation_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            changed = true;
+        }
+
+        private void AdditionalInformation_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if(changed)
+            {
+                TextBox tb = (TextBox)sender;
+                int index = int.Parse(tb.Name.ToCharArray()[tb.Name.Length - 1].ToString());
+                UpdateAdditionalInformation(index, tb, timestampMap[equivalentKeyMap[tb.Name]][0], timestampMap[equivalentKeyMap[tb.Name]][1]);
+                changed = false;
+            }
+        }
 	}
 }

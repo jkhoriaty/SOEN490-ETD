@@ -40,12 +40,12 @@
     <Compile Include="CustomObjects\CustomUIObjects\InterventionContainer.cs" />
     <Compile Include="CustomObjects\CustomUIObjects\EquipmentPin.cs" />
     <Compile Include="CustomObjects\CustomUIObjects\InterventionPin.cs" />
+    <Compile Include="CustomObjects\CustomUIObjects\MapModPin.cs" />
     <Compile Include="CustomObjects\CustomUIObjects\Pin.cs" />
     <Compile Include="CustomObjects\CustomUIObjects\TeamPin.cs" />
     <Compile Include="Models\Objects\ABC.cs" />
-    <Compile Include="Models\Objects\AdditionalInfo.cs" />
-    <Compile Include="CustomObjects\CustomUIObjects\AdditionalInfoGrid.cs" />
     <Compile Include="Models\Objects\InterventionAdditionalInfo.cs" />
+    <Compile Include="Models\Objects\MapMod.cs" />
     <Compile Include="Models\Objects\Request.cs" />
     <Compile Include="Models\Objects\Intervention.cs" />
     <Compile Include="CustomObjects\PopupForms\FollowUpSectionForm.xaml.cs">
@@ -325,6 +325,7 @@
     <Content Include="Icons\statExport.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Resources\ErrorMessages.xml" />
     <Content Include="Resources\Vocabulary.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>

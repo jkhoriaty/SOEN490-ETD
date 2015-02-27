@@ -5,6 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 using ETD.Models.Objects;
+using ETD.ViewsPresenters.MapSection;
+using System.Drawing;
+using System.Windows;
+using System.Windows.Media;
+
 
 namespace ETD.Services
 {
@@ -59,15 +64,15 @@ namespace ETD.Services
 		};
 
 
-        private static Dictionary<AdditionalInfos, String> AdditionalInfoPath = new Dictionary<AdditionalInfos, String>
+        private static Dictionary<MapMods, String> MapModPath = new Dictionary<MapMods, String>
         {
-            {AdditionalInfos.camp, @"\Icons\camp.png"},
-            {AdditionalInfos.circle, @"\Icons\circle.png"},
-            {AdditionalInfos.line, @"\Icons\lineCanvas.png"},
-            {AdditionalInfos.rectangle, @"\Icons\rectangle.png"},
-            {AdditionalInfos.square, @"\Icons\square.png"},
-            {AdditionalInfos.stairs, @"\Icons\stairs.png"},
-            {AdditionalInfos.ramp, @"\Icons\Ramp.png"}
+            {MapMods.camp, @"\Icons\camp.png"},
+            {MapMods.circle, @"\Icons\circle.png"},
+            {MapMods.line, @"\Icons\lineCanvas.png"},
+            {MapMods.rectangle, @"\Icons\rectangle.png"},
+            {MapMods.square, @"\Icons\square.png"},
+            {MapMods.stairs, @"\Icons\stairs.png"},
+            {MapMods.ramp, @"\Icons\Ramp.png"}
         };
 
 		private static Dictionary<String, String> alphabet = new Dictionary<String, String>
@@ -157,11 +162,105 @@ namespace ETD.Services
 
 
         //Return image of additionnal info
-        public static BitmapImage getImage(AdditionalInfos AI)
+        public static BitmapImage getImage(MapMods AI)
         {
-            BitmapImage img = new BitmapImage(new Uri(AbsolutePath + AdditionalInfoPath[AI]));
+            BitmapImage img = new BitmapImage(new Uri(AbsolutePath + MapModPath[AI]));
             return img;
 
         }
+
+        public static void saveMap(AdditionalInfoPage AIPmapSection, MapSectionPage mapSection)
+        {
+            //MessageBox.Show("Saving map..");
+
+            // Absolute path doesnt work..
+            // Saving to desktop directory for now
+            String AbsolutePath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase);
+            String Filename = @"\Maps\test.png";
+            String test = AbsolutePath + Filename;
+            // MessageBox.Show((AbsolutePath + Filename).ToString());
+
+            Rect AIbounds = VisualTreeHelper.GetDescendantBounds(AIPmapSection);
+            Rect Mapbounds = VisualTreeHelper.GetDescendantBounds(mapSection);
+            var AIFileName = "AIInfo_" + DateTime.Now.ToString("yyyyMMdd_hhss");
+            var MapFileName = "Map_" + DateTime.Now.ToString("yyyyMMdd_hhss");
+            var MergedMapName = "ModMap_" + DateTime.Now.ToString("yyyyMMdd_hhss");
+            var desktopFolder = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+
+            // MessageBox.Show("mapbounds:"+ Mapbounds.ToString());
+            // MessageBox.Show("Aibounds:" + AIbounds.ToString());
+
+            double dpi = 96d;
+            if (AIbounds.ToString() != "Empty" && Mapbounds.ToString() != "Empty")
+            {
+                RenderTargetBitmap rtb = new RenderTargetBitmap((int)AIbounds.Width, (int)AIbounds.Height, dpi, dpi, System.Windows.Media.PixelFormats.Default);
+                RenderTargetBitmap rtb2 = new RenderTargetBitmap((int)Mapbounds.Width, (int)Mapbounds.Height, dpi, dpi, System.Windows.Media.PixelFormats.Default);
+
+                //ai
+                DrawingVisual dv = new DrawingVisual();
+                using (DrawingContext dc = dv.RenderOpen())
+                {
+                    VisualBrush vb = new VisualBrush(AIPmapSection.AdditionalMap);
+                    dc.DrawRectangle(vb, null, new Rect(new System.Windows.Point(), AIbounds.Size));
+                }
+
+                //map
+                DrawingVisual dv2 = new DrawingVisual();
+                using (DrawingContext dc2 = dv2.RenderOpen())
+                {
+                    VisualBrush vb2 = new VisualBrush(mapSection.Canvas_map);
+                    dc2.DrawRectangle(vb2, null, new Rect(new System.Windows.Point(), Mapbounds.Size));
+                }
+
+                //ai
+                rtb.Render(dv);
+                BitmapEncoder pngEncoder = new PngBitmapEncoder();
+                pngEncoder.Frames.Add(BitmapFrame.Create(rtb));
+
+                //map
+                rtb2.Render(dv2);
+                BitmapEncoder pngEncoder2 = new PngBitmapEncoder();
+                pngEncoder2.Frames.Add(BitmapFrame.Create(rtb2));
+
+                try
+                {
+                    System.IO.MemoryStream ms = new System.IO.MemoryStream();
+                    System.IO.MemoryStream ms2 = new System.IO.MemoryStream();
+
+                    pngEncoder.Save(ms);
+                    ms.Close();
+                    pngEncoder2.Save(ms2);
+                    ms2.Close();
+
+                    System.IO.File.WriteAllBytes(desktopFolder + AIFileName + ".png", ms.ToArray());
+                    System.IO.File.WriteAllBytes(desktopFolder + MapFileName + ".png", ms2.ToArray());
+
+                    System.Drawing.Image AIimg = System.Drawing.Image.FromFile(desktopFolder + AIFileName + ".png");
+                    System.Drawing.Image Mapimg = System.Drawing.Image.FromFile(desktopFolder + MapFileName + ".png");
+                    String FinalImage = desktopFolder + MergedMapName + ".png";
+
+                    int width = Mapimg.Width;
+                    int height = Mapimg.Height;
+
+                    Bitmap FinalImg = new Bitmap(width, height);
+                    Graphics g = Graphics.FromImage(FinalImg);
+
+                    g.DrawImage(Mapimg, new System.Drawing.Point(0, 0));
+                    g.DrawImage(AIimg, new System.Drawing.Point(0, 0));
+                    g.Dispose();
+                    AIimg.Dispose();
+                    Mapimg.Dispose();
+
+                    FinalImg.Save(FinalImage, System.Drawing.Imaging.ImageFormat.Png);
+                    FinalImg.Dispose();
+                }
+                catch (Exception err)
+                {
+                    MessageBox.Show(err.ToString(), "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+
+
 	}
 }

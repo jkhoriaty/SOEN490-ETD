@@ -7,74 +7,74 @@
       d:DesignHeight="120" d:DesignWidth="335"
 	Title="DetailsInterventionFormPage">
 
-	<StackPanel VerticalAlignment="Center">
-		<UniformGrid Margin="0,1,0,1">
-			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-				<Label Content="Call:"/>
-				<TextBox Name="Callhh" Width="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
-				<Button Width="10" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Click="Button_Click"/>
-				<TextBox Name="Callmm" Width="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
-			</StackPanel>
-			<TextBox Text="Caller Name" Name="CallerName" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
-			<TextBox Text="Location" Name="Location" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,1,0,1" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
-			<TextBox Text="Nature of Call" Name="NatureOfCall" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,1,0,1" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
-		</UniformGrid>
-		<Border BorderThickness="1" BorderBrush="Black" Margin="0,3,0,3"/>
-		<UniformGrid Rows="1">
-			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-				<Label Content="Priority:"/>
-				<ComboBox Name="Priority" Width="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" SelectionChanged="Priority_SelectionChanged">
-					<ComboBoxItem Content="1"/>
-					<ComboBoxItem Content="2"/>
-				</ComboBox>
-			</StackPanel>
-			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-				<Label Content="Gender:"/>
-				<ComboBox Name="Gender" Width="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
-					<ComboBoxItem Content="M"/>
-					<ComboBoxItem Content="F"/>
-				</ComboBox>
-			</StackPanel>
-			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-				<Label Content="Age:"/>
-				<TextBox Name="Age" Width="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-			</StackPanel>
-		</UniformGrid>
-		<Grid Margin="0,2,0,2">
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="1*"/>
-				<ColumnDefinition Width="1*"/>
-				<ColumnDefinition Width="2*"/>
-			</Grid.ColumnDefinitions>
-			<Label Grid.Column="0" Content="Complaint:"/>
-			<ComboBox Grid.Column="1" Grid.ColumnSpan="2" Name="Complaint" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" SelectionChanged="Complaint_SelectionChanged">
-				<ComboBoxItem Content="Abdominal pain"/>
-				<ComboBoxItem Content="Allergy (Mild)"/>
-				<ComboBoxItem Content="Anaphylaxis"/>
-				<ComboBoxItem Content="Behavioral Disorder"/>
-				<ComboBoxItem Content="Burn"/>
-				<ComboBoxItem Content="Cardiac Arrest"/>
-				<ComboBoxItem Content="Seizures"/>
-				<ComboBoxItem Content="Environmental related disorder"/>
-				<ComboBoxItem Content="Head / Spinal injury"/>
-				<ComboBoxItem Content="Headache"/>
-				<ComboBoxItem Content="Hemorrhage"/>
-				<ComboBoxItem Content="Insect bite"/>
-				<ComboBoxItem Content="Intoxication"/>
-				<ComboBoxItem Content="Musculoskeletal"/>
-				<ComboBoxItem Content="Nosebleed"/>
-				<ComboBoxItem Content="Ocular"/>
-				<ComboBoxItem Content="Oral"/>
-				<ComboBoxItem Content="Respiratory"/>
-				<ComboBoxItem Content="Respiratory arrest"/>
-				<ComboBoxItem Content="Soft tissue injury"/>
-				<ComboBoxItem Content="Suspected stroke"/>
-				<ComboBoxItem Content="Chest pain"/>
-				<ComboBoxItem Content="Unconscious"/>
-				<ComboBoxItem Content="Weakness / Fainting"/>
-				<ComboBoxItem Content="Other"/>
-			</ComboBox>
-			<TextBox Name="OtherChiefComplaint" Grid.Column="2" Grid.Row="0" Visibility="Collapsed" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" TextChanged="OtherChiefComplaint_TextChanged"/>
-		</Grid>
-	</StackPanel>
+    <StackPanel VerticalAlignment="Center">
+        <UniformGrid Margin="0,1,0,1">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Label Content="Call:"/>
+                <TextBox Name="Callhh" Width="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                <Button Width="10" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Click="Button_Click"/>
+                <TextBox Name="Callmm" Width="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+            </StackPanel>
+            <TextBox Text="Caller Name" Name="CallerName" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+            <TextBox Text="Location" Name="Location" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,1,0,1" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+            <TextBox Text="Nature of Call" Name="NatureOfCall" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,1,0,1" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+        </UniformGrid>
+        <Border BorderThickness="1" BorderBrush="Black" Margin="0,3,0,3"/>
+        <UniformGrid Rows="1">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Label Content="Priority:"/>
+                <ComboBox Name="Priority" Width="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" SelectionChanged="Priority_SelectionChanged">
+                    <ComboBoxItem Content="1"/>
+                    <ComboBoxItem Content="2"/>
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Label Content="Gender:"/>
+                <ComboBox Name="Gender" Width="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" SelectionChanged="Gender_SelectionChanged">
+                    <ComboBoxItem Name ="M" Content="M"/>
+                    <ComboBoxItem Name ="F" Content="F"/>
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Label Content="Age:"/>
+                <TextBox Name="Age" Width="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" LostFocus="TextBoxes_LostFocus"/>
+            </StackPanel>
+        </UniformGrid>
+        <Grid Margin="0,2,0,2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" Content="Complaint:"/>
+            <ComboBox Grid.Column="1" Grid.ColumnSpan="2" Name="Complaint" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" SelectionChanged="Complaint_SelectionChanged">
+                <ComboBoxItem Content="Abdominal pain"/>
+                <ComboBoxItem Content="Allergy (Mild)"/>
+                <ComboBoxItem Content="Anaphylaxis"/>
+                <ComboBoxItem Content="Behavioral Disorder"/>
+                <ComboBoxItem Content="Burn"/>
+                <ComboBoxItem Content="Cardiac Arrest"/>
+                <ComboBoxItem Content="Seizures"/>
+                <ComboBoxItem Content="Environmental related disorder"/>
+                <ComboBoxItem Content="Head / Spinal injury"/>
+                <ComboBoxItem Content="Headache"/>
+                <ComboBoxItem Content="Hemorrhage"/>
+                <ComboBoxItem Content="Insect bite"/>
+                <ComboBoxItem Content="Intoxication"/>
+                <ComboBoxItem Content="Musculoskeletal"/>
+                <ComboBoxItem Content="Nosebleed"/>
+                <ComboBoxItem Content="Ocular"/>
+                <ComboBoxItem Content="Oral"/>
+                <ComboBoxItem Content="Respiratory"/>
+                <ComboBoxItem Content="Respiratory arrest"/>
+                <ComboBoxItem Content="Soft tissue injury"/>
+                <ComboBoxItem Content="Suspected stroke"/>
+                <ComboBoxItem Content="Chest pain"/>
+                <ComboBoxItem Content="Unconscious"/>
+                <ComboBoxItem Content="Weakness / Fainting"/>
+                <ComboBoxItem Content="Other"/>
+            </ComboBox>
+            <TextBox Name="OtherChiefComplaint" Grid.Column="2" Grid.Row="0" Visibility="Collapsed" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" TextChanged="OtherChiefComplaint_TextChanged"/>
+        </Grid>
+    </StackPanel>
 </Page>

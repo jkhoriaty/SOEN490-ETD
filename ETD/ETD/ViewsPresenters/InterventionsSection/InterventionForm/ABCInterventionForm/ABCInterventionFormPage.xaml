@@ -24,19 +24,19 @@
 			<TextBlock Text="L': " FontWeight="Bold" VerticalAlignment="Center"/>
 			<TextBlock Text="Consciousness " VerticalAlignment="Center"/>
 		</StackPanel>
-		<ComboBox Grid.Column="1" Grid.Row="0" Name="ConsciousnessBox" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+		<ComboBox Grid.Column="1" Grid.Row="0" Name="ConsciousnessBox" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" SelectionChanged="ConsciousnessBox_SelectionChanged">
 			<ComboBoxItem Content="Alert"/>
 			<ComboBoxItem Content="Verbal"/>
 			<ComboBoxItem Content="Painful"/>
 			<ComboBoxItem Content="Unconscious"/>
 		</ComboBox>
-		<CheckBox Grid.Column="2" Grid.Row="0" Name="Disoriented" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Disoriented"/>
+		<CheckBox Grid.Column="2" Grid.Row="0" Name="Disoriented" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Disoriented" Checked="Disoriented_Checked"/>
 		
 		<StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal">
 			<TextBlock Text="A: " FontWeight="Bold" VerticalAlignment="Center"/>
 			<TextBlock Text="Aiways" VerticalAlignment="Center"/>
 		</StackPanel>
-		<ComboBox Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Name="AirwaysBox" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+		<ComboBox Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Name="AirwaysBox" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" SelectionChanged="AirwaysBox_SelectionChanged">
 			<ComboBoxItem Content="Clear"/>
 			<ComboBoxItem Content="Partially Obstructed"/>
 			<ComboBoxItem Content="Completely Obstructed"/>
@@ -45,27 +45,27 @@
 			<TextBlock Text="B: " FontWeight="Bold" VerticalAlignment="Center"/>
 			<TextBlock Text="Breathing" VerticalAlignment="Center"/>
 		</StackPanel>
-		<ComboBox Grid.Column="1" Grid.Row="2" Name="BreathingBox" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+		<ComboBox Grid.Column="1" Grid.Row="2" Name="BreathingBox" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" SelectionChanged="BreathingBox_SelectionChanged">
 			<ComboBoxItem Content="Normal"/>
 			<ComboBoxItem Content="Difficulty"/>
 			<ComboBoxItem Content="Absent"/>
 		</ComboBox>
 		<StackPanel Grid.Column="2" Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-			<TextBox Name="BreathingFrequency" Width="25"/>
+            <TextBox Name="BreathingFrequency" Width="25" LostFocus="BreathingFrequency_LostFocus"/>
 			<Label Content="/minute"/>
 		</StackPanel>
 		<StackPanel Grid.Column="0" Grid.Row="3" Orientation="Horizontal">
 			<TextBlock Text="C: " FontWeight="Bold" VerticalAlignment="Center"/>
 			<TextBlock Text="Circulation" VerticalAlignment="Center"/>
 		</StackPanel>
-		<ComboBox Grid.Column="1" Grid.Row="3" Name="CirculationBox" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+		<ComboBox Grid.Column="1" Grid.Row="3" Name="CirculationBox" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" SelectionChanged="CirculationBox_SelectionChanged">
 			<ComboBoxItem Content="Normal"/>
 			<ComboBoxItem Content="Chest Pain"/>
 			<ComboBoxItem Content="Hemorrhage"/>
 			<ComboBoxItem Content="No Pulse"/>
 		</ComboBox>
 		<StackPanel Grid.Column="2" Grid.Row="3" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-			<TextBox Name="CirculationFrequency" Width="25"/>
+            <TextBox Name="CirculationFrequency" Width="25" LostFocus="CirculationFrequency_LostFocus"/>
 			<Label Content="/minute"/>
 		</StackPanel>
 	</Grid>

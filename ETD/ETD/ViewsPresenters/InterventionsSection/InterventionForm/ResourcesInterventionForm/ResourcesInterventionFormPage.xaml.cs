@@ -30,6 +30,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.ResourcesInt
 		private List<Button> movingButtons = new List<Button>();
 		private List<Button> arrivalButtons = new List<Button>();
 		private int addResourcesOffset = 0;
+        private bool changed;
 
 		public ResourcesInterventionFormPage(InterventionFormPage interventionForm, Intervention intervention)
 		{
@@ -43,6 +44,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.ResourcesInt
 			setupInformationMap();
 			setupMovingButtons();
 			setupArrivalButtons();
+            FillForm();
 		}
 
 		private void setupMovingMap()
@@ -123,11 +125,19 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.ResourcesInt
 		private void TextBoxes_LostFocus(object sender, RoutedEventArgs e)
 		{
 			TextBoxHandler.LostFocus(sender, e);
+            if (changed)
+            {
+                TextBox tb = (TextBox)sender;
+                int index = int.Parse(tb.Name.ToCharArray()[tb.Name.Length - 1].ToString());
+                UpdateResource(index - 1, movingMap["Moving" + index][0], movingMap["Moving" + index][1], arrivalMap["Arrival" + index][0], arrivalMap["Arrival" + index][1], informationMap["Moving" + index][1], informationMap["Moving" + index][0]);
+                changed = false;
+            }
 		}
 
 		//Display an extra resource line when filling out the last available line
 		private void TeamChanged(object sender, RoutedEventArgs e)
 		{
+            changed = true;
 			TextBox tb = (TextBox)sender;
 			if(tb.Name.Equals("Team1"))
 			{
@@ -216,6 +226,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.ResourcesInt
 		{
 			TextBox resource = (TextBox)sender;
 			movingButtons.ElementAt(Grid.GetRow(resource)-1).RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+            changed = true;
 		}
 
 		private void UpdateResource(int position, TextBox MovinghhBox, TextBox MovingmmBox, TextBox ArrivalhhBox, TextBox ArrivalmmBox, TextBox Resource, TextBox Team)
@@ -245,7 +256,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.ResourcesInt
 			DateTime arrival = DateTime.Now;
 			arrival = arrival.Date + new TimeSpan(arrivalhh, arrivalmm, 0);
 
-			intervention.setResources(position, new Intervention.Resource(Resource.Text, Team.Text, moving, arrival));
+			intervention.setResources(position, new Resource(Resource.Text, Team.Text, moving, arrival));
 		}
 
 		private void Moving_Click(object sender, RoutedEventArgs e)
@@ -347,5 +358,27 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.ResourcesInt
 				}
 			}
 		}
+
+        private void FillForm()
+        {
+            Resource[] resources = intervention.getResources();
+
+            for (int i = 0; i < resources.Length; i++)
+            {
+                int j = i + 1;
+                if (resources[i] != null)
+                {
+                    //UpdateResource(index - 1, movingMap["Moving" + index][0], movingMap["Moving" + index][1], arrivalMap["Arrival" + index][0], arrivalMap["Arrival" + index][1], informationMap["Moving" + index][1], informationMap["Moving" + index][0]);
+                    informationMap["Moving" + j][1].Text = resources[i].getResourceName();
+                    informationMap["Moving" + j][0].Text = resources[i].getTeamName();
+                    DateTime moving = resources[i].getMovingTime();
+                    movingMap["Moving" + j][0].Text = (moving.Hour != 0) ? moving.Hour.ToString() : "hh";
+                    movingMap["Moving" + j][1].Text = (moving.Minute != 0) ? moving.Minute.ToString() : "00";
+                    DateTime arrival = resources[i].getArrivalTime();
+                    arrivalMap["Arrival" + j][0].Text = (arrival.Hour != 0) ? arrival.Hour.ToString() : "hh";
+                    arrivalMap["Arrival" + j][1].Text = (arrival.Minute != 0) ? arrival.Minute.ToString() : "00";
+                }
+            }
+        }
 	}
 }

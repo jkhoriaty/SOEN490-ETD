@@ -38,7 +38,8 @@ namespace ETD.ViewsPresenters
 		private InterventionSectionPage interventionsSection;
         private AdditionalInfoPage AIPmapSection;
         private ScheduleSectionPage ScheduleSection;
-        private int AddtionalInfoSize;
+        private FollowUpSectionForm FollowupSection;
+
         private bool isdrawing = false;
 		private double previousWidth;
 		private double previousHeight;
@@ -84,6 +85,8 @@ namespace ETD.ViewsPresenters
             /*Frame ScheduleFrame = new Frame();
             ScheduleFrame.Content = ScheduleSection;
             MapSection.Child = ScheduleFrame;*/
+
+            
 		}
 
 		//Ping server to test connection and update registed volunteers - Executes every 10 seconds
@@ -92,9 +95,14 @@ namespace ETD.ViewsPresenters
 			UpdateRegistered();
 		}
 
+
         //window closed
         public void WindowClosed(object sender, System.EventArgs e)
         {
+
+            //TechnicalServices.saveMap(AIPmapSection, mapSection);
+
+            /*
             //MessageBox.Show("Saving map..");
 
            // Absolute path doesnt work..
@@ -183,7 +191,7 @@ namespace ETD.ViewsPresenters
                     MessageBox.Show(err.ToString(), "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
-
+            */
         }
          
 
@@ -272,7 +280,7 @@ namespace ETD.ViewsPresenters
 		}
 
         //Create additional shapes on the map
-        public void CreateAdditionnalInfoPin(object sender, RoutedEventArgs e)
+        public void CreateMapModificationPin(object sender, RoutedEventArgs e)
         {
             ComboBoxItem item = sender as ComboBoxItem;
             ComboBox parent = item.Parent as ComboBox;
@@ -280,22 +288,25 @@ namespace ETD.ViewsPresenters
             {
                 if (mi!=null && mi.IsSelected )
                 {
-                    AIPmapSection.CreateAdditionnalInfoPin("" + mi.Name, AddtionalInfoSize);
+                    AIPmapSection.createMapModificationPin("" + mi.Name);
                     isdrawing = false;
                 }
             }  
         }
-        
+
+        /*
         public void CreateAdditionnalInfoPin(String AI,int size)
         {
             AIPmapSection.CreateAdditionnalInfoPin(AI,size);
         }
+        
 
-        //delete additional pins
+       // delete additional pins
         public void AIDeletePin(object sender, RoutedEventArgs e)
         {
-            AIPmapSection.AIDeletePin(sender, e);
+          //  AIPmapSection.AIDeletePin(sender, e);
         }
+        */
 
         //switch between Regular mode and Edit mode
         private void ModeChange(object sender, RoutedEventArgs e)
@@ -366,6 +377,12 @@ namespace ETD.ViewsPresenters
 			UpdateRegisteredTask.Start();
 			return UpdateRegisteredTask;
 		}
+
+        //Displays follow up section page
+        private void ShowFollowUpSection(object sender, RoutedEventArgs e)
+        {
+            //new FormPopup(this, new FollowUpSectionForm(FollowupSection));
+        }
 
 		//Interpret the servers return
 		private void UpdateRegisteredResultAnalysis(String[] reply)
