@@ -2,6 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="concordia_university_capstone.etd_v10" >
 
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -24,11 +29,16 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="concordia_university_capstone.etd_v10.Login" />
         </activity>
-    </application>
 
-	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-	<uses-permission android:name="android.permission.INTERNET"/>
-	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-	<uses-permission android:name="android.permission.READ_PHONE_STATE" />
+        <service
+            android:name=".BackgroundLocation"
+            android:enabled="true"
+            android:exported="true" >
+        </service>
+        <service
+            android:name=".LocationService"
+            android:exported="false" >
+        </service>
+    </application>
 
 </manifest>
