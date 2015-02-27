@@ -22,6 +22,11 @@ namespace ETD.CustomObjects.CustomUIObjects
 		private static Pin draggedPin;
 
 		private object relatedObject;
+        private Models.Objects.MapMod mapMod;
+        private AdditionalInfoPage aiSection;
+        private double p1;
+        private double p2;
+        private int size;
 
 		//Creating regular pin
 		public Pin(object relatedObject, MapSectionPage mapSection, int size) : base()
@@ -51,6 +56,23 @@ namespace ETD.CustomObjects.CustomUIObjects
 			//Adding the border pin to the list of all pins
 			pinList.Add(this);
 		}
+
+        public Pin(Models.Objects.MapMod mapMod, AdditionalInfoPage aiSection, double p1, double p2)
+        {
+            // TODO: Complete member initialization
+            this.mapMod = mapMod;
+            this.aiSection = aiSection;
+            this.p1 = p1;
+            this.p2 = p2;
+        }
+
+        public Pin(Models.Objects.MapMod mapMod, AdditionalInfoPage aiSection, int size)
+        {
+            // TODO: Complete member initialization
+            this.mapMod = mapMod;
+            this.aiSection = aiSection;
+            this.size = size;
+        }
 
 		//Setting the background image to the passed image
 		public void setImage(BitmapImage image)

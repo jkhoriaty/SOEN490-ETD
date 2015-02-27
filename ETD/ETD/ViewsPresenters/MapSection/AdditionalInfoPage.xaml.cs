@@ -13,7 +13,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using ETD.CustomObjects.CustomUIObjects;
 using ETD.Services;
-using ETD.Models.Objects;
 using System.Windows.Shapes;
 
 namespace ETD.ViewsPresenters.MapSection
@@ -219,7 +218,7 @@ namespace ETD.ViewsPresenters.MapSection
             }
 		}
 
-        public void ObservedObjectUpdated()
+        public void Update()
         {
             Pin.ClearAllPins(AdditionalMap); //Clearing all pins from the additional info map
 
