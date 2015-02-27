@@ -19,7 +19,7 @@ namespace ETD.Models.ArchitecturalObjects
 		{
 			foreach(Observer observer in observerList)
 			{
-				observer.ObservedObjectUpdated();
+				observer.Update();
 			}
 		}
 

@@ -19,7 +19,6 @@ namespace ETD.CustomObjects.CustomUIObjects
 
 		public InterventionContainer(InterventionPin interventionPin) : base(interventionPin)
 		{
-			MessageBox.Show("drawing");
 			this.interventionPin = interventionPin;
 			interveningTeamPinList = interventionPin.getInterveningTeamsPin();
 			interventionPin.setInterventionContainer(this);

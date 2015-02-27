@@ -29,7 +29,6 @@ namespace ETD.Models.Objects
 
         public Team(String name)
         {
-			MessageBox.Show("Create team notify");
             this.name = name;
 			status = Statuses.available;
 
@@ -66,7 +65,6 @@ namespace ETD.Models.Objects
 				{
 					highestLevelOfTraining = mem.getTrainingLevel();
 				}
-				MessageBox.Show("Add team member notify");
 				NotifyAll();
                 return true;
             }
@@ -103,8 +101,7 @@ namespace ETD.Models.Objects
 
         public void setStatus(String s)
         {
-			this.status = (Statuses)Enum.Parse(typeof(Statuses), s); ;
-			MessageBox.Show("Set status team notify");
+			this.status = (Statuses)Enum.Parse(typeof(Statuses), s);
 			NotifyAll();
         }
 

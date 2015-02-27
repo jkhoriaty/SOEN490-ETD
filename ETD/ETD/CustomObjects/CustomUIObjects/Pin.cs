@@ -198,7 +198,6 @@ namespace ETD.CustomObjects.CustomUIObjects
 		//Collision detection and resolution on the pin
 		internal void CollisionDetectionAndResolution(Canvas Canvas_map, bool defaultPosition)
 		{
-			MessageBox.Show("" + this);
 			double movedPin_X = this.getX();
 			double movedPin_Y = this.getY();
 

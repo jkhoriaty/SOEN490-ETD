@@ -40,12 +40,10 @@ namespace ETD.CustomObjects.CustomUIObjects
 			{
 				if(SufficientOverlap(interventionPin.getInterventionContainer())) //Considered accidental drag-and-drop
 				{
-					MessageBox.Show("here");
 					interventionPin.getInterventionContainer().PlaceAll();
 				}
 				else
 				{
-					MessageBox.Show("there");
 					interventionPin.getIntervention().RemoveTeam(team);
 					team.setStatus("unavailable");
 					interventionPin = null;
@@ -62,7 +60,6 @@ namespace ETD.CustomObjects.CustomUIObjects
 			//SpecialCollision: Team is dropped on intervention, add team to intervention
 			if(fixedPin.IsOfType("InterventionPin") && SufficientOverlap(fixedPin))
 			{
-				MessageBox.Show("Called");
 				interventionPin = (InterventionPin)fixedPin;
 				interventionPin.getIntervention().AddTeam(team);
 				interventionPin.getInterventionContainer();

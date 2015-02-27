@@ -65,7 +65,6 @@ namespace ETD.Models.Objects
             this.abc = new ABC();
 
             activeInterventionList.Add(this);
-			MessageBox.Show("Create intervention notify");
             NotifyAll();
         }
 
@@ -89,7 +88,6 @@ namespace ETD.Models.Objects
 		public void AddTeam(Team team)
 		{
 			interveningTeamList.Add(team);
-			MessageBox.Show("Add team to intervention notify");
 			NotifyAll();
 		}
 

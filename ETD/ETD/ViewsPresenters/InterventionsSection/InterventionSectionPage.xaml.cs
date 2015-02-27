@@ -214,7 +214,7 @@ namespace ETD.ViewsPresenters.InterventionsSection
             return null;
         }
 
-        public void ObservedObjectUpdated()
+        public void Update()
         {
             InterventionsList.Children.Clear();
             foreach (Intervention intervention in Intervention.getActiveInterventionList())
