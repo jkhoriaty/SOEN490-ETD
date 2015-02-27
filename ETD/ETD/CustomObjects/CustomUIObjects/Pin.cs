@@ -48,6 +48,26 @@ namespace ETD.CustomObjects.CustomUIObjects
 			pinList.Add(this);
 		}
 
+        //Line items
+        public Pin(object relatedAiObject, AdditionalInfoPage aiSection, double width, double height)
+        {
+            //Setting relatedObject, used for position recovery
+            relatedObject = relatedAiObject;
+
+            //Initializing grid attibutes
+            this.Width = width;
+            this.Height = height;
+
+            this.MouseLeftButtonDown += new MouseButtonEventHandler(aiSection.DrawingStart);
+            this.MouseLeftButtonUp += new MouseButtonEventHandler(aiSection.DrawingStop);
+            this.MouseUp += new MouseButtonEventHandler(aiSection.DrawingMove);
+            this.MouseMove += new MouseEventHandler(aiSection.Move);
+            this.MouseWheel += new MouseWheelEventHandler(aiSection.ChangeColor);
+
+            //Adding the pin to the list of all pins
+            pinList.Add(this);
+        }
+
 		//Constructor for Creating border pin
 		public Pin(InterventionPin interventionPin)
 		{

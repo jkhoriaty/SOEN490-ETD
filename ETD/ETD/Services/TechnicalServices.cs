@@ -67,10 +67,10 @@ namespace ETD.Services
         private static Dictionary<MapMods, String> MapModPath = new Dictionary<MapMods, String>
         {
             {MapMods.camp, @"\Icons\camp.png"},
-            {MapMods.circle, @"\Icons\circle.png"},
+            {MapMods.circle, @"\Icons\lineCanvas.png"},
             {MapMods.line, @"\Icons\lineCanvas.png"},
-            {MapMods.rectangle, @"\Icons\rectangle.png"},
-            {MapMods.square, @"\Icons\square.png"},
+            {MapMods.rectangle, @"\Icons\lineCanvas.png"},
+            {MapMods.square, @"\Icons\lineCanvas.png"},
             {MapMods.stairs, @"\Icons\stairs.png"},
             {MapMods.ramp, @"\Icons\Ramp.png"}
         };
