@@ -94,19 +94,48 @@ namespace ETD.Services
 			}
 		}
 
-		//Sets the current hours and minutes in the passed TextBoxes
-		public static void setNow(TextBox hh, TextBox mm)
+        //Sets custom time to TextBoxes
+		public static void setTime(TextBox hh, TextBox mm, int hour, int minute)
 		{
-			hh.Text = "" + DateTime.Now.Hour;
+            if (hour < 10)
+            {
+                hh.Text = "0" + hour;
+            }
+            else
+            {
+                hh.Text = "" + hour;
+            }
 			if (DateTime.Now.Minute < 10)
 			{
-				mm.Text = "0" + DateTime.Now.Minute;
+				mm.Text = "0" + minute;
 			}
 			else
 			{
-				mm.Text = "" + DateTime.Now.Minute;
+				mm.Text = "" + minute;
 			}
 		}
+
+        //Sets the current hours and minutes in the passed TextBoxes
+
+        public static void setNow(TextBox hh, TextBox mm)
+        {
+            if (DateTime.Now.Hour < 10)
+            {
+                hh.Text = "0" + DateTime.Now.Hour;
+            }
+            else
+            {
+                hh.Text = "" + DateTime.Now.Hour;
+            }
+            if (DateTime.Now.Minute < 10)
+            {
+                mm.Text = "0" + DateTime.Now.Minute;
+            }
+            else
+            {
+                mm.Text = "" + DateTime.Now.Minute;
+            }
+        }
 
 		//Places the two items in a TextBox array and returns the array
 		public static TextBox[] textboxArray(TextBox box1, TextBox box2)

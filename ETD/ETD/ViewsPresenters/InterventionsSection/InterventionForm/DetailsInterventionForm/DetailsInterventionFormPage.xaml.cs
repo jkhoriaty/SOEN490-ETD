@@ -30,7 +30,6 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.DetailsInter
             InitializeComponent();
             this.interventionForm = interventionForm;
             this.intervention = intervention;
-            TextBoxHandler.setNow(Callhh, Callmm);
             //MessageBox.Show(intervention.getCallerName());
             FillForm(intervention);
         }
@@ -84,8 +83,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.DetailsInter
             }
             if (intervention.getTimeOfCall() != null)
             {
-                Callhh.Text = intervention.getTimeOfCall().Hour.ToString();
-                Callmm.Text = intervention.getTimeOfCall().Minute.ToString();
+                TextBoxHandler.setTime(Callhh, Callmm, intervention.getTimeOfCall().Hour, intervention.getTimeOfCall().Minute);
             }
         }
         private void TextBoxes_GotFocus(object sender, RoutedEventArgs e)
@@ -100,8 +98,9 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.DetailsInter
             intervention.setLocation(this.Location.Text);
             intervention.setNatureOfCall(this.NatureOfCall.Text);
             intervention.setAge(this.Age.Text);
-
-            DateTime timeOfCall = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, Convert.ToInt32(Callhh.Text), Convert.ToInt32(Callmm.Text), 0);
+            int hh = int.Parse(Callhh.Text);
+            int mm = int.Parse(Callmm.Text);
+            DateTime timeOfCall = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, hh, mm, 0);
             intervention.setTimeOfCall(timeOfCall);
         }
 
@@ -197,6 +196,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.DetailsInter
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            TextBoxHandler.setNow(Callhh, Callmm);
             try
             {
                 int hh = int.Parse(Callhh.Text);

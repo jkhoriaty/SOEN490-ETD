@@ -36,9 +36,12 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
 
         private void FillForm(Intervention intervention)
         {
+
+            AdditionalInformation.Text = intervention.getConclusionAdditionalInfo();
+         
             if (intervention.getConclusion() != null)
             {
-                int index = -1;
+                int index = 0;
                 foreach (ComboBoxItem cb in ConclusionBox.Items)
                 {
                     index++;
@@ -47,12 +50,35 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
                         break;
                     }
                 }
-                ConclusionBox.SelectedIndex = index;
+                ConclusionBox.SelectedIndex = index-1;
             }
+            
             if (intervention.getConclusionTime().Hour != 0 && intervention.getConclusionTime().Minute != 0)
+            {              
+                TextBoxHandler.setTime(Endhh, Endmm, intervention.getConclusionTime().Hour, intervention.getConclusionTime().Minute);
+            }
+            if (intervention.getConclusion() == "911")
             {
-                Endhh.Text = intervention.getConclusionTime().Hour.ToString();
-                Endmm.Text = intervention.getConclusionTime().Minute.ToString();
+                if (intervention.getCall911Time().Hour != 0 && intervention.getCall911Time().Minute != 0)
+                {                  
+                    TextBoxHandler.setTime(Call911hh, Call911mm, intervention.getCall911Time().Hour, intervention.getCall911Time().Minute);
+                }
+                if (intervention.getFirstResponderArrivalTime().Hour != 0 && intervention.getFirstResponderArrivalTime().Minute != 0)
+                {                   
+                    TextBoxHandler.setTime(FirstResponderArrivalhh, FirstResponderArrivalmm, intervention.getFirstResponderArrivalTime().Hour, intervention.getFirstResponderArrivalTime().Minute);
+                }
+                              
+                if (intervention.getAmbulanceArrivalTime().Hour != 0 && intervention.getAmbulanceArrivalTime().Minute != 0)
+                {            
+                    TextBoxHandler.setTime(AmbulanceArrivalhh, AmbulanceArrivalmm, intervention.getAmbulanceArrivalTime().Hour, intervention.getAmbulanceArrivalTime().Minute);
+                }
+                
+                AmbulanceCompany.Text = intervention.getAmbulanceCompany();
+                AmbulanceVehicle.Text = intervention.getAmbulanceVehicle();
+                FirstResponderCompany.Text = intervention.getFirstResponderCompany();
+                FirstResponderVehicle.Text = intervention.getFirstResponderVehicle();
+                MeetingPoint.Text = intervention.getMeetingPoint();
+                
             }
         }
 
@@ -69,6 +95,11 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
             {
                 DateTime concTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, Convert.ToInt32(Endhh.Text), Convert.ToInt32(Endmm.Text), 0);
                 intervention.setConclusionTime(concTime);
+                intervention.setAmbulanceCompany(AmbulanceCompany.Text);
+                intervention.setAmbulanceVehicle(AmbulanceVehicle.Text);
+                intervention.setFirstResponderCompany(FirstResponderCompany.Text);
+                intervention.setFirstResponderVehicle(FirstResponderVehicle.Text);
+                intervention.setMeetingPoint(MeetingPoint.Text);
             }
             catch { }
 		}
@@ -198,7 +229,6 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
 				if (item.Name.Equals("call911"))
 				{
 					intervention.setConclusionAdditionalInfo(AdditionalInformation.Text);
-
 					int call911hh = 0;
 					int call911mm = 0;
 					if (!Call911hh.Text.Equals("hh") && !Call911mm.Text.Equals("mm"))
@@ -209,6 +239,8 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
 					DateTime call911Time = DateTime.Now;
 					call911Time = call911Time.Date + new TimeSpan(call911hh, call911mm, 0);
 					intervention.setCall911Time(call911Time);
+
+                    intervention.setMeetingPoint(MeetingPoint.Text);
 
 					intervention.setFirstResponderCompany(FirstResponderCompany.Text);
 					intervention.setFirstResponderVehicle(FirstResponderVehicle.Text);
@@ -256,7 +288,9 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
 			TextBoxHandler.setNow(Endhh, Endmm);
             try
             {
-                DateTime concTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, Convert.ToInt32(Endhh.Text), Convert.ToInt32(Endmm.Text), 0);
+                int hh = int.Parse(Endhh.Text);
+                int mm = int.Parse(Endmm.Text);
+                DateTime concTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, hh, mm, DateTime.Now.Second);
                 intervention.setConclusionTime(concTime);
             }
             catch { }
@@ -271,6 +305,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
                 int hh = int.Parse(Call911hh.Text);
                 int mm = int.Parse(Call911mm.Text);
                 DateTime startTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, hh, mm, DateTime.Now.Second);
+                intervention.setCall911Time(startTime);
                 int offset = (int)DateTime.Now.Subtract(startTime).TotalSeconds;
                 if (offset < 0)
                 {
@@ -300,6 +335,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
                     int hh = int.Parse(FirstResponderArrivalhh.Text);
                     int mm = int.Parse(FirstResponderArrivalmm.Text);
                     DateTime startTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, hh, mm, DateTime.Now.Second);
+                    intervention.setFirstResponderArrivalTime(startTime);
                     int offset = (int)DateTime.Now.Subtract(startTime).TotalMinutes;
                     if (offset < 0)
                     {
@@ -324,13 +360,13 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
 		{
             if (interventionForm.IsTimerRunning(11) || interventionForm.IsTimerRunning(12))
             {
-                TextBoxHandler.setNow(AmbulanceArrivalhh, AmbulanceArrivalmm);
-
+                TextBoxHandler.setNow(AmbulanceArrivalhh, AmbulanceArrivalmm);              
                 try
                 {
                     int hh = int.Parse(AmbulanceArrivalhh.Text);
                     int mm = int.Parse(AmbulanceArrivalmm.Text);
                     DateTime startTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, hh, mm, DateTime.Now.Second);
+                    intervention.setAmbulanceArrivalTime(startTime);
                     int offset = (int)DateTime.Now.Subtract(startTime).TotalMinutes;
                     if (offset < 0)
                     {

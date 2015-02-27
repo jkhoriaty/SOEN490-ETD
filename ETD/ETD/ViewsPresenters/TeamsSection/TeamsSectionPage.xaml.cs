@@ -155,7 +155,7 @@ namespace ETD.ViewsPresenters.TeamsSection
             //Equipment equip = new Equipment((Equipments)Enum.Parse(typeof(Equipments), equipment.Name.ToString()));
 			StackPanel equipmentStackPanel = (StackPanel)equipment.Parent;
 			//Team.teamList["" + equipment.Tag].RemoveEquipment(equip);
-			equipmentStackPanel.Children.Remove(equipment);
+			equipmentStackPanel.Children.Remove(equipment);          
 			//mainWindow.CreateEquipmentPin(equipment.Name);
 
 		}

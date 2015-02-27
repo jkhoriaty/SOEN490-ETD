@@ -11,9 +11,9 @@
         <UniformGrid Margin="0,1,0,1">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <Label Content="Call:"/>
-                <TextBox Name="Callhh" Width="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                <TextBox Name="Callhh" Width="30" Text="hh" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
                 <Button Width="10" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Click="Button_Click"/>
-                <TextBox Name="Callmm" Width="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                <TextBox Name="Callmm" Width="30" Text="mm" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
             </StackPanel>
             <TextBox Text="Caller Name" Name="CallerName" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
             <TextBox Text="Location" Name="Location" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,1,0,1" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
