@@ -14,13 +14,14 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ETD.Models.Objects;
 using ETD.Services;
+using ETD.Models.ArchitecturalObjects;
 
 namespace ETD.ViewsPresenters.TeamsSection.TeamInfo
 {
 	/// <summary>
 	/// Interaction logic for TeamInfoPage.xaml
 	/// </summary>
-	public partial class TeamInfoPage : Page
+	public partial class TeamInfoPage : Page, Observer
 	{
 		TeamsSectionPage teamsSection;
         Team team;
@@ -30,12 +31,19 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamInfo
 			InitializeComponent();
 			this.teamsSection = teamsSection;
 			this.team = team;
-			populateInfo(team);
+			populateInfo();
             teamName.ContextMenu = (ContextMenu)TeamContextName;
+
+			team.RegisterInstanceObserver(this);
+		}
+
+		public void Update()
+		{
+			populateInfo();
 		}
 
 		//Filling up the page with the information on the team
-		private void populateInfo(Team team)
+		private void populateInfo()
 		{
 			teamName.Name = team.getName();
 			if (team.getName().Length == 1)

@@ -45,8 +45,8 @@ namespace ETD.ViewsPresenters.MapSection
 			pinHandler = new PinHandler(this);
             Canvas_map.ContextMenu = Resources["ContextMenu"] as ContextMenu;
 
-			Team.RegisterObserver(this);
-			Equipment.RegisterObserver(this);
+			Observable.RegisterClassObserver(typeof(Team), this);
+			Observable.RegisterClassObserver(typeof(Intervention), this);
 		}
 
 		//Loading of map as a result to the user clicking the "Load Map" button
@@ -102,12 +102,6 @@ namespace ETD.ViewsPresenters.MapSection
 					previousPinPosition = new double[] { (interventionPin.Width / 2), Canvas_map.ActualHeight - (interventionPin.Height / 2) }; //Bottom-right corner
 				}
 				interventionPin.setPinPosition(previousPinPosition[0], previousPinPosition[1]);
-				if (intervention.getInterveningTeamList().Count > 0)
-				{
-					InterventionContainer interventionContainer = new InterventionContainer(interventionPin);
-					Canvas_map.Children.Add(interventionContainer);
-					interventionContainer.PlaceAll();
-				}
 				interventionPin.CollisionDetectionAndResolution(Canvas_map, defaultPosition); //TODO: Switch to only resolution
 			}
 

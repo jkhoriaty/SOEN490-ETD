@@ -65,14 +65,14 @@ namespace ETD.Models.Objects
             this.abc = new ABC();
 
             activeInterventionList.Add(this);
-            NotifyAll();
+            ClassModifiedNotification(typeof(Intervention));
         }
 
         public void Completed()
         {
             activeInterventionList.Remove(this);
             completedInterventionList.Add(this);
-            NotifyAll();
+			ClassModifiedNotification(typeof(Intervention));
         }
 
         public static List<Intervention> getActiveInterventionList()
@@ -88,13 +88,13 @@ namespace ETD.Models.Objects
 		public void AddTeam(Team team)
 		{
 			interveningTeamList.Add(team);
-			NotifyAll();
+			InstanceModifiedNotification();
 		}
 
 		public void RemoveTeam(Team team)
 		{
 			interveningTeamList.Remove(team);
-			NotifyAll();
+			InstanceModifiedNotification();
 		}
 
 		public List<Team> getInterveningTeamList()

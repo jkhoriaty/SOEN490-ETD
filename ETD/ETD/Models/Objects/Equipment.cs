@@ -20,7 +20,7 @@ namespace ETD.Models.Objects
 			equipmentType = (Equipments)Enum.Parse(typeof(Equipments), name);
 			
 			equipmentList.Add(this);
-			NotifyAll();
+			ClassModifiedNotification(typeof(Equipment));
 		}
 
 		/*

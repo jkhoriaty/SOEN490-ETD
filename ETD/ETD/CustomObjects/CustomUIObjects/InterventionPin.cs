@@ -1,4 +1,5 @@
-﻿using ETD.Models.Objects;
+﻿using ETD.Models.ArchitecturalObjects;
+using ETD.Models.Objects;
 using ETD.Services;
 using ETD.ViewsPresenters.MapSection;
 using System;
@@ -12,7 +13,7 @@ using System.Windows.Input;
 
 namespace ETD.CustomObjects.CustomUIObjects
 {
-	class InterventionPin : Pin
+	class InterventionPin : Pin, Observer
 	{
 		internal static int size = 40;
 
@@ -22,10 +23,33 @@ namespace ETD.CustomObjects.CustomUIObjects
 
 		public InterventionPin(Intervention intervention, MapSectionPage mapSection) : base(intervention, mapSection, size)
 		{
+			this.intervention = intervention; //Providing a link to the team that this pin represents
+			this.mapSection = mapSection; //Keeping pointer to draw a InterventionContainer when a team is added
+
 			base.setImage(TechnicalServices.getImage("intervention"));
 			base.setText(intervention.getInterventionNumber().ToString());
 
-			this.intervention = intervention; //Providing a link to the team that this pin represents
+			Draw();
+
+			intervention.RegisterInstanceObserver(this);
+		}
+
+		private void Draw()
+		{
+			if (intervention.getInterveningTeamList().Count > 0)
+			{
+				if (interventionContainer == null)
+				{
+					interventionContainer = new InterventionContainer(this);
+					mapSection.Canvas_map.Children.Add(interventionContainer);
+				}
+				interventionContainer.PlaceAll();
+			}
+		}
+
+		public void Update()
+		{
+			Draw();
 		}
 
 		internal Intervention getIntervention()
@@ -70,11 +94,6 @@ namespace ETD.CustomObjects.CustomUIObjects
 				}
 			}
 			return interveningTeamsPin;
-		}
-
-		internal void setInterventionContainer(InterventionContainer interventionContainer)
-		{
-			this.interventionContainer = interventionContainer;
 		}
 
 		internal InterventionContainer getInterventionContainer()

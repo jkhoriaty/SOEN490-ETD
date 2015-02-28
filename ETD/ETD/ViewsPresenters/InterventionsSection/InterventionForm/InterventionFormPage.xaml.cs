@@ -20,13 +20,14 @@ using ETD.ViewsPresenters.InterventionsSection.InterventionForm.AdditionalInfoIn
 using ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndInterventionForm;
 using ETD.Models.Objects;
 using System.Windows.Threading;
+using ETD.Models.ArchitecturalObjects;
 
 namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm
 {
     /// <summary>
     /// Interaction logic for InterventionForm.xaml
     /// </summary>
-    public partial class InterventionFormPage : Page
+    public partial class InterventionFormPage : Page, Observer
     {
 		private InterventionSectionPage interventionSection;
 		private Intervention intervention;
@@ -58,6 +59,15 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm
 			dispatcherTimer.Interval += new TimeSpan(0, 0, 30);
 			dispatcherTimer.Start();
 
+			BuildComponents();
+            
+            details.Focus();
+
+			intervention.RegisterInstanceObserver(this);
+		}
+
+		private void BuildComponents()
+		{
 			timersPage = new TimersInterventionFormPage(this, intervention);
 			detailsPage = new DetailsInterventionFormPage(this, intervention);
 			resourcesPage = new ResourcesInterventionFormPage(this, intervention);
@@ -89,12 +99,15 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm
 			endFrame.Content = endPage;
 			end.Content = endFrame;
 
-            if(intervention.IsCompleted())
-            {
-                DisableForms();
-            }
-            
-            details.Focus();
+			if (intervention.IsCompleted())
+			{
+				DisableForms();
+			}
+		}
+
+		public void Update()
+		{
+			BuildComponents();
 		}
 
 		public void setInterventionNumber(int interventionNum)

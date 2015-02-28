@@ -41,7 +41,7 @@ namespace ETD.ViewsPresenters.TeamsSection
 			dispatcherTimer.Interval = new TimeSpan(0, 0, 10); //Update every minute
 			dispatcherTimer.Start();
 
-			Team.RegisterObserver(this);
+			Observable.RegisterClassObserver(typeof(Team), this);
 		}
 
 		private void refresh(object sender, EventArgs e)

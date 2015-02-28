@@ -44,7 +44,7 @@ namespace ETD.ViewsPresenters.InterventionsSection
             reportArrival_DispatcherTimer.Tick += new EventHandler(ReportArrival_Refresh);
             reportArrival_DispatcherTimer.Interval = new TimeSpan(0, 0, 1); //Update every second
 
-            Intervention.RegisterObserver(this);
+            Observable.RegisterClassObserver(typeof(Intervention), this);
 		}
 
 		//Adjusting the intervention section width
@@ -217,6 +217,7 @@ namespace ETD.ViewsPresenters.InterventionsSection
         public void Update()
         {
             InterventionsList.Children.Clear();
+
             foreach (Intervention intervention in Intervention.getActiveInterventionList())
             {
                 Frame frame = new Frame();
@@ -230,6 +231,7 @@ namespace ETD.ViewsPresenters.InterventionsSection
                 }
                 InterventionsList.Children.Add(frame);
             }
+
             foreach (Intervention intervention in Intervention.getCompletedInterventionList())
             {
                 Frame frame = new Frame();

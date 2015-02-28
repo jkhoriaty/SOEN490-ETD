@@ -1,4 +1,5 @@
-﻿using ETD.Models.Objects;
+﻿using ETD.Models.ArchitecturalObjects;
+using ETD.Models.Objects;
 using ETD.Services;
 using ETD.ViewsPresenters.MapSection;
 using System;
@@ -12,7 +13,7 @@ using System.Windows.Input;
 
 namespace ETD.CustomObjects.CustomUIObjects
 {
-	class TeamPin : Pin
+	class TeamPin : Pin, Observer
 	{
 		internal static int size = 40;
 
@@ -21,10 +22,23 @@ namespace ETD.CustomObjects.CustomUIObjects
 
 		public TeamPin(Team team, MapSectionPage mapSection) : base(team, mapSection, size)
 		{
+			this.team = team; //Providing a link to the team that this pin represents
+
+			Draw();
+
+			team.RegisterInstanceObserver(this);
+		}
+
+		private void Draw()
+		{
+			base.Children.Clear();
 			base.setImage(TechnicalServices.getImage(team, team.getStatus()));
 			base.setText(team.getName());
+		}
 
-			this.team = team; //Providing a link to the team that this pin represents
+		public void Update()
+		{
+			Draw();
 		}
 
 		internal Team getTeam()
@@ -44,6 +58,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 				}
 				else
 				{
+					MessageBox.Show("Reaching wtf");
 					interventionPin.getIntervention().RemoveTeam(team);
 					team.setStatus("unavailable");
 					interventionPin = null;

@@ -21,7 +21,6 @@ namespace ETD.CustomObjects.CustomUIObjects
 		{
 			this.interventionPin = interventionPin;
 			interveningTeamPinList = interventionPin.getInterveningTeamsPin();
-			interventionPin.setInterventionContainer(this);
 
 			//Determine the number of rows that the border is going to have with the interventionPin on top and then 2 teams per row
 			int teamRows = 0;
@@ -46,6 +45,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 
 		public void PlaceAll()
 		{
+			//MessageBox.Show("Called");
 			setBorderPosition(interventionPin.getX(), interventionPin.getY());
 
 			double Y = interventionPin.getY() + (InterventionPin.size/2) + (TeamPin.size/2);

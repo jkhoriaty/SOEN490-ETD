@@ -15,7 +15,7 @@ namespace ETD.Models.Objects
 	public enum Statuses {available, moving, intervening, unavailable};
 
     public class Team : Observable
-    {
+	{
 		private static List<Observer> observerList = new List<Observer>();
 
 		static List<Team> teamList = new List<Team>();
@@ -33,14 +33,14 @@ namespace ETD.Models.Objects
 			status = Statuses.available;
 
 			teamList.Add(this);
-			NotifyAll();
+			ClassModifiedNotification(typeof(Team));
         }
 
 		//Delete Team
 		public static void DeleteTeam(Team team)
 		{
 			teamList.Remove(team);
-			NotifyAll();
+			ClassModifiedNotification(typeof(Team));
 		}
 
 		public static bool TeamListContains(String teamName)
@@ -65,7 +65,7 @@ namespace ETD.Models.Objects
 				{
 					highestLevelOfTraining = mem.getTrainingLevel();
 				}
-				NotifyAll();
+				InstanceModifiedNotification();
                 return true;
             }
             return false;
@@ -77,7 +77,7 @@ namespace ETD.Models.Objects
             if (equipmentList.Count < 3)
             {
 				equipmentList.Add(equipment);
-				NotifyAll();
+				InstanceModifiedNotification();
                 return true;
             }
             return false;
@@ -87,7 +87,7 @@ namespace ETD.Models.Objects
         public void RemoveEquipment(Equipment equipment)
         {
 			equipmentList.Remove(equipment);
-			NotifyAll();
+			InstanceModifiedNotification();
 		}
 
 		/*
@@ -96,13 +96,13 @@ namespace ETD.Models.Objects
         public void setName(String name)
         {
             this.name = name;
-			NotifyAll();
+			InstanceModifiedNotification();
         }
 
         public void setStatus(String s)
         {
 			this.status = (Statuses)Enum.Parse(typeof(Statuses), s);
-			NotifyAll();
+			InstanceModifiedNotification();
         }
 
 		/*

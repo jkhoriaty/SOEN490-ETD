@@ -20,7 +20,7 @@ namespace ETD.Models.Objects
        {
            mapModType = (MapMods)Enum.Parse(typeof(MapMods), name);
            mapModList.Add(this);
-           NotifyAll();
+           ClassModifiedNotification(typeof(MapMod));
        }
 
         //getters

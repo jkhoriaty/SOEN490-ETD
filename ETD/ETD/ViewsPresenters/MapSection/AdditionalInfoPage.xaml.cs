@@ -47,7 +47,7 @@ namespace ETD.ViewsPresenters.MapSection
 			InitializeComponent();
 			this.mainWindow = mainWindow;
             AdditionalMap.Focus();
-            MapMod.RegisterObserver(this);
+			Observable.RegisterClassObserver(typeof(MapMod), this);
 		}
 
         //Loading the map should only be done on the AdditionalInfoPAge.xaml rather than MapSectionPage.xaml
