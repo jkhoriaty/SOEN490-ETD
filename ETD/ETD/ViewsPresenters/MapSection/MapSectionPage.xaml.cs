@@ -47,6 +47,7 @@ namespace ETD.ViewsPresenters.MapSection
 
 			Observable.RegisterClassObserver(typeof(Team), this);
 			Observable.RegisterClassObserver(typeof(Intervention), this);
+			Observable.RegisterClassObserver(typeof(Equipment), this);
 		}
 
 		//Loading of map as a result to the user clicking the "Load Map" button
@@ -102,25 +103,29 @@ namespace ETD.ViewsPresenters.MapSection
 					previousPinPosition = new double[] { (interventionPin.Width / 2), Canvas_map.ActualHeight - (interventionPin.Height / 2) }; //Bottom-right corner
 				}
 				interventionPin.setPinPosition(previousPinPosition[0], previousPinPosition[1]);
+				interventionPin.Update();
 				interventionPin.CollisionDetectionAndResolution(Canvas_map, defaultPosition); //TODO: Switch to only resolution
 			}
 
 			//Creating all equipment pins and adding the map to their previous or a new position while detecting newly created collisions
 			foreach (Equipment equipment in Equipment.getEquipmentList())
 			{
-				EquipmentPin equipmentPin = new EquipmentPin(equipment, this);
-				Canvas_map.Children.Add(equipmentPin);
-
-				//Setting the pin to it's previous position, if it exists, or to the top-left corner
-				bool defaultPosition = false;
-				double[] previousPinPosition = Pin.getPreviousPinPosition(equipment);
-				if (previousPinPosition == null)
+				if (!equipment.IsAssigned())
 				{
-					defaultPosition = true;
-					previousPinPosition = new double[]{ Canvas_map.ActualWidth - (equipmentPin.Width / 2), (equipmentPin.Height / 2) }; //Top-right corner
+					EquipmentPin equipmentPin = new EquipmentPin(equipment, this);
+					Canvas_map.Children.Add(equipmentPin);
+
+					//Setting the pin to it's previous position, if it exists, or to the top-left corner
+					bool defaultPosition = false;
+					double[] previousPinPosition = Pin.getPreviousPinPosition(equipment);
+					if (previousPinPosition == null)
+					{
+						defaultPosition = true;
+						previousPinPosition = new double[] { Canvas_map.ActualWidth - (equipmentPin.Width / 2), (equipmentPin.Height / 2) }; //Top-right corner
+					}
+					equipmentPin.setPinPosition(previousPinPosition[0], previousPinPosition[1]);
+					equipmentPin.CollisionDetectionAndResolution(Canvas_map, defaultPosition); //TODO: Switch to only resolution
 				}
-				equipmentPin.setPinPosition(previousPinPosition[0], previousPinPosition[1]);
-				equipmentPin.CollisionDetectionAndResolution(Canvas_map, defaultPosition); //TODO: Switch to only resolution
 			}
 		}
 		

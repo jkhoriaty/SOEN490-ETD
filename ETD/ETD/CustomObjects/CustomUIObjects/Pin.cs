@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows;
+using ETD.Models.Objects;
 
 namespace ETD.CustomObjects.CustomUIObjects
 {
@@ -21,8 +22,9 @@ namespace ETD.CustomObjects.CustomUIObjects
 
 		private static Pin draggedPin;
 
-		private object relatedObject;
-        private Models.Objects.MapMod mapMod;
+		internal object relatedObject;
+
+        private MapMod mapMod;
         private AdditionalInfoPage aiSection;
         private double p1;
         private double p2;
@@ -40,9 +42,6 @@ namespace ETD.CustomObjects.CustomUIObjects
 			this.MouseLeftButtonDown += new MouseButtonEventHandler(mapSection.DragStart_MouseLeftButtonDown);
 			this.MouseMove += new MouseEventHandler(mapSection.DragMove_MouseMove);
 			this.MouseLeftButtonUp += new MouseButtonEventHandler(mapSection.DragStop_MouseLeftButtonUp);
-			this.ContextMenu = mapSection.Resources["ContextMenu"] as ContextMenu;
-			this.ContextMenuOpening += new ContextMenuEventHandler(mapSection.CheckRight);
-			(this.ContextMenu.Items[0] as MenuItem).IsChecked = true;
 
 			//Adding the pin to the list of all pins
 			pinList.Add(this);
@@ -240,9 +239,6 @@ namespace ETD.CustomObjects.CustomUIObjects
 		//Collision detection and resolution on the pin
 		internal void CollisionDetectionAndResolution(Canvas Canvas_map, bool defaultPosition)
 		{
-			double movedPin_X = this.getX();
-			double movedPin_Y = this.getY();
-
 			bool collisionDetected = true;
 			int verificationCount = 0;
 
@@ -252,10 +248,14 @@ namespace ETD.CustomObjects.CustomUIObjects
 				collisionDetected = false;
 				verificationCount++;
 
-				List<Pin> pinListCopy = new List<Pin>(pinList);
+				List<Pin> pinListCopy = new List<Pin>(pinList); //To avoid crashing when a pin is added while in the loop
 				//Iterating throught all pins
 				foreach (Pin fixedPin in pinListCopy)
 				{
+					//Getting the position of the dropped pin
+					double movedPin_X = this.getX();
+					double movedPin_Y = this.getY();
+
 					//Skipping collision-detection with itself
 					if (fixedPin == this)
 					{
@@ -276,15 +276,6 @@ namespace ETD.CustomObjects.CustomUIObjects
 					//Getting the position of where the rectangle has been dropped (center point)
 					double fixedPin_X = fixedPin.getX();
 					double fixedPin_Y = fixedPin.getY();
-
-					//If equipment is dropped on team and it overlaps more than 25% (assumption: not by mistake)
-					/*if (this.GetType().Equals("ETD.Models.CustomUIObjects.EquipmentPin") && fixedPin.GetType().Equals("ETD.Models.CustomUIObjects.TeamPin") && movedPin_X > (fixedPin_X - (this.Width / 2)) && movedPin_X < (fixedPin_X + (this.Width / 2)) && movedPin_Y > (fixedPin_Y - (this.Height / 2)) && movedPin_Y < (fixedPin_Y + (this.Height / 2)))
-					{
-						//mapSection.AddTeamEquipment(this.Name, fixedPin.Name);
-						Canvas parent = (Canvas)this.Parent;
-						parent.Children.Remove(this);
-						return;
-					}*/
 
 					//Checking if the dropped rectangle is within the bounds of any other rectangle
 					while (movedPin_X > (fixedPin_X - ((this.Width / 2) + (fixedPin.Width / 2))) && movedPin_X < (fixedPin_X + ((this.Width / 2) + (fixedPin.Width / 2))) && movedPin_Y > (fixedPin_Y - ((this.Height / 2) + (fixedPin.Height / 2))) && movedPin_Y < (fixedPin_Y + ((this.Height / 2) + (fixedPin.Height / 2))))
@@ -401,18 +392,17 @@ namespace ETD.CustomObjects.CustomUIObjects
 								}
 							}
 						}
+						//Drop the rectangle after resolution of collision
+						setPinPosition(movedPin_X, movedPin_Y);
 					}
 				}
 			}
-
-			//Drop the rectangle if there are not collision or after resolution of collision
-			setPinPosition(movedPin_X, movedPin_Y);
 
 			//Trigger after collision detection special tasks
 			AfterCollisionDetection(Canvas_map);
 		}
 		
-		//Handling special cases of collision detection, default: nothing has been handled
+		//Handling special cases of collision detection, default: nothing to handle, return false
 		internal virtual bool HandleSpecialCollisions(Pin fixedPin)
 		{
 			return false;

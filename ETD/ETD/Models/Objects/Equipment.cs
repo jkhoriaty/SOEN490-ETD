@@ -14,12 +14,19 @@ namespace ETD.Models.Objects
 		private static List<Equipment> equipmentList = new List<Equipment>();
 
 		private Equipments equipmentType;
+		private bool assigned;
 
 		public Equipment(String name)
 		{
 			equipmentType = (Equipments)Enum.Parse(typeof(Equipments), name);
 			
 			equipmentList.Add(this);
+			ClassModifiedNotification(typeof(Equipment));
+		}
+
+		public void setAssigned(bool assigned)
+		{
+			this.assigned = assigned;
 			ClassModifiedNotification(typeof(Equipment));
 		}
 
@@ -34,6 +41,11 @@ namespace ETD.Models.Objects
 		public static List<Equipment> getEquipmentList()
 		{
 			return equipmentList;
+		}
+
+		public bool IsAssigned()
+		{
+			return assigned;
 		}
     }
 }

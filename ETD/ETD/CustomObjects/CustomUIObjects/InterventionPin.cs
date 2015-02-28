@@ -29,27 +29,21 @@ namespace ETD.CustomObjects.CustomUIObjects
 			base.setImage(TechnicalServices.getImage("intervention"));
 			base.setText(intervention.getInterventionNumber().ToString());
 
-			Draw();
-
 			intervention.RegisterInstanceObserver(this);
 		}
 
-		private void Draw()
+		public void Update()
 		{
 			if (intervention.getInterveningTeamList().Count > 0)
 			{
 				if (interventionContainer == null)
 				{
-					interventionContainer = new InterventionContainer(this);
+					interventionContainer = new InterventionContainer(this, mapSection.Canvas_map);
 					mapSection.Canvas_map.Children.Add(interventionContainer);
 				}
 				interventionContainer.PlaceAll();
+				interventionContainer.CollisionDetectionAndResolution(mapSection.Canvas_map);
 			}
-		}
-
-		public void Update()
-		{
-			Draw();
 		}
 
 		internal Intervention getIntervention()
@@ -82,14 +76,13 @@ namespace ETD.CustomObjects.CustomUIObjects
 		internal List<TeamPin> getInterveningTeamsPin()
 		{
 			List<TeamPin> interveningTeamsPin = new List<TeamPin>();
-			foreach(Pin pin in pinList)
+			foreach(Team team in intervention.getInterveningTeamList())
 			{
-				if(pin.IsOfType("TeamPin"))
+				foreach(Pin pin in pinList)
 				{
-					TeamPin teamPin = (TeamPin)pin;
-					if(intervention.getInterveningTeamList().Contains(teamPin.getTeam()))
+					if(pin.relatedObject == team)
 					{
-						interveningTeamsPin.Add(teamPin);
+						interveningTeamsPin.Add((TeamPin)pin);
 					}
 				}
 			}

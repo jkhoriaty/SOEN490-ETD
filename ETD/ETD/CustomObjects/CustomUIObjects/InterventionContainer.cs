@@ -15,26 +15,12 @@ namespace ETD.CustomObjects.CustomUIObjects
 	class InterventionContainer : Pin
 	{
 		private InterventionPin interventionPin;
-		private List<TeamPin> interveningTeamPinList;
+		private Canvas Canvas_map;
 
-		public InterventionContainer(InterventionPin interventionPin) : base(interventionPin)
+		public InterventionContainer(InterventionPin interventionPin, Canvas Canvas_map) : base(interventionPin)
 		{
 			this.interventionPin = interventionPin;
-			interveningTeamPinList = interventionPin.getInterveningTeamsPin();
-
-			//Determine the number of rows that the border is going to have with the interventionPin on top and then 2 teams per row
-			int teamRows = 0;
-			double height = ((double)interveningTeamPinList.Count()) / 2;
-			teamRows += (int)Math.Ceiling(height);
-			this.Height = interventionPin.Height + (teamRows * TeamPin.size);
-
-			//Determine the number of columns that the border is going to have, if more than one team than there will be two columns
-			int columns = 1;
-			if (interveningTeamPinList.Count() > 1)
-			{
-				columns = 2;
-			}
-			this.Width = columns * TeamPin.size;
+			this.Canvas_map = Canvas_map;
 
 			Border border = new Border();
 			border.BorderThickness = new Thickness(1);
@@ -45,26 +31,39 @@ namespace ETD.CustomObjects.CustomUIObjects
 
 		public void PlaceAll()
 		{
-			//MessageBox.Show("Called");
+			//Determine the number of rows that the border is going to have with the interventionPin on top and then 2 teams per row
+			int teamRows = 0;
+			double height = ((double)interventionPin.getInterveningTeamsPin().Count) / 2;
+			teamRows += (int)Math.Ceiling(height);
+			this.Height = interventionPin.Height + (teamRows * TeamPin.size);
+
+			//Determine the number of columns that the border is going to have, if more than one team than there will be two columns
+			int columns = 1;
+			if (interventionPin.getInterveningTeamsPin().Count() > 1)
+			{
+				columns = 2;
+			}
+			this.Width = columns * TeamPin.size;
+
 			setBorderPosition(interventionPin.getX(), interventionPin.getY());
 
 			double Y = interventionPin.getY() + (InterventionPin.size/2) + (TeamPin.size/2);
-			for (int i = 0; i < interveningTeamPinList.Count; i++)
+			for (int i = 0; i < interventionPin.getInterveningTeamsPin().Count; i++)
 			{
 				if ((i % 2) == 0) //First item on line
 				{
-					if ((i + 1) == interveningTeamPinList.Count) //Single on the line
+					if ((i + 1) == interventionPin.getInterveningTeamsPin().Count) //Single on the line
 					{
-						interveningTeamPinList[i].setPinPosition(interventionPin.getX(), Y);
+						interventionPin.getInterveningTeamsPin()[i].setPinPosition(interventionPin.getX(), Y);
 					}
-					else //There's another team on the line
+					else //There's another item on the line
 					{
-						interveningTeamPinList[i].setPinPosition(interventionPin.getX() - (TeamPin.size / 2), Y);
+						interventionPin.getInterveningTeamsPin()[i].setPinPosition(interventionPin.getX() - (TeamPin.size / 2), Y);
 					}
 				}
 				else //Second item on the line
 				{
-					interveningTeamPinList[i].setPinPosition(interventionPin.getX() + (TeamPin.size / 2), Y);
+					interventionPin.getInterveningTeamsPin()[i].setPinPosition(interventionPin.getX() + (TeamPin.size / 2), Y);
 					Y += TeamPin.size;
 				}
 			}
@@ -79,15 +78,39 @@ namespace ETD.CustomObjects.CustomUIObjects
 		//Handling special cases when collision detection is made on an InterventionContainer
 		internal override bool HandleSpecialCollisions(Pin fixedPin)
 		{
+			//Those special cases occur when the border just got drawn but it went out of bouds left or right or at the bottom
+			bool handled = false;
+
+			if (this.getX() < (this.Width / 2)) //Left
+			{
+				interventionPin.setPinPosition(this.Width / 2, interventionPin.getY()); //Move it right
+				handled = true;
+			}
+			if ((Canvas_map.ActualWidth - (this.Width / 2)) < this.getX()) //Right
+			{
+				interventionPin.setPinPosition(Canvas_map.ActualWidth - (this.Width / 2), interventionPin.getY()); //Move it left
+				handled = true;
+			}
+			if ((Canvas_map.ActualHeight - (this.Height / 2)) < this.getY()) //Bottom
+			{
+				interventionPin.setPinPosition(interventionPin.getX(), Canvas_map.ActualHeight - this.Height + (interventionPin.Height / 2));
+				handled = true;
+			}
+
+			if(handled)
+			{
+				PlaceAll(); //Replace all the team and border in accordance with the new intervention pin position
+				CollisionDetectionAndResolution(Canvas_map); //Recursive call to make sure that it does not collide with anything even the things it previously found no collision with
+				return true;
+			}
+
 			//Ignore collision with all pins related to it
-			if(fixedPin == interventionPin || interveningTeamPinList.Contains(fixedPin))
+			if (fixedPin == interventionPin || interventionPin.getInterveningTeamsPin().Contains(fixedPin))
 			{
 				return true;
 			}
-			else
-			{
-				return false;
-			}
+
+			return false;
 		}
 
 		//Making sure that if the border moved, that all it's related pins have moved as well
