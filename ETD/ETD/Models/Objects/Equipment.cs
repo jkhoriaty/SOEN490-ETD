@@ -24,6 +24,12 @@ namespace ETD.Models.Objects
 			ClassModifiedNotification(typeof(Equipment));
 		}
 
+		public static void DeleteEquipment(Equipment equipment)
+		{
+			equipmentList.Remove(equipment);
+			ClassModifiedNotification(typeof(Equipment));
+		}
+
 		public void setAssigned(bool assigned)
 		{
 			this.assigned = assigned;

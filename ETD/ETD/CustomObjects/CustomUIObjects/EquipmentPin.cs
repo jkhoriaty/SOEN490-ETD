@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
 
 /// <summary>
 /// Equipment Model Object
@@ -24,6 +26,20 @@ namespace ETD.CustomObjects.CustomUIObjects
 			base.setImage(TechnicalServices.getImage(equipment.getEquipmentType()));
 
 			this.equipment = equipment; //Providing a link to the equipment that this pin represents
+
+			MenuItem menuItem = new MenuItem();
+			menuItem.Header = "Delete equipment";
+			menuItem.Click += DeleteEquipment_Click;
+
+			ContextMenu contextMenu = new ContextMenu();
+			contextMenu.Items.Add(menuItem);
+
+			this.ContextMenu = contextMenu;
+		}
+
+		private void DeleteEquipment_Click(object sender, RoutedEventArgs e)
+		{
+			Equipment.DeleteEquipment(equipment);
 		}
 
 		internal override bool HandleSpecialCollisions(Pin fixedPin)
