@@ -77,24 +77,7 @@ namespace ETD.CustomObjects.CustomUIObjects
             //Adding the pin to the list of all pins
             pinList.Add(this);
         }
-
-        public Pin(Models.Objects.MapMod mapMod, AdditionalInfoPage aiSection, double p1, double p2)
-        {
-            // TODO: Complete member initialization
-            this.mapMod = mapMod;
-            this.aiSection = aiSection;
-            this.p1 = p1;
-            this.p2 = p2;
-        }
-
-        public Pin(Models.Objects.MapMod mapMod, AdditionalInfoPage aiSection, int size)
-        {
-            // TODO: Complete member initialization
-            this.mapMod = mapMod;
-            this.aiSection = aiSection;
-            this.size = size;
-        }
-
+    
 		//Setting the pins' background image to the passed image
 		public void setImage(BitmapImage image)
 		{
