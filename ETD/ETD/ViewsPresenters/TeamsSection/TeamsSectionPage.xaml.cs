@@ -29,22 +29,27 @@ namespace ETD.ViewsPresenters.TeamsSection
 	{
 		private MainWindow mainWindow;
 		private static Dictionary<String, StackPanel> teamEquipmentStacks = new Dictionary<String, StackPanel>();
+        private static Dictionary<Team, int> teamPosition = new Dictionary<Team, int>();
 		private DispatcherTimer dispatcherTimer = new DispatcherTimer();
 
 		private Frame createTeamForm;
+        int index;
+        int elementIndex = 0;
+        int count = 0;
 
 		public TeamsSectionPage(MainWindow mainWindow)
 		{
 			InitializeComponent();
 			this.mainWindow = mainWindow;
-			dispatcherTimer.Tick += new EventHandler(refresh);
-			dispatcherTimer.Interval = new TimeSpan(0, 0, 10); //Update every minute
+			dispatcherTimer.Tick += new EventHandler(Refresh);
+			dispatcherTimer.Interval = new TimeSpan(0, 0, 10); //Update every 10 seconds
 			dispatcherTimer.Start();
 
 			Observable.RegisterClassObserver(typeof(Team), this);
 		}
 
-		private void refresh(object sender, EventArgs e)
+        //refresh fucntion every 10 seconds looping through teams to check if time's up
+		private void Refresh(object sender, EventArgs e)
 		{
 			foreach(Team team in Team.getTeamList())
 			{
@@ -96,7 +101,7 @@ namespace ETD.ViewsPresenters.TeamsSection
 			{
 				Frame frame = new Frame();
 				frame.Content = new TeamInfoPage(this, team);
-				StackPanel_teamList.Children.Add(frame);
+				StackPanel_teamList.Children.Add(frame);              
 			}
 
 			//Restoring the form if a NotifyAll was called when the form was open
@@ -107,7 +112,7 @@ namespace ETD.ViewsPresenters.TeamsSection
 		}
 
 		//Registering the team equipment StackPanel to be able to add equipment to each team
-		public void registerStackPanel(String teamName, StackPanel equipmentStack)
+		public void RegisterStackPanel(String teamName, StackPanel equipmentStack)
 		{
 			//teamEquipmentStacks.Add(teamName, equipmentStack);
 		}
@@ -132,7 +137,6 @@ namespace ETD.ViewsPresenters.TeamsSection
 
 				//Getting the background image to the rectangle
 				ImageBrush equipmentImage = new ImageBrush();
-				//equipmentImage.ImageSource = TechnicalServices.getImage(equip.getEquipmentName());
 				imageRectangle.Fill = equipmentImage;
 
 				//Getting the appropriate equipment StackPanel
@@ -143,7 +147,6 @@ namespace ETD.ViewsPresenters.TeamsSection
 			else
 			{
 				MessageBox.Show("You cannot add more than 3 pieces of equipment to a team. The equipment is going to be readded to the map.");
-				//mainWindow.CreateEquipmentPin(equip.ToString());
 			}
 		}
 
@@ -156,31 +159,32 @@ namespace ETD.ViewsPresenters.TeamsSection
 			StackPanel equipmentStackPanel = (StackPanel)equipment.Parent;
 			//Team.teamList["" + equipment.Tag].RemoveEquipment(equip);
 			equipmentStackPanel.Children.Remove(equipment);          
-			//mainWindow.CreateEquipmentPin(equipment.Name);
 
 		}
        
-        internal void frameKeyDown(object sender, KeyEventArgs e)
+        //handling keyboard up/down arrow event
+        internal void FrameKeyDown(object sender, KeyEventArgs e)
         {
             UIElement frame = e.Source as UIElement;
 
             if (e.Key == Key.Down)
             {
-                frameMoveDown(frame);
+                FrameMoveDown(frame);
                 e.Handled = true;
             }
 
             else if (e.Key == Key.Up)
             {
-                frameMoveUp(frame);
+                FrameMoveUp(frame);
                 e.Handled = true;
             }
         }
 
-        internal void frameSelection(object sender, MouseEventArgs e)
+        //handling mouse event, selected team frame into focus
+        internal void FrameSelection(object sender, MouseEventArgs e)
         {
             UIElement frame = e.Source as UIElement;
-			StackPanel_teamList.KeyDown += new KeyEventHandler(frameKeyDown); 
+			StackPanel_teamList.KeyDown += new KeyEventHandler(FrameKeyDown); 
             if (!frame.Focus())
             {
                 frame.Focus();
@@ -189,38 +193,55 @@ namespace ETD.ViewsPresenters.TeamsSection
             e.Handled = true;
         }
 
-        internal void frameMoveDown(UIElement element)
+        //handling changing frame index position down, if at bottom, goes to top position instead
+        internal void FrameMoveDown(UIElement element)
         {
-            int elementIndex = 0;
-			int count = StackPanel_teamList.Children.Count; //get number of elements in stackpanel
-            int index;
+			count = StackPanel_teamList.Children.Count; //get number of elements in stackpanel
 			if (StackPanel_teamList.Children.Contains(element))
             {
 				index = StackPanel_teamList.Children.IndexOf(element);
-                if (index < count-1)
-                elementIndex = index+1;
-				StackPanel_teamList.Children.Remove(element);
-				StackPanel_teamList.Children.Insert(elementIndex, element);
+                if (index < count - 1)
+                {
+                    elementIndex = index + 1;
+                    StackPanel_teamList.Children.Remove(element);
+                    StackPanel_teamList.Children.Insert(elementIndex, element);
+                    Frame teamFrame = (Frame)(StackPanel_teamList.Children[elementIndex]);
+                    TeamInfoPage teamInfo = (TeamInfoPage)teamFrame.Content;
+                    Team team = teamInfo.getTeam();
+                    team.Swap(team, "down");
+                }
+                else if (index == count)
+                {
+                }
+				
             }
  
         }
 
-        internal void frameMoveUp(UIElement element)
+        //handling changing frame index position up, if at top, goes to bottom position instead
+        internal void FrameMoveUp(UIElement element)
         {
-            int elementIndex = 0;
-			int count = StackPanel_teamList.Children.Count; //get number of elements in stackpanel
-            int index;
+			count = StackPanel_teamList.Children.Count; //get number of elements in stackpanel
 			if (StackPanel_teamList.Children.Contains(element))
             {
 				index = StackPanel_teamList.Children.IndexOf(element);
                 if (index > 0)
+                {
                     elementIndex = index - 1;
+                    StackPanel_teamList.Children.Remove(element);
+                    StackPanel_teamList.Children.Insert(elementIndex, element);
+                    Frame teamFrame = (Frame)(StackPanel_teamList.Children[elementIndex]);
+                    TeamInfoPage teamInfo = (TeamInfoPage)teamFrame.Content;
+                    Team team = teamInfo.getTeam();
+                    team.Swap(team, "up");
+                }
                 else if (index == 0)
-                    elementIndex = count - 1;
-				StackPanel_teamList.Children.Remove(element);
-				StackPanel_teamList.Children.Insert(elementIndex, element);
+                {
+                }
+				
             }
-        }       
+        }
+
 	}
 }
 

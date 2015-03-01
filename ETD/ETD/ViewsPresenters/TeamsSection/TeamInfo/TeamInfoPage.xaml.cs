@@ -77,7 +77,7 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamInfo
 				memberTraining.Fill = img2;
 			}
 
-			teamsSection.registerStackPanel(team.getName(), equipmentStackPanel);
+			teamsSection.RegisterStackPanel(team.getName(), equipmentStackPanel);
 		}
 
 		private String DepartureTimeToString(TeamMember member)
@@ -93,8 +93,13 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamInfo
 
 		//Right click on the team to remove it from the team list
 		internal void DeleteTeam(object sender, RoutedEventArgs e)
-		{
+		{                      
 			Team.DeleteTeam(team);
 		}
+
+        internal Team getTeam()
+        {
+            return team;
+        }
 	}
 }

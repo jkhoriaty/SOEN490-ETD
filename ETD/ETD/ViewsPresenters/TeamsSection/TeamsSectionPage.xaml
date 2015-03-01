@@ -10,7 +10,7 @@
 	<StackPanel>
 		<Label Name="TeamsSectionLabel" Content="Teams" FontWeight="ExtraBlack" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24"/>
 		<ScrollViewer Name="Scroller" VerticalScrollBarVisibility="Auto">
-            <StackPanel Name="StackPanel_teamList" MouseLeftButtonDown="frameSelection">
+            <StackPanel Name="StackPanel_teamList" MouseLeftButtonDown="FrameSelection">
 				<!-- Team display is here -->
             </StackPanel>
 		</ScrollViewer>
