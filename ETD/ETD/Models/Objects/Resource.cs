@@ -16,12 +16,11 @@ namespace ETD.Models.Objects
         private DateTime moving;
         private DateTime arrival;
 
-        public Resource(String resourceName, Team team, DateTime moving, DateTime arrival)
+        public Resource(String resourceName, Team team, DateTime moving)
         {
             this.resourceName = resourceName;
             this.team = team;
-            this.moving = moving;
-            this.arrival = arrival;
+            this.moving = moving;  
         }
 
         public String getResourceName()
@@ -37,6 +36,11 @@ namespace ETD.Models.Objects
         public DateTime getMovingTime()
         {
             return moving;
+        }
+
+        public void setArrival(DateTime arrival)
+        {
+            this.arrival = arrival;
         }
 
         public DateTime getArrivalTime()

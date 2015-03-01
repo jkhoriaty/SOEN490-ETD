@@ -39,7 +39,8 @@ namespace ETD.ViewsPresenters
 		private InterventionSectionPage interventionsSection;
         private AdditionalInfoPage AIPmapSection;
         private ScheduleSectionPage ScheduleSection;
-        private FollowUpSectionForm FollowupSection;
+        private FollowUpSectionForm FollowupSection = new FollowUpSectionForm();
+        private FormPopup FollowUpSectionFormPopupContainer;
 
         private bool isdrawing = false;
 		private double previousWidth;
@@ -132,7 +133,7 @@ namespace ETD.ViewsPresenters
 				System.IO.FileInfo File = new System.IO.FileInfo(openFileDialog.FileName);
 				coloredImage = new BitmapImage(new Uri(openFileDialog.FileName));
 
-				mapSection.setMap(coloredImage);
+                AIPmapSection.SetMap(coloredImage);
 			}
 		}
 
@@ -203,19 +204,6 @@ namespace ETD.ViewsPresenters
             }  
         }
 
-        /*
-        public void CreateAdditionnalInfoPin(String AI,int size)
-        {
-            AIPmapSection.CreateAdditionnalInfoPin(AI,size);
-        }
-        
-
-       // delete additional pins
-        public void AIDeletePin(object sender, RoutedEventArgs e)
-        {
-          //  AIPmapSection.AIDeletePin(sender, e);
-        }
-        */
 
         //switch between Regular mode and Edit mode
         private void ModeChange(object sender, RoutedEventArgs e)
@@ -292,7 +280,7 @@ namespace ETD.ViewsPresenters
         //Displays follow up section page
         private void ShowFollowUpSection(object sender, RoutedEventArgs e)
         {
-            //new FormPopup(this, new FollowUpSectionForm(FollowupSection));
+            FollowUpSectionFormPopupContainer = new FormPopup(FollowupSection);
         }
 
 		//Interpret the servers return

@@ -26,25 +26,25 @@ namespace ETD.CustomObjects.PopupForms
         private Request FollowUpInfo;
         private Dictionary<String, TextBox[]> TimeStampMap = new Dictionary<String, TextBox[]>();
         private Dictionary<String, TextBox> ClientMap = new Dictionary<String, TextBox>();
-        private Dictionary<String, TextBox> DestinateurMap = new Dictionary<String, TextBox>();
-        private Dictionary<String, TextBox> DemandeMap = new Dictionary<String, TextBox>();
-        private Dictionary<String, TextBox> PriseEnChargeMap = new Dictionary<String, TextBox>();
+        private Dictionary<String, TextBox> RecipientMap = new Dictionary<String, TextBox>();
+        private Dictionary<String, TextBox> RequestMap = new Dictionary<String, TextBox>();
+        private Dictionary<String, TextBox> HandledByMap = new Dictionary<String, TextBox>();
         private Dictionary<String, TextBox[]> SuiviTimeStampMap = new Dictionary<String, TextBox[]>();
         private Dictionary<String, TextBox[]> FaitTimeStampMap = new Dictionary<String, TextBox[]>();
         //private Dictionary<String, String> TimesEquivalentKeyMap = new Dictionary<String, String>();
 
 
 
-        public FollowUpSectionForm(FollowUpSectionForm FollowUpPage)
+        public FollowUpSectionForm()
         {
             InitializeComponent();
-            this.FollowUpPage = FollowUpPage;
+            //this.FollowUpPage = FollowUpPage;
 
             setupTimeMap();
             setupClientMap();
-            setupDestinateurMap();
-            setupDemandeMap();
-            setupPriseEnChargeMap();
+            setupRecipientMap();
+            setupRequestMap();
+            setupHandledByMap();
             setupSuiviTimeStampMap();
             //setupTimesEquivalentKeyMap();
             setupFaitTimeStampMap();
@@ -81,47 +81,47 @@ namespace ETD.CustomObjects.PopupForms
 
         }
 
-        private void setupDestinateurMap()
+        private void setupRecipientMap()
         {
-            DestinateurMap.Add("Destinateur1", Destinateur1);
-            DestinateurMap.Add("Destinateur2", Destinateur2);
-            DestinateurMap.Add("Destinateur3", Destinateur3);
-            DestinateurMap.Add("Destinateur4", Destinateur4);
-            DestinateurMap.Add("Destinateur5", Destinateur5);
-            DestinateurMap.Add("Destinateur6", Destinateur6);
-            DestinateurMap.Add("Destinateur7", Destinateur7);
-            DestinateurMap.Add("Destinateur8", Destinateur8);
-            DestinateurMap.Add("Destinateur9", Destinateur9);
-            DestinateurMap.Add("Destinateur10", Destinateur10);
+            RecipientMap.Add("Recipient1", Recipient1);
+            RecipientMap.Add("Recipient2", Recipient2);
+            RecipientMap.Add("Recipient3", Recipient3);
+            RecipientMap.Add("Recipient4", Recipient4);
+            RecipientMap.Add("Recipient5", Recipient5);
+            RecipientMap.Add("Recipient6", Recipient6);
+            RecipientMap.Add("Recipient7", Recipient7);
+            RecipientMap.Add("Recipient8", Recipient8);
+            RecipientMap.Add("Recipient9", Recipient9);
+            RecipientMap.Add("Recipient10", Recipient10);
         }
 
-        private void setupDemandeMap()
+        private void setupRequestMap()
         {
-            DemandeMap.Add("Demande1", Demande1);
-            DemandeMap.Add("Demande2", Demande2);
-            DemandeMap.Add("Demande3", Demande3);
-            DemandeMap.Add("Demande4", Demande4);
-            DemandeMap.Add("Demande5", Demande5);
-            DemandeMap.Add("Demande6", Demande6);
-            DemandeMap.Add("Demande7", Demande7);
-            DemandeMap.Add("Demande8", Demande8);
-            DemandeMap.Add("Demande9", Demande9);
-            DemandeMap.Add("Demande10", Demande10);
+            RequestMap.Add("Request1", Request1);
+            RequestMap.Add("Request2", Request2);
+            RequestMap.Add("Request3", Request3);
+            RequestMap.Add("Request4", Request4);
+            RequestMap.Add("Request5", Request5);
+            RequestMap.Add("Request6", Request6);
+            RequestMap.Add("Request7", Request7);
+            RequestMap.Add("Request8", Request8);
+            RequestMap.Add("Request9", Request9);
+            RequestMap.Add("Request10", Request10);
         }
 
 
-        private void setupPriseEnChargeMap()
+        private void setupHandledByMap()
         {
-            PriseEnChargeMap.Add("PriseEnCharge1", PriseEnCharge1);
-            PriseEnChargeMap.Add("PriseEnCharge2", PriseEnCharge2);
-            PriseEnChargeMap.Add("PriseEnCharge3", PriseEnCharge3);
-            PriseEnChargeMap.Add("PriseEnCharge4", PriseEnCharge4);
-            PriseEnChargeMap.Add("PriseEnCharge5", PriseEnCharge5);
-            PriseEnChargeMap.Add("PriseEnCharge6", PriseEnCharge6);
-            PriseEnChargeMap.Add("PriseEnCharge7", PriseEnCharge7);
-            PriseEnChargeMap.Add("PriseEnCharge8", PriseEnCharge8);
-            PriseEnChargeMap.Add("PriseEnCharge9", PriseEnCharge9);
-            PriseEnChargeMap.Add("PriseEnCharge10", PriseEnCharge10);
+            HandledByMap.Add("HandledBy1", HandledBy1);
+            HandledByMap.Add("HandledBy2", HandledBy2);
+            HandledByMap.Add("HandledBy3", HandledBy3);
+            HandledByMap.Add("HandledBy4", HandledBy4);
+            HandledByMap.Add("HandledBy5", HandledBy5);
+            HandledByMap.Add("HandledBy6", HandledBy6);
+            HandledByMap.Add("HandledBy7", HandledBy7);
+            HandledByMap.Add("HandledBy8", HandledBy8);
+            HandledByMap.Add("HandledBy9", HandledBy9);
+            HandledByMap.Add("HandledBy10", HandledBy10);
         }
 
         private void setupSuiviTimeStampMap()
@@ -169,7 +169,7 @@ namespace ETD.CustomObjects.PopupForms
         }
         */
 
-        private void UpdateFollowUpInformation(int position, TextBox Clientbox, TextBox DemandeBox, TextBox PriseEnChargeMapBox, 
+        private void UpdateFollowUpInformation(int position, TextBox Clientbox, TextBox RequestBox, TextBox HandledByMapBox, 
                                                  TextBox TimestamphhsBox, TextBox TimestampmmsBox, TextBox TimestamphhfBox, TextBox TimestampmmfBox)
         {
             //Suivi timestamp
@@ -196,7 +196,7 @@ namespace ETD.CustomObjects.PopupForms
             timestampSuivi = timestampSuivi.Date + new TimeSpan(timestampshh, timestampsmm, 0);
             timestampFait = timestampFait.Date + new TimeSpan(timestampfhh, timestampfmm, 0);
 
-            FollowUpInfo.SetFollowUpInfo(position, new Request(Clientbox.Text, DemandeBox.Text, PriseEnChargeMapBox.Text, timestampSuivi, timestampFait));
+            FollowUpInfo.SetFollowUpInfo(position, new Request(Clientbox.Text, RequestBox.Text, HandledByMapBox.Text, timestampSuivi, timestampFait));
 
         }
 
@@ -204,52 +204,52 @@ namespace ETD.CustomObjects.PopupForms
         {
             if (!Client1.Text.Equals(""))
             {
-                UpdateFollowUpInformation(1, Client1, Demande1, PriseEnCharge1, Timestamphhs1, Timestampmms1, Timestamphhf1, Timestampmmf1);
+                UpdateFollowUpInformation(1, Client1, Request1, HandledBy1, Timestamphhs1, Timestampmms1, Timestamphhf1, Timestampmmf1);
             }
 
             if (!Client1.Text.Equals(""))
             {
-                UpdateFollowUpInformation(2, Client2, Demande2, PriseEnCharge2, Timestamphhs2, Timestampmms2, Timestamphhf2, Timestampmmf2);
+                UpdateFollowUpInformation(2, Client2, Request2, HandledBy2, Timestamphhs2, Timestampmms2, Timestamphhf2, Timestampmmf2);
             }
 
             if (!Client1.Text.Equals(""))
             {
-                UpdateFollowUpInformation(3, Client3, Demande3, PriseEnCharge3, Timestamphhs3, Timestampmms3, Timestamphhf3, Timestampmmf3);
+                UpdateFollowUpInformation(3, Client3, Request3, HandledBy3, Timestamphhs3, Timestampmms3, Timestamphhf3, Timestampmmf3);
             }
 
             if (!Client1.Text.Equals(""))
             {
-                UpdateFollowUpInformation(4, Client4, Demande4, PriseEnCharge4, Timestamphhs4, Timestampmms4, Timestamphhf4, Timestampmmf4);
+                UpdateFollowUpInformation(4, Client4, Request4, HandledBy4, Timestamphhs4, Timestampmms4, Timestamphhf4, Timestampmmf4);
             }
 
             if (!Client1.Text.Equals(""))
             {
-                UpdateFollowUpInformation(5, Client5, Demande5, PriseEnCharge5, Timestamphhs5, Timestampmms5, Timestamphhf5, Timestampmmf5);
+                UpdateFollowUpInformation(5, Client5, Request5, HandledBy5, Timestamphhs5, Timestampmms5, Timestamphhf5, Timestampmmf5);
             }
 
             if (!Client1.Text.Equals(""))
             {
-                UpdateFollowUpInformation(6, Client6, Demande6, PriseEnCharge6, Timestamphhs6, Timestampmms6, Timestamphhf6, Timestampmmf6);
+                UpdateFollowUpInformation(6, Client6, Request6, HandledBy6, Timestamphhs6, Timestampmms6, Timestamphhf6, Timestampmmf6);
             }
 
             if (!Client1.Text.Equals(""))
             {
-                UpdateFollowUpInformation(7, Client7, Demande7, PriseEnCharge7, Timestamphhs7, Timestampmms7, Timestamphhf7, Timestampmmf7);
+                UpdateFollowUpInformation(7, Client7, Request7, HandledBy7, Timestamphhs7, Timestampmms7, Timestamphhf7, Timestampmmf7);
             }
 
             if (!Client1.Text.Equals(""))
             {
-                UpdateFollowUpInformation(8, Client8, Demande8, PriseEnCharge8, Timestamphhs8, Timestampmms8, Timestamphhf8, Timestampmmf8);
+                UpdateFollowUpInformation(8, Client8, Request8, HandledBy8, Timestamphhs8, Timestampmms8, Timestamphhf8, Timestampmmf8);
             }
 
             if (!Client1.Text.Equals(""))
             {
-                UpdateFollowUpInformation(9, Client9, Demande9, PriseEnCharge9, Timestamphhs9, Timestampmms9, Timestamphhf9, Timestampmmf9);
+                UpdateFollowUpInformation(9, Client9, Request9, HandledBy9, Timestamphhs9, Timestampmms9, Timestamphhf9, Timestampmmf9);
             }
 
             if (!Client1.Text.Equals(""))
             {
-                UpdateFollowUpInformation(10, Client10, Demande10, PriseEnCharge10, Timestamphhs10, Timestampmms10, Timestamphhf10, Timestampmmf10);
+                UpdateFollowUpInformation(10, Client10, Request10, HandledBy10, Timestamphhs10, Timestampmms10, Timestamphhf10, Timestampmmf10);
             }
 
         }
