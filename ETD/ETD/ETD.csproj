@@ -37,6 +37,7 @@
     Auto Generated
   -->
   <ItemGroup>
+    <Compile Include="CustomObjects\CustomUIObjects\EquipmentIcon.cs" />
     <Compile Include="CustomObjects\CustomUIObjects\InterventionContainer.cs" />
     <Compile Include="CustomObjects\CustomUIObjects\EquipmentPin.cs" />
     <Compile Include="CustomObjects\CustomUIObjects\InterventionPin.cs" />
@@ -55,9 +56,7 @@
     <Compile Include="Models\Objects\Operation.cs" />
     <Compile Include="Models\ArchitecturalObjects\Observable.cs" />
     <Compile Include="Models\ArchitecturalObjects\Observer.cs" />
-    <Compile Include="Models\Objects\PatrolShift.cs" />
     <Compile Include="Models\Objects\Resource.cs" />
-    <Compile Include="Models\Objects\Scheduler.cs" />
     <Compile Include="CustomObjects\PopupForms\FormPopup.cs" />
     <Compile Include="CustomObjects\PopupForms\RegisteredVolunteersPopup.cs" />
     <Compile Include="Services\NetworkServices.cs" />
@@ -92,9 +91,7 @@
     <Compile Include="ViewsPresenters\MapSection\MapSectionPage.xaml.cs">
       <DependentUpon>MapSectionPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewsPresenters\MapSection\PinManagement\PinEditor.cs" />
     <Compile Include="ViewsPresenters\MapSection\PinManagement\AIPinHandler.cs" />
-    <Compile Include="ViewsPresenters\MapSection\PinManagement\PinHandler.cs" />
     <Compile Include="ViewsPresenters\PopupForm.cs" />
     <Compile Include="ViewsPresenters\ScheduleSection\ScheduleSectionPage.xaml.cs">
       <DependentUpon>ScheduleSectionPage.xaml</DependentUpon>

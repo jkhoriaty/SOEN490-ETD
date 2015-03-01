@@ -7,7 +7,9 @@ using System.Threading.Tasks;
 
 namespace ETD.Models.Objects
 {
-
+    /// <summary>
+    /// Map Model Object
+    /// </summary>
     public enum MapMods { camp, circle, line, ramp, rectangle, square, stairs, text };
 
     public class MapMod : Observable

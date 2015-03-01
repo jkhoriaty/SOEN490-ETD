@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 
 namespace ETD.Models.Objects
 {
+    /// <summary>
+    /// Equipment Model Object
+    /// </summary>
+
 	public enum Equipments {ambulanceCart, sittingCart, epipen, transportStretcher, mountedStretcher, wheelchair};
 
 	public class Equipment : Observable
@@ -27,7 +31,7 @@ namespace ETD.Models.Objects
 		public static void DeleteEquipment(Equipment equipment)
 		{
 			equipmentList.Remove(equipment);
-			ClassModifiedNotification(typeof(Equipment));
+			ClassModifiedNotification(typeof(Equipment)); 
 		}
 
 		public void setAssigned(bool assigned)

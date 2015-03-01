@@ -23,6 +23,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 		private static Pin draggedPin;
 
 		internal object relatedObject;
+		internal MapSectionPage mapSection;
 
         private MapMod mapMod;
         private AdditionalInfoPage aiSection;
@@ -35,6 +36,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 		{
 			//Setting relatedObject, used for position recovery
 			this.relatedObject = relatedObject;
+			this.mapSection = mapSection;
 
 			//Initializing grid attibutes
 			this.Width = size;
@@ -44,6 +46,15 @@ namespace ETD.CustomObjects.CustomUIObjects
 			this.MouseLeftButtonUp += new MouseButtonEventHandler(mapSection.DragStop_MouseLeftButtonUp);
 
 			//Adding the pin to the list of all pins
+			pinList.Add(this);
+		}
+
+		//Constructor for Creating border pin
+		public Pin(InterventionPin interventionPin)
+		{
+			this.relatedObject = interventionPin;
+
+			//Adding the border pin to the list of all pins
 			pinList.Add(this);
 		}
 
@@ -67,15 +78,6 @@ namespace ETD.CustomObjects.CustomUIObjects
             pinList.Add(this);
         }
 
-		//Constructor for Creating border pin
-		public Pin(InterventionPin interventionPin)
-		{
-			this.relatedObject = interventionPin;
-
-			//Adding the border pin to the list of all pins
-			pinList.Add(this);
-		}
-        /*
         public Pin(Models.Objects.MapMod mapMod, AdditionalInfoPage aiSection, double p1, double p2)
         {
             // TODO: Complete member initialization
@@ -84,7 +86,7 @@ namespace ETD.CustomObjects.CustomUIObjects
             this.p1 = p1;
             this.p2 = p2;
         }
-        */
+
         public Pin(Models.Objects.MapMod mapMod, AdditionalInfoPage aiSection, int size)
         {
             // TODO: Complete member initialization
@@ -93,7 +95,7 @@ namespace ETD.CustomObjects.CustomUIObjects
             this.size = size;
         }
 
-		//Setting the background image to the passed image
+		//Setting the pins' background image to the passed image
 		public void setImage(BitmapImage image)
 		{
 			Rectangle imageRectangle = new Rectangle();
@@ -123,7 +125,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 			viewbox.Child = nameLabel;
 		}
 
-		//If a pin already exists when the map is being rendered, return this position so it can be set to it
+		//If a pin already exists when the map is being rendered, return it's last known position position so it can be set to it
 		public static double[] getPreviousPinPosition(object pinObject)
 		{
 			if (pinPositionList.ContainsKey(pinObject))
@@ -175,9 +177,36 @@ namespace ETD.CustomObjects.CustomUIObjects
 		public static void ClearAllPins(Canvas Canvas_map)
 		{
 			Canvas_map.Children.Clear();
+
+			//To avoid having vestigial observers on which update is called while they have been destroyed
+			foreach(Pin pin in pinList)
+			{
+				pin.DeregisterPinFromObserver();
+			}
+
 			pinList.Clear();
 		}
 
+		//Used in order to avoid having vestigial observers
+		internal virtual void DeregisterPinFromObserver()
+		{
+			return;
+		}
+
+		//Move all pins when the window gets resized so that they stay in the same position as they were before the resizing
+		public static void MoveAllPins(double widthRatio, double heightRatio) //The ratios are the difference in percentage between the old screen size and the new one
+		{
+			foreach (Pin pin in pinList)
+			{
+				double movedPin_X = widthRatio * pin.getX();
+				double movedPin_Y = heightRatio * pin.getY(); ;
+
+				pin.setPinPosition(movedPin_X, movedPin_Y);
+				pin.CollisionDetectionAndResolution(true); //true to avoid having the resize add a team to an intervention or an equipment to a team
+			}
+		}
+
+		//Checking the type of the pin; used mostly for special collisions
 		internal bool IsOfType(String type)
 		{
 			return this.GetType().ToString().Equals("ETD.CustomObjects.CustomUIObjects." + type);
@@ -189,7 +218,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 			draggedPin = this;
 		}
 
-		//Drag in progress
+		//Drag in progress (when mouse moves and a pin is clicked)
 		public virtual void DragMove(Canvas Canvas_map, MouseEventArgs e)
 		{
 			//Get the position of the mouse relative to the Canvas
@@ -215,7 +244,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 			}
 			this.ReleaseMouseCapture();
 
-			CollisionDetectionAndResolution(Canvas_map);
+			CollisionDetectionAndResolution(false);
 		}
 
 		//Returns true if this pin (the moved pin) overlaps the fixed pin passed as an argument more than 25%, false otherwise
@@ -231,16 +260,11 @@ namespace ETD.CustomObjects.CustomUIObjects
 			}
 		}
 
-		internal void CollisionDetectionAndResolution(Canvas Canvas_map)
-		{
-			CollisionDetectionAndResolution(Canvas_map, false);
-		}
-
 		//Collision detection and resolution on the pin
-		internal void CollisionDetectionAndResolution(Canvas Canvas_map, bool defaultPosition)
+		internal void CollisionDetectionAndResolution(bool ignoreSpecialCollisions)
 		{
 			bool collisionDetected = true;
-			int verificationCount = 0;
+			int verificationCount = 0; //Counter so that the program will be able to recognize when an object is stuck and bouncing around endlessly
 
 			//Loop to make sure that last verification ensures no collision with any object
 			while (collisionDetected == true)
@@ -252,7 +276,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 				//Iterating throught all pins
 				foreach (Pin fixedPin in pinListCopy)
 				{
-					//Getting the position of the dropped pin
+					//Getting the current position of the dropped pin
 					double movedPin_X = this.getX();
 					double movedPin_Y = this.getY();
 
@@ -263,7 +287,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 					}
 
 					//Handling all special cases no matter what the movedPin is except if it just got added
-					if (!defaultPosition)
+					if (!ignoreSpecialCollisions)
 					{
 						bool skipCollisionDetection = HandleSpecialCollisions(fixedPin);
 
@@ -273,7 +297,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 						}
 					}
 
-					//Getting the position of where the rectangle has been dropped (center point)
+					//Getting the position of the pin with which the collision is being tested
 					double fixedPin_X = fixedPin.getX();
 					double fixedPin_Y = fixedPin.getY();
 
@@ -300,7 +324,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 							differenceRatio = Math.Round(((Math.Abs(verticalDifference) / Math.Abs(horizontalDifference)) / 10), 3);
 
 							//Shifting horizontally in the correct direction, if not at the border
-							if ((this.Width / 2) < movedPin_X && movedPin_X < (Canvas_map.ActualWidth - (this.Width / 2)))
+							if ((this.Width / 2) < movedPin_X && movedPin_X < (mapSection.Canvas_map.ActualWidth - (this.Width / 2)))
 							{
 								if (horizontalDifference < 0)
 								{
@@ -319,7 +343,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 						if (verticalDifference != 0)
 						{
 							//Shifting vertically in the correct direction
-							if ((this.Height / 2) < movedPin_Y && movedPin_Y < (Canvas_map.ActualHeight - (this.Height / 2)))
+							if ((this.Height / 2) < movedPin_Y && movedPin_Y < (mapSection.Canvas_map.ActualHeight - (this.Height / 2)))
 							{
 								if (verticalDifference < 0)
 								{
@@ -337,7 +361,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 						//Handling situation where object is dropped between two others and is just bouncing around, moving it left or right depending on the part of the map the pin is on
 						if (verificationCount > 100)
 						{
-							if (movedPin_Y < (Canvas_map.ActualHeight / 2))
+							if (movedPin_Y < (mapSection.Canvas_map.ActualHeight / 2))
 							{
 								movedPin_Y += fixedPin.Height;
 							}
@@ -352,7 +376,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 						//Handling case of perfect superposition and placing right of fixed item if in the left half of the map, otherwise place left
 						if (movedPin_X == fixedPin_X && movedPin_Y == fixedPin_Y)
 						{
-							if (fixedPin_X < (Canvas_map.ActualWidth / 2))
+							if (fixedPin_X < (mapSection.Canvas_map.ActualWidth / 2))
 							{
 								movedPin_X = movedPin_X + ((this.Width / 2) + (fixedPin.Width / 2));
 							}
@@ -366,8 +390,8 @@ namespace ETD.CustomObjects.CustomUIObjects
 						//Handling corner situation
 						if (moved == false)
 						{
-							double horizontalToBorder = Math.Min(fixedPin_X, (Canvas_map.ActualWidth - fixedPin_X));
-							double verticalToBorder = Math.Min(fixedPin_Y, (Canvas_map.ActualHeight - fixedPin_Y));
+							double horizontalToBorder = Math.Min(fixedPin_X, (mapSection.Canvas_map.ActualWidth - fixedPin_X));
+							double verticalToBorder = Math.Min(fixedPin_Y, (mapSection.Canvas_map.ActualHeight - fixedPin_Y));
 
 							if (horizontalToBorder <= verticalToBorder) //Need horizontal movement
 							{
@@ -393,13 +417,13 @@ namespace ETD.CustomObjects.CustomUIObjects
 							}
 						}
 						//Drop the rectangle after resolution of collision
-						setPinPosition(movedPin_X, movedPin_Y);
+						 setPinPosition(movedPin_X, movedPin_Y);
 					}
 				}
 			}
 
 			//Trigger after collision detection special tasks
-			AfterCollisionDetection(Canvas_map);
+			AfterCollisionDetection();
 		}
 		
 		//Handling special cases of collision detection, default: nothing to handle, return false
@@ -409,7 +433,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 		}
 
 		//Handling cases where some pins need to trigger actions for the correct placement of all pins, default: do nothing
-		internal virtual void AfterCollisionDetection(Canvas Canvas_map)
+		internal virtual void AfterCollisionDetection()
 		{
 			return;
 		}

@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace ETD.Models.Objects
 {
+    /// <summary>
+    /// Operation Model Object
+    /// </summary>
+
     public class Operation
     {
         private String operationName;

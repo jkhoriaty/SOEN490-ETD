@@ -8,11 +8,9 @@ using System.Windows;
 
 namespace ETD.Models.Objects
 {
-	//public enum Consciousness { alert, verbal, painful, unconscious, notSet };
-	//public enum Airways { clear, partiallyObstructed, completelyObstructed, notSet };
-	//public enum Breathing { normal, difficulty, absent, notSet };
-	//public enum Circulation { normal, chestPain, hemorrhage, noPulse, notSet };
-	//public enum Conclusions { returnToSite, returnToHome, referredToDoctor, equipmentDistribution, hospital, patientNotFound, noInterventions, other, notSet };
+    /// <summary>
+    /// Intervention Model Object
+    /// </summary>
 
     public class Intervention : Observable
     {

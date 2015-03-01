@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace ETD.Models.Objects
 {
+    /// <summary>
+    /// Intervention Additional Information Model Object
+    /// </summary>
+
     public class InterventionAdditionalInfo
     {
         private String information;
@@ -15,6 +19,11 @@ namespace ETD.Models.Objects
         {
             this.information = information;
             this.timestamp = timestamp;
+        }
+
+        public InterventionAdditionalInfo()
+        {
+            // TODO: Complete member initialization
         }
 
         public String getInformation()

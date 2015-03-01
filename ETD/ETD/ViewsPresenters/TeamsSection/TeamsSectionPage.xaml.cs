@@ -33,6 +33,9 @@ namespace ETD.ViewsPresenters.TeamsSection
 		private DispatcherTimer dispatcherTimer = new DispatcherTimer();
 
 		private Frame createTeamForm;
+        int index;
+        int elementIndex = 0;
+        int count = 0;
 
 		public TeamsSectionPage(MainWindow mainWindow)
 		{
@@ -115,7 +118,7 @@ namespace ETD.ViewsPresenters.TeamsSection
 		}
 
 		//Adding equipment to specified team equipment stack
-		public void AddTeamEquipment(Equipment equip, String teamName)
+		/*public void AddTeamEquipment(Equipment equip, String teamName)
 		{
 			//Limit of 3 pieces of equipment per team
 			if (teamEquipmentStacks[teamName].Children.Count <= 3)
@@ -145,7 +148,7 @@ namespace ETD.ViewsPresenters.TeamsSection
 			{
 				MessageBox.Show("You cannot add more than 3 pieces of equipment to a team. The equipment is going to be readded to the map.");
 			}
-		}
+		}*/
 
 		//Right clicking on an equipment in a team description removew the equipment from the stack and adds it back to the map
 		public void RemoveTeamEquipment(object sender, RoutedEventArgs e)
@@ -193,17 +196,24 @@ namespace ETD.ViewsPresenters.TeamsSection
         //handling changing frame index position down, if at bottom, goes to top position instead
         internal void FrameMoveDown(UIElement element)
         {
-            int elementIndex = 0;
-			int count = StackPanel_teamList.Children.Count; //get number of elements in stackpanel
-            int index;
+			count = StackPanel_teamList.Children.Count; //get number of elements in stackpanel
 			if (StackPanel_teamList.Children.Contains(element))
             {
 				index = StackPanel_teamList.Children.IndexOf(element);
-                if (index < count-1)
-                elementIndex = index+1;
-				StackPanel_teamList.Children.Remove(element);
-				StackPanel_teamList.Children.Insert(elementIndex, element);
-                //MessageBox.Show((StackPanel_teamList.Children[index]).GetType().ToString());
+                if (index < count - 1)
+                {
+                    elementIndex = index + 1;
+                    StackPanel_teamList.Children.Remove(element);
+                    StackPanel_teamList.Children.Insert(elementIndex, element);
+                    Frame teamFrame = (Frame)(StackPanel_teamList.Children[elementIndex]);
+                    TeamInfoPage teamInfo = (TeamInfoPage)teamFrame.Content;
+                    Team team = teamInfo.getTeam();
+                    team.Swap(team, "down");
+                }
+                else if (index == count)
+                {
+                }
+				
             }
  
         }
@@ -211,18 +221,24 @@ namespace ETD.ViewsPresenters.TeamsSection
         //handling changing frame index position up, if at top, goes to bottom position instead
         internal void FrameMoveUp(UIElement element)
         {
-            int elementIndex = 0;
-			int count = StackPanel_teamList.Children.Count; //get number of elements in stackpanel
-            int index;
+			count = StackPanel_teamList.Children.Count; //get number of elements in stackpanel
 			if (StackPanel_teamList.Children.Contains(element))
             {
 				index = StackPanel_teamList.Children.IndexOf(element);
                 if (index > 0)
+                {
                     elementIndex = index - 1;
+                    StackPanel_teamList.Children.Remove(element);
+                    StackPanel_teamList.Children.Insert(elementIndex, element);
+                    Frame teamFrame = (Frame)(StackPanel_teamList.Children[elementIndex]);
+                    TeamInfoPage teamInfo = (TeamInfoPage)teamFrame.Content;
+                    Team team = teamInfo.getTeam();
+                    team.Swap(team, "up");
+                }
                 else if (index == 0)
-                    elementIndex = count - 1;
-				StackPanel_teamList.Children.Remove(element);
-				StackPanel_teamList.Children.Insert(elementIndex, element);
+                {
+                }
+				
             }
         }
 

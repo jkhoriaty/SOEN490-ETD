@@ -23,10 +23,11 @@ namespace ETD.CustomObjects.CustomUIObjects
 
 		public EquipmentPin(Equipment equipment, MapSectionPage mapSection) : base(equipment, mapSection, size)
 		{
-			base.setImage(TechnicalServices.getImage(equipment.getEquipmentType()));
-
 			this.equipment = equipment; //Providing a link to the equipment that this pin represents
-
+			
+			base.setImage(TechnicalServices.getImage(equipment.getEquipmentType())); //Setting background image
+						
+			//Adding contect menu so that the user can delete the equipment
 			MenuItem menuItem = new MenuItem();
 			menuItem.Header = "Delete equipment";
 			menuItem.Click += DeleteEquipment_Click;
@@ -37,11 +38,13 @@ namespace ETD.CustomObjects.CustomUIObjects
 			this.ContextMenu = contextMenu;
 		}
 
+		//Deleting euqipment object (context menu item click)
 		private void DeleteEquipment_Click(object sender, RoutedEventArgs e)
 		{
 			Equipment.DeleteEquipment(equipment);
 		}
 
+		//Handle special collisions between a Equipment and another pin
 		internal override bool HandleSpecialCollisions(Pin fixedPin)
 		{
 			//SpecialCollision: Equipment is dropped on a team with sufficient overlap, add the equipment to the team
@@ -49,6 +52,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 			{
 				TeamPin teamPin = (TeamPin)fixedPin;
 				teamPin.getTeam().AddEquipment(equipment);
+                //MessageBox.Show(teamPin.getTeam().getName());
 				equipment.setAssigned(true);
 				return true;
 			}
