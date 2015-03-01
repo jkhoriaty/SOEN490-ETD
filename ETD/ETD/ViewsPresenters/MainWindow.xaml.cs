@@ -24,6 +24,7 @@ using ETD.Services;
 using System.Threading;
 using System.Windows.Controls.Primitives;
 using ETD.CustomObjects.PopupForms;
+using ETD.CustomObjects.CustomUIObjects;
 
 
 namespace ETD.ViewsPresenters
@@ -44,6 +45,7 @@ namespace ETD.ViewsPresenters
 		private double previousWidth;
 		private double previousHeight;
 
+		DispatcherTimer dispatcherTimer = new DispatcherTimer();
 		private Dictionary<String, String> registeredVolunteers = new Dictionary<String, String>();
 
 		public MainWindow()
@@ -54,7 +56,6 @@ namespace ETD.ViewsPresenters
 			teamsSection = new TeamsSectionPage(this);
 			mapSection = new MapSectionPage(this);
 			interventionsSection = new InterventionSectionPage(this);
-          
             //ScheduleSection = new ScheduleSectionPage(this);
 
 			previousWidth = MapSection.ActualWidth;
@@ -81,18 +82,18 @@ namespace ETD.ViewsPresenters
 			interventionsFrame.Content = interventionsSection;
 			InterventionsSection.Child = interventionsFrame;
 
-
-
             //Populating the Schedule section
             /*Frame ScheduleFrame = new Frame();
             ScheduleFrame.Content = ScheduleSection;
             MapSection.Child = ScheduleFrame;*/
 
-            
+			dispatcherTimer.Tick += new EventHandler(RefreshGPSPositions);
+			dispatcherTimer.Interval += new TimeSpan(0, 0, 10);
+			dispatcherTimer.Start();
 		}
 
 		//Ping server to test connection and update registed volunteers - Executes every 10 seconds
-		public void refresh(object sender, EventArgs e)
+		public void RefreshGPSPositions(object sender, EventArgs e)
 		{
 			UpdateRegistered();
 		}
@@ -110,7 +111,7 @@ namespace ETD.ViewsPresenters
 			teamsSection.setTeamsSectionHeight(TeamsSection);
 			interventionsSection.setInterventionsSectionWidth(InterventionsSection);
 
-			mapSection.movePins((MapSection.ActualWidth / previousWidth), (MapSection.ActualHeight / previousHeight));
+			Pin.MoveAllPins((MapSection.ActualWidth / previousWidth), (MapSection.ActualHeight / previousHeight));
 
 			previousWidth = MapSection.ActualWidth;
 			previousHeight = MapSection.ActualHeight;

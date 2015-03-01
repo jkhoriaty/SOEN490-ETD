@@ -91,9 +91,7 @@
     <Compile Include="ViewsPresenters\MapSection\MapSectionPage.xaml.cs">
       <DependentUpon>MapSectionPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewsPresenters\MapSection\PinManagement\PinEditor.cs" />
     <Compile Include="ViewsPresenters\MapSection\PinManagement\AIPinHandler.cs" />
-    <Compile Include="ViewsPresenters\MapSection\PinManagement\PinHandler.cs" />
     <Compile Include="ViewsPresenters\PopupForm.cs" />
     <Compile Include="ViewsPresenters\ScheduleSection\ScheduleSectionPage.xaml.cs">
       <DependentUpon>ScheduleSectionPage.xaml</DependentUpon>

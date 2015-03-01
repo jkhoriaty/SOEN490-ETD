@@ -103,7 +103,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 			if(handled)
 			{
 				PlaceAll(); //Replace all the team and border in accordance with the new intervention pin position
-				CollisionDetectionAndResolution(Canvas_map); //Recursive call to make sure that it does not collide with anything even the things it previously found no collision with
+				CollisionDetectionAndResolution(false); //Recursive call to make sure that it does not collide with anything even the things it previously found no collision with
 				return true;
 			}
 
@@ -117,7 +117,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 		}
 
 		//Making sure that if the border moved, that all it's related pins have moved as well
-		internal override void AfterCollisionDetection(Canvas Canvas_map)
+		internal override void AfterCollisionDetection()
 		{
 			interventionPin.setPinPosition(getX(), getY() - (this.Height / 2) + (InterventionPin.size / 2));
 			PlaceAll();

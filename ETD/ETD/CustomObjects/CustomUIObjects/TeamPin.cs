@@ -18,13 +18,11 @@ namespace ETD.CustomObjects.CustomUIObjects
 		internal static int size = 40;
 
 		private Team team;
-		private MapSectionPage mapSection;
 		private InterventionPin interventionPin;
 
 		public TeamPin(Team team, MapSectionPage mapSection) : base(team, mapSection, size)
 		{
 			this.team = team; //Providing a link to the team that this pin represents
-			this.mapSection = mapSection;
 
 			//Updating image to match training and status of team in addition to text
 			Update();
@@ -117,7 +115,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 
 					//Setting the position of the intervention to be the position of the team and calling collision detection on the teamPin for the team to be added to the intervention
 					relatedInterventionPin.setPinPosition(teamPin.getX(), teamPin.getY());
-					teamPin.CollisionDetectionAndResolution(mapSection.Canvas_map);
+					teamPin.CollisionDetectionAndResolution(false);
 				}
 				else
 				{

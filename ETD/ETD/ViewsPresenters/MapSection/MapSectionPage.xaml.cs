@@ -22,8 +22,6 @@ namespace ETD.ViewsPresenters.MapSection
 	public partial class MapSectionPage : Page, Observer
 	{
 		MainWindow mainWindow;
-		PinEditor pinEditor;
-		PinHandler pinHandler;
 
 		//Drag-and-Drop related variable
 		private bool pinDragInProgress;
@@ -41,9 +39,6 @@ namespace ETD.ViewsPresenters.MapSection
 		{
 			InitializeComponent();
 			this.mainWindow = mainWindow;
-			pinEditor = new PinEditor(this);
-			pinHandler = new PinHandler(this);
-            Canvas_map.ContextMenu = Resources["ContextMenu"] as ContextMenu;
 
 			Observable.RegisterClassObserver(typeof(Team), this);
 			Observable.RegisterClassObserver(typeof(Intervention), this);
@@ -85,7 +80,7 @@ namespace ETD.ViewsPresenters.MapSection
 					previousPinPosition = new double[]{ teamPin.Width / 2, teamPin.Height / 2 }; //Top-left corner
 				}
 				teamPin.setPinPosition(previousPinPosition[0], previousPinPosition[1]);
-				teamPin.CollisionDetectionAndResolution(Canvas_map, defaultPosition); //TODO: Switch to only resolution
+				teamPin.CollisionDetectionAndResolution(defaultPosition);
 			}
 
 			//Creating all intervention pins and adding the map to their previous or a new position while detecting newly created collisions
@@ -104,7 +99,7 @@ namespace ETD.ViewsPresenters.MapSection
 				}
 				interventionPin.setPinPosition(previousPinPosition[0], previousPinPosition[1]);
 				interventionPin.Update();
-				interventionPin.CollisionDetectionAndResolution(Canvas_map, defaultPosition); //TODO: Switch to only resolution
+				interventionPin.CollisionDetectionAndResolution(defaultPosition);
 			}
 
 			//Creating all equipment pins and adding the map to their previous or a new position while detecting newly created collisions
@@ -124,7 +119,7 @@ namespace ETD.ViewsPresenters.MapSection
 						previousPinPosition = new double[] { Canvas_map.ActualWidth - (equipmentPin.Width / 2), (equipmentPin.Height / 2) }; //Top-right corner
 					}
 					equipmentPin.setPinPosition(previousPinPosition[0], previousPinPosition[1]);
-					equipmentPin.CollisionDetectionAndResolution(Canvas_map, defaultPosition); //TODO: Switch to only resolution
+					equipmentPin.CollisionDetectionAndResolution(defaultPosition);
 				}
 			}
 		}
@@ -158,72 +153,34 @@ namespace ETD.ViewsPresenters.MapSection
 			pin.DragStop(Canvas_map, e);
 		}
 
-		//Pushing request to mainWindow
-		public void AddTeamEquipment(String equip, String teamName)
-		{
-            /*Equipment equipment = new Equipment((Equipments)Enum.Parse(typeof(Equipments), equip));
-			mainWindow.AddTeamEquipment(equipment, teamName);*/
-		}
-
-        internal void ChangeStatus_Click(object sender, RoutedEventArgs e)
-        {
-            pinEditor.ChangeStatus(sender, e);
-        }
-
-        internal void EditMenuItems_Opened(object sender, RoutedEventArgs e)
-        {
-			ContextMenu cm = (ContextMenu)sender;
-			pinEditor.EditMenuItems(cm);
-        }
-
-		public void CheckRight(object sender, ContextMenuEventArgs e)
-		{
-			//TeamGrid fe = (TeamGrid)sender;
-			//pinEditor.EditMenuItems(fe.ContextMenu);
-		}
-
-		//When the window is resized, the pins need to move to stay in the window
-		public void movePins(double widthRatio, double heightRatio)
-		{
-			pinHandler.movePins(widthRatio, heightRatio);
-		}
-
-		private void DeleteEquipment_Click(object sender, RoutedEventArgs e)
-		{
-			MenuItem item = sender as MenuItem;
-			if (item != null)
-			{
-				ContextMenu parent = item.Parent as ContextMenu;
-				if (parent != null)
-				{
-					//EquipmentGrid grid = (EquipmentGrid)parent.PlacementTarget;
-					//pinEditor.DeletePin(grid);
-				}
-			}
-		}
-
-		internal void AddResource(String teamName, String interventionName)
-		{
-			mainWindow.AddResource(teamName, interventionName);
-		}
-
 		internal void ReportArrival(Grid team)
 		{
-			Grid intervention = pinHandler.RelatedIntervention(team);
+			/*Grid intervention = pinHandler.RelatedIntervention(team);
 			if(intervention == null)
 			{
                 mainWindow.CreateIntervention();
                 //pinHandler.AppointTeamToIntervention(team, (Grid) Map.Children[Map.Children.Count - 1]);
                 intervention = pinHandler.RelatedIntervention(team);
 			}
-			mainWindow.ReportArrival(team.Name, intervention.Name);
+			mainWindow.ReportArrival(team.Name, intervention.Name);*/
 		}
 
         internal void ReportArrived(string interventionName, int rowNumber)
         {
-            pinHandler.ReportArrived(interventionName, rowNumber);
+			/*
+			foreach(KeyValuePair<Grid, List<Grid>> intervention in activeTeams)
+			{
+				if (intervention.Key.Name.Equals(interventionName))
+				{
+					TeamGrid team = (TeamGrid)intervention.Value[rowNumber];
+					team.ChangeStatus("intervening");
+
+					return;
+				}
+			}*/
         }
 
+		/*
 		//Upon right click store mouse position to know where to zoom
         private void Map_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -291,7 +248,6 @@ namespace ETD.ViewsPresenters.MapSection
                 TT = new TranslateTransform(TTX, TTY);
                 imgbrush.Transform = TT;
             }
-            
-        }
+        }*/
 	}
 }

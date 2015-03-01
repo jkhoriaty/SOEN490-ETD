@@ -19,12 +19,10 @@ namespace ETD.CustomObjects.CustomUIObjects
 
 		private Intervention intervention;
 		private InterventionContainer interventionContainer;
-		private MapSectionPage mapSection;
 
 		public InterventionPin(Intervention intervention, MapSectionPage mapSection) : base(intervention, mapSection, size)
 		{
 			this.intervention = intervention; //Providing a link to the team that this pin represents
-			this.mapSection = mapSection; //Keeping pointer to draw a InterventionContainer when a team is added
 
 			//Setting the image and text of the pin
 			base.setImage(TechnicalServices.getImage("intervention"));
@@ -49,7 +47,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 
 				//Place all the pins in the appropriate place and make sure that it is not colliding with anything
 				interventionContainer.PlaceAll();
-				interventionContainer.CollisionDetectionAndResolution(mapSection.Canvas_map);
+				interventionContainer.CollisionDetectionAndResolution(false);
 			}
 		}
 
@@ -127,12 +125,12 @@ namespace ETD.CustomObjects.CustomUIObjects
 		}
 
 		//Making sure that if the InterventionPin moved, that the boder and all it's related pins have moved as well
-		internal override void AfterCollisionDetection(Canvas Canvas_map)
+		internal override void AfterCollisionDetection()
 		{
 			if (interventionContainer != null)
 			{
 				interventionContainer.PlaceAll();
-				interventionContainer.CollisionDetectionAndResolution(Canvas_map);
+				interventionContainer.CollisionDetectionAndResolution(false);
 			}
 		}
 	}

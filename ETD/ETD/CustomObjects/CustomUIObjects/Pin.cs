@@ -23,6 +23,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 		private static Pin draggedPin;
 
 		internal object relatedObject;
+		internal MapSectionPage mapSection;
 
         private MapMod mapMod;
         private AdditionalInfoPage aiSection;
@@ -35,6 +36,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 		{
 			//Setting relatedObject, used for position recovery
 			this.relatedObject = relatedObject;
+			this.mapSection = mapSection;
 
 			//Initializing grid attibutes
 			this.Width = size;
@@ -185,9 +187,23 @@ namespace ETD.CustomObjects.CustomUIObjects
 			pinList.Clear();
 		}
 
+		//Used in order to avoid having vestigial observers
 		internal virtual void DeregisterPinFromObserver()
 		{
 			return;
+		}
+
+		//Move all pins when the window gets resized so that they stay in the same position as they were before the resizing
+		public static void MoveAllPins(double widthRatio, double heightRatio) //The ratios are the difference in percentage between the old screen size and the new one
+		{
+			foreach (Pin pin in pinList)
+			{
+				double movedPin_X = widthRatio * pin.getX();
+				double movedPin_Y = heightRatio * pin.getY(); ;
+
+				pin.setPinPosition(movedPin_X, movedPin_Y);
+				pin.CollisionDetectionAndResolution(true); //true to avoid having the resize add a team to an intervention or an equipment to a team
+			}
 		}
 
 		//Checking the type of the pin; used mostly for special collisions
@@ -228,7 +244,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 			}
 			this.ReleaseMouseCapture();
 
-			CollisionDetectionAndResolution(Canvas_map);
+			CollisionDetectionAndResolution(false);
 		}
 
 		//Returns true if this pin (the moved pin) overlaps the fixed pin passed as an argument more than 25%, false otherwise
@@ -244,14 +260,8 @@ namespace ETD.CustomObjects.CustomUIObjects
 			}
 		}
 
-		//Default collision detection when the pin is not a new pin being set in a default position
-		internal void CollisionDetectionAndResolution(Canvas Canvas_map)
-		{
-			CollisionDetectionAndResolution(Canvas_map, false);
-		}
-
 		//Collision detection and resolution on the pin
-		internal void CollisionDetectionAndResolution(Canvas Canvas_map, bool defaultPosition)
+		internal void CollisionDetectionAndResolution(bool ignoreSpecialCollisions)
 		{
 			bool collisionDetected = true;
 			int verificationCount = 0; //Counter so that the program will be able to recognize when an object is stuck and bouncing around endlessly
@@ -277,7 +287,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 					}
 
 					//Handling all special cases no matter what the movedPin is except if it just got added
-					if (!defaultPosition)
+					if (!ignoreSpecialCollisions)
 					{
 						bool skipCollisionDetection = HandleSpecialCollisions(fixedPin);
 
@@ -314,7 +324,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 							differenceRatio = Math.Round(((Math.Abs(verticalDifference) / Math.Abs(horizontalDifference)) / 10), 3);
 
 							//Shifting horizontally in the correct direction, if not at the border
-							if ((this.Width / 2) < movedPin_X && movedPin_X < (Canvas_map.ActualWidth - (this.Width / 2)))
+							if ((this.Width / 2) < movedPin_X && movedPin_X < (mapSection.Canvas_map.ActualWidth - (this.Width / 2)))
 							{
 								if (horizontalDifference < 0)
 								{
@@ -333,7 +343,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 						if (verticalDifference != 0)
 						{
 							//Shifting vertically in the correct direction
-							if ((this.Height / 2) < movedPin_Y && movedPin_Y < (Canvas_map.ActualHeight - (this.Height / 2)))
+							if ((this.Height / 2) < movedPin_Y && movedPin_Y < (mapSection.Canvas_map.ActualHeight - (this.Height / 2)))
 							{
 								if (verticalDifference < 0)
 								{
@@ -351,7 +361,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 						//Handling situation where object is dropped between two others and is just bouncing around, moving it left or right depending on the part of the map the pin is on
 						if (verificationCount > 100)
 						{
-							if (movedPin_Y < (Canvas_map.ActualHeight / 2))
+							if (movedPin_Y < (mapSection.Canvas_map.ActualHeight / 2))
 							{
 								movedPin_Y += fixedPin.Height;
 							}
@@ -366,7 +376,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 						//Handling case of perfect superposition and placing right of fixed item if in the left half of the map, otherwise place left
 						if (movedPin_X == fixedPin_X && movedPin_Y == fixedPin_Y)
 						{
-							if (fixedPin_X < (Canvas_map.ActualWidth / 2))
+							if (fixedPin_X < (mapSection.Canvas_map.ActualWidth / 2))
 							{
 								movedPin_X = movedPin_X + ((this.Width / 2) + (fixedPin.Width / 2));
 							}
@@ -380,8 +390,8 @@ namespace ETD.CustomObjects.CustomUIObjects
 						//Handling corner situation
 						if (moved == false)
 						{
-							double horizontalToBorder = Math.Min(fixedPin_X, (Canvas_map.ActualWidth - fixedPin_X));
-							double verticalToBorder = Math.Min(fixedPin_Y, (Canvas_map.ActualHeight - fixedPin_Y));
+							double horizontalToBorder = Math.Min(fixedPin_X, (mapSection.Canvas_map.ActualWidth - fixedPin_X));
+							double verticalToBorder = Math.Min(fixedPin_Y, (mapSection.Canvas_map.ActualHeight - fixedPin_Y));
 
 							if (horizontalToBorder <= verticalToBorder) //Need horizontal movement
 							{
@@ -413,7 +423,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 			}
 
 			//Trigger after collision detection special tasks
-			AfterCollisionDetection(Canvas_map);
+			AfterCollisionDetection();
 		}
 		
 		//Handling special cases of collision detection, default: nothing to handle, return false
@@ -423,7 +433,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 		}
 
 		//Handling cases where some pins need to trigger actions for the correct placement of all pins, default: do nothing
-		internal virtual void AfterCollisionDetection(Canvas Canvas_map)
+		internal virtual void AfterCollisionDetection()
 		{
 			return;
 		}
