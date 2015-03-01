@@ -155,6 +155,25 @@ namespace ETD.Models.Objects
 			return memberList;
 		}
 
+        public Team getTeamObject(String teamName)
+        {
+            if (teamList.Count > 0)
+            {
+                foreach (Team team in teamList)
+                {
+                    if (teamName == team.getName())
+                    {
+                        return team;
+                    }
+                    else
+                    {
+                        return new Team(teamName);
+                    }
+                }
+            }
+            return null;
+        }
+
         //swapping method to swap teams around inside teamList up or down
         internal void Swap(Team team, String direction)
         {
