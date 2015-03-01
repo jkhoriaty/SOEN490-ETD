@@ -152,7 +152,7 @@ namespace ETD.ViewsPresenters
 		//Add equipment to team
 		public void AddTeamEquipment(Equipment equip, String teamName)
 		{
-			teamsSection.AddTeamEquipment(equip, teamName);
+			//teamsSection.AddTeamEquipment(equip, teamName);
 		}
 
         //Change intervention deadlines

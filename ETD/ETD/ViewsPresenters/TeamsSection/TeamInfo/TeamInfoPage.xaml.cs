@@ -67,7 +67,7 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamInfo
             foreach (Equipment eq in equipmentList)
             {
                 Rectangle imageRectangle = new Rectangle();
-                //imageRectangle.Name = equip.getEquipmentName().ToString();
+                //imageRectangle.Name = eq.getEquipmentType().ToString();
                 imageRectangle.Tag = teamName;
                 imageRectangle.Width = 27;
                 imageRectangle.Height = 27;
@@ -104,9 +104,16 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamInfo
 				img2.ImageSource = TechnicalServices.getImage(member.getTrainingLevel());
 				memberTraining.Fill = img2;
 			}
-
-			//teamsSection.RegisterStackPanel(team.getName(), equipmentStackPanel);
 		}
+
+        public void RemoveTeamEquipment(object sender, RoutedEventArgs e)
+        {
+            Rectangle equipment = (Rectangle)sender;
+            String equipmentName = equipment.Name;
+            Equipment tempEquipment = new Equipment(equipmentName);
+            team.RemoveEquipment(tempEquipment);
+            populateInfo();
+        }
 
 		private String DepartureTimeToString(TeamMember member)
 		{

@@ -80,12 +80,14 @@ namespace ETD.Models.Objects
 				InstanceModifiedNotification();
                 return true;
             }
+            MessageBox.Show("Can not have more than three equipments");
             return false;
         }
 
 		//Removing equipment from the team list
         public void RemoveEquipment(Equipment equipment)
         {
+
 			equipmentList.Remove(equipment);
 			InstanceModifiedNotification();
 		}
