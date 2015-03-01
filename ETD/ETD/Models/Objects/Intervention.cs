@@ -52,6 +52,7 @@ namespace ETD.Models.Objects
         private String ambulanceCompany;
         private String ambulanceVehicle;
         private DateTime ambulanceArrivalTime;
+        private int position;
 
         public Intervention()
         {
@@ -61,6 +62,7 @@ namespace ETD.Models.Objects
             this.timeOfCall = DateTime.Now;
             this.additionalInfo = new InterventionAdditionalInfo[10];
             this.abc = new ABC();
+            this.position = 0;
 
             activeInterventionList.Add(this);
             ClassModifiedNotification(typeof(Intervention));
@@ -197,9 +199,9 @@ namespace ETD.Models.Objects
 			return otherChiefComplaint;
 		}
 
-		public void setResources(int position, Resource resource)
+		public void AddResource(Resource resource)
 		{
-			resources[position] = resource;
+			resources[this.position++] = resource;
 		}
 
 		public Resource[] getResources()
