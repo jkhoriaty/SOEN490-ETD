@@ -33,6 +33,9 @@ namespace ETD.ViewsPresenters.TeamsSection
 		private DispatcherTimer dispatcherTimer = new DispatcherTimer();
 
 		private Frame createTeamForm;
+        int index;
+        int elementIndex = 0;
+        int count = 0;
 
 		public TeamsSectionPage(MainWindow mainWindow)
 		{
@@ -193,9 +196,7 @@ namespace ETD.ViewsPresenters.TeamsSection
         //handling changing frame index position down, if at bottom, goes to top position instead
         internal void FrameMoveDown(UIElement element)
         {
-            int elementIndex = 0;
-			int count = StackPanel_teamList.Children.Count; //get number of elements in stackpanel
-            int index;
+			count = StackPanel_teamList.Children.Count; //get number of elements in stackpanel
 			if (StackPanel_teamList.Children.Contains(element))
             {
 				index = StackPanel_teamList.Children.IndexOf(element);
@@ -207,7 +208,6 @@ namespace ETD.ViewsPresenters.TeamsSection
                     Frame teamFrame = (Frame)(StackPanel_teamList.Children[elementIndex]);
                     TeamInfoPage teamInfo = (TeamInfoPage)teamFrame.Content;
                     Team team = teamInfo.getTeam();
-                    MessageBox.Show(team.getName().ToString());
                     team.Swap(team, "down");
                 }
                 else if (index == count)
@@ -221,9 +221,7 @@ namespace ETD.ViewsPresenters.TeamsSection
         //handling changing frame index position up, if at top, goes to bottom position instead
         internal void FrameMoveUp(UIElement element)
         {
-            int elementIndex = 0;
-			int count = StackPanel_teamList.Children.Count; //get number of elements in stackpanel
-            int index;
+			count = StackPanel_teamList.Children.Count; //get number of elements in stackpanel
 			if (StackPanel_teamList.Children.Contains(element))
             {
 				index = StackPanel_teamList.Children.IndexOf(element);

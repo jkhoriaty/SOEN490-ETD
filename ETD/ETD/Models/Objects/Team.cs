@@ -150,6 +150,7 @@ namespace ETD.Models.Objects
 			return memberList;
 		}
 
+        //swapping method to swap teams around inside teamList up or down
         internal void Swap(Team team, String direction)
         {
             int currentPosition = teamList.IndexOf(team);
