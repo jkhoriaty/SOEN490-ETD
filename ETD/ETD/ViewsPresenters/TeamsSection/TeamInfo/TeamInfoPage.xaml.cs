@@ -45,6 +45,8 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamInfo
 		//Filling up the page with the information on the team
 		private void populateInfo()
 		{
+            equipmentStackPanel.Children.RemoveRange(1, equipmentStackPanel.Children.Count - 1);
+
 			teamName.Name = team.getName();
 			if (team.getName().Length == 1)
 			{
