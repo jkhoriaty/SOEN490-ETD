@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace ETD.Models.Objects
 {
+    /// <summary>
+    /// Request Model Object
+    /// </summary>
+
     public class Request
     {
 		private static List<Request> requestList = new List<Request>();

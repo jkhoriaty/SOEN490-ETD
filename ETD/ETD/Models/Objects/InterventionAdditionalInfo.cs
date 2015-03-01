@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace ETD.Models.Objects
 {
+    /// <summary>
+    /// Intervention Additional Information Model Object
+    /// </summary>
+
     public class InterventionAdditionalInfo
     {
         private String information;

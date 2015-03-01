@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace ETD.Models.Objects
 {
+    /// <summary>
+    /// Airways Breathing Circulation Model Object
+    /// </summary>
+
     public class ABC
     {
         private String consciousness;

@@ -55,9 +55,7 @@
     <Compile Include="Models\Objects\Operation.cs" />
     <Compile Include="Models\ArchitecturalObjects\Observable.cs" />
     <Compile Include="Models\ArchitecturalObjects\Observer.cs" />
-    <Compile Include="Models\Objects\PatrolShift.cs" />
     <Compile Include="Models\Objects\Resource.cs" />
-    <Compile Include="Models\Objects\Scheduler.cs" />
     <Compile Include="CustomObjects\PopupForms\FormPopup.cs" />
     <Compile Include="CustomObjects\PopupForms\RegisteredVolunteersPopup.cs" />
     <Compile Include="Services\NetworkServices.cs" />

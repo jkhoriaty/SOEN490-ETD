@@ -8,7 +8,7 @@ using ETD.Models.ArchitecturalObjects;
 using System.Windows;
 
 /// <summary>
-/// Team Model Object
+/// Team Model Object, containing TeamMember and Equipment classes
 /// </summary>
 namespace ETD.Models.Objects
 {
@@ -154,7 +154,8 @@ namespace ETD.Models.Objects
 		{
 			return memberList;
 		}
-
+        
+        //used to get Team Object from teamList with team name as input
         public Team getTeamObject(String teamName)
         {
             if (teamList.Count > 0)

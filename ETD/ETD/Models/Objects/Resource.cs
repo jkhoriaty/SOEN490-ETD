@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace ETD.Models.Objects
 {
+    /// <summary>
+    /// Resource Model Object
+    /// </summary>
     public class Resource
     {
         private String resourceName;
