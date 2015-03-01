@@ -51,7 +51,8 @@
 					<ComboBoxItem Content="Regular Mode"/>
 					<ComboBoxItem Content="Edit Mode"/>
 				</ComboBox>
-				<Border BorderThickness="0.5" BorderBrush="Black" Margin="3,0,3,0" VerticalAlignment="Stretch"/>
+                <Button Content="Follow up" Click="ShowFollowUpSection" IsEnabled="true"/>
+                <Border BorderThickness="0.5" BorderBrush="Black" Margin="3,0,3,0" VerticalAlignment="Stretch"/>
 				<Button Content="Load Map" Name="Load_Map" Click="LoadMap" Margin="2,0,2,0"/>
 				<Border BorderThickness="0.5" BorderBrush="Black" Margin="3,0,3,0" VerticalAlignment="Stretch"/>
                 <TextBlock Text="Deadlines (mins):" FontWeight="Bold" Margin="1,0,1,0" VerticalAlignment="Center"/>

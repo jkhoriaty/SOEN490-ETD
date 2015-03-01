@@ -38,7 +38,8 @@ namespace ETD.ViewsPresenters
 		private InterventionSectionPage interventionsSection;
         private AdditionalInfoPage AIPmapSection;
         private ScheduleSectionPage ScheduleSection;
-        private FollowUpSectionForm FollowupSection;
+        private FollowUpSectionForm FollowupSection = new FollowUpSectionForm();
+        private FormPopup FollowUpSectionFormPopupContainer;
 
         private bool isdrawing = false;
 		private double previousWidth;
@@ -82,6 +83,7 @@ namespace ETD.ViewsPresenters
 			InterventionsSection.Child = interventionsFrame;
 
 
+        
 
             //Populating the Schedule section
             /*Frame ScheduleFrame = new Frame();
@@ -291,7 +293,7 @@ namespace ETD.ViewsPresenters
         //Displays follow up section page
         private void ShowFollowUpSection(object sender, RoutedEventArgs e)
         {
-            //new FormPopup(this, new FollowUpSectionForm(FollowupSection));
+            FollowUpSectionFormPopupContainer = new FormPopup(FollowupSection);
         }
 
 		//Interpret the servers return

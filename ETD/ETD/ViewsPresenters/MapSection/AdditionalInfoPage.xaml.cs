@@ -155,6 +155,7 @@ namespace ETD.ViewsPresenters.MapSection
             }
         }
 
+
         internal void Move(object sender, MouseEventArgs e)
         {
 
@@ -170,7 +171,9 @@ namespace ETD.ViewsPresenters.MapSection
             if (Keyboard.IsKeyDown(Key.Escape) && !isEmpty)
             {
                 int objectIndex = objectList.Count - 1;
+                //MessageBox.Show(objectList.Count.ToString());
                 AdditionalMap.Children.RemoveAt(objectList.Count);
+                //AdditionalMap.Children.Remove(mapModObject);
 
                 if (objectIndex == 0 && objectList[0] != null)
                 {

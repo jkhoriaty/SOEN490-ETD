@@ -23,7 +23,7 @@ namespace ETD.CustomObjects.PopupForms
 			this.StaysOpen = false;
 			this.IsOpen = true;
 			this.Focus();
-			this.LostFocus += mainWindow.PopupLostFocus;
+			//this.LostFocus += mainWindow.PopupLostFocus;
 
 			Border border = new Border();
 			border.BorderThickness = new Thickness(1);
