@@ -103,7 +103,7 @@ namespace ETD.ViewsPresenters
         //window closed
         public void WindowClosed(object sender, System.EventArgs e)
         {
-            TechnicalServices.saveMap(AIPmapSection, mapSection);
+            TechnicalServices.saveMap(AIPmapSection);
         }
          
 		//Window size or state changed - Adjusting the team section height
@@ -204,7 +204,7 @@ namespace ETD.ViewsPresenters
             }  
         }
 
-
+     
         //switch between Regular mode and Edit mode
         private void ModeChange(object sender, RoutedEventArgs e)
 		{

@@ -74,6 +74,7 @@ namespace ETD.CustomObjects.CustomUIObjects
             this.MouseMove += new MouseEventHandler(aiSection.Move);
             this.MouseWheel += new MouseWheelEventHandler(aiSection.ChangeColor);
 
+
             //Adding the pin to the list of all pins
             pinList.Add(this);
         }
