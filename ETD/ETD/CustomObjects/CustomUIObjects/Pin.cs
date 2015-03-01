@@ -75,7 +75,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 			//Adding the border pin to the list of all pins
 			pinList.Add(this);
 		}
-
+        /*
         public Pin(Models.Objects.MapMod mapMod, AdditionalInfoPage aiSection, double p1, double p2)
         {
             // TODO: Complete member initialization
@@ -84,7 +84,7 @@ namespace ETD.CustomObjects.CustomUIObjects
             this.p1 = p1;
             this.p2 = p2;
         }
-
+        */
         public Pin(Models.Objects.MapMod mapMod, AdditionalInfoPage aiSection, int size)
         {
             // TODO: Complete member initialization

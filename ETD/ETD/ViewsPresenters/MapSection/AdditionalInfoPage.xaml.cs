@@ -88,6 +88,7 @@ namespace ETD.ViewsPresenters.MapSection
             if (mapModName.Equals("rectangle"))
             {
                 mapModObject = new System.Windows.Shapes.Rectangle();
+                mapModObject.StrokeThickness = 4;
             }
 
             if (mapModName.Equals("circle"))
@@ -137,7 +138,6 @@ namespace ETD.ViewsPresenters.MapSection
 
                 setMapModObjectType();
                 mapModObject.Stroke = System.Windows.Media.Brushes.Black;
-                mapModObject.StrokeThickness = 4;
                 mapModObject.Width = width;
                 mapModObject.Height = height;
 
