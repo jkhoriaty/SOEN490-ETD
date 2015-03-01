@@ -53,6 +53,12 @@ namespace ETD.CustomObjects.CustomUIObjects
 			}
 		}
 
+		//Removing this item as an observer, called when clearing the map before redrawing
+		internal override void DeregisterPinFromObserver()
+		{
+			intervention.DeregisterInstanceObserver(this);
+		}
+
 		//Return the intervention that this pin represents
 		internal Intervention getIntervention()
 		{

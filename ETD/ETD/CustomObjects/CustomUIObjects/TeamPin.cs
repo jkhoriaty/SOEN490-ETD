@@ -70,6 +70,12 @@ namespace ETD.CustomObjects.CustomUIObjects
 			base.setText(team.getName()); //Although the text doesn't change, we have to redraw it for it not to be hidden by the image
 		}
 
+		//Removing this item as an observer, called when clearing the map before redrawing
+		internal override void DeregisterPinFromObserver()
+		{
+			team.DeregisterInstanceObserver(this);
+		}
+
 		//Making sure the right item of the context menu is checked (it checks the actual status of the team)
 		private void CheckCurrentStatus_Opened(object sender, RoutedEventArgs e)
 		{

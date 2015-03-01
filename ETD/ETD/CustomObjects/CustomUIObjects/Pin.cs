@@ -175,7 +175,19 @@ namespace ETD.CustomObjects.CustomUIObjects
 		public static void ClearAllPins(Canvas Canvas_map)
 		{
 			Canvas_map.Children.Clear();
+
+			//To avoid having vestigial observers on which update is called while they have been destroyed
+			foreach(Pin pin in pinList)
+			{
+				pin.DeregisterPinFromObserver();
+			}
+
 			pinList.Clear();
+		}
+
+		internal virtual void DeregisterPinFromObserver()
+		{
+			return;
 		}
 
 		//Checking the type of the pin; used mostly for special collisions
@@ -395,7 +407,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 							}
 						}
 						//Drop the rectangle after resolution of collision
-						setPinPosition(movedPin_X, movedPin_Y);
+						 setPinPosition(movedPin_X, movedPin_Y);
 					}
 				}
 			}
