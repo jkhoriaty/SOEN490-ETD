@@ -133,7 +133,7 @@ namespace ETD.ViewsPresenters
 				System.IO.FileInfo File = new System.IO.FileInfo(openFileDialog.FileName);
 				coloredImage = new BitmapImage(new Uri(openFileDialog.FileName));
 
-				mapSection.setMap(coloredImage);
+                AIPmapSection.SetMap(coloredImage);
 			}
 		}
 
@@ -204,19 +204,6 @@ namespace ETD.ViewsPresenters
             }  
         }
 
-        /*
-        public void CreateAdditionnalInfoPin(String AI,int size)
-        {
-            AIPmapSection.CreateAdditionnalInfoPin(AI,size);
-        }
-        
-
-       // delete additional pins
-        public void AIDeletePin(object sender, RoutedEventArgs e)
-        {
-          //  AIPmapSection.AIDeletePin(sender, e);
-        }
-        */
 
         //switch between Regular mode and Edit mode
         private void ModeChange(object sender, RoutedEventArgs e)

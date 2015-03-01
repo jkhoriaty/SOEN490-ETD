@@ -23,10 +23,7 @@ namespace ETD.ViewsPresenters.MapSection
 	public partial class AdditionalInfoPage : Page, Observer
 	{
 		MainWindow mainWindow;
-
-        //Drag-and-Drop related variable
-        private bool pinDragInProgress;
-        private Pin draggedPin;
+        ImageBrush imgbrush;
 
         // Drawing variables
         private bool IsDrawing = false;
@@ -40,7 +37,6 @@ namespace ETD.ViewsPresenters.MapSection
         private System.Windows.Shapes.Shape mapModObject;
         private int _startX, _startY;
         private String mapModName;
-        private System.Drawing.Rectangle _rect;
 
         public AdditionalInfoPage(MainWindow mainWindow)
 		{
@@ -50,29 +46,21 @@ namespace ETD.ViewsPresenters.MapSection
 			Observable.RegisterClassObserver(typeof(MapMod), this);
 		}
 
-        //Loading the map should only be done on the AdditionalInfoPAge.xaml rather than MapSectionPage.xaml
+        //Loading the map 
 		public void SetMap(BitmapImage coloredImage)
 		{
-			//Making the picture grayscale
-			FormatConvertedBitmap grayBitmap = new FormatConvertedBitmap();
-			grayBitmap.BeginInit();
-			grayBitmap.Source = coloredImage;
-			grayBitmap.DestinationFormat = PixelFormats.Gray8;
-			grayBitmap.EndInit();
+            //Making the picture grayscale
+            FormatConvertedBitmap grayBitmap = new FormatConvertedBitmap();
+            grayBitmap.BeginInit();
+            grayBitmap.Source = coloredImage;
+            grayBitmap.DestinationFormat = PixelFormats.Gray8;
+            grayBitmap.EndInit();
 
-			//Displaying the map as the background
-            AdditionalMap.Background = new ImageBrush(grayBitmap);
+            //Displaying the map as the background
+            imgbrush = new ImageBrush(grayBitmap);
+            AdditionalMap.Background = imgbrush;
 		}
 		
-
-		internal void DragStart(object sender, MouseButtonEventArgs e)
-		{
-         /*   Pin pin = (Pin)sender;
-            pinDragInProgress = pin.CaptureMouse();
-            draggedPin = pin;
-          * */
-		}
-
         internal void DrawingStart(object sender, MouseButtonEventArgs e)
         {
             IsDrawing = true;
@@ -155,7 +143,6 @@ namespace ETD.ViewsPresenters.MapSection
             }
         }
 
-
         internal void Move(object sender, MouseEventArgs e)
         {
 
@@ -191,7 +178,6 @@ namespace ETD.ViewsPresenters.MapSection
             IsDrawing = false;
         }
 
-
         internal void ChangeColor(object sender, MouseWheelEventArgs e)
         {
             //scroll up
@@ -219,7 +205,6 @@ namespace ETD.ViewsPresenters.MapSection
                     }
                 }
             }
-
         }
 
         public void createMapModificationPin(String AI)
@@ -234,79 +219,6 @@ namespace ETD.ViewsPresenters.MapSection
                 ContainsLine = true;
             }
         }
-
-		internal void DragStop(object sender, MouseButtonEventArgs e)
-		{
-            /*
-            Pin pin = (Pin)sender;
-
-            //Avoid in having method called on object being collided with
-            if (pin != draggedPin)
-            {
-                return;
-            }
-
-            pin.ReleaseMouseCapture();
-            pinDragInProgress = false;
-
-            var mousePos = e.GetPosition(AdditionalMap);
-             * */
-		}
-
-		internal void DragMove(object sender, MouseEventArgs e)
-		{
-         /*   // Set the new cursor.
-            Cursor new_cursor = Cursors.Cross;
-            if (Cursor != new_cursor)
-                Cursor = new_cursor;
-
-            //If no rectangle are clicked, exit method
-            if (!pinDragInProgress)
-            {
-                return;
-            }
-
-            Pin pin = (Pin)sender;
-
-            //Handling behaviour where fixed rectangle gets moved when another rectangle is dropped on it
-            if (pin != draggedPin)
-            {
-                return;
-            }
-
-            //Get the position of the mouse relative to the Canvas
-            var mousePos = e.GetPosition(AdditionalMap);
-
-            //Making sure it is not dragged out of bounds
-            if (mousePos.X < (pin.Width / 2) || (AdditionalMap.ActualWidth - (pin.Width / 2)) < mousePos.X || mousePos.Y < (pin.Width / 2) || (AdditionalMap.ActualHeight - (pin.Width / 2)) < mousePos.Y)
-            {
-                return;
-            }
-
-            pin.setPinPosition(mousePos.X, mousePos.Y);
-          * */
-		}
-
-        internal void DeleteMapMod_Click(object sender, RoutedEventArgs e)
-		{
-            /*
-            MenuItem item = sender as MenuItem;
-            if (item != null)
-            {
-                ContextMenu parent = item.Parent as ContextMenu;
-                if (parent != null)
-                {
-                    /*
-                    foreach (AdditionalInfoGrid grid in AIPmap.AdditionalMap.Children)
-                    {
-                        AIPmap.AdditionalMap.Children.Remove(grid);
-                        return;
-                    }
-                    
-                }
-            }
-             * */
-		}
 
         public void Update()
         {

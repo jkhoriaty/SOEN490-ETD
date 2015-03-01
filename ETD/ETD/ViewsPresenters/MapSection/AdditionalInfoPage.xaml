@@ -14,9 +14,6 @@
         
     </Canvas>
     <Page.Resources>
-        <ContextMenu x:Key="AIcontext" >
 
-            <MenuItem Header="Delete" Click="DeleteMapMod_Click"></MenuItem>
-        </ContextMenu>
     </Page.Resources>
 </Page>

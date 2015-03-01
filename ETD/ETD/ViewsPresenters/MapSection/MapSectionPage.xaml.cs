@@ -45,20 +45,6 @@ namespace ETD.ViewsPresenters.MapSection
 			Observable.RegisterClassObserver(typeof(Equipment), this);
 		}
 
-		//Loading of map as a result to the user clicking the "Load Map" button
-		public void setMap(BitmapImage coloredImage)
-		{
-			//Making the picture grayscale
-			FormatConvertedBitmap grayBitmap = new FormatConvertedBitmap();
-			grayBitmap.BeginInit();
-			grayBitmap.Source = coloredImage;
-			grayBitmap.DestinationFormat = PixelFormats.Gray8;
-			grayBitmap.EndInit();
-
-			//Displaying the map as the background
-            imgbrush = new ImageBrush(grayBitmap);
-			Canvas_map.Background = imgbrush;
-		}
 
 		//Callback when any of the observed objects modified i.e. creation and addition of all pins (including new pins, excluding deleted pins)
 		public void Update()
