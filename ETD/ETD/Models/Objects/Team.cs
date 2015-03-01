@@ -153,21 +153,35 @@ namespace ETD.Models.Objects
         internal void Swap(Team team, String direction)
         {
             int currentPosition = teamList.IndexOf(team);
+            int newPosition;
             if (teamList.Count >= 2)
             {
                 if (direction == "up")
                 {
-                    int newPosition = currentPosition + 1;
-                    Team temp = teamList.ElementAt(newPosition);
-                    teamList[newPosition] = teamList[currentPosition];
-                    teamList[currentPosition] = temp;
+                    if (currentPosition == 0)
+                    {
+                    }
+                    else 
+                    {
+                        newPosition = currentPosition - 1;
+                        Team temp = teamList.ElementAt(newPosition);
+                        teamList[newPosition] = teamList[currentPosition];
+                        teamList[currentPosition] = temp;
+                    }
+                    
                 }
                 else if (direction == "down")
                 {
-                    int newPosition = currentPosition - 1;
-                    Team temp = teamList.ElementAt(newPosition);
-                    teamList[newPosition] = teamList[currentPosition];
-                    teamList[currentPosition] = temp;
+                    if (currentPosition == teamList.Count - 1)
+                    {
+                    }
+                    else
+                    {
+                        newPosition = currentPosition + 1;
+                        Team temp = teamList.ElementAt(newPosition);
+                        teamList[newPosition] = teamList[currentPosition];
+                        teamList[currentPosition] = temp;
+                    }                    
                 }
             }
         }

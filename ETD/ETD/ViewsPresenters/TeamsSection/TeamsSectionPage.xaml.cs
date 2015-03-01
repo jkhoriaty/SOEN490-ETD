@@ -199,11 +199,21 @@ namespace ETD.ViewsPresenters.TeamsSection
 			if (StackPanel_teamList.Children.Contains(element))
             {
 				index = StackPanel_teamList.Children.IndexOf(element);
-                if (index < count-1)
-                elementIndex = index+1;
-				StackPanel_teamList.Children.Remove(element);
-				StackPanel_teamList.Children.Insert(elementIndex, element);
-                //MessageBox.Show((StackPanel_teamList.Children[index]).GetType().ToString());
+                if (index < count - 1)
+                {
+                    elementIndex = index + 1;
+                    StackPanel_teamList.Children.Remove(element);
+                    StackPanel_teamList.Children.Insert(elementIndex, element);
+                    Frame teamFrame = (Frame)(StackPanel_teamList.Children[elementIndex]);
+                    TeamInfoPage teamInfo = (TeamInfoPage)teamFrame.Content;
+                    Team team = teamInfo.getTeam();
+                    MessageBox.Show(team.getName().ToString());
+                    team.Swap(team, "down");
+                }
+                else if (index == count)
+                {
+                }
+				
             }
  
         }
@@ -218,11 +228,19 @@ namespace ETD.ViewsPresenters.TeamsSection
             {
 				index = StackPanel_teamList.Children.IndexOf(element);
                 if (index > 0)
+                {
                     elementIndex = index - 1;
+                    StackPanel_teamList.Children.Remove(element);
+                    StackPanel_teamList.Children.Insert(elementIndex, element);
+                    Frame teamFrame = (Frame)(StackPanel_teamList.Children[elementIndex]);
+                    TeamInfoPage teamInfo = (TeamInfoPage)teamFrame.Content;
+                    Team team = teamInfo.getTeam();
+                    team.Swap(team, "up");
+                }
                 else if (index == 0)
-                    elementIndex = count - 1;
-				StackPanel_teamList.Children.Remove(element);
-				StackPanel_teamList.Children.Insert(elementIndex, element);
+                {
+                }
+				
             }
         }
 

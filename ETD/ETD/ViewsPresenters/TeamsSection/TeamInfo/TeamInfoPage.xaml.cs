@@ -96,5 +96,10 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamInfo
 		{                      
 			Team.DeleteTeam(team);
 		}
+
+        internal Team getTeam()
+        {
+            return team;
+        }
 	}
 }
