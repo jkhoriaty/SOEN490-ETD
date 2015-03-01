@@ -26,37 +26,46 @@ namespace ETD.CustomObjects.CustomUIObjects
 			this.intervention = intervention; //Providing a link to the team that this pin represents
 			this.mapSection = mapSection; //Keeping pointer to draw a InterventionContainer when a team is added
 
+			//Setting the image and text of the pin
 			base.setImage(TechnicalServices.getImage("intervention"));
 			base.setText(intervention.getInterventionNumber().ToString());
 
+			//Register as an observer to the intervention instance so that any modification to it are reflected on the map, e.g. addition of a team
 			intervention.RegisterInstanceObserver(this);
 		}
 
+		//Callback when the intervention instance has changed
 		public void Update()
 		{
+			//If teams are assigned to this intervention draw the border
 			if (intervention.getInterveningTeamList().Count > 0)
 			{
 				if (interventionContainer == null)
 				{
+					//Create the border if it doesn't exist yet
 					interventionContainer = new InterventionContainer(this, mapSection.Canvas_map);
 					mapSection.Canvas_map.Children.Add(interventionContainer);
 				}
+
+				//Place all the pins in the appropriate place and make sure that it is not colliding with anything
 				interventionContainer.PlaceAll();
 				interventionContainer.CollisionDetectionAndResolution(mapSection.Canvas_map);
 			}
 		}
 
+		//Return the intervention that this pin represents
 		internal Intervention getIntervention()
 		{
 			return intervention;
 		}
-
+		
+		//Override default DragMove to add functionality
 		public override void DragMove(Canvas Canvas_map, MouseEventArgs e)
 		{
 			//Get the position of the mouse relative to the Canvas
 			var mousePosition = e.GetPosition(Canvas_map);
 
-			//Keep the object within bounds even when user tries to drag it outside of them
+			//If it has an intervention container, keep it within bounds even when user tries to drag it outside of them
 			if (interventionContainer != null)
 			{
 				if (mousePosition.X < (interventionContainer.Width / 2) || (Canvas_map.ActualWidth - (interventionContainer.Width / 2)) < mousePosition.X || mousePosition.Y < (this.Height / 2) || (Canvas_map.ActualHeight - interventionContainer.Height + (this.Height / 2)) < mousePosition.Y)
@@ -67,12 +76,14 @@ namespace ETD.CustomObjects.CustomUIObjects
 
 			base.DragMove(Canvas_map, e);
 
+			//Move the border and all the team pins along with the intervention pin
 			if(interventionContainer != null)
 			{
 				interventionContainer.PlaceAll();
 			}
 		}
 
+		//Make a list of the TeamPin of the teams intervening on this intervention
 		internal List<TeamPin> getInterveningTeamsPin()
 		{
 			List<TeamPin> interveningTeamsPin = new List<TeamPin>();
@@ -89,13 +100,16 @@ namespace ETD.CustomObjects.CustomUIObjects
 			return interveningTeamsPin;
 		}
 
+		//Get the intervention container related to this intervention
 		internal InterventionContainer getInterventionContainer()
 		{
 			return interventionContainer;
 		}
 
+		//Handle special collisions between an InterventionPin and another pin
 		internal override bool HandleSpecialCollisions(Pin fixedPin)
 		{
+			//SpecialCollision: Ignore collision with it's related InterventionContainer
 			if(fixedPin == interventionContainer)
 			{
 				return true;

@@ -8,6 +8,7 @@ namespace ETD.Models.ArchitecturalObjects
 {
 	public interface Observer
 	{
+		//Callback for when an object or instance is changed
 		void Update();
 	}
 }

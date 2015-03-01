@@ -16,6 +16,7 @@ namespace ETD.Models.ArchitecturalObjects
 		 * to reflect the actual list of teams) but a TeamInfo is only interested in one Team (and when it's status or equipment list is changed)
 		 */
 
+		//The following section is for observers to register to an object, basically listen for creation and deletion of instances of that object
 		private static Dictionary<Type, List<Observer>> classObserverList = new Dictionary<Type, List<Observer>>(); //Where the Type is the class that the observer is interested in
 
 		public static void RegisterClassObserver(Type type, Observer observer)
@@ -40,6 +41,7 @@ namespace ETD.Models.ArchitecturalObjects
 			classObserverList[type].Remove(observer);
 		}
 
+		//The following is for observers that want to listen to only one instance of that object, e.g. when a team status changes or when a team is assigned to an intervention
 		private List<Observer> instanceObserverList = new List<Observer>();
 
 		public void RegisterInstanceObserver(Observer observer)
