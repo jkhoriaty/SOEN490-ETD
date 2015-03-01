@@ -88,7 +88,7 @@ namespace ETD.ViewsPresenters
             MapSection.Child = ScheduleFrame;*/
 
 			dispatcherTimer.Tick += new EventHandler(RefreshGPSPositions);
-			dispatcherTimer.Interval += new TimeSpan(0, 0, 10);
+			dispatcherTimer.Interval += new TimeSpan(0, 0, 5);
 			dispatcherTimer.Start();
 		}
 
