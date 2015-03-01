@@ -204,6 +204,11 @@ namespace ETD.Models.Objects
 			resources[this.position++] = resource;
 		}
 
+        public void setResources(int position, Resource resource)
+		{
+            resources[position] = resource;
+		}
+
 		public Resource[] getResources()
 		{
 			return resources;
