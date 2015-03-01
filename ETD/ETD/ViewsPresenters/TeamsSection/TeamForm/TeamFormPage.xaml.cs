@@ -23,6 +23,7 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
     /// <summary>
     /// Interaction logic for TeamForm.xaml
     /// </summary>
+    
     public partial class TeamFormPage : Page
     {
 		TeamsSectionPage caller;
@@ -73,7 +74,7 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 		//Click: Submit
         private void Submit_Click(object sender, RoutedEventArgs e)
         {
-			if(formValidation())
+			if(FormValidation())
 			{
 				//Creating team
 				DateTime dateNow = DateTime.Now;
@@ -88,7 +89,7 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 
 				//Create first member
 				String mem_1_name = teamMember1.Text;
-				DateTime mem_1_departure = checkDepartureTime(new DateTime(dateNow.Year, dateNow.Month, dateNow.Day, int.Parse(departurehh1.Text), int.Parse(departuremm1.Text), dateNow.Second));
+				DateTime mem_1_departure = CheckDepartureTime(new DateTime(dateNow.Year, dateNow.Month, dateNow.Day, int.Parse(departurehh1.Text), int.Parse(departuremm1.Text), dateNow.Second));
 				Trainings mem_1_lvlOfTraining = (Trainings)lvlOfTraining1.SelectedIndex;
 				TeamMember mem_1 = new TeamMember(mem_1_name, mem_1_lvlOfTraining, mem_1_departure);
 				team.AddMember(mem_1);
@@ -97,7 +98,7 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 				String mem_2_name = teamMember2.Text;
 				if (mem_2_name != "Team Member Name")
 				{
-					DateTime mem_2_departure = checkDepartureTime(new DateTime(dateNow.Year, dateNow.Month, dateNow.Day, int.Parse(departurehh2.Text), int.Parse(departuremm2.Text), dateNow.Second));
+					DateTime mem_2_departure = CheckDepartureTime(new DateTime(dateNow.Year, dateNow.Month, dateNow.Day, int.Parse(departurehh2.Text), int.Parse(departuremm2.Text), dateNow.Second));
 					Trainings mem_2_lvlOfTraining = (Trainings) lvlOfTraining2.SelectedIndex;
 					TeamMember mem_2 = new TeamMember(mem_2_name, mem_2_lvlOfTraining, mem_2_departure);
 					team.AddMember(mem_2);
@@ -107,12 +108,12 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 				String mem_3_name = teamMember3.Text;
 				if (mem_3_name != "Team Member Name")
 				{
-					DateTime mem_3_departure = checkDepartureTime(new DateTime(dateNow.Year, dateNow.Month, dateNow.Day, int.Parse(departurehh3.Text), int.Parse(departuremm3.Text), dateNow.Second));
+					DateTime mem_3_departure = CheckDepartureTime(new DateTime(dateNow.Year, dateNow.Month, dateNow.Day, int.Parse(departurehh3.Text), int.Parse(departuremm3.Text), dateNow.Second));
 					Trainings mem_3_lvlOfTraining = (Trainings)lvlOfTraining3.SelectedIndex;
 					TeamMember mem_3 = new TeamMember(mem_3_name, mem_3_lvlOfTraining, mem_3_departure);
 					team.AddMember(mem_3);
 				}
-
+               
 				//Displaying the team on the main window
 				caller.HideCreateTeamForm();
                 //caller.UpdateSectors();
@@ -142,7 +143,7 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 		}
 
 		//Validating all fields when form is submitted before team creation
-		private bool formValidation()
+		private bool FormValidation()
 		{
 			List<Control> textboxFailedValidation = new List<Control>();
 			List<Border> comboboxFailedValidation = new List<Border>();
@@ -165,11 +166,11 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 				textboxFailedValidation.Add(teamMember1);
 			}
 
-			if(timeValidation(departurehh1.Text, true) == false)
+			if(TimeValidation(departurehh1.Text, true) == false)
 			{
 				textboxFailedValidation.Add(departurehh1);
 			}
-			if (timeValidation(departuremm1.Text, false) == false)
+			if (TimeValidation(departuremm1.Text, false) == false)
 			{
 				textboxFailedValidation.Add(departuremm1);
 			}
@@ -187,11 +188,11 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 					textboxFailedValidation.Add(teamMember2);
 				}
 
-				if (timeValidation(departurehh2.Text, true) == false)
+				if (TimeValidation(departurehh2.Text, true) == false)
 				{
 					textboxFailedValidation.Add(departurehh2);
 				}
-				if (timeValidation(departuremm2.Text, false) == false)
+				if (TimeValidation(departuremm2.Text, false) == false)
 				{
 					textboxFailedValidation.Add(departuremm2);
 				}
@@ -210,11 +211,11 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 					textboxFailedValidation.Add(teamMember3);
 				}
 
-				if (timeValidation(departurehh3.Text, true) == false)
+				if (TimeValidation(departurehh3.Text, true) == false)
 				{
 					textboxFailedValidation.Add(departurehh3);
 				}
-				if (timeValidation(departuremm3.Text, false) == false)
+				if (TimeValidation(departuremm3.Text, false) == false)
 				{
 					textboxFailedValidation.Add(departuremm3);
 				}
@@ -225,8 +226,8 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 				}
 			}
 
-			bool textBoxSuccess = reportValidationFail(textboxFailedValidation);
-			bool comboBoxSuccess = reportValidationFail(comboboxFailedValidation);
+			bool textBoxSuccess = ReportValidationFail(textboxFailedValidation);
+			bool comboBoxSuccess = ReportValidationFail(comboboxFailedValidation);
 			if (textBoxSuccess == false || comboBoxSuccess == false)
 			{
 				return false;
@@ -239,7 +240,7 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 		}
 
 		//Validation of hours and minutes fields, hours is true when the time passed is one of the hours fields
-		private bool timeValidation(String time, bool hours)
+		private bool TimeValidation(String time, bool hours)
 		{
 			if(hours == true && time.Equals("hh"))
 			{
@@ -272,7 +273,7 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 		}
 
 		//Redenning the borders of the controls that failed validation
-		public bool reportValidationFail(List<Control> failedValidation)
+		public bool ReportValidationFail(List<Control> failedValidation)
 		{
 			//Resetting border values to default
 			if (textboxLastValidationFailed != null)
@@ -301,7 +302,7 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 		}
 
 		//Redenning the borders of the controls that failed validation
-		public bool reportValidationFail(List<Border> failedValidation)
+		public bool ReportValidationFail(List<Border> failedValidation)
 		{
 			//Resetting border values to default
 			if (comboboxLastValidationFailed != null)
@@ -328,7 +329,7 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 			}
 		}
 
-		public DateTime checkDepartureTime(DateTime departureTime)
+		public DateTime CheckDepartureTime(DateTime departureTime)
 		{
 			if (departureTime.Hour < DateTime.Now.Hour)
 			{
