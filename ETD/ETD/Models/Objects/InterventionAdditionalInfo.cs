@@ -21,6 +21,11 @@ namespace ETD.Models.Objects
             this.timestamp = timestamp;
         }
 
+        public InterventionAdditionalInfo()
+        {
+            // TODO: Complete member initialization
+        }
+
         public String getInformation()
         {
             return this.information;

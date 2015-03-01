@@ -5,7 +5,6 @@ using ETD.ViewsPresenters.MapSection;
 using ETD.ViewsPresenters.MapSection.PinManagement;
 using ETD.ViewsPresenters;
 using ETD.Models.Objects;
-using ETD.Models.Grids;
 namespace ETD_UnitTest
 {
     [TestClass]
@@ -24,8 +23,6 @@ namespace ETD_UnitTest
             TeamMember MemberB = new TeamMember("Alex", Trainings.firstAid, departure);
             b.AddMember(MemberA);
             b.AddMember(MemberB);           
-            TeamGrid tg = new TeamGrid(b, mapSection, teamSize);
-            Assert.AreEqual(tg.Name, b.getName());
         }        
     }
 }
