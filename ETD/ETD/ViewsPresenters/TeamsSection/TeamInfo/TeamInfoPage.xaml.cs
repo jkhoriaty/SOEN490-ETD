@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using ETD.Models.Objects;
 using ETD.Services;
 using ETD.Models.ArchitecturalObjects;
+using ETD.CustomObjects.CustomUIObjects;
 
 namespace ETD.ViewsPresenters.TeamsSection.TeamInfo
 {
@@ -45,6 +46,8 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamInfo
 		//Filling up the page with the information on the team
 		private void populateInfo()
 		{
+            equipmentStackPanel.Children.RemoveRange(1, equipmentStackPanel.Children.Count - 1);
+
 			teamName.Name = team.getName();
 			if (team.getName().Length == 1)
 			{
@@ -58,6 +61,37 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamInfo
 			ImageBrush img = new ImageBrush();
 			img.ImageSource = TechnicalServices.getImage(team.getHighestLevelOfTraining());
 			teamTraining.Fill = img;
+
+            List<Equipment> equipmentList = team.getEquipmentList();
+            //MessageBox.Show(equipmentList.Count().ToString());
+
+            foreach (Equipment eq in equipmentList)
+            {
+                /*Rectangle imageRectangle = new Rectangle();
+                imageRectangle.Name = eq.getEquipmentType().ToString();
+                imageRectangle.Tag = teamName;
+                imageRectangle.Width = 27;
+                imageRectangle.Height = 27;
+                imageRectangle.MouseRightButtonDown += new MouseButtonEventHandler(RemoveTeamEquipment);
+                imageRectangle.FlowDirection = FlowDirection.LeftToRight;
+
+                Thickness equipmentMargin = imageRectangle.Margin;
+                equipmentMargin.Right = 1;
+                imageRectangle.Margin = equipmentMargin;
+
+                //Getting the background image to the rectangle
+                ImageBrush equipmentImage = new ImageBrush();
+                equipmentImage.ImageSource = TechnicalServices.getImage(eq.getEquipmentType());
+                imageRectangle.Fill = equipmentImage;
+
+                //Getting the appropriate equipment StackPanel
+                equipmentStackPanel.Children.Add(imageRectangle);*/
+
+                EquipmentIcon equip = new EquipmentIcon(team, this, 27, eq);
+                equip.SetImage(TechnicalServices.getImage(eq.getEquipmentType()));
+                equipmentStackPanel.Children.Add(equip);
+
+            }
 
 			TeamMember member = null;
 			int position = 0;
@@ -76,9 +110,22 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamInfo
 				img2.ImageSource = TechnicalServices.getImage(member.getTrainingLevel());
 				memberTraining.Fill = img2;
 			}
-
-			teamsSection.RegisterStackPanel(team.getName(), equipmentStackPanel);
 		}
+
+        public void RemoveTeamEquipment(object sender, RoutedEventArgs e)
+        {
+            /*Rectangle equipment = (Rectangle)sender;
+            String equipmentName = equipment.Name;
+            Equipment tempEquipment = new Equipment(equipmentName);
+            team.RemoveEquipment(tempEquipment);
+            populateInfo();*/
+
+            EquipmentIcon equip = (EquipmentIcon)sender;
+            Team relatedTeam = equip.GetTeam();
+            Equipment relatedEquipment = equip.GetEquip();
+
+            relatedTeam.RemoveEquipment(relatedEquipment);
+        }
 
 		private String DepartureTimeToString(TeamMember member)
 		{

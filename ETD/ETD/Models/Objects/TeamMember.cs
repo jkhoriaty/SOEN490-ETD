@@ -6,6 +6,10 @@ using System.Windows.Controls;
 
 namespace ETD.Models.Objects
 {
+    /// <summary>
+    /// Team Member Model Object, contained by Team Class
+    /// </summary>
+
 	public enum Trainings {firstAid, firstResponder, medicine};
 
     public class TeamMember

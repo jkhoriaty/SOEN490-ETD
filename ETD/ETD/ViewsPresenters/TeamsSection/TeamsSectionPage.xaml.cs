@@ -118,7 +118,7 @@ namespace ETD.ViewsPresenters.TeamsSection
 		}
 
 		//Adding equipment to specified team equipment stack
-		public void AddTeamEquipment(Equipment equip, String teamName)
+		/*public void AddTeamEquipment(Equipment equip, String teamName)
 		{
 			//Limit of 3 pieces of equipment per team
 			if (teamEquipmentStacks[teamName].Children.Count <= 3)
@@ -148,7 +148,7 @@ namespace ETD.ViewsPresenters.TeamsSection
 			{
 				MessageBox.Show("You cannot add more than 3 pieces of equipment to a team. The equipment is going to be readded to the map.");
 			}
-		}
+		}*/
 
 		//Right clicking on an equipment in a team description removew the equipment from the stack and adds it back to the map
 		public void RemoveTeamEquipment(object sender, RoutedEventArgs e)

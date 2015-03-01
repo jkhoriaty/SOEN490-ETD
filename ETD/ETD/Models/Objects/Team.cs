@@ -8,7 +8,7 @@ using ETD.Models.ArchitecturalObjects;
 using System.Windows;
 
 /// <summary>
-/// Team Model Object
+/// Team Model Object, containing TeamMember and Equipment classes
 /// </summary>
 namespace ETD.Models.Objects
 {
@@ -80,12 +80,14 @@ namespace ETD.Models.Objects
 				InstanceModifiedNotification();
                 return true;
             }
+            MessageBox.Show("Can not have more than three equipments");
             return false;
         }
 
 		//Removing equipment from the team list
         public void RemoveEquipment(Equipment equipment)
         {
+
 			equipmentList.Remove(equipment);
 			InstanceModifiedNotification();
 		}
@@ -145,10 +147,35 @@ namespace ETD.Models.Objects
             return equipmentList.Count;
         }
 
+        public List<Equipment> getEquipmentList()
+        {
+            return equipmentList;
+        }
+
 		public List<TeamMember> getMemberList()
 		{
 			return memberList;
 		}
+        
+        //used to get Team Object from teamList with team name as input
+        public Team getTeamObject(String teamName)
+        {
+            if (teamList.Count > 0)
+            {
+                foreach (Team team in teamList)
+                {
+                    if (teamName == team.getName())
+                    {
+                        return team;
+                    }
+                    else
+                    {
+                        return new Team(teamName);
+                    }
+                }
+            }
+            return null;
+        }
 
         //swapping method to swap teams around inside teamList up or down
         internal void Swap(Team team, String direction)

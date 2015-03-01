@@ -6,14 +6,17 @@ using System.Threading.Tasks;
 
 namespace ETD.Models.Objects
 {
+    /// <summary>
+    /// Resource Model Object
+    /// </summary>
     public class Resource
     {
         private String resourceName;
-        private String team;
+        private Team team;
         private DateTime moving;
         private DateTime arrival;
 
-        public Resource(String resourceName, String team, DateTime moving, DateTime arrival)
+        public Resource(String resourceName, Team team, DateTime moving, DateTime arrival)
         {
             this.resourceName = resourceName;
             this.team = team;
@@ -26,7 +29,7 @@ namespace ETD.Models.Objects
             return resourceName;
         }
 
-        public String getTeamName()
+        public Team getTeamObject()
         {
             return team;
         }

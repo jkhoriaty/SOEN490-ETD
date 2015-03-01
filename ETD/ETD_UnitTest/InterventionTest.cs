@@ -96,32 +96,22 @@ namespace ETD_UnitTest
             Assert.AreEqual("testothercomplaint", a.getOtherChiefComplaint());
         }
 
-        [TestMethod]
-        public void InterventionSetResourcesTest()
-        {
-            Intervention a = new Intervention();
-            a.setResources(1, new Intervention.Resource("resource1", "A", DateTime.Now, DateTime.Now));
-            a.setResources(2, new Intervention.Resource("resource2", "B", DateTime.Now, DateTime.Now));
-
-            Intervention.Resource[] b = a.getResources();
-            Assert.IsNotNull(b);
-            //Not sure how to assertequal here...
-        }
-
+        
         [TestMethod]
         public void InterventionSetABCTest()
         {
             Intervention a = new Intervention();
-            a.setABC(new Intervention.ABC(Consciousness.alert, true, Airways.clear, Breathing.normal, 1, Circulation.normal, 1));
+            ABC abc = new ABC();
+            a.setABC(abc);
 
-            Assert.IsNotNull(a.getABC()); //Not sure if this is correct... someone check.
+            Assert.IsNotNull(a.getABC());
         }
 
         [TestMethod]
         public void InterventionSetAdditionalInfoTest()
         {
             Intervention a = new Intervention();
-            ETD.Models.Objects.Intervention.AdditionalInformation ai = new ETD.Models.Objects.Intervention.AdditionalInformation("information", DateTime.Now);
+            InterventionAdditionalInfo ai = new InterventionAdditionalInfo();
             a.setAdditionalInfo(5, ai);
             Assert.AreEqual(ai, a.getAdditionalInfo(5));
         }
@@ -130,8 +120,8 @@ namespace ETD_UnitTest
         public void InterventionSetConclusionTest()
         {
             Intervention a = new Intervention();
-            a.setConclusion(Conclusions.hospital);
-            Assert.AreEqual(Conclusions.hospital, a.getConclusion());
+            a.setConclusion("hospital");
+            Assert.AreEqual("hospital", a.getConclusion());
         }
 
         [TestMethod]

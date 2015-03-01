@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ETD.Models;
 using ETD.Models.Objects;
+using ETD.Models.ArchitecturalObjects;
 
 namespace ETD_UnitTest
 {
@@ -11,6 +12,7 @@ namespace ETD_UnitTest
         [TestMethod]
         public void TeamCreationTest()
         {
+            //Observable.RegisterClassObserver(typeof(Team),observer);
             Team a = new Team("tester");
             Assert.AreEqual(a.getName(), "tester");
             a.setName("something");
@@ -39,10 +41,10 @@ namespace ETD_UnitTest
             //String equip2 = "TestEquip2";
             //String equip3 = "TestEquip3";
             //String equip4 = "TestEquip4";
-            Equipment equip1 = new Equipment(Equipments.sittingCart);
-            Equipment equip2 = new Equipment(Equipments.ambulanceCart);
-            Equipment equip3 = new Equipment(Equipments.epipen);
-            Equipment equip4 = new Equipment(Equipments.transportStretcher);
+            Equipment equip1 = new Equipment("sittingCart");
+            Equipment equip2 = new Equipment("ambulanceCart");
+            Equipment equip3 = new Equipment("epipen");
+            Equipment equip4 = new Equipment("transportStretcher");
             c.AddEquipment(equip1);
             c.AddEquipment(equip2);
             c.AddEquipment(equip3);
@@ -59,10 +61,9 @@ namespace ETD_UnitTest
         {
             Team b = new Team("B");
 
-            b.setStatus(Statuses.available);
+            b.setStatus("available");
             Assert.AreEqual(b.getStatus(), Statuses.available);
         }
 
-       
     }
 }
