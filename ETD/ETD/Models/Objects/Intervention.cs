@@ -62,7 +62,6 @@ namespace ETD.Models.Objects
             this.timeOfCall = DateTime.Now;
             this.additionalInfo = new InterventionAdditionalInfo[10];
             this.abc = new ABC();
-            this.position = 0;
 
             activeInterventionList.Add(this);
             ClassModifiedNotification(typeof(Intervention));
@@ -197,11 +196,6 @@ namespace ETD.Models.Objects
 		public String getOtherChiefComplaint()
 		{
 			return otherChiefComplaint;
-		}
-
-		public void AddResource(Resource resource)
-		{
-			resources[this.position++] = resource;
 		}
 
         public void setResources(int position, Resource resource)

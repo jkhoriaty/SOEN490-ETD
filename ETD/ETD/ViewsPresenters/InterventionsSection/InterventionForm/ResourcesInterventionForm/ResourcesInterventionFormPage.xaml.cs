@@ -362,6 +362,8 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.ResourcesInt
 
         private void FillForm()
         {
+			List<Team> interveningTeamList = intervention.getInterveningTeamList();
+			MessageBox.Show(interveningTeamList[Team1].ToString());
             Resource[] resources = intervention.getResources();
 
             for (int i = 0; i < resources.Length; i++)

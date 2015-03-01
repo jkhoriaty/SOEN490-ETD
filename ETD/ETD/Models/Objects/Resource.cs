@@ -16,11 +16,12 @@ namespace ETD.Models.Objects
         private DateTime moving;
         private DateTime arrival;
 
-        public Resource(String resourceName, Team team, DateTime moving)
+        public Resource(String resourceName, Team team, DateTime moving, DateTime arrival)
         {
             this.resourceName = resourceName;
             this.team = team;
-            this.moving = moving;  
+            this.moving = moving;
+			this.arrival = arrival;
         }
 
         public String getResourceName()
