@@ -145,6 +145,11 @@ namespace ETD.Models.Objects
             return equipmentList.Count;
         }
 
+        public List<Equipment> getEquipmentList()
+        {
+            return equipmentList;
+        }
+
 		public List<TeamMember> getMemberList()
 		{
 			return memberList;

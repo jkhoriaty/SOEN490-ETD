@@ -59,6 +59,32 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamInfo
 			img.ImageSource = TechnicalServices.getImage(team.getHighestLevelOfTraining());
 			teamTraining.Fill = img;
 
+            List<Equipment> equipmentList = team.getEquipmentList();
+            //MessageBox.Show(equipmentList.Count().ToString());
+
+            foreach (Equipment eq in equipmentList)
+            {
+                Rectangle imageRectangle = new Rectangle();
+                //imageRectangle.Name = equip.getEquipmentName().ToString();
+                imageRectangle.Tag = teamName;
+                imageRectangle.Width = 27;
+                imageRectangle.Height = 27;
+                //imageRectangle.MouseRightButtonDown += new MouseButtonEventHandler(RemoveTeamEquipment);
+                imageRectangle.FlowDirection = FlowDirection.LeftToRight;
+
+                Thickness equipmentMargin = imageRectangle.Margin;
+                equipmentMargin.Right = 1;
+                imageRectangle.Margin = equipmentMargin;
+
+                //Getting the background image to the rectangle
+                ImageBrush equipmentImage = new ImageBrush();
+                equipmentImage.ImageSource = TechnicalServices.getImage(eq.getEquipmentType());
+                imageRectangle.Fill = equipmentImage;
+
+                //Getting the appropriate equipment StackPanel
+                equipmentStackPanel.Children.Add(imageRectangle);
+            }
+
 			TeamMember member = null;
 			int position = 0;
 			while ((member = team.getMember(position++)) != null)
@@ -77,7 +103,7 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamInfo
 				memberTraining.Fill = img2;
 			}
 
-			teamsSection.RegisterStackPanel(team.getName(), equipmentStackPanel);
+			//teamsSection.RegisterStackPanel(team.getName(), equipmentStackPanel);
 		}
 
 		private String DepartureTimeToString(TeamMember member)

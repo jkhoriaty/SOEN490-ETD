@@ -52,6 +52,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 			{
 				TeamPin teamPin = (TeamPin)fixedPin;
 				teamPin.getTeam().AddEquipment(equipment);
+                MessageBox.Show(teamPin.getTeam().getName());
 				equipment.setAssigned(true);
 				return true;
 			}
