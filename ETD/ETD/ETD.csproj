@@ -37,6 +37,7 @@
     Auto Generated
   -->
   <ItemGroup>
+    <Compile Include="CustomObjects\CustomUIObjects\EquipmentIcon.cs" />
     <Compile Include="CustomObjects\CustomUIObjects\InterventionContainer.cs" />
     <Compile Include="CustomObjects\CustomUIObjects\EquipmentPin.cs" />
     <Compile Include="CustomObjects\CustomUIObjects\InterventionPin.cs" />
