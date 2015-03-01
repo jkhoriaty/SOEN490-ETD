@@ -92,7 +92,7 @@ namespace ETD.ViewsPresenters
 			dispatcherTimer.Start();
 		}
 
-		//Ping server to test connection and update registed volunteers - Executes every 10 seconds
+		//Ping server to test connection and update registed volunteers - Executes every 5 seconds
 		public void RefreshGPSPositions(object sender, EventArgs e)
 		{
 			UpdateRegistered();

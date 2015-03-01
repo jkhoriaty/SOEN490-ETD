@@ -169,7 +169,9 @@ namespace ETD.CustomObjects.CustomUIObjects
 			if(fixedPin.IsOfType("InterventionPin") && SufficientOverlap(fixedPin))
 			{
 				interventionPin = (InterventionPin)fixedPin;
-				interventionPin.getIntervention().AddTeam(team);
+				//interventionPin.getIntervention().AddTeam(team);
+				Resource resource = new Resource("", team, DateTime.Now);
+				interventionPin.getIntervention().AddResource(resource);
 				return true;
 			}
 
