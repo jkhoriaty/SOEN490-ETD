@@ -120,6 +120,7 @@ namespace ETD.Services
 			return img;
 		}
 
+        //Return image of the team
 		public static BitmapImage getImage(Team team, Statuses status)
 		{
 			Trainings teamTraining = team.getHighestLevelOfTraining();
@@ -141,6 +142,7 @@ namespace ETD.Services
 			return img;
 		}
 
+        //get image of the intervention pin
 		public static BitmapImage getImage(String type)
 		{
 			BitmapImage img = new BitmapImage(new Uri(AbsolutePath + generalRelPath[type]));
@@ -160,25 +162,28 @@ namespace ETD.Services
 			}
 		}
 
-
-        //Return image of additionnal info
+        //Return image of the map modification item
         public static BitmapImage getImage(MapMods AI)
         {
             BitmapImage img = new BitmapImage(new Uri(AbsolutePath + MapModPath[AI]));
             return img;
         }
 
-        public static void saveMap(AdditionalInfoPage AIPmapSection, MapSectionPage mapSection)
+        public static void saveMap(AdditionalInfoPage AIPmapSection)
         {
-            // Absolute path doesnt work..
-            // Saving to desktop directory for now
+            /* Absolute path doesnt work..
+             Saving to desktop directory for now
             String AbsolutePath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase);
+             * */
+
             Rect AIbounds = VisualTreeHelper.GetDescendantBounds(AIPmapSection);
             var AIFileName = "AIInfo_" + DateTime.Now.ToString("yyyyMMdd_hhss");
             var desktopFolder = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             double dpi = 96d;
+            bool isMapLoaded = AIPmapSection.MapLoaded();
 
-            if (AIbounds.ToString() != "Empty")
+            //If a map was loaded and modifications were made, save the map 
+            if (AIbounds.ToString() != "Empty" && isMapLoaded)
             {
                 RenderTargetBitmap rtb = new RenderTargetBitmap((int)AIbounds.Width, (int)AIbounds.Height, dpi, dpi, System.Windows.Media.PixelFormats.Default);
                 DrawingVisual dv = new DrawingVisual();

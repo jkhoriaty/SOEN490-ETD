@@ -24,6 +24,7 @@ namespace ETD.ViewsPresenters.MapSection
 	{
 		MainWindow mainWindow;
         ImageBrush imgbrush;
+        private bool isMapLoaded= false;
 
         // Drawing variables
         private bool IsDrawing = false;
@@ -58,8 +59,15 @@ namespace ETD.ViewsPresenters.MapSection
 
             //Displaying the map as the background
             imgbrush = new ImageBrush(grayBitmap);
+            isMapLoaded = true;
             AdditionalMap.Background = imgbrush;
 		}
+
+        //Checks if a map has been loaded
+        public bool MapLoaded()
+        {
+            return isMapLoaded;
+        }
 		
         internal void DrawingStart(object sender, MouseButtonEventArgs e)
         {
@@ -140,9 +148,14 @@ namespace ETD.ViewsPresenters.MapSection
 
                 objectList.Add(mapModObject);
                 AdditionalMap.Children.Add(mapModObject);
+             
             }
         }
 
+        public void delete(object sender, MouseButtonEventArgs e)
+        {
+
+        }
         internal void Move(object sender, MouseEventArgs e)
         {
 
@@ -157,21 +170,31 @@ namespace ETD.ViewsPresenters.MapSection
             //erase line when the escape key is pressed and the mouse is moving
             if (Keyboard.IsKeyDown(Key.Escape) && !isEmpty)
             {
-                int objectIndex = objectList.Count - 1;
-                //MessageBox.Show(objectList.Count.ToString());
-                AdditionalMap.Children.RemoveAt(objectList.Count);
-                //AdditionalMap.Children.Remove(mapModObject);
+                try
+                {
+                    // MessageBox.Show(objectList.Count.ToString());
+                    int objectIndex = objectList.Count - 1;
+                    AdditionalMap.Children.RemoveAt(objectList.Count);
 
-                if (objectIndex == 0 && objectList[0] != null)
-                {
-                    objectList.RemoveAt(0);
+                    if (objectIndex == 0 && objectList[0] != null)
+                    {
+                        objectList.RemoveAt(0);
+                    }
+                    else
+                    {
+                        objectList.RemoveAt(objectIndex);
+                    }
+
                 }
-                else
+                catch (Exception ee)
                 {
-                    objectList.RemoveAt(objectIndex);
+
                 }
+               
             }
         }
+
+   
 
         internal void DrawingStop(object sender, MouseButtonEventArgs e)
         {
@@ -212,7 +235,7 @@ namespace ETD.ViewsPresenters.MapSection
             mapModName = AI;
             MapMod mapMod = new MapMod("line");
             MapModPin lineMapModPin = new MapModPin(mapMod, this, this.ActualWidth, this.ActualHeight);
-
+            this.Cursor = Cursors.Pen;
             if (!ContainsLine)
             {
                 AdditionalMap.Children.Add(lineMapModPin);
@@ -254,11 +277,11 @@ namespace ETD.ViewsPresenters.MapSection
                         previousPinPosition = new double[] { this.ActualWidth - (mapLinePin.Width / 2), (mapLinePin.Height / 2) }; //Top-right corner
                     }
                     mapLinePin.setPinPosition(previousPinPosition[0], previousPinPosition[1]);
-                }
+                
              
             }
-            */
             
+            */
         }
 
 	}

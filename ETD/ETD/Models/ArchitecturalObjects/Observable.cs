@@ -30,9 +30,12 @@ namespace ETD.Models.ArchitecturalObjects
 
 		protected static void ClassModifiedNotification(Type type)
 		{
-			foreach (Observer observer in classObserverList[type])
+			if(classObserverList.ContainsKey(type))
 			{
-				observer.Update();
+				foreach (Observer observer in classObserverList[type])
+				{
+					observer.Update();
+				}
 			}
 		}
 

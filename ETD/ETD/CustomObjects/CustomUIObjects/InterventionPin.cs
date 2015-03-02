@@ -13,7 +13,7 @@ using System.Windows.Input;
 
 namespace ETD.CustomObjects.CustomUIObjects
 {
-	class InterventionPin : Pin, Observer
+	public class InterventionPin : Pin, Observer
 	{
 		internal static int size = 40;
 

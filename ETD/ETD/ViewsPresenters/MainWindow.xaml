@@ -39,7 +39,7 @@
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
                 <!-- Here go all the buttons right-->
 				<ComboBox Visibility="Collapsed" Name="AI" Width="130" Margin="1,0,1,0" VerticalAlignment="Center">
-                    <ComboBoxItem Content="default" Name="default" />
+                    <ComboBoxItem Content="eraser" Name="default"/>
 					<ComboBoxItem Content="circle" Name="circle" Selected="CreateMapModificationPin"/>
                     <ComboBoxItem Content="rectangle" Name="rectangle" Selected="CreateMapModificationPin"/>
                     <ComboBoxItem Content="stairs" Name="stairs" Selected="CreateMapModificationPin"/>
