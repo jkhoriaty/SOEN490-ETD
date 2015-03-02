@@ -60,7 +60,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ModelsObjectsTest\TeamMemberTest.cs" />
     <Compile Include="ModelsObjectsTest\EquipmentTest.cs" />
-    <Compile Include="IntegrationTest\ResourceUITest.cs" />
+    <Compile Include="IntegrationTest\TeamUITest.cs" />
     <Compile Include="ModelsObjectsTest\ABCTest.cs" />
     <Compile Include="ModelsObjectsTest\InterventionAdditionalInfoTest.cs" />
     <Compile Include="ModelsObjectsTest\MapModTest.cs" />
