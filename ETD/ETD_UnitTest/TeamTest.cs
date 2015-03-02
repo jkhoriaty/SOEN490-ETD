@@ -1,10 +1,13 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using ETD;
 using ETD.Models;
 using ETD.Models.Objects;
 using ETD.Models.ArchitecturalObjects;
 using ETD.CustomObjects;
 using ETD.CustomObjects.CustomUIObjects;
+using ETD.ViewsPresenters.MapSection;
+using ETD.ViewsPresenters;
 
 namespace ETD_UnitTest
 {
@@ -68,10 +71,13 @@ namespace ETD_UnitTest
         }
 
 		/*[TestMethod]
-		public void createTeamPinTesT()
+		public void CreateTeamPinTest()
 		{
+			MainWindow window = new MainWindow();
+			MapSectionPage mapSectionPage = new MapSectionPage(window);
 			Team a = new Team("A");
-
+			mapSectionPage.Update();
+			
 			bool check = false;
 			foreach(Pin pin in Pin.getPinList())
 			{
@@ -81,6 +87,7 @@ namespace ETD_UnitTest
 				}
 			}
 			Assert.IsTrue(check);
-		}*/
+		}
+		*/
     }
 }
