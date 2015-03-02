@@ -12,8 +12,7 @@ namespace ETD_UnitTest
     [TestClass]
     public class ResourceUITest
     {
-        [TestMethod]
-      
+        [TestMethod]      
 		public void CreateTeamPinTest()
 		{
 			MainWindow window = new MainWindow();
