@@ -11,10 +11,7 @@ namespace ETD_UnitTest
     public class ResourceUITest
     {
         [TestMethod]
-        public void testLabelName()
-        {
-            
-		[TestMethod]
+      
 		public void CreateTeamPinTest()
 		{
 			MainWindow window = new MainWindow();
@@ -31,7 +28,7 @@ namespace ETD_UnitTest
 				}
 			}
 			Assert.IsTrue(check);
-		}
+		
            
         }        
     }
