@@ -3,6 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:properties="clr-namespace:ETD.Properties"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
 	Title="InterventionSectionPage">
@@ -11,13 +12,13 @@
 		<Border Background="Transparent">
             <Border.ContextMenu>
 				<ContextMenu Name="InterventionFilter">
-					<MenuItem Header="Ongoing Interventions" Tag="Ongoing" IsChecked="True" Click="FilterInterventions"/>
-					<MenuItem Header="Completed Interventions" Tag="Completed" Click="FilterInterventions"/>
+                    <MenuItem x:Uid="MenuItem_OngoingInterventions" Header="{x:Static properties:Resources.MenuItem_OngoingInterventions}" Tag="Ongoing" IsChecked="True" Click="FilterInterventions"/>
+                    <MenuItem x:Uid="MenuItem_CompletedInterventions" Header="{x:Static properties:Resources.MenuItem_CompletedInterventions}" Tag="Completed" Click="FilterInterventions"/>
 				</ContextMenu>
 			</Border.ContextMenu>
 			<StackPanel VerticalAlignment="Center" Background="Transparent">
-				<Label Name="InterventionFilterLabel" Content="Ongoing" FontWeight="ExtraBlack" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24"/>
-				<Label Name="InterventionsLabel" Content="Interventions" FontWeight="ExtraBlack" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24"/>
+                <Label x:Uid="Label_Interventions" Name="InterventionsLabel" Content="{x:Static properties:Resources.Label_Interventions}" FontWeight="ExtraBlack" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24"/>
+                <Label x:Uid="Label_InterventionFilter" Name="InterventionFilterLabel" Content="{x:Static properties:Resources.Label_InterventionFilterOngoing}" FontWeight="ExtraBlack" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24"/>
 			</StackPanel>
 		</Border>
 		<ScrollViewer Name="Scroller" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Visible">

@@ -17,6 +17,7 @@ using ETD.Models.Objects;
 using System.Threading;
 using System.Windows.Threading;
 using ETD.Models.ArchitecturalObjects;
+using ETD.Services;
 
 namespace ETD.ViewsPresenters.InterventionsSection
 {
@@ -45,6 +46,7 @@ namespace ETD.ViewsPresenters.InterventionsSection
             reportArrival_DispatcherTimer.Interval = new TimeSpan(0, 0, 1); //Update every second
 
             Observable.RegisterClassObserver(typeof(Intervention), this);
+            Observable.RegisterClassObserver(typeof(LanguageSelector), this);
 		}
 
 		//Adjusting the intervention section width
@@ -103,7 +105,19 @@ namespace ETD.ViewsPresenters.InterventionsSection
 				}
 			}
 			mi.IsChecked = true;
-			InterventionFilterLabel.Content = mi.Tag;
+
+            if (mi.Tag.ToString().Equals("Completed"))
+            {
+                InterventionFilterLabel.Content = ETD.Properties.Resources.Label_InterventionFilterCompleted;
+            }
+            else if (mi.Tag.ToString().Equals("Ongoing"))
+            {
+                InterventionFilterLabel.Content = ETD.Properties.Resources.Label_InterventionFilterOngoing;
+            }
+            else
+            {
+                InterventionFilterLabel.Content = mi.Tag;
+            }
 
 			foreach (Frame frame in InterventionsList.Children)
 			{

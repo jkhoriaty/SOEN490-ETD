@@ -3,21 +3,22 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:properties="clr-namespace:ETD.Properties"
       mc:Ignorable="d"
 	  Margin="0,5,0,0"
 	Title="TeamForm">
 	
 	<Border BorderBrush="Black" BorderThickness="1" CornerRadius="5">
 		<StackPanel Name="teamStackPanel" Margin="2,2,2,2">
-			<TextBox Name="teamName" Text="Team Name" FontStyle="Italic" FontWeight="Bold" FontSize="20" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus" MaxLength="6"/>
+            <TextBox x:Uid="TextBox_TeamName" Name="teamName" Text="{x:Static properties:Resources.TextBox_TeamName}" FontStyle="Italic" FontWeight="Bold" FontSize="20" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus" MaxLength="6"/>
 
 			<Border BorderBrush="Black" BorderThickness="1" Margin="0,3,0,3"></Border>
 
 			<!-- Information on Team Member 1-->
 			<StackPanel>
-				<TextBox Name="teamMember1" Text="Team Member Name" FontSize="18" Margin="0,2,0,2" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus" MaxLength="20"/>
+                <TextBox x:Uid="TextBox_TeamMemberName" Name="teamMember1" Text="{x:Static properties:Resources.TextBox_TeamMemberName}" FontSize="18" Margin="0,2,0,2" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus" MaxLength="20"/>
 				<UniformGrid Rows="1" Margin="0,2,0,2">
-					<Label Content="Time of Departure:"/>
+                    <Label x:Uid="Label_DepartureTime" Content="{x:Static properties:Resources.Label_DepartureTime}"/>
 					<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 						<TextBox Name="departurehh1" Width="30" Text="hh" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus" MaxLength="2"></TextBox>
 						<Label Content=":"/>
@@ -29,12 +30,12 @@
 						<ColumnDefinition Width="1*"/>
 						<ColumnDefinition Width="2*"/>
 					</Grid.ColumnDefinitions>
-					<Label Grid.Column="0" Content="Training:"/>
+                    <Label x:Uid="Label_Training" Grid.Column="0" Content="{x:Static properties:Resources.Label_Training}"/>
 					<Border Grid.Column="1" Name="lvlOfTraining1Border" BorderThickness="1">
 						<ComboBox Name="lvlOfTraining1">
-							<ComboBoxItem Content="General First Aid"/>
-							<ComboBoxItem Content="First Responder"/>
-							<ComboBoxItem Content="Medicine"/>
+                            <ComboBoxItem x:Uid="ComboBoxItem_GeneralFA" Content="{x:Static properties:Resources.ComboBoxItem_GeneralFA}"/>
+                            <ComboBoxItem x:Uid="ComboBoxItem_FirstResponder" Content="{x:Static properties:Resources.ComboBoxItem_FirstResponder}"/>
+                            <ComboBoxItem x:Uid="ComboBoxItem_Medicine" Content="{x:Static properties:Resources.ComboBoxItem_Medicine}"/>
 						</ComboBox>
 					</Border>
 				</Grid>
@@ -50,9 +51,9 @@
 			<!-- Information on Team Member 2-->
 			<StackPanel Name="member2" Visibility="Collapsed">
 				<Border BorderBrush="Black" BorderThickness="1" Margin="0,3,0,3"></Border>
-				<TextBox Name="teamMember2" Text="Team Member Name" FontSize="18" Margin="0,2,0,2" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus" MaxLength="20"/>
+                <TextBox x:Uid="TextBox_TeamMemberName" Name="teamMember2" Text="{x:Static properties:Resources.TextBox_TeamMemberName}" FontSize="18" Margin="0,2,0,2" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus" MaxLength="20"/>
 				<UniformGrid Rows="1" Margin="0,2,0,2">
-					<Label Content="Time of Departure:"/>
+                    <Label x:Uid="Label_DepartureTime" Content="{x:Static properties:Resources.Label_DepartureTime}"/>
 					<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 						<TextBox Name="departurehh2" Width="30" Text="hh" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus" MaxLength="2"></TextBox>
 						<Label Content=":"/>
@@ -64,13 +65,13 @@
 						<ColumnDefinition Width="1*"/>
 						<ColumnDefinition Width="2*"/>
 					</Grid.ColumnDefinitions>
-					<Label Grid.Column="0" Content="Training:"/>
+                    <Label x:Uid="Label_Training" Grid.Column="0" Content="{x:Static properties:Resources.Label_Training}"/>
 					<Border Grid.Column="1" Name="lvlOfTraining2Border" BorderThickness="1">
 						<ComboBox Name="lvlOfTraining2">
-							<ComboBoxItem Content="General First Aid"/>
-							<ComboBoxItem Content="First Responder"/>
-							<ComboBoxItem Content="Medicine"/>
-						</ComboBox>
+                            <ComboBoxItem x:Uid="ComboBoxItem_GeneralFA" Content="{x:Static properties:Resources.ComboBoxItem_GeneralFA}"/>
+                            <ComboBoxItem x:Uid="ComboBoxItem_FirstResponder" Content="{x:Static properties:Resources.ComboBoxItem_FirstResponder}"/>
+                            <ComboBoxItem x:Uid="ComboBoxItem_Medicine" Content="{x:Static properties:Resources.ComboBoxItem_Medicine}"/>
+                        </ComboBox>
 					</Border>
 				</Grid>
 			</StackPanel>
@@ -79,9 +80,9 @@
 			<!-- Information on Team Member 3-->
 			<StackPanel Name="member3" Visibility="Collapsed">
 				<Border BorderBrush="Black" BorderThickness="1" Margin="0,3,0,3"></Border>
-				<TextBox Name="teamMember3" Text="Team Member Name" FontSize="18" Margin="0,2,0,2" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus" MaxLength="20"/>
+                <TextBox x:Uid="TextBox_TeamMemberName" Name="teamMember3" Text="{x:Static properties:Resources.TextBox_TeamMemberName}" FontSize="18" Margin="0,2,0,2" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus" MaxLength="20"/>
 				<UniformGrid Rows="1" Margin="0,2,0,2">
-					<Label Content="Time of Departure:"/>
+                    <Label x:Uid="Label_DepartureTime" Content="{x:Static properties:Resources.Label_DepartureTime}"/>
 					<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 						<TextBox Name="departurehh3" Width="30" Text="hh" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus" MaxLength="2"></TextBox>
 						<Label Content=":"/>
@@ -93,13 +94,13 @@
 						<ColumnDefinition Width="1*"/>
 						<ColumnDefinition Width="2*"/>
 					</Grid.ColumnDefinitions>
-					<Label Grid.Column="0" Content="Training:"/>
+                    <Label x:Uid="Label_Training" Grid.Column="0" Content="{x:Static properties:Resources.Label_Training}"/>
 					<Border Grid.Column="1" Name="lvlOfTraining3Border" BorderThickness="1">
 						<ComboBox Name="lvlOfTraining3">
-							<ComboBoxItem Content="General First Aid"/>
-							<ComboBoxItem Content="First Responder"/>
-							<ComboBoxItem Content="Medicine"/>
-						</ComboBox>
+                            <ComboBoxItem x:Uid="ComboBoxItem_GeneralFA" Content="{x:Static properties:Resources.ComboBoxItem_GeneralFA}"/>
+                            <ComboBoxItem x:Uid="ComboBoxItem_FirstResponder" Content="{x:Static properties:Resources.ComboBoxItem_FirstResponder}"/>
+                            <ComboBoxItem x:Uid="ComboBoxItem_Medicine" Content="{x:Static properties:Resources.ComboBoxItem_Medicine}"/>
+                        </ComboBox>
 					</Border>
 				</Grid>
 			</StackPanel>
@@ -107,10 +108,10 @@
 			<Border BorderBrush="Black" BorderThickness="1" Margin="0,3,0,3"></Border>
 
 			<UniformGrid>
-				<Button Name="AddMember" Content="Add Member" FontSize="12" FontWeight="ExtraBlack" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="White" BorderBrush="Black" Click="AddMember_Click"></Button>
-				<Button Name="RemoveMember" IsEnabled="false" Content="Remove Member" FontSize="12" FontWeight="ExtraBlack" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="White" BorderBrush="Black" Height="22" VerticalAlignment="Top" Click="RemoveMember_Click"/>
-				<Button Name="Submit" Content="Submit" FontSize="12" FontWeight="ExtraBlack" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="White" BorderBrush="Black" Click="Submit_Click"></Button>
-				<Button Name="Cancel" Content="Cancel" FontSize="12" FontWeight="ExtraBlack" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="White" BorderBrush="Black" Height="22" VerticalAlignment="Top" Click="Cancel_Click"/>
+                <Button x:Uid="Button_AddMember" Name="AddMember" Content="{x:Static properties:Resources.Button_AddMember}" FontSize="12" FontWeight="ExtraBlack" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="White" BorderBrush="Black" Click="AddMember_Click"></Button>
+                <Button x:Uid="Button_RemoveMember" Name="RemoveMember" IsEnabled="false" Content="{x:Static properties:Resources.Button_RemoveMember}" FontSize="12" FontWeight="ExtraBlack" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="White" BorderBrush="Black" Height="22" VerticalAlignment="Top" Click="RemoveMember_Click"/>
+                <Button x:Uid="Button_Submit" Name="Submit" Content="{x:Static properties:Resources.Button_Submit}" FontSize="12" FontWeight="ExtraBlack" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="White" BorderBrush="Black" Click="Submit_Click"></Button>
+                <Button x:Uid="Button_Cancel" Name="Cancel" Content="{x:Static properties:Resources.Button_Cancel}" FontSize="12" FontWeight="ExtraBlack" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="White" BorderBrush="Black" Height="22" VerticalAlignment="Top" Click="Cancel_Click"/>
 			</UniformGrid>
 		</StackPanel>
 	</Border>

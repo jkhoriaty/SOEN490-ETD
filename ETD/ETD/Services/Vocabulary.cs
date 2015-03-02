@@ -21,19 +21,22 @@ namespace ETD.Services
         {
             using (XmlReader reader = XmlReader.Create("Resources/Vocabulary.xml"))
             {
-                String name = "", fr = "", en = "";
+                String uid = "", fr = "", en = "";
                 while (reader.Read())
                 {
                     if (reader.IsStartElement())
                     {
                         switch (reader.Name)
                         {
-                            case "control": name = reader.GetAttribute("name");
+                            case "element": uid = reader.GetAttribute("uid");
                                 break;
                             case "fr": fr = reader.ReadElementContentAsString().Trim();
                                 break;
                             case "en": en = reader.ReadElementContentAsString().Trim();
-                                vocabulary.Add(name, new Word(fr, en));
+                                vocabulary.Add(uid, new Word(fr, en));
+                                uid = "";
+                                fr = "";
+                                en = "";
                                 break;
                         }
                     }
@@ -46,7 +49,7 @@ namespace ETD.Services
             string value = "";
             if (vocabulary.ContainsKey(id))
             {
-                if(lang.Equals("French"))
+                if (lang.Equals("French"))
                     value = vocabulary[id].getFrench();
                 else if(lang.Equals("English"))
                     value = vocabulary[id].getEnglish();

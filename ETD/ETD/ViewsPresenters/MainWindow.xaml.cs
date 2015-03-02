@@ -25,6 +25,8 @@ using System.Threading;
 using System.Windows.Controls.Primitives;
 using ETD.CustomObjects.PopupForms;
 using ETD.CustomObjects.CustomUIObjects;
+using ETD.Models.ArchitecturalObjects;
+using System.Globalization;
 
 
 namespace ETD.ViewsPresenters
@@ -32,7 +34,7 @@ namespace ETD.ViewsPresenters
 	/// <summary>
 	/// Interaction logic for MainWindow.xaml
 	/// </summary>
-    public partial class MainWindow
+    public partial class MainWindow : Observer
 	{
 		private TeamsSectionPage teamsSection;
 		private MapSectionPage mapSection;
@@ -51,6 +53,7 @@ namespace ETD.ViewsPresenters
 
 		public MainWindow()
 		{
+            ETD.Properties.Resources.Culture = new CultureInfo("fr-CA");
 			InitializeComponent();
 			FormPopup.RegisterMainWindow(this);
             AIPmapSection = new AdditionalInfoPage(this);
@@ -211,14 +214,14 @@ namespace ETD.ViewsPresenters
 			ComboBoxItem item = sender as ComboBoxItem;
 			ComboBox parent = modeCB;
             foreach (ComboBoxItem mi in parent.Items)
-            {  
-                if (mi.Content.Equals("Regular Mode") && (mi.IsSelected))
+            {
+                if (mi.Content.Equals(ETD.Properties.Resources.ComboBoxItem_RegularMode) && (mi.IsSelected))
                 {
                     AI.Visibility = Visibility.Collapsed;
                     AIPmapSection.IsEnabled = false;
                     mapSection.IsEnabled = true;
                 }
-                else if (mi.Content.Equals("Edit Mode") && (mi.IsSelected ))
+                else if (mi.Content.Equals(ETD.Properties.Resources.ComboBoxItem_EditMode) && (mi.IsSelected))
                 {
                     AI.Visibility = Visibility.Visible;
                     AIPmapSection.IsEnabled = true;
@@ -332,6 +335,35 @@ namespace ETD.ViewsPresenters
 				GPSLocationsTextBlock.IsEnabled = false;
 			});
 		}
+
+        public void Update()
+        {
+            
+            foreach (Button btn in FindVisualChildren<Button>(this))
+            {
+                btn.Content = LanguageSelector.getString(btn.Uid);
+            }
+        }
+
+        public static IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject
+        {
+            if (depObj != null)
+            {
+                for (int i = 0; i < VisualTreeHelper.GetChildrenCount(depObj); i++)
+                {
+                    DependencyObject child = VisualTreeHelper.GetChild(depObj, i);
+                    if (child != null && child is T)
+                    {
+                        yield return (T)child;
+                    }
+
+                    foreach (T childOfChild in FindVisualChildren<T>(child))
+                    {
+                        yield return childOfChild;
+                    }
+                }
+            }
+        }
     }
 
 }

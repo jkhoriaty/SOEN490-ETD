@@ -1,48 +1,35 @@
-﻿using System;
+﻿using ETD.Models.ArchitecturalObjects;
+using System;
 using System.Collections.Generic;
 
 
 namespace ETD.Services
 {
-    public class LanguageSelector
+    public class LanguageSelector : Observable 
     {
-		/*
-        const String French = "French";
-        const String English = "English";
-        static private String currentLang = LanguageSelector.English;
-        static private Vocabulary dictionary = new Vocabulary();
-        static private List<IObserver> observers = new List<IObserver>();
-
-        public static void attach(IObserver ob)
+        public enum Languages
         {
-            observers.Add(ob);
+            English,
+            French
         }
+        
+        static private Languages currentLang = Languages.English;
+        static private Vocabulary dictionary = new Vocabulary();
+        static private List<Observer> observers = new List<Observer>();
+
         public static String getString(String n)
         {
-            String value = dictionary.findWord(n, currentLang);
+            String value = dictionary.findWord(n, currentLang.ToString());
             return value;
         }
 
-        public static void switchLanguage(String lang)
+        public static void switchLanguage(Languages lang)
         {
             if (!lang.Equals(currentLang))
             {
-                if (lang.Equals(LanguageSelector.English))
-                    currentLang = LanguageSelector.English;
-                else if (lang.Equals(LanguageSelector.French))
-                    currentLang = LanguageSelector.French;
-                update();
+                currentLang = lang;
+                Observable.ClassModifiedNotification(typeof(LanguageSelector));
             }
         }
-
-        private static void update()
-        {
-            foreach(IObserver ob in observers)
-            {
-                ob.update();
-            }
-        }
-
-		*/
     }
 }

@@ -59,6 +59,11 @@
     <Compile Include="Models\Objects\Resource.cs" />
     <Compile Include="CustomObjects\PopupForms\FormPopup.cs" />
     <Compile Include="CustomObjects\PopupForms\RegisteredVolunteersPopup.cs" />
+    <Compile Include="Properties\Resources.fr-CA.Designer.cs">
+      <DependentUpon>Resources.fr-CA.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Services\NetworkServices.cs" />
     <Compile Include="Services\TextboxHandler.cs" />
     <Compile Include="ViewsPresenters\InitialSetup.xaml.cs">
@@ -141,8 +146,13 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Properties\Resources.fr-CA.resx">
+      <Generator>ResXFileCodeGeneratorEX</Generator>
+      <LastGenOutput>Resources.fr-CA.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>ResXFileCodeGeneratorEX</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>

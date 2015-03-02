@@ -96,7 +96,7 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 
 				//Create second member
 				String mem_2_name = teamMember2.Text;
-				if (mem_2_name != "Team Member Name")
+				if (mem_2_name != ETD.Properties.Resources.TextBox_TeamMemberName)
 				{
 					DateTime mem_2_departure = CheckDepartureTime(new DateTime(dateNow.Year, dateNow.Month, dateNow.Day, int.Parse(departurehh2.Text), int.Parse(departuremm2.Text), dateNow.Second));
 					Trainings mem_2_lvlOfTraining = (Trainings) lvlOfTraining2.SelectedIndex;
@@ -106,7 +106,7 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 
 				//Create third member
 				String mem_3_name = teamMember3.Text;
-				if (mem_3_name != "Team Member Name")
+                if (mem_3_name != ETD.Properties.Resources.TextBox_TeamMemberName)
 				{
 					DateTime mem_3_departure = CheckDepartureTime(new DateTime(dateNow.Year, dateNow.Month, dateNow.Day, int.Parse(departurehh3.Text), int.Parse(departuremm3.Text), dateNow.Second));
 					Trainings mem_3_lvlOfTraining = (Trainings)lvlOfTraining3.SelectedIndex;
