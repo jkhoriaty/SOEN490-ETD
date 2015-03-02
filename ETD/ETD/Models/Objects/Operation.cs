@@ -26,5 +26,27 @@ namespace ETD.Models.Objects
             this.shiftEnd = shiftEnd;
             this.dispatcherName = dispatcherName;
 		}
+
+        public String getOperationName()
+        {
+            return operationName;
+        }
+
+        public String getAcronym()
+        {
+            return acronym;
+        }
+        public DateTime getShiftStart()
+        {
+            return shiftStart;
+        }
+        public DateTime getShiftEnd()
+        {
+            return shiftEnd; 
+        }
+        public String getDispatcherName()
+        {
+            return dispatcherName;
+        }
     }
 }

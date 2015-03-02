@@ -19,7 +19,7 @@ namespace ETD.Models.Objects
 		private String HandledBy;
 		private DateTime SuiviTimeStamp;
 		private DateTime FaitTimeStamp;
-		private Request[] followUpInfo;
+		private Request[] followUpInfo = new Request[100];
 
 		public Request(String client,String Request,String HandledBy, DateTime SuiviTime, DateTime FaitTime)
 		{
@@ -37,14 +37,14 @@ namespace ETD.Models.Objects
 			return requestList;
 		}
 
-		public void SetFollowUpInfo(int position, Request followUpinfo)
+		public void SetFollowUpInfo(int position, Request folUpinfo)
 		{
-			this.followUpInfo[position] = followUpinfo;
+			followUpInfo[position] = folUpinfo;
 		}
 
 		public Request[] getFollowUpInfo()
 		{
-			return this.followUpInfo;
+			return followUpInfo;
 		}
 	}
 }

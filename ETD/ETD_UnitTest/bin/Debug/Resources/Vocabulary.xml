@@ -1,31 +1,83 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?> 
 <Vocabulary>
-  <control name="_File">
-    <fr>_Fichier</fr>
-    <en>_File</en>
-  </control>
-  <control name="_NewEvent">
-    <fr>_Nouveau Événement</fr>
-    <en>_New Event</en>
-  </control>
-  <control name="_LoadMap">
-    <fr>_Choisir Carte</fr>
-    <en>_Choose Map</en>
-  </control>
-  <control name="_CreateTeam">
-    <fr>_Créer Équipe</fr>
-    <en>_Create Team</en>
-  </control>
-  <control name="_Quit">
-    <fr>_Quitter</fr>
-    <en>_Quit</en>
-  </control>
-  <control name="_Tools">
-    <fr>_Outils</fr>
-    <en>_Tools</en>
-  </control>
-  <control name="_Language">
-    <fr>_Langage</fr>
-    <en>_Language</en>
-  </control>
+  <element uid="Button_GPSLocations" type="Button" source="MainWindow">
+    <fr>Position GPS</fr>
+    <en>GPS Locations</en>
+  </element>
+  <element uid="ComboBoxItem_Circle" type="ComboBoxItem" source="MainWindow">
+    <fr>Cercle</fr>
+    <en>Circle</en>
+  </element>
+  <element uid="ComboBoxItem_Rectangle" type="ComboBoxItem" source="MainWindow">
+    <fr>Rectangle</fr>
+    <en>Rectangle</en>
+  </element>
+  <element uid="ComboBoxItem_Stairs" type="ComboBoxItem" source="MainWindow">
+    <fr>Escalier</fr>
+    <en>Stairs</en>
+  </element>
+  <element uid="ComboBoxItem_Camp" type="ComboBoxItem" source="MainWindow">
+    <fr>Poste</fr>
+    <en>Camp</en>
+  </element>
+  <element uid="ComboBoxItem_Line" type="ComboBoxItem" source="MainWindow">
+    <fr>Ligne</fr>
+    <en>Line</en>
+  </element>
+  <element uid="ComboBoxItem_RegularMode" type="ComboBoxItem" source="MainWindow">
+    <fr>Mode regulier</fr>
+    <en>Regular Mode</en>
+  </element>
+  <element uid="ComboBoxItem_EditMode" type="ComboBoxItem" source="MainWindow">
+    <fr>Mode d'edition</fr>
+    <en>Edit Mode</en>
+  </element>  
+  <element uid="Button_FollowUp" type="Button" source="MainWindow">
+    <fr>Suivi</fr>
+    <en>Follow Up</en>
+  </element>
+  <element uid="Button_LoadMap" type="Button" source="MainWindow">
+    <fr>Choisir Carte</fr>
+    <en>Load Map</en>
+  </element>
+  <element uid="TextBlock_Deadlines" type="TextBlock" source="MainWindow">
+    <fr>Limite (mins):</fr>
+    <en>Deadlines (mins):</en>
+  </element>
+  <element uid="TextBlock_InterventionDeadline" type="TextBlock" source="MainWindow">
+    <fr>Intervention</fr>
+    <en>Intervention</en>
+  </element>
+  <element uid="Button_Submit" type="Button" source="MainWindow">
+    <fr>Soumettre</fr>
+    <en>Submit</en>
+  </element>
+  <element uid="ComboBoxItem_AmbulanceCart" type="ComboBoxItem" source="MainWindow">
+    <fr>Ambulancette</fr>
+    <en>Ambulance Cart</en>
+  </element>
+  <element uid="ComboBoxItem_SittingCart" type="ComboBoxItem" source="MainWindow">
+    <fr>Cart Assis</fr>
+    <en>Sitting Cart</en>
+  </element>
+  <element uid="ComboBoxItem_Epipen" type="ComboBoxItem" source="MainWindow">
+    <fr>Epipen</fr>
+    <en>Epipen</en>
+  </element>
+  <element uid="ComboBoxItem_TransportStretcher" type="ComboBoxItem" source="MainWindow">
+    <fr>Civiere de Transport</fr>
+    <en>Transport Stretcher</en>
+  </element>
+  <element uid="ComboBoxItem_MountedStretcher" type="ComboBoxItem" source="MainWindow">
+    <fr>Civiere Montee</fr>
+    <en>Mounted Stretcher</en>
+  </element>
+  <element uid="ComboBoxItem_Wheelchair" type="ComboBoxItem" source="MainWindow">
+    <fr>Fauteil Roulant</fr>
+    <en>Wheelchair</en>
+  </element>
+  <element uid="Button_AddEquipment" type="Button" source="MainWindow">
+    <fr>Ajouter Equipment</fr>
+    <en>Add Equipment</en>
+  </element>
 </Vocabulary>

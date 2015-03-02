@@ -111,7 +111,7 @@ namespace ETD_UnitTest
         public void InterventionSetAdditionalInfoTest()
         {
             Intervention a = new Intervention();
-            InterventionAdditionalInfo ai = new InterventionAdditionalInfo();
+            InterventionAdditionalInfo ai = new InterventionAdditionalInfo("info",DateTime.Now);
             a.setAdditionalInfo(5, ai);
             Assert.AreEqual(ai, a.getAdditionalInfo(5));
         }

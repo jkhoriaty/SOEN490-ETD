@@ -60,6 +60,11 @@
     <Compile Include="TeamMemberTest.cs" />
     <Compile Include="EquipmentTest.cs" />
     <Compile Include="ResourceUITest.cs" />
+    <Compile Include="ABCTest.cs" />
+    <Compile Include="InterventionAdditionalInfoTest.cs" />
+    <Compile Include="MapModTest.cs" />
+    <Compile Include="OperationTest.cs" />
+    <Compile Include="RequestTest.cs" />
     <Compile Include="WordTest.cs" />
   </ItemGroup>
   <ItemGroup>
