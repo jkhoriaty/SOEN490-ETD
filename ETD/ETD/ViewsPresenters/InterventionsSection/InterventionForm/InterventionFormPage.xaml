@@ -3,6 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:properties="clr-namespace:ETD.Properties"
       mc:Ignorable="d" 
       d:DesignHeight="177" d:DesignWidth="335"
 	Title="InterventionForm">
@@ -31,25 +32,13 @@
 				</Grid>
 			</Border>
 			<TabControl Name="TabControl" TabStripPlacement="Bottom" Height="145">
-				<TabItem Name="timers" Header="Timers">
-					
-				</TabItem>
-				<TabItem Name="details" Header="Details">
-
-				</TabItem>
-				<TabItem Name="resources" Header="Resources">
-
-				</TabItem>
-				<TabItem Name="abc" Header="ABC">
-					
-				</TabItem>
-				<TabItem Name="additionalInfo" Header="Additional Info">
-
-				</TabItem>
-				<TabItem Name="end" Header="End">
-
-				</TabItem>
-			</TabControl>
+                <TabItem x:Uid="TabItem_Timers" Name="timers" Header="{x:Static properties:Resources.TabItem_Timers}" />
+                <TabItem x:Uid="TabItem_Details" Name="details" Header="{x:Static properties:Resources.TabItem_Details}" />
+                <TabItem x:Uid="TabItem_Resources" Name="resources" Header="{x:Static properties:Resources.TabItem_Resources}" />
+                <TabItem x:Uid="TabItem_ABC" Name="abc" Header="{x:Static properties:Resources.TabItem_ABC}" />
+                <TabItem x:Uid="TabItem_AdditionalInfo" Name="additionalInfo" Header="{x:Static properties:Resources.TabItem_AdditionalInfo}" />
+                <TabItem x:Uid="TabItem_End" Name="end" Header="{x:Static properties:Resources.TabItem_End}" />
+            </TabControl>
 		</StackPanel>
 	</Border>
 </Page>

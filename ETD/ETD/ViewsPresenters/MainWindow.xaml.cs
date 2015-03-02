@@ -53,7 +53,7 @@ namespace ETD.ViewsPresenters
 
 		public MainWindow()
 		{
-            ETD.Properties.Resources.Culture = new CultureInfo("fr-CA");
+            //ETD.Properties.Resources.Culture = new CultureInfo("fr-CA");
 			InitializeComponent();
 			FormPopup.RegisterMainWindow(this);
             AIPmapSection = new AdditionalInfoPage(this);

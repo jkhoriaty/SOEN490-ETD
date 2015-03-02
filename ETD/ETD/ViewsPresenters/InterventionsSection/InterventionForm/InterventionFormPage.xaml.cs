@@ -160,8 +160,6 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm
 			//Stopping timer
 			if(timersPage.StopOverallTimer(offset))
 			{
-				interventionSection.CompleteIntervention(getInterventionNumber());
-
                 DisableForms();
 			}
 		}

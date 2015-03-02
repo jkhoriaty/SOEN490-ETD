@@ -277,6 +277,30 @@
     <value>Intervention En Cours</value>
     <comment>InterventionSection</comment>
   </data>
+  <data name="TabItem_ABC" xml:space="preserve">
+    <value>ABC</value>
+    <comment>InterventionForm</comment>
+  </data>
+  <data name="TabItem_AdditionalInfo" xml:space="preserve">
+    <value>Plus d'Info</value>
+    <comment>InterventionForm</comment>
+  </data>
+  <data name="TabItem_Details" xml:space="preserve">
+    <value>Détails</value>
+    <comment>InterventionForm</comment>
+  </data>
+  <data name="TabItem_End" xml:space="preserve">
+    <value>Fin</value>
+    <comment>InterventionForm</comment>
+  </data>
+  <data name="TabItem_Resources" xml:space="preserve">
+    <value>Resources</value>
+    <comment>InterventionForm</comment>
+  </data>
+  <data name="TabItem_Timers" xml:space="preserve">
+    <value>Chrono</value>
+    <comment>InterventionForm</comment>
+  </data>
   <data name="TextBlock_Deadlines" xml:space="preserve">
     <value>Limites (mins):</value>
     <comment>MainWindow</comment>

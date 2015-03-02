@@ -447,6 +447,60 @@ namespace ETD.Properties {
         }
         
         /// <summary>
+        /// Looks up a localized string similar to 'ABC'.
+        /// </summary>
+        public static string TabItem_ABC {
+            get {
+                return ResourceManager.GetString(ResourceNames.TabItem_ABC, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Additional Info'.
+        /// </summary>
+        public static string TabItem_AdditionalInfo {
+            get {
+                return ResourceManager.GetString(ResourceNames.TabItem_AdditionalInfo, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Details'.
+        /// </summary>
+        public static string TabItem_Details {
+            get {
+                return ResourceManager.GetString(ResourceNames.TabItem_Details, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'End'.
+        /// </summary>
+        public static string TabItem_End {
+            get {
+                return ResourceManager.GetString(ResourceNames.TabItem_End, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Resources'.
+        /// </summary>
+        public static string TabItem_Resources {
+            get {
+                return ResourceManager.GetString(ResourceNames.TabItem_Resources, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Timers'.
+        /// </summary>
+        public static string TabItem_Timers {
+            get {
+                return ResourceManager.GetString(ResourceNames.TabItem_Timers, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Looks up a localized string similar to 'Deadlines (mins):'.
         /// </summary>
         public static string TextBlock_Deadlines {
@@ -695,6 +749,36 @@ namespace ETD.Properties {
             /// Stores the resource name 'MenuItem_OngoingInterventions'.
             /// </summary>
             public const string MenuItem_OngoingInterventions = "MenuItem_OngoingInterventions";
+            
+            /// <summary>
+            /// Stores the resource name 'TabItem_ABC'.
+            /// </summary>
+            public const string TabItem_ABC = "TabItem_ABC";
+            
+            /// <summary>
+            /// Stores the resource name 'TabItem_AdditionalInfo'.
+            /// </summary>
+            public const string TabItem_AdditionalInfo = "TabItem_AdditionalInfo";
+            
+            /// <summary>
+            /// Stores the resource name 'TabItem_Details'.
+            /// </summary>
+            public const string TabItem_Details = "TabItem_Details";
+            
+            /// <summary>
+            /// Stores the resource name 'TabItem_End'.
+            /// </summary>
+            public const string TabItem_End = "TabItem_End";
+            
+            /// <summary>
+            /// Stores the resource name 'TabItem_Resources'.
+            /// </summary>
+            public const string TabItem_Resources = "TabItem_Resources";
+            
+            /// <summary>
+            /// Stores the resource name 'TabItem_Timers'.
+            /// </summary>
+            public const string TabItem_Timers = "TabItem_Timers";
             
             /// <summary>
             /// Stores the resource name 'TextBlock_Deadlines'.
