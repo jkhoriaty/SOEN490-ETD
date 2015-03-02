@@ -15,7 +15,7 @@ using ETD.Models.Objects;
 
 namespace ETD.CustomObjects.CustomUIObjects
 {
-	class Pin : Grid
+	public class Pin : Grid
 	{
 		internal static List<Pin> pinList = new List<Pin>(); //Contains all pins, used for collision detection
 		private static Dictionary<object, double[]> pinPositionList = new Dictionary<object, double[]>(); //Used to recover previous pin position after Update callback that clears the whole map
@@ -79,6 +79,10 @@ namespace ETD.CustomObjects.CustomUIObjects
             pinList.Add(this);
         }
     
+		public static List<Pin> getPinList()
+		{
+			return pinList;
+		}
 		//Setting the pins' background image to the passed image
 		public void setImage(BitmapImage image)
 		{
@@ -89,6 +93,11 @@ namespace ETD.CustomObjects.CustomUIObjects
 			img.ImageSource = image;
 			imageRectangle.Fill = img;
 			this.Children.Add(imageRectangle);
+		}
+
+		public object getRelatedObject()
+		{
+			return relatedObject;
 		}
 
 		//Adding text to the pin for interventions and teams
