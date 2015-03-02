@@ -1,0 +1,300 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Button_AddEquipment" xml:space="preserve">
+    <value>Ajouter Équipement</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="Button_AddMember" xml:space="preserve">
+    <value>Ajouter Membre</value>
+    <comment>TeamForm</comment>
+  </data>
+  <data name="Button_Cancel" xml:space="preserve">
+    <value>Annuler</value>
+    <comment>Multi</comment>
+  </data>
+  <data name="Button_FollowUp" xml:space="preserve">
+    <value>Suivi</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="Button_GPSLocations" xml:space="preserve">
+    <value>Position GPS</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="Button_LoadMap" xml:space="preserve">
+    <value>Choisir Carte</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="Button_RemoveMember" xml:space="preserve">
+    <value>Enlever Membre</value>
+    <comment>TeamForm</comment>
+  </data>
+  <data name="Button_Submit" xml:space="preserve">
+    <value>Soumettre</value>
+    <comment>Multi</comment>
+  </data>
+  <data name="ComboBoxItem_AmbulanceCart" xml:space="preserve">
+    <value>Ambulancette</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="ComboBoxItem_Camp" xml:space="preserve">
+    <value>Poste</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="ComboBoxItem_Circle" xml:space="preserve">
+    <value>Cercle</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="ComboBoxItem_EditMode" xml:space="preserve">
+    <value>Mode d'Édition</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="ComboBoxItem_Epipen" xml:space="preserve">
+    <value>Epipen</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="ComboBoxItem_FirstResponder" xml:space="preserve">
+    <value>Premier Répondant</value>
+    <comment>TeamForm</comment>
+  </data>
+  <data name="ComboBoxItem_GeneralFA" xml:space="preserve">
+    <value>Secouriste Général</value>
+    <comment>TeamForm</comment>
+  </data>
+  <data name="ComboBoxItem_Line" xml:space="preserve">
+    <value>Ligne</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="ComboBoxItem_Medicine" xml:space="preserve">
+    <value>Medicine</value>
+    <comment>TeamForm</comment>
+  </data>
+  <data name="ComboBoxItem_MountedStretcher" xml:space="preserve">
+    <value>Civière Montée</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="ComboBoxItem_Rectangle" xml:space="preserve">
+    <value>Rectangle</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="ComboBoxItem_RegularMode" xml:space="preserve">
+    <value>Mode régulier</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="ComboBoxItem_SittingCart" xml:space="preserve">
+    <value>Cart Assis</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="ComboBoxItem_Stairs" xml:space="preserve">
+    <value>Escalier</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="ComboBoxItem_TransportStretcher" xml:space="preserve">
+    <value>Civière de Transport</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="ComboBoxItem_Wheelchair" xml:space="preserve">
+    <value>Fauteil Roulant</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="Label_Acronym" xml:space="preserve">
+    <value>Acronyme</value>
+    <comment>InitialSetup</comment>
+  </data>
+  <data name="Label_DepartureTime" xml:space="preserve">
+    <value>Temps de départ</value>
+    <comment>TeamForm</comment>
+  </data>
+  <data name="Label_DispatcherName" xml:space="preserve">
+    <value>Nom du Répartiteur</value>
+    <comment>InitialSetup</comment>
+  </data>
+  <data name="Label_InterventionFilterCompleted" xml:space="preserve">
+    <value>Completée</value>
+    <comment>InterventionSection</comment>
+  </data>
+  <data name="Label_InterventionFilterOngoing" xml:space="preserve">
+    <value>En Cours</value>
+    <comment>InterventionSection</comment>
+  </data>
+  <data name="Label_Interventions" xml:space="preserve">
+    <value>Interventions:</value>
+    <comment>InterventionSection</comment>
+  </data>
+  <data name="Label_OperationName" xml:space="preserve">
+    <value>Nom d'Opération</value>
+    <comment>InitialSetup</comment>
+  </data>
+  <data name="Label_ShiftEndDate" xml:space="preserve">
+    <value>Date de Fin de Quart</value>
+    <comment>InitialSetup</comment>
+  </data>
+  <data name="Label_ShiftEndTime" xml:space="preserve">
+    <value>Heure de Fin de Quart</value>
+    <comment>InitialSetup</comment>
+  </data>
+  <data name="Label_ShiftStartDate" xml:space="preserve">
+    <value>Date de Début de Quart</value>
+    <comment>InitialSetup</comment>
+  </data>
+  <data name="Label_ShiftStartTime" xml:space="preserve">
+    <value>Heure de Début de Quart</value>
+    <comment>InitialSetup</comment>
+  </data>
+  <data name="Label_Teams" xml:space="preserve">
+    <value>Équipes</value>
+    <comment>TeamsSection</comment>
+  </data>
+  <data name="Label_Training" xml:space="preserve">
+    <value>Formation:</value>
+    <comment>TeamForm</comment>
+  </data>
+  <data name="MenuItem_CompletedInterventions" xml:space="preserve">
+    <value>Intervention Completée</value>
+    <comment>InterventionSection</comment>
+  </data>
+  <data name="MenuItem_DeleteTeam" xml:space="preserve">
+    <value>Supprimer Équipe</value>
+    <comment>TeamInfo</comment>
+  </data>
+  <data name="MenuItem_OngoingInterventions" xml:space="preserve">
+    <value>Intervention En Cours</value>
+    <comment>InterventionSection</comment>
+  </data>
+  <data name="TextBlock_Deadlines" xml:space="preserve">
+    <value>Limites (mins):</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="TextBlock_InterventionDeadline" xml:space="preserve">
+    <value>Intervention</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="TextBlock_MovingDeadline" xml:space="preserve">
+    <value>Déplacement</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="TextBox_TeamMemberName" xml:space="preserve">
+    <value>Nom de membre d'équipe</value>
+    <comment>TeamForm</comment>
+  </data>
+  <data name="TextBox_TeamName" xml:space="preserve">
+    <value>Nom d'équipe</value>
+    <comment>TeamForm</comment>
+  </data>
+</root>
