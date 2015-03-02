@@ -57,25 +57,8 @@ namespace ETD.ViewsPresenters.InterventionsSection
 
 		private void CreateIntervention_Click(object sender, RoutedEventArgs e)
 		{
-            //CreateIntervention();
             Intervention intervention = new Intervention(); 
 		}
-
-        internal void CreateIntervention()
-        {
-            Intervention intervention = new Intervention();
-
-			Frame frame = new Frame();
-			InterventionFormPage form = new InterventionFormPage(this, intervention);
-			frame.Content = form;
-			frame.Name = "Intervention_" + form.getInterventionNumber();
-			frame.Tag = "Ongoing";
-			if(!InterventionFilterLabel.Content.Equals("Ongoing"))
-			{
-				frame.Visibility = Visibility.Collapsed;
-			}
-			InterventionsList.Children.Add(frame);
-        }
 
 		//Hiding intervention form after completion
 		public void CompleteIntervention(int interventionNumber)
@@ -106,11 +89,11 @@ namespace ETD.ViewsPresenters.InterventionsSection
 			}
 			mi.IsChecked = true;
 
-            if (mi.Tag.ToString().Equals("Completed"))
+            if (mi.Header.ToString().Equals(ETD.Properties.Resources.MenuItem_CompletedInterventions))
             {
                 InterventionFilterLabel.Content = ETD.Properties.Resources.Label_InterventionFilterCompleted;
             }
-            else if (mi.Tag.ToString().Equals("Ongoing"))
+            else if (mi.Header.ToString().Equals(ETD.Properties.Resources.MenuItem_OngoingInterventions))
             {
                 InterventionFilterLabel.Content = ETD.Properties.Resources.Label_InterventionFilterOngoing;
             }
@@ -239,7 +222,7 @@ namespace ETD.ViewsPresenters.InterventionsSection
                 frame.Content = form;
                 frame.Name = "Intervention_" + form.getInterventionNumber();
                 frame.Tag = "Ongoing";
-                if (!InterventionFilterLabel.Content.Equals("Ongoing"))
+                if (!InterventionFilterLabel.Content.Equals(ETD.Properties.Resources.Label_InterventionFilterOngoing))
                 {
                     frame.Visibility = Visibility.Collapsed;
                 }
@@ -254,7 +237,7 @@ namespace ETD.ViewsPresenters.InterventionsSection
                 frame.Content = form;
                 frame.Name = "Intervention_" + form.getInterventionNumber();
                 frame.Tag = "Completed";
-                if (!InterventionFilterLabel.Content.Equals("Completed"))
+                if (!InterventionFilterLabel.Content.Equals(ETD.Properties.Resources.Label_InterventionFilterCompleted))
                 {
                     frame.Visibility = Visibility.Collapsed;
                 }

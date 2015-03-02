@@ -249,12 +249,7 @@ namespace ETD.ViewsPresenters
         {
             ScheduleSection.UpdateSectors();
         }*/
-
-        internal void CreateIntervention()
-        {
-            interventionsSection.CreateIntervention();
-        }
-
+        
 		public void PopupLostFocus(object sender, EventArgs e)
 		{
 			Popup popup = (Popup)sender;
