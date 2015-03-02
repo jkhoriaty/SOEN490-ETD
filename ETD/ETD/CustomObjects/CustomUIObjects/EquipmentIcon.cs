@@ -18,10 +18,11 @@ namespace ETD.CustomObjects.CustomUIObjects
 {
     class EquipmentIcon : Grid
     {
-        Equipment equip;
-        Team team;
+        Equipment equip; //Reference to the equipment represented by the icon
+        Team team; //Reference to the team that holds the equipment
         Rectangle rekt;
 
+        //Default constructor, takes in the specific information that is necessary to the existence of this object.
         public EquipmentIcon(Team relatedTeam,TeamInfoPage teamInfoPage,int size, Equipment relatedEquipment) : base()
         {
             this.Width = size;
@@ -34,6 +35,7 @@ namespace ETD.CustomObjects.CustomUIObjects
             this.team = relatedTeam;
         }
 
+        //Sets the image that is show in this icon
         public void SetImage(BitmapImage image)
         {
             Rectangle imageRectangle = new Rectangle();
@@ -45,11 +47,12 @@ namespace ETD.CustomObjects.CustomUIObjects
             this.Children.Add(imageRectangle);
         }
 
+        //Basic accessor
         public Team GetTeam()
         {
             return this.team;
         }
-
+        //Basic accessor
         public Equipment GetEquip()
         {
             return this.equip;

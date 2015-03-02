@@ -9,6 +9,10 @@ using System.Threading.Tasks;
 
 namespace ETD.Services
 {
+    //Summary
+    //Used for connecting the desktop application to the server in order to receive
+    //Information from the android application.
+
 	class NetworkServices
 	{
 		static String serverIP = "24.202.7.147";
