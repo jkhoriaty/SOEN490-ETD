@@ -18,6 +18,8 @@ namespace ETD_UnitTest
             Assert.AreEqual(testWord.getFrench(), "french");
             testWord.setEnglish("english2");
             Assert.AreEqual(testWord.getEnglish(), "english2");
+            testWord.setFrench("french2");
+            Assert.AreEqual(testWord.getFrench(), "french2");
 
         }
     }
