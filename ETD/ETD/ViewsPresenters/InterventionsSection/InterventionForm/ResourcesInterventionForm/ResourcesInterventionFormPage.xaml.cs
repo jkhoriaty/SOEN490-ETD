@@ -29,7 +29,6 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.ResourcesInt
 		private Dictionary<String, TextBox[]> informationMap = new Dictionary<String, TextBox[]>();
 		private List<Button> movingButtons = new List<Button>();
 		private List<Button> arrivalButtons = new List<Button>();
-        private Team team;
 		private int addResourcesOffset = 0;
         private bool changed;
 
@@ -256,8 +255,9 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.ResourcesInt
 			}
 			DateTime arrival = DateTime.Now;
 			arrival = arrival.Date + new TimeSpan(arrivalhh, arrivalmm, 0);
-            Team foundTeam = team.getTeamObject(Team.Text.ToString());
-			intervention.setResources(position, new Resource(Resource.Text, foundTeam, moving, arrival));
+			intervention.getResources().ElementAt(position).setResourceName(Resource.Text);
+			intervention.getResources().ElementAt(position).setMoving(moving);
+			intervention.getResources().ElementAt(position).setArrival(arrival);
 		}
 
 		private void Moving_Click(object sender, RoutedEventArgs e)
@@ -362,23 +362,25 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.ResourcesInt
 
         private void FillForm()
         {
-            Resource[] resources = intervention.getResources();
-
-            for (int i = 0; i < resources.Length; i++)
+			int position = 1;
+			foreach (Resource resource in intervention.getResources())
             {
-                int j = i + 1;
-                if (resources[i] != null)
-                {
-                    //UpdateResource(index - 1, movingMap["Moving" + index][0], movingMap["Moving" + index][1], arrivalMap["Arrival" + index][0], arrivalMap["Arrival" + index][1], informationMap["Moving" + index][1], informationMap["Moving" + index][0]);
-                    informationMap["Moving" + j][1].Text = resources[i].getResourceName();
-                    informationMap["Moving" + j][0].Text = resources[i].getTeamObject().ToString();
-                    DateTime moving = resources[i].getMovingTime();
-                    movingMap["Moving" + j][0].Text = (moving.Hour != 0) ? moving.Hour.ToString() : "hh";
-                    movingMap["Moving" + j][1].Text = (moving.Minute != 0) ? moving.Minute.ToString() : "00";
-                    DateTime arrival = resources[i].getArrivalTime();
-                    arrivalMap["Arrival" + j][0].Text = (arrival.Hour != 0) ? arrival.Hour.ToString() : "hh";
-                    arrivalMap["Arrival" + j][1].Text = (arrival.Minute != 0) ? arrival.Minute.ToString() : "00";
-                }
+				informationMap["Moving" + position][1].IsEnabled = true;
+
+                //UpdateResource(index - 1, movingMap["Moving" + index][0], movingMap["Moving" + index][1], arrivalMap["Arrival" + index][0], arrivalMap["Arrival" + index][1], informationMap["Moving" + index][1], informationMap["Moving" + index][0]);
+				if (informationMap["Moving" + position][1].Text.Equals(""))
+				{
+					informationMap["Moving" + position][1].Text = resource.getResourceName();
+				}
+                informationMap["Moving" + position][0].Text = resource.getTeam().getName();
+                DateTime moving = resource.getMovingTime();
+                movingMap["Moving" + position][0].Text = (moving.Hour != 0) ? moving.Hour.ToString() : "hh";
+                movingMap["Moving" + position][1].Text = (moving.Minute != 0) ? moving.Minute.ToString() : "00";
+                DateTime arrival = resource.getArrivalTime();
+                arrivalMap["Arrival" + position][0].Text = (arrival.Hour != 0) ? arrival.Hour.ToString() : "hh";
+                arrivalMap["Arrival" + position][1].Text = (arrival.Minute != 0) ? arrival.Minute.ToString() : "00";
+
+				position++;
             }
         }
 	}

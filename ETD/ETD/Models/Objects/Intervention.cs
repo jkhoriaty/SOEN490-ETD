@@ -21,7 +21,6 @@ namespace ETD.Models.Objects
 		private static List<Intervention> completedInterventionList = new List<Intervention>();
 
 		private int interventionNumber;
-		private List<Team> interveningTeamList;
 
         private DateTime timeOfCall;
         private String callerName;
@@ -34,7 +33,7 @@ namespace ETD.Models.Objects
 		private String chiefComplaint;
 		private String otherChiefComplaint;
 
-        private Resource[] resources;
+        private List<Resource> resourceList;
 
 		private ABC abc;
 
@@ -56,8 +55,7 @@ namespace ETD.Models.Objects
 
         public Intervention()
         {
-            this.interveningTeamList = new List<Team>();
-            this.resources = new Resource[10];
+            this.resourceList = new List<Resource>();
             this.interventionNumber = ++lastIntervention;
             this.timeOfCall = DateTime.Now;
             this.additionalInfo = new InterventionAdditionalInfo[10];
@@ -85,21 +83,35 @@ namespace ETD.Models.Objects
 			return completedInterventionList;
 		}
 
-		public void AddTeam(Team team)
+		public void AddInterveningTeam(Team team)
 		{
-			interveningTeamList.Add(team);
+			resourceList.Add(new Resource(team));
 			InstanceModifiedNotification();
 		}
 
-		public void RemoveTeam(Team team)
+		public void RemoveInterveningTeam(Team team)
 		{
-			interveningTeamList.Remove(team);
+			foreach(Resource resource in resourceList)
+			{
+				if(resource.getTeam() == team)
+				{
+					resource.setIntervening(false);
+				}
+			}
 			InstanceModifiedNotification();
 		}
 
 		public List<Team> getInterveningTeamList()
 		{
-			return interveningTeamList;
+			List<Team> interveningTeams = new List<Team>();
+			foreach(Resource resource in resourceList)
+			{
+				if(resource.getIntervening() == true)
+				{
+					interveningTeams.Add(resource.getTeam());
+				}
+			}
+			return interveningTeams;
         }
 
         public void setInterventionNumber(int interventionNumber)
@@ -199,19 +211,14 @@ namespace ETD.Models.Objects
 			return otherChiefComplaint;
 		}
 
-		public void AddResource(Resource resource)
+		/*public void setResource(int position, Resource resource)
 		{
-			resources[this.position++] = resource;
-		}
+			resources[position] = resource;
+		}*/
 
-        public void setResources(int position, Resource resource)
+		public List<Resource> getResources()
 		{
-            resources[position] = resource;
-		}
-
-		public Resource[] getResources()
-		{
-			return resources;
+			return resourceList;
 		}
 
 		public void setABC(ABC abc)

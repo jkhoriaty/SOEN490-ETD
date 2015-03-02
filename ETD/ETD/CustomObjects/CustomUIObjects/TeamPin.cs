@@ -142,7 +142,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 				}
 				else //Remove team from intervention
 				{
-					interventionPin.getIntervention().RemoveTeam(team);
+					interventionPin.getIntervention().RemoveInterveningTeam(team);
 					team.setStatus("unavailable");
 
 					//If it was the last team on that intervention and it has been removed, force redrawing of the map so that the InterventionContainer is removed
@@ -169,9 +169,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 			if(fixedPin.IsOfType("InterventionPin") && SufficientOverlap(fixedPin))
 			{
 				interventionPin = (InterventionPin)fixedPin;
-				//interventionPin.getIntervention().AddTeam(team);
-				Resource resource = new Resource("", team, DateTime.Now);
-				interventionPin.getIntervention().AddResource(resource);
+				interventionPin.getIntervention().AddInterveningTeam(team);
 				return true;
 			}
 

@@ -114,7 +114,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
 				DateTime endTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, hh, mm, DateTime.Now.Second);
 				int offset = (int)DateTime.Now.Subtract(endTime).TotalMinutes;
                 
-                Resource[] resources = this.intervention.getResources();
+                List<Resource> resources = this.intervention.getResources();
                             
                 /*for (int i = 0; i < TeamsSection.TeamForm.TeamFormPage.activeTeamsList.Count; i++)
                 {

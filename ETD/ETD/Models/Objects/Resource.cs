@@ -13,14 +13,24 @@ namespace ETD.Models.Objects
     {
         private String resourceName;
         private Team team;
+		private bool intervening;
         private DateTime moving;
         private DateTime arrival;
 
-        public Resource(String resourceName, Team team, DateTime moving)
+		public Resource(String resourceName, Team team, bool intervening, DateTime moving, DateTime arrival)
+		{
+			this.resourceName = resourceName;
+			this.team = team;
+			this.intervening = intervening;
+			this.moving = moving;
+			this.arrival = arrival;
+		}
+
+        public Resource(Team team)
         {
-            this.resourceName = resourceName;
             this.team = team;
-            this.moving = moving;  
+			this.intervening = true;
+			this.moving = DateTime.Now;
         }
 
         public String getResourceName()
@@ -28,10 +38,30 @@ namespace ETD.Models.Objects
             return resourceName;
         }
 
-        public Team getTeamObject()
+		public void setResourceName(string resourceName)
+		{
+			this.resourceName = resourceName;
+		}
+
+        public Team getTeam()
         {
             return team;
         }
+
+		public bool getIntervening()
+		{
+			return intervening;
+		}
+
+		public void setIntervening(bool intervening)
+		{
+			this.intervening = intervening;
+		}
+
+		public void setMoving(DateTime moving)
+		{
+			this.moving = moving;
+		}
 
         public DateTime getMovingTime()
         {
