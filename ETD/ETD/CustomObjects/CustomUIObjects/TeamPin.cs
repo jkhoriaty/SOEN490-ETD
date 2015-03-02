@@ -119,7 +119,8 @@ namespace ETD.CustomObjects.CustomUIObjects
 				}
 				else
 				{
-					//TODO connect to hook to set team as "In position" on the intervention
+					//Set team as "In position" on the intervention
+					interventionPin.getIntervention().InterveningTeamArrived(team);
 				}
 			}
 		}

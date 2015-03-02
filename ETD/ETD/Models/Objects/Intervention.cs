@@ -51,7 +51,6 @@ namespace ETD.Models.Objects
         private String ambulanceCompany;
         private String ambulanceVehicle;
         private DateTime ambulanceArrivalTime;
-        private int position;
 
         public Intervention()
         {
@@ -60,7 +59,6 @@ namespace ETD.Models.Objects
             this.timeOfCall = DateTime.Now;
             this.additionalInfo = new InterventionAdditionalInfo[10];
             this.abc = new ABC();
-            this.position = 0;
 
             activeInterventionList.Add(this);
             ClassModifiedNotification(typeof(Intervention));
@@ -113,6 +111,18 @@ namespace ETD.Models.Objects
 			}
 			return interveningTeams;
         }
+
+		public void InterveningTeamArrived(Team team)
+		{
+			foreach (Resource resource in resourceList)
+			{
+				if (resource.getTeam() == team)
+				{
+					resource.setArrival(DateTime.Now);
+					InstanceModifiedNotification();
+				}
+			}
+		}
 
         public void setInterventionNumber(int interventionNumber)
         {
@@ -216,7 +226,7 @@ namespace ETD.Models.Objects
 			resources[position] = resource;
 		}*/
 
-		public List<Resource> getResources()
+		public List<Resource> getResourceList()
 		{
 			return resourceList;
 		}

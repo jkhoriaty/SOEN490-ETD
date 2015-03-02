@@ -255,9 +255,9 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.ResourcesInt
 			}
 			DateTime arrival = DateTime.Now;
 			arrival = arrival.Date + new TimeSpan(arrivalhh, arrivalmm, 0);
-			intervention.getResources().ElementAt(position).setResourceName(Resource.Text);
-			intervention.getResources().ElementAt(position).setMoving(moving);
-			intervention.getResources().ElementAt(position).setArrival(arrival);
+			intervention.getResourceList().ElementAt(position).setResourceName(Resource.Text);
+			intervention.getResourceList().ElementAt(position).setMoving(moving);
+			intervention.getResourceList().ElementAt(position).setArrival(arrival);
 		}
 
 		private void Moving_Click(object sender, RoutedEventArgs e)
@@ -363,7 +363,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.ResourcesInt
         private void FillForm()
         {
 			int position = 1;
-			foreach (Resource resource in intervention.getResources())
+			foreach (Resource resource in intervention.getResourceList())
             {
 				informationMap["Moving" + position][1].IsEnabled = true;
 
