@@ -16,7 +16,6 @@ namespace ETD_UnitTest
             Random randomName = new Random();
             MainWindow mw = new MainWindow();
             MapSectionPage mapSection = new MapSectionPage(mw);
-            int teamSize = 3;
             Team b = new Team("Bob");
             DateTime departure = new DateTime(2014, 11, 20);
             TeamMember MemberA = new TeamMember("John", Trainings.firstResponder, departure);
