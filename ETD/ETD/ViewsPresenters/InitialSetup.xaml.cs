@@ -32,7 +32,7 @@ namespace ETD.ViewsPresenters
 
         private void Submit_Click(object sender, RoutedEventArgs e)
         {
-            if(isFormValid())
+            if(IsFormValid()) //if the form is valid, create an instance of mainwindow
             {                
                 ETD.Models.Objects.Operation initInfo = new ETD.Models.Objects.Operation(operationName.Text, acronym.Text, shiftStart, shiftEnd, dispatcherName.Text);
                 
@@ -42,28 +42,34 @@ namespace ETD.ViewsPresenters
             }
         }
 
-        internal void text_enter(object sender, RoutedEventArgs e)
+        internal void Text_Enter(object sender, RoutedEventArgs e)
         {
             TextBox box = sender as TextBox;
             if (((box.Text) == "hh") || ((box.Text) == "mm"))
-            box.Clear();
+			{ 
+				box.Clear();
+			}
         }
 
-        internal void text_fillhh(object sender, RoutedEventArgs e)
+        internal void Text_Fillhh(object sender, RoutedEventArgs e) //re-fill box if user hasnt entered hours
         {
             TextBox box = sender as TextBox;
             if (string.IsNullOrWhiteSpace(box.Text))
+			{ 
                 box.Text = "hh";
+			}
         }
 
-        internal void text_fillmm(object sender, RoutedEventArgs e)
+        internal void Text_Fillmm(object sender, RoutedEventArgs e) //re-fill minute box if user hasn't entered minutes
         {
             TextBox box = sender as TextBox;
             if (string.IsNullOrWhiteSpace(box.Text))
-            box.Text = "mm";
+			{ 
+				box.Text = "mm";
+			}
         }
 
-        private Boolean isFormValid()
+        private Boolean IsFormValid() //checks if the user submitted valid values in the form
         {
             //operation name 
             

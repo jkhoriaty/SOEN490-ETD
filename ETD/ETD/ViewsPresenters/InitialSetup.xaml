@@ -26,15 +26,15 @@
             <DatePicker Grid.Row="2" Grid.Column="1" Name="shiftStartDate" />
             <Label x:Uid="Label_ShiftStartTime" Grid.Row="3" Grid.Column="0" Content="{x:Static properties:Resources.Label_ShiftStartTime}" />
             <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal">
-                <TextBox HorizontalContentAlignment="Center" Name="shiftStartTimehh" Width="30" MaxLength="2" GotFocus="text_enter" LostFocus="text_fillhh">hh</TextBox>
-                <TextBox HorizontalContentAlignment="Center" Name="shiftStartTimemm" Width="30" MaxLength="2" GotFocus="text_enter" LostFocus="text_fillmm">mm</TextBox>
+                <TextBox HorizontalContentAlignment="Center" Name="shiftStartTimehh" Width="30" MaxLength="2" GotFocus="Text_Enter" LostFocus="Text_Fillhh">hh</TextBox>
+                <TextBox HorizontalContentAlignment="Center" Name="shiftStartTimemm" Width="30" MaxLength="2" GotFocus="Text_Enter" LostFocus="Text_Fillmm">mm</TextBox>
             </StackPanel>
             <Label x:Uid="Label_ShiftEndDate" Grid.Row="4" Grid.Column="0" Content="{x:Static properties:Resources.Label_ShiftEndDate}" />
             <DatePicker Grid.Row="4" Grid.Column="1" Name="shiftEndDate" />
             <Label x:Uid="Label_ShiftEndTime" Grid.Row="5" Grid.Column="0" Content="{x:Static properties:Resources.Label_ShiftEndTime}" />
             <StackPanel Grid.Row="5" Grid.Column="1" Orientation="Horizontal">
-                <TextBox HorizontalContentAlignment="Center" Name="shiftEndTimehh" Width="30" MaxLength="2" GotFocus="text_enter" LostFocus="text_fillhh">hh</TextBox>
-                <TextBox HorizontalContentAlignment="Center" Name="shiftEndTimemm" Width="30" MaxLength="2" GotFocus="text_enter" LostFocus="text_fillmm">mm</TextBox>
+                <TextBox HorizontalContentAlignment="Center" Name="shiftEndTimehh" Width="30" MaxLength="2" GotFocus="Text_Enter" LostFocus="Text_Fillhh">hh</TextBox>
+                <TextBox HorizontalContentAlignment="Center" Name="shiftEndTimemm" Width="30" MaxLength="2" GotFocus="Text_Enter" LostFocus="Text_Fillmm">mm</TextBox>
             </StackPanel>
             <Label x:Uid="Label_DispatcherName" Grid.Row="6" Grid.Column="0" Content="{x:Static properties:Resources.Label_DispatcherName}" />
             <TextBox Grid.Row="6" Grid.Column="1" Name="dispatcherName" />
