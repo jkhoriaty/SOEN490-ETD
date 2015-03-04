@@ -55,6 +55,8 @@
   </Choose>
   <ItemGroup>
     <Compile Include="IntegrationTest\TeamUITest.cs" />
+    <Compile Include="IntegrationTest\EquipmentUITest.cs" />
+    <Compile Include="IntegrationTest\InterventionUITest.cs" />
     <Compile Include="ModelsObjectsTest\InterventionTest.cs" />
     <Compile Include="ModelsObjectsTest\TeamTest.cs" />
     <Compile Include="ModelsObjectsTest\ResourceTest.cs" />

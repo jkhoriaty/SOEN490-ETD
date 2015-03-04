@@ -15,7 +15,7 @@ using System.Windows.Controls;
 
 namespace ETD.CustomObjects.CustomUIObjects
 {
-	class EquipmentPin : Pin
+	public class EquipmentPin : Pin
 	{
 		internal static int size = 30;//Sets the size of the equipment icon
 
