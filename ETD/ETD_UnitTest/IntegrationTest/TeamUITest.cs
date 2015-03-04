@@ -2,7 +2,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ETD.Models;
 using ETD.ViewsPresenters.MapSection;
-using ETD.ViewsPresenters.MapSection.PinManagement;
 using ETD.ViewsPresenters;
 using ETD.Models.Objects;
 using ETD.CustomObjects.CustomUIObjects;
