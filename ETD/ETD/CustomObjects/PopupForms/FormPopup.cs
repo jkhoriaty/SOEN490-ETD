@@ -15,6 +15,7 @@ namespace ETD.CustomObjects.PopupForms
 	{
 		private static MainWindow mainWindow;
 
+        //Used to display additional information about the operation such as registered volounteers and special requests.
 		public FormPopup(Page page)
 		{
 			this.AllowsTransparency = true;
@@ -23,7 +24,6 @@ namespace ETD.CustomObjects.PopupForms
 			this.StaysOpen = false;
 			this.IsOpen = true;
 			this.Focus();
-			//this.LostFocus += mainWindow.PopupLostFocus;
 
 			Border border = new Border();
 			border.BorderThickness = new Thickness(1);
@@ -38,6 +38,7 @@ namespace ETD.CustomObjects.PopupForms
 			border.Child = frame;
 		}
 
+        //Set the main window as the master window
 		public static void RegisterMainWindow(MainWindow root)
 		{
 			mainWindow = root;

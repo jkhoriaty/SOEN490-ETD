@@ -11,12 +11,14 @@ namespace ETD.Models.Objects
     /// </summary>
     public class Resource
     {
+        //Variables used for a resource
         private String resourceName;
         private Team team;
 		private bool intervening;
         private DateTime moving;
         private DateTime arrival;
 
+        //Creates a new resource
 		public Resource(String resourceName, Team team, bool intervening, DateTime moving, DateTime arrival)
 		{
 			this.resourceName = resourceName;
@@ -26,6 +28,7 @@ namespace ETD.Models.Objects
 			this.arrival = arrival;
 		}
 
+        //Creates a new resource
         public Resource(Team team)
         {
             this.team = team;
@@ -33,49 +36,63 @@ namespace ETD.Models.Objects
 			this.moving = DateTime.Now;
         }
 
+        //Accessors
+
+        //Returns the resource's name
         public String getResourceName()
         {
             return resourceName;
         }
 
-		public void setResourceName(string resourceName)
-		{
-			this.resourceName = resourceName;
-		}
-
+        //Returns the team assigned to the resource
         public Team getTeam()
         {
             return team;
         }
 
-		public bool getIntervening()
+        //Checks if the resource is being used
+        public bool getIntervening()
 		{
 			return intervening;
 		}
 
-		public void setIntervening(bool intervening)
-		{
-			this.intervening = intervening;
-		}
-
-		public void setMoving(DateTime moving)
-		{
-			this.moving = moving;
-		}
-
+        //Returns the time it took for a resource to reach the destination point
         public DateTime getMovingTime()
         {
             return moving;
         }
 
-        public void setArrival(DateTime arrival)
-        {
-            this.arrival = arrival;
-        }
-
+        //Returns the time of arrival of a resource
         public DateTime getArrivalTime()
         {
             return arrival;
+        }
+
+        //Returns the resource's name
+		public void setResourceName(String resourceName)
+		{
+			this.resourceName = resourceName;
+		}
+
+    
+        //Mutators
+
+        //Sets the resource as currently in use
+		public void setIntervening(bool intervening)
+		{
+			this.intervening = intervening;
+		}
+
+        //Sets the resource was currently moving
+		public void setMoving(DateTime moving)
+		{
+			this.moving = moving;
+		}
+
+        //Sets the resource's time of arrival
+        public void setArrival(DateTime arrival)
+        {
+            this.arrival = arrival;
         }
     }
 }

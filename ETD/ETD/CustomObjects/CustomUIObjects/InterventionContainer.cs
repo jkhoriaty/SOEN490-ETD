@@ -47,7 +47,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 			}
 			this.Width = columns * TeamPin.size;
 
-			//Pla
+			//Places a border around the intervention pin
 			setBorderPosition(interventionPin.getX(), interventionPin.getY());
 
 			double Y = interventionPin.getY() + (InterventionPin.size/2) + (TeamPin.size/2);

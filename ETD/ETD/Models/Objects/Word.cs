@@ -2,39 +2,49 @@
 
 namespace ETD.Models.Objects
 {
-    // Class containing the multilingual equivalent of a word. One string variable per language.
-    // Can be expanded by adding more.
+    /* Class containing the multilingual equivalent of a word. One string variable per language.
+     Can be expanded by adding more.*/
+
     public class Word
     {
-        private String fr; // French version of a word.
+        private String french; // French version of a word.
 
-        private String en; // English version of a word.
+        private String english; // English version of a word.
         
-        public Word(String f, String e)
+        public Word(String fr, String eng)
         {
-            this.fr = f;
-            this.en = e;
+            this.french = fr;
+            this.english = eng;
         }
 
-        public void setFrench(string f)
-        {
-            this.fr = f;
-        }
+        //Accessors
 
+        //Returns french words
         public String getFrench()
         {
-            return this.fr;
+            return this.french;
         }
 
-        public void setEnglish(string e)
-        {
-            this.en = e;
-        }
 
+        //Returns english words
         public String getEnglish()
         {
-            return this.en;
+            return this.english;
         }
-        
+
+        //Mutators
+
+        //Sets the french word equivalent for the passed string
+        public void setFrench(String fr)
+        {
+            this.french = fr;
+        }
+
+        //Sets the english word for the passed string
+        public void setEnglish(String eng)
+        {
+            this.english = eng;
+        }
+
     }
 }

@@ -36,15 +36,20 @@ namespace ETD.ViewsPresenters
 	/// </summary>
     public partial class MainWindow : Observer
 	{
+        //Page variables 
 		private TeamsSectionPage teamsSection;
 		private MapSectionPage mapSection;
 		private InterventionSectionPage interventionsSection;
-        private AdditionalInfoPage AIPmapSection;
-        private ScheduleSectionPage ScheduleSection;
-        private FollowUpSectionForm FollowupSection = new FollowUpSectionForm();
-        private FormPopup FollowUpSectionFormPopupContainer;
+        private AdditionalInfoPage mapModificationSection;
+        private ScheduleSectionPage scheduleSection;
 
-        private bool isdrawing = false;
+        //Forms used by the popup method
+        private FollowUpSectionForm followupSection = new FollowUpSectionForm();
+        private FormPopup followupSectionFormPopupContainer;
+
+        private bool isdrawing = false;//Used to add map modifications
+
+        //Variables used when resizing the window
 		private double previousWidth;
 		private double previousHeight;
 
@@ -53,21 +58,20 @@ namespace ETD.ViewsPresenters
 
 		public MainWindow()
 		{
-            //ETD.Properties.Resources.Culture = new CultureInfo("fr-CA");
+
 			InitializeComponent();
-			FormPopup.RegisterMainWindow(this);
-            AIPmapSection = new AdditionalInfoPage(this);
+            FormPopup.RegisterMainWindow(this);//Register main window as the master window, used for  displaying popups
+            mapModificationSection = new AdditionalInfoPage(this);
 			teamsSection = new TeamsSectionPage(this);
 			mapSection = new MapSectionPage(this);
 			interventionsSection = new InterventionSectionPage(this);
-            //ScheduleSection = new ScheduleSectionPage(this);
 
 			previousWidth = MapSection.ActualWidth;
 			previousHeight = MapSection.ActualHeight;
 
-            //Populating the AI section
+            //Populating the Map modification section
             Frame AIFrame = new Frame();
-            AIFrame.Content = AIPmapSection;
+            AIFrame.Content = mapModificationSection;
             AIPSection.Child = AIFrame;
             
 
@@ -86,11 +90,7 @@ namespace ETD.ViewsPresenters
 			interventionsFrame.Content = interventionsSection;
 			InterventionsSection.Child = interventionsFrame;
 
-            //Populating the Schedule section
-            /*Frame ScheduleFrame = new Frame();
-            ScheduleFrame.Content = ScheduleSection;
-            MapSection.Child = ScheduleFrame;*/
-
+            //Start the transmission of the dispatcher's gps position
 			dispatcherTimer.Tick += new EventHandler(RefreshGPSPositions);
 			dispatcherTimer.Interval += new TimeSpan(0, 0, 5);
 			dispatcherTimer.Start();
@@ -102,11 +102,10 @@ namespace ETD.ViewsPresenters
 			UpdateRegistered();
 		}
 
-
         //window closed
         public void WindowClosed(object sender, System.EventArgs e)
         {
-            TechnicalServices.saveMap(AIPmapSection);
+            TechnicalServices.saveMap(mapModificationSection);
         }
          
 		//Window size or state changed - Adjusting the team section height
@@ -136,7 +135,7 @@ namespace ETD.ViewsPresenters
 				System.IO.FileInfo File = new System.IO.FileInfo(openFileDialog.FileName);
 				coloredImage = new BitmapImage(new Uri(openFileDialog.FileName));
 
-                AIPmapSection.SetMap(coloredImage);
+                mapModificationSection.SetMap(coloredImage);
 			}
 		}
 
@@ -154,11 +153,6 @@ namespace ETD.ViewsPresenters
 			}
 		}
 
-		//Add equipment to team
-		public void AddTeamEquipment(Equipment equip, String teamName)
-		{
-			//teamsSection.AddTeamEquipment(equip, teamName);
-		}
 
         //Change intervention deadlines
 		private void ChangeDeadlines(object sender, RoutedEventArgs e)
@@ -201,67 +195,67 @@ namespace ETD.ViewsPresenters
             {
                 if (mi!=null && mi.IsSelected )
                 {
-                    AIPmapSection.createMapModificationPin("" + mi.Name);
+                    mapModificationSection.createMapModificationPin("" + mi.Name);
                     isdrawing = false;
                 }
             }  
         }
 
      
-        //switch between Regular mode and Edit mode
+        //Switch between Regular mode and Edit mode
         private void ModeChange(object sender, RoutedEventArgs e)
 		{
 			ComboBoxItem item = sender as ComboBoxItem;
 			ComboBox parent = modeCB;
             foreach (ComboBoxItem mi in parent.Items)
             {
-                if (mi.Content.Equals(ETD.Properties.Resources.ComboBoxItem_RegularMode) && (mi.IsSelected))
+                if (mi.Content.Equals(ETD.Properties.Resources.ComboBoxItem_RegularMode) && (mi.IsSelected))//lock the map modification section
                 {
                     AI.Visibility = Visibility.Collapsed;
-                    AIPmapSection.IsEnabled = false;
+                    mapModificationSection.IsEnabled = false;
                     mapSection.IsEnabled = true;
                 }
-                else if (mi.Content.Equals(ETD.Properties.Resources.ComboBoxItem_EditMode) && (mi.IsSelected))
+                else if (mi.Content.Equals(ETD.Properties.Resources.ComboBoxItem_EditMode) && (mi.IsSelected))//lock the map section
                 {
                     AI.Visibility = Visibility.Visible;
-                    AIPmapSection.IsEnabled = true;
+                    mapModificationSection.IsEnabled = true;
                     mapSection.IsEnabled = false;
                 }
             }  
 		}
 
+        //Add a new resource to the intervention section
 		internal void AddResource(String teamName, String interventionName)
 		{
 			interventionsSection.AddResource(teamName, interventionName);
 		}
 
+        //Report an approximate arrival time of resource
 		internal void ReportArrival(String teamName, String interventionName)
 		{
 			interventionsSection.ReportArrival(teamName, interventionName);
 		}
 
+        //Set resource arrival time
         internal void ReportArrived(string interventionName, int rowNumber)
         {
             mapSection.ReportArrived(interventionName, rowNumber);
         }
-        
-        /*internal void UpdateSectors()
-        {
-            ScheduleSection.UpdateSectors();
-        }*/
-        
+
+        //Recovering the fields default text if left empty
 		public void PopupLostFocus(object sender, EventArgs e)
 		{
 			Popup popup = (Popup)sender;
 			popup.IsOpen = false;
 		}
 
+        //Display GPS position
 		private void ShowGPSLocations(object sender, RoutedEventArgs e)
 		{
 			UpdateRegistered().Wait();
 			Dispatcher.Invoke(() =>
 			{
-				//new FormPopup(this, new RegisteredVolunteersForm(registeredVolunteers));
+				
 			});
 			newRegisteredCTR.Content = "0";
 		}
@@ -278,7 +272,7 @@ namespace ETD.ViewsPresenters
         //Displays follow up section page
         private void ShowFollowUpSection(object sender, RoutedEventArgs e)
         {
-            FollowUpSectionFormPopupContainer = new FormPopup(FollowupSection);
+            followupSectionFormPopupContainer = new FormPopup(followupSection);
         }
 
 		//Interpret the servers return
@@ -331,6 +325,7 @@ namespace ETD.ViewsPresenters
 			});
 		}
 
+        //Update button content when switching language
         public void Update()
         {
             

@@ -1,6 +1,5 @@
 ﻿using ETD.Models.Objects;
 using ETD.Models.ArchitecturalObjects;
-using ETD.ViewsPresenters.MapSection.PinManagement;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,19 +26,15 @@ namespace ETD.ViewsPresenters.MapSection
 		private bool pinDragInProgress;
 		private Pin draggedPin;
 
-        ImageBrush imgbrush;
         internal String zoomLevel = "100%";
 
-        double mouseX;
-        double mouseY;
-        double TTX;
-        double TTY;
-
+        //Creates a map section page
 		public MapSectionPage(MainWindow mainWindow)
 		{
 			InitializeComponent();
 			this.mainWindow = mainWindow;
 
+            //Registers itself to the list of observers
 			Observable.RegisterClassObserver(typeof(Team), this);
 			Observable.RegisterClassObserver(typeof(Intervention), this);
 			Observable.RegisterClassObserver(typeof(Equipment), this);
@@ -165,75 +160,5 @@ namespace ETD.ViewsPresenters.MapSection
 				}
 			}*/
         }
-
-		/*
-		//Upon right click store mouse position to know where to zoom
-        private void Map_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            var mousePos = e.GetPosition(Canvas_map);
-            mouseX = mousePos.X;
-            mouseY = mousePos.Y;
-        }
-		
-
-		public void Zoom_Click(object sender, EventArgs e)
-        {
-            MenuItem mi = (MenuItem)sender;
-            zoomLevel = (String)mi.Header;
-            switch(zoomLevel)
-            {
-                case "100%":
-                    ScaleMap(1);
-                    break;
-                case "120%":
-                    ScaleMap(1.2);
-                    break;
-                case "140%":
-                    ScaleMap(1.4);
-                    break;
-                case "160%":
-                    ScaleMap(1.6);
-                    break;
-                case "180%":
-                    ScaleMap(1.8);
-                    break;
-                case "200%":
-                    ScaleMap(2);
-                    break;
-            }
-        }
-		
-		public void ScaleMapDefault()
-        {
-            ScaleTransform ST = new ScaleTransform();
-            ST.ScaleX = 1;
-            ST.ScaleY = 1;
-            imgbrush.RelativeTransform = ST;
-
-            TranslateTransform TT;
-
-            TT = new TranslateTransform(-TTX, -TTY);
-            imgbrush.Transform = TT;
-        }
-
-        public void ScaleMap(double ratio)
-        {
-            ScaleMapDefault();
-            if (ratio != 1)
-            {
-                ScaleTransform ST = new ScaleTransform();
-                ST.ScaleX = ratio;
-                ST.ScaleY = ratio;
-                imgbrush.RelativeTransform = ST;
-
-                TranslateTransform TT;
-
-                TTX = -mouseX * ratio + Canvas_map.ActualWidth / 2;
-				TTY = -mouseY * ratio + Canvas_map.ActualHeight / 2;
-
-                TT = new TranslateTransform(TTX, TTY);
-                imgbrush.Transform = TT;
-            }
-        }*/
 	}
 }

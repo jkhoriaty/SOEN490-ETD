@@ -11,6 +11,7 @@ namespace ETD.CustomObjects.PopupForms
 {
 	class RegisteredVolunteersForm : Grid
 	{
+        //Creates a page containing the list of registered volounteers for an operation
 		public RegisteredVolunteersForm(Dictionary<String, String> registeredVolunteers)
 		{
 			ColumnDefinition ColumnDefinition1 = new ColumnDefinition();
@@ -20,6 +21,7 @@ namespace ETD.CustomObjects.PopupForms
 			ColumnDefinition2.Width = new GridLength(100);
 			this.ColumnDefinitions.Add(ColumnDefinition2);
 
+            //If there are no registered volunteers, display a warning message
 			if(registeredVolunteers.Count == 0)
 			{
 				MessageBox.Show("Warning");

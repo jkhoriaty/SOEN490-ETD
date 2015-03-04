@@ -88,7 +88,7 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamInfo
                 equipmentStackPanel.Children.Add(imageRectangle);*/
 
                 EquipmentIcon equip = new EquipmentIcon(team, this, 27, eq);
-                equip.SetImage(TechnicalServices.getImage(eq.getEquipmentType()));
+                equip.setImage(TechnicalServices.getImage(eq.getEquipmentType()));
                 equipmentStackPanel.Children.Add(equip);
 
             }
@@ -121,8 +121,8 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamInfo
             populateInfo();*/
 
             EquipmentIcon equip = (EquipmentIcon)sender;
-            Team relatedTeam = equip.GetTeam();
-            Equipment relatedEquipment = equip.GetEquip();
+            Team relatedTeam = equip.getTeam();
+            Equipment relatedEquipment = equip.getEquip();
 
             relatedTeam.RemoveEquipment(relatedEquipment);
         }

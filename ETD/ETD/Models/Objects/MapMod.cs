@@ -10,14 +10,17 @@ namespace ETD.Models.Objects
     /// <summary>
     /// Map Model Object
     /// </summary>
+   
+    //Mapmofidication items
     public enum MapMods { camp, circle, line, ramp, rectangle, square, stairs, text };
 
     public class MapMod : Observable
     {
-        private static List<MapMod> mapModList = new List<MapMod>();
+        private static List<MapMod> mapModList = new List<MapMod>();//Contains a list of map modification objects
 
         private MapMods mapModType;
 
+        //Creates a map modification object
         public MapMod(String name)
        {
            mapModType = (MapMods)Enum.Parse(typeof(MapMods), name);
@@ -25,13 +28,15 @@ namespace ETD.Models.Objects
            ClassModifiedNotification(typeof(MapMod));
        }
 
-        //getters
+        //Accessors
 
+        //Returns the type of the map modification
         public MapMods getMapModType()
         {
             return mapModType;
         }
 
+        //Returns the list of map modification objects
         public static List<MapMod> getMapModList()
         {
             return mapModList;

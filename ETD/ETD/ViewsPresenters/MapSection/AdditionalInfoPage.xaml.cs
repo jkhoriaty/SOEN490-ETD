@@ -1,6 +1,5 @@
 ﻿using ETD.Models.Objects;
 using ETD.Models.ArchitecturalObjects;
-using ETD.ViewsPresenters.MapSection.PinManagement;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,22 +22,23 @@ namespace ETD.ViewsPresenters.MapSection
 	public partial class AdditionalInfoPage : Page, Observer
 	{
 		MainWindow mainWindow;
-        ImageBrush imgbrush;
-        private bool isMapLoaded= false;
+        ImageBrush imgbrush;//Used for loading the map
+        private bool isMapLoaded= false;//Used to check if a map was loaded
 
-        // Drawing variables
+        // Drawing lines variables
         private bool IsDrawing = false;
         private System.Windows.Point NewPt1, NewPt2;
         private List<Line> Lines = new List<Line>();
         private Line newline;
         private bool ContainsLine = false;
 
-        //variables for drawing shapes
-        private List<object> objectList = new List<object>();
+        //Drawing shapes variables
+        private List<object> objectList = new List<object>();//Contains the list of added map modification items
         private System.Windows.Shapes.Shape mapModObject;
         private int _startX, _startY;
         private String mapModName;
 
+        //Creates a new Additional map information page
         public AdditionalInfoPage(MainWindow mainWindow)
 		{
 			InitializeComponent();
@@ -69,6 +69,7 @@ namespace ETD.ViewsPresenters.MapSection
             return isMapLoaded;
         }
 		
+        //Get the current position of the mouse on the screen when the left mouse button is clicked
         internal void DrawingStart(object sender, MouseButtonEventArgs e)
         {
             IsDrawing = true;
@@ -79,6 +80,7 @@ namespace ETD.ViewsPresenters.MapSection
 
         }
 
+        //Set the map modification object type
         internal void setMapModObjectType()
         {
             if (mapModName.Equals("rectangle"))
@@ -107,8 +109,10 @@ namespace ETD.ViewsPresenters.MapSection
             }
         }
 
+        //The selected map modification item is drawn on the map when the left mouse button is released
         internal void DrawingMove(object sender, MouseEventArgs e)
         {
+            //Draws the selected map modification option
             if (mapModName.Equals("line"))
             {
                 newline = new Line();
@@ -125,8 +129,7 @@ namespace ETD.ViewsPresenters.MapSection
 
             else if (!mapModName.Equals("line"))
             {
-                //The width of the shape should be the maximum between the start x-position and current x-position minus
-                //the minimum of start x-position and current x-position
+                //The width of the shape is the the maximum between the start x-position and current x-position minus the minimum of start x-position and current x-position
                 int width = Convert.ToInt32(Math.Max(_startX, NewPt2.X) - Math.Min(_startX, NewPt2.X));
 
                 //For the height value, it's basically the same thing as above, but with the y-values:
@@ -152,10 +155,7 @@ namespace ETD.ViewsPresenters.MapSection
             }
         }
 
-        public void delete(object sender, MouseButtonEventArgs e)
-        {
-
-        }
+        //When the mouse is moving, get its position to create the selected map modification item
         internal void Move(object sender, MouseEventArgs e)
         {
 
@@ -164,15 +164,13 @@ namespace ETD.ViewsPresenters.MapSection
                 NewPt2 = e.GetPosition(AdditionalMap);
             }
 
-            //false, no element
-            bool isEmpty = !objectList.Any();
+            bool isEmpty = !objectList.Any();//Checks if the list of map modification object is empty
 
-            //erase line when the escape key is pressed and the mouse is moving
+            //When the mouse is moving and the escape key is pressed, remove the most recently added map modification item
             if (Keyboard.IsKeyDown(Key.Escape) && !isEmpty)
             {
                 try
                 {
-                    // MessageBox.Show(objectList.Count.ToString());
                     int objectIndex = objectList.Count - 1;
                     AdditionalMap.Children.RemoveAt(objectList.Count);
 
@@ -186,7 +184,7 @@ namespace ETD.ViewsPresenters.MapSection
                     }
 
                 }
-                catch (Exception ee)
+                catch (Exception ex)
                 {
 
                 }
@@ -194,16 +192,16 @@ namespace ETD.ViewsPresenters.MapSection
             }
         }
 
-   
-
+        //Stopped drawing 
         internal void DrawingStop(object sender, MouseButtonEventArgs e)
         {
             IsDrawing = false;
         }
 
+        //Change the map modification color on mouse scroll
         internal void ChangeColor(object sender, MouseWheelEventArgs e)
         {
-            //scroll up
+            //scroll up to new color
             if (e.Delta > 0)
             {
 
@@ -230,6 +228,7 @@ namespace ETD.ViewsPresenters.MapSection
             }
         }
 
+        //Creates a new Map modification item
         public void createMapModificationPin(String AI)
         {
             mapModName = AI;
@@ -243,26 +242,10 @@ namespace ETD.ViewsPresenters.MapSection
             }
         }
 
+        //Notifies its observables
         public void Update()
         {
-            //Pin.ClearAllPins(AdditionalMap); //Clearing all pins from the additional info map
-
-            /*Creating all normal map modification pins and adding the map to their previous or a new position 
-            foreach (MapMod mapModification in MapMod.getMapModList())
-            {
-                MapModPin mapModPin = new MapModPin(mapModification, this);
-                AdditionalMap.Children.Add(mapModPin);
-
-                //Setting the pin to it's previous position, if it exists, or to the top-left corner
-                double[] previousPinPosition = Pin.getPreviousPinPosition(mapModification);
-                if (previousPinPosition == null)
-                {
-                    previousPinPosition = new double[] { AdditionalMap.ActualWidth - (mapModPin.Width / 2), (mapModPin.Height / 2) }; //Top-right corner
-                }
-                mapModPin.setPinPosition(previousPinPosition[0], previousPinPosition[1]);
-            }
-            
-            
+            /*    
             //Creating all map line modification pins and adding the map to their previous or a new position 
             foreach (MapMod mapLineModification in MapMod.getMapModList())
             {
@@ -277,10 +260,8 @@ namespace ETD.ViewsPresenters.MapSection
                         previousPinPosition = new double[] { this.ActualWidth - (mapLinePin.Width / 2), (mapLinePin.Height / 2) }; //Top-right corner
                     }
                     mapLinePin.setPinPosition(previousPinPosition[0], previousPinPosition[1]);
-                
-             
-            }
-            
+ 
+            }  
             */
         }
 

@@ -20,16 +20,12 @@ namespace ETD.CustomObjects.CustomUIObjects
 		internal static List<Pin> pinList = new List<Pin>(); //Contains all pins, used for collision detection
 		private static Dictionary<object, double[]> pinPositionList = new Dictionary<object, double[]>(); //Used to recover previous pin position after Update callback that clears the whole map
 
-		private static Pin draggedPin;
+		private static Pin draggedPin;//Pin used for collision detection, detects whether a pin is currently being moved on the map
 
-		internal object relatedObject;
-		internal MapSectionPage mapSection;
-
-        private MapMod mapMod;
-        private AdditionalInfoPage aiSection;
-        private double p1;
-        private double p2;
-        private int size;
+		internal object relatedObject;//Creates an object used for position recovery
+		
+        internal MapSectionPage mapSection;//Page on which team, intervention and equipment pins can be added
+        private AdditionalInfoPage aiSection;//Page on which map modification pins can be added
 
 		//Creating regular pin
 		public Pin(object relatedObject, MapSectionPage mapSection, int size) : base()
@@ -58,7 +54,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 			pinList.Add(this);
 		}
 
-        //Line items
+        //Creating map modification pins
         public Pin(object relatedAiObject, AdditionalInfoPage aiSection, double width, double height)
         {
             //Setting relatedObject, used for position recovery
@@ -68,6 +64,7 @@ namespace ETD.CustomObjects.CustomUIObjects
             this.Width = width;
             this.Height = height;
 
+            //Initializing grid attibutes
             this.MouseLeftButtonDown += new MouseButtonEventHandler(aiSection.DrawingStart);
             this.MouseLeftButtonUp += new MouseButtonEventHandler(aiSection.DrawingStop);
             this.MouseUp += new MouseButtonEventHandler(aiSection.DrawingMove);
@@ -79,10 +76,12 @@ namespace ETD.CustomObjects.CustomUIObjects
             pinList.Add(this);
         }
     
+        //Returns the list of pins
 		public static List<Pin> getPinList()
 		{
 			return pinList;
 		}
+
 		//Setting the pins' background image to the passed image
 		public void setImage(BitmapImage image)
 		{
@@ -95,6 +94,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 			this.Children.Add(imageRectangle);
 		}
 
+        //Returns the type of the pin
 		public object getRelatedObject()
 		{
 			return relatedObject;

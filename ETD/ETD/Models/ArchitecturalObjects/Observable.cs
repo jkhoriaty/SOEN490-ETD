@@ -19,6 +19,7 @@ namespace ETD.Models.ArchitecturalObjects
 		//The following section is for observers to register to an object, basically listen for creation and deletion of instances of that object
 		private static Dictionary<Type, List<Observer>> classObserverList = new Dictionary<Type, List<Observer>>(); //Where the Type is the class that the observer is interested in
 
+        //Add the new observer to the list of observers
 		public static void RegisterClassObserver(Type type, Observer observer)
 		{
 			if (!classObserverList.ContainsKey(type))
@@ -28,6 +29,7 @@ namespace ETD.Models.ArchitecturalObjects
 			classObserverList[type].Add(observer);
 		}
 
+        //If a change of state occured, notify every registered observers
 		protected static void ClassModifiedNotification(Type type)
 		{
 			if(classObserverList.ContainsKey(type))
@@ -39,6 +41,7 @@ namespace ETD.Models.ArchitecturalObjects
 			}
 		}
 
+        //Remove an observer from the list of observers
 		public static void DeregisterClassObserver(Type type, Observer observer)
 		{
 			classObserverList[type].Remove(observer);

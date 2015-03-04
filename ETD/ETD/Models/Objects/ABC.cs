@@ -12,6 +12,7 @@ namespace ETD.Models.Objects
 
     public class ABC
     {
+        //ABC objects
         private String consciousness;
         private bool disoriented;
         private String airways;
@@ -20,6 +21,7 @@ namespace ETD.Models.Objects
         private String circulation;
         private int circulationFrequency;
 
+        //Set default values for all ABC objects
         public ABC()
         {
             this.consciousness = "notSet";
@@ -31,6 +33,7 @@ namespace ETD.Models.Objects
             this.circulationFrequency = -1;
         }
 
+        //User inputs default values for all ABC objects
         public ABC(String consciousness, bool disoriented, String airways, String breathing, int breathingFrequency, String circulation, int circulationFrequency)
         {
             this.consciousness = consciousness;
@@ -42,14 +45,10 @@ namespace ETD.Models.Objects
             this.circulationFrequency = circulationFrequency;
         }
 
+        //Accessor methods
         public String getConsciousness()
         {
             return this.consciousness;
-        }
-
-        public void setConsciousness(String consciousness)
-        {
-            this.consciousness = consciousness;
         }
 
         public bool getDisoriented()
@@ -57,19 +56,9 @@ namespace ETD.Models.Objects
             return this.disoriented;
         }
 
-        public void setDisoriented(bool disoriented)
-        {
-            this.disoriented = disoriented;
-        }
-
         public String getAirways()
         {
             return this.airways;
-        }
-
-        public void setAirways(String airways)
-        {
-            this.airways = airways;
         }
 
         public String getBreathing()
@@ -77,19 +66,9 @@ namespace ETD.Models.Objects
             return this.breathing;
         }
 
-        public void setBreathing(String breathing)
-        {
-            this.breathing = breathing;
-        }
-
         public int getBreathingFrequency()
         {
             return this.breathingFrequency;
-        }
-
-        public void setBreathingFrequency(int breathingFrequency)
-        {
-            this.breathingFrequency = breathingFrequency;
         }
 
         public String getCirculation()
@@ -97,16 +76,42 @@ namespace ETD.Models.Objects
             return this.circulation;
         }
 
-
-        public void setCirculation(String circulation)
-        {
-            this.circulation = circulation;
-        }
         public int getCirculationFrequency()
         {
             return this.circulationFrequency;
         }
 
+        //Mutator methods
+        public void setConsciousness(String consciousness)
+        {
+            this.consciousness = consciousness;
+        }
+
+        public void setDisoriented(bool disoriented)
+        {
+            this.disoriented = disoriented;
+        }
+
+        public void setAirways(String airways)
+        {
+            this.airways = airways;
+        }
+
+        public void setBreathing(String breathing)
+        {
+            this.breathing = breathing;
+        }
+
+        public void setBreathingFrequency(int breathingFrequency)
+        {
+            this.breathingFrequency = breathingFrequency;
+        }
+
+        public void setCirculation(String circulation)
+        {
+            this.circulation = circulation;
+        }
+    
         public void setCirculationFrequency(int circulationFrequency)
         {
             this.circulationFrequency = circulationFrequency;
