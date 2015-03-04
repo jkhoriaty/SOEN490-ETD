@@ -135,7 +135,7 @@ namespace ETD.ViewsPresenters
 				System.IO.FileInfo File = new System.IO.FileInfo(openFileDialog.FileName);
 				coloredImage = new BitmapImage(new Uri(openFileDialog.FileName));
 
-                mapModificationSection.SetMap(coloredImage);
+                mapModificationSection.setMap(coloredImage);
 			}
 		}
 
@@ -195,7 +195,7 @@ namespace ETD.ViewsPresenters
             {
                 if (mi!=null && mi.IsSelected )
                 {
-                    mapModificationSection.createMapModificationPin("" + mi.Name);
+                    mapModificationSection.CreateMapModificationPin("" + mi.Name);
                     isdrawing = false;
                 }
             }  

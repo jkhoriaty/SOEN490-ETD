@@ -48,7 +48,7 @@ namespace ETD.ViewsPresenters.MapSection
 		}
 
         //Loading the map 
-		public void SetMap(BitmapImage coloredImage)
+		public void setMap(BitmapImage coloredImage)
 		{
             //Making the picture grayscale
             FormatConvertedBitmap grayBitmap = new FormatConvertedBitmap();
@@ -229,7 +229,7 @@ namespace ETD.ViewsPresenters.MapSection
         }
 
         //Creates a new Map modification item
-        public void createMapModificationPin(String AI)
+        public void CreateMapModificationPin(String AI)
         {
             mapModName = AI;
             MapMod mapMod = new MapMod("line");
