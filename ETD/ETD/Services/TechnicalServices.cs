@@ -17,6 +17,7 @@ namespace ETD.Services
 	{
 		private static String AbsolutePath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase);
 
+        //Sets the image path for each equipment 
 		private static Dictionary<Equipments, String> equipmentRelPath = new Dictionary<Equipments, String>
 		{
 			{Equipments.ambulanceCart, @"\Icons\AmbulanceCart.png"},
@@ -27,6 +28,7 @@ namespace ETD.Services
 			{Equipments.wheelchair, @"\Icons\WheelChair.png"}
 		};
 
+        //Sets the image path for each training levels 
 		private static Dictionary<Trainings, String> trainingRelPath = new Dictionary<Trainings, String>
 		{
 			{Trainings.firstAid, @"\Icons\First_Aid3.png"},
@@ -34,6 +36,7 @@ namespace ETD.Services
 			{Trainings.medicine, @"\Icons\Medicine.png"}
 		};
 
+        //Sets the image path for the status of the first aid pin
 		private static Dictionary<Statuses, String> firstAidPinRelPath = new Dictionary<Statuses, String>
 		{
 			{Statuses.available, @"\Icons\FirstAid_available.png"},
@@ -42,6 +45,7 @@ namespace ETD.Services
 			{Statuses.unavailable, @"\Icons\FirstAid_unavailable.png"}
 		};
 
+        //Sets the image path for the status of the first responder pin
 		private static Dictionary<Statuses, String> firstResponderPinRelPath = new Dictionary<Statuses, String>
 		{
 			{Statuses.available, @"\Icons\FirstResponder_available.png"},
@@ -50,6 +54,7 @@ namespace ETD.Services
 			{Statuses.unavailable, @"\Icons\FirstResponder_unavailable.png"}
 		};
 
+        //Sets the image path for the status of the medicine pin
 		private static Dictionary<Statuses, String> medicinePinRelPath = new Dictionary<Statuses, String>
 		{
 			{Statuses.available, @"\Icons\Medicine_available.png"},
@@ -58,12 +63,13 @@ namespace ETD.Services
 			{Statuses.unavailable, @"\Icons\Medicine_unavailable.png"}
 		};
 
+        //Sets the image path for each intervntion
 		private static Dictionary<String, String> generalRelPath = new Dictionary<String, String>
 		{
 			{"intervention", @"\Icons\InterventionIcon.png"}
 		};
 
-
+        //Sets the image path for each map modification 
         private static Dictionary<MapMods, String> MapModPath = new Dictionary<MapMods, String>
         {
             {MapMods.camp, @"\Icons\camp.png"},
@@ -75,6 +81,7 @@ namespace ETD.Services
             {MapMods.ramp, @"\Icons\Ramp.png"}
         };
 
+        //Sets the acronym for a team
 		private static Dictionary<String, String> alphabet = new Dictionary<String, String>
 		{
 			{"A", "Alpha"},
@@ -106,21 +113,21 @@ namespace ETD.Services
 		};
 
     
-		//Return image of equipment
+		//Returns the equipment image
 		public static BitmapImage getImage(Equipments equipment)
 		{
 			BitmapImage img = new BitmapImage(new Uri(AbsolutePath + equipmentRelPath[equipment]));
 			return img;
 		}
 
-		//Return image of training
+		//Returns the level of training image
 		public static BitmapImage getImage(Trainings training)
 		{
 			BitmapImage img = new BitmapImage(new Uri(AbsolutePath + trainingRelPath[training]));
 			return img;
 		}
 
-        //Return image of the team
+        //Returns the team's image
 		public static BitmapImage getImage(Team team, Statuses status)
 		{
 			Trainings teamTraining = team.getHighestLevelOfTraining();
@@ -142,14 +149,14 @@ namespace ETD.Services
 			return img;
 		}
 
-        //get image of the intervention pin
+        //Returns the image of the intervention pin
 		public static BitmapImage getImage(String type)
 		{
 			BitmapImage img = new BitmapImage(new Uri(AbsolutePath + generalRelPath[type]));
 			return img;
 		}
 
-		//Return the full word of the phonetic letter
+		//Returns the full word of the phonetic letter
 		public static String getPhoneticLetter(String letter)
 		{
 			if(alphabet.ContainsKey(letter))
@@ -162,13 +169,14 @@ namespace ETD.Services
 			}
 		}
 
-        //Return image of the map modification item
+        //Returns the image of the map modification item
         public static BitmapImage getImage(MapMods AI)
         {
             BitmapImage img = new BitmapImage(new Uri(AbsolutePath + MapModPath[AI]));
             return img;
         }
 
+        //The map is saved when the window is closed
         public static void saveMap(AdditionalInfoPage AIPmapSection)
         {
             /* Absolute path doesnt work..
@@ -177,7 +185,7 @@ namespace ETD.Services
              * */
 
             Rect AIbounds = VisualTreeHelper.GetDescendantBounds(AIPmapSection);
-            var AIFileName = "AIInfo_" + DateTime.Now.ToString("yyyyMMdd_hhss");
+            var AIFileName = "MapModification_" + DateTime.Now.ToString("yyyyMMdd_hhss");
             var desktopFolder = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             double dpi = 96d;
             bool isMapLoaded = AIPmapSection.MapLoaded();
@@ -203,7 +211,7 @@ namespace ETD.Services
                     System.IO.MemoryStream ms = new System.IO.MemoryStream();
                     pngEncoder.Save(ms);
                     ms.Close();
-                    System.IO.File.WriteAllBytes(desktopFolder + AIFileName + ".png", ms.ToArray());
+                    System.IO.File.WriteAllBytes(desktopFolder + AIFileName + ".png", ms.ToArray());//Save the modified map as an image 
                 }
                 catch (Exception err)
                 {

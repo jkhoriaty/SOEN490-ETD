@@ -10,8 +10,8 @@ namespace ETD.Services
 {
 	static class TextBoxHandler
 	{
-		private static Dictionary<TextBox, String> defaultTextboxContent = new Dictionary<TextBox, String>();
-		private static Dictionary<TextBox, String> alternativeTextboxContent = new Dictionary<TextBox, String>();
+		private static Dictionary<TextBox, String> defaultTextboxContent = new Dictionary<TextBox, String>();//Contains text box content 
+		private static Dictionary<TextBox, String> alternativeTextboxContent = new Dictionary<TextBox, String>();//Contains alternative text box content
 
 		//Focus: Textboxes - Clearing the fields upon focus if populated by the default text
 		public static void GotFocus(object sender, RoutedEventArgs e)

@@ -44,6 +44,7 @@ namespace ETD.Services
             }
         }
 
+        //Lookup french and english words in the vocabulary dictionary
         public string findWord(String id, String lang)
         {
             string value = "";

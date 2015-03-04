@@ -7,27 +7,30 @@ namespace ETD.Services
 {
     public class LanguageSelector : Observable 
     {
+        //List of available languages
         public enum Languages
         {
             English,
             French
         }
         
-        static private Languages currentLang = Languages.English;
+        static private Languages currentLanguage = Languages.English;//Default language set to english
         static private Vocabulary dictionary = new Vocabulary();
         static private List<Observer> observers = new List<Observer>();
 
+        //Returns the current language in use
         public static String getString(String n)
         {
-            String value = dictionary.findWord(n, currentLang.ToString());
+            String value = dictionary.findWord(n, currentLanguage.ToString());
             return value;
         }
 
-        public static void switchLanguage(Languages lang)
+        //Switch betwen language
+        public static void switchLanguage(Languages language)
         {
-            if (!lang.Equals(currentLang))
+            if (!language.Equals(currentLanguage))
             {
-                currentLang = lang;
+                currentLanguage = language;
                 Observable.ClassModifiedNotification(typeof(LanguageSelector));
             }
         }
