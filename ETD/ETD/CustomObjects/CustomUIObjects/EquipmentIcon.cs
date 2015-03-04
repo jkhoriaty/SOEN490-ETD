@@ -33,7 +33,7 @@ namespace ETD.CustomObjects.CustomUIObjects
         }
 
         //Sets the image that is show in this icon
-        public void SetImage(BitmapImage image)
+        public void setImage(BitmapImage image)
         {
             Rectangle imageRectangle = new Rectangle();
             imageRectangle.Width = this.Width;
@@ -45,12 +45,12 @@ namespace ETD.CustomObjects.CustomUIObjects
         }
 
         //Basic accessor, returns the team the equipment is associated with
-        public Team GetTeam()
+        public Team getTeam()
         {
             return this.team;
         }
         //Basic accessor, returns the equipment the team is associated with
-        public Equipment GetEquip()
+        public Equipment getEquip()
         {
             return this.equip;
         }
