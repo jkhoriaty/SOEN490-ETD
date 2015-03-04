@@ -15,7 +15,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 {
 	public class InterventionPin : Pin, Observer
 	{
-		internal static int size = 40;
+		internal static int size = 40;//Sets the size of the intervention icon
 
 		private Intervention intervention;
 		private InterventionContainer interventionContainer;

@@ -22,270 +22,221 @@ namespace ETD.CustomObjects.PopupForms
     /// </summary>
     public partial class FollowUpSectionForm : Page
     {
-        private FollowUpSectionForm FollowUpPage;
-        private Request FollowUpInfo;
-        private Dictionary<String, TextBox[]> TimeStampMap = new Dictionary<String, TextBox[]>();
-        private Dictionary<String, TextBox> ClientMap = new Dictionary<String, TextBox>();
-        private Dictionary<String, TextBox> RecipientMap = new Dictionary<String, TextBox>();
-        private Dictionary<String, TextBox> RequestMap = new Dictionary<String, TextBox>();
-        private Dictionary<String, TextBox> HandledByMap = new Dictionary<String, TextBox>();
-        private Dictionary<String, TextBox[]> SuiviTimeStampMap = new Dictionary<String, TextBox[]>();
-        private Dictionary<String, TextBox[]> FaitTimeStampMap = new Dictionary<String, TextBox[]>();
-        //private Dictionary<String, String> TimesEquivalentKeyMap = new Dictionary<String, String>();
+        private FollowUpSectionForm followupPage;
+        private Request followupInfo;
+        private Dictionary<String, TextBox[]> timestampMap = new Dictionary<String, TextBox[]>();//Contains all time stamps
+        private Dictionary<String, TextBox> clientMap = new Dictionary<String, TextBox>();//Contains all clients
+        private Dictionary<String, TextBox> recipientMap = new Dictionary<String, TextBox>();//Contains all Recipients
+        private Dictionary<String, TextBox> requestMap = new Dictionary<String, TextBox>();//Contains all request
+        private Dictionary<String, TextBox> handledbyMap = new Dictionary<String, TextBox>();//Contains all handledby
+        private Dictionary<String, TextBox[]> followupTimestampMap = new Dictionary<String, TextBox[]>();//Contains all follow up time stamps
+        private Dictionary<String, TextBox[]> completionTimestampMap = new Dictionary<String, TextBox[]>();//Contains all completion time stamps
 
-
-
+        //Create a follow up form containing a list of special requests made during the operation
         public FollowUpSectionForm()
         {
             InitializeComponent();
-            //this.FollowUpPage = FollowUpPage;
 
-            setupTimeMap();
+            // Adding textbox information to the appropriate list 
+            setupTimestampMap();
             setupClientMap();
             setupRecipientMap();
             setupRequestMap();
             setupHandledByMap();
-            setupSuiviTimeStampMap();
-            //setupTimesEquivalentKeyMap();
-            setupFaitTimeStampMap();
+            setupFollowupTimeStampMap();
+            setupCompletionTimeStampMap();
 
         }
 
-        private void setupTimeMap()
+        //Populating the list of time stamps
+        private void setupTimestampMap()
         {
-            TimeStampMap.Add("TimestampT1", TextBoxHandler.textboxArray(TimestamphhT1, TimestampmmT1));
-            TimeStampMap.Add("TimestampT2", TextBoxHandler.textboxArray(TimestamphhT2, TimestampmmT2));
-            TimeStampMap.Add("TimestampT3", TextBoxHandler.textboxArray(TimestamphhT3, TimestampmmT3));
-            TimeStampMap.Add("TimestampT4", TextBoxHandler.textboxArray(TimestamphhT4, TimestampmmT4));
-            TimeStampMap.Add("TimestampT5", TextBoxHandler.textboxArray(TimestamphhT5, TimestampmmT5));
-            TimeStampMap.Add("TimestampT6", TextBoxHandler.textboxArray(TimestamphhT6, TimestampmmT6));
-            TimeStampMap.Add("TimestampT7", TextBoxHandler.textboxArray(TimestamphhT7, TimestampmmT7));
-            TimeStampMap.Add("TimestampT8", TextBoxHandler.textboxArray(TimestamphhT8, TimestampmmT8));
-            TimeStampMap.Add("TimestampT9", TextBoxHandler.textboxArray(TimestamphhT9, TimestampmmT9));
-            TimeStampMap.Add("TimestampT10", TextBoxHandler.textboxArray(TimestamphhT10, TimestampmmT10));
+            timestampMap.Add("TimestampT1", TextBoxHandler.textboxArray(TimestamphhT1, TimestampmmT1));
+            timestampMap.Add("TimestampT2", TextBoxHandler.textboxArray(TimestamphhT2, TimestampmmT2));
+            timestampMap.Add("TimestampT3", TextBoxHandler.textboxArray(TimestamphhT3, TimestampmmT3));
+            timestampMap.Add("TimestampT4", TextBoxHandler.textboxArray(TimestamphhT4, TimestampmmT4));
+            timestampMap.Add("TimestampT5", TextBoxHandler.textboxArray(TimestamphhT5, TimestampmmT5));
+            timestampMap.Add("TimestampT6", TextBoxHandler.textboxArray(TimestamphhT6, TimestampmmT6));
+            timestampMap.Add("TimestampT7", TextBoxHandler.textboxArray(TimestamphhT7, TimestampmmT7));
+            timestampMap.Add("TimestampT8", TextBoxHandler.textboxArray(TimestamphhT8, TimestampmmT8));
+            timestampMap.Add("TimestampT9", TextBoxHandler.textboxArray(TimestamphhT9, TimestampmmT9));
+            timestampMap.Add("TimestampT10", TextBoxHandler.textboxArray(TimestamphhT10, TimestampmmT10));
         }
 
-   
+        //Populating the list of clients
         private void setupClientMap()
         {
-            ClientMap.Add("Client1", Client1);
-            ClientMap.Add("Client2", Client2);
-            ClientMap.Add("Client3", Client3);
-            ClientMap.Add("Client4", Client4);
-            ClientMap.Add("Client5", Client5);
-            ClientMap.Add("Client6", Client6);
-            ClientMap.Add("Client7", Client7);
-            ClientMap.Add("Client8", Client8);
-            ClientMap.Add("Client9", Client9);
-            ClientMap.Add("Client10", Client10);
+            clientMap.Add("Client1", Client1);
+            clientMap.Add("Client2", Client2);
+            clientMap.Add("Client3", Client3);
+            clientMap.Add("Client4", Client4);
+            clientMap.Add("Client5", Client5);
+            clientMap.Add("Client6", Client6);
+            clientMap.Add("Client7", Client7);
+            clientMap.Add("Client8", Client8);
+            clientMap.Add("Client9", Client9);
+            clientMap.Add("Client10", Client10);
 
         }
 
+        //Populating the list of recipients
         private void setupRecipientMap()
         {
-            RecipientMap.Add("Recipient1", Recipient1);
-            RecipientMap.Add("Recipient2", Recipient2);
-            RecipientMap.Add("Recipient3", Recipient3);
-            RecipientMap.Add("Recipient4", Recipient4);
-            RecipientMap.Add("Recipient5", Recipient5);
-            RecipientMap.Add("Recipient6", Recipient6);
-            RecipientMap.Add("Recipient7", Recipient7);
-            RecipientMap.Add("Recipient8", Recipient8);
-            RecipientMap.Add("Recipient9", Recipient9);
-            RecipientMap.Add("Recipient10", Recipient10);
+            recipientMap.Add("Recipient1", Recipient1);
+            recipientMap.Add("Recipient2", Recipient2);
+            recipientMap.Add("Recipient3", Recipient3);
+            recipientMap.Add("Recipient4", Recipient4);
+            recipientMap.Add("Recipient5", Recipient5);
+            recipientMap.Add("Recipient6", Recipient6);
+            recipientMap.Add("Recipient7", Recipient7);
+            recipientMap.Add("Recipient8", Recipient8);
+            recipientMap.Add("Recipient9", Recipient9);
+            recipientMap.Add("Recipient10", Recipient10);
         }
 
+        //Populating the list of requests
         private void setupRequestMap()
         {
-            RequestMap.Add("Request1", Request1);
-            RequestMap.Add("Request2", Request2);
-            RequestMap.Add("Request3", Request3);
-            RequestMap.Add("Request4", Request4);
-            RequestMap.Add("Request5", Request5);
-            RequestMap.Add("Request6", Request6);
-            RequestMap.Add("Request7", Request7);
-            RequestMap.Add("Request8", Request8);
-            RequestMap.Add("Request9", Request9);
-            RequestMap.Add("Request10", Request10);
+            requestMap.Add("Request1", Request1);
+            requestMap.Add("Request2", Request2);
+            requestMap.Add("Request3", Request3);
+            requestMap.Add("Request4", Request4);
+            requestMap.Add("Request5", Request5);
+            requestMap.Add("Request6", Request6);
+            requestMap.Add("Request7", Request7);
+            requestMap.Add("Request8", Request8);
+            requestMap.Add("Request9", Request9);
+            requestMap.Add("Request10", Request10);
         }
 
-
+        //Populating the list of handled by
         private void setupHandledByMap()
         {
-            HandledByMap.Add("HandledBy1", HandledBy1);
-            HandledByMap.Add("HandledBy2", HandledBy2);
-            HandledByMap.Add("HandledBy3", HandledBy3);
-            HandledByMap.Add("HandledBy4", HandledBy4);
-            HandledByMap.Add("HandledBy5", HandledBy5);
-            HandledByMap.Add("HandledBy6", HandledBy6);
-            HandledByMap.Add("HandledBy7", HandledBy7);
-            HandledByMap.Add("HandledBy8", HandledBy8);
-            HandledByMap.Add("HandledBy9", HandledBy9);
-            HandledByMap.Add("HandledBy10", HandledBy10);
+            handledbyMap.Add("HandledBy1", HandledBy1);
+            handledbyMap.Add("HandledBy2", HandledBy2);
+            handledbyMap.Add("HandledBy3", HandledBy3);
+            handledbyMap.Add("HandledBy4", HandledBy4);
+            handledbyMap.Add("HandledBy5", HandledBy5);
+            handledbyMap.Add("HandledBy6", HandledBy6);
+            handledbyMap.Add("HandledBy7", HandledBy7);
+            handledbyMap.Add("HandledBy8", HandledBy8);
+            handledbyMap.Add("HandledBy9", HandledBy9);
+            handledbyMap.Add("HandledBy10", HandledBy10);
         }
 
-        private void setupSuiviTimeStampMap()
+        //Populating the list of follow up time stamps
+        private void setupFollowupTimeStampMap()
         {
-            SuiviTimeStampMap.Add("Timestamps1", TextBoxHandler.textboxArray(Timestamphhs1, Timestampmms1));
-            SuiviTimeStampMap.Add("Timestamps2", TextBoxHandler.textboxArray(Timestamphhs2, Timestampmms2));
-            SuiviTimeStampMap.Add("Timestamps3", TextBoxHandler.textboxArray(Timestamphhs3, Timestampmms3));
-            SuiviTimeStampMap.Add("Timestamps4", TextBoxHandler.textboxArray(Timestamphhs4, Timestampmms4));
-            SuiviTimeStampMap.Add("Timestamps5", TextBoxHandler.textboxArray(Timestamphhs5, Timestampmms5));
-            SuiviTimeStampMap.Add("Timestamps6", TextBoxHandler.textboxArray(Timestamphhs6, Timestampmms6));
-            SuiviTimeStampMap.Add("Timestamps7", TextBoxHandler.textboxArray(Timestamphhs7, Timestampmms7));
-            SuiviTimeStampMap.Add("Timestamps8", TextBoxHandler.textboxArray(Timestamphhs8, Timestampmms8));
-            SuiviTimeStampMap.Add("Timestamps9", TextBoxHandler.textboxArray(Timestamphhs9, Timestampmms9));
-            SuiviTimeStampMap.Add("Timestamps10", TextBoxHandler.textboxArray(Timestamphhs10, Timestampmms10));
+            followupTimestampMap.Add("Timestamps1", TextBoxHandler.textboxArray(Timestamphhs1, Timestampmms1));
+            followupTimestampMap.Add("Timestamps2", TextBoxHandler.textboxArray(Timestamphhs2, Timestampmms2));
+            followupTimestampMap.Add("Timestamps3", TextBoxHandler.textboxArray(Timestamphhs3, Timestampmms3));
+            followupTimestampMap.Add("Timestamps4", TextBoxHandler.textboxArray(Timestamphhs4, Timestampmms4));
+            followupTimestampMap.Add("Timestamps5", TextBoxHandler.textboxArray(Timestamphhs5, Timestampmms5));
+            followupTimestampMap.Add("Timestamps6", TextBoxHandler.textboxArray(Timestamphhs6, Timestampmms6));
+            followupTimestampMap.Add("Timestamps7", TextBoxHandler.textboxArray(Timestamphhs7, Timestampmms7));
+            followupTimestampMap.Add("Timestamps8", TextBoxHandler.textboxArray(Timestamphhs8, Timestampmms8));
+            followupTimestampMap.Add("Timestamps9", TextBoxHandler.textboxArray(Timestamphhs9, Timestampmms9));
+            followupTimestampMap.Add("Timestamps10", TextBoxHandler.textboxArray(Timestamphhs10, Timestampmms10));
         }
 
-
-        private void setupFaitTimeStampMap()
+        //Populating the list of completion time stamps
+        private void setupCompletionTimeStampMap()
         {
-            FaitTimeStampMap.Add("Timestampf1", TextBoxHandler.textboxArray(Timestamphhf1, Timestampmmf1));
-            FaitTimeStampMap.Add("Timestampf2", TextBoxHandler.textboxArray(Timestamphhf2, Timestampmmf2));
-            FaitTimeStampMap.Add("Timestampf3", TextBoxHandler.textboxArray(Timestamphhf3, Timestampmmf3));
-            FaitTimeStampMap.Add("Timestampf4", TextBoxHandler.textboxArray(Timestamphhf4, Timestampmmf4));
-            FaitTimeStampMap.Add("Timestampf5", TextBoxHandler.textboxArray(Timestamphhf5, Timestampmmf5));
-            FaitTimeStampMap.Add("Timestampf6", TextBoxHandler.textboxArray(Timestamphhf6, Timestampmmf6));
-            FaitTimeStampMap.Add("Timestampf7", TextBoxHandler.textboxArray(Timestamphhf7, Timestampmmf7));
-            FaitTimeStampMap.Add("Timestampf8", TextBoxHandler.textboxArray(Timestamphhf8, Timestampmmf8));
-            FaitTimeStampMap.Add("Timestampf9", TextBoxHandler.textboxArray(Timestamphhf9, Timestampmmf9));
-            FaitTimeStampMap.Add("Timestampf10", TextBoxHandler.textboxArray(Timestamphhf10, Timestampmmf10));
+            completionTimestampMap.Add("Timestampf1", TextBoxHandler.textboxArray(Timestamphhf1, Timestampmmf1));
+            completionTimestampMap.Add("Timestampf2", TextBoxHandler.textboxArray(Timestamphhf2, Timestampmmf2));
+            completionTimestampMap.Add("Timestampf3", TextBoxHandler.textboxArray(Timestamphhf3, Timestampmmf3));
+            completionTimestampMap.Add("Timestampf4", TextBoxHandler.textboxArray(Timestamphhf4, Timestampmmf4));
+            completionTimestampMap.Add("Timestampf5", TextBoxHandler.textboxArray(Timestamphhf5, Timestampmmf5));
+            completionTimestampMap.Add("Timestampf6", TextBoxHandler.textboxArray(Timestamphhf6, Timestampmmf6));
+            completionTimestampMap.Add("Timestampf7", TextBoxHandler.textboxArray(Timestamphhf7, Timestampmmf7));
+            completionTimestampMap.Add("Timestampf8", TextBoxHandler.textboxArray(Timestamphhf8, Timestampmmf8));
+            completionTimestampMap.Add("Timestampf9", TextBoxHandler.textboxArray(Timestamphhf9, Timestampmmf9));
+            completionTimestampMap.Add("Timestampf10", TextBoxHandler.textboxArray(Timestamphhf10, Timestampmmf10));
         }
 
-        /*
-        private void setupTimesEquivalentKeyMap()
+        //Updating the time stamp information for the follow up and completion textbox
+        private void UpdateFollowUpInformation(int position, TextBox timestamphhtBox, TextBox timestampmmtBox, TextBox clientbox, TextBox requestBox, TextBox recipientBox, TextBox handledbyMapBox, 
+                                                 TextBox timestamphhsBox, TextBox timestampmmsBox, TextBox timestamphhfBox, TextBox timestampmmfBox)
         {
-            TimesEquivalentKeyMap.Add("Timestamps1", "Timestampf1");
-            TimesEquivalentKeyMap.Add("Timestamps2", "Timestampf2");
-            TimesEquivalentKeyMap.Add("Timestamps3", "Timestampf3");
-            TimesEquivalentKeyMap.Add("Timestamps4", "Timestampf4");
-            TimesEquivalentKeyMap.Add("Timestamps5", "Timestampf5");
-            TimesEquivalentKeyMap.Add("Timestamps6", "Timestampf6");
-            TimesEquivalentKeyMap.Add("Timestamps7", "Timestampf7");
-            TimesEquivalentKeyMap.Add("Timestamps8", "Timestampf8");
-            TimesEquivalentKeyMap.Add("Timestamps9", "Timestampf9");
-            TimesEquivalentKeyMap.Add("Timestamps10", "Timestampf10");
-        }
-        */
-
-        private void UpdateFollowUpInformation(int position, TextBox Clientbox, TextBox RequestBox, TextBox HandledByMapBox, 
-                                                 TextBox TimestamphhsBox, TextBox TimestampmmsBox, TextBox TimestamphhfBox, TextBox TimestampmmfBox)
-        {
-            //Suivi timestamp
+            //Set the follow up timestamp to 0
             int timestampshh = 0;
             int timestampsmm = 0;
 
-            //fait timestamp
+            //Set the completion timestamp to 0
             int timestampfhh = 0;
             int timestampfmm = 0;
 
-            if (!TimestamphhsBox.Text.Equals("hh") && !TimestampmmsBox.Text.Equals("mm"))
+            //Set Time timestamp to 0
+            int timestampThh = 0;
+            int timestampTmm = 0;
+
+            //Checks if the field is present on the form
+            if (!timestamphhsBox.Text.Equals("hh") && !timestampmmsBox.Text.Equals("mm"))
             {
-                timestampshh = int.Parse(TimestamphhsBox.Text);
-                timestampsmm = int.Parse(TimestampmmsBox.Text);
+                timestampshh = int.Parse(timestamphhsBox.Text);
+                timestampsmm = int.Parse(timestampmmsBox.Text);
             }
-            if (!TimestamphhfBox.Text.Equals("hh") && !TimestampmmfBox.Text.Equals("mm"))
+            if (!timestamphhfBox.Text.Equals("hh") && !timestampmmfBox.Text.Equals("mm"))
             {
-                timestampfhh = int.Parse(TimestamphhfBox.Text);
-                timestampfmm = int.Parse(TimestampmmfBox.Text);
+                timestampfhh = int.Parse(timestamphhfBox.Text);
+                timestampfmm = int.Parse(timestampmmfBox.Text);
             }
 
-            DateTime timestampSuivi = DateTime.Now;
-            DateTime timestampFait = DateTime.Now;
-            timestampSuivi = timestampSuivi.Date + new TimeSpan(timestampshh, timestampsmm, 0);
-            timestampFait = timestampFait.Date + new TimeSpan(timestampfhh, timestampfmm, 0);
+            if (!timestamphhtBox.Text.Equals("hh") && !timestampmmtBox.Text.Equals("mm"))
+            {
+                timestampThh = int.Parse(timestamphhtBox.Text);
+                timestampTmm = int.Parse(timestampmmtBox.Text);
+            }
 
-            FollowUpInfo.SetFollowUpInfo(position, new Request(Clientbox.Text, RequestBox.Text, HandledByMapBox.Text, timestampSuivi, timestampFait));
+            //Get the current time 
+            DateTime timestampFollowup = DateTime.Now;
+            DateTime timestampCompletion = DateTime.Now;
+            DateTime timestampTime = DateTime.Now;
+
+            //Set the follow up and completion time stamp to the current time
+            timestampFollowup = timestampFollowup.Date + new TimeSpan(timestampshh, timestampsmm, 0);
+            timestampCompletion = timestampCompletion.Date + new TimeSpan(timestampfhh, timestampfmm, 0);
+            followupInfo.setFollowupInfo(position, new Request(timestampTime, clientbox.Text, requestBox.Text, recipientBox.Text, handledbyMapBox.Text, timestampFollowup, timestampCompletion));
 
         }
 
-        public void PersistencyUpdate()
-        {
-            if (!Client1.Text.Equals(""))
-            {
-                UpdateFollowUpInformation(1, Client1, Request1, HandledBy1, Timestamphhs1, Timestampmms1, Timestamphhf1, Timestampmmf1);
-            }
-
-            if (!Client1.Text.Equals(""))
-            {
-                UpdateFollowUpInformation(2, Client2, Request2, HandledBy2, Timestamphhs2, Timestampmms2, Timestamphhf2, Timestampmmf2);
-            }
-
-            if (!Client1.Text.Equals(""))
-            {
-                UpdateFollowUpInformation(3, Client3, Request3, HandledBy3, Timestamphhs3, Timestampmms3, Timestamphhf3, Timestampmmf3);
-            }
-
-            if (!Client1.Text.Equals(""))
-            {
-                UpdateFollowUpInformation(4, Client4, Request4, HandledBy4, Timestamphhs4, Timestampmms4, Timestamphhf4, Timestampmmf4);
-            }
-
-            if (!Client1.Text.Equals(""))
-            {
-                UpdateFollowUpInformation(5, Client5, Request5, HandledBy5, Timestamphhs5, Timestampmms5, Timestamphhf5, Timestampmmf5);
-            }
-
-            if (!Client1.Text.Equals(""))
-            {
-                UpdateFollowUpInformation(6, Client6, Request6, HandledBy6, Timestamphhs6, Timestampmms6, Timestamphhf6, Timestampmmf6);
-            }
-
-            if (!Client1.Text.Equals(""))
-            {
-                UpdateFollowUpInformation(7, Client7, Request7, HandledBy7, Timestamphhs7, Timestampmms7, Timestamphhf7, Timestampmmf7);
-            }
-
-            if (!Client1.Text.Equals(""))
-            {
-                UpdateFollowUpInformation(8, Client8, Request8, HandledBy8, Timestamphhs8, Timestampmms8, Timestamphhf8, Timestampmmf8);
-            }
-
-            if (!Client1.Text.Equals(""))
-            {
-                UpdateFollowUpInformation(9, Client9, Request9, HandledBy9, Timestamphhs9, Timestampmms9, Timestamphhf9, Timestampmmf9);
-            }
-
-            if (!Client1.Text.Equals(""))
-            {
-                UpdateFollowUpInformation(10, Client10, Request10, HandledBy10, Timestamphhs10, Timestampmms10, Timestamphhf10, Timestampmmf10);
-            }
-
-        }
-
-
+        //Focus on either the client, recipient , request, handle by text box
         private void FollowUpInfo_GotFocus(object sender, RoutedEventArgs e)
         {
             TextBoxHandler.GotFocus(sender, e);
         }
 
+        //Focus on the follow up or completion time stamp text box
         private void TextBoxes_GotFocus(object sender, RoutedEventArgs e)
         {
             TextBoxHandler.GotFocus(sender, e);
         }
 
+        //Recovering the fields default text if left empty
         private void TextBoxes_LostFocus(object sender, RoutedEventArgs e)
         {
             TextBoxHandler.LostFocus(sender, e);
         }
 
+        //Sets the current hours and minutes in the passed TextBoxes
         public void TimeStampFait_Click(object sender, RoutedEventArgs e)
         {
             Button bt = (Button)sender;
-            TextBoxHandler.setNow(FaitTimeStampMap[bt.Name][0], FaitTimeStampMap[bt.Name][1]);
+            TextBoxHandler.setNow(completionTimestampMap[bt.Name][0], completionTimestampMap[bt.Name][1]);
         }
 
+        //Sets the current hours and minutes in the passed TextBoxes
         public void TimestampSuivi_Click(object sender, RoutedEventArgs e)
         {
             Button bt = (Button)sender;
-            TextBoxHandler.setNow(SuiviTimeStampMap[bt.Name][0], SuiviTimeStampMap[bt.Name][1]);
+            TextBoxHandler.setNow(followupTimestampMap[bt.Name][0], followupTimestampMap[bt.Name][1]);
         }
 
+        //Sets the current hours and minutes in the passed TextBoxes
         public void TimestampTime_Click(object sender, RoutedEventArgs e)
         {
             Button bt = (Button)sender;
-            TextBoxHandler.setNow(TimeStampMap[bt.Name][0], TimeStampMap[bt.Name][1]);
+            TextBoxHandler.setNow(timestampMap[bt.Name][0], timestampMap[bt.Name][1]);
         }
     }
 

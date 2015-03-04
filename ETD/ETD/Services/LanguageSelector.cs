@@ -1,33 +1,37 @@
 ﻿using ETD.Models.ArchitecturalObjects;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 
 namespace ETD.Services
 {
     public class LanguageSelector : Observable 
     {
+        //List of available languages
         public enum Languages
         {
             English,
             French
         }
+
+        private static readonly Dictionary<Languages, string> AvailableLanguages = new Dictionary<Languages, string>
+        {
+            { Languages.English, "en-CA" },
+            { Languages.French, "fr-CA" }
+        };
+
+        private static Languages currentLanguage = Languages.English;//Default language set to english
+        private static List<Observer> observers = new List<Observer>();
         
-        static private Languages currentLang = Languages.English;
-        static private Vocabulary dictionary = new Vocabulary();
-        static private List<Observer> observers = new List<Observer>();
 
-        public static String getString(String n)
+        //Switch betwen language
+        public static void switchLanguage(Languages language)
         {
-            String value = dictionary.findWord(n, currentLang.ToString());
-            return value;
-        }
-
-        public static void switchLanguage(Languages lang)
-        {
-            if (!lang.Equals(currentLang))
+            if (AvailableLanguages.ContainsKey(language) && !language.Equals(currentLanguage))
             {
-                currentLang = lang;
+                currentLanguage = language;
+                ETD.Properties.Resources.Culture = new CultureInfo(AvailableLanguages[language]);
                 Observable.ClassModifiedNotification(typeof(LanguageSelector));
             }
         }

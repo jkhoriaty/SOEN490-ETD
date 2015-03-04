@@ -13,8 +13,8 @@ namespace ETD_UnitTest
         {
             List<Request> requestList = Request.getRequestList();
             requestList.Clear();
-            Request rq = new Request("client", "request", "handle", DateTime.Now, DateTime.Now);
-            Request rp = new Request("client", "request", "handle", DateTime.Now, DateTime.Now);
+            Request rq = new Request(DateTime.Now,"client", "request","recipient", "handle", DateTime.Now, DateTime.Now);
+            Request rp = new Request(DateTime.Now, "client", "request", "recipient", "handle", DateTime.Now, DateTime.Now);
             Assert.AreEqual(requestList.Count, 2);
         }
 
@@ -24,8 +24,8 @@ namespace ETD_UnitTest
             Request[] fInfo;
             List<Request> requestList = Request.getRequestList();
             requestList.Clear();
-            Request rq = new Request("client", "request", "handle", DateTime.Now, DateTime.Now);
-            rq.SetFollowUpInfo(1, rq);
+            Request rq = new Request(DateTime.Now,"client", "request","recipient", "handle", DateTime.Now, DateTime.Now);
+            rq.setFollowupInfo(1, rq);
             fInfo = rq.getFollowUpInfo();
             Assert.AreEqual(fInfo[1], rq);
  

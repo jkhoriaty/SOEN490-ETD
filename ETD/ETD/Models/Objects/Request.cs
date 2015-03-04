@@ -12,39 +12,54 @@ namespace ETD.Models.Objects
 
     public class Request
     {
-		private static List<Request> requestList = new List<Request>();
+		private static List<Request> requestList = new List<Request>();//Contains a list of requests
 
-		private String Client;
+        //Variables used for a request
+		private String client;
 		private String request;
-		private String HandledBy;
-		private DateTime SuiviTimeStamp;
-		private DateTime FaitTimeStamp;
-		private Request[] followUpInfo = new Request[100];
+		private String handledby;
+        private String recipient;
+        private DateTime time;
+        private DateTime followupTimestampMap;
+		private DateTime completionTimestampMap;
+		private Request[] followupInfo = new Request[100];
 
-		public Request(String client,String Request,String HandledBy, DateTime SuiviTime, DateTime FaitTime)
+        //Creates a new request
+        public Request(DateTime time, String client, String request,String recipient, String handledby, DateTime followupTimestampMap, DateTime completionTimestampMap)
 		{
-			this.Client = client;
-            this.request = Request;
-			this.HandledBy = HandledBy;
-			this.SuiviTimeStamp = SuiviTime;
-			this.FaitTimeStamp = FaitTime;
+            this.time = time;
+            this.client = client;
+            this.request = request;
+            this.recipient = recipient;
+            this.handledby = handledby;
+            this.followupTimestampMap = followupTimestampMap;
+            this.completionTimestampMap = completionTimestampMap;
 
 			requestList.Add(this);
 		}
 
+        //Accessors
+
+        //Returns the list of requests
 		public static List<Request> getRequestList()
 		{
 			return requestList;
 		}
-
-		public void SetFollowUpInfo(int position, Request folUpinfo)
+        
+        //Returns the request's information
+	    public Request[] getFollowUpInfo()
 		{
-			followUpInfo[position] = folUpinfo;
+			return followupInfo;
 		}
 
-		public Request[] getFollowUpInfo()
+        //Mutators
+
+        //Sets the request's information
+		public void setFollowupInfo(int position, Request followupInfo)
 		{
-			return followUpInfo;
+            this.followupInfo[position] = followupInfo;
 		}
+
+	
 	}
 }

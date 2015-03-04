@@ -38,8 +38,8 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
         }
 
 		//Click: Add Member
-        private void AddMember_Click(object sender, RoutedEventArgs e)
-        {
+		private void AddMember_Click(object sender, RoutedEventArgs e)
+		{
 			switch (currentNumberOfMembers)
 			{
 				case 1:
@@ -80,38 +80,38 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 				DateTime dateNow = DateTime.Now;
 
 				//Create team
-                String team_name = teamName.Text;
-                if (team_name.Length == 1)
+                String teamNameStr = teamName.Text;
+				if (teamNameStr.Length == 1)
                 {
-                    team_name = team_name.ToUpper();
-                }		
-				Team team = new Team(team_name);
+					teamNameStr = teamNameStr.ToUpper();
+                }
+				Team team = new Team(teamNameStr);
 
 				//Create first member
-				String mem_1_name = teamMember1.Text;
-				DateTime mem_1_departure = CheckDepartureTime(new DateTime(dateNow.Year, dateNow.Month, dateNow.Day, int.Parse(departurehh1.Text), int.Parse(departuremm1.Text), dateNow.Second));
-				Trainings mem_1_lvlOfTraining = (Trainings)lvlOfTraining1.SelectedIndex;
-				TeamMember mem_1 = new TeamMember(mem_1_name, mem_1_lvlOfTraining, mem_1_departure);
+				String mem1Name = teamMember1.Text;
+				DateTime mem1Departure = CheckDepartureTime(new DateTime(dateNow.Year, dateNow.Month, dateNow.Day, int.Parse(departurehh1.Text), int.Parse(departuremm1.Text), dateNow.Second));
+				Trainings mem1LvlOfTraining = (Trainings)lvlOfTraining1.SelectedIndex;
+				TeamMember mem_1 = new TeamMember(mem1Name, mem1LvlOfTraining, mem1Departure);
 				team.AddMember(mem_1);
 
 				//Create second member
-				String mem_2_name = teamMember2.Text;
-				if (mem_2_name != ETD.Properties.Resources.TextBox_TeamMemberName)
+				String mem2Name = teamMember2.Text;
+				if (mem2Name != ETD.Properties.Resources.TextBox_TeamMemberName)
 				{
-					DateTime mem_2_departure = CheckDepartureTime(new DateTime(dateNow.Year, dateNow.Month, dateNow.Day, int.Parse(departurehh2.Text), int.Parse(departuremm2.Text), dateNow.Second));
-					Trainings mem_2_lvlOfTraining = (Trainings) lvlOfTraining2.SelectedIndex;
-					TeamMember mem_2 = new TeamMember(mem_2_name, mem_2_lvlOfTraining, mem_2_departure);
-					team.AddMember(mem_2);
+					DateTime mem2Departure = CheckDepartureTime(new DateTime(dateNow.Year, dateNow.Month, dateNow.Day, int.Parse(departurehh2.Text), int.Parse(departuremm2.Text), dateNow.Second));
+					Trainings mem2LvlOfTraining = (Trainings) lvlOfTraining2.SelectedIndex;
+					TeamMember mem2 = new TeamMember(mem2Name, mem2LvlOfTraining, mem2Departure);
+					team.AddMember(mem2);
 				}
 
 				//Create third member
-				String mem_3_name = teamMember3.Text;
-                if (mem_3_name != ETD.Properties.Resources.TextBox_TeamMemberName)
+				String mem3Name = teamMember3.Text;
+                if (mem3Name != ETD.Properties.Resources.TextBox_TeamMemberName)
 				{
-					DateTime mem_3_departure = CheckDepartureTime(new DateTime(dateNow.Year, dateNow.Month, dateNow.Day, int.Parse(departurehh3.Text), int.Parse(departuremm3.Text), dateNow.Second));
-					Trainings mem_3_lvlOfTraining = (Trainings)lvlOfTraining3.SelectedIndex;
-					TeamMember mem_3 = new TeamMember(mem_3_name, mem_3_lvlOfTraining, mem_3_departure);
-					team.AddMember(mem_3);
+					DateTime mem3Departure = CheckDepartureTime(new DateTime(dateNow.Year, dateNow.Month, dateNow.Day, int.Parse(departurehh3.Text), int.Parse(departuremm3.Text), dateNow.Second));
+					Trainings mem3LvlOfTraining = (Trainings)lvlOfTraining3.SelectedIndex;
+					TeamMember mem3 = new TeamMember(mem3Name, mem3LvlOfTraining, mem3Departure);
+					team.AddMember(mem3);
 				}
                
 				//Displaying the team on the main window

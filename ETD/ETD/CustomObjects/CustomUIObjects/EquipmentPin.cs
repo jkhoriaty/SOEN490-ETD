@@ -15,9 +15,9 @@ using System.Windows.Controls;
 
 namespace ETD.CustomObjects.CustomUIObjects
 {
-	class EquipmentPin : Pin
+	public class EquipmentPin : Pin
 	{
-		internal static int size = 30;
+		internal static int size = 30;//Sets the size of the equipment icon
 
 		private Equipment equipment;
 
@@ -44,7 +44,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 			Equipment.DeleteEquipment(equipment);
 		}
 
-		//Handle special collisions between a Equipment and another pin
+		//Handles special collisions between a Equipment and another pin
 		internal override bool HandleSpecialCollisions(Pin fixedPin)
 		{
 			//SpecialCollision: Equipment is dropped on a team with sufficient overlap, add the equipment to the team
@@ -52,11 +52,9 @@ namespace ETD.CustomObjects.CustomUIObjects
 			{
 				TeamPin teamPin = (TeamPin)fixedPin;
 				teamPin.getTeam().AddEquipment(equipment);
-                //MessageBox.Show(teamPin.getTeam().getName());
 				equipment.setAssigned(true);
 				return true;
 			}
-
 			//If there are no special conditions return false
 			return false;
 		}

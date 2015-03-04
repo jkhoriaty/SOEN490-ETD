@@ -11,51 +11,59 @@ namespace ETD.Models.Objects
     /// Equipment Model Object
     /// </summary>
 
+    //Equipment types
 	public enum Equipments {ambulanceCart, sittingCart, epipen, transportStretcher, mountedStretcher, wheelchair};
 
 	public class Equipment : Observable
     {
-		private static List<Equipment> equipmentList = new List<Equipment>();
+		private static List<Equipment> equipmentList = new List<Equipment>();//Contains a list of equipments
 
 		private Equipments equipmentType;
-		private bool assigned;
+		private bool assigned;//Used when checking if the equipment is assigned to any team
 
+        //Creates an equipment and notifies the list of observers
 		public Equipment(String name)
 		{
 			equipmentType = (Equipments)Enum.Parse(typeof(Equipments), name);
-			
 			equipmentList.Add(this);
 			ClassModifiedNotification(typeof(Equipment));
 		}
 
+        //Deletes an equipment and notifies the list of observers
 		public static void DeleteEquipment(Equipment equipment)
 		{
 			equipmentList.Remove(equipment);
 			ClassModifiedNotification(typeof(Equipment)); 
 		}
 
-		public void setAssigned(bool assigned)
+        //Checks if the equipment is assigned to a team
+		public bool IsAssigned()
 		{
-			this.assigned = assigned;
-			ClassModifiedNotification(typeof(Equipment));
+			return assigned;
 		}
 
-		/*
-		 * Getters
-		 */
+		//Accessors
+
+        //Returns the equipment type
 		public Equipments getEquipmentType()
 		{
 			return equipmentType;
 		}
 
+        //Return the list of equipments
 		public static List<Equipment> getEquipmentList()
 		{
 			return equipmentList;
 		}
 
-		public bool IsAssigned()
-		{
-			return assigned;
-		}
+        //Mutators
+
+        //Assign the the equipment to a team
+        public void setAssigned(bool assigned)
+        {
+            this.assigned = assigned;
+            ClassModifiedNotification(typeof(Equipment));
+        }
+
     }
 }

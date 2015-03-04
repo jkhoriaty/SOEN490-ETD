@@ -55,6 +55,8 @@
   </Choose>
   <ItemGroup>
     <Compile Include="IntegrationTest\TeamUITest.cs" />
+    <Compile Include="IntegrationTest\EquipmentUITest.cs" />
+    <Compile Include="IntegrationTest\InterventionUITest.cs" />
     <Compile Include="ModelsObjectsTest\InterventionTest.cs" />
     <Compile Include="ModelsObjectsTest\TeamTest.cs" />
     <Compile Include="ModelsObjectsTest\ResourceTest.cs" />
@@ -66,7 +68,6 @@
     <Compile Include="ModelsObjectsTest\MapModTest.cs" />
     <Compile Include="ModelsObjectsTest\OperationTest.cs" />
     <Compile Include="ModelsObjectsTest\RequestTest.cs" />
-    <Compile Include="ModelsObjectsTest\WordTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ETD\ETD.csproj">

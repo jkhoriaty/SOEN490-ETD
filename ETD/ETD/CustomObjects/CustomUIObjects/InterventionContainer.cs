@@ -47,14 +47,12 @@ namespace ETD.CustomObjects.CustomUIObjects
 			}
 			this.Width = columns * TeamPin.size;
 
-			//Placing the container at the appropriate place
+			//Places a border around the intervention pin
 			setBorderPosition(interventionPin.getX(), interventionPin.getY());
 
-			//Placing all pins within the container
 			double Y = interventionPin.getY() + (InterventionPin.size/2) + (TeamPin.size/2);
 			for (int i = 0; i < interventionPin.getInterveningTeamsPin().Count; i++)
 			{
-				interventionPin.getInterveningTeamsPin()[i].setInterventionPin(interventionPin); //Setting reference to the InterventionPin from the TeamPin
 				if ((i % 2) == 0) //First item on line
 				{
 					if ((i + 1) == interventionPin.getInterveningTeamsPin().Count) //Single on the line
@@ -74,7 +72,6 @@ namespace ETD.CustomObjects.CustomUIObjects
 			}
 		}
 
-		//Setter for the container position
 		private void setBorderPosition(double interventionPin_X, double interventionPin_Y)
 		{
 			Canvas.SetLeft(this, interventionPin_X - (this.Width/2));
@@ -84,7 +81,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 		//Handling special cases when collision detection is made on an InterventionContainer
 		internal override bool HandleSpecialCollisions(Pin fixedPin)
 		{
-			//Special case occur when the border just got drawn but it went out of bouds left or right or at the bottom
+			//Those special cases occur when the border just got drawn but it went out of bouds left or right or at the bottom
 			bool handled = false;
 
 			if (this.getX() < (this.Width / 2)) //Left
@@ -103,7 +100,6 @@ namespace ETD.CustomObjects.CustomUIObjects
 				handled = true;
 			}
 
-			//If intervention pin has been moved, replace the container and all its containing pins
 			if(handled)
 			{
 				PlaceAll(); //Replace all the team and border in accordance with the new intervention pin position
@@ -117,7 +113,6 @@ namespace ETD.CustomObjects.CustomUIObjects
 				return true;
 			}
 
-			//Default return, nothing has been handled
 			return false;
 		}
 

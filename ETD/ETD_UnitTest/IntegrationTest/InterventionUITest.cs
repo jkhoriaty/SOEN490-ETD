@@ -6,54 +6,53 @@ using ETD.ViewsPresenters;
 using ETD.Models.Objects;
 using ETD.CustomObjects.CustomUIObjects;
 
-namespace ETD_UnitTest
+namespace ETD_UnitTest.IntegrationTest
 {
     [TestClass]
-    public class ResourceUITest
+    public class InterventionUITest
     {
-        [TestMethod]      
-		public void CreateTeamPinTest()
-		{
-			MainWindow window = new MainWindow();
-			MapSectionPage mapSectionPage = new MapSectionPage(window);
-			Team a = new Team("A");
-			mapSectionPage.Update();
-			
-			bool check = false;
-			foreach(Pin pin in Pin.getPinList())
-			{
-				if(pin.getRelatedObject() == a)
-				{
-					check = true;
-				}
-			}
-			Assert.IsTrue(check);
-		        
-        }
-
         [TestMethod]
-        public void DeleteTeamPinTest()
+        public void CreateInterventionPinTest()
         {
             MainWindow window = new MainWindow();
             MapSectionPage mapSectionPage = new MapSectionPage(window);
-            Team a = new Team("A");
+            Intervention iv = new Intervention();
             mapSectionPage.Update();
-
             bool check = false;
             foreach (Pin pin in Pin.getPinList())
             {
-                if (pin.getRelatedObject() == a)
+                if (pin.getRelatedObject() == iv)
                 {
                     check = true;
                 }
             }
+
+            Assert.IsTrue(check);
+        }
+
+        [TestMethod]
+        public void DeleteInterventionPinTest()
+        {
+            MainWindow window = new MainWindow();
+            MapSectionPage mapSectionPage = new MapSectionPage(window);
+            Intervention iv = new Intervention();
+            mapSectionPage.Update();
+            bool check = false;
+            foreach (Pin pin in Pin.getPinList())
+            {
+                if (pin.getRelatedObject() == iv)
+                {
+                    check = true;
+                }
+            }
+
             Assert.IsTrue(check);
 
-            Team.DeleteTeam(a);
+            iv.Completed();
             bool exist = false;
             foreach (Pin pin in Pin.getPinList())
             {
-                if (pin.getRelatedObject() == a)
+                if (pin.getRelatedObject() == iv)
                 {
                     check = true;
                 }

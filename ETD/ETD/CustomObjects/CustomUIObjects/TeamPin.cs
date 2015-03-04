@@ -15,7 +15,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 {
 	class TeamPin : Pin, Observer
 	{
-		internal static int size = 40;
+		internal static int size = 40;//Sets the size of the team icon
 
 		private Team team;
 		private InterventionPin interventionPin;

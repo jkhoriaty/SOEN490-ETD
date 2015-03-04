@@ -208,7 +208,7 @@ namespace ETD.ViewsPresenters.TeamsSection
                     Frame teamFrame = (Frame)(StackPanel_teamList.Children[elementIndex]);
                     TeamInfoPage teamInfo = (TeamInfoPage)teamFrame.Content;
                     Team team = teamInfo.getTeam();
-                    team.Swap(team, "down");
+                    Team.Swap(team, "down");
                 }
                 else if (index == count)
                 {
@@ -233,7 +233,7 @@ namespace ETD.ViewsPresenters.TeamsSection
                     Frame teamFrame = (Frame)(StackPanel_teamList.Children[elementIndex]);
                     TeamInfoPage teamInfo = (TeamInfoPage)teamFrame.Content;
                     Team team = teamInfo.getTeam();
-                    team.Swap(team, "up");
+                    Team.Swap(team, "up");
                 }
                 else if (index == 0)
                 {

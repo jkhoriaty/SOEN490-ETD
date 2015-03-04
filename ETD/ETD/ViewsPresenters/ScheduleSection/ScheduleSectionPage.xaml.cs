@@ -20,46 +20,7 @@ namespace ETD.ViewsPresenters.ScheduleSection
     /// Interaction logic for ScheduleSectionPage.xaml
     /// </summary>
     public partial class ScheduleSectionPage : Page
-    {/*
-        private MainWindow parent;
-        private int tabs = 1;
-        private List<SectorsTablePage> tables = new List<SectorsTablePage>();
-        private List<Frame> tableFrames = new List<Frame>();
-        public ScheduleSectionPage(MainWindow mainWindow)
-        {
-            InitializeComponent();
-            parent = mainWindow;
-            addButton.Margin = new Thickness(this.Width - addButton.Width, this.Height - addButton.Height, 0.0, 0.0);
+    {
 
-            tables.Add(new SectorsTablePage(this));
-            tableFrames.Add(new Frame());
-            tableFrames[0].Content = tables[0];
-            Schedule1.Content = tableFrames[0];
-
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            (tables[tabs-1] as SectorsTablePage).Close();
-            tabs++;
-            TabItem newTab = new TabItem();
-            newTab.Header = "" + tabs;
-            SchedulesTab.Items.Add(newTab);
-            SchedulesTab.SelectedIndex = tabs-1;
-
-            tables.Add(new SectorsTablePage(this));
-            tableFrames.Add(new Frame());
-            tableFrames[tabs - 1].Content = tables[tabs - 1];
-            (SchedulesTab.Items[tabs - 1] as TabItem).Content = tableFrames[tabs - 1];
-
-        }
-
-        internal void UpdateSectors()
-        {
-            foreach(SectorsTablePage stp in tables)
-            {
-                stp.UpdateSectors();
-            }
-        }*/
     }
 }
