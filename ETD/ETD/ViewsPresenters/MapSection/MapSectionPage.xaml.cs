@@ -1,6 +1,5 @@
 ﻿using ETD.Models.Objects;
 using ETD.Models.ArchitecturalObjects;
-using ETD.ViewsPresenters.MapSection.PinManagement;
 using System;
 using System.Collections.Generic;
 using System.Linq;

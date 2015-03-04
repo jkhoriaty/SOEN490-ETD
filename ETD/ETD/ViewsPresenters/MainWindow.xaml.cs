@@ -224,24 +224,6 @@ namespace ETD.ViewsPresenters
             }  
 		}
 
-        //Add a new resource to the intervention section
-		internal void AddResource(String teamName, String interventionName)
-		{
-			interventionsSection.AddResource(teamName, interventionName);
-		}
-
-        //Report an approximate arrival time of resource
-		internal void ReportArrival(String teamName, String interventionName)
-		{
-			interventionsSection.ReportArrival(teamName, interventionName);
-		}
-
-        //Set resource arrival time
-        internal void ReportArrived(string interventionName, int rowNumber)
-        {
-            mapSection.ReportArrived(interventionName, rowNumber);
-        }
-
         //Recovering the fields default text if left empty
 		public void PopupLostFocus(object sender, EventArgs e)
 		{
