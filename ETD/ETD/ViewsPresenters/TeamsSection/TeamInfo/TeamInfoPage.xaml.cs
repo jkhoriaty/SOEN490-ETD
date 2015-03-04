@@ -38,6 +38,7 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamInfo
 			team.RegisterInstanceObserver(this);
 		}
 
+        //Update the displayed info on notify from the observed element. 
 		public void Update()
 		{
 			PopulateInfo();
@@ -68,7 +69,7 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamInfo
             foreach (Equipment eq in equipmentList)
             {
                 EquipmentIcon equip = new EquipmentIcon(team, this, 27, eq);
-                equip.setImage(TechnicalServices.getImage(eq.getEquipmentType()));
+                equip.SetImage(TechnicalServices.getImage(eq.getEquipmentType()));
                 equipmentStackPanel.Children.Add(equip);
             }
 
@@ -90,12 +91,13 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamInfo
 				memberTraining.Fill = img2;
 			}
 		}
-
+        //Removes a piece of equipment from a team when the equipment is clicked on 
+        //the Team panel.
         public void RemoveTeamEquipment(object sender, RoutedEventArgs e)
         {
             EquipmentIcon equip = (EquipmentIcon)sender;
-            Team relatedTeam = equip.getTeam();
-            Equipment relatedEquipment = equip.getEquip();
+            Team relatedTeam = equip.GetTeam();
+            Equipment relatedEquipment = equip.GetEquip();
 
             relatedTeam.RemoveEquipment(relatedEquipment);
         }

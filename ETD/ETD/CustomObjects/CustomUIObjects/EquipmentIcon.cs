@@ -20,7 +20,6 @@ namespace ETD.CustomObjects.CustomUIObjects
     {
         Equipment equip; //Reference to the equipment represented by the icon
         Team team; //Reference to the team that holds the equipment
-        Rectangle rekt; 
 
         //Default constructor, takes in the specific information that is necessary to the existence of this object.
         public EquipmentIcon(Team relatedTeam,TeamInfoPage teamInfoPage,int size, Equipment relatedEquipment) : base()
@@ -34,7 +33,7 @@ namespace ETD.CustomObjects.CustomUIObjects
         }
 
         //Sets the image that is show in this icon
-        public void setImage(BitmapImage image)
+        public void SetImage(BitmapImage image)
         {
             Rectangle imageRectangle = new Rectangle();
             imageRectangle.Width = this.Width;
@@ -46,12 +45,12 @@ namespace ETD.CustomObjects.CustomUIObjects
         }
 
         //Basic accessor, returns the team the equipment is associated with
-        public Team getTeam()
+        public Team GetTeam()
         {
             return this.team;
         }
         //Basic accessor, returns the equipment the team is associated with
-        public Equipment getEquip()
+        public Equipment GetEquip()
         {
             return this.equip;
         }
