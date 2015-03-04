@@ -29,5 +29,37 @@ namespace ETD_UnitTest.IntegrationTest
 
             Assert.IsTrue(check);
         }
+
+        [TestMethod]
+        public void DeleteInterventionPinTest()
+        {
+            MainWindow window = new MainWindow();
+            MapSectionPage mapSectionPage = new MapSectionPage(window);
+            Intervention iv = new Intervention();
+            mapSectionPage.Update();
+            bool check = false;
+            foreach (Pin pin in Pin.getPinList())
+            {
+                if (pin.getRelatedObject() == iv)
+                {
+                    check = true;
+                }
+            }
+
+            Assert.IsTrue(check);
+
+            iv.Completed();
+            bool exist = false;
+            foreach (Pin pin in Pin.getPinList())
+            {
+                if (pin.getRelatedObject() == iv)
+                {
+                    check = true;
+                }
+            }
+
+            Assert.IsFalse(exist);
+ 
+        }
     }
 }
