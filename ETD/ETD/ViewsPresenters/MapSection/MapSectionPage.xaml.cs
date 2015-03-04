@@ -58,15 +58,15 @@ namespace ETD.ViewsPresenters.MapSection
 				Canvas_map.Children.Add(teamPin);
 
 				//Setting the pin to it's previous position, if it exists, or to the top-left corner
-				bool defaultPosition = false;
+				bool ignoreSpecialCollisions = true;
 				double[] previousPinPosition = Pin.getPreviousPinPosition(team);
 				if (previousPinPosition == null)
 				{
-					defaultPosition = true;
+					ignoreSpecialCollisions = false;
 					previousPinPosition = new double[]{ teamPin.Width / 2, teamPin.Height / 2 }; //Top-left corner
 				}
 				teamPin.setPinPosition(previousPinPosition[0], previousPinPosition[1]);
-				teamPin.CollisionDetectionAndResolution(defaultPosition);
+				teamPin.CollisionDetectionAndResolution(ignoreSpecialCollisions);
 			}
 
 			//Creating all intervention pins and adding the map to their previous or a new position while detecting newly created collisions
@@ -76,16 +76,16 @@ namespace ETD.ViewsPresenters.MapSection
 				Canvas_map.Children.Add(interventionPin);
 
 				//Setting the pin to it's previous position, if it exists, or to the top-left corner
-				bool defaultPosition = false;
+				bool ignoreSpecialCollisions = true;
 				double[] previousPinPosition = Pin.getPreviousPinPosition(intervention);
 				if (previousPinPosition == null)
 				{
-					defaultPosition = true;
+					ignoreSpecialCollisions = false;
 					previousPinPosition = new double[] { (interventionPin.Width / 2), Canvas_map.ActualHeight - (interventionPin.Height / 2) }; //Bottom-right corner
 				}
 				interventionPin.setPinPosition(previousPinPosition[0], previousPinPosition[1]);
 				interventionPin.Update();
-				interventionPin.CollisionDetectionAndResolution(defaultPosition);
+				interventionPin.CollisionDetectionAndResolution(ignoreSpecialCollisions);
 			}
 
 			//Creating all equipment pins and adding the map to their previous or a new position while detecting newly created collisions
@@ -97,15 +97,15 @@ namespace ETD.ViewsPresenters.MapSection
 					Canvas_map.Children.Add(equipmentPin);
 
 					//Setting the pin to it's previous position, if it exists, or to the top-left corner
-					bool defaultPosition = false;
+					bool ignoreSpecialCollisions = true;
 					double[] previousPinPosition = Pin.getPreviousPinPosition(equipment);
 					if (previousPinPosition == null)
 					{
-						defaultPosition = true;
+						ignoreSpecialCollisions = false;
 						previousPinPosition = new double[] { Canvas_map.ActualWidth - (equipmentPin.Width / 2), (equipmentPin.Height / 2) }; //Top-right corner
 					}
 					equipmentPin.setPinPosition(previousPinPosition[0], previousPinPosition[1]);
-					equipmentPin.CollisionDetectionAndResolution(defaultPosition);
+					equipmentPin.CollisionDetectionAndResolution(ignoreSpecialCollisions);
 				}
 			}
 		}
@@ -138,33 +138,6 @@ namespace ETD.ViewsPresenters.MapSection
 			pinDragInProgress = false;
 			pin.DragStop(Canvas_map, e);
 		}
-
-		internal void ReportArrival(Grid team)
-		{
-			/*Grid intervention = pinHandler.RelatedIntervention(team);
-			if(intervention == null)
-			{
-                mainWindow.CreateIntervention();
-                //pinHandler.AppointTeamToIntervention(team, (Grid) Map.Children[Map.Children.Count - 1]);
-                intervention = pinHandler.RelatedIntervention(team);
-			}
-			mainWindow.ReportArrival(team.Name, intervention.Name);*/
-		}
-
-        internal void ReportArrived(string interventionName, int rowNumber)
-        {
-			/*
-			foreach(KeyValuePair<Grid, List<Grid>> intervention in activeTeams)
-			{
-				if (intervention.Key.Name.Equals(interventionName))
-				{
-					TeamGrid team = (TeamGrid)intervention.Value[rowNumber];
-					team.ChangeStatus("intervening");
-
-					return;
-				}
-			}*/
-        }
 
 		/*
 		//Upon right click store mouse position to know where to zoom

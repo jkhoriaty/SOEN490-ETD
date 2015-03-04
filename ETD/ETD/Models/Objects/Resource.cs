@@ -15,7 +15,9 @@ namespace ETD.Models.Objects
         private Team team;
 		private bool intervening;
         private DateTime moving;
+		private bool movingBool;
         private DateTime arrival;
+		private bool arrivedBool;
 
 		public Resource(String resourceName, Team team, bool intervening, DateTime moving, DateTime arrival)
 		{
@@ -31,6 +33,7 @@ namespace ETD.Models.Objects
             this.team = team;
 			this.intervening = true;
 			this.moving = DateTime.Now;
+			this.movingBool = true;
         }
 
         public String getResourceName()
@@ -61,6 +64,12 @@ namespace ETD.Models.Objects
 		public void setMoving(DateTime moving)
 		{
 			this.moving = moving;
+			this.movingBool = true;
+		}
+
+		public bool isMoving()
+		{
+			return movingBool;
 		}
 
         public DateTime getMovingTime()
@@ -71,7 +80,13 @@ namespace ETD.Models.Objects
         public void setArrival(DateTime arrival)
         {
             this.arrival = arrival;
+			this.arrivedBool = true;
         }
+
+		public bool hasArrived()
+		{
+			return arrivedBool;
+		}
 
         public DateTime getArrivalTime()
         {

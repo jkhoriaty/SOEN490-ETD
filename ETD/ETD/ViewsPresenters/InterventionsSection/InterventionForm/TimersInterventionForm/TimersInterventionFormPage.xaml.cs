@@ -24,20 +24,14 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.TimersInterv
 	/// </summary>
 	public partial class TimersInterventionFormPage : Page
 	{
-        private const int TIMER_LIMIT = 13;
         private InterventionFormPage interventionForm;
         private Intervention intervention;
-		private int timerPosition = 1;
 
-
-        private Label[] teamLabels = new Label[TIMER_LIMIT];
-        private Label[] resourceLabels = new Label[TIMER_LIMIT];
-        private Label[] timerLabels = new Label[TIMER_LIMIT];
-        private Label[] statusLabels = new Label[TIMER_LIMIT];
-
-        private Stopwatch[] stopwatches = new Stopwatch[TIMER_LIMIT];
-        private int[] offsets = new int[TIMER_LIMIT];
-        private int[] endOffsets = new int[TIMER_LIMIT];
+        private List<Stopwatch> stopwatchList = new List<Stopwatch>();
+		private Dictionary<Stopwatch, bool> stopwatchActive = new Dictionary<Stopwatch, bool>();
+		private Dictionary<Stopwatch, Label> stopwatchLabelDictionary = new Dictionary<Stopwatch, Label>();
+		private Dictionary<Stopwatch, TimeSpan> stopwatchOffsetDictionary = new Dictionary<Stopwatch, TimeSpan>();
+		private Dictionary<Stopwatch, Label> stopwatchStatusDictionary = new Dictionary<Stopwatch, Label>();
 
 		private static int interventionDeadline = 30;
 		private static int movingDeadline = 5;
@@ -48,240 +42,180 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.TimersInterv
 			this.interventionForm = interventionForm;
             this.intervention = intervention;
 
-			for (int i = 0; i < endOffsets.Length; i++)
-			{
-				endOffsets[i] = -1;
-			}
+            CreateInterventionTimer();
+			CreateResourcesTimers();
 
 			DispatcherTimer dispatcherTimer = new DispatcherTimer();
 			dispatcherTimer.Tick += new EventHandler(refresh);
 			dispatcherTimer.Interval = new TimeSpan(0, 0, 1); //Update every second
 			dispatcherTimer.Start();
-
-            CreateOverallTimer((int)intervention.getElapsed().TotalSeconds);
 		}
 
-		//Method ran every second
+		//Method runs every second
 		public void refresh(object sender, EventArgs e)
 		{
-			for (int i = 0; i < TIMER_LIMIT; i++)
+			foreach (Stopwatch stopwatch in stopwatchList)
 			{
-				if (stopwatches[i] != null && (statusLabels[i].Content.Equals("Ongoing") || statusLabels[i].Content.Equals("Overtime")))
+				if(stopwatchActive[stopwatch])
 				{
-					if(endOffsets[i] != -1)
+					TimeSpan elapsed = stopwatch.Elapsed + stopwatchOffsetDictionary[stopwatch];
+					stopwatchLabelDictionary[stopwatch].Content = elapsed.Minutes + ":";
+					if(elapsed.Seconds < 10)
 					{
-						setStatus(i, "Completed");
+						stopwatchLabelDictionary[stopwatch].Content += "0";
 					}
-					//Update all timers
-					TimeSpan elapsed = stopwatches[i].Elapsed;
-					timerLabels[i].Content = (elapsed.Minutes + offsets[i]/60) + ":";
-                    if (elapsed.Seconds + offsets[i] % 60 < 10)
-					{
-						timerLabels[i].Content += "0";
-					}
-                    timerLabels[i].Content += "" + (elapsed.Seconds + offsets[i] % 60);
+					stopwatchLabelDictionary[stopwatch].Content += elapsed.Seconds.ToString();
 
-					//Setting status to overtime of it surpasses the deadline
-                    if (statusLabels[i].Content.Equals("Ongoing") && ((i == 0 && (interventionDeadline <= (elapsed.Minutes + offsets[i] / 60))) || (i != 0 && (movingDeadline <= (elapsed.Minutes + offsets[i] / 60)))))
+					//Setting the status
+					if(stopwatchList.ElementAt(0) == stopwatch) //It's the intervention timer
 					{
-						setStatus(i, "Overtime");
-					}
-
-					//Flash 15 seconds every minute if overtime
-					if (statusLabels[i].Content.Equals("Overtime"))
-					{
-						if (elapsed.Seconds <= 15)
+						if(elapsed.Minutes < interventionDeadline) //Is overtime
 						{
-							Brush backgroundColor = statusLabels[i].Background;
-							statusLabels[i].Background = statusLabels[i].Foreground;
-							statusLabels[i].Foreground = backgroundColor;
+							setStatus(stopwatchStatusDictionary[stopwatch], "Overtime");
+							if(elapsed.Seconds < 15)
+							{
+								if(elapsed.Seconds % 2 == 0)
+								{
+									Brush backgroundColor = stopwatchStatusDictionary[stopwatch].Background;
+									stopwatchStatusDictionary[stopwatch].Background = stopwatchStatusDictionary[stopwatch].Foreground;
+									stopwatchStatusDictionary[stopwatch].Foreground = backgroundColor;
+								}
+							}
 						}
 						else
 						{
-							setStatus(i, "Overtime");
+							setStatus(stopwatchStatusDictionary[stopwatch], "Ongoing");
 						}
 					}
+					else if(elapsed.Minutes < movingDeadline) //Is a resource time and is overtime
+					{
+						setStatus(stopwatchStatusDictionary[stopwatch], "Overtime");
+					}
+					else
+					{
+						setStatus(stopwatchStatusDictionary[stopwatch], "Ongoing");
+					}
+				}
+				else
+				{
+					setStatus(stopwatchStatusDictionary[stopwatch], "Completed");
 				}
 			}
 		}
 
 		//Create the intervention timer
-		public void CreateOverallTimer(int offset)
+		private void CreateInterventionTimer()
 		{
-            offsets[0] = offset;
-			if (stopwatches[0] != null)
+			Thickness border = new Thickness();
+			border.Bottom = 1;
+
+            Stopwatch stopwatch = new Stopwatch();
+			stopwatchList.Add(stopwatch);
+			stopwatch.Start();
+
+			TimeSpan offset;
+			if (intervention.isConcluded() == true)
 			{
-				stopwatches[0].Restart();
+				stopwatchActive.Add(stopwatch, false);
+				offset = intervention.getConclusionTime() - intervention.getTimeOfCall();
 			}
 			else
 			{
-				Thickness border = new Thickness();
-				border.Bottom = 1;
+				stopwatchActive.Add(stopwatch, true);
+				offset = DateTime.Now - intervention.getTimeOfCall();
+			}
+			stopwatchOffsetDictionary.Add(stopwatch, offset);
+
+			Label name = new Label();
+			name.Content = "Intervention";
+			name.FontWeight = FontWeights.Bold;
+			Grid.SetColumn(name, 0);
+			Grid.SetColumnSpan(name, 2);
+			Grid.SetRow(name, 0);
+			name.BorderBrush = new SolidColorBrush(Colors.Black);
+			name.BorderThickness = border;
+			timersList.Children.Add(name);
+
+			Label timer = new Label();
+			timer.FontWeight = FontWeights.Bold;
+			timer.HorizontalContentAlignment = HorizontalAlignment.Center;
+			Grid.SetColumn(timer, 2);
+			Grid.SetRow(timer, 0);
+			timer.BorderBrush = new SolidColorBrush(Colors.Black);
+			timer.BorderThickness = border;
+			timersList.Children.Add(timer);
+			stopwatchLabelDictionary.Add(stopwatch, timer);
+
+
+			Label status = new Label();
+			status.FontWeight = FontWeights.Bold;
+			status.HorizontalContentAlignment = HorizontalAlignment.Center;
+			Grid.SetColumn(status, 3);
+			Grid.SetRow(status, 0);
+			status.BorderBrush = new SolidColorBrush(Colors.Black);
+			status.BorderThickness = border;
+			timersList.Children.Add(status);
+			stopwatchStatusDictionary.Add(stopwatch, status);
+		}
+
+		private void CreateResourcesTimers()
+		{
+			int rowNumber = 1;
+			foreach(Resource resource in intervention.getResourceList())
+			{
+				RowDefinition rowDefinition = new RowDefinition();
+				rowDefinition.Height = new GridLength(25);
+				timersList.RowDefinitions.Add(rowDefinition);
+
+				Stopwatch stopwatch = new Stopwatch();
+				stopwatchList.Add(stopwatch);
+				stopwatch.Start();
+
+				TimeSpan offset;
+				if(resource.hasArrived() == true)
+				{
+					stopwatchActive.Add(stopwatch, false);
+					offset = resource.getArrivalTime() - resource.getMovingTime();
+				}
+				else
+				{
+					stopwatchActive.Add(stopwatch, true);
+					offset = DateTime.Now - intervention.getTimeOfCall();
+				}
+				stopwatchOffsetDictionary.Add(stopwatch, offset);
 
 				Label name = new Label();
-				name.Content = "Intervention";
-				name.FontWeight = FontWeights.Bold;
+				name.Content = resource.getTeam().getName();
 				Grid.SetColumn(name, 0);
-				Grid.SetColumnSpan(name, 2);
-				Grid.SetRow(name, 0);
-				name.BorderBrush = new SolidColorBrush(Colors.Black);
-				name.BorderThickness = border;
-
+				Grid.SetRow(name, rowNumber);
 				timersList.Children.Add(name);
-				resourceLabels[0] = name;
+
+				Label resourceName = new Label();
+				resourceName.Content = resource.getResourceName();
+				Grid.SetColumn(resourceName, 1);
+				Grid.SetRow(resourceName, rowNumber);
+				timersList.Children.Add(resourceName);
 
 				Label timer = new Label();
-				timer.FontWeight = FontWeights.Bold;
 				timer.HorizontalContentAlignment = HorizontalAlignment.Center;
 				Grid.SetColumn(timer, 2);
 				Grid.SetRow(timer, 0);
-				timer.BorderBrush = new SolidColorBrush(Colors.Black);
-				timer.BorderThickness = border;
-
 				timersList.Children.Add(timer);
-				timerLabels[0] = timer;
+				stopwatchLabelDictionary.Add(stopwatch, timer);
 
 				Label status = new Label();
-				status.FontWeight = FontWeights.Bold;
 				status.HorizontalContentAlignment = HorizontalAlignment.Center;
 				Grid.SetColumn(status, 3);
-				Grid.SetRow(status, 0);
-				status.BorderBrush = new SolidColorBrush(Colors.Black);
-				status.BorderThickness = border;
-
+				Grid.SetRow(status, rowNumber);
 				timersList.Children.Add(status);
-				statusLabels[0] = status;
-				setStatus(0, "Ongoing");
+				stopwatchStatusDictionary.Add(stopwatch, status);
 
-                Stopwatch stopwatch = new Stopwatch();
-				stopwatches[0] = stopwatch;
-				stopwatch.Start();
+				rowNumber++;
 			}
 		}
 
-		public void CreateTimer(int position, String team, String resource, int offset)
+		public void setStatus(Label statusLabel, String status)
 		{
-			if(stopwatches[position] != null)
-			{
-				teamLabels[position].Content = team;
-				resourceLabels[position].Content = resource;
-
-				offsets[position] = offset;
-				if(offset != 0)
-				{
-					stopwatches[position].Restart();
-				}
-			}
-			else
-			{
-				Label teamLabel = new Label();
-				teamLabel.Content = team;
-				teamLabel.HorizontalContentAlignment = HorizontalAlignment.Center;
-				Grid.SetColumn(teamLabel, 0);
-				Grid.SetRow(teamLabel, timerPosition);
-
-				timersList.Children.Add(teamLabel);
-				teamLabels[position] = teamLabel;
-
-				Label resourceLabel = new Label();
-				resourceLabel.Content = resource;
-				Grid.SetColumn(resourceLabel, 1);
-				Grid.SetRow(resourceLabel, timerPosition);
-
-				timersList.Children.Add(resourceLabel);
-				resourceLabels[position] = resourceLabel;
-
-				Label timerLabel = new Label();
-				timerLabel.HorizontalContentAlignment = HorizontalAlignment.Center;
-				Grid.SetColumn(timerLabel, 2);
-				Grid.SetRow(timerLabel, timerPosition);
-
-				timersList.Children.Add(timerLabel);
-				timerLabels[position] = timerLabel;
-
-				Label statusLabel = new Label();
-				statusLabel.HorizontalContentAlignment = HorizontalAlignment.Center;
-				Grid.SetColumn(statusLabel, 3);
-				Grid.SetRow(statusLabel, timerPosition);
-
-				timersList.Children.Add(statusLabel);
-				statusLabels[position] = statusLabel;
-				setStatus(position, "Ongoing");
-
-				offsets[position] = offset;
-
-				Stopwatch stopwatch = new Stopwatch();
-				stopwatches[position] = stopwatch;
-				stopwatch.Start();
-
-				timerPosition++;
-			}
-			
-		}
-
-        //TODO: Make CloneTimer Method
-        public void CloneTimer(int position, String team, String resource, int offset, int original)
-        {
-            if (stopwatches[original] != null)
-            {
-                if (stopwatches[position] != null)
-                {
-                    teamLabels[position].Content = team;
-                    resourceLabels[position].Content = resource;
-
-                    offsets[position] = offset + (int)(stopwatches[original].ElapsedMilliseconds/1000);
-                    stopwatches[position].Restart();
-                }
-                else
-                {
-                    Label teamLabel = new Label();
-                    teamLabel.Content = team;
-                    teamLabel.HorizontalContentAlignment = HorizontalAlignment.Center;
-                    Grid.SetColumn(teamLabel, 0);
-                    Grid.SetRow(teamLabel, timerPosition);
-
-                    timersList.Children.Add(teamLabel);
-                    teamLabels[position] = teamLabel;
-
-                    Label resourceLabel = new Label();
-                    resourceLabel.Content = resource;
-                    Grid.SetColumn(resourceLabel, 1);
-                    Grid.SetRow(resourceLabel, timerPosition);
-
-                    timersList.Children.Add(resourceLabel);
-                    resourceLabels[position] = resourceLabel;
-
-                    Label timerLabel = new Label();
-                    timerLabel.HorizontalContentAlignment = HorizontalAlignment.Center;
-                    Grid.SetColumn(timerLabel, 2);
-                    Grid.SetRow(timerLabel, timerPosition);
-
-                    timersList.Children.Add(timerLabel);
-                    timerLabels[position] = timerLabel;
-
-                    Label statusLabel = new Label();
-                    statusLabel.HorizontalContentAlignment = HorizontalAlignment.Center;
-                    Grid.SetColumn(statusLabel, 3);
-                    Grid.SetRow(statusLabel, timerPosition);
-
-                    timersList.Children.Add(statusLabel);
-                    statusLabels[position] = statusLabel;
-                    setStatus(position, "Ongoing");
-
-                    offsets[position] = offset + (int)(stopwatches[original].ElapsedMilliseconds/1000);
-
-                    Stopwatch stopwatch = new Stopwatch();
-                    stopwatches[position] = stopwatch;
-                    stopwatch.Start();
-
-                    timerPosition++;
-                }
-            }
-        }
-
-		public void setStatus(int position, String status)
-		{
-			Label statusLabel = statusLabels[position];
 			statusLabel.Content = status;
 			if(status.Equals("Ongoing"))
 			{
@@ -292,7 +226,6 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.TimersInterv
 			{
 				statusLabel.Background = new SolidColorBrush(Colors.Green);
 				statusLabel.Foreground = new SolidColorBrush(Colors.White);
-				stopwatches[position].Stop();
 			}
 			else if(status.Equals("Overtime"))
 			{
@@ -301,57 +234,12 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.TimersInterv
 			}
 		}
 
-		public bool StopOverallTimer(int offset)
-		{
-			int timeFromStart = stopwatches[0].Elapsed.Seconds + offsets[0];
-			if (timeFromStart >= offset)
-			{
-				endOffsets[0] = offset;
-				return true;
-			}
-			else
-			{
-				MessageBox.Show("The intervention end time is before the start time");
-				return false;
-			}
-		}
-
-		public void StopTimer(int position, int offset)
-		{
-			int timeFromStart = stopwatches[position].Elapsed.Minutes + offsets[position];
-			if(timeFromStart >= offset)
-			{
-				endOffsets[position] = offset;
-			}
-			else
-			{
-				MessageBox.Show("The end time is before the start time");
-			}
-		}
-
-        public bool IsRunning(int position)
-        {
-            if (stopwatches[position] != null)
-                return stopwatches[position].IsRunning;
-            else
-                return false;
-        }
-
-        public void RenameTimer(int position, String team, String resource)
-        {
-            if (stopwatches[position] != null)
-            {
-                teamLabels[position].Content = team;
-                resourceLabels[position].Content = resource;
-            }
-        }
-
-		public static void setInterventionDeadline(int deadline)
+		internal static void setInterventionDeadline(int deadline)
 		{
 			interventionDeadline = deadline;
 		}
 
-		public static void setMovingDeadline(int deadline)
+		internal static void setMovingDeadline(int deadline)
 		{
 			movingDeadline = deadline;
 		}

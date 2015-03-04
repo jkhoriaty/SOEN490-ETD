@@ -42,6 +42,7 @@ namespace ETD.Models.Objects
         private String conclusion;
         private String conclusionAdditionalInfo;
         private DateTime conclusionTime;
+		private bool isConcludedBool;
 
         private DateTime call911Time;
         private String meetingPoint;
@@ -59,6 +60,7 @@ namespace ETD.Models.Objects
             this.timeOfCall = DateTime.Now;
             this.additionalInfo = new InterventionAdditionalInfo[10];
             this.abc = new ABC();
+			this.isConcludedBool = false;
 
             activeInterventionList.Add(this);
             ClassModifiedNotification(typeof(Intervention));
@@ -68,6 +70,7 @@ namespace ETD.Models.Objects
         {
             activeInterventionList.Remove(this);
             completedInterventionList.Add(this);
+			isConcludedBool = true;
 			ClassModifiedNotification(typeof(Intervention));
         }
 
@@ -137,6 +140,7 @@ namespace ETD.Models.Objects
 		public void setTimeOfCall(DateTime timeOfCall)
 		{
 			this.timeOfCall = timeOfCall;
+			InstanceModifiedNotification();
 		}
 
 		public DateTime getTimeOfCall()
@@ -177,6 +181,7 @@ namespace ETD.Models.Objects
         public void setCode(int code)
         {
             this.code = code;
+			InstanceModifiedNotification();
         }
         public int getCode()
         {
@@ -204,6 +209,7 @@ namespace ETD.Models.Objects
 		public void setChiefComplaint(String chiefComplaint)
 		{
 			this.chiefComplaint = chiefComplaint;
+			InstanceModifiedNotification();
 		}
 
 		public String getChiefComplaint()
@@ -263,6 +269,11 @@ namespace ETD.Models.Objects
 		public String getConclusion()
 		{
 			return conclusion;
+		}
+
+		public bool isConcluded()
+		{
+			return isConcludedBool;
 		}
 
 		public void setConclusionAdditionalInfo(String additionalInfo)
@@ -364,18 +375,6 @@ namespace ETD.Models.Objects
 		{
 			return ambulanceArrivalTime;
 		}
-
-        public TimeSpan getElapsed()
-        {
-            if (activeInterventionList.Contains(this))
-            {
-                return DateTime.Now - timeOfCall;
-            }
-            else
-            { 
-                return conclusionTime - timeOfCall;
-            }
-        }
 
         public bool IsActive()
         {

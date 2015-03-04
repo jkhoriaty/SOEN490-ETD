@@ -27,23 +27,11 @@ namespace ETD.ViewsPresenters.InterventionsSection
 	public partial class InterventionSectionPage : Page, Observer
 	{
 		private MainWindow mainWindow;
-        List<String[]> addResource_Buffer = new List<String[]>();
-        private DispatcherTimer addResource_DispatcherTimer;
-        List<String[]> reportArrival_Buffer = new List<String[]>();
-        private DispatcherTimer reportArrival_DispatcherTimer;
 
 		public InterventionSectionPage(MainWindow mainWindow)
 		{
 			InitializeComponent();
 			this.mainWindow = mainWindow;
-
-            addResource_DispatcherTimer = new DispatcherTimer();
-            addResource_DispatcherTimer.Tick += new EventHandler(AddResource_Refresh);
-            addResource_DispatcherTimer.Interval = new TimeSpan(0, 0, 1); //Update every second
-
-            reportArrival_DispatcherTimer = new DispatcherTimer();
-            reportArrival_DispatcherTimer.Tick += new EventHandler(ReportArrival_Refresh);
-            reportArrival_DispatcherTimer.Interval = new TimeSpan(0, 0, 1); //Update every second
 
             Observable.RegisterClassObserver(typeof(Intervention), this);
             Observable.RegisterClassObserver(typeof(LanguageSelector), this);
@@ -113,67 +101,6 @@ namespace ETD.ViewsPresenters.InterventionsSection
 			}
 			return null;
 		}
-
-        /* Due to the fact that "frame.Content = object" is an asynchronous call, and causes a race condition that crashes the program when a team is
-         * added to an intervention and set as arrived in the same program-flow as creating the intervention, the method call is made to be retried
-         * every second until the frame.Content is actually set and it can access the correct InterventionForm
-         * */
-		internal void AddResource(String teamName, String interventionName)
-		{
-            addResource_Buffer.Add(new String[] { teamName, interventionName });
-            addResource_DispatcherTimer.Start();
-		}
-
-        private void AddResource_Refresh(object sender, EventArgs e)
-        {
-            if(addResource_Buffer.Count == 0)
-            {
-                addResource_DispatcherTimer.Stop();
-            }
-            else
-            {
-                try
-                {
-                    getInterventionPage(addResource_Buffer[0][1]).AddResource(addResource_Buffer[0][0]);
-                    addResource_Buffer.RemoveAt(0);
-                }
-                catch(Exception ex)
-                {
-
-                }
-            }
-        }
-
-		internal void ReportArrival(String teamName, String interventionName)
-		{
-            reportArrival_Buffer.Add(new String[] { teamName, interventionName });
-            reportArrival_DispatcherTimer.Start();
-		}
-
-        private void ReportArrival_Refresh(object sender, EventArgs e)
-        {
-            if (reportArrival_Buffer.Count == 0)
-            {
-                reportArrival_DispatcherTimer.Stop();
-            }
-            else
-            {
-                try
-                {
-                    getInterventionPage(reportArrival_Buffer[0][1]).ReportArrival(reportArrival_Buffer[0][0]);
-                    reportArrival_Buffer.RemoveAt(0);
-                }
-                catch (Exception ex)
-                {
-
-                }
-            }
-        }
-
-        internal void ReportArrived(InterventionFormPage caller, int rowNumber)
-        {
-            mainWindow.ReportArrived(getInterventionName(caller), rowNumber);
-        }
         
 		public static void setInterventionDeadline(int deadline)
 		{

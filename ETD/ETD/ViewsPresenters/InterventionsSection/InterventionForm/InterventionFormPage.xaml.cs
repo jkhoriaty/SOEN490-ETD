@@ -108,6 +108,16 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm
 		public void Update()
 		{
 			BuildComponents();
+			teamName.Text = intervention.getResourceList().ElementAt(0).getTeam().getName();
+			interventionType.Text = intervention.getNatureOfCall();
+			if(intervention.getCode() == 1)
+			{
+				interventionType.Foreground = new SolidColorBrush(Colors.Red);
+			}
+			else
+			{
+				interventionType.Foreground = new SolidColorBrush(Colors.Black);
+			}
 		}
 
 		public void setInterventionNumber(int interventionNum)
@@ -118,28 +128,6 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm
 		public int getInterventionNumber()
 		{
 			return intervention.getInterventionNumber();
-		}
-
-		public void setComplaint(String complaint)
-		{
-			interventionType.Text = complaint;
-		}
-
-		public void setPriority(String priority)
-		{
-			if(priority.Equals("1"))
-			{
-				interventionType.Foreground = new SolidColorBrush(Colors.Red);
-			}
-			else
-			{
-				interventionType.Foreground = new SolidColorBrush(Colors.Black);
-			}
-		}
-
-		public void setTeam(String team)
-		{
-			teamName.Text = team;
 		}
 
 		//Runs once per minute - Registers all changes in the form to the intervention object
@@ -158,57 +146,21 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm
 		public void CompleteIntervention(int offset)
 		{
 			//Stopping timer
-			if(timersPage.StopOverallTimer(offset))
+			/*if(timersPage.StopOverallTimer(offset))
 			{
                 DisableForms();
-			}
+			}*/
 		}
-
-		public void CreateOverallTimer(int offset)
-		{
-			timersPage.CreateOverallTimer(offset);
-		}
-
-		public void CreateTimer(int position, String team, String resource, int offset)
-		{
-			timersPage.CreateTimer(position, team, resource, offset);
-		}
-
-		public void StopTimer(int position, int offset)
-		{
-			timersPage.StopTimer(position, offset);
-		}
-
-        public void RenameTimer(int position, String team, String resource)
-        {
-            timersPage.RenameTimer(position, team, resource);
-        }
 		
         public bool IsTimerRunning(int position)
         {
-            return timersPage.IsRunning(position);
+            //return timersPage.IsRunning(position);
+			return false;
         }
 
         public void CloneTimer(int position, String team, String resource, int offset, int original)
         {
-            timersPage.CloneTimer(position, team, resource, offset, original);
-        }
-
-		internal void AddResource(String teamName)
-		{
-			resources.Focus();
-			resourcesPage.AddResources(teamName);
-		}
-
-		internal void ReportArrival(String teamName)
-		{
-			timers.Focus();
-			resourcesPage.ReportArrival(teamName);
-		}
-
-        internal void ReportArrived(int rowNumber)
-        {
-            interventionSection.ReportArrived(this, rowNumber);
+            //timersPage.CloneTimer(position, team, resource, offset, original);
         }
         
 		public static void setInterventionDeadline(int deadline)

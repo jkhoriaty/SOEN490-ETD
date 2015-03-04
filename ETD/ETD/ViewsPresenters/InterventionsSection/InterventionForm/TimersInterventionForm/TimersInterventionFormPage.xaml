@@ -16,19 +16,7 @@
 				<ColumnDefinition Width="1.25*"/>
 			</Grid.ColumnDefinitions>
 			<Grid.RowDefinitions>
-				<RowDefinition/>
-				<RowDefinition/>
-				<RowDefinition/>
-				<RowDefinition/>
-				<RowDefinition/>
-				<RowDefinition/>
-				<RowDefinition/>
-				<RowDefinition/>
-				<RowDefinition/>
-				<RowDefinition/>
-				<RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
+				<RowDefinition Height="25"/>
 			</Grid.RowDefinitions>
 		</Grid>
 	</ScrollViewer>

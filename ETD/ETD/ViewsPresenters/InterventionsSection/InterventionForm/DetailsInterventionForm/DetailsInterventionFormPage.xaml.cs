@@ -98,6 +98,10 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.DetailsInter
             intervention.setLocation(this.Location.Text);
             intervention.setNatureOfCall(this.NatureOfCall.Text);
             intervention.setAge(this.Age.Text);
+			if((TextBox)sender == OtherChiefComplaint)
+			{
+				intervention.setChiefComplaint(OtherChiefComplaint.Text);
+			}
             int hh = int.Parse(Callhh.Text);
             int mm = int.Parse(Callmm.Text);
             DateTime timeOfCall = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, hh, mm, 0);
@@ -108,7 +112,6 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.DetailsInter
         {
             ComboBox comboBox = (ComboBox)sender;
             ComboBoxItem item = (ComboBoxItem)comboBox.SelectedItem;
-            interventionForm.setPriority("" + item.Content);
             intervention.setCode(Convert.ToInt32(item.Content));
         }
 
@@ -126,17 +129,14 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.DetailsInter
             {
                 Grid.SetColumnSpan(Complaint, 1);
                 OtherChiefComplaint.Visibility = Visibility.Visible;
-                interventionForm.setComplaint("" + OtherChiefComplaint.Text);
                 intervention.setChiefComplaint("" + OtherChiefComplaint.Text);
             }
             else
             {
                 OtherChiefComplaint.Visibility = Visibility.Collapsed;
                 Grid.SetColumnSpan(Complaint, 2);
-                interventionForm.setComplaint("" + item.Content);
                 intervention.setChiefComplaint("" + item.Content);
             }
-
         }
 
         public void PersistencyUpdate()
@@ -196,7 +196,6 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.DetailsInter
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            TextBoxHandler.setNow(Callhh, Callmm);
             try
             {
                 int hh = int.Parse(Callhh.Text);
@@ -209,19 +208,13 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.DetailsInter
                 }
                 else
                 {
-                    interventionForm.CreateOverallTimer(offset);
+					intervention.setTimeOfCall(callTime);
                 }
-
             }
             catch (Exception ex)
             {
                 MessageBox.Show("The text inserted in the time boxes is not valid");
             }
-        }
-
-        private void OtherChiefComplaint_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            interventionForm.setComplaint("" + OtherChiefComplaint.Text);
         }
     }
 }

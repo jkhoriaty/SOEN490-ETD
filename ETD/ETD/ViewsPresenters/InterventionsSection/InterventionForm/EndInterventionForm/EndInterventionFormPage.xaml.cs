@@ -313,7 +313,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
                 }
                 else
                 {
-                    interventionForm.CreateTimer(11, "911", "Call", offset);
+                    //interventionForm.CreateTimer(11, "911", "Call", offset);
                 }
 
             }
@@ -343,9 +343,9 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
                     }
                     else
                     {
-                        interventionForm.RenameTimer(11, "911", "First Responder");
-                        interventionForm.CloneTimer(12, "911", "Ambulance", offset, 11);
-                        interventionForm.StopTimer(11, offset);
+                        //interventionForm.RenameTimer(11, "911", "First Responder"); TODO
+                        //interventionForm.CloneTimer(12, "911", "Ambulance", offset, 11); TODO
+                        //interventionForm.StopTimer(11, offset); TODO
                     }
 
                 }
@@ -374,13 +374,15 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
                     }
                     else
                     {
-                        if (!interventionForm.IsTimerRunning(12))
-                        {
-                            interventionForm.RenameTimer(11, "911", "Ambulance");
-                            interventionForm.StopTimer(11, offset);
-                        }
-                        else
-                            interventionForm.StopTimer(12, offset);
+						if (!interventionForm.IsTimerRunning(12))
+						{
+							//interventionForm.RenameTimer(11, "911", "Ambulance"); TODO
+							//interventionForm.StopTimer(11, offset); TODO
+						}
+						else
+						{
+							//interventionForm.StopTimer(12, offset); TODO
+						}
 
                     }
 

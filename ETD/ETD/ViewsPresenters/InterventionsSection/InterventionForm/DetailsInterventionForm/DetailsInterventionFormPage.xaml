@@ -74,7 +74,7 @@
                 <ComboBoxItem Content="Weakness / Fainting"/>
                 <ComboBoxItem Content="Other"/>
             </ComboBox>
-            <TextBox Name="OtherChiefComplaint" Grid.Column="2" Grid.Row="0" Visibility="Collapsed" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" TextChanged="OtherChiefComplaint_TextChanged"/>
+			<TextBox Name="OtherChiefComplaint" Grid.Column="2" Grid.Row="0" Visibility="Collapsed" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
         </Grid>
     </StackPanel>
 </Page>

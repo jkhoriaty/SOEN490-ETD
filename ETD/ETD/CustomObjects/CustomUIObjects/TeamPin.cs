@@ -163,6 +163,11 @@ namespace ETD.CustomObjects.CustomUIObjects
 			base.DragStop(Canvas_map, e);
 		}
 
+		internal void setInterventionPin(InterventionPin interventionPin)
+		{
+			this.interventionPin = interventionPin;
+		}
+
 		//Handle special collisions between a TeamPin and another pin
 		internal override bool HandleSpecialCollisions(Pin fixedPin)
 		{
