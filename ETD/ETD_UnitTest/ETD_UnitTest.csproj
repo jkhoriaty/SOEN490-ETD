@@ -66,7 +66,6 @@
     <Compile Include="ModelsObjectsTest\MapModTest.cs" />
     <Compile Include="ModelsObjectsTest\OperationTest.cs" />
     <Compile Include="ModelsObjectsTest\RequestTest.cs" />
-    <Compile Include="ModelsObjectsTest\WordTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ETD\ETD.csproj">

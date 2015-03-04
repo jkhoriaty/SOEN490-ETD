@@ -168,7 +168,7 @@ namespace ETD.Models.Objects
 		}
         
         //Returns the Team Object from teamList with team name as an input
-        public Team getTeamObject(String teamName)
+        public static Team getTeamObject(String teamName)
         {
             if (teamList.Count > 0)
             {
@@ -178,17 +178,13 @@ namespace ETD.Models.Objects
                     {
                         return team;
                     }
-                    else
-                    {
-                        return new Team(teamName);
-                    }
                 }
             }
             return null;
         }
 
         //Swapping method used to reorder teams in the team section
-        internal void Swap(Team team, String direction)
+        public static void Swap(Team team, String direction)
         {
             int currentPosition = teamList.IndexOf(team);
             int newPosition;

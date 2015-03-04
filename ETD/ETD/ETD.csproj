@@ -170,9 +170,7 @@
     <Compile Include="Models\Objects\Equipment.cs" />
     <Compile Include="Services\TechnicalServices.cs" />
     <Compile Include="Models\Objects\Team.cs" />
-    <Compile Include="Services\Vocabulary.cs" />
     <Compile Include="Models\Objects\TeamMember.cs" />
-    <Compile Include="Models\Objects\Word.cs" />
   </ItemGroup>
   <!--
     ViewsPresenters
@@ -332,10 +330,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Resource Include="Resources\ErrorMessages.xml" />
-    <Content Include="Resources\Vocabulary.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
-    </Content>
   </ItemGroup>
   <!--
     Icons
