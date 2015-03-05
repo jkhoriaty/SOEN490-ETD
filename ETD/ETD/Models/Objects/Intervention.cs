@@ -66,8 +66,14 @@ namespace ETD.Models.Objects
             ClassModifiedNotification(typeof(Intervention));
         }
 
+		//Set intervention as completed
         public void Completed()
         {
+			//Set teams to unavailable when the team is completed
+			foreach(Team team in getInterveningTeamList())
+			{
+				team.setStatus("unavailable");
+			}
             activeInterventionList.Remove(this);
             completedInterventionList.Add(this);
 			isConcludedBool = true;
@@ -385,5 +391,10 @@ namespace ETD.Models.Objects
         {
             return completedInterventionList.Contains(this);
         }
+
+		public void ResourceModified()
+		{
+			InstanceModifiedNotification();
+		}
     }
 }

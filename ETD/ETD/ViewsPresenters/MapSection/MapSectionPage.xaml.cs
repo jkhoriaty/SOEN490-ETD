@@ -57,11 +57,11 @@ namespace ETD.ViewsPresenters.MapSection
 				Canvas_map.Children.Add(teamPin);
 
 				//Setting the pin to it's previous position, if it exists, or to the top-left corner
-				bool ignoreSpecialCollisions = true;
+				bool ignoreSpecialCollisions = false;
 				double[] previousPinPosition = Pin.getPreviousPinPosition(team);
 				if (previousPinPosition == null)
 				{
-					ignoreSpecialCollisions = false;
+					ignoreSpecialCollisions = true;
 					previousPinPosition = new double[]{ teamPin.Width / 2, teamPin.Height / 2 }; //Top-left corner
 				}
 				teamPin.setPinPosition(previousPinPosition[0], previousPinPosition[1]);
@@ -75,11 +75,11 @@ namespace ETD.ViewsPresenters.MapSection
 				Canvas_map.Children.Add(interventionPin);
 
 				//Setting the pin to it's previous position, if it exists, or to the top-left corner
-				bool ignoreSpecialCollisions = true;
+				bool ignoreSpecialCollisions = false;
 				double[] previousPinPosition = Pin.getPreviousPinPosition(intervention);
 				if (previousPinPosition == null)
 				{
-					ignoreSpecialCollisions = false;
+					ignoreSpecialCollisions = true;
 					previousPinPosition = new double[] { (interventionPin.Width / 2), Canvas_map.ActualHeight - (interventionPin.Height / 2) }; //Bottom-right corner
 				}
 				interventionPin.setPinPosition(previousPinPosition[0], previousPinPosition[1]);
@@ -96,11 +96,11 @@ namespace ETD.ViewsPresenters.MapSection
 					Canvas_map.Children.Add(equipmentPin);
 
 					//Setting the pin to it's previous position, if it exists, or to the top-left corner
-					bool ignoreSpecialCollisions = true;
+					bool ignoreSpecialCollisions = false;
 					double[] previousPinPosition = Pin.getPreviousPinPosition(equipment);
 					if (previousPinPosition == null)
 					{
-						ignoreSpecialCollisions = false;
+						ignoreSpecialCollisions = true;
 						previousPinPosition = new double[] { Canvas_map.ActualWidth - (equipmentPin.Width / 2), (equipmentPin.Height / 2) }; //Top-right corner
 					}
 					equipmentPin.setPinPosition(previousPinPosition[0], previousPinPosition[1]);

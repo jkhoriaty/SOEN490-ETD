@@ -13,6 +13,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 {
 	class ResourceLine
 	{
+		private Intervention intervention;
 		private Resource resource;
 
 		private TextBox resourceNameTextBox;
@@ -32,8 +33,9 @@ namespace ETD.CustomObjects.CustomUIObjects
 		private TextBox arrivalMMTextBox;
 
 		//Constructor
-		public ResourceLine(Resource resource)
+		public ResourceLine(Resource resource, Intervention intervention)
 		{
+			this.intervention = intervention;
 			this.resource = resource;
 			BuildLine();
 			PopulateLine();
@@ -220,6 +222,8 @@ namespace ETD.CustomObjects.CustomUIObjects
 					return;
 				}
 			}
+
+			intervention.ResourceModified();
 		}
 
 		//Called when the colon in the moving column is clicked

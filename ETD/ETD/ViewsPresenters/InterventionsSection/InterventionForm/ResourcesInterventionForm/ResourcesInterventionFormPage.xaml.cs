@@ -30,7 +30,6 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.ResourcesInt
 		private Dictionary<String, TextBox[]> informationMap = new Dictionary<String, TextBox[]>();
 		private List<Button> movingButtons = new List<Button>();
 		private List<Button> arrivalButtons = new List<Button>();
-		private int addResourcesOffset = 0;
 
 		public ResourcesInterventionFormPage(InterventionFormPage interventionForm, Intervention intervention)
 		{
@@ -46,7 +45,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.ResourcesInt
 			foreach (Resource resource in intervention.getResourceList())
             {
 				//Creating line and adding the items to the main Grid
-				ResourceLine resourceLine = new ResourceLine(resource);
+				ResourceLine resourceLine = new ResourceLine(resource, intervention);
 				RowDefinition rowDefinition = new RowDefinition();
 				rowDefinition.Height = new GridLength(25);
 				Grid_Main.RowDefinitions.Add(rowDefinition);

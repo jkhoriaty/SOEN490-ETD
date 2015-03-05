@@ -26,12 +26,12 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.TimersInterv
 	{
         private InterventionFormPage interventionForm;
         private Intervention intervention;
+		private Label interventionTimer;
+		private Label interventionStatus;
 
-        private List<Stopwatch> stopwatchList = new List<Stopwatch>();
-		private Dictionary<Stopwatch, bool> stopwatchActive = new Dictionary<Stopwatch, bool>();
-		private Dictionary<Stopwatch, Label> stopwatchLabelDictionary = new Dictionary<Stopwatch, Label>();
-		private Dictionary<Stopwatch, TimeSpan> stopwatchOffsetDictionary = new Dictionary<Stopwatch, TimeSpan>();
-		private Dictionary<Stopwatch, Label> stopwatchStatusDictionary = new Dictionary<Stopwatch, Label>();
+		private List<Resource> resourceList = new List<Resource>();
+		private Dictionary<Resource, Label> resourceTimerDictionary = new Dictionary<Resource, Label>();
+		private Dictionary<Resource, Label> resourceStatusDictionary = new Dictionary<Resource, Label>();
 
 		private static int interventionDeadline = 30;
 		private static int movingDeadline = 5;
@@ -54,52 +54,61 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.TimersInterv
 		//Method runs every second
 		public void refresh(object sender, EventArgs e)
 		{
-			foreach (Stopwatch stopwatch in stopwatchList)
+			TimeSpan elapsed;
+			bool ongoing = true;
+			if(intervention.IsCompleted())
 			{
-				if(stopwatchActive[stopwatch])
-				{
-					TimeSpan elapsed = stopwatch.Elapsed + stopwatchOffsetDictionary[stopwatch];
-					stopwatchLabelDictionary[stopwatch].Content = elapsed.Minutes + ":";
-					if(elapsed.Seconds < 10)
-					{
-						stopwatchLabelDictionary[stopwatch].Content += "0";
-					}
-					stopwatchLabelDictionary[stopwatch].Content += elapsed.Seconds.ToString();
+				elapsed = intervention.getConclusionTime() - intervention.getTimeOfCall();
+				ongoing = false;
+			}
+			else
+			{
+				elapsed = DateTime.Now - intervention.getTimeOfCall();
+			}
+			UpdateTimer(elapsed, interventionTimer, interventionStatus, ongoing, interventionDeadline);
 
-					//Setting the status
-					if(stopwatchList.ElementAt(0) == stopwatch) //It's the intervention timer
-					{
-						if(elapsed.Minutes < interventionDeadline) //Is overtime
-						{
-							setStatus(stopwatchStatusDictionary[stopwatch], "Overtime");
-							if(elapsed.Seconds < 15)
-							{
-								if(elapsed.Seconds % 2 == 0)
-								{
-									Brush backgroundColor = stopwatchStatusDictionary[stopwatch].Background;
-									stopwatchStatusDictionary[stopwatch].Background = stopwatchStatusDictionary[stopwatch].Foreground;
-									stopwatchStatusDictionary[stopwatch].Foreground = backgroundColor;
-								}
-							}
-						}
-						else
-						{
-							setStatus(stopwatchStatusDictionary[stopwatch], "Ongoing");
-						}
-					}
-					else if(elapsed.Minutes < movingDeadline) //Is a resource time and is overtime
-					{
-						setStatus(stopwatchStatusDictionary[stopwatch], "Overtime");
-					}
-					else
-					{
-						setStatus(stopwatchStatusDictionary[stopwatch], "Ongoing");
-					}
+			foreach (Resource resource in resourceList)
+			{
+				ongoing = true;
+				if(resource.hasArrived())
+				{
+					elapsed = resource.getArrivalTime() - resource.getMovingTime();
+					ongoing = false;
 				}
 				else
 				{
-					setStatus(stopwatchStatusDictionary[stopwatch], "Completed");
+					elapsed = DateTime.Now - resource.getMovingTime();
 				}
+				UpdateTimer(elapsed, resourceTimerDictionary[resource], resourceStatusDictionary[resource], ongoing, movingDeadline);
+			}
+		}
+
+		private void UpdateTimer(TimeSpan elapsed, Label timer, Label status, bool ongoing, int deadline)
+		{
+			timer.Content = elapsed.Minutes + ":";
+			if (elapsed.Seconds < 10)
+			{
+				timer.Content += "0";
+			}
+			timer.Content += elapsed.Seconds.ToString();
+
+			if (ongoing && elapsed.TotalMinutes > deadline)
+			{
+				setStatus(status, "Overtime");
+				if (elapsed.Seconds < 15 && elapsed.Seconds % 2 == 0)
+				{
+					Brush backgroundColor = status.Background;
+					status.Background = status.Foreground;
+					status.Foreground = backgroundColor;
+				}
+			}
+			else if(ongoing)
+			{
+				setStatus(status, "Ongoing");
+			}
+			else
+			{
+				setStatus(status, "Completed");
 			}
 		}
 
@@ -108,23 +117,6 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.TimersInterv
 		{
 			Thickness border = new Thickness();
 			border.Bottom = 1;
-
-            Stopwatch stopwatch = new Stopwatch();
-			stopwatchList.Add(stopwatch);
-			stopwatch.Start();
-
-			TimeSpan offset;
-			if (intervention.isConcluded() == true)
-			{
-				stopwatchActive.Add(stopwatch, false);
-				offset = intervention.getConclusionTime() - intervention.getTimeOfCall();
-			}
-			else
-			{
-				stopwatchActive.Add(stopwatch, true);
-				offset = DateTime.Now - intervention.getTimeOfCall();
-			}
-			stopwatchOffsetDictionary.Add(stopwatch, offset);
 
 			Label name = new Label();
 			name.Content = "Intervention";
@@ -144,7 +136,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.TimersInterv
 			timer.BorderBrush = new SolidColorBrush(Colors.Black);
 			timer.BorderThickness = border;
 			timersList.Children.Add(timer);
-			stopwatchLabelDictionary.Add(stopwatch, timer);
+			interventionTimer = timer;
 
 
 			Label status = new Label();
@@ -155,7 +147,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.TimersInterv
 			status.BorderBrush = new SolidColorBrush(Colors.Black);
 			status.BorderThickness = border;
 			timersList.Children.Add(status);
-			stopwatchStatusDictionary.Add(stopwatch, status);
+			interventionStatus = status;
 		}
 
 		private void CreateResourcesTimers()
@@ -163,26 +155,11 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.TimersInterv
 			int rowNumber = 1;
 			foreach(Resource resource in intervention.getResourceList())
 			{
+				resourceList.Add(resource);
+
 				RowDefinition rowDefinition = new RowDefinition();
-				rowDefinition.Height = new GridLength(25);
+				rowDefinition.Height = new GridLength(27);
 				timersList.RowDefinitions.Add(rowDefinition);
-
-				Stopwatch stopwatch = new Stopwatch();
-				stopwatchList.Add(stopwatch);
-				stopwatch.Start();
-
-				TimeSpan offset;
-				if(resource.hasArrived() == true)
-				{
-					stopwatchActive.Add(stopwatch, false);
-					offset = resource.getArrivalTime() - resource.getMovingTime();
-				}
-				else
-				{
-					stopwatchActive.Add(stopwatch, true);
-					offset = DateTime.Now - intervention.getTimeOfCall();
-				}
-				stopwatchOffsetDictionary.Add(stopwatch, offset);
 
 				Label name = new Label();
 				name.Content = resource.getTeam().getName();
@@ -199,16 +176,16 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.TimersInterv
 				Label timer = new Label();
 				timer.HorizontalContentAlignment = HorizontalAlignment.Center;
 				Grid.SetColumn(timer, 2);
-				Grid.SetRow(timer, 0);
+				Grid.SetRow(timer, rowNumber);
 				timersList.Children.Add(timer);
-				stopwatchLabelDictionary.Add(stopwatch, timer);
+				resourceTimerDictionary.Add(resource, timer);
 
 				Label status = new Label();
 				status.HorizontalContentAlignment = HorizontalAlignment.Center;
 				Grid.SetColumn(status, 3);
 				Grid.SetRow(status, rowNumber);
 				timersList.Children.Add(status);
-				stopwatchStatusDictionary.Add(stopwatch, status);
+				resourceStatusDictionary.Add(resource, status);
 
 				rowNumber++;
 			}

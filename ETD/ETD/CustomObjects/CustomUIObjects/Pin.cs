@@ -409,6 +409,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 								}
 							}
 						}
+						
 						//Drop the rectangle after resolution of collision
 						 setPinPosition(movedPin_X, movedPin_Y);
 					}

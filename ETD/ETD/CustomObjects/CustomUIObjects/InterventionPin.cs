@@ -28,6 +28,12 @@ namespace ETD.CustomObjects.CustomUIObjects
 			base.setImage(TechnicalServices.getImage("intervention"));
 			base.setText(intervention.getInterventionNumber().ToString());
 
+			//Setting the intervention pin  of all team pins that are intervening on this pin
+			foreach(TeamPin teamPin in getInterveningTeamsPin())
+			{
+				teamPin.setInterventionPin(this);
+			}
+
 			//Register as an observer to the intervention instance so that any modification to it are reflected on the map, e.g. addition of a team
 			intervention.RegisterInstanceObserver(this);
 		}

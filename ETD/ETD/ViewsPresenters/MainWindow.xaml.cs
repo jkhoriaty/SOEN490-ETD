@@ -41,13 +41,10 @@ namespace ETD.ViewsPresenters
 		private MapSectionPage mapSection;
 		private InterventionSectionPage interventionsSection;
         private AdditionalInfoPage mapModificationSection;
-        private ScheduleSectionPage scheduleSection;
 
         //Forms used by the popup method
         private FollowUpSectionForm followupSection = new FollowUpSectionForm();
         private FormPopup followupSectionFormPopupContainer;
-
-        private bool isdrawing = false;//Used to add map modifications
 
         //Variables used when resizing the window
 		private double previousWidth;
@@ -60,7 +57,7 @@ namespace ETD.ViewsPresenters
 		{
 
 			InitializeComponent();
-            FormPopup.RegisterMainWindow(this);//Register main window as the master window, used for  displaying popups
+            FormPopup.RegisterMainWindow(this);//Register main window as the master window, used for displaying popups
             mapModificationSection = new AdditionalInfoPage(this);
 			teamsSection = new TeamsSectionPage(this);
 			mapSection = new MapSectionPage(this);
@@ -196,7 +193,6 @@ namespace ETD.ViewsPresenters
                 if (mi!=null && mi.IsSelected )
                 {
                     mapModificationSection.CreateMapModificationPin("" + mi.Name);
-                    isdrawing = false;
                 }
             }  
         }
