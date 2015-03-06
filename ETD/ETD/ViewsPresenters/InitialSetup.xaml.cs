@@ -75,7 +75,7 @@ namespace ETD.ViewsPresenters
             
             if (operationName.Text == "")
             {
-                MessageBox.Show("Invalid operation name.");
+                MessageBox.Show(ETD.Properties.Resources.MessageBox_Notification_InvalidOperationName);
                 return false;
             }
 
@@ -83,7 +83,7 @@ namespace ETD.ViewsPresenters
             Regex acronymRgx = new Regex(@"^[a-zA-Z]{1,3}$");
             if (!acronymRgx.Match(acronym.Text).Success)
             {
-                MessageBox.Show("Invalid Acronym.");
+                MessageBox.Show(ETD.Properties.Resources.MessageBox_Notification_InvalidAcronym);
                 return false;
             }
 
@@ -92,14 +92,14 @@ namespace ETD.ViewsPresenters
             Regex timeRgx = new Regex(@"^[0-9]{2}$");
             if (!timeRgx.Match(shiftStartTimehh.Text).Success || !timeRgx.Match(shiftStartTimemm.Text).Success || (Convert.ToInt32(shiftStartTimehh.Text) < 0 || Convert.ToInt32(shiftStartTimehh.Text) > 24) || (Convert.ToInt32(shiftStartTimemm.Text) < 0 || Convert.ToInt32(shiftStartTimehh.Text) > 59))
             {
-                MessageBox.Show("Invalid start time.");
+                MessageBox.Show(ETD.Properties.Resources.MessageBox_Notification_InvalidStartTime);
                 return false;
             }
 
             //end time regex
             if (!timeRgx.Match(shiftEndTimehh.Text).Success || !timeRgx.Match(shiftEndTimemm.Text).Success || (Convert.ToInt32(shiftEndTimehh.Text) < 0 || Convert.ToInt32(shiftEndTimehh.Text) > 24) || (Convert.ToInt32(shiftEndTimemm.Text) < 0 || Convert.ToInt32(shiftEndTimehh.Text) > 59))
             {
-                MessageBox.Show("Invalid end time.");
+                MessageBox.Show(ETD.Properties.Resources.MessageBox_Notification_InvalidEndTime);
                 return false;
             }
 
@@ -107,7 +107,7 @@ namespace ETD.ViewsPresenters
             Regex nameRgx = new Regex(@"^[a-zA-Z '-]+$");
             if (!nameRgx.Match(dispatcherName.Text).Success)
             {
-                MessageBox.Show("Invalid dispatcher name.");
+                MessageBox.Show(ETD.Properties.Resources.MessageBox_Notification_InvalidDispatcherName);
                 return false;
             }
 
@@ -118,7 +118,7 @@ namespace ETD.ViewsPresenters
             shiftEnd = Convert.ToDateTime(shiftEndStr);
             if (shiftStart >= shiftEnd)
             {
-                MessageBox.Show("Invalid. Start time cannot be greater than end time.");
+                MessageBox.Show(ETD.Properties.Resources.MessageBox_Notification_StartTimeAfterEndTime);
                 return false;
             }
 
@@ -126,12 +126,12 @@ namespace ETD.ViewsPresenters
             //date
             if (shiftStartDate.Text == "")
             {
-                MessageBox.Show("Invalid shift start date.");
+                MessageBox.Show(ETD.Properties.Resources.MessageBox_Notification_InvalidStartDate);
                 return false;
             }
             if (shiftEndDate.Text == "")
             {
-                MessageBox.Show("Invalid shift end date.");
+                MessageBox.Show(ETD.Properties.Resources.MessageBox_Notification_InvalidEndDate);
                 return false;
             }
             return true;

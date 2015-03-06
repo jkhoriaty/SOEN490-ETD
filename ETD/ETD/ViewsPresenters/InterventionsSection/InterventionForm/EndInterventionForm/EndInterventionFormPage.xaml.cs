@@ -131,7 +131,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
 
 				if (offset < 0)
 				{
-					MessageBox.Show("The time inserted is in the future!");
+					MessageBox.Show(ETD.Properties.Resources.MessageBox_Notification_FutureTime);
 				}
 				else
 				{
@@ -139,7 +139,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
 
 					if (Grid.GetColumnSpan(ComboBoxBorder) == 1 && TextBoxHandler.isDefaultText(AdditionalInformation))
 					{
-						MessageBox.Show("No conclusion is set!");
+						MessageBox.Show(ETD.Properties.Resources.MessageBox_Notification_NoConclusion);
 					}
 					else
 					{
@@ -152,7 +152,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
 			}
 			catch (FormatException ex)
 			{
-				MessageBox.Show("The text inserted in the time boxes is not valid");
+				MessageBox.Show(ETD.Properties.Resources.MessageBox_Notification_InvalidTime);
 			}
 		}
 
@@ -173,7 +173,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
 				AdditionalInformationBorder.Visibility = Visibility.Visible;
 				if (item.Name.Equals("call911"))
 				{
-					AdditionalInformation.Text = "Hospital?";
+					AdditionalInformation.Text = ETD.Properties.Resources.TextBox_AdditionalInformation_Hospital;
 
 					//If the ambulance requires an ambulance, show the ambulance form
 					MainGrid.RowDefinitions[1].Height = new GridLength(1, GridUnitType.Star);
@@ -183,11 +183,11 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
 				}
 				else if (item.Name.Equals("other"))
 				{
-					AdditionalInformation.Text = "Conclusion?";
+                    AdditionalInformation.Text = ETD.Properties.Resources.TextBox_AdditionalInformation_Conclusion;
 				}
 				else if (item.Name.Equals("doctor"))
 				{
-					AdditionalInformation.Text = "Hospital?";
+                    AdditionalInformation.Text = ETD.Properties.Resources.TextBox_AdditionalInformation_Hospital;
 				}
 				TextBoxHandler.ResetHandling(AdditionalInformation);
 			}
@@ -309,7 +309,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
                 int offset = (int)DateTime.Now.Subtract(startTime).TotalSeconds;
                 if (offset < 0)
                 {
-                    MessageBox.Show("The time inserted is in the future!");
+                    MessageBox.Show(ETD.Properties.Resources.MessageBox_Notification_FutureTime);
                 }
                 else
                 {
@@ -319,7 +319,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
             }
             catch (Exception ex)
             {
-                MessageBox.Show("The text inserted in the time boxes is not valid");
+                MessageBox.Show(ETD.Properties.Resources.MessageBox_Notification_InvalidTime);
             }
             
 		}
@@ -339,7 +339,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
                     int offset = (int)DateTime.Now.Subtract(startTime).TotalMinutes;
                     if (offset < 0)
                     {
-                        MessageBox.Show("The time inserted is in the future!");
+                        MessageBox.Show(ETD.Properties.Resources.MessageBox_Notification_FutureTime);
                     }
                     else
                     {
@@ -351,7 +351,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("The text inserted in the time boxes is not valid");
+                    MessageBox.Show(ETD.Properties.Resources.MessageBox_Notification_InvalidTime);
                 }
             }
 		}
@@ -370,7 +370,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
                     int offset = (int)DateTime.Now.Subtract(startTime).TotalMinutes;
                     if (offset < 0)
                     {
-                        MessageBox.Show("The time inserted is in the future!");
+                        MessageBox.Show(ETD.Properties.Resources.MessageBox_Notification_FutureTime);
                     }
                     else
                     {
@@ -389,7 +389,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("The text inserted in the time boxes is not valid");
+                    MessageBox.Show(ETD.Properties.Resources.MessageBox_Notification_InvalidTime);
                 }
             }
 		}

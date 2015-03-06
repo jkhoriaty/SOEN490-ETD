@@ -204,7 +204,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.DetailsInter
                 int offset = (int)DateTime.Now.Subtract(callTime).TotalMinutes;
                 if (offset < 0)
                 {
-                    MessageBox.Show("The time inserted is in the future!");
+                    MessageBox.Show(ETD.Properties.Resources.MessageBox_Notification_FutureTime);
                 }
                 else
                 {
@@ -213,7 +213,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.DetailsInter
             }
             catch (Exception ex)
             {
-                MessageBox.Show("The text inserted in the time boxes is not valid");
+                MessageBox.Show(ETD.Properties.Resources.MessageBox_Notification_InvalidTime);
             }
         }
     }

@@ -129,6 +129,10 @@
     <value>Cancel</value>
     <comment>Multi</comment>
   </data>
+  <data name="Button_Conclusion" xml:space="preserve">
+    <value>Conclusion</value>
+    <comment>EndInterventionForm</comment>
+  </data>
   <data name="Button_FollowUp" xml:space="preserve">
     <value>Follow Up</value>
     <comment>MainWindow</comment>
@@ -305,6 +309,42 @@
     <value>Weakness/Fainting</value>
     <comment>DetailsForm</comment>
   </data>
+  <data name="ComboBoxItem_Conclusion_911" xml:space="preserve">
+    <value>911 called</value>
+    <comment>EndInterventionForm</comment>
+  </data>
+  <data name="ComboBoxItem_Conclusion_Doctor" xml:space="preserve">
+    <value>Referred to doctor</value>
+    <comment>EndInterventionForm</comment>
+  </data>
+  <data name="ComboBoxItem_Conclusion_Equipment" xml:space="preserve">
+    <value>Equipment distribution</value>
+    <comment>EndInterventionForm</comment>
+  </data>
+  <data name="ComboBoxItem_Conclusion_NoIntervention" xml:space="preserve">
+    <value>No intervention</value>
+    <comment>EndInterventionForm</comment>
+  </data>
+  <data name="ComboBoxItem_Conclusion_NotFound" xml:space="preserve">
+    <value>Patient not found</value>
+    <comment>EndInterventionForm</comment>
+  </data>
+  <data name="ComboBoxItem_Conclusion_Other" xml:space="preserve">
+    <value>Other</value>
+    <comment>EndInterventionForm</comment>
+  </data>
+  <data name="ComboBoxItem_Conclusion_Refusal" xml:space="preserve">
+    <value>Refusal of treatment</value>
+    <comment>EndInterventionForm</comment>
+  </data>
+  <data name="ComboBoxItem_Conclusion_ReturnHome" xml:space="preserve">
+    <value>Returned to home</value>
+    <comment>EndInterventionForm</comment>
+  </data>
+  <data name="ComboBoxItem_Conclusion_ReturnSite" xml:space="preserve">
+    <value>Returned to site</value>
+    <comment>EndInterventionForm</comment>
+  </data>
   <data name="ComboBoxItem_Consciousness_Alert" xml:space="preserve">
     <value>Alert</value>
     <comment>ABCForm</comment>
@@ -373,6 +413,10 @@
     <value>Wheelchair</value>
     <comment>MainWindow</comment>
   </data>
+  <data name="Label_911Call" xml:space="preserve">
+    <value>911 Call</value>
+    <comment>EndInterventionForm</comment>
+  </data>
   <data name="Label_Acronym" xml:space="preserve">
     <value>Acronym</value>
     <comment>InitialSetup</comment>
@@ -380,6 +424,10 @@
   <data name="Label_Age" xml:space="preserve">
     <value>Age:</value>
     <comment>DetailsForm</comment>
+  </data>
+  <data name="Label_Ambulance" xml:space="preserve">
+    <value>Ambulance</value>
+    <comment>EndInterventionForm</comment>
   </data>
   <data name="Label_Call" xml:space="preserve">
     <value>Call</value>
@@ -396,6 +444,10 @@
   <data name="Label_DispatcherName" xml:space="preserve">
     <value>Dispatcher Name</value>
     <comment>InitialSetup</comment>
+  </data>
+  <data name="Label_FR" xml:space="preserve">
+    <value>F.R.</value>
+    <comment>EndInterventionForm</comment>
   </data>
   <data name="Label_Gender" xml:space="preserve">
     <value>Gender:</value>
@@ -489,17 +541,61 @@
     <value>The intervention deadlines should be numbers!</value>
     <comment>Notification_MainWindow</comment>
   </data>
+  <data name="MessageBox_Notification_EquipmentLimit" xml:space="preserve">
+    <value>A team cannot use more than three equipments.</value>
+    <comment>Notification_Team</comment>
+  </data>
   <data name="MessageBox_Notification_FutureTime" xml:space="preserve">
     <value>The time inserted is in the future!</value>
     <comment>Notification_ResourceLine</comment>
+  </data>
+  <data name="MessageBox_Notification_InvalidAcronym" xml:space="preserve">
+    <value>Invalid acronym.</value>
+    <comment>Notification_InitialSetup</comment>
+  </data>
+  <data name="MessageBox_Notification_InvalidDispatcherName" xml:space="preserve">
+    <value>Invalid dispatcher name.</value>
+    <comment>Notification_InitialSetup</comment>
+  </data>
+  <data name="MessageBox_Notification_InvalidEndDate" xml:space="preserve">
+    <value>Invalid shift end date.</value>
+    <comment>Notification_InitialSetup</comment>
+  </data>
+  <data name="MessageBox_Notification_InvalidEndTime" xml:space="preserve">
+    <value>Invalid shift end time.</value>
+    <comment>Notification_InitialSetup</comment>
+  </data>
+  <data name="MessageBox_Notification_InvalidOperationName" xml:space="preserve">
+    <value>Invalid operation name.</value>
+    <comment>Notification_InitialSetup</comment>
+  </data>
+  <data name="MessageBox_Notification_InvalidStartDate" xml:space="preserve">
+    <value>Invalid shift start date.</value>
+    <comment>Notification_InitialSetup</comment>
+  </data>
+  <data name="MessageBox_Notification_InvalidStartTime" xml:space="preserve">
+    <value>Invalid shift start time.</value>
+    <comment>Notification_InitialSetup</comment>
   </data>
   <data name="MessageBox_Notification_InvalidTime" xml:space="preserve">
     <value>The text inserted in the time boxes is not valid.</value>
     <comment>Notification_ResourceLine</comment>
   </data>
+  <data name="MessageBox_Notification_NoConclusion" xml:space="preserve">
+    <value>No conclusion is set!</value>
+    <comment>Notification_EndInterventionForm</comment>
+  </data>
   <data name="MessageBox_Notification_NoEquipment" xml:space="preserve">
     <value>You need to select an equipment to add!</value>
     <comment>Notification_MainWindow</comment>
+  </data>
+  <data name="MessageBox_Notification_StartTimeAfterEndTime" xml:space="preserve">
+    <value>Start time cannot be greater than end time.</value>
+    <comment>Notification_InitialSetup</comment>
+  </data>
+  <data name="MessageBox_Notification_Warning" xml:space="preserve">
+    <value>Warning</value>
+    <comment>Notification_RegisteredVolunteers</comment>
   </data>
   <data name="TabItem_ABC" xml:space="preserve">
     <value>ABC</value>
@@ -541,6 +637,10 @@
     <value>Circulation</value>
     <comment>ABCForm</comment>
   </data>
+  <data name="TextBlock_Company" xml:space="preserve">
+    <value>Company</value>
+    <comment>EndInterventionForm</comment>
+  </data>
   <data name="TextBlock_Consciousness" xml:space="preserve">
     <value>Consciousness</value>
     <comment>ABCForm</comment>
@@ -552,6 +652,10 @@
   <data name="TextBlock_InterventionDeadline" xml:space="preserve">
     <value>Intervention</value>
     <comment>MainWindow</comment>
+  </data>
+  <data name="TextBlock_MeetingPoint" xml:space="preserve">
+    <value>Meeting:</value>
+    <comment>EndInterventionForm</comment>
   </data>
   <data name="TextBlock_Moving" xml:space="preserve">
     <value>Moving</value>
@@ -568,6 +672,18 @@
   <data name="TextBlock_Team" xml:space="preserve">
     <value>Team</value>
     <comment>ResourcesForm</comment>
+  </data>
+  <data name="TextBlock_Vehicle" xml:space="preserve">
+    <value>Vehicle</value>
+    <comment>EndInterventionForm</comment>
+  </data>
+  <data name="TextBox_AdditionalInformation_Conclusion" xml:space="preserve">
+    <value>Conclusion</value>
+    <comment>EndInterventionForm</comment>
+  </data>
+  <data name="TextBox_AdditionalInformation_Hospital" xml:space="preserve">
+    <value>Hospital?</value>
+    <comment>EndInterventionForm</comment>
   </data>
   <data name="TextBox_CallerName" xml:space="preserve">
     <value>Caller Name</value>

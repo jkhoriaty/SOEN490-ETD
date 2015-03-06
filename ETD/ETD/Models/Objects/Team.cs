@@ -82,7 +82,7 @@ namespace ETD.Models.Objects
 				InstanceModifiedNotification();
                 return true;
             }
-            MessageBox.Show("Can not have more than three equipments");
+            MessageBox.Show(ETD.Properties.Resources.MessageBox_Notification_EquipmentLimit);
             return false;
         }
 

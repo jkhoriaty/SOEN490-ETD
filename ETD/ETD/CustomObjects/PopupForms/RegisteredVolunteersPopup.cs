@@ -24,7 +24,7 @@ namespace ETD.CustomObjects.PopupForms
             //If there are no registered volunteers, display a warning message
 			if(registeredVolunteers.Count == 0)
 			{
-				MessageBox.Show("Warning");
+				MessageBox.Show(ETD.Properties.Resources.MessageBox_Notification_Warning);
 			}
 
 			int row = 0;
