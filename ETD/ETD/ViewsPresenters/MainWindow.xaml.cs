@@ -43,7 +43,7 @@ namespace ETD.ViewsPresenters
         private AdditionalInfoPage mapModificationSection;
 
         //Forms used by the popup method
-        private FollowUpSectionForm followupSection = new FollowUpSectionForm();
+        private FollowUpSectionForm followupSection;
         private FormPopup followupSectionFormPopupContainer;
 
         //Variables used when resizing the window
@@ -58,6 +58,7 @@ namespace ETD.ViewsPresenters
             LanguageSelector.switchLanguage(LanguageSelector.Languages.French);
 			InitializeComponent();
             FormPopup.RegisterMainWindow(this);//Register main window as the master window, used for displaying popups
+            followupSection = new FollowUpSectionForm();
             mapModificationSection = new AdditionalInfoPage(this);
 			teamsSection = new TeamsSectionPage(this);
 			mapSection = new MapSectionPage(this);
@@ -146,7 +147,7 @@ namespace ETD.ViewsPresenters
 			}
 			else
 			{
-				MessageBox.Show("You need to select an equipment to add!");
+				MessageBox.Show(ETD.Properties.Resources.MessageBox_Notification_NoEquipment);
 			}
 		}
 
@@ -173,13 +174,13 @@ namespace ETD.ViewsPresenters
 
 			if(success == false)
 			{
-				MessageBox.Show("The intervention deadlines should be numbers!");
+				MessageBox.Show(ETD.Properties.Resources.MessageBox_Notification_DeadlineNumbers);
 			}
 			else
 			{
 				InterventionSectionPage.setInterventionDeadline(interventionDeadline);
 				InterventionSectionPage.setMovingDeadline(movingDeadline);
-				MessageBox.Show("The deadlines have been changed.");
+				MessageBox.Show(ETD.Properties.Resources.MessageBox_Notification_DeadlineChanged);
 			}
 		}
 

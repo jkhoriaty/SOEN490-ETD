@@ -705,4 +705,36 @@
     <value>Nom d'équipe</value>
     <comment>TeamForm</comment>
   </data>
+  <data name="MessageBox_Notification_FailedValidation" xml:space="preserve">
+    <value>Validation échoué. S'il vous plaît changez les champs avec une bordure rouge.</value>
+    <comment>Notification_TeamForm</comment>
+  </data>
+  <data name="TextBlock_Client" xml:space="preserve">
+    <value>Client</value>
+    <comment>FollowUpSection</comment>
+  </data>
+  <data name="TextBlock_Completion" xml:space="preserve">
+    <value>Complété</value>
+    <comment>FollowUpSection</comment>
+  </data>
+  <data name="TextBlock_FollowUp" xml:space="preserve">
+    <value>Suivi</value>
+    <comment>FollowUpSection</comment>
+  </data>
+  <data name="TextBlock_HandledBy" xml:space="preserve">
+    <value>Géré par</value>
+    <comment>FollowUpSection</comment>
+  </data>
+  <data name="TextBlock_Recipient" xml:space="preserve">
+    <value>Destinataire</value>
+    <comment>FollowUpSection</comment>
+  </data>
+  <data name="TextBlock_Request" xml:space="preserve">
+    <value>Demande</value>
+    <comment>FollowUpSection</comment>
+  </data>
+  <data name="TextBlock_Time" xml:space="preserve">
+    <value>Heure</value>
+    <comment>FollowUpSection</comment>
+  </data>
 </root>

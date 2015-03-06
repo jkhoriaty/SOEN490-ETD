@@ -1050,6 +1050,15 @@ namespace ETD.Properties {
         }
         
         /// <summary>
+        /// Looks up a localized string similar to 'Validation has failed. Please change the boxes with a red border.'.
+        /// </summary>
+        public static string MessageBox_Notification_FailedValidation {
+            get {
+                return ResourceManager.GetString(ResourceNames.MessageBox_Notification_FailedValidation, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Looks up a localized string similar to 'The time inserted is in the future!'.
         /// </summary>
         public static string MessageBox_Notification_FutureTime {
@@ -1257,11 +1266,29 @@ namespace ETD.Properties {
         }
         
         /// <summary>
+        /// Looks up a localized string similar to 'Client'.
+        /// </summary>
+        public static string TextBlock_Client {
+            get {
+                return ResourceManager.GetString(ResourceNames.TextBlock_Client, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Looks up a localized string similar to 'Company'.
         /// </summary>
         public static string TextBlock_Company {
             get {
                 return ResourceManager.GetString(ResourceNames.TextBlock_Company, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Completion'.
+        /// </summary>
+        public static string TextBlock_Completion {
+            get {
+                return ResourceManager.GetString(ResourceNames.TextBlock_Completion, _resourceCulture);
             }
         }
         
@@ -1280,6 +1307,24 @@ namespace ETD.Properties {
         public static string TextBlock_Deadlines {
             get {
                 return ResourceManager.GetString(ResourceNames.TextBlock_Deadlines, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Follow Up'.
+        /// </summary>
+        public static string TextBlock_FollowUp {
+            get {
+                return ResourceManager.GetString(ResourceNames.TextBlock_FollowUp, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Handled By'.
+        /// </summary>
+        public static string TextBlock_HandledBy {
+            get {
+                return ResourceManager.GetString(ResourceNames.TextBlock_HandledBy, _resourceCulture);
             }
         }
         
@@ -1320,6 +1365,24 @@ namespace ETD.Properties {
         }
         
         /// <summary>
+        /// Looks up a localized string similar to 'Recipient'.
+        /// </summary>
+        public static string TextBlock_Recipient {
+            get {
+                return ResourceManager.GetString(ResourceNames.TextBlock_Recipient, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Request'.
+        /// </summary>
+        public static string TextBlock_Request {
+            get {
+                return ResourceManager.GetString(ResourceNames.TextBlock_Request, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Looks up a localized string similar to 'Resources'.
         /// </summary>
         public static string TextBlock_Resources {
@@ -1334,6 +1397,15 @@ namespace ETD.Properties {
         public static string TextBlock_Team {
             get {
                 return ResourceManager.GetString(ResourceNames.TextBlock_Team, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Time'.
+        /// </summary>
+        public static string TextBlock_Time {
+            get {
+                return ResourceManager.GetString(ResourceNames.TextBlock_Time, _resourceCulture);
             }
         }
         
@@ -1950,6 +2022,11 @@ namespace ETD.Properties {
             public const string MessageBox_Notification_EquipmentLimit = "MessageBox_Notification_EquipmentLimit";
             
             /// <summary>
+            /// Stores the resource name 'MessageBox_Notification_FailedValidation'.
+            /// </summary>
+            public const string MessageBox_Notification_FailedValidation = "MessageBox_Notification_FailedValidation";
+            
+            /// <summary>
             /// Stores the resource name 'MessageBox_Notification_FutureTime'.
             /// </summary>
             public const string MessageBox_Notification_FutureTime = "MessageBox_Notification_FutureTime";
@@ -2065,9 +2142,19 @@ namespace ETD.Properties {
             public const string TextBlock_Circulation = "TextBlock_Circulation";
             
             /// <summary>
+            /// Stores the resource name 'TextBlock_Client'.
+            /// </summary>
+            public const string TextBlock_Client = "TextBlock_Client";
+            
+            /// <summary>
             /// Stores the resource name 'TextBlock_Company'.
             /// </summary>
             public const string TextBlock_Company = "TextBlock_Company";
+            
+            /// <summary>
+            /// Stores the resource name 'TextBlock_Completion'.
+            /// </summary>
+            public const string TextBlock_Completion = "TextBlock_Completion";
             
             /// <summary>
             /// Stores the resource name 'TextBlock_Consciousness'.
@@ -2078,6 +2165,16 @@ namespace ETD.Properties {
             /// Stores the resource name 'TextBlock_Deadlines'.
             /// </summary>
             public const string TextBlock_Deadlines = "TextBlock_Deadlines";
+            
+            /// <summary>
+            /// Stores the resource name 'TextBlock_FollowUp'.
+            /// </summary>
+            public const string TextBlock_FollowUp = "TextBlock_FollowUp";
+            
+            /// <summary>
+            /// Stores the resource name 'TextBlock_HandledBy'.
+            /// </summary>
+            public const string TextBlock_HandledBy = "TextBlock_HandledBy";
             
             /// <summary>
             /// Stores the resource name 'TextBlock_InterventionDeadline'.
@@ -2100,6 +2197,16 @@ namespace ETD.Properties {
             public const string TextBlock_MovingDeadline = "TextBlock_MovingDeadline";
             
             /// <summary>
+            /// Stores the resource name 'TextBlock_Recipient'.
+            /// </summary>
+            public const string TextBlock_Recipient = "TextBlock_Recipient";
+            
+            /// <summary>
+            /// Stores the resource name 'TextBlock_Request'.
+            /// </summary>
+            public const string TextBlock_Request = "TextBlock_Request";
+            
+            /// <summary>
             /// Stores the resource name 'TextBlock_Resources'.
             /// </summary>
             public const string TextBlock_Resources = "TextBlock_Resources";
@@ -2108,6 +2215,11 @@ namespace ETD.Properties {
             /// Stores the resource name 'TextBlock_Team'.
             /// </summary>
             public const string TextBlock_Team = "TextBlock_Team";
+            
+            /// <summary>
+            /// Stores the resource name 'TextBlock_Time'.
+            /// </summary>
+            public const string TextBlock_Time = "TextBlock_Time";
             
             /// <summary>
             /// Stores the resource name 'TextBlock_Vehicle'.

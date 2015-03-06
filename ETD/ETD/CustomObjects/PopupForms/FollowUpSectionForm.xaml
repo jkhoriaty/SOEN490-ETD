@@ -3,6 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:properties="clr-namespace:ETD.Properties"
       mc:Ignorable="d" 
       d:DesignHeight="400" d:DesignWidth="1200"
 	Title="FollowUpSection">
@@ -38,43 +39,43 @@
 
             <Border  Grid.Column="0" Grid.Row="0" BorderBrush="Black" BorderThickness="1,1,1,1">
                 <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal">
-                    <TextBlock Text="Time" FontSize="25" VerticalAlignment="Center" RenderTransformOrigin="1.294,0.509"/>
+                    <TextBlock x:Uid="TextBlock_Time" Text="{x:Static properties:Resources.TextBlock_Time}" FontSize="25" VerticalAlignment="Center" RenderTransformOrigin="1.294,0.509"/>
                 </StackPanel>
             </Border>
 
             <Border  Grid.Column="1" Grid.Row="0" BorderBrush="Black" BorderThickness="1,1,1,1">
                 <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal">
-                    <TextBlock Text="Client" FontSize="25" VerticalAlignment="Center" RenderTransformOrigin="1.294,0.509"/>
+                    <TextBlock x:Uid="TextBlock_Client" Text="{x:Static properties:Resources.TextBlock_Client}" FontSize="25" VerticalAlignment="Center" RenderTransformOrigin="1.294,0.509"/>
                 </StackPanel>
             </Border>
 
             <Border  Grid.Column="2" Grid.Row="0" BorderBrush="Black" BorderThickness="1,1,1,1">
                 <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal">
-                    <TextBlock Text="Recipient" FontSize="25" VerticalAlignment="Center" RenderTransformOrigin="1.294,0.509"/>
+                    <TextBlock x:Uid="TextBlock_Recipient" Text="{x:Static properties:Resources.TextBlock_Recipient}" FontSize="25" VerticalAlignment="Center" RenderTransformOrigin="1.294,0.509"/>
                 </StackPanel>
             </Border>
 
             <Border  Grid.Column="3" Grid.Row="0" BorderBrush="Black" BorderThickness="0,1,1,1">
                 <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal">
-                    <TextBlock Text="Request" FontSize="25" VerticalAlignment="Center" RenderTransformOrigin="1.294,0.509"/>
+                    <TextBlock x:Uid="TextBlock_Request" Text="{x:Static properties:Resources.TextBlock_Request}" FontSize="25" VerticalAlignment="Center" RenderTransformOrigin="1.294,0.509"/>
                 </StackPanel>
             </Border>
 
             <Border  Grid.Column="4" Grid.Row="0" BorderBrush="Black" BorderThickness="0,1,1,1">
                 <StackPanel Grid.Column="2" Grid.Row="0" Orientation="Horizontal">
-                    <TextBlock Text="Handled by" FontSize="25" VerticalAlignment="Center" RenderTransformOrigin="1.294,0.509"/>
+                    <TextBlock x:Uid="TextBlock_HandledBy" Text="{x:Static properties:Resources.TextBlock_HandledBy}" FontSize="25" VerticalAlignment="Center" RenderTransformOrigin="1.294,0.509"/>
                 </StackPanel>
             </Border>
 
             <Border  Grid.Column="5" Grid.Row="0" BorderBrush="Black" BorderThickness="0,1,1,1">
                 <StackPanel Grid.Column="3" Grid.Row="0" Orientation="Horizontal">
-                    <TextBlock Text="Follow-up" FontSize="25" VerticalAlignment="Center" RenderTransformOrigin="1.294,0.509"/>
+                    <TextBlock x:Uid="TextBlock_FollowUp" Text="{x:Static properties:Resources.TextBlock_FollowUp}" FontSize="25" VerticalAlignment="Center" RenderTransformOrigin="1.294,0.509"/>
                 </StackPanel>
             </Border>
 
             <Border  Grid.Column="6" Grid.Row="0" BorderBrush="Black" BorderThickness="0,1,1,1">
                 <StackPanel Grid.Column="4" Grid.Row="0" Orientation="Horizontal">
-                    <TextBlock Text="Completion" FontSize="25" VerticalAlignment="Center" RenderTransformOrigin="1.294,0.509"/>
+                    <TextBlock x:Uid="TextBlock_Completion"  Text="{x:Static properties:Resources.TextBlock_Completion}" FontSize="25" VerticalAlignment="Center" RenderTransformOrigin="1.294,0.509"/>
                 </StackPanel>
             </Border>
 

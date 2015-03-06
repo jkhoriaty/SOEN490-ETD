@@ -120,7 +120,7 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 			}
 			else
 			{
-				MessageBox.Show("Validation has failed. Please change the boxes with a red border.");
+				MessageBox.Show(ETD.Properties.Resources.MessageBox_Notification_FailedValidation);
 			}
         }
 
