@@ -112,7 +112,6 @@
     <Compile Include="ViewsPresenters\MapSection\MapSectionPage.xaml.cs">
       <DependentUpon>MapSectionPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewsPresenters\PopupForm.cs" />
     <Compile Include="ViewsPresenters\ScheduleSection\ScheduleSectionPage.xaml.cs">
       <DependentUpon>ScheduleSectionPage.xaml</DependentUpon>
     </Compile>
@@ -345,7 +344,6 @@
     <Content Include="Icons\statExport.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Resource Include="Resources\ErrorMessages.xml" />
   </ItemGroup>
   <!--
     Icons
@@ -429,6 +427,7 @@
   -->
   <ItemGroup>
     <Folder Include="Maps\" />
+    <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">

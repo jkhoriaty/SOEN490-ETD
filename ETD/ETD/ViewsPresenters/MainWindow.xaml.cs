@@ -55,7 +55,7 @@ namespace ETD.ViewsPresenters
 
 		public MainWindow()
 		{
-            LanguageSelector.switchLanguage(LanguageSelector.Languages.French);
+            LanguageSelector.switchLanguage(LanguageSelector.Languages.English);
 			InitializeComponent();
             FormPopup.RegisterMainWindow(this);//Register main window as the master window, used for displaying popups
             followupSection = new FollowUpSectionForm();
