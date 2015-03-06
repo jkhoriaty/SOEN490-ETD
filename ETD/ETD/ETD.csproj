@@ -75,11 +75,17 @@
     <Compile Include="Models\Objects\Resource.cs" />
     <Compile Include="CustomObjects\PopupForms\FormPopup.cs" />
     <Compile Include="CustomObjects\PopupForms\RegisteredVolunteersPopup.cs" />
-    <Compile Include="Properties\Resources.fr-CA.Designer.cs">
-      <DependentUpon>Resources.fr-CA.resx</DependentUpon>
+    <Compile Include="Properties\Resources.en.Designer.cs">
+      <DependentUpon>Resources.en.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Properties\Resources.fr.Designer.cs">
+      <DependentUpon>Resources.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Services\CultureResources.cs" />
     <Compile Include="Services\NetworkServices.cs" />
     <Compile Include="Services\TextboxHandler.cs" />
     <Compile Include="ViewsPresenters\InitialSetup.xaml.cs">
@@ -160,9 +166,14 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Properties\Resources.fr-CA.resx">
+    <EmbeddedResource Include="Properties\Resources.en.resx">
       <Generator>ResXFileCodeGeneratorEX</Generator>
-      <LastGenOutput>Resources.fr-CA.Designer.cs</LastGenOutput>
+      <LastGenOutput>Resources.en.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.fr.resx">
+      <Generator>ResXFileCodeGeneratorEX</Generator>
+      <LastGenOutput>Resources.fr.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -181,7 +192,6 @@
     Models
   -->
   <ItemGroup>
-    <Compile Include="Services\LanguageSelector.cs" />
     <Compile Include="Models\Objects\Equipment.cs" />
     <Compile Include="Services\TechnicalServices.cs" />
     <Compile Include="Models\Objects\Team.cs" />
@@ -192,6 +202,10 @@
   -->
   <ItemGroup>
     <Page Include="CustomObjects\PopupForms\FollowUpSectionForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ResourceDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -445,6 +459,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <!--
     Icons

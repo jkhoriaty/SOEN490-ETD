@@ -24,19 +24,19 @@
 		</Grid.RowDefinitions>
 		
 		<Border Grid.Column="0" Grid.Row="0" BorderThickness="0,0,0,1" BorderBrush="Black">
-            <Button x:Uid="Button_Conclusion" Content="{x:Static properties:Resources.Button_Conclusion}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="EndIntervention"/>
+            <Button x:Uid="Button_Conclusion" Content="{Binding Path=Button_Conclusion, Mode=OneWay, Source={StaticResource Resources}}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="EndIntervention"/>
 		</Border>
 		<Border Name="ComboBoxBorder" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0" BorderBrush="Black" BorderThickness="0,0,0,1" Padding="1">
 			<ComboBox x:Uid="ComboBox_Conclusion" Name="ConclusionBox" SelectionChanged="SelectionChanged">
-                <ComboBoxItem x:Uid="ComboBoxItem_Conclusion_ReturnSite" Content="{x:Static properties:Resources.ComboBoxItem_Conclusion_ReturnSite}"/>
-                <ComboBoxItem x:Uid="ComboBoxItem_Conclusion_ReturnHome" Content="{x:Static properties:Resources.ComboBoxItem_Conclusion_ReturnHome}"/>
-                <ComboBoxItem x:Uid="ComboBoxItem_Conclusion_Doctor" Content="{x:Static properties:Resources.ComboBoxItem_Conclusion_Doctor}" Name="doctor"/>
-                <ComboBoxItem x:Uid="ComboBoxItem_Conclusion_Equipment" Content="{x:Static properties:Resources.ComboBoxItem_Conclusion_Equipment}"/>
-                <ComboBoxItem x:Uid="ComboBoxItem_Conclusion_911" Content="{x:Static properties:Resources.ComboBoxItem_Conclusion_911}" Name="call911"/>
-                <ComboBoxItem x:Uid="ComboBoxItem_Conclusion_NotFound" Content="{x:Static properties:Resources.ComboBoxItem_Conclusion_NotFound}"/>
-                <ComboBoxItem x:Uid="ComboBoxItem_Conclusion_Refusal" Content="{x:Static properties:Resources.ComboBoxItem_Conclusion_Refusal}"/>
-                <ComboBoxItem x:Uid="ComboBoxItem_Conclusion_NoIntervention" Content="{x:Static properties:Resources.ComboBoxItem_Conclusion_NoIntervention}"/>
-                <ComboBoxItem x:Uid="ComboBoxItem_Conclusion_Other" Content="{x:Static properties:Resources.ComboBoxItem_Conclusion_Other}" Name="other"/>
+                <ComboBoxItem x:Uid="ComboBoxItem_Conclusion_ReturnSite" Content="{Binding Path=ComboBoxItem_Conclusion_ReturnSite, Mode=OneWay, Source={StaticResource Resources}}"/>
+                <ComboBoxItem x:Uid="ComboBoxItem_Conclusion_ReturnHome" Content="{Binding Path=ComboBoxItem_Conclusion_ReturnHome, Mode=OneWay, Source={StaticResource Resources}}"/>
+                <ComboBoxItem x:Uid="ComboBoxItem_Conclusion_Doctor" Content="{Binding Path=ComboBoxItem_Conclusion_Doctor, Mode=OneWay, Source={StaticResource Resources}}" Name="doctor"/>
+                <ComboBoxItem x:Uid="ComboBoxItem_Conclusion_Equipment" Content="{Binding Path=ComboBoxItem_Conclusion_Equipment, Mode=OneWay, Source={StaticResource Resources}}"/>
+                <ComboBoxItem x:Uid="ComboBoxItem_Conclusion_911" Content="{Binding Path=ComboBoxItem_Conclusion_911, Mode=OneWay, Source={StaticResource Resources}}" Name="call911"/>
+                <ComboBoxItem x:Uid="ComboBoxItem_Conclusion_NotFound" Content="{Binding Path=ComboBoxItem_Conclusion_NotFound, Mode=OneWay, Source={StaticResource Resources}}"/>
+                <ComboBoxItem x:Uid="ComboBoxItem_Conclusion_Refusal" Content="{Binding Path=ComboBoxItem_Conclusion_Refusal, Mode=OneWay, Source={StaticResource Resources}}"/>
+                <ComboBoxItem x:Uid="ComboBoxItem_Conclusion_NoIntervention" Content="{Binding Path=ComboBoxItem_Conclusion_NoIntervention, Mode=OneWay, Source={StaticResource Resources}}"/>
+                <ComboBoxItem x:Uid="ComboBoxItem_Conclusion_Other" Content="{Binding Path=ComboBoxItem_Conclusion_Other, Mode=OneWay, Source={StaticResource Resources}}" Name="other"/>
 			</ComboBox>
 		</Border>
         <Border Name="AdditionalInformationBorder" Grid.Column="2" Grid.Row="0" Visibility="Collapsed" BorderBrush="Black" BorderThickness="0,0,0,1">
@@ -51,7 +51,7 @@
 			</StackPanel>
 		</Border>
 
-        <Label x:Uid="Label_911Call" Grid.Column="0" Grid.Row="1" Content="{x:Static properties:Resources.Label_911Call}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderBrush="Black" BorderThickness="0,0,1,0"/>
+        <Label x:Uid="Label_911Call" Grid.Column="0" Grid.Row="1" Content="{Binding Path=Label_911Call, Mode=OneWay, Source={StaticResource Resources}}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderBrush="Black" BorderThickness="0,0,1,0"/>
 		<Border Grid.Column="0" Grid.Row="2" BorderBrush="Black" BorderThickness="0,0,1,1">
 			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 				<TextBox Name="Call911hh" Width="29" Text="hh" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
@@ -62,16 +62,16 @@
 		
 		<Border Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="1" BorderBrush="Black" BorderThickness="0,0,0,1" VerticalAlignment="Center">
 			<DockPanel >
-                <TextBlock x:Uid="TextBlock_MeetingPoint" Text="{x:Static properties:Resources.TextBlock_MeetingPoint}" Margin="2,0,2,0"/>
+                <TextBlock x:Uid="TextBlock_MeetingPoint" Text="{Binding Path=TextBlock_MeetingPoint, Mode=OneWay, Source={StaticResource Resources}}" Margin="2,0,2,0"/>
 				<TextBox Name="MeetingPoint" Margin="1"/>
 			</DockPanel>
 		</Border>
 
-        <TextBlock x:Uid="TextBlock_Company" Grid.Column="1" Grid.Row="2" Text="{x:Static properties:Resources.TextBlock_Company}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-        <TextBlock x:Uid="TextBlock_Vehicle" Grid.Column="2" Grid.Row="2" Text="{x:Static properties:Resources.TextBlock_Vehicle}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-        <TextBlock x:Uid="TextBlock_Arrival" Grid.Column="3" Grid.Row="2" Text="{x:Static properties:Resources.TextBlock_Arrival}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-        <Label x:Uid="Label_FR" Grid.Column="0" Grid.Row="3" Content="{x:Static properties:Resources.Label_FR}" VerticalAlignment="Center" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-        <Label x:Uid="Label_Ambulance" Grid.Column="0" Grid.Row="4" Content="{x:Static properties:Resources.Label_Ambulance}" VerticalAlignment="Center" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <TextBlock x:Uid="TextBlock_Company" Grid.Column="1" Grid.Row="2" Text="{Binding Path=TextBlock_Company, Mode=OneWay, Source={StaticResource Resources}}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <TextBlock x:Uid="TextBlock_Vehicle" Grid.Column="2" Grid.Row="2" Text="{Binding Path=TextBlock_Vehicle, Mode=OneWay, Source={StaticResource Resources}}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <TextBlock x:Uid="TextBlock_Arrival" Grid.Column="3" Grid.Row="2" Text="{Binding Path=TextBlock_Arrival, Mode=OneWay, Source={StaticResource Resources}}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <Label x:Uid="Label_FR" Grid.Column="0" Grid.Row="3" Content="{Binding Path=Label_FR, Mode=OneWay, Source={StaticResource Resources}}" VerticalAlignment="Center" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <Label x:Uid="Label_Ambulance" Grid.Column="0" Grid.Row="4" Content="{Binding Path=Label_Ambulance, Mode=OneWay, Source={StaticResource Resources}}" VerticalAlignment="Center" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
 
 		<TextBox Grid.Column="1" Grid.Row="3" Name="FirstResponderCompany" Text="SIM" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
 		<TextBox Grid.Column="1" Grid.Row="4" Name="AmbulanceCompany" Text="US" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>

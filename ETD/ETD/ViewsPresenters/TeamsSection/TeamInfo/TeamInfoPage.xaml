@@ -16,7 +16,7 @@
                     <TextBlock Name="teamName" HorizontalAlignment="Left" FontWeight="Bold" FontSize="20" Foreground="White" Margin="3,0,0,0">
                         <TextBlock.ContextMenu>
                             <ContextMenu Name="TeamContextName">
-                                <MenuItem x:Uid="MenuItem_DeleteTeam" Header="{x:Static properties:Resources.MenuItem_DeleteTeam}" Tag="team" Click="DeleteTeam"/>
+                                <MenuItem x:Uid="MenuItem_DeleteTeam" Header="{Binding Path=MenuItem_DeleteTeam, Mode=OneWay, Source={StaticResource Resources}}" Tag="team" Click="DeleteTeam"/>
                             </ContextMenu>
                         </TextBlock.ContextMenu>
                     </TextBlock>

@@ -39,43 +39,43 @@
 
             <Border  Grid.Column="0" Grid.Row="0" BorderBrush="Black" BorderThickness="1,1,1,1">
                 <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal">
-                    <TextBlock x:Uid="TextBlock_Time" Text="{x:Static properties:Resources.TextBlock_Time}" FontSize="25" VerticalAlignment="Center" RenderTransformOrigin="1.294,0.509"/>
+                    <TextBlock x:Uid="TextBlock_Time" Text="{Binding Path=TextBlock_Time, Mode=OneWay, Source={StaticResource Resources}}" FontSize="25" VerticalAlignment="Center" RenderTransformOrigin="1.294,0.509"/>
                 </StackPanel>
             </Border>
 
             <Border  Grid.Column="1" Grid.Row="0" BorderBrush="Black" BorderThickness="1,1,1,1">
                 <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal">
-                    <TextBlock x:Uid="TextBlock_Client" Text="{x:Static properties:Resources.TextBlock_Client}" FontSize="25" VerticalAlignment="Center" RenderTransformOrigin="1.294,0.509"/>
+                    <TextBlock x:Uid="TextBlock_Client" Text="{Binding Path=TextBlock_Client, Mode=OneWay, Source={StaticResource Resources}}" FontSize="25" VerticalAlignment="Center" RenderTransformOrigin="1.294,0.509"/>
                 </StackPanel>
             </Border>
 
             <Border  Grid.Column="2" Grid.Row="0" BorderBrush="Black" BorderThickness="1,1,1,1">
                 <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal">
-                    <TextBlock x:Uid="TextBlock_Recipient" Text="{x:Static properties:Resources.TextBlock_Recipient}" FontSize="25" VerticalAlignment="Center" RenderTransformOrigin="1.294,0.509"/>
+                    <TextBlock x:Uid="TextBlock_Recipient" Text="{Binding Path=TextBlock_Recipient, Mode=OneWay, Source={StaticResource Resources}}" FontSize="25" VerticalAlignment="Center" RenderTransformOrigin="1.294,0.509"/>
                 </StackPanel>
             </Border>
 
             <Border  Grid.Column="3" Grid.Row="0" BorderBrush="Black" BorderThickness="0,1,1,1">
                 <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal">
-                    <TextBlock x:Uid="TextBlock_Request" Text="{x:Static properties:Resources.TextBlock_Request}" FontSize="25" VerticalAlignment="Center" RenderTransformOrigin="1.294,0.509"/>
+                    <TextBlock x:Uid="TextBlock_Request" Text="{Binding Path=TextBlock_Request, Mode=OneWay, Source={StaticResource Resources}}" FontSize="25" VerticalAlignment="Center" RenderTransformOrigin="1.294,0.509"/>
                 </StackPanel>
             </Border>
 
             <Border  Grid.Column="4" Grid.Row="0" BorderBrush="Black" BorderThickness="0,1,1,1">
                 <StackPanel Grid.Column="2" Grid.Row="0" Orientation="Horizontal">
-                    <TextBlock x:Uid="TextBlock_HandledBy" Text="{x:Static properties:Resources.TextBlock_HandledBy}" FontSize="25" VerticalAlignment="Center" RenderTransformOrigin="1.294,0.509"/>
+                    <TextBlock x:Uid="TextBlock_HandledBy" Text="{Binding Path=TextBlock_HandledBy, Mode=OneWay, Source={StaticResource Resources}}" FontSize="25" VerticalAlignment="Center" RenderTransformOrigin="1.294,0.509"/>
                 </StackPanel>
             </Border>
 
             <Border  Grid.Column="5" Grid.Row="0" BorderBrush="Black" BorderThickness="0,1,1,1">
                 <StackPanel Grid.Column="3" Grid.Row="0" Orientation="Horizontal">
-                    <TextBlock x:Uid="TextBlock_FollowUp" Text="{x:Static properties:Resources.TextBlock_FollowUp}" FontSize="25" VerticalAlignment="Center" RenderTransformOrigin="1.294,0.509"/>
+                    <TextBlock x:Uid="TextBlock_FollowUp" Text="{Binding Path=TextBlock_FollowUp, Mode=OneWay, Source={StaticResource Resources}}" FontSize="25" VerticalAlignment="Center" RenderTransformOrigin="1.294,0.509"/>
                 </StackPanel>
             </Border>
 
             <Border  Grid.Column="6" Grid.Row="0" BorderBrush="Black" BorderThickness="0,1,1,1">
                 <StackPanel Grid.Column="4" Grid.Row="0" Orientation="Horizontal">
-                    <TextBlock x:Uid="TextBlock_Completion"  Text="{x:Static properties:Resources.TextBlock_Completion}" FontSize="25" VerticalAlignment="Center" RenderTransformOrigin="1.294,0.509"/>
+                    <TextBlock x:Uid="TextBlock_Completion"  Text="{Binding Path=TextBlock_Completion, Mode=OneWay, Source={StaticResource Resources}}" FontSize="25" VerticalAlignment="Center" RenderTransformOrigin="1.294,0.509"/>
                 </StackPanel>
             </Border>
 

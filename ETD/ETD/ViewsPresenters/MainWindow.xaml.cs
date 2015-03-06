@@ -27,6 +27,7 @@ using ETD.CustomObjects.PopupForms;
 using ETD.CustomObjects.CustomUIObjects;
 using ETD.Models.ArchitecturalObjects;
 using System.Globalization;
+using System.Diagnostics;
 
 
 namespace ETD.ViewsPresenters
@@ -34,7 +35,7 @@ namespace ETD.ViewsPresenters
 	/// <summary>
 	/// Interaction logic for MainWindow.xaml
 	/// </summary>
-    public partial class MainWindow : Observer
+    public partial class MainWindow
 	{
         //Page variables 
 		private TeamsSectionPage teamsSection;
@@ -55,8 +56,19 @@ namespace ETD.ViewsPresenters
 
 		public MainWindow()
 		{
-            LanguageSelector.switchLanguage(LanguageSelector.Languages.English);
+            //hook up DataChanged event to get notification to make culture-related changes in code
+            CultureResources.ResourceProvider.DataChanged += new EventHandler(ResourceProvider_DataChanged);
+
+            //initialise with default culture
+            Debug.WriteLine(string.Format("Set culture to default [{0}]:", Properties.Settings.Default.DefaultCulture));
+            CultureResources.ChangeCulture(Properties.Settings.Default.DefaultCulture.NativeName);
+
 			InitializeComponent();
+
+            //only attach SelectionChanged event here to avoid the culture being updated twice
+            this.ComboBox_Languages.SelectionChanged += new System.Windows.Controls.SelectionChangedEventHandler(this.ComboBox_Languages_SelectionChanged);
+            ComboBox_Languages.SelectedItem = Properties.Settings.Default.DefaultCulture;
+
             FormPopup.RegisterMainWindow(this);//Register main window as the master window, used for displaying popups
             followupSection = new FollowUpSectionForm();
             mapModificationSection = new AdditionalInfoPage(this);
@@ -304,9 +316,37 @@ namespace ETD.ViewsPresenters
 			});
 		}
 
-        public void Update()
-        { 
+        ////Code written by: Andrew Wood
+        //Retrieved from: http://www.codeproject.com/Articles/22967/WPF-Runtime-Localization
+        //Used under  Code Project Open License (CPOL) license.
+        void ResourceProvider_DataChanged(object sender, EventArgs e)
+        {
+            //Debug.WriteLine(string.Format("ObjectDataProvider.DataChanged event. fetching culturename property for new culture [{0}]", Properties.Resources.LabelCultureName));
+        }
 
+        ////Code written by: Andrew Wood
+        //Retrieved from: http://www.codeproject.com/Articles/22967/WPF-Runtime-Localization
+        //Used under  Code Project Open License (CPOL) license.
+        private void ComboBox_Languages_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            String selected_NativeName = ComboBox_Languages.SelectedItem as String;
+            //CultureInfo selected_culture = ComboBox_Languages.SelectedItem as CultureInfo;
+
+            //if not current language
+            //could check here whether the culture we want to change to is available in order to provide feedback / action
+            if (Properties.Resources.Culture != null && !Properties.Resources.Culture.NativeName.Equals(selected_NativeName))
+            {
+                Debug.WriteLine(string.Format("Change Current Culture to [{0}]", selected_NativeName));
+
+                //save language in settings
+                //Properties.Settings.Default.CultureDefault = selected_culture;
+                //Properties.Settings.Default.Save();
+
+                //change resources to new culture
+                CultureResources.ChangeCulture(selected_NativeName);
+
+                //could apply a theme tied to this culture if desired
+            }
         }
     }
 

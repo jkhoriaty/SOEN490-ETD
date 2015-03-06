@@ -34,7 +34,6 @@ namespace ETD.ViewsPresenters.InterventionsSection
 			this.mainWindow = mainWindow;
 
             Observable.RegisterClassObserver(typeof(Intervention), this);
-            Observable.RegisterClassObserver(typeof(LanguageSelector), this);
 		}
 
 		//Adjusting the intervention section width

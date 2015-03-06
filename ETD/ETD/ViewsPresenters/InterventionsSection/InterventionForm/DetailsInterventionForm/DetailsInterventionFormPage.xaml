@@ -11,33 +11,33 @@
     <StackPanel VerticalAlignment="Center">
         <UniformGrid Margin="0,1,0,1">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Label x:Uid="Label_Call" Content="{x:Static properties:Resources.Label_Call}"/>
+                <Label x:Uid="Label_Call" Content="{Binding Path=Label_Call, Mode=OneWay, Source={StaticResource Resources}}"/>
                 <TextBox Name="Callhh" Width="30" Text="hh" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
                 <Button Width="10" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Click="Button_Click"/>
                 <TextBox Name="Callmm" Width="30" Text="mm" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
             </StackPanel>
-            <TextBox x:Uid="TextBox_CallerName" Text="{x:Static properties:Resources.TextBox_CallerName}" Name="CallerName" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
-            <TextBox x:Uid="TextBox_Location" Text="{x:Static properties:Resources.TextBox_Location}" Name="Location" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,1,0,1" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
-            <TextBox x:Uid="TextBox_Nature" Text="{x:Static properties:Resources.TextBox_Nature}" Name="NatureOfCall" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,1,0,1" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+            <TextBox x:Uid="TextBox_CallerName" Text="{Binding Path=TextBox_CallerName, Mode=OneWay, Source={StaticResource Resources}}" Name="CallerName" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+            <TextBox x:Uid="TextBox_Location" Text="{Binding Path=TextBox_Location, Mode=OneWay, Source={StaticResource Resources}}" Name="Location" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,1,0,1" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+            <TextBox x:Uid="TextBox_Nature" Text="{Binding Path=TextBox_Nature, Mode=OneWay, Source={StaticResource Resources}}" Name="NatureOfCall" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,1,0,1" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
         </UniformGrid>
         <Border BorderThickness="1" BorderBrush="Black" Margin="0,3,0,3"/>
         <UniformGrid Rows="1">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Label x:Uid="Label_Priority" Content="{x:Static properties:Resources.Label_Priority}"/>
+                <Label x:Uid="Label_Priority" Content="{Binding Path=Label_Priority, Mode=OneWay, Source={StaticResource Resources}}"/>
                 <ComboBox x:Uid="ComboBox_Priority" Name="Priority" Width="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" SelectionChanged="Priority_SelectionChanged">
                     <ComboBoxItem x:Uid="ComboBoxItem_Priority_1" Content="1"/>
                     <ComboBoxItem x:Uid="ComboBoxItem_Priority_2" Content="2"/>
                 </ComboBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Label x:Uid="Label_Gender" Content="{x:Static properties:Resources.Label_Gender}"/>
+                <Label x:Uid="Label_Gender" Content="{Binding Path=Label_Gender, Mode=OneWay, Source={StaticResource Resources}}"/>
                 <ComboBox x:Uid="ComboBox_Gender" Name="Gender" Width="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" SelectionChanged="Gender_SelectionChanged">
                     <ComboBoxItem x:Uid="ComboBoxItem_Gender_M" Name ="M" Content="M"/>
                     <ComboBoxItem x:Uid="ComboBoxItem_Gender_F" Name ="F" Content="F"/>
                 </ComboBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Label x:Uid="Label_Age" Content="{x:Static properties:Resources.Label_Age}"/>
+                <Label x:Uid="Label_Age" Content="{Binding Path=Label_Age, Mode=OneWay, Source={StaticResource Resources}}"/>
                 <TextBox Name="Age" Width="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" LostFocus="TextBoxes_LostFocus"/>
             </StackPanel>
         </UniformGrid>
@@ -47,33 +47,33 @@
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
-            <Label x:Uid="Label_Complaint" Grid.Column="0" Content="{x:Static properties:Resources.Label_Complaint}"/>
+            <Label x:Uid="Label_Complaint" Grid.Column="0" Content="{Binding Path=Label_Complaint, Mode=OneWay, Source={StaticResource Resources}}"/>
             <ComboBox x:Uid="ComboBox_Complaint" Grid.Column="1" Grid.ColumnSpan="2" Name="Complaint" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" SelectionChanged="Complaint_SelectionChanged">
-                <ComboBoxItem x:Uid="ComboBoxItem_Complaint_AbdominalPain" Content="{x:Static properties:Resources.ComboBoxItem_Complaint_AbdominalPain}"/>
-                <ComboBoxItem x:Uid="ComboBoxItem_Complaint_Allergy" Content="{x:Static properties:Resources.ComboBoxItem_Complaint_Allergy}"/>
-                <ComboBoxItem x:Uid="ComboBoxItem_Complaint_Anaphylaxis" Content="{x:Static properties:Resources.ComboBoxItem_Complaint_Anaphylaxis}"/>
-                <ComboBoxItem x:Uid="ComboBoxItem_Complaint_Behavioural" Content="{x:Static properties:Resources.ComboBoxItem_Complaint_Behavioural}"/>
-                <ComboBoxItem x:Uid="ComboBoxItem_Complaint_Burn" Content="{x:Static properties:Resources.ComboBoxItem_Complaint_Burn}"/>
-                <ComboBoxItem x:Uid="ComboBoxItem_Complaint_Cardiac" Content="{x:Static properties:Resources.ComboBoxItem_Complaint_Cardiac}"/>
-                <ComboBoxItem x:Uid="ComboBoxItem_Complaint_Seizures" Content="{x:Static properties:Resources.ComboBoxItem_Complaint_Seizures}"/>
-                <ComboBoxItem x:Uid="ComboBoxItem_Complaint_Environmental" Content="{x:Static properties:Resources.ComboBoxItem_Complaint_Environmental}"/>
-                <ComboBoxItem x:Uid="ComboBoxItem_Complaint_HeadSpine" Content="{x:Static properties:Resources.ComboBoxItem_Complaint_HeadSpine}"/>
-                <ComboBoxItem x:Uid="ComboBoxItem_Complaint_Headache" Content="{x:Static properties:Resources.ComboBoxItem_Complaint_Headache}"/>
-                <ComboBoxItem x:Uid="ComboBoxItem_Complaint_Hemorrhage" Content="{x:Static properties:Resources.ComboBoxItem_Complaint_Hemorrhage}"/>
-                <ComboBoxItem x:Uid="ComboBoxItem_Complaint_InsectBite" Content="{x:Static properties:Resources.ComboBoxItem_Complaint_InsectBite}"/>
-                <ComboBoxItem x:Uid="ComboBoxItem_Complaint_Intoxication" Content="{x:Static properties:Resources.ComboBoxItem_Complaint_Intoxication}"/>
-                <ComboBoxItem x:Uid="ComboBoxItem_Complaint_Musculoskeletal" Content="{x:Static properties:Resources.ComboBoxItem_Complaint_Musculoskeletal}"/>
-                <ComboBoxItem x:Uid="ComboBoxItem_Complaint_Nosebleed" Content="{x:Static properties:Resources.ComboBoxItem_Complaint_Nosebleed}"/>
-                <ComboBoxItem x:Uid="ComboBoxItem_Complaint_Ocular" Content="{x:Static properties:Resources.ComboBoxItem_Complaint_Ocular}"/>
-                <ComboBoxItem x:Uid="ComboBoxItem_Complaint_Oral" Content="{x:Static properties:Resources.ComboBoxItem_Complaint_Oral}"/>
-                <ComboBoxItem x:Uid="ComboBoxItem_Complaint_Respiratory" Content="{x:Static properties:Resources.ComboBoxItem_Complaint_Respiratory}"/>
-                <ComboBoxItem x:Uid="ComboBoxItem_Complaint_RespiratoryArrest" Content="{x:Static properties:Resources.ComboBoxItem_Complaint_RespiratoryArrest}"/>
-                <ComboBoxItem x:Uid="ComboBoxItem_Complaint_SoftTissueInjury" Content="{x:Static properties:Resources.ComboBoxItem_Complaint_SoftTissueInjury}"/>
-                <ComboBoxItem x:Uid="ComboBoxItem_Complaint_SuspectedStroke" Content="{x:Static properties:Resources.ComboBoxItem_Complaint_SuspectedStroke}"/>
-                <ComboBoxItem x:Uid="ComboBoxItem_Complaint_ChestPain" Content="{x:Static properties:Resources.ComboBoxItem_Complaint_ChestPain}"/>
-                <ComboBoxItem x:Uid="ComboBoxItem_Complaint_Unconscious" Content="{x:Static properties:Resources.ComboBoxItem_Complaint_Unconscious}"/>
-                <ComboBoxItem x:Uid="ComboBoxItem_Complaint_Weakness" Content="{x:Static properties:Resources.ComboBoxItem_Complaint_Weakness}"/>
-                <ComboBoxItem x:Uid="ComboBoxItem_Complaint_Other" Content="{x:Static properties:Resources.ComboBoxItem_Complaint_Other}"/>
+                <ComboBoxItem x:Uid="ComboBoxItem_Complaint_AbdominalPain" Content="{Binding Path=ComboBoxItem_Complaint_AbdominalPain, Mode=OneWay, Source={StaticResource Resources}}"/>
+                <ComboBoxItem x:Uid="ComboBoxItem_Complaint_Allergy" Content="{Binding Path=ComboBoxItem_Complaint_Allergy, Mode=OneWay, Source={StaticResource Resources}}"/>
+                <ComboBoxItem x:Uid="ComboBoxItem_Complaint_Anaphylaxis" Content="{Binding Path=ComboBoxItem_Complaint_Anaphylaxis, Mode=OneWay, Source={StaticResource Resources}}"/>
+                <ComboBoxItem x:Uid="ComboBoxItem_Complaint_Behavioural" Content="{Binding Path=ComboBoxItem_Complaint_Behavioural, Mode=OneWay, Source={StaticResource Resources}}"/>
+                <ComboBoxItem x:Uid="ComboBoxItem_Complaint_Burn" Content="{Binding Path=ComboBoxItem_Complaint_Burn, Mode=OneWay, Source={StaticResource Resources}}"/>
+                <ComboBoxItem x:Uid="ComboBoxItem_Complaint_Cardiac" Content="{Binding Path=ComboBoxItem_Complaint_Cardiac, Mode=OneWay, Source={StaticResource Resources}}"/>
+                <ComboBoxItem x:Uid="ComboBoxItem_Complaint_Seizures" Content="{Binding Path=ComboBoxItem_Complaint_Seizures, Mode=OneWay, Source={StaticResource Resources}}"/>
+                <ComboBoxItem x:Uid="ComboBoxItem_Complaint_Environmental" Content="{Binding Path=ComboBoxItem_Complaint_Environmental, Mode=OneWay, Source={StaticResource Resources}}"/>
+                <ComboBoxItem x:Uid="ComboBoxItem_Complaint_HeadSpine" Content="{Binding Path=ComboBoxItem_Complaint_HeadSpine, Mode=OneWay, Source={StaticResource Resources}}"/>
+                <ComboBoxItem x:Uid="ComboBoxItem_Complaint_Headache" Content="{Binding Path=ComboBoxItem_Complaint_Headache, Mode=OneWay, Source={StaticResource Resources}}"/>
+                <ComboBoxItem x:Uid="ComboBoxItem_Complaint_Hemorrhage" Content="{Binding Path=ComboBoxItem_Complaint_Hemorrhage, Mode=OneWay, Source={StaticResource Resources}}"/>
+                <ComboBoxItem x:Uid="ComboBoxItem_Complaint_InsectBite" Content="{Binding Path=ComboBoxItem_Complaint_InsectBite, Mode=OneWay, Source={StaticResource Resources}}"/>
+                <ComboBoxItem x:Uid="ComboBoxItem_Complaint_Intoxication" Content="{Binding Path=ComboBoxItem_Complaint_Intoxication, Mode=OneWay, Source={StaticResource Resources}}"/>
+                <ComboBoxItem x:Uid="ComboBoxItem_Complaint_Musculoskeletal" Content="{Binding Path=ComboBoxItem_Complaint_Musculoskeletal, Mode=OneWay, Source={StaticResource Resources}}"/>
+                <ComboBoxItem x:Uid="ComboBoxItem_Complaint_Nosebleed" Content="{Binding Path=ComboBoxItem_Complaint_Nosebleed, Mode=OneWay, Source={StaticResource Resources}}"/>
+                <ComboBoxItem x:Uid="ComboBoxItem_Complaint_Ocular" Content="{Binding Path=ComboBoxItem_Complaint_Ocular, Mode=OneWay, Source={StaticResource Resources}}"/>
+                <ComboBoxItem x:Uid="ComboBoxItem_Complaint_Oral" Content="{Binding Path=ComboBoxItem_Complaint_Oral, Mode=OneWay, Source={StaticResource Resources}}"/>
+                <ComboBoxItem x:Uid="ComboBoxItem_Complaint_Respiratory" Content="{Binding Path=ComboBoxItem_Complaint_Respiratory, Mode=OneWay, Source={StaticResource Resources}}"/>
+                <ComboBoxItem x:Uid="ComboBoxItem_Complaint_RespiratoryArrest" Content="{Binding Path=ComboBoxItem_Complaint_RespiratoryArrest, Mode=OneWay, Source={StaticResource Resources}}"/>
+                <ComboBoxItem x:Uid="ComboBoxItem_Complaint_SoftTissueInjury" Content="{Binding Path=ComboBoxItem_Complaint_SoftTissueInjury, Mode=OneWay, Source={StaticResource Resources}}"/>
+                <ComboBoxItem x:Uid="ComboBoxItem_Complaint_SuspectedStroke" Content="{Binding Path=ComboBoxItem_Complaint_SuspectedStroke, Mode=OneWay, Source={StaticResource Resources}}"/>
+                <ComboBoxItem x:Uid="ComboBoxItem_Complaint_ChestPain" Content="{Binding Path=ComboBoxItem_Complaint_ChestPain, Mode=OneWay, Source={StaticResource Resources}}"/>
+                <ComboBoxItem x:Uid="ComboBoxItem_Complaint_Unconscious" Content="{Binding Path=ComboBoxItem_Complaint_Unconscious, Mode=OneWay, Source={StaticResource Resources}}"/>
+                <ComboBoxItem x:Uid="ComboBoxItem_Complaint_Weakness" Content="{Binding Path=ComboBoxItem_Complaint_Weakness, Mode=OneWay, Source={StaticResource Resources}}"/>
+                <ComboBoxItem x:Uid="ComboBoxItem_Complaint_Other" Content="{Binding Path=ComboBoxItem_Complaint_Other, Mode=OneWay, Source={StaticResource Resources}}"/>
             </ComboBox>
 			<TextBox Name="OtherChiefComplaint" Grid.Column="2" Grid.Row="0" Visibility="Collapsed" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
         </Grid>

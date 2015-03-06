@@ -21,16 +21,16 @@
 			</Grid.RowDefinitions>
 		
 			<Border Grid.Column="0" Grid.Row="0" BorderBrush="Black" BorderThickness="0,0,1,1">
-                <TextBlock x:Uid="TextBlock_Resources" Text="{x:Static properties:Resources.TextBlock_Resources}" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <TextBlock x:Uid="TextBlock_Resources" Text="{Binding Path=TextBlock_Resources, Mode=OneWay, Source={StaticResource Resources}}" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 			</Border>
 			<Border Grid.Column="1" Grid.Row="0" BorderBrush="Black" BorderThickness="1,0,1,1">
-                <TextBlock x:Uid="TextBlock_Team" Text="{x:Static properties:Resources.TextBlock_Team}" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <TextBlock x:Uid="TextBlock_Team" Text="{Binding Path=TextBlock_Team, Mode=OneWay, Source={StaticResource Resources}}" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 			</Border>
 			<Border Grid.Column="2" Grid.Row="0" BorderBrush="Black" BorderThickness="1,0,1,1">
-                <TextBlock x:Uid="TextBlock_Moving" Text="{x:Static properties:Resources.TextBlock_Moving}" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <TextBlock x:Uid="TextBlock_Moving" Text="{Binding Path=TextBlock_Moving, Mode=OneWay, Source={StaticResource Resources}}" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 			</Border>
 			<Border Grid.Column="3" Grid.Row="0" BorderBrush="Black" BorderThickness="1,0,0,1">
-                <TextBlock x:Uid="TextBlock_Arrival" Text="{x:Static properties:Resources.TextBlock_Arrival}" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <TextBlock x:Uid="TextBlock_Arrival" Text="{Binding Path=TextBlock_Arrival, Mode=OneWay, Source={StaticResource Resources}}" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 			</Border>
 		</Grid>
 	</ScrollViewer>

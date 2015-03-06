@@ -32,12 +32,12 @@
 				</Grid>
 			</Border>
 			<TabControl Name="TabControl" TabStripPlacement="Bottom" Height="145">
-                <TabItem x:Uid="TabItem_Timers" Name="timers" Header="{x:Static properties:Resources.TabItem_Timers}" />
-                <TabItem x:Uid="TabItem_Details" Name="details" Header="{x:Static properties:Resources.TabItem_Details}" />
-                <TabItem x:Uid="TabItem_Resources" Name="resources" Header="{x:Static properties:Resources.TabItem_Resources}" />
-                <TabItem x:Uid="TabItem_ABC" Name="abc" Header="{x:Static properties:Resources.TabItem_ABC}" />
-                <TabItem x:Uid="TabItem_AdditionalInfo" Name="additionalInfo" Header="{x:Static properties:Resources.TabItem_AdditionalInfo}" />
-                <TabItem x:Uid="TabItem_End" Name="end" Header="{x:Static properties:Resources.TabItem_End}" />
+                <TabItem x:Uid="TabItem_Timers" Name="timers" Header="{Binding Path=TabItem_Timers, Mode=OneWay, Source={StaticResource Resources}}" />
+                <TabItem x:Uid="TabItem_Details" Name="details" Header="{Binding Path=TabItem_Details, Mode=OneWay, Source={StaticResource Resources}}" />
+                <TabItem x:Uid="TabItem_Resources" Name="resources" Header="{Binding Path=TabItem_Resources, Mode=OneWay, Source={StaticResource Resources}}" />
+                <TabItem x:Uid="TabItem_ABC" Name="abc" Header="{Binding Path=TabItem_ABC, Mode=OneWay, Source={StaticResource Resources}}" />
+                <TabItem x:Uid="TabItem_AdditionalInfo" Name="additionalInfo" Header="{Binding Path=TabItem_AdditionalInfo, Mode=OneWay, Source={StaticResource Resources}}" />
+                <TabItem x:Uid="TabItem_End" Name="end" Header="{Binding Path=TabItem_End, Mode=OneWay, Source={StaticResource Resources}}" />
             </TabControl>
 		</StackPanel>
 	</Border>

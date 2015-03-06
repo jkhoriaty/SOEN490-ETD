@@ -32,43 +32,43 @@
         <Grid Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
                 <!-- Here go all the buttons left -->
-                <Button x:Uid="Button_GPSLocations" Content="{x:Static properties:Resources.Button_GPSLocations}" Name="GPSLocationsTextBlock" Click="ShowGPSLocations" IsEnabled="False"/>
+                <Button x:Uid="Button_GPSLocations" Content="{Binding Path=Button_GPSLocations, Source={StaticResource Resources}}" Name="GPSLocationsTextBlock" Click="ShowGPSLocations" IsEnabled="False"/>
                 <Label Content="0" Name="newRegisteredCTR" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-				<Border BorderThickness="0.5" BorderBrush="Black" Margin="3,0,3,0" VerticalAlignment="Stretch"/>
-
-			</StackPanel>
+                <Border BorderThickness="0.5" BorderBrush="Black" Margin="3,0,3,0" VerticalAlignment="Stretch"/>
+                <ComboBox IsSynchronizedWithCurrentItem="True" VerticalAlignment="Center" Height="Auto" x:Name="ComboBox_Languages" ItemsSource="{Binding Path=SupportedCulturesNames, Mode=OneWay, Source={StaticResource CultureResourcesDS}}" Width="Auto"/>
+            </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
                 <!-- Here go all the buttons right-->
                 <ComboBox Visibility="Collapsed" Name="AI" Width="130" Margin="1,0,1,0" VerticalAlignment="Center">
-                    <ComboBoxItem x:Uid="ComboBoxItem_Rectangle" Content="{x:Static properties:Resources.ComboBoxItem_Rectangle}" Name="rectangle" Selected="CreateMapModificationPin"/>
-                    <ComboBoxItem x:Uid="ComboBoxItem_Stairs" Content="{x:Static properties:Resources.ComboBoxItem_Stairs}" Name="stairs" Selected="CreateMapModificationPin"/>
-                    <ComboBoxItem x:Uid="ComboBoxItem_Camp" Content="{x:Static properties:Resources.ComboBoxItem_Camp}" Name="camp" Selected="CreateMapModificationPin"/>
-                    <ComboBoxItem x:Uid="ComboBoxItem_Line" Content="{x:Static properties:Resources.ComboBoxItem_Line}" Name="line" Selected="CreateMapModificationPin"/>
+                    <ComboBoxItem x:Uid="ComboBoxItem_Rectangle" Content="{Binding Path=ComboBoxItem_Rectangle, Source={StaticResource Resources}}" Name="rectangle" Selected="CreateMapModificationPin"/>
+                    <ComboBoxItem x:Uid="ComboBoxItem_Stairs" Content="{Binding Path=ComboBoxItem_Stairs, Source={StaticResource Resources}}" Name="stairs" Selected="CreateMapModificationPin"/>
+                    <ComboBoxItem x:Uid="ComboBoxItem_Camp" Content="{Binding Path=ComboBoxItem_Camp, Source={StaticResource Resources}}" Name="camp" Selected="CreateMapModificationPin"/>
+                    <ComboBoxItem x:Uid="ComboBoxItem_Line" Content="{Binding Path=ComboBoxItem_Line, Source={StaticResource Resources}}" Name="line" Selected="CreateMapModificationPin"/>
 				</ComboBox>
 				<ComboBox Name="modeCB" SelectionChanged="ModeChange" Width="140">
-                    <ComboBoxItem x:Uid="ComboBoxItem_RegularMode" Content="{x:Static properties:Resources.ComboBoxItem_RegularMode}"/>
-                    <ComboBoxItem x:Uid="ComboBoxItem_EditMode" Content="{x:Static properties:Resources.ComboBoxItem_EditMode}"/>
+                    <ComboBoxItem x:Uid="ComboBoxItem_RegularMode" Content="{Binding Path=ComboBoxItem_RegularMode, Source={StaticResource Resources}}"/>
+                    <ComboBoxItem x:Uid="ComboBoxItem_EditMode" Content="{Binding Path=ComboBoxItem_EditMode, Source={StaticResource Resources}}"/>
 				</ComboBox>
-                <Button x:Uid="Button_FollowUp" Content="{x:Static properties:Resources.Button_FollowUp}" Click="ShowFollowUpSection" IsEnabled="true"/>
+                <Button x:Uid="Button_FollowUp" Content="{Binding Path=Button_FollowUp, Source={StaticResource Resources}}" Click="ShowFollowUpSection" IsEnabled="true"/>
                 <Border BorderThickness="0.5" BorderBrush="Black" Margin="3,0,3,0" VerticalAlignment="Stretch"/>
-                <Button x:Uid="Button_LoadMap" Content="{x:Static properties:Resources.Button_LoadMap}" Name="Load_Map" Click="LoadMap" Margin="2,0,2,0"/>
+                <Button x:Uid="Button_LoadMap" Content="{Binding Path=Button_LoadMap, Source={StaticResource Resources}}" Name="Load_Map" Click="LoadMap" Margin="2,0,2,0"/>
 				<Border BorderThickness="0.5" BorderBrush="Black" Margin="3,0,3,0" VerticalAlignment="Stretch"/>
-                <TextBlock x:Uid="TextBlock_Deadlines" Text="{x:Static properties:Resources.TextBlock_Deadlines}" FontWeight="Bold" Margin="1,0,1,0" VerticalAlignment="Center"/>
-                <TextBlock x:Uid="TextBlock_InterventionDeadline" Text="{x:Static properties:Resources.TextBlock_InterventionDeadline}" Margin="1,0,1,0" VerticalAlignment="Center"/>
+                <TextBlock x:Uid="TextBlock_Deadlines" Text="{Binding Path=TextBlock_Deadlines, Source={StaticResource Resources}}" FontWeight="Bold" Margin="1,0,1,0" VerticalAlignment="Center"/>
+                <TextBlock x:Uid="TextBlock_InterventionDeadline" Text="{Binding Path=TextBlock_InterventionDeadline, Source={StaticResource Resources}}" Margin="1,0,1,0" VerticalAlignment="Center"/>
                 <TextBox Name="InterventionDeadline" Text="30" Width="20" Margin="1,0,1,0" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-                <TextBlock x:Uid="TextBlock_MovingDeadline" Text="{x:Static properties:Resources.TextBlock_MovingDeadline}" Margin="1,0,1,0" VerticalAlignment="Center"/>
+                <TextBlock x:Uid="TextBlock_MovingDeadline" Text="{Binding Path=TextBlock_MovingDeadline, Source={StaticResource Resources}}" Margin="1,0,1,0" VerticalAlignment="Center"/>
                 <TextBox Name="MovingDeadline" Text="5" Width="20" Margin="1,0,1,0" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-                <Button x:Uid="Button_Submit" Content="{x:Static properties:Resources.Button_Submit}" Margin="1,0,1,0" VerticalAlignment="Center" Click="ChangeDeadlines"/>
+                <Button x:Uid="Button_Submit" Content="{Binding Path=Button_Submit, Source={StaticResource Resources}}" Margin="1,0,1,0" VerticalAlignment="Center" Click="ChangeDeadlines"/>
                 <Border BorderThickness="0.5" BorderBrush="Black" Margin="3,0,3,0" VerticalAlignment="Stretch"/>
 				<ComboBox Name="EquipmentAdd" HorizontalAlignment="Stretch" Width="130" Margin="1,0,1,0" VerticalAlignment="Center">
-                    <ComboBoxItem x:Uid="ComboBoxItem_AmbulanceCart" Content="{x:Static properties:Resources.ComboBoxItem_AmbulanceCart}" Name="ambulanceCart"/>
-                    <ComboBoxItem x:Uid="ComboBoxItem_SittingCart" Content="{x:Static properties:Resources.ComboBoxItem_SittingCart}" Name="sittingCart"/>
-                    <ComboBoxItem x:Uid="ComboBoxItem_Epipen" Content="{x:Static properties:Resources.ComboBoxItem_Epipen}" Name="epipen"/>
-                    <ComboBoxItem x:Uid="ComboBoxItem_TransportStretcher" Content="{x:Static properties:Resources.ComboBoxItem_TransportStretcher}" Name="transportStretcher"/>
-                    <ComboBoxItem x:Uid="ComboBoxItem_MountedStretcher" Content="{x:Static properties:Resources.ComboBoxItem_MountedStretcher}" Name="mountedStretcher"/>
-                    <ComboBoxItem x:Uid="ComboBoxItem_Wheelchair" Content="{x:Static properties:Resources.ComboBoxItem_Wheelchair}" Name="wheelchair"/>
+                    <ComboBoxItem x:Uid="ComboBoxItem_AmbulanceCart" Content="{Binding Path=ComboBoxItem_AmbulanceCart, Source={StaticResource Resources}}" Name="ambulanceCart"/>
+                    <ComboBoxItem x:Uid="ComboBoxItem_SittingCart" Content="{Binding Path=ComboBoxItem_SittingCart, Source={StaticResource Resources}}" Name="sittingCart"/>
+                    <ComboBoxItem x:Uid="ComboBoxItem_Epipen" Content="{Binding Path=ComboBoxItem_Epipen, Source={StaticResource Resources}}" Name="epipen"/>
+                    <ComboBoxItem x:Uid="ComboBoxItem_TransportStretcher" Content="{Binding Path=ComboBoxItem_TransportStretcher, Source={StaticResource Resources}}" Name="transportStretcher"/>
+                    <ComboBoxItem x:Uid="ComboBoxItem_MountedStretcher" Content="{Binding Path=ComboBoxItem_MountedStretcher, Source={StaticResource Resources}}" Name="mountedStretcher"/>
+                    <ComboBoxItem x:Uid="ComboBoxItem_Wheelchair" Content="{Binding Path=ComboBoxItem_Wheelchair, Source={StaticResource Resources}}" Name="wheelchair"/>
 				</ComboBox>
-                <Button x:Uid="Button_AddEquipment" Content="{x:Static properties:Resources.Button_AddEquipment}" Click="CreateEquipmentPin" Margin="1,0,1,0" VerticalAlignment="Center"/>
+                <Button x:Uid="Button_AddEquipment" Content="{Binding Path=Button_AddEquipment, Source={StaticResource Resources}}" Click="CreateEquipmentPin" Margin="1,0,1,0" VerticalAlignment="Center"/>
 
             </StackPanel>
         </Grid>

@@ -12,13 +12,13 @@
 		<Border Background="Transparent">
             <Border.ContextMenu>
 				<ContextMenu Name="InterventionFilter">
-                    <MenuItem x:Uid="MenuItem_OngoingInterventions" Header="{x:Static properties:Resources.MenuItem_OngoingInterventions}" Tag="Ongoing" IsChecked="True" Click="FilterInterventions"/>
-                    <MenuItem x:Uid="MenuItem_CompletedInterventions" Header="{x:Static properties:Resources.MenuItem_CompletedInterventions}" Tag="Completed" Click="FilterInterventions"/>
+                    <MenuItem x:Uid="MenuItem_OngoingInterventions" Header="{Binding Path=MenuItem_OngoingInterventions, Mode=OneWay, Source={StaticResource Resources}}" Tag="Ongoing" IsChecked="True" Click="FilterInterventions"/>
+                    <MenuItem x:Uid="MenuItem_CompletedInterventions" Header="{Binding Path=MenuItem_CompletedInterventions, Mode=OneWay, Source={StaticResource Resources}}" Tag="Completed" Click="FilterInterventions"/>
 				</ContextMenu>
 			</Border.ContextMenu>
 			<StackPanel VerticalAlignment="Center" Background="Transparent">
-                <Label x:Uid="Label_Interventions" Name="InterventionsLabel" Content="{x:Static properties:Resources.Label_Interventions}" FontWeight="ExtraBlack" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24"/>
-                <Label x:Uid="Label_InterventionFilter" Name="InterventionFilterLabel" Content="{x:Static properties:Resources.Label_InterventionFilterOngoing}" FontWeight="ExtraBlack" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24"/>
+                <Label x:Uid="Label_Interventions" Name="InterventionsLabel" Content="{Binding Path=Label_Interventions, Mode=OneWay, Source={StaticResource Resources}}" FontWeight="ExtraBlack" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24"/>
+                <Label x:Uid="Label_InterventionFilter" Name="InterventionFilterLabel" Content="{Binding Path=Label_InterventionFilterOngoing, Mode=OneWay, Source={StaticResource Resources}}" FontWeight="ExtraBlack" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24"/>
 			</StackPanel>
 		</Border>
 		<ScrollViewer Name="Scroller" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Visible">

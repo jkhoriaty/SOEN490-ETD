@@ -9,7 +9,7 @@
 	Title="TeamsSectionPage">
 
 	<StackPanel>
-        <Label x:Uid="Label_Teams" Name="TeamsSectionLabel" Content="{x:Static properties:Resources.Label_Teams}" FontWeight="ExtraBlack" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24"/>
+        <Label x:Uid="Label_Teams" Name="TeamsSectionLabel" Content="{Binding Path=Label_Teams, Source={StaticResource Resources}}" FontWeight="ExtraBlack" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="24"/>
 		<ScrollViewer Name="Scroller" VerticalScrollBarVisibility="Auto">
             <StackPanel Name="StackPanel_teamList" MouseLeftButtonDown="FrameSelection">
 				<!-- Team display is here -->

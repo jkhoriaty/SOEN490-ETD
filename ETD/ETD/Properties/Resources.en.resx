@@ -1,0 +1,740 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Button_AddEquipment" xml:space="preserve">
+    <value>Add Equipment</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="Button_AddMember" xml:space="preserve">
+    <value>Add Member</value>
+    <comment>TeamForm</comment>
+  </data>
+  <data name="Button_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+    <comment>Multi</comment>
+  </data>
+  <data name="Button_Conclusion" xml:space="preserve">
+    <value>Conclusion</value>
+    <comment>EndInterventionForm</comment>
+  </data>
+  <data name="Button_FollowUp" xml:space="preserve">
+    <value>Follow Up</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="Button_GPSLocations" xml:space="preserve">
+    <value>GPS Location</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="Button_LoadMap" xml:space="preserve">
+    <value>Load Map</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="Button_RemoveMember" xml:space="preserve">
+    <value>Remove Member</value>
+    <comment>TeamForm</comment>
+  </data>
+  <data name="Button_Submit" xml:space="preserve">
+    <value>Submit</value>
+    <comment>Multi</comment>
+  </data>
+  <data name="CheckBox_Disoriented" xml:space="preserve">
+    <value>Disoriented</value>
+    <comment>ABCForm</comment>
+  </data>
+  <data name="ComboBoxItem_Airways_Clear" xml:space="preserve">
+    <value>Clear</value>
+    <comment>ABCForm</comment>
+  </data>
+  <data name="ComboBoxItem_Airways_CompletelyObstructed" xml:space="preserve">
+    <value>Completely Obstructed</value>
+    <comment>ABCForm</comment>
+  </data>
+  <data name="ComboBoxItem_Airways_PartiallyObstructed" xml:space="preserve">
+    <value>Partially Obstructed</value>
+    <comment>ABCForm</comment>
+  </data>
+  <data name="ComboBoxItem_AmbulanceCart" xml:space="preserve">
+    <value>Ambulance Cart</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="ComboBoxItem_Breathing_Absent" xml:space="preserve">
+    <value>Absent</value>
+    <comment>ABCForm</comment>
+  </data>
+  <data name="ComboBoxItem_Breathing_Difficulty" xml:space="preserve">
+    <value>Difficulty</value>
+    <comment>ABCForm</comment>
+  </data>
+  <data name="ComboBoxItem_Breathing_Normal" xml:space="preserve">
+    <value>Normal</value>
+    <comment>ABCForm</comment>
+  </data>
+  <data name="ComboBoxItem_Camp" xml:space="preserve">
+    <value>Camp</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="ComboBoxItem_Circle" xml:space="preserve">
+    <value>Circle</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="ComboBoxItem_Circulation_ChestPain" xml:space="preserve">
+    <value>Chest Pain</value>
+    <comment>ABCForm</comment>
+  </data>
+  <data name="ComboBoxItem_Circulation_Hemmorrhage" xml:space="preserve">
+    <value>Hemmorrhage</value>
+    <comment>ABCForm</comment>
+  </data>
+  <data name="ComboBoxItem_Circulation_NoPulse" xml:space="preserve">
+    <value>No pulse</value>
+    <comment>ABCForm</comment>
+  </data>
+  <data name="ComboBoxItem_Circulation_Normal" xml:space="preserve">
+    <value>Normal</value>
+    <comment>ABCForm</comment>
+  </data>
+  <data name="ComboBoxItem_Complaint_AbdominalPain" xml:space="preserve">
+    <value>Abdominal Pain</value>
+    <comment>DetailsForm</comment>
+  </data>
+  <data name="ComboBoxItem_Complaint_Allergy" xml:space="preserve">
+    <value>Allergy (Mild)</value>
+    <comment>DetailsForm</comment>
+  </data>
+  <data name="ComboBoxItem_Complaint_Anaphylaxis" xml:space="preserve">
+    <value>Anaphylaxis</value>
+    <comment>DetailsForm</comment>
+  </data>
+  <data name="ComboBoxItem_Complaint_Behavioural" xml:space="preserve">
+    <value>Behavioural Disorder</value>
+    <comment>DetailsForm</comment>
+  </data>
+  <data name="ComboBoxItem_Complaint_Burn" xml:space="preserve">
+    <value>Burn</value>
+    <comment>DetailsForm</comment>
+  </data>
+  <data name="ComboBoxItem_Complaint_Cardiac" xml:space="preserve">
+    <value>Cardiac Arrest</value>
+    <comment>DetailsForm</comment>
+  </data>
+  <data name="ComboBoxItem_Complaint_ChestPain" xml:space="preserve">
+    <value>Chest Pain</value>
+    <comment>DetailsForm</comment>
+  </data>
+  <data name="ComboBoxItem_Complaint_Environmental" xml:space="preserve">
+    <value>Environmental Related Disorder</value>
+    <comment>DetailsForm</comment>
+  </data>
+  <data name="ComboBoxItem_Complaint_Headache" xml:space="preserve">
+    <value>Headache</value>
+    <comment>DetailsForm</comment>
+  </data>
+  <data name="ComboBoxItem_Complaint_HeadSpine" xml:space="preserve">
+    <value>Head/Spine Injury</value>
+    <comment>DetailsForm</comment>
+  </data>
+  <data name="ComboBoxItem_Complaint_Hemorrhage" xml:space="preserve">
+    <value>Hemorrhage</value>
+    <comment>DetailsForm</comment>
+  </data>
+  <data name="ComboBoxItem_Complaint_InsectBite" xml:space="preserve">
+    <value>Insect Bite</value>
+    <comment>DetailsForm</comment>
+  </data>
+  <data name="ComboBoxItem_Complaint_Intoxication" xml:space="preserve">
+    <value>Intoxication</value>
+    <comment>DetailsForm</comment>
+  </data>
+  <data name="ComboBoxItem_Complaint_Musculoskeletal" xml:space="preserve">
+    <value>Musculoskeletal</value>
+    <comment>DetailsForm</comment>
+  </data>
+  <data name="ComboBoxItem_Complaint_Nosebleed" xml:space="preserve">
+    <value>Nosebleed</value>
+    <comment>DetailsForm</comment>
+  </data>
+  <data name="ComboBoxItem_Complaint_Ocular" xml:space="preserve">
+    <value>Ocular</value>
+    <comment>DetailsForm</comment>
+  </data>
+  <data name="ComboBoxItem_Complaint_Oral" xml:space="preserve">
+    <value>Oral</value>
+    <comment>DetailsForm</comment>
+  </data>
+  <data name="ComboBoxItem_Complaint_Other" xml:space="preserve">
+    <value>Other</value>
+    <comment>DetailsForm</comment>
+  </data>
+  <data name="ComboBoxItem_Complaint_Respiratory" xml:space="preserve">
+    <value>Respiratory</value>
+    <comment>DetailsForm</comment>
+  </data>
+  <data name="ComboBoxItem_Complaint_RespiratoryArrest" xml:space="preserve">
+    <value>Respiratory Arrest</value>
+    <comment>DetailsForm</comment>
+  </data>
+  <data name="ComboBoxItem_Complaint_Seizures" xml:space="preserve">
+    <value>Seizures</value>
+    <comment>DetailsForm</comment>
+  </data>
+  <data name="ComboBoxItem_Complaint_SoftTissueInjury" xml:space="preserve">
+    <value>Soft Tissue Injury</value>
+    <comment>DetailsForm</comment>
+  </data>
+  <data name="ComboBoxItem_Complaint_SuspectedStroke" xml:space="preserve">
+    <value>Suspected Stroke</value>
+    <comment>DetailsForm</comment>
+  </data>
+  <data name="ComboBoxItem_Complaint_Unconscious" xml:space="preserve">
+    <value>Unconscious</value>
+    <comment>DetailsForm</comment>
+  </data>
+  <data name="ComboBoxItem_Complaint_Weakness" xml:space="preserve">
+    <value>Weakness/Fainting</value>
+    <comment>DetailsForm</comment>
+  </data>
+  <data name="ComboBoxItem_Conclusion_911" xml:space="preserve">
+    <value>911 called</value>
+    <comment>EndInterventionForm</comment>
+  </data>
+  <data name="ComboBoxItem_Conclusion_Doctor" xml:space="preserve">
+    <value>Referred to doctor</value>
+    <comment>EndInterventionForm</comment>
+  </data>
+  <data name="ComboBoxItem_Conclusion_Equipment" xml:space="preserve">
+    <value>Equipment distribution</value>
+    <comment>EndInterventionForm</comment>
+  </data>
+  <data name="ComboBoxItem_Conclusion_NoIntervention" xml:space="preserve">
+    <value>No intervention</value>
+    <comment>EndInterventionForm</comment>
+  </data>
+  <data name="ComboBoxItem_Conclusion_NotFound" xml:space="preserve">
+    <value>Patient not found</value>
+    <comment>EndInterventionForm</comment>
+  </data>
+  <data name="ComboBoxItem_Conclusion_Other" xml:space="preserve">
+    <value>Other</value>
+    <comment>EndInterventionForm</comment>
+  </data>
+  <data name="ComboBoxItem_Conclusion_Refusal" xml:space="preserve">
+    <value>Refusal of treatment</value>
+    <comment>EndInterventionForm</comment>
+  </data>
+  <data name="ComboBoxItem_Conclusion_ReturnHome" xml:space="preserve">
+    <value>Returned to home</value>
+    <comment>EndInterventionForm</comment>
+  </data>
+  <data name="ComboBoxItem_Conclusion_ReturnSite" xml:space="preserve">
+    <value>Returned to site</value>
+    <comment>EndInterventionForm</comment>
+  </data>
+  <data name="ComboBoxItem_Consciousness_Alert" xml:space="preserve">
+    <value>Alert</value>
+    <comment>ABCForm</comment>
+  </data>
+  <data name="ComboBoxItem_Consciousness_Painful" xml:space="preserve">
+    <value>Painful</value>
+    <comment>ABCForm</comment>
+  </data>
+  <data name="ComboBoxItem_Consciousness_Unconscious" xml:space="preserve">
+    <value>Unconsicous</value>
+    <comment>ABCForm</comment>
+  </data>
+  <data name="ComboBoxItem_Consciousness_Verbal" xml:space="preserve">
+    <value>Verbal</value>
+    <comment>ABCForm</comment>
+  </data>
+  <data name="ComboBoxItem_EditMode" xml:space="preserve">
+    <value>Edit Mode</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="ComboBoxItem_Epipen" xml:space="preserve">
+    <value>Epipen</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="ComboBoxItem_FirstResponder" xml:space="preserve">
+    <value>First Responder</value>
+    <comment>TeamForm</comment>
+  </data>
+  <data name="ComboBoxItem_GeneralFA" xml:space="preserve">
+    <value>General First Aid</value>
+    <comment>TeamForm</comment>
+  </data>
+  <data name="ComboBoxItem_Line" xml:space="preserve">
+    <value>Line</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="ComboBoxItem_Medicine" xml:space="preserve">
+    <value>Medicine</value>
+    <comment>TeamForm</comment>
+  </data>
+  <data name="ComboBoxItem_MountedStretcher" xml:space="preserve">
+    <value>Mounted Stretcher</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="ComboBoxItem_Rectangle" xml:space="preserve">
+    <value>Rectangle</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="ComboBoxItem_RegularMode" xml:space="preserve">
+    <value>Regular Mode</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="ComboBoxItem_SittingCart" xml:space="preserve">
+    <value>Sitting Cart</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="ComboBoxItem_Stairs" xml:space="preserve">
+    <value>Stairs</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="ComboBoxItem_TransportStretcher" xml:space="preserve">
+    <value>Transport Stretcher</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="ComboBoxItem_Wheelchair" xml:space="preserve">
+    <value>Wheelchair</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="Label_911Call" xml:space="preserve">
+    <value>911 Call</value>
+    <comment>EndInterventionForm</comment>
+  </data>
+  <data name="Label_Acronym" xml:space="preserve">
+    <value>Acronym</value>
+    <comment>InitialSetup</comment>
+  </data>
+  <data name="Label_Age" xml:space="preserve">
+    <value>Age:</value>
+    <comment>DetailsForm</comment>
+  </data>
+  <data name="Label_Ambulance" xml:space="preserve">
+    <value>Ambulance</value>
+    <comment>EndInterventionForm</comment>
+  </data>
+  <data name="Label_Call" xml:space="preserve">
+    <value>Call</value>
+    <comment>DetailsForm</comment>
+  </data>
+  <data name="Label_Complaint" xml:space="preserve">
+    <value>Complaint:</value>
+    <comment>DetailsForm</comment>
+  </data>
+  <data name="Label_DepartureTime" xml:space="preserve">
+    <value>Time of Departure</value>
+    <comment>TeamForm</comment>
+  </data>
+  <data name="Label_DispatcherName" xml:space="preserve">
+    <value>Dispatcher Name</value>
+    <comment>InitialSetup</comment>
+  </data>
+  <data name="Label_FR" xml:space="preserve">
+    <value>F.R.</value>
+    <comment>EndInterventionForm</comment>
+  </data>
+  <data name="Label_Gender" xml:space="preserve">
+    <value>Gender:</value>
+    <comment>DetailsForm</comment>
+  </data>
+  <data name="Label_InterventionFilterCompleted" xml:space="preserve">
+    <value>Completed</value>
+    <comment>InterventionSection</comment>
+  </data>
+  <data name="Label_InterventionFilterOngoing" xml:space="preserve">
+    <value>Ongoing</value>
+    <comment>InterventionSection</comment>
+  </data>
+  <data name="Label_Interventions" xml:space="preserve">
+    <value>Interventions:</value>
+    <comment>InterventionSection</comment>
+  </data>
+  <data name="Label_OperationName" xml:space="preserve">
+    <value>Operation Name</value>
+    <comment>InitialSetup</comment>
+  </data>
+  <data name="Label_PerMinute" xml:space="preserve">
+    <value>/minute</value>
+    <comment>ABCForm</comment>
+  </data>
+  <data name="Label_Priority" xml:space="preserve">
+    <value>Priority:</value>
+    <comment>DetailsForm</comment>
+  </data>
+  <data name="Label_ShiftEndDate" xml:space="preserve">
+    <value>Shift End Date</value>
+    <comment>InitialSetup</comment>
+  </data>
+  <data name="Label_ShiftEndTime" xml:space="preserve">
+    <value>Shift End Time</value>
+    <comment>InitialSetup</comment>
+  </data>
+  <data name="Label_ShiftStartDate" xml:space="preserve">
+    <value>Shift Start Date</value>
+    <comment>InitialSetup</comment>
+  </data>
+  <data name="Label_ShiftStartTime" xml:space="preserve">
+    <value>Shift Start Time</value>
+    <comment>InitialSetup</comment>
+  </data>
+  <data name="Label_Teams" xml:space="preserve">
+    <value>Teams</value>
+    <comment>TeamsSection</comment>
+  </data>
+  <data name="Label_Training" xml:space="preserve">
+    <value>Training:</value>
+    <comment>TeamForm</comment>
+  </data>
+  <data name="MenuItem_CompletedInterventions" xml:space="preserve">
+    <value>Completed Interventions</value>
+    <comment>InterventionSection</comment>
+  </data>
+  <data name="MenuItem_DeleteTeam" xml:space="preserve">
+    <value>Delete Team</value>
+    <comment>TeamInfo</comment>
+  </data>
+  <data name="MenuItem_EquipmentPin_Delete" xml:space="preserve">
+    <value>Delete Equipment</value>
+    <comment>EquipmentPin</comment>
+  </data>
+  <data name="MenuItem_OngoingInterventions" xml:space="preserve">
+    <value>Ongoing Interventions</value>
+    <comment>InterventionSection</comment>
+  </data>
+  <data name="MenuItem_TeamPin_Available" xml:space="preserve">
+    <value>Available</value>
+    <comment>TeamPin</comment>
+  </data>
+  <data name="MenuItem_TeamPin_Intervening" xml:space="preserve">
+    <value>Intervening</value>
+    <comment>TeamPin</comment>
+  </data>
+  <data name="MenuItem_TeamPin_Moving" xml:space="preserve">
+    <value>Moving</value>
+    <comment>TeamPin</comment>
+  </data>
+  <data name="MenuItem_TeamPin_Unavailable" xml:space="preserve">
+    <value>Unavailable</value>
+    <comment>TeamPin</comment>
+  </data>
+  <data name="MessageBox_Notification_DeadlineChanged" xml:space="preserve">
+    <value>The deadlines have been changed.</value>
+    <comment>Notification_MainWindow</comment>
+  </data>
+  <data name="MessageBox_Notification_DeadlineNumbers" xml:space="preserve">
+    <value>The intervention deadlines should be numbers!</value>
+    <comment>Notification_MainWindow</comment>
+  </data>
+  <data name="MessageBox_Notification_EquipmentLimit" xml:space="preserve">
+    <value>A team cannot use more than three equipments.</value>
+    <comment>Notification_Team</comment>
+  </data>
+  <data name="MessageBox_Notification_FutureTime" xml:space="preserve">
+    <value>The time inserted is in the future!</value>
+    <comment>Notification_ResourceLine</comment>
+  </data>
+  <data name="MessageBox_Notification_InvalidAcronym" xml:space="preserve">
+    <value>Invalid acronym.</value>
+    <comment>Notification_InitialSetup</comment>
+  </data>
+  <data name="MessageBox_Notification_InvalidDispatcherName" xml:space="preserve">
+    <value>Invalid dispatcher name.</value>
+    <comment>Notification_InitialSetup</comment>
+  </data>
+  <data name="MessageBox_Notification_InvalidEndDate" xml:space="preserve">
+    <value>Invalid shift end date.</value>
+    <comment>Notification_InitialSetup</comment>
+  </data>
+  <data name="MessageBox_Notification_InvalidEndTime" xml:space="preserve">
+    <value>Invalid shift end time.</value>
+    <comment>Notification_InitialSetup</comment>
+  </data>
+  <data name="MessageBox_Notification_InvalidOperationName" xml:space="preserve">
+    <value>Invalid operation name.</value>
+    <comment>Notification_InitialSetup</comment>
+  </data>
+  <data name="MessageBox_Notification_InvalidStartDate" xml:space="preserve">
+    <value>Invalid shift start date.</value>
+    <comment>Notification_InitialSetup</comment>
+  </data>
+  <data name="MessageBox_Notification_InvalidStartTime" xml:space="preserve">
+    <value>Invalid shift start time.</value>
+    <comment>Notification_InitialSetup</comment>
+  </data>
+  <data name="MessageBox_Notification_InvalidTime" xml:space="preserve">
+    <value>The text inserted in the time boxes is not valid.</value>
+    <comment>Notification_ResourceLine</comment>
+  </data>
+  <data name="MessageBox_Notification_NoConclusion" xml:space="preserve">
+    <value>No conclusion is set!</value>
+    <comment>Notification_EndInterventionForm</comment>
+  </data>
+  <data name="MessageBox_Notification_NoEquipment" xml:space="preserve">
+    <value>You need to select an equipment to add!</value>
+    <comment>Notification_MainWindow</comment>
+  </data>
+  <data name="MessageBox_Notification_StartTimeAfterEndTime" xml:space="preserve">
+    <value>Start time cannot be greater than end time.</value>
+    <comment>Notification_InitialSetup</comment>
+  </data>
+  <data name="MessageBox_Notification_Warning" xml:space="preserve">
+    <value>Warning</value>
+    <comment>Notification_RegisteredVolunteers</comment>
+  </data>
+  <data name="TabItem_ABC" xml:space="preserve">
+    <value>ABC</value>
+    <comment>InterventionForm</comment>
+  </data>
+  <data name="TabItem_AdditionalInfo" xml:space="preserve">
+    <value>Additional Info</value>
+    <comment>InterventionForm</comment>
+  </data>
+  <data name="TabItem_Details" xml:space="preserve">
+    <value>Details</value>
+    <comment>InterventionForm</comment>
+  </data>
+  <data name="TabItem_End" xml:space="preserve">
+    <value>End</value>
+    <comment>InterventionForm</comment>
+  </data>
+  <data name="TabItem_Resources" xml:space="preserve">
+    <value>Resources</value>
+    <comment>InterventionForm</comment>
+  </data>
+  <data name="TabItem_Timers" xml:space="preserve">
+    <value>Timers</value>
+    <comment>InterventionForm</comment>
+  </data>
+  <data name="TextBlock_Airways" xml:space="preserve">
+    <value>Airways</value>
+    <comment>ABCForm</comment>
+  </data>
+  <data name="TextBlock_Arrival" xml:space="preserve">
+    <value>Arrival</value>
+    <comment>ResourcesForm</comment>
+  </data>
+  <data name="TextBlock_Breathing" xml:space="preserve">
+    <value>Breathing</value>
+    <comment>ABCForm</comment>
+  </data>
+  <data name="TextBlock_Circulation" xml:space="preserve">
+    <value>Circulation</value>
+    <comment>ABCForm</comment>
+  </data>
+  <data name="TextBlock_Company" xml:space="preserve">
+    <value>Company</value>
+    <comment>EndInterventionForm</comment>
+  </data>
+  <data name="TextBlock_Consciousness" xml:space="preserve">
+    <value>Consciousness</value>
+    <comment>ABCForm</comment>
+  </data>
+  <data name="TextBlock_Deadlines" xml:space="preserve">
+    <value>Deadlines (mins):</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="TextBlock_InterventionDeadline" xml:space="preserve">
+    <value>Intervention</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="TextBlock_MeetingPoint" xml:space="preserve">
+    <value>Meeting:</value>
+    <comment>EndInterventionForm</comment>
+  </data>
+  <data name="TextBlock_Moving" xml:space="preserve">
+    <value>Moving</value>
+    <comment>ResourcesForm</comment>
+  </data>
+  <data name="TextBlock_MovingDeadline" xml:space="preserve">
+    <value>Moving</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="TextBlock_Resources" xml:space="preserve">
+    <value>Resources</value>
+    <comment>ResourcesForm</comment>
+  </data>
+  <data name="TextBlock_Team" xml:space="preserve">
+    <value>Team</value>
+    <comment>ResourcesForm</comment>
+  </data>
+  <data name="TextBlock_Vehicle" xml:space="preserve">
+    <value>Vehicle</value>
+    <comment>EndInterventionForm</comment>
+  </data>
+  <data name="TextBox_AdditionalInformation_Conclusion" xml:space="preserve">
+    <value>Conclusion</value>
+    <comment>EndInterventionForm</comment>
+  </data>
+  <data name="TextBox_AdditionalInformation_Hospital" xml:space="preserve">
+    <value>Hospital?</value>
+    <comment>EndInterventionForm</comment>
+  </data>
+  <data name="TextBox_CallerName" xml:space="preserve">
+    <value>Caller Name</value>
+    <comment>DetailsForm</comment>
+  </data>
+  <data name="TextBox_Location" xml:space="preserve">
+    <value>Location</value>
+    <comment>DetailsForm</comment>
+  </data>
+  <data name="TextBox_Nature" xml:space="preserve">
+    <value>Nature of Call</value>
+    <comment>DetailsForm</comment>
+  </data>
+  <data name="TextBox_TeamMemberName" xml:space="preserve">
+    <value>Team Member Name</value>
+    <comment>TeamForm</comment>
+  </data>
+  <data name="TextBox_TeamName" xml:space="preserve">
+    <value>Team Name</value>
+    <comment>TeamForm</comment>
+  </data>
+  <data name="MessageBox_Notification_FailedValidation" xml:space="preserve">
+    <value>Validation has failed. Please change the boxes with a red border.</value>
+    <comment>Notification_TeamForm</comment>
+  </data>
+  <data name="TextBlock_Client" xml:space="preserve">
+    <value>Client</value>
+    <comment>FollowUpSection</comment>
+  </data>
+  <data name="TextBlock_Completion" xml:space="preserve">
+    <value>Completion</value>
+    <comment>FollowUpSection</comment>
+  </data>
+  <data name="TextBlock_FollowUp" xml:space="preserve">
+    <value>Follow Up</value>
+    <comment>FollowUpSection</comment>
+  </data>
+  <data name="TextBlock_HandledBy" xml:space="preserve">
+    <value>Handled By</value>
+    <comment>FollowUpSection</comment>
+  </data>
+  <data name="TextBlock_Recipient" xml:space="preserve">
+    <value>Recipient</value>
+    <comment>FollowUpSection</comment>
+  </data>
+  <data name="TextBlock_Request" xml:space="preserve">
+    <value>Request</value>
+    <comment>FollowUpSection</comment>
+  </data>
+  <data name="TextBlock_Time" xml:space="preserve">
+    <value>Time</value>
+    <comment>FollowUpSection</comment>
+  </data>
+</root>
