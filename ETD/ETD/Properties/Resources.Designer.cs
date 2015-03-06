@@ -159,11 +159,74 @@ namespace ETD.Properties {
         }
         
         /// <summary>
+        /// Looks up a localized string similar to 'Disoriented'.
+        /// </summary>
+        public static string CheckBox_Disoriented {
+            get {
+                return ResourceManager.GetString(ResourceNames.CheckBox_Disoriented, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Clear'.
+        /// </summary>
+        public static string ComboBoxItem_Airways_Clear {
+            get {
+                return ResourceManager.GetString(ResourceNames.ComboBoxItem_Airways_Clear, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Completely Obstructed'.
+        /// </summary>
+        public static string ComboBoxItem_Airways_CompletelyObstructed {
+            get {
+                return ResourceManager.GetString(ResourceNames.ComboBoxItem_Airways_CompletelyObstructed, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Partially Obstructed'.
+        /// </summary>
+        public static string ComboBoxItem_Airways_PartiallyObstructed {
+            get {
+                return ResourceManager.GetString(ResourceNames.ComboBoxItem_Airways_PartiallyObstructed, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Looks up a localized string similar to 'Ambulance Cart'.
         /// </summary>
         public static string ComboBoxItem_AmbulanceCart {
             get {
                 return ResourceManager.GetString(ResourceNames.ComboBoxItem_AmbulanceCart, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Absent'.
+        /// </summary>
+        public static string ComboBoxItem_Breathing_Absent {
+            get {
+                return ResourceManager.GetString(ResourceNames.ComboBoxItem_Breathing_Absent, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Difficulty'.
+        /// </summary>
+        public static string ComboBoxItem_Breathing_Difficulty {
+            get {
+                return ResourceManager.GetString(ResourceNames.ComboBoxItem_Breathing_Difficulty, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Normal'.
+        /// </summary>
+        public static string ComboBoxItem_Breathing_Normal {
+            get {
+                return ResourceManager.GetString(ResourceNames.ComboBoxItem_Breathing_Normal, _resourceCulture);
             }
         }
         
@@ -182,6 +245,303 @@ namespace ETD.Properties {
         public static string ComboBoxItem_Circle {
             get {
                 return ResourceManager.GetString(ResourceNames.ComboBoxItem_Circle, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Chest Pain'.
+        /// </summary>
+        public static string ComboBoxItem_Circulation_ChestPain {
+            get {
+                return ResourceManager.GetString(ResourceNames.ComboBoxItem_Circulation_ChestPain, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Hemmorrhage'.
+        /// </summary>
+        public static string ComboBoxItem_Circulation_Hemmorrhage {
+            get {
+                return ResourceManager.GetString(ResourceNames.ComboBoxItem_Circulation_Hemmorrhage, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'No pulse'.
+        /// </summary>
+        public static string ComboBoxItem_Circulation_NoPulse {
+            get {
+                return ResourceManager.GetString(ResourceNames.ComboBoxItem_Circulation_NoPulse, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Normal'.
+        /// </summary>
+        public static string ComboBoxItem_Circulation_Normal {
+            get {
+                return ResourceManager.GetString(ResourceNames.ComboBoxItem_Circulation_Normal, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Abdominal Pain'.
+        /// </summary>
+        public static string ComboBoxItem_Complaint_AbdominalPain {
+            get {
+                return ResourceManager.GetString(ResourceNames.ComboBoxItem_Complaint_AbdominalPain, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Allergy (Mild)'.
+        /// </summary>
+        public static string ComboBoxItem_Complaint_Allergy {
+            get {
+                return ResourceManager.GetString(ResourceNames.ComboBoxItem_Complaint_Allergy, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Anaphylaxis'.
+        /// </summary>
+        public static string ComboBoxItem_Complaint_Anaphylaxis {
+            get {
+                return ResourceManager.GetString(ResourceNames.ComboBoxItem_Complaint_Anaphylaxis, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Behavioural Disorder'.
+        /// </summary>
+        public static string ComboBoxItem_Complaint_Behavioural {
+            get {
+                return ResourceManager.GetString(ResourceNames.ComboBoxItem_Complaint_Behavioural, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Burn'.
+        /// </summary>
+        public static string ComboBoxItem_Complaint_Burn {
+            get {
+                return ResourceManager.GetString(ResourceNames.ComboBoxItem_Complaint_Burn, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Cardiac Arrest'.
+        /// </summary>
+        public static string ComboBoxItem_Complaint_Cardiac {
+            get {
+                return ResourceManager.GetString(ResourceNames.ComboBoxItem_Complaint_Cardiac, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Chest Pain'.
+        /// </summary>
+        public static string ComboBoxItem_Complaint_ChestPain {
+            get {
+                return ResourceManager.GetString(ResourceNames.ComboBoxItem_Complaint_ChestPain, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Environmental Related Disorder'.
+        /// </summary>
+        public static string ComboBoxItem_Complaint_Environmental {
+            get {
+                return ResourceManager.GetString(ResourceNames.ComboBoxItem_Complaint_Environmental, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Headache'.
+        /// </summary>
+        public static string ComboBoxItem_Complaint_Headache {
+            get {
+                return ResourceManager.GetString(ResourceNames.ComboBoxItem_Complaint_Headache, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Head/Spine Injury'.
+        /// </summary>
+        public static string ComboBoxItem_Complaint_HeadSpine {
+            get {
+                return ResourceManager.GetString(ResourceNames.ComboBoxItem_Complaint_HeadSpine, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Hemorrhage'.
+        /// </summary>
+        public static string ComboBoxItem_Complaint_Hemorrhage {
+            get {
+                return ResourceManager.GetString(ResourceNames.ComboBoxItem_Complaint_Hemorrhage, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Insect Bite'.
+        /// </summary>
+        public static string ComboBoxItem_Complaint_InsectBite {
+            get {
+                return ResourceManager.GetString(ResourceNames.ComboBoxItem_Complaint_InsectBite, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Intoxication'.
+        /// </summary>
+        public static string ComboBoxItem_Complaint_Intoxication {
+            get {
+                return ResourceManager.GetString(ResourceNames.ComboBoxItem_Complaint_Intoxication, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Musculoskeletal'.
+        /// </summary>
+        public static string ComboBoxItem_Complaint_Musculoskeletal {
+            get {
+                return ResourceManager.GetString(ResourceNames.ComboBoxItem_Complaint_Musculoskeletal, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Nosebleed'.
+        /// </summary>
+        public static string ComboBoxItem_Complaint_Nosebleed {
+            get {
+                return ResourceManager.GetString(ResourceNames.ComboBoxItem_Complaint_Nosebleed, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Ocular'.
+        /// </summary>
+        public static string ComboBoxItem_Complaint_Ocular {
+            get {
+                return ResourceManager.GetString(ResourceNames.ComboBoxItem_Complaint_Ocular, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Oral'.
+        /// </summary>
+        public static string ComboBoxItem_Complaint_Oral {
+            get {
+                return ResourceManager.GetString(ResourceNames.ComboBoxItem_Complaint_Oral, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Other'.
+        /// </summary>
+        public static string ComboBoxItem_Complaint_Other {
+            get {
+                return ResourceManager.GetString(ResourceNames.ComboBoxItem_Complaint_Other, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Respiratory'.
+        /// </summary>
+        public static string ComboBoxItem_Complaint_Respiratory {
+            get {
+                return ResourceManager.GetString(ResourceNames.ComboBoxItem_Complaint_Respiratory, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Respiratory Arrest'.
+        /// </summary>
+        public static string ComboBoxItem_Complaint_RespiratoryArrest {
+            get {
+                return ResourceManager.GetString(ResourceNames.ComboBoxItem_Complaint_RespiratoryArrest, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Seizures'.
+        /// </summary>
+        public static string ComboBoxItem_Complaint_Seizures {
+            get {
+                return ResourceManager.GetString(ResourceNames.ComboBoxItem_Complaint_Seizures, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Soft Tissue Injury'.
+        /// </summary>
+        public static string ComboBoxItem_Complaint_SoftTissueInjury {
+            get {
+                return ResourceManager.GetString(ResourceNames.ComboBoxItem_Complaint_SoftTissueInjury, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Suspected Stroke'.
+        /// </summary>
+        public static string ComboBoxItem_Complaint_SuspectedStroke {
+            get {
+                return ResourceManager.GetString(ResourceNames.ComboBoxItem_Complaint_SuspectedStroke, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Unconscious'.
+        /// </summary>
+        public static string ComboBoxItem_Complaint_Unconscious {
+            get {
+                return ResourceManager.GetString(ResourceNames.ComboBoxItem_Complaint_Unconscious, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Weakness/Fainting'.
+        /// </summary>
+        public static string ComboBoxItem_Complaint_Weakness {
+            get {
+                return ResourceManager.GetString(ResourceNames.ComboBoxItem_Complaint_Weakness, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Alert'.
+        /// </summary>
+        public static string ComboBoxItem_Consciousness_Alert {
+            get {
+                return ResourceManager.GetString(ResourceNames.ComboBoxItem_Consciousness_Alert, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Painful'.
+        /// </summary>
+        public static string ComboBoxItem_Consciousness_Painful {
+            get {
+                return ResourceManager.GetString(ResourceNames.ComboBoxItem_Consciousness_Painful, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Unconsicous'.
+        /// </summary>
+        public static string ComboBoxItem_Consciousness_Unconscious {
+            get {
+                return ResourceManager.GetString(ResourceNames.ComboBoxItem_Consciousness_Unconscious, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Verbal'.
+        /// </summary>
+        public static string ComboBoxItem_Consciousness_Verbal {
+            get {
+                return ResourceManager.GetString(ResourceNames.ComboBoxItem_Consciousness_Verbal, _resourceCulture);
             }
         }
         
@@ -312,6 +672,33 @@ namespace ETD.Properties {
         }
         
         /// <summary>
+        /// Looks up a localized string similar to 'Age:'.
+        /// </summary>
+        public static string Label_Age {
+            get {
+                return ResourceManager.GetString(ResourceNames.Label_Age, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Call'.
+        /// </summary>
+        public static string Label_Call {
+            get {
+                return ResourceManager.GetString(ResourceNames.Label_Call, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Complaint:'.
+        /// </summary>
+        public static string Label_Complaint {
+            get {
+                return ResourceManager.GetString(ResourceNames.Label_Complaint, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Looks up a localized string similar to 'Time of Departure'.
         /// </summary>
         public static string Label_DepartureTime {
@@ -326,6 +713,15 @@ namespace ETD.Properties {
         public static string Label_DispatcherName {
             get {
                 return ResourceManager.GetString(ResourceNames.Label_DispatcherName, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Gender:'.
+        /// </summary>
+        public static string Label_Gender {
+            get {
+                return ResourceManager.GetString(ResourceNames.Label_Gender, _resourceCulture);
             }
         }
         
@@ -362,6 +758,24 @@ namespace ETD.Properties {
         public static string Label_OperationName {
             get {
                 return ResourceManager.GetString(ResourceNames.Label_OperationName, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to '/minute'.
+        /// </summary>
+        public static string Label_PerMinute {
+            get {
+                return ResourceManager.GetString(ResourceNames.Label_PerMinute, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Priority:'.
+        /// </summary>
+        public static string Label_Priority {
+            get {
+                return ResourceManager.GetString(ResourceNames.Label_Priority, _resourceCulture);
             }
         }
         
@@ -438,11 +852,101 @@ namespace ETD.Properties {
         }
         
         /// <summary>
+        /// Looks up a localized string similar to 'Delete Equipment'.
+        /// </summary>
+        public static string MenuItem_EquipmentPin_Delete {
+            get {
+                return ResourceManager.GetString(ResourceNames.MenuItem_EquipmentPin_Delete, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Looks up a localized string similar to 'Ongoing Interventions'.
         /// </summary>
         public static string MenuItem_OngoingInterventions {
             get {
                 return ResourceManager.GetString(ResourceNames.MenuItem_OngoingInterventions, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Available'.
+        /// </summary>
+        public static string MenuItem_TeamPin_Available {
+            get {
+                return ResourceManager.GetString(ResourceNames.MenuItem_TeamPin_Available, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Intervening'.
+        /// </summary>
+        public static string MenuItem_TeamPin_Intervening {
+            get {
+                return ResourceManager.GetString(ResourceNames.MenuItem_TeamPin_Intervening, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Moving'.
+        /// </summary>
+        public static string MenuItem_TeamPin_Moving {
+            get {
+                return ResourceManager.GetString(ResourceNames.MenuItem_TeamPin_Moving, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Unavailable'.
+        /// </summary>
+        public static string MenuItem_TeamPin_Unavailable {
+            get {
+                return ResourceManager.GetString(ResourceNames.MenuItem_TeamPin_Unavailable, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'The deadlines have been changed.'.
+        /// </summary>
+        public static string MessageBox_Notification_DeadlineChanged {
+            get {
+                return ResourceManager.GetString(ResourceNames.MessageBox_Notification_DeadlineChanged, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'The intervention deadlines should be numbers!'.
+        /// </summary>
+        public static string MessageBox_Notification_DeadlineNumbers {
+            get {
+                return ResourceManager.GetString(ResourceNames.MessageBox_Notification_DeadlineNumbers, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'The time inserted is in the future!'.
+        /// </summary>
+        public static string MessageBox_Notification_FutureTime {
+            get {
+                return ResourceManager.GetString(ResourceNames.MessageBox_Notification_FutureTime, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'The text inserted in the time boxes is not valid.'.
+        /// </summary>
+        public static string MessageBox_Notification_InvalidTime {
+            get {
+                return ResourceManager.GetString(ResourceNames.MessageBox_Notification_InvalidTime, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'You need to select an equipment to add!'.
+        /// </summary>
+        public static string MessageBox_Notification_NoEquipment {
+            get {
+                return ResourceManager.GetString(ResourceNames.MessageBox_Notification_NoEquipment, _resourceCulture);
             }
         }
         
@@ -501,6 +1005,51 @@ namespace ETD.Properties {
         }
         
         /// <summary>
+        /// Looks up a localized string similar to 'Airways'.
+        /// </summary>
+        public static string TextBlock_Airways {
+            get {
+                return ResourceManager.GetString(ResourceNames.TextBlock_Airways, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Arrival'.
+        /// </summary>
+        public static string TextBlock_Arrival {
+            get {
+                return ResourceManager.GetString(ResourceNames.TextBlock_Arrival, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Breathing'.
+        /// </summary>
+        public static string TextBlock_Breathing {
+            get {
+                return ResourceManager.GetString(ResourceNames.TextBlock_Breathing, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Circulation'.
+        /// </summary>
+        public static string TextBlock_Circulation {
+            get {
+                return ResourceManager.GetString(ResourceNames.TextBlock_Circulation, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Consciousness'.
+        /// </summary>
+        public static string TextBlock_Consciousness {
+            get {
+                return ResourceManager.GetString(ResourceNames.TextBlock_Consciousness, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Looks up a localized string similar to 'Deadlines (mins):'.
         /// </summary>
         public static string TextBlock_Deadlines {
@@ -521,9 +1070,63 @@ namespace ETD.Properties {
         /// <summary>
         /// Looks up a localized string similar to 'Moving'.
         /// </summary>
+        public static string TextBlock_Moving {
+            get {
+                return ResourceManager.GetString(ResourceNames.TextBlock_Moving, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Moving'.
+        /// </summary>
         public static string TextBlock_MovingDeadline {
             get {
                 return ResourceManager.GetString(ResourceNames.TextBlock_MovingDeadline, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Resources'.
+        /// </summary>
+        public static string TextBlock_Resources {
+            get {
+                return ResourceManager.GetString(ResourceNames.TextBlock_Resources, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Team'.
+        /// </summary>
+        public static string TextBlock_Team {
+            get {
+                return ResourceManager.GetString(ResourceNames.TextBlock_Team, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Caller Name'.
+        /// </summary>
+        public static string TextBox_CallerName {
+            get {
+                return ResourceManager.GetString(ResourceNames.TextBox_CallerName, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Location'.
+        /// </summary>
+        public static string TextBox_Location {
+            get {
+                return ResourceManager.GetString(ResourceNames.TextBox_Location, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Nature of Call'.
+        /// </summary>
+        public static string TextBox_Nature {
+            get {
+                return ResourceManager.GetString(ResourceNames.TextBox_Nature, _resourceCulture);
             }
         }
         
@@ -591,9 +1194,44 @@ namespace ETD.Properties {
             public const string Button_Submit = "Button_Submit";
             
             /// <summary>
+            /// Stores the resource name 'CheckBox_Disoriented'.
+            /// </summary>
+            public const string CheckBox_Disoriented = "CheckBox_Disoriented";
+            
+            /// <summary>
+            /// Stores the resource name 'ComboBoxItem_Airways_Clear'.
+            /// </summary>
+            public const string ComboBoxItem_Airways_Clear = "ComboBoxItem_Airways_Clear";
+            
+            /// <summary>
+            /// Stores the resource name 'ComboBoxItem_Airways_CompletelyObstructed'.
+            /// </summary>
+            public const string ComboBoxItem_Airways_CompletelyObstructed = "ComboBoxItem_Airways_CompletelyObstructed";
+            
+            /// <summary>
+            /// Stores the resource name 'ComboBoxItem_Airways_PartiallyObstructed'.
+            /// </summary>
+            public const string ComboBoxItem_Airways_PartiallyObstructed = "ComboBoxItem_Airways_PartiallyObstructed";
+            
+            /// <summary>
             /// Stores the resource name 'ComboBoxItem_AmbulanceCart'.
             /// </summary>
             public const string ComboBoxItem_AmbulanceCart = "ComboBoxItem_AmbulanceCart";
+            
+            /// <summary>
+            /// Stores the resource name 'ComboBoxItem_Breathing_Absent'.
+            /// </summary>
+            public const string ComboBoxItem_Breathing_Absent = "ComboBoxItem_Breathing_Absent";
+            
+            /// <summary>
+            /// Stores the resource name 'ComboBoxItem_Breathing_Difficulty'.
+            /// </summary>
+            public const string ComboBoxItem_Breathing_Difficulty = "ComboBoxItem_Breathing_Difficulty";
+            
+            /// <summary>
+            /// Stores the resource name 'ComboBoxItem_Breathing_Normal'.
+            /// </summary>
+            public const string ComboBoxItem_Breathing_Normal = "ComboBoxItem_Breathing_Normal";
             
             /// <summary>
             /// Stores the resource name 'ComboBoxItem_Camp'.
@@ -604,6 +1242,171 @@ namespace ETD.Properties {
             /// Stores the resource name 'ComboBoxItem_Circle'.
             /// </summary>
             public const string ComboBoxItem_Circle = "ComboBoxItem_Circle";
+            
+            /// <summary>
+            /// Stores the resource name 'ComboBoxItem_Circulation_ChestPain'.
+            /// </summary>
+            public const string ComboBoxItem_Circulation_ChestPain = "ComboBoxItem_Circulation_ChestPain";
+            
+            /// <summary>
+            /// Stores the resource name 'ComboBoxItem_Circulation_Hemmorrhage'.
+            /// </summary>
+            public const string ComboBoxItem_Circulation_Hemmorrhage = "ComboBoxItem_Circulation_Hemmorrhage";
+            
+            /// <summary>
+            /// Stores the resource name 'ComboBoxItem_Circulation_NoPulse'.
+            /// </summary>
+            public const string ComboBoxItem_Circulation_NoPulse = "ComboBoxItem_Circulation_NoPulse";
+            
+            /// <summary>
+            /// Stores the resource name 'ComboBoxItem_Circulation_Normal'.
+            /// </summary>
+            public const string ComboBoxItem_Circulation_Normal = "ComboBoxItem_Circulation_Normal";
+            
+            /// <summary>
+            /// Stores the resource name 'ComboBoxItem_Complaint_AbdominalPain'.
+            /// </summary>
+            public const string ComboBoxItem_Complaint_AbdominalPain = "ComboBoxItem_Complaint_AbdominalPain";
+            
+            /// <summary>
+            /// Stores the resource name 'ComboBoxItem_Complaint_Allergy'.
+            /// </summary>
+            public const string ComboBoxItem_Complaint_Allergy = "ComboBoxItem_Complaint_Allergy";
+            
+            /// <summary>
+            /// Stores the resource name 'ComboBoxItem_Complaint_Anaphylaxis'.
+            /// </summary>
+            public const string ComboBoxItem_Complaint_Anaphylaxis = "ComboBoxItem_Complaint_Anaphylaxis";
+            
+            /// <summary>
+            /// Stores the resource name 'ComboBoxItem_Complaint_Behavioural'.
+            /// </summary>
+            public const string ComboBoxItem_Complaint_Behavioural = "ComboBoxItem_Complaint_Behavioural";
+            
+            /// <summary>
+            /// Stores the resource name 'ComboBoxItem_Complaint_Burn'.
+            /// </summary>
+            public const string ComboBoxItem_Complaint_Burn = "ComboBoxItem_Complaint_Burn";
+            
+            /// <summary>
+            /// Stores the resource name 'ComboBoxItem_Complaint_Cardiac'.
+            /// </summary>
+            public const string ComboBoxItem_Complaint_Cardiac = "ComboBoxItem_Complaint_Cardiac";
+            
+            /// <summary>
+            /// Stores the resource name 'ComboBoxItem_Complaint_ChestPain'.
+            /// </summary>
+            public const string ComboBoxItem_Complaint_ChestPain = "ComboBoxItem_Complaint_ChestPain";
+            
+            /// <summary>
+            /// Stores the resource name 'ComboBoxItem_Complaint_Environmental'.
+            /// </summary>
+            public const string ComboBoxItem_Complaint_Environmental = "ComboBoxItem_Complaint_Environmental";
+            
+            /// <summary>
+            /// Stores the resource name 'ComboBoxItem_Complaint_Headache'.
+            /// </summary>
+            public const string ComboBoxItem_Complaint_Headache = "ComboBoxItem_Complaint_Headache";
+            
+            /// <summary>
+            /// Stores the resource name 'ComboBoxItem_Complaint_HeadSpine'.
+            /// </summary>
+            public const string ComboBoxItem_Complaint_HeadSpine = "ComboBoxItem_Complaint_HeadSpine";
+            
+            /// <summary>
+            /// Stores the resource name 'ComboBoxItem_Complaint_Hemorrhage'.
+            /// </summary>
+            public const string ComboBoxItem_Complaint_Hemorrhage = "ComboBoxItem_Complaint_Hemorrhage";
+            
+            /// <summary>
+            /// Stores the resource name 'ComboBoxItem_Complaint_InsectBite'.
+            /// </summary>
+            public const string ComboBoxItem_Complaint_InsectBite = "ComboBoxItem_Complaint_InsectBite";
+            
+            /// <summary>
+            /// Stores the resource name 'ComboBoxItem_Complaint_Intoxication'.
+            /// </summary>
+            public const string ComboBoxItem_Complaint_Intoxication = "ComboBoxItem_Complaint_Intoxication";
+            
+            /// <summary>
+            /// Stores the resource name 'ComboBoxItem_Complaint_Musculoskeletal'.
+            /// </summary>
+            public const string ComboBoxItem_Complaint_Musculoskeletal = "ComboBoxItem_Complaint_Musculoskeletal";
+            
+            /// <summary>
+            /// Stores the resource name 'ComboBoxItem_Complaint_Nosebleed'.
+            /// </summary>
+            public const string ComboBoxItem_Complaint_Nosebleed = "ComboBoxItem_Complaint_Nosebleed";
+            
+            /// <summary>
+            /// Stores the resource name 'ComboBoxItem_Complaint_Ocular'.
+            /// </summary>
+            public const string ComboBoxItem_Complaint_Ocular = "ComboBoxItem_Complaint_Ocular";
+            
+            /// <summary>
+            /// Stores the resource name 'ComboBoxItem_Complaint_Oral'.
+            /// </summary>
+            public const string ComboBoxItem_Complaint_Oral = "ComboBoxItem_Complaint_Oral";
+            
+            /// <summary>
+            /// Stores the resource name 'ComboBoxItem_Complaint_Other'.
+            /// </summary>
+            public const string ComboBoxItem_Complaint_Other = "ComboBoxItem_Complaint_Other";
+            
+            /// <summary>
+            /// Stores the resource name 'ComboBoxItem_Complaint_Respiratory'.
+            /// </summary>
+            public const string ComboBoxItem_Complaint_Respiratory = "ComboBoxItem_Complaint_Respiratory";
+            
+            /// <summary>
+            /// Stores the resource name 'ComboBoxItem_Complaint_RespiratoryArrest'.
+            /// </summary>
+            public const string ComboBoxItem_Complaint_RespiratoryArrest = "ComboBoxItem_Complaint_RespiratoryArrest";
+            
+            /// <summary>
+            /// Stores the resource name 'ComboBoxItem_Complaint_Seizures'.
+            /// </summary>
+            public const string ComboBoxItem_Complaint_Seizures = "ComboBoxItem_Complaint_Seizures";
+            
+            /// <summary>
+            /// Stores the resource name 'ComboBoxItem_Complaint_SoftTissueInjury'.
+            /// </summary>
+            public const string ComboBoxItem_Complaint_SoftTissueInjury = "ComboBoxItem_Complaint_SoftTissueInjury";
+            
+            /// <summary>
+            /// Stores the resource name 'ComboBoxItem_Complaint_SuspectedStroke'.
+            /// </summary>
+            public const string ComboBoxItem_Complaint_SuspectedStroke = "ComboBoxItem_Complaint_SuspectedStroke";
+            
+            /// <summary>
+            /// Stores the resource name 'ComboBoxItem_Complaint_Unconscious'.
+            /// </summary>
+            public const string ComboBoxItem_Complaint_Unconscious = "ComboBoxItem_Complaint_Unconscious";
+            
+            /// <summary>
+            /// Stores the resource name 'ComboBoxItem_Complaint_Weakness'.
+            /// </summary>
+            public const string ComboBoxItem_Complaint_Weakness = "ComboBoxItem_Complaint_Weakness";
+            
+            /// <summary>
+            /// Stores the resource name 'ComboBoxItem_Consciousness_Alert'.
+            /// </summary>
+            public const string ComboBoxItem_Consciousness_Alert = "ComboBoxItem_Consciousness_Alert";
+            
+            /// <summary>
+            /// Stores the resource name 'ComboBoxItem_Consciousness_Painful'.
+            /// </summary>
+            public const string ComboBoxItem_Consciousness_Painful = "ComboBoxItem_Consciousness_Painful";
+            
+            /// <summary>
+            /// Stores the resource name 'ComboBoxItem_Consciousness_Unconscious'.
+            /// </summary>
+            public const string ComboBoxItem_Consciousness_Unconscious = "ComboBoxItem_Consciousness_Unconscious";
+            
+            /// <summary>
+            /// Stores the resource name 'ComboBoxItem_Consciousness_Verbal'.
+            /// </summary>
+            public const string ComboBoxItem_Consciousness_Verbal = "ComboBoxItem_Consciousness_Verbal";
             
             /// <summary>
             /// Stores the resource name 'ComboBoxItem_EditMode'.
@@ -676,6 +1479,21 @@ namespace ETD.Properties {
             public const string Label_Acronym = "Label_Acronym";
             
             /// <summary>
+            /// Stores the resource name 'Label_Age'.
+            /// </summary>
+            public const string Label_Age = "Label_Age";
+            
+            /// <summary>
+            /// Stores the resource name 'Label_Call'.
+            /// </summary>
+            public const string Label_Call = "Label_Call";
+            
+            /// <summary>
+            /// Stores the resource name 'Label_Complaint'.
+            /// </summary>
+            public const string Label_Complaint = "Label_Complaint";
+            
+            /// <summary>
             /// Stores the resource name 'Label_DepartureTime'.
             /// </summary>
             public const string Label_DepartureTime = "Label_DepartureTime";
@@ -684,6 +1502,11 @@ namespace ETD.Properties {
             /// Stores the resource name 'Label_DispatcherName'.
             /// </summary>
             public const string Label_DispatcherName = "Label_DispatcherName";
+            
+            /// <summary>
+            /// Stores the resource name 'Label_Gender'.
+            /// </summary>
+            public const string Label_Gender = "Label_Gender";
             
             /// <summary>
             /// Stores the resource name 'Label_InterventionFilterCompleted'.
@@ -704,6 +1527,16 @@ namespace ETD.Properties {
             /// Stores the resource name 'Label_OperationName'.
             /// </summary>
             public const string Label_OperationName = "Label_OperationName";
+            
+            /// <summary>
+            /// Stores the resource name 'Label_PerMinute'.
+            /// </summary>
+            public const string Label_PerMinute = "Label_PerMinute";
+            
+            /// <summary>
+            /// Stores the resource name 'Label_Priority'.
+            /// </summary>
+            public const string Label_Priority = "Label_Priority";
             
             /// <summary>
             /// Stores the resource name 'Label_ShiftEndDate'.
@@ -746,9 +1579,59 @@ namespace ETD.Properties {
             public const string MenuItem_DeleteTeam = "MenuItem_DeleteTeam";
             
             /// <summary>
+            /// Stores the resource name 'MenuItem_EquipmentPin_Delete'.
+            /// </summary>
+            public const string MenuItem_EquipmentPin_Delete = "MenuItem_EquipmentPin_Delete";
+            
+            /// <summary>
             /// Stores the resource name 'MenuItem_OngoingInterventions'.
             /// </summary>
             public const string MenuItem_OngoingInterventions = "MenuItem_OngoingInterventions";
+            
+            /// <summary>
+            /// Stores the resource name 'MenuItem_TeamPin_Available'.
+            /// </summary>
+            public const string MenuItem_TeamPin_Available = "MenuItem_TeamPin_Available";
+            
+            /// <summary>
+            /// Stores the resource name 'MenuItem_TeamPin_Intervening'.
+            /// </summary>
+            public const string MenuItem_TeamPin_Intervening = "MenuItem_TeamPin_Intervening";
+            
+            /// <summary>
+            /// Stores the resource name 'MenuItem_TeamPin_Moving'.
+            /// </summary>
+            public const string MenuItem_TeamPin_Moving = "MenuItem_TeamPin_Moving";
+            
+            /// <summary>
+            /// Stores the resource name 'MenuItem_TeamPin_Unavailable'.
+            /// </summary>
+            public const string MenuItem_TeamPin_Unavailable = "MenuItem_TeamPin_Unavailable";
+            
+            /// <summary>
+            /// Stores the resource name 'MessageBox_Notification_DeadlineChanged'.
+            /// </summary>
+            public const string MessageBox_Notification_DeadlineChanged = "MessageBox_Notification_DeadlineChanged";
+            
+            /// <summary>
+            /// Stores the resource name 'MessageBox_Notification_DeadlineNumbers'.
+            /// </summary>
+            public const string MessageBox_Notification_DeadlineNumbers = "MessageBox_Notification_DeadlineNumbers";
+            
+            /// <summary>
+            /// Stores the resource name 'MessageBox_Notification_FutureTime'.
+            /// </summary>
+            public const string MessageBox_Notification_FutureTime = "MessageBox_Notification_FutureTime";
+            
+            /// <summary>
+            /// Stores the resource name 'MessageBox_Notification_InvalidTime'.
+            /// </summary>
+            public const string MessageBox_Notification_InvalidTime = "MessageBox_Notification_InvalidTime";
+            
+            /// <summary>
+            /// Stores the resource name 'MessageBox_Notification_NoEquipment'.
+            /// </summary>
+            public const string MessageBox_Notification_NoEquipment = "MessageBox_Notification_NoEquipment";
             
             /// <summary>
             /// Stores the resource name 'TabItem_ABC'.
@@ -781,6 +1664,31 @@ namespace ETD.Properties {
             public const string TabItem_Timers = "TabItem_Timers";
             
             /// <summary>
+            /// Stores the resource name 'TextBlock_Airways'.
+            /// </summary>
+            public const string TextBlock_Airways = "TextBlock_Airways";
+            
+            /// <summary>
+            /// Stores the resource name 'TextBlock_Arrival'.
+            /// </summary>
+            public const string TextBlock_Arrival = "TextBlock_Arrival";
+            
+            /// <summary>
+            /// Stores the resource name 'TextBlock_Breathing'.
+            /// </summary>
+            public const string TextBlock_Breathing = "TextBlock_Breathing";
+            
+            /// <summary>
+            /// Stores the resource name 'TextBlock_Circulation'.
+            /// </summary>
+            public const string TextBlock_Circulation = "TextBlock_Circulation";
+            
+            /// <summary>
+            /// Stores the resource name 'TextBlock_Consciousness'.
+            /// </summary>
+            public const string TextBlock_Consciousness = "TextBlock_Consciousness";
+            
+            /// <summary>
             /// Stores the resource name 'TextBlock_Deadlines'.
             /// </summary>
             public const string TextBlock_Deadlines = "TextBlock_Deadlines";
@@ -791,9 +1699,39 @@ namespace ETD.Properties {
             public const string TextBlock_InterventionDeadline = "TextBlock_InterventionDeadline";
             
             /// <summary>
+            /// Stores the resource name 'TextBlock_Moving'.
+            /// </summary>
+            public const string TextBlock_Moving = "TextBlock_Moving";
+            
+            /// <summary>
             /// Stores the resource name 'TextBlock_MovingDeadline'.
             /// </summary>
             public const string TextBlock_MovingDeadline = "TextBlock_MovingDeadline";
+            
+            /// <summary>
+            /// Stores the resource name 'TextBlock_Resources'.
+            /// </summary>
+            public const string TextBlock_Resources = "TextBlock_Resources";
+            
+            /// <summary>
+            /// Stores the resource name 'TextBlock_Team'.
+            /// </summary>
+            public const string TextBlock_Team = "TextBlock_Team";
+            
+            /// <summary>
+            /// Stores the resource name 'TextBox_CallerName'.
+            /// </summary>
+            public const string TextBox_CallerName = "TextBox_CallerName";
+            
+            /// <summary>
+            /// Stores the resource name 'TextBox_Location'.
+            /// </summary>
+            public const string TextBox_Location = "TextBox_Location";
+            
+            /// <summary>
+            /// Stores the resource name 'TextBox_Nature'.
+            /// </summary>
+            public const string TextBox_Nature = "TextBox_Nature";
             
             /// <summary>
             /// Stores the resource name 'TextBox_TeamMemberName'.

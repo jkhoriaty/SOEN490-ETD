@@ -32,16 +32,20 @@ namespace ETD.CustomObjects.CustomUIObjects
 
 			//Menu items for status change
 			menuItems[0] = new MenuItem();
-			menuItems[0].Header = "Available";
+            menuItems[0].Uid = "MenuItem_TeamPin_Available";
+			menuItems[0].Header = ETD.Properties.Resources.MenuItem_TeamPin_Available;
 
 			menuItems[1] = new MenuItem();
-			menuItems[1].Header = "Moving";
+            menuItems[1].Uid = "MenuItem_TeamPin_Moving";
+            menuItems[1].Header = ETD.Properties.Resources.MenuItem_TeamPin_Moving;
 
 			menuItems[2] = new MenuItem();
-			menuItems[2].Header = "Intervening";
+            menuItems[2].Uid = "MenuItem_TeamPin_Intervening";
+            menuItems[2].Header = ETD.Properties.Resources.MenuItem_TeamPin_Intervening;
 
 			menuItems[3] = new MenuItem();
-			menuItems[3].Header = "Unavailable";
+            menuItems[3].Uid = "MenuItem_TeamPin_Unavailable";
+            menuItems[3].Header = ETD.Properties.Resources.MenuItem_TeamPin_Unavailable;
 
 			//Adding the method to be called when a menu item is clicked and adding the menuitem to the TeamPin context menu
 			ContextMenu contextMenu = new ContextMenu();

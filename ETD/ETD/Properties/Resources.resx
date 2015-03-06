@@ -149,9 +149,37 @@
     <value>Submit</value>
     <comment>Multi</comment>
   </data>
+  <data name="CheckBox_Disoriented" xml:space="preserve">
+    <value>Disoriented</value>
+    <comment>ABCForm</comment>
+  </data>
+  <data name="ComboBoxItem_Airways_Clear" xml:space="preserve">
+    <value>Clear</value>
+    <comment>ABCForm</comment>
+  </data>
+  <data name="ComboBoxItem_Airways_CompletelyObstructed" xml:space="preserve">
+    <value>Completely Obstructed</value>
+    <comment>ABCForm</comment>
+  </data>
+  <data name="ComboBoxItem_Airways_PartiallyObstructed" xml:space="preserve">
+    <value>Partially Obstructed</value>
+    <comment>ABCForm</comment>
+  </data>
   <data name="ComboBoxItem_AmbulanceCart" xml:space="preserve">
     <value>Ambulance Cart</value>
     <comment>MainWindow</comment>
+  </data>
+  <data name="ComboBoxItem_Breathing_Absent" xml:space="preserve">
+    <value>Absent</value>
+    <comment>ABCForm</comment>
+  </data>
+  <data name="ComboBoxItem_Breathing_Difficulty" xml:space="preserve">
+    <value>Difficulty</value>
+    <comment>ABCForm</comment>
+  </data>
+  <data name="ComboBoxItem_Breathing_Normal" xml:space="preserve">
+    <value>Normal</value>
+    <comment>ABCForm</comment>
   </data>
   <data name="ComboBoxItem_Camp" xml:space="preserve">
     <value>Camp</value>
@@ -160,6 +188,138 @@
   <data name="ComboBoxItem_Circle" xml:space="preserve">
     <value>Circle</value>
     <comment>MainWindow</comment>
+  </data>
+  <data name="ComboBoxItem_Circulation_ChestPain" xml:space="preserve">
+    <value>Chest Pain</value>
+    <comment>ABCForm</comment>
+  </data>
+  <data name="ComboBoxItem_Circulation_Hemmorrhage" xml:space="preserve">
+    <value>Hemmorrhage</value>
+    <comment>ABCForm</comment>
+  </data>
+  <data name="ComboBoxItem_Circulation_NoPulse" xml:space="preserve">
+    <value>No pulse</value>
+    <comment>ABCForm</comment>
+  </data>
+  <data name="ComboBoxItem_Circulation_Normal" xml:space="preserve">
+    <value>Normal</value>
+    <comment>ABCForm</comment>
+  </data>
+  <data name="ComboBoxItem_Complaint_AbdominalPain" xml:space="preserve">
+    <value>Abdominal Pain</value>
+    <comment>DetailsForm</comment>
+  </data>
+  <data name="ComboBoxItem_Complaint_Allergy" xml:space="preserve">
+    <value>Allergy (Mild)</value>
+    <comment>DetailsForm</comment>
+  </data>
+  <data name="ComboBoxItem_Complaint_Anaphylaxis" xml:space="preserve">
+    <value>Anaphylaxis</value>
+    <comment>DetailsForm</comment>
+  </data>
+  <data name="ComboBoxItem_Complaint_Behavioural" xml:space="preserve">
+    <value>Behavioural Disorder</value>
+    <comment>DetailsForm</comment>
+  </data>
+  <data name="ComboBoxItem_Complaint_Burn" xml:space="preserve">
+    <value>Burn</value>
+    <comment>DetailsForm</comment>
+  </data>
+  <data name="ComboBoxItem_Complaint_Cardiac" xml:space="preserve">
+    <value>Cardiac Arrest</value>
+    <comment>DetailsForm</comment>
+  </data>
+  <data name="ComboBoxItem_Complaint_ChestPain" xml:space="preserve">
+    <value>Chest Pain</value>
+    <comment>DetailsForm</comment>
+  </data>
+  <data name="ComboBoxItem_Complaint_Environmental" xml:space="preserve">
+    <value>Environmental Related Disorder</value>
+    <comment>DetailsForm</comment>
+  </data>
+  <data name="ComboBoxItem_Complaint_Headache" xml:space="preserve">
+    <value>Headache</value>
+    <comment>DetailsForm</comment>
+  </data>
+  <data name="ComboBoxItem_Complaint_HeadSpine" xml:space="preserve">
+    <value>Head/Spine Injury</value>
+    <comment>DetailsForm</comment>
+  </data>
+  <data name="ComboBoxItem_Complaint_Hemorrhage" xml:space="preserve">
+    <value>Hemorrhage</value>
+    <comment>DetailsForm</comment>
+  </data>
+  <data name="ComboBoxItem_Complaint_InsectBite" xml:space="preserve">
+    <value>Insect Bite</value>
+    <comment>DetailsForm</comment>
+  </data>
+  <data name="ComboBoxItem_Complaint_Intoxication" xml:space="preserve">
+    <value>Intoxication</value>
+    <comment>DetailsForm</comment>
+  </data>
+  <data name="ComboBoxItem_Complaint_Musculoskeletal" xml:space="preserve">
+    <value>Musculoskeletal</value>
+    <comment>DetailsForm</comment>
+  </data>
+  <data name="ComboBoxItem_Complaint_Nosebleed" xml:space="preserve">
+    <value>Nosebleed</value>
+    <comment>DetailsForm</comment>
+  </data>
+  <data name="ComboBoxItem_Complaint_Ocular" xml:space="preserve">
+    <value>Ocular</value>
+    <comment>DetailsForm</comment>
+  </data>
+  <data name="ComboBoxItem_Complaint_Oral" xml:space="preserve">
+    <value>Oral</value>
+    <comment>DetailsForm</comment>
+  </data>
+  <data name="ComboBoxItem_Complaint_Other" xml:space="preserve">
+    <value>Other</value>
+    <comment>DetailsForm</comment>
+  </data>
+  <data name="ComboBoxItem_Complaint_Respiratory" xml:space="preserve">
+    <value>Respiratory</value>
+    <comment>DetailsForm</comment>
+  </data>
+  <data name="ComboBoxItem_Complaint_RespiratoryArrest" xml:space="preserve">
+    <value>Respiratory Arrest</value>
+    <comment>DetailsForm</comment>
+  </data>
+  <data name="ComboBoxItem_Complaint_Seizures" xml:space="preserve">
+    <value>Seizures</value>
+    <comment>DetailsForm</comment>
+  </data>
+  <data name="ComboBoxItem_Complaint_SoftTissueInjury" xml:space="preserve">
+    <value>Soft Tissue Injury</value>
+    <comment>DetailsForm</comment>
+  </data>
+  <data name="ComboBoxItem_Complaint_SuspectedStroke" xml:space="preserve">
+    <value>Suspected Stroke</value>
+    <comment>DetailsForm</comment>
+  </data>
+  <data name="ComboBoxItem_Complaint_Unconscious" xml:space="preserve">
+    <value>Unconscious</value>
+    <comment>DetailsForm</comment>
+  </data>
+  <data name="ComboBoxItem_Complaint_Weakness" xml:space="preserve">
+    <value>Weakness/Fainting</value>
+    <comment>DetailsForm</comment>
+  </data>
+  <data name="ComboBoxItem_Consciousness_Alert" xml:space="preserve">
+    <value>Alert</value>
+    <comment>ABCForm</comment>
+  </data>
+  <data name="ComboBoxItem_Consciousness_Painful" xml:space="preserve">
+    <value>Painful</value>
+    <comment>ABCForm</comment>
+  </data>
+  <data name="ComboBoxItem_Consciousness_Unconscious" xml:space="preserve">
+    <value>Unconsicous</value>
+    <comment>ABCForm</comment>
+  </data>
+  <data name="ComboBoxItem_Consciousness_Verbal" xml:space="preserve">
+    <value>Verbal</value>
+    <comment>ABCForm</comment>
   </data>
   <data name="ComboBoxItem_EditMode" xml:space="preserve">
     <value>Edit Mode</value>
@@ -217,6 +377,18 @@
     <value>Acronym</value>
     <comment>InitialSetup</comment>
   </data>
+  <data name="Label_Age" xml:space="preserve">
+    <value>Age:</value>
+    <comment>DetailsForm</comment>
+  </data>
+  <data name="Label_Call" xml:space="preserve">
+    <value>Call</value>
+    <comment>DetailsForm</comment>
+  </data>
+  <data name="Label_Complaint" xml:space="preserve">
+    <value>Complaint:</value>
+    <comment>DetailsForm</comment>
+  </data>
   <data name="Label_DepartureTime" xml:space="preserve">
     <value>Time of Departure</value>
     <comment>TeamForm</comment>
@@ -224,6 +396,10 @@
   <data name="Label_DispatcherName" xml:space="preserve">
     <value>Dispatcher Name</value>
     <comment>InitialSetup</comment>
+  </data>
+  <data name="Label_Gender" xml:space="preserve">
+    <value>Gender:</value>
+    <comment>DetailsForm</comment>
   </data>
   <data name="Label_InterventionFilterCompleted" xml:space="preserve">
     <value>Completed</value>
@@ -240,6 +416,14 @@
   <data name="Label_OperationName" xml:space="preserve">
     <value>Operation Name</value>
     <comment>InitialSetup</comment>
+  </data>
+  <data name="Label_PerMinute" xml:space="preserve">
+    <value>/minute</value>
+    <comment>ABCForm</comment>
+  </data>
+  <data name="Label_Priority" xml:space="preserve">
+    <value>Priority:</value>
+    <comment>DetailsForm</comment>
   </data>
   <data name="Label_ShiftEndDate" xml:space="preserve">
     <value>Shift End Date</value>
@@ -273,9 +457,49 @@
     <value>Delete Team</value>
     <comment>TeamInfo</comment>
   </data>
+  <data name="MenuItem_EquipmentPin_Delete" xml:space="preserve">
+    <value>Delete Equipment</value>
+    <comment>EquipmentPin</comment>
+  </data>
   <data name="MenuItem_OngoingInterventions" xml:space="preserve">
     <value>Ongoing Interventions</value>
     <comment>InterventionSection</comment>
+  </data>
+  <data name="MenuItem_TeamPin_Available" xml:space="preserve">
+    <value>Available</value>
+    <comment>TeamPin</comment>
+  </data>
+  <data name="MenuItem_TeamPin_Intervening" xml:space="preserve">
+    <value>Intervening</value>
+    <comment>TeamPin</comment>
+  </data>
+  <data name="MenuItem_TeamPin_Moving" xml:space="preserve">
+    <value>Moving</value>
+    <comment>TeamPin</comment>
+  </data>
+  <data name="MenuItem_TeamPin_Unavailable" xml:space="preserve">
+    <value>Unavailable</value>
+    <comment>TeamPin</comment>
+  </data>
+  <data name="MessageBox_Notification_DeadlineChanged" xml:space="preserve">
+    <value>The deadlines have been changed.</value>
+    <comment>Notification_MainWindow</comment>
+  </data>
+  <data name="MessageBox_Notification_DeadlineNumbers" xml:space="preserve">
+    <value>The intervention deadlines should be numbers!</value>
+    <comment>Notification_MainWindow</comment>
+  </data>
+  <data name="MessageBox_Notification_FutureTime" xml:space="preserve">
+    <value>The time inserted is in the future!</value>
+    <comment>Notification_ResourceLine</comment>
+  </data>
+  <data name="MessageBox_Notification_InvalidTime" xml:space="preserve">
+    <value>The text inserted in the time boxes is not valid.</value>
+    <comment>Notification_ResourceLine</comment>
+  </data>
+  <data name="MessageBox_Notification_NoEquipment" xml:space="preserve">
+    <value>You need to select an equipment to add!</value>
+    <comment>Notification_MainWindow</comment>
   </data>
   <data name="TabItem_ABC" xml:space="preserve">
     <value>ABC</value>
@@ -301,6 +525,26 @@
     <value>Timers</value>
     <comment>InterventionForm</comment>
   </data>
+  <data name="TextBlock_Airways" xml:space="preserve">
+    <value>Airways</value>
+    <comment>ABCForm</comment>
+  </data>
+  <data name="TextBlock_Arrival" xml:space="preserve">
+    <value>Arrival</value>
+    <comment>ResourcesForm</comment>
+  </data>
+  <data name="TextBlock_Breathing" xml:space="preserve">
+    <value>Breathing</value>
+    <comment>ABCForm</comment>
+  </data>
+  <data name="TextBlock_Circulation" xml:space="preserve">
+    <value>Circulation</value>
+    <comment>ABCForm</comment>
+  </data>
+  <data name="TextBlock_Consciousness" xml:space="preserve">
+    <value>Consciousness</value>
+    <comment>ABCForm</comment>
+  </data>
   <data name="TextBlock_Deadlines" xml:space="preserve">
     <value>Deadlines (mins):</value>
     <comment>MainWindow</comment>
@@ -309,9 +553,33 @@
     <value>Intervention</value>
     <comment>MainWindow</comment>
   </data>
+  <data name="TextBlock_Moving" xml:space="preserve">
+    <value>Moving</value>
+    <comment>ResourcesForm</comment>
+  </data>
   <data name="TextBlock_MovingDeadline" xml:space="preserve">
     <value>Moving</value>
     <comment>MainWindow</comment>
+  </data>
+  <data name="TextBlock_Resources" xml:space="preserve">
+    <value>Resources</value>
+    <comment>ResourcesForm</comment>
+  </data>
+  <data name="TextBlock_Team" xml:space="preserve">
+    <value>Team</value>
+    <comment>ResourcesForm</comment>
+  </data>
+  <data name="TextBox_CallerName" xml:space="preserve">
+    <value>Caller Name</value>
+    <comment>DetailsForm</comment>
+  </data>
+  <data name="TextBox_Location" xml:space="preserve">
+    <value>Location</value>
+    <comment>DetailsForm</comment>
+  </data>
+  <data name="TextBox_Nature" xml:space="preserve">
+    <value>Nature of Call</value>
+    <comment>DetailsForm</comment>
   </data>
   <data name="TextBox_TeamMemberName" xml:space="preserve">
     <value>Team Member Name</value>

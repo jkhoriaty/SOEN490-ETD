@@ -29,7 +29,8 @@ namespace ETD.CustomObjects.CustomUIObjects
 						
 			//Adding contect menu so that the user can delete the equipment
 			MenuItem menuItem = new MenuItem();
-			menuItem.Header = "Delete equipment";
+            menuItem.Uid = "MenuItem_EquipmentPin_Delete";
+            menuItem.Header = ETD.Properties.Resources.MenuItem_EquipmentPin_Delete;
 			menuItem.Click += DeleteEquipment_Click;
 
 			ContextMenu contextMenu = new ContextMenu();

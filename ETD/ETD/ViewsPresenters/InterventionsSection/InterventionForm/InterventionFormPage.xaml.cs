@@ -108,7 +108,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm
 		public void Update()
 		{
 			BuildComponents();
-			teamName.Text = intervention.getResourceList().ElementAt(0).getTeam().getName();
+            teamName.Text = (intervention.getResourceList().Count > 0) ? intervention.getResourceList().ElementAt(0).getTeam().getName() : "";
 			interventionType.Text = intervention.getNatureOfCall();
 			if(intervention.getCode() == 1)
 			{

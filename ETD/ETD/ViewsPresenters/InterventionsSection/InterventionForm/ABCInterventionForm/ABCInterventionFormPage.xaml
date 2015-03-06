@@ -3,6 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:properties="clr-namespace:ETD.Properties"
       mc:Ignorable="d" 
       d:DesignHeight="120" d:DesignWidth="335"
 	Title="ABCInterventionFormPage">
@@ -22,51 +23,51 @@
 		
 		<StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal">
 			<TextBlock Text="L': " FontWeight="Bold" VerticalAlignment="Center"/>
-			<TextBlock Text="Consciousness " VerticalAlignment="Center"/>
+            <TextBlock x:Uid="TextBlock_Consciousness" Text="{x:Static properties:Resources.TextBlock_Consciousness}" VerticalAlignment="Center"/>
 		</StackPanel>
-		<ComboBox Grid.Column="1" Grid.Row="0" Name="ConsciousnessBox" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" SelectionChanged="ConsciousnessBox_SelectionChanged">
-			<ComboBoxItem Content="Alert"/>
-			<ComboBoxItem Content="Verbal"/>
-			<ComboBoxItem Content="Painful"/>
-			<ComboBoxItem Content="Unconscious"/>
+		<ComboBox x:Uid="ComboBox_Consciousness" Grid.Column="1" Grid.Row="0" Name="ConsciousnessBox" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" SelectionChanged="ConsciousnessBox_SelectionChanged">
+            <ComboBoxItem x:Uid="ComboBoxItem_Consciousness_Alert" Content="{x:Static properties:Resources.ComboBoxItem_Consciousness_Alert}"/>
+            <ComboBoxItem x:Uid="ComboBoxItem_Consciousness_Verbal" Content="{x:Static properties:Resources.ComboBoxItem_Consciousness_Verbal}"/>
+            <ComboBoxItem x:Uid="ComboBoxItem_Consciousness_Painful" Content="{x:Static properties:Resources.ComboBoxItem_Consciousness_Painful}"/>
+            <ComboBoxItem x:Uid="ComboBoxItem_Consciousness_Unconscious" Content="{x:Static properties:Resources.ComboBoxItem_Consciousness_Unconscious}"/>
 		</ComboBox>
-		<CheckBox Grid.Column="2" Grid.Row="0" Name="Disoriented" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Disoriented" Checked="Disoriented_Checked"/>
+        <CheckBox x:Uid="CheckBox_Disoriented" Grid.Column="2" Grid.Row="0" Name="Disoriented" HorizontalAlignment="Center" VerticalAlignment="Center" Content="{x:Static properties:Resources.CheckBox_Disoriented}" Checked="Disoriented_Checked"/>
 		
 		<StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal">
 			<TextBlock Text="A: " FontWeight="Bold" VerticalAlignment="Center"/>
-			<TextBlock Text="Aiways" VerticalAlignment="Center"/>
+            <TextBlock x:Uid="TextBlock_Airways" Text="{x:Static properties:Resources.TextBlock_Airways}" VerticalAlignment="Center"/>
 		</StackPanel>
-		<ComboBox Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Name="AirwaysBox" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" SelectionChanged="AirwaysBox_SelectionChanged">
-			<ComboBoxItem Content="Clear"/>
-			<ComboBoxItem Content="Partially Obstructed"/>
-			<ComboBoxItem Content="Completely Obstructed"/>
+		<ComboBox x:Uid="ComboBox_Airways" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Name="AirwaysBox" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" SelectionChanged="AirwaysBox_SelectionChanged">
+            <ComboBoxItem x:Uid="ComboBoxItem_Airways_Clear" Content="{x:Static properties:Resources.ComboBoxItem_Airways_Clear}"/>
+            <ComboBoxItem x:Uid="ComboBoxItem_Airways_PartiallyObstructed" Content="{x:Static properties:Resources.ComboBoxItem_Airways_PartiallyObstructed}"/>
+            <ComboBoxItem x:Uid="ComboBoxItem_Airways_CompletelyObstructed" Content="{x:Static properties:Resources.ComboBoxItem_Airways_CompletelyObstructed}"/>
 		</ComboBox>
 		<StackPanel Grid.Column="0" Grid.Row="2" Orientation="Horizontal">
 			<TextBlock Text="B: " FontWeight="Bold" VerticalAlignment="Center"/>
-			<TextBlock Text="Breathing" VerticalAlignment="Center"/>
+            <TextBlock x:Uid="TextBlock_Breathing" Text="{x:Static properties:Resources.TextBlock_Breathing}" VerticalAlignment="Center"/>
 		</StackPanel>
-		<ComboBox Grid.Column="1" Grid.Row="2" Name="BreathingBox" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" SelectionChanged="BreathingBox_SelectionChanged">
-			<ComboBoxItem Content="Normal"/>
-			<ComboBoxItem Content="Difficulty"/>
-			<ComboBoxItem Content="Absent"/>
+		<ComboBox x:Uid="ComboBox_Breathing" Grid.Column="1" Grid.Row="2" Name="BreathingBox" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" SelectionChanged="BreathingBox_SelectionChanged">
+            <ComboBoxItem x:Uid="ComboBoxItem_Breathing_Normal" Content="{x:Static properties:Resources.ComboBoxItem_Breathing_Normal}"/>
+            <ComboBoxItem x:Uid="ComboBoxItem_Breathing_Difficulty" Content="{x:Static properties:Resources.ComboBoxItem_Breathing_Difficulty}"/>
+            <ComboBoxItem x:Uid="ComboBoxItem_Breathing_Absent" Content="{x:Static properties:Resources.ComboBoxItem_Breathing_Absent}"/>
 		</ComboBox>
 		<StackPanel Grid.Column="2" Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
             <TextBox Name="BreathingFrequency" Width="25" LostFocus="BreathingFrequency_LostFocus"/>
-			<Label Content="/minute"/>
+            <Label x:Uid="Label_PerMinute" Content="{x:Static properties:Resources.Label_PerMinute}" />
 		</StackPanel>
 		<StackPanel Grid.Column="0" Grid.Row="3" Orientation="Horizontal">
 			<TextBlock Text="C: " FontWeight="Bold" VerticalAlignment="Center"/>
-			<TextBlock Text="Circulation" VerticalAlignment="Center"/>
+            <TextBlock x:Uid="TextBlock_Circulation" Text="{x:Static properties:Resources.TextBlock_Circulation}" VerticalAlignment="Center"/>
 		</StackPanel>
-		<ComboBox Grid.Column="1" Grid.Row="3" Name="CirculationBox" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" SelectionChanged="CirculationBox_SelectionChanged">
-			<ComboBoxItem Content="Normal"/>
-			<ComboBoxItem Content="Chest Pain"/>
-			<ComboBoxItem Content="Hemorrhage"/>
-			<ComboBoxItem Content="No Pulse"/>
+        <ComboBox x:Uid="ComboBox_Circulation" Grid.Column="1" Grid.Row="3" Name="CirculationBox" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" SelectionChanged="CirculationBox_SelectionChanged">
+            <ComboBoxItem x:Uid="ComboBoxItem_Circulation_Normal" Content="{x:Static properties:Resources.ComboBoxItem_Circulation_Normal}"/>
+            <ComboBoxItem x:Uid="ComboBoxItem_Circulation_ChestPain" Content="{x:Static properties:Resources.ComboBoxItem_Circulation_ChestPain}"/>
+            <ComboBoxItem x:Uid="ComboBoxItem_Circulation_Hemmorrhage" Content="{x:Static properties:Resources.ComboBoxItem_Circulation_Hemmorrhage}"/>
+            <ComboBoxItem x:Uid="ComboBoxItem_Circulation_NoPulse" Content="{x:Static properties:Resources.ComboBoxItem_Circulation_NoPulse}"/>
 		</ComboBox>
 		<StackPanel Grid.Column="2" Grid.Row="3" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
             <TextBox Name="CirculationFrequency" Width="25" LostFocus="CirculationFrequency_LostFocus"/>
-			<Label Content="/minute"/>
+            <Label x:Uid="Label_PerMinute" Content="{x:Static properties:Resources.Label_PerMinute}"/>
 		</StackPanel>
 	</Grid>
 </Page>
