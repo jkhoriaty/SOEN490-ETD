@@ -23,5 +23,28 @@ namespace ETD_Statistic.ViewsPresenters
         {
             InitializeComponent();
         }
+
+        private void Submit_Click(object sender, RoutedEventArgs e)
+        {
+            if (IsFormValid()) //if the form is valid, create an instance of mainwindow
+            {
+                MainWindow mw = new MainWindow();
+                mw.Show();
+                this.Close();
+            }
+        }
+
+        private bool IsFormValid()
+        {
+            if (username.Text != "admin" && password.Text != "admin")
+            {
+                MessageBox.Show(ETD_Statistic.Properties.Resources.MessageBox_Notification_InvalidCredentials);
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
     }
 }
