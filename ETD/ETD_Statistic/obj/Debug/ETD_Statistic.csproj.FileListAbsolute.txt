@@ -13,3 +13,12 @@ C:\Workspace\SOEN490-ETD\ETD\ETD_Statistic\obj\Debug\ETD_Statistic.Properties.Re
 C:\Workspace\SOEN490-ETD\ETD\ETD_Statistic\obj\Debug\ETD_Statistic.csproj.GenerateResource.Cache
 C:\Workspace\SOEN490-ETD\ETD\ETD_Statistic\obj\Debug\ETD_Statistic.exe
 C:\Workspace\SOEN490-ETD\ETD\ETD_Statistic\obj\Debug\ETD_Statistic.pdb
+K:\Workspace\SOEN490-ETD\ETD\ETD_Statistic\obj\Debug\ETD_Statistic.csprojResolveAssemblyReference.cache
+K:\Workspace\SOEN490-ETD\ETD\ETD_Statistic\obj\Debug\ViewsPresenters\MainWindow.g.cs
+K:\Workspace\SOEN490-ETD\ETD\ETD_Statistic\obj\Debug\ViewsPresenters\Login.g.cs
+K:\Workspace\SOEN490-ETD\ETD\ETD_Statistic\obj\Debug\App.g.cs
+K:\Workspace\SOEN490-ETD\ETD\ETD_Statistic\obj\Debug\ETD_Statistic_MarkupCompile.cache
+K:\Workspace\SOEN490-ETD\ETD\ETD_Statistic\obj\Debug\ETD_Statistic_MarkupCompile.lref
+K:\Workspace\SOEN490-ETD\ETD\ETD_Statistic\obj\Debug\ViewsPresenters\MainWindow.baml
+K:\Workspace\SOEN490-ETD\ETD\ETD_Statistic\obj\Debug\ETD_Statistic.exe
+K:\Workspace\SOEN490-ETD\ETD\ETD_Statistic\obj\Debug\ETD_Statistic.pdb
