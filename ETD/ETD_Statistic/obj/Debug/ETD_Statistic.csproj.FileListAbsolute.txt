@@ -1,0 +1,8 @@
+C:\Workspace\SOEN490-ETD\ETD\ETD_Statistic\bin\Debug\ETD_Statistic.exe.config
+C:\Workspace\SOEN490-ETD\ETD\ETD_Statistic\bin\Debug\ETD_Statistic.exe
+C:\Workspace\SOEN490-ETD\ETD\ETD_Statistic\bin\Debug\ETD_Statistic.pdb
+C:\Workspace\SOEN490-ETD\ETD\ETD_Statistic\obj\Debug\ETD_Statistic.csprojResolveAssemblyReference.cache
+C:\Workspace\SOEN490-ETD\ETD\ETD_Statistic\obj\Debug\ETD_Statistic.Properties.Resources.resources
+C:\Workspace\SOEN490-ETD\ETD\ETD_Statistic\obj\Debug\ETD_Statistic.csproj.GenerateResource.Cache
+C:\Workspace\SOEN490-ETD\ETD\ETD_Statistic\obj\Debug\ETD_Statistic.exe
+C:\Workspace\SOEN490-ETD\ETD\ETD_Statistic\obj\Debug\ETD_Statistic.pdb
