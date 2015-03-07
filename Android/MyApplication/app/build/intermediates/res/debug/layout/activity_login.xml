@@ -42,7 +42,7 @@
         android:layout_below="@+id/textView2"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="94dp"
-        android:onClick="login"
+        android:onClick="Login"
         android:text="@string/login"/>
 
 

@@ -36,6 +36,12 @@ public class LocationTransmission extends ActionBarActivity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_location_transmission);
+
+		Intent intent = getIntent();
+		deviceID = intent.getStringExtra("deviceID");
+		serverIP = intent.getStringExtra("serverIP");
+		serverPort = intent.getIntExtra("serverPort", -1);
+
         locationTransmission = (Button) findViewById(R.id.button1);
         checkBox = (CheckBox) findViewById(R.id.checkBox1);
         backToLogin = (Button) findViewById(R.id.backButton);
@@ -96,6 +102,9 @@ public class LocationTransmission extends ActionBarActivity
 		super.onStart();
         try {
             serviceIntent = new Intent(this, BackgroundLocation.class);
+	        serviceIntent.putExtra("deviceID", deviceID);
+	        serviceIntent.putExtra("serverIP", serverIP);
+	        serviceIntent.putExtra("serverPort", serverPort);
             startService(serviceIntent);
         }catch (Exception e)
         {

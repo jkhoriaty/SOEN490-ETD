@@ -237,6 +237,9 @@
     <string name="common_open_on_phone">Open on phone</string>
     <string name="common_signin_button_text">Sign in</string>
     <string name="common_signin_button_text_long">Sign in with Google</string>
+    <!-- From: file:/D:/Users/jadk9_000/Desktop/Dropbox/Concordia%20-%20Winter%202015/SOEN%20490/Project%20Repository/Android/MyApplication/app/src/main/res/values/strings.xml -->
+    <eat-comment/>
+    <string name="connection_stauts">Connected to Google Maps?</string>
     <!-- From: file:/D:/Users/jadk9_000/Desktop/Dropbox/Concordia%20-%20Winter%202015/SOEN%20490/Project%20Repository/Android/MyApplication/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values/admob_strings.xml -->
     <eat-comment/>
     <string name="create_calendar_message">Allow Ad to create a calendar event?</string>
