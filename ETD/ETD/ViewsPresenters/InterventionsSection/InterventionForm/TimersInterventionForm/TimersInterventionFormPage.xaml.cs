@@ -28,6 +28,12 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.TimersInterv
         private Intervention intervention;
 		private Label interventionTimer;
 		private Label interventionStatus;
+		private Label timer911;
+		private Label status911;
+		private Label timerAmbulance;
+		private Label statusAmbulance;
+		private Label timerFR;
+		private Label statusFR;
 
 		private List<Resource> resourceList = new List<Resource>();
 		private Dictionary<Resource, Label> resourceTimerDictionary = new Dictionary<Resource, Label>();
@@ -67,6 +73,43 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.TimersInterv
 			}
 			UpdateTimer(elapsed, interventionTimer, interventionStatus, ongoing, interventionDeadline);
 
+			if (intervention.getFirstResponderArrivalTime() != DateTime.MinValue || intervention.getAmbulanceArrivalTime() != DateTime.MinValue)
+			{
+				if(intervention.getFirstResponderArrivalTime() != DateTime.MinValue)
+				{
+					ongoing = false;
+					elapsed = intervention.getFirstResponderArrivalTime() - intervention.getCall911Time();
+					UpdateTimer(elapsed, timerFR, statusFR, ongoing, interventionDeadline);
+				}
+				else
+				{
+					ongoing = true;
+					elapsed = DateTime.Now - intervention.getCall911Time();
+					UpdateTimer(elapsed, timerFR, statusFR, ongoing, interventionDeadline);
+				}
+				if(intervention.getAmbulanceArrivalTime() != DateTime.MinValue)
+				{
+					ongoing = false;
+					elapsed = intervention.getAmbulanceArrivalTime() - intervention.getCall911Time();
+					UpdateTimer(elapsed, timerAmbulance, statusAmbulance, ongoing, interventionDeadline);
+				}
+				else
+				{
+					ongoing = true;
+					elapsed = DateTime.Now - intervention.getCall911Time();
+					UpdateTimer(elapsed, timerAmbulance, statusAmbulance, ongoing, interventionDeadline);
+				}
+			}
+			else
+			{
+				if (intervention.getCall911Time() != DateTime.MinValue)
+				{
+					ongoing = true;
+					elapsed = DateTime.Now - intervention.getCall911Time();
+				}
+				UpdateTimer(elapsed, timer911, status911, ongoing, interventionDeadline);
+			}
+			
 			foreach (Resource resource in resourceList)
 			{
 				ongoing = true;
@@ -85,30 +128,37 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.TimersInterv
 
 		private void UpdateTimer(TimeSpan elapsed, Label timer, Label status, bool ongoing, int deadline)
 		{
-			timer.Content = elapsed.Minutes + ":";
-			if (elapsed.Seconds < 10)
-			{
-				timer.Content += "0";
-			}
-			timer.Content += elapsed.Seconds.ToString();
-
-			if (ongoing && elapsed.TotalMinutes > deadline)
-			{
-				setStatus(status, "Overtime");
-				if (elapsed.Seconds < 15 && elapsed.Seconds % 2 == 0)
+			try 
+			{ 
+				timer.Content = elapsed.Minutes + ":";
+				if (elapsed.Seconds < 10)
 				{
-					Brush backgroundColor = status.Background;
-					status.Background = status.Foreground;
-					status.Foreground = backgroundColor;
+					timer.Content += "0";
+				}
+				timer.Content += elapsed.Seconds.ToString();
+
+				if (ongoing && elapsed.TotalMinutes > deadline)
+				{
+					setStatus(status, "Overtime");
+					if (elapsed.Seconds < 15 && elapsed.Seconds % 2 == 0)
+					{
+						Brush backgroundColor = status.Background;
+						status.Background = status.Foreground;
+						status.Foreground = backgroundColor;
+					}
+				}
+				else if(ongoing)
+				{
+					setStatus(status, "Ongoing");
+				}
+				else
+				{
+					setStatus(status, "Completed");
 				}
 			}
-			else if(ongoing)
+			catch
 			{
-				setStatus(status, "Ongoing");
-			}
-			else
-			{
-				setStatus(status, "Completed");
+
 			}
 		}
 
@@ -153,6 +203,87 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.TimersInterv
 		private void CreateResourcesTimers()
 		{
 			int rowNumber = 1;
+			if (intervention.getCall911Time() != DateTime.MinValue) //if 911 time is set
+			{
+				if(intervention.getFirstResponderArrivalTime() != DateTime.MinValue || intervention.getAmbulanceArrivalTime() != DateTime.MinValue)
+				{
+					RowDefinition rowDefFR = new RowDefinition();
+					rowDefFR.Height = new GridLength(27);
+					timersList.RowDefinitions.Add(rowDefFR);
+
+					Label nameFR = new Label();
+					nameFR.Content = "FR";
+					Grid.SetColumn(nameFR, 0);
+					Grid.SetRow(nameFR, rowNumber);
+					timersList.Children.Add(nameFR);
+
+					timerFR = new Label();
+					//timerFR.Content = (intervention.getFirstResponderArrivalTime() - intervention.getCall911Time());
+					timerFR.HorizontalContentAlignment = HorizontalAlignment.Center;
+					Grid.SetColumn(timerFR, 2);
+					Grid.SetRow(timerFR, rowNumber);
+					timersList.Children.Add(timerFR);
+
+					statusFR = new Label();
+					statusFR.HorizontalContentAlignment = HorizontalAlignment.Center;
+					Grid.SetColumn(statusFR, 3);
+					Grid.SetRow(statusFR, rowNumber);
+					timersList.Children.Add(statusFR);
+
+					rowNumber++;
+
+					RowDefinition rowDefAmb = new RowDefinition();
+					rowDefAmb.Height = new GridLength(27);
+					timersList.RowDefinitions.Add(rowDefAmb);
+
+					Label nameAmb = new Label();
+					nameAmb.Content = "Ambulance";
+					Grid.SetColumn(nameAmb, 0);
+					Grid.SetRow(nameAmb, rowNumber);
+					timersList.Children.Add(nameAmb);
+
+					timerAmbulance = new Label();
+					//timerFR.Content = (intervention.getFirstResponderArrivalTime() - intervention.getCall911Time());
+					timerAmbulance.HorizontalContentAlignment = HorizontalAlignment.Center;
+					Grid.SetColumn(timerAmbulance, 2);
+					Grid.SetRow(timerAmbulance, rowNumber);
+					timersList.Children.Add(timerAmbulance);
+
+					statusAmbulance = new Label();
+					statusAmbulance.HorizontalContentAlignment = HorizontalAlignment.Center;
+					Grid.SetColumn(statusAmbulance, 3);
+					Grid.SetRow(statusAmbulance, rowNumber);
+					timersList.Children.Add(statusAmbulance);
+								
+				}
+				else 
+				{
+					RowDefinition rowDef911 = new RowDefinition();
+					rowDef911.Height = new GridLength(27);
+					timersList.RowDefinitions.Add(rowDef911);
+
+					Label name911 = new Label();
+					name911.Content = "911 Call";
+					Grid.SetColumn(name911, 0);
+					Grid.SetRow(name911, rowNumber);
+					timersList.Children.Add(name911);
+
+					timer911 = new Label();
+					//timer911.Content = (DateTime.Now - intervention.getCall911Time()).Seconds;
+					timer911.HorizontalContentAlignment = HorizontalAlignment.Center;
+					Grid.SetColumn(timer911, 2);
+					Grid.SetRow(timer911, rowNumber);
+					timersList.Children.Add(timer911);
+
+					status911 = new Label();
+					status911.HorizontalContentAlignment = HorizontalAlignment.Center;
+					Grid.SetColumn(status911, 3);
+					Grid.SetRow(status911, rowNumber);
+					timersList.Children.Add(status911);
+				}
+			}
+
+			rowNumber++;
 			foreach(Resource resource in intervention.getResourceList())
 			{
 				resourceList.Add(resource);
