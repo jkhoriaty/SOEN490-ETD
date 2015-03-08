@@ -68,7 +68,6 @@ public class BackgroundLocation extends Service implements GoogleApiClient.Conne
         if(apiClient.isConnected())
         {
             apiClient.disconnect();
-            Toast.makeText(this, "Sending position service stopped", Toast.LENGTH_SHORT).show();
         }
 
 
@@ -98,7 +97,6 @@ public class BackgroundLocation extends Service implements GoogleApiClient.Conne
     {
 	    Toast.makeText(this, "" + serverIP, Toast.LENGTH_SHORT).show();
         new Thread(new LocationSenderThread(serverIP, serverPort, deviceID, location)).start();
-        Toast.makeText(this, "Location Changed called", Toast.LENGTH_SHORT).show();
     }
 
     protected synchronized void buildGoogleApiClient()
@@ -108,7 +106,6 @@ public class BackgroundLocation extends Service implements GoogleApiClient.Conne
                 .addOnConnectionFailedListener(this)
                 .addApi(LocationServices.API)
                 .build();
-        Toast.makeText(this, "api created", Toast.LENGTH_SHORT).show();
     }
 
     protected void createLocationRequest()
@@ -117,14 +114,11 @@ public class BackgroundLocation extends Service implements GoogleApiClient.Conne
         locationRequest.setInterval(10000);
         locationRequest.setFastestInterval(1000);
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-
-        Toast.makeText(this, "location created", Toast.LENGTH_SHORT).show();
     }
 
     public void startLocationUpdates(View view)
     {
         LocationServices.FusedLocationApi.requestLocationUpdates(apiClient, locationRequest, this);
-        Toast.makeText(this, "Service Started", Toast.LENGTH_SHORT).show();
     }
 
     public void stopLocationUpdates(View view)

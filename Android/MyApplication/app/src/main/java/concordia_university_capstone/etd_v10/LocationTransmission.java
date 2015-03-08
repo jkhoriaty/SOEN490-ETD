@@ -66,7 +66,6 @@ public class LocationTransmission extends ActionBarActivity
     {
         checkBox.setChecked(false);
         setContentView(R.layout.activity_login);
-        Toast.makeText(this, "Session disconnected.", Toast.LENGTH_SHORT).show();
     }
 
     private void startTransmitting() {
