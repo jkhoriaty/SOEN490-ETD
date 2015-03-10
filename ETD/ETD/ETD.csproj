@@ -90,10 +90,10 @@
     <Compile Include="Services\DatabaseServices.cs" />
     <Compile Include="Services\Database\DBConnection.cs" />
     <Compile Include="Services\Database\DBQuery.cs" />
-    <Compile Include="Services\Database\Queries\AddCallQuery.cs" />
-    <Compile Include="Services\Database\Queries\AddEventQuery.cs" />
-    <Compile Include="Services\Database\Queries\AddInterventionQuery.cs" />
-    <Compile Include="Services\Database\Queries\AddVolunteerQuery.cs" />
+    <Compile Include="Services\Database\Queries\CreateCallQuery.cs" />
+    <Compile Include="Services\Database\Queries\CreateEventQuery.cs" />
+    <Compile Include="Services\Database\Queries\CreateInterventionQuery.cs" />
+    <Compile Include="Services\Database\Queries\CreateVolunteerQuery.cs" />
     <Compile Include="Services\Database\Queries\SelectEventQuery.cs" />
     <Compile Include="Services\NetworkServices.cs" />
     <Compile Include="Services\TextboxHandler.cs" />
