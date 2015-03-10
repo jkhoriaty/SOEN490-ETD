@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace ETD.Services.Database.Queries
 {
-    class AddVolunteerQuery : DBQuery
+    class CreateVolunteerQuery : DBQuery
     {
-        public AddVolunteerQuery(string name, Trainings training)
+        public CreateVolunteerQuery(string name, Trainings training)
         {
             sql = "INSERT INTO [Volunteers] (Volunteer_ID, Name, Training_Level) VALUES (null, '" + name + "', '" + training.ToString() + "')";
         }

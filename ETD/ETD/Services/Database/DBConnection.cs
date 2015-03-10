@@ -39,42 +39,46 @@ namespace ETD.Services.Database
                 }
             }
             m_dbConnection.Open();
+            while (m_dbConnection.State != System.Data.ConnectionState.Open)
+            {
+                //Ensures connection is properly open before continuing
+            }
         }
 
         private void CloseConnection()
         {
             m_dbConnection.Close();
+            while (m_dbConnection.State != System.Data.ConnectionState.Closed)
+            {
+                //Ensures connection is properly open before continuing
+            }
         }
 
-        public void AddVolunteer(AddVolunteerQuery query)
+        public void AddVolunteer(CreateVolunteerQuery query)
         {
-            QueryDatabse(query.GetQuery());
+            NonQueryDatabse(query.GetQuery());
         }
 
-        public void AddEvent(AddEventQuery query)
+        public void AddEvent(CreateEventQuery query)
         {
-            QueryDatabse(query.GetQuery());
+            NonQueryDatabse(query.GetQuery());
         }
 
-        public void AddIntervention(AddInterventionQuery query)
+        public void AddIntervention(CreateInterventionQuery query)
         {
-            QueryDatabse(query.GetQuery());
+            NonQueryDatabse(query.GetQuery());
         }
 
-        public void AddCall(AddCallQuery query)
+        public void AddCall(CreateCallQuery query)
         {
-            QueryDatabse(query.GetQuery());
+            NonQueryDatabse(query.GetQuery());
         }
 
-        private void QueryDatabse(string query)
+        private void NonQueryDatabse(string query)
         {
             if ((m_dbConnection == null) || (m_dbConnection.State == System.Data.ConnectionState.Closed))
             {
                 OpenDatabase();
-                while(m_dbConnection.State != System.Data.ConnectionState.Open)
-                {
-                    //Ensures connection is properly open before continuing
-                }
             }
             SQLiteCommand command = new SQLiteCommand(query, m_dbConnection);
             command.ExecuteNonQuery();
@@ -85,9 +89,9 @@ namespace ETD.Services.Database
         {
             OpenDatabase();
             if (m_dbConnection.State == System.Data.ConnectionState.Open)
-                Console.WriteLine("Database Connected.");
+                Console.WriteLine("Connected to database.");
             else
-                Console.WriteLine("Database Not Connected.");
+                Console.WriteLine("Can't connect to database.");
             CloseConnection();
         }
     }
