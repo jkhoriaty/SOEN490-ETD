@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Data.SQLite;
+//using System.Data.SQLite;
 using ETD.Models.Objects;
 using ETD.Services.Database.Queries;
 using System.IO;
@@ -12,7 +12,7 @@ namespace ETD.Services.Database
 {
     class DBConnection
     {
-        private SQLiteConnection m_dbConnection;
+ /*       private SQLiteConnection m_dbConnection;
 
         private void CreateDatabase()
         {
@@ -93,6 +93,6 @@ namespace ETD.Services.Database
             else
                 Console.WriteLine("Can't connect to database.");
             CloseConnection();
-        }
+        }*/
     }
 }
