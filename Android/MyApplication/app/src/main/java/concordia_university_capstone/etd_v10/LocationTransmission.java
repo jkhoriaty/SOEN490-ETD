@@ -107,7 +107,7 @@ public class LocationTransmission extends ActionBarActivity
             startService(serviceIntent);
         }catch (Exception e)
         {
-            Toast.makeText(this, "can not create service", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Service can not be created. Please try again!", Toast.LENGTH_SHORT).show();
         }
 	}
 }

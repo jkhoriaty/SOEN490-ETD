@@ -42,7 +42,6 @@ public class BackgroundLocation extends Service implements GoogleApiClient.Conne
 
         createLocationRequest();
 
-        Toast.makeText(this, "service created", Toast.LENGTH_SHORT).show();
         apiClient.connect();
     }
 
@@ -95,7 +94,6 @@ public class BackgroundLocation extends Service implements GoogleApiClient.Conne
     @Override
     public void onLocationChanged(Location location)
     {
-	    Toast.makeText(this, "" + serverIP, Toast.LENGTH_SHORT).show();
         new Thread(new LocationSenderThread(serverIP, serverPort, deviceID, location)).start();
     }
 
