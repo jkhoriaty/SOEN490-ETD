@@ -47,7 +47,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 				if (interventionContainer == null)
 				{
 					//Create the border if it doesn't exist yet
-					interventionContainer = new InterventionContainer(this, mapSection.Canvas_map);
+					interventionContainer = new InterventionContainer(this, mapSection);
 					mapSection.Canvas_map.Children.Add(interventionContainer);
 				}
 

@@ -46,9 +46,10 @@ namespace ETD.CustomObjects.CustomUIObjects
 		}
 
 		//Constructor for Creating border pin
-		public Pin(InterventionPin interventionPin)
+		public Pin(InterventionPin interventionPin, MapSectionPage mapSection)
 		{
 			this.relatedObject = interventionPin;
+			this.mapSection = mapSection;
 
 			//Adding the border pin to the list of all pins
 			pinList.Add(this);
@@ -191,12 +192,25 @@ namespace ETD.CustomObjects.CustomUIObjects
 		{
 			foreach (Pin pin in pinList)
 			{
-				double movedPin_X = widthRatio * pin.getX();
-				double movedPin_Y = heightRatio * pin.getY(); ;
-
-				pin.setPinPosition(movedPin_X, movedPin_Y);
-				pin.CollisionDetectionAndResolution(true); //true to avoid having the resize add a team to an intervention or an equipment to a team
+				pin.MovePin(widthRatio, heightRatio);
 			}
+		}
+
+		internal virtual void MovePin(double widthRatio, double heightRatio)
+		{
+			double movedPin_X = widthRatio * getX();
+			double movedPin_Y = heightRatio * getY(); ;
+
+			setPinPosition(movedPin_X, movedPin_Y);
+			if(IsOfType("InterventionPin"))
+			{
+				CollisionDetectionAndResolution(false); //false to avoid the InterventionPin from colliding with it's own border causing the group to shift at each resizing of the window
+			}
+			else
+			{
+				CollisionDetectionAndResolution(true); //true to avoid having the resize add a team to an intervention or an equipment to a team
+			}
+		
 		}
 
 		//Checking the type of the pin; used mostly for special collisions

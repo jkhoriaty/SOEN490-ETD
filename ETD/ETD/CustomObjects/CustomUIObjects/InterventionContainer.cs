@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ETD.ViewsPresenters.MapSection;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,10 +18,10 @@ namespace ETD.CustomObjects.CustomUIObjects
 		private InterventionPin interventionPin;
 		private Canvas Canvas_map;
 
-		public InterventionContainer(InterventionPin interventionPin, Canvas Canvas_map) : base(interventionPin)
+		public InterventionContainer(InterventionPin interventionPin, MapSectionPage mapSection) : base(interventionPin, mapSection)
 		{
 			this.interventionPin = interventionPin;
-			this.Canvas_map = Canvas_map;
+			this.Canvas_map = mapSection.Canvas_map;
 
 			//Creating border that defines the edge of the container
 			Border border = new Border();
@@ -76,6 +77,11 @@ namespace ETD.CustomObjects.CustomUIObjects
 		{
 			Canvas.SetLeft(this, interventionPin_X - (this.Width/2));
 			Canvas.SetTop(this, interventionPin_Y - (interventionPin.Height/2));
+		}
+
+		internal override void MovePin(double widthRatio, double heightRatio)
+		{
+			return; //Ignore moving the pin in all cases, it will be moved with the intervention
 		}
 
 		//Handling special cases when collision detection is made on an InterventionContainer

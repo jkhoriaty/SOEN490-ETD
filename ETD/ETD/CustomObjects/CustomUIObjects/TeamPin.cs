@@ -129,6 +129,15 @@ namespace ETD.CustomObjects.CustomUIObjects
 			}
 		}
 
+		//Moving the pin when the window is resized
+		internal override void MovePin(double widthRatio, double heightRatio)
+		{
+			if(interventionPin == null) //Do not move pin if it is assigned to an intervention (it will be moved when the intervention will be moved
+			{
+				base.MovePin(widthRatio, heightRatio);
+			}
+		}
+
 		//Return the team that this pin represents
 		internal Team getTeam()
 		{
