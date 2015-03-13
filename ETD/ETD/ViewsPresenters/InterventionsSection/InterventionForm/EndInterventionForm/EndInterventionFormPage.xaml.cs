@@ -148,6 +148,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
 						interventionForm.CompleteIntervention(offset);
 					}
 				}
+				intervention.ResourceModified();
 
 			}
 			catch (FormatException ex)
@@ -280,6 +281,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
 					}
 				}
 			}
+			intervention.ResourceModified();
 			
 		}
 
@@ -292,6 +294,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
                 int mm = int.Parse(Endmm.Text);
                 DateTime concTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, hh, mm, DateTime.Now.Second);
                 intervention.setConclusionTime(concTime);
+				intervention.ResourceModified();
             }
             catch { }
 		}
@@ -306,6 +309,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
                 int mm = int.Parse(Call911mm.Text);
                 DateTime startTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, hh, mm, DateTime.Now.Second);
                 intervention.setCall911Time(startTime);
+				intervention.ResourceModified();
                 int offset = (int)DateTime.Now.Subtract(startTime).TotalSeconds;
                 if (offset < 0)
                 {
@@ -333,15 +337,19 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
 
             try
             {
-                int hh = int.Parse(FirstResponderArrivalhh.Text);
-                int mm = int.Parse(FirstResponderArrivalmm.Text);
-                DateTime startTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, hh, mm, DateTime.Now.Second);
-                intervention.setFirstResponderArrivalTime(startTime);
-                int offset = (int)DateTime.Now.Subtract(startTime).TotalMinutes;
-                if (offset < 0)
-                {
-                    MessageBox.Show(ETD.Properties.Resources.MessageBox_Notification_FutureTime);
-                }
+				if(intervention.getCall911Time() != DateTime.MinValue)
+				{ 
+					int hh = int.Parse(FirstResponderArrivalhh.Text);
+					int mm = int.Parse(FirstResponderArrivalmm.Text);
+					DateTime startTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, hh, mm, DateTime.Now.Second);
+					intervention.setFirstResponderArrivalTime(startTime);
+					int offset = (int)DateTime.Now.Subtract(startTime).TotalMinutes;
+					if (offset < 0)
+					{
+						MessageBox.Show(ETD.Properties.Resources.MessageBox_Notification_FutureTime);
+					}
+					intervention.ResourceModified();
+				}
             }
             catch (Exception ex)
             {
@@ -357,15 +365,19 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
             TextBoxHandler.setNow(AmbulanceArrivalhh, AmbulanceArrivalmm);              
             try
             {
-                int hh = int.Parse(AmbulanceArrivalhh.Text);
-                int mm = int.Parse(AmbulanceArrivalmm.Text);
-                DateTime startTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, hh, mm, DateTime.Now.Second);
-                intervention.setAmbulanceArrivalTime(startTime);
-                int offset = (int)DateTime.Now.Subtract(startTime).TotalMinutes;
-                if (offset < 0)
-                {
-                    MessageBox.Show(ETD.Properties.Resources.MessageBox_Notification_FutureTime);
-                }
+				if(intervention.getCall911Time() != DateTime.MinValue)
+				{ 
+					int hh = int.Parse(AmbulanceArrivalhh.Text);
+					int mm = int.Parse(AmbulanceArrivalmm.Text);
+					DateTime startTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, hh, mm, DateTime.Now.Second);
+					intervention.setAmbulanceArrivalTime(startTime);
+					int offset = (int)DateTime.Now.Subtract(startTime).TotalMinutes;
+					if (offset < 0)
+					{
+						MessageBox.Show(ETD.Properties.Resources.MessageBox_Notification_FutureTime);
+					}
+					intervention.ResourceModified();
+				}
             }
             catch (Exception ex)
             {
