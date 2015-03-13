@@ -61,6 +61,7 @@
     <Compile Include="CustomObjects\CustomUIObjects\ResourceLine.cs" />
     <Compile Include="CustomObjects\CustomUIObjects\TeamPin.cs" />
     <Compile Include="Models\Objects\ABC.cs" />
+    <Compile Include="Models\Objects\GPSLocation.cs" />
     <Compile Include="Models\Objects\InterventionAdditionalInfo.cs" />
     <Compile Include="Models\Objects\MapMod.cs" />
     <Compile Include="Models\Objects\Request.cs" />
@@ -86,6 +87,8 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Services\CultureResources.cs" />
+    <Compile Include="Services\GPSServices.cs" />
+    <Compile Include="Services\Interfaces\GPSStatusCallbacks.cs" />
     <Compile Include="Services\NetworkServices.cs" />
     <Compile Include="Services\TextboxHandler.cs" />
     <Compile Include="ViewsPresenters\InitialSetup.xaml.cs">

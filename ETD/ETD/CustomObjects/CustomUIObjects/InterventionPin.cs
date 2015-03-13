@@ -19,6 +19,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 
 		private Intervention intervention;
 		private InterventionContainer interventionContainer;
+		private GPSLocation gpsLocation;
 
 		public InterventionPin(Intervention intervention, MapSectionPage mapSection) : base(intervention, mapSection, size)
 		{
@@ -32,6 +33,13 @@ namespace ETD.CustomObjects.CustomUIObjects
 			foreach(TeamPin teamPin in getInterveningTeamsPin())
 			{
 				teamPin.setInterventionPin(this);
+
+				//Have the intervention track the position of a team intervening on it so that it moves instead of the team
+				if(gpsLocation == null && teamPin.getTeam().getGPSLocation() != null)
+				{
+					gpsLocation = teamPin.getTeam().getGPSLocation();
+					gpsLocation.RegisterInstanceObserver(this);
+				}
 			}
 
 			//Register as an observer to the intervention instance so that any modification to it are reflected on the map, e.g. addition of a team
@@ -54,6 +62,13 @@ namespace ETD.CustomObjects.CustomUIObjects
 				//Place all the pins in the appropriate place and make sure that it is not colliding with anything
 				interventionContainer.PlaceAll();
 				interventionContainer.CollisionDetectionAndResolution(false);
+			}
+
+			//Move the intervention pin using the GPS location of one of its intervening teams
+			if(gpsLocation != null)
+			{
+				setPinPosition(gpsLocation.getMapX(), gpsLocation.getMapY());
+				CollisionDetectionAndResolution(false);
 			}
 		}
 

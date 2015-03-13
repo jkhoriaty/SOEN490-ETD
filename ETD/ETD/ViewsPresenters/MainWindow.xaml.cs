@@ -28,6 +28,7 @@ using ETD.CustomObjects.CustomUIObjects;
 using ETD.Models.ArchitecturalObjects;
 using System.Globalization;
 using System.Diagnostics;
+using ETD.Services.Interfaces;
 
 
 namespace ETD.ViewsPresenters
@@ -35,7 +36,7 @@ namespace ETD.ViewsPresenters
 	/// <summary>
 	/// Interaction logic for MainWindow.xaml
 	/// </summary>
-    public partial class MainWindow
+    public partial class MainWindow : GPSStatusCallbacks
 	{
         //Page variables 
 		private TeamsSectionPage teamsSection;
@@ -51,8 +52,8 @@ namespace ETD.ViewsPresenters
 		private double previousWidth;
 		private double previousHeight;
 
-		DispatcherTimer dispatcherTimer = new DispatcherTimer();
-		private Dictionary<String, String> registeredVolunteers = new Dictionary<String, String>();
+		//Services variables
+		GPSServices gpsServices;
 
 		public MainWindow()
 		{
@@ -100,16 +101,8 @@ namespace ETD.ViewsPresenters
 			interventionsFrame.Content = interventionsSection;
 			InterventionsSection.Child = interventionsFrame;
 
-            //Start the transmission of the dispatcher's gps position
-			dispatcherTimer.Tick += new EventHandler(RefreshGPSPositions);
-			dispatcherTimer.Interval += new TimeSpan(0, 0, 5);
-			dispatcherTimer.Start();
-		}
-
-		//Ping server to test connection and update registed volunteers - Executes every 5 seconds
-		public void RefreshGPSPositions(object sender, EventArgs e)
-		{
-			UpdateRegistered();
+			//Starting GPS Services tasks
+			gpsServices = new GPSServices(this);
 		}
 
         //window closed
@@ -240,10 +233,16 @@ namespace ETD.ViewsPresenters
 			popup.IsOpen = false;
 		}
 
+        //Displays follow up section page
+        private void ShowFollowUpSection(object sender, RoutedEventArgs e)
+        {
+            followupSectionFormPopupContainer = new FormPopup(followupSection);
+        }
+
         //Display GPS position
-		private void ShowGPSLocations(object sender, RoutedEventArgs e)
+		private void ShowGPSLocations_Click(object sender, RoutedEventArgs e)
 		{
-			UpdateRegistered().Wait();
+			gpsServices.UpdateRegistered().Wait();
 			Dispatcher.Invoke(() =>
 			{
 				
@@ -251,53 +250,10 @@ namespace ETD.ViewsPresenters
 			newRegisteredCTR.Content = "0";
 		}
 
-		//Pinging server for registered volunteers and interpret the return
-		private Task UpdateRegistered()
-		{
-			Task<String[]> UpdateRegisteredTask = new Task<string[]>(NetworkServices.UpdateRegisted);
-			UpdateRegisteredTask.ContinueWith(task => UpdateRegisteredResultAnalysis(task.Result));
-			UpdateRegisteredTask.Start();
-			return UpdateRegisteredTask;
-		}
-
-        //Displays follow up section page
-        private void ShowFollowUpSection(object sender, RoutedEventArgs e)
-        {
-            followupSectionFormPopupContainer = new FormPopup(followupSection);
-        }
-
-		//Interpret the servers return
-		private void UpdateRegisteredResultAnalysis(String[] reply)
-		{
-			if(reply == null)
-			{
-				NotifyConnectionFail();
-			}
-			else if(reply.Length > 0)
-			{
-				NotifyConnectionSuccess();
-				int newCtr = 0;
-				for (int i = 1; i < (reply.Length - 1); i++)
-				{
-					String[] volunteerInfo = reply[i].Split('|');
-					if (!registeredVolunteers.ContainsKey(volunteerInfo[0]))
-					{
-						registeredVolunteers.Add(volunteerInfo[0], volunteerInfo[1]);
-						newCtr++;
-					}
-					else
-					{
-						registeredVolunteers[volunteerInfo[0]] = volunteerInfo[1];
-					}
-				}
-				Dispatcher.Invoke(() => newRegisteredCTR.Content = "" + newCtr);
-			}
-		}
-
 		//UI work to notify of connection success
-		private void NotifyConnectionSuccess()
+		public void NotifyConnectionSuccess()
 		{
-			Dispatcher.Invoke(() => 
+			Dispatcher.Invoke(() =>
 			{
 				GPSLocationsTextBlock.Background = new SolidColorBrush(Colors.Green);
 				GPSLocationsTextBlock.Foreground = new SolidColorBrush(Colors.White);
@@ -306,9 +262,9 @@ namespace ETD.ViewsPresenters
 		}
 
 		//UI work to notify of connection failure
-		private void NotifyConnectionFail()
+		public void NotifyConnectionFail()
 		{
-			Dispatcher.Invoke(() => 
+			Dispatcher.Invoke(() =>
 			{
 				GPSLocationsTextBlock.Background = new SolidColorBrush(Colors.Red);
 				GPSLocationsTextBlock.Foreground = new SolidColorBrush(Colors.White);

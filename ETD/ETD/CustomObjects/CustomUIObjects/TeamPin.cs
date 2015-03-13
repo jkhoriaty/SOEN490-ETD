@@ -18,6 +18,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 		internal static int size = 40;//Sets the size of the team icon
 
 		private Team team;
+		private GPSLocation gpsLocation;
 		private InterventionPin interventionPin;
 
 		public TeamPin(Team team, MapSectionPage mapSection) : base(team, mapSection, size)
@@ -61,6 +62,13 @@ namespace ETD.CustomObjects.CustomUIObjects
 
 			//Register as an observer to the team instance that this pin represents
 			team.RegisterInstanceObserver(this);
+
+			//Register as an observer to the GPS locations so that it will be notified when the GPS locations are changed (team has moved)
+			if(team.getGPSLocation() != null) //The team has been associated to GPS locations
+			{
+				gpsLocation = team.getGPSLocation(); //Getting a direct pointer for ease of access only
+				gpsLocation.RegisterInstanceObserver(this);
+			}
 		}
 
 		//Callback when the team instance has changed
@@ -70,6 +78,13 @@ namespace ETD.CustomObjects.CustomUIObjects
 			base.Children.Clear();
 			base.setImage(TechnicalServices.getImage(team, team.getStatus()));
 			base.setText(team.getName()); //Although the text doesn't change, we have to redraw it for it not to be hidden by the image
+
+			//Making the appropriate movement with the information provided by GPS
+			if(interventionPin == null && gpsLocation != null)
+			{
+				setPinPosition(gpsLocation.getMapX(), gpsLocation.getMapY()); //Move the team
+				CollisionDetectionAndResolution(true);
+			}
 		}
 
 		//Removing this item as an observer, called when clearing the map before redrawing

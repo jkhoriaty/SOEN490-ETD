@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using ETD.CustomObjects.CustomUIObjects;
 using ETD.Models.ArchitecturalObjects;
 using System.Windows;
+using System.Windows.Threading;
 
 /// <summary>
 /// Team Model Object, containing TeamMember and Equipment classes
@@ -27,6 +28,7 @@ namespace ETD.Models.Objects
         List<Equipment> equipmentList = new List<Equipment>();
 		Statuses status;
 		Trainings highestLevelOfTraining = 0;
+		GPSLocation gpsLocation;
 
         //Creates a new team
         public Team(String name)
@@ -110,6 +112,13 @@ namespace ETD.Models.Objects
 			InstanceModifiedNotification();
         }
 
+		//Associating the team to GPS locations
+		public void setGPSLocation(GPSLocation gpsLocation)
+		{
+			this.gpsLocation = gpsLocation;
+			ClassModifiedNotification(typeof(Team)); //Called so that the TeamPin registers interest in the GPSLocation upon creation
+		}
+
 		//Accessors
 
         //Returns the list of teams
@@ -182,6 +191,11 @@ namespace ETD.Models.Objects
             }
             return null;
         }
+
+		public GPSLocation getGPSLocation()
+		{
+			return gpsLocation;
+		}
 
         //Swapping method used to reorder teams in the team section
         public static void Swap(Team team, String direction)

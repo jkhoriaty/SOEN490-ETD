@@ -117,39 +117,6 @@ namespace ETD.ViewsPresenters.TeamsSection
 			//teamEquipmentStacks.Add(teamName, equipmentStack);
 		}
 
-		//Adding equipment to specified team equipment stack
-		/*public void AddTeamEquipment(Equipment equip, String teamName)
-		{
-			//Limit of 3 pieces of equipment per team
-			if (teamEquipmentStacks[teamName].Children.Count <= 3)
-			{
-				Rectangle imageRectangle = new Rectangle();
-				//imageRectangle.Name = equip.getEquipmentName().ToString();
-				imageRectangle.Tag = teamName;
-				imageRectangle.Width = 27;
-				imageRectangle.Height = 27;
-				imageRectangle.MouseRightButtonDown += new MouseButtonEventHandler(RemoveTeamEquipment);
-                imageRectangle.FlowDirection = FlowDirection.LeftToRight;
-
-				Thickness equipmentMargin = imageRectangle.Margin;
-				equipmentMargin.Right = 1;
-				imageRectangle.Margin = equipmentMargin;
-
-				//Getting the background image to the rectangle
-				ImageBrush equipmentImage = new ImageBrush();
-				imageRectangle.Fill = equipmentImage;
-
-				//Getting the appropriate equipment StackPanel
-				teamEquipmentStacks[teamName].Children.Add(imageRectangle);
-
-				//Team.teamList[teamName].AddEquipment(equip);
-			}
-			else
-			{
-				MessageBox.Show("You cannot add more than 3 pieces of equipment to a team. The equipment is going to be readded to the map.");
-			}
-		}*/
-
 		//Right clicking on an equipment in a team description removew the equipment from the stack and adds it back to the map
 		public void RemoveTeamEquipment(object sender, RoutedEventArgs e)
 		{

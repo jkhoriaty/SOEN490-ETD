@@ -18,7 +18,7 @@ namespace ETD.Services
 		static String serverIP = "24.202.7.147";
 		static int serverPort = 2000;
 
-		private static String[] execute(String request)
+		internal static String[] ExecuteRequest(String request)
 		{
 			UdpClient socket = new UdpClient();
 
@@ -33,7 +33,7 @@ namespace ETD.Services
 					Byte[] buffer = Encoding.ASCII.GetBytes(request);
 					socket.Send(buffer, buffer.Length, serverIP, serverPort);
 
-					Task<String[]> replyListener = new Task<String[]>(() => receiveReply(socket));
+					Task<String[]> replyListener = new Task<String[]>(() => ReceiveReply(socket));
 					replyListener.Start();
 
 					if (replyListener.Wait(TimeSpan.FromSeconds(2)))
@@ -55,16 +55,11 @@ namespace ETD.Services
 			return null;
 		}
 
-		private static String[] receiveReply(UdpClient socket)
+		private static String[] ReceiveReply(UdpClient socket)
 		{
 			IPEndPoint remoteServer = new IPEndPoint(IPAddress.Any, 0);
 			Byte[] buffer = socket.Receive(ref remoteServer);
 			return Encoding.ASCII.GetString(buffer).Split('~');
-		}
-
-		public static String[] UpdateRegisted()
-		{
-			return execute("2~");
 		}
 	}
 }
