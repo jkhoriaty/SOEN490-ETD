@@ -91,6 +91,9 @@
     <Compile Include="Services\Interfaces\GPSStatusCallbacks.cs" />
     <Compile Include="Services\NetworkServices.cs" />
     <Compile Include="Services\TextboxHandler.cs" />
+    <Compile Include="ViewsPresenters\GPSAssignment.xaml.cs">
+      <DependentUpon>GPSAssignment.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewsPresenters\InitialSetup.xaml.cs">
       <DependentUpon>InitialSetup.xaml</DependentUpon>
     </Compile>
@@ -209,6 +212,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ResourceDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ViewsPresenters\GPSAssignment.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
