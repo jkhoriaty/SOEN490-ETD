@@ -250,6 +250,20 @@ namespace ETD.ViewsPresenters
 			newRegisteredCTR.Content = "0";
 		}
 
+		//Go through GPS setup
+		private void GPSSetup_Click(object sender, RoutedEventArgs e)
+		{
+			//Check if a team has been created
+			if(Team.getTeamList().Count > 0)
+			{
+
+			}
+			else
+			{
+				MessageBox.Show("No teams have been created yet. Please create a team and associate it to a GPS position before entering GPS setup.");
+			}
+		}
+
 		//UI work to notify of connection success
 		public void NotifyConnectionSuccess()
 		{

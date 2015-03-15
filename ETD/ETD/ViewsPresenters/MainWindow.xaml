@@ -34,6 +34,7 @@
                 <!-- Here go all the buttons left -->
                 <Button x:Uid="Button_GPSLocations" Content="{Binding Path=Button_GPSLocations, Source={StaticResource Resources}}" Name="GPSLocationsTextBlock" Click="ShowGPSLocations_Click" IsEnabled="False"/>
                 <Label Content="0" Name="newRegisteredCTR" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+				<Button Content="GPS Setup" Name="GPSSetup_Button" Click="GPSSetup_Click"/>
                 <Border BorderThickness="0.5" BorderBrush="Black" Margin="3,0,3,0" VerticalAlignment="Stretch"/>
                 <ComboBox IsSynchronizedWithCurrentItem="True" VerticalAlignment="Center" Height="Auto" x:Name="ComboBox_Languages" ItemsSource="{Binding Path=SupportedCulturesNames, Mode=OneWay, Source={StaticResource CultureResourcesDS}}" Width="Auto"/>
             </StackPanel>

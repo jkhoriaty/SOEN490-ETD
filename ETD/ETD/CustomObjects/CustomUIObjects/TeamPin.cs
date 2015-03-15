@@ -80,7 +80,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 			base.setText(team.getName()); //Although the text doesn't change, we have to redraw it for it not to be hidden by the image
 
 			//Making the appropriate movement with the information provided by GPS
-			if(interventionPin == null && gpsLocation != null)
+			if(interventionPin == null && gpsLocation != null && GPSLocation.gpsConfigured == true)
 			{
 				setPinPosition(gpsLocation.getMapX(), gpsLocation.getMapY()); //Move the team
 				CollisionDetectionAndResolution(true);

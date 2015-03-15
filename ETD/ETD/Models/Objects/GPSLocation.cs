@@ -10,7 +10,8 @@ namespace ETD.Models.Objects
 	public class GPSLocation : Observable
 	{
 		private static Dictionary<string, GPSLocation> gpsLocationsDictionary = new Dictionary<string, GPSLocation>();
-		
+		internal static bool gpsConfigured = false;
+
 		private string id;
 		private double lattitude;
 		private double longitude;
