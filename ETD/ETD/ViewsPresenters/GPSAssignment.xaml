@@ -18,5 +18,7 @@
                 <RowDefinition Height="30"/>
             </Grid.RowDefinitions>
         </Grid>
+        
+        <Button Name="Buttom_Submit" Click="Submit_Click" Width="100" Content="Submit" />
     </StackPanel>
 </Window>

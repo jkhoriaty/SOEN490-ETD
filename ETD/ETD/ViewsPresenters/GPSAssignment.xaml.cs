@@ -58,15 +58,21 @@ namespace ETD.ViewsPresenters
                 teamGrid.Children.Add(teamName);
 
                 ComboBox combo = new ComboBox();
+                combo.Name = row.ToString();
                 Grid.SetRow(combo, row);
                 Grid.SetColumn(combo, 1);
 
                 List<TeamMember> tempList = new List<TeamMember>();
                 tempList = t.getMemberList();
 
-                foreach (TeamMember temp in tempList)
+                /*foreach (TeamMember temp in tempList)
                 {
                     combo.Items.Add(temp.getName());
+                }*/
+
+                foreach (KeyValuePair<string, GPSLocation> entry in gpsLocationsDictionary)
+                {
+                    combo.Items.Add(entry.Key);
                 }
 
                 teamGrid.Children.Add(combo);
@@ -77,10 +83,14 @@ namespace ETD.ViewsPresenters
 
         private void Submit_Click(object sender, RoutedEventArgs e)
         {
-                
-                /*The code to link the chosen GPS signal with the team
-                 * member selected above goes here.
-                 * TODO: Finish this tonight. ~Greg*/
+            foreach (Control ctrl in teamGrid.Children)
+            {
+                if (ctrl is ComboBox)
+                {
+                    int index = Convert.ToInt32(ctrl.Name);
+                    
+                }
+            }
 
                 this.Close();
         }
