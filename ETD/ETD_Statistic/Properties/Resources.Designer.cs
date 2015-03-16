@@ -87,6 +87,15 @@ namespace ETD_Statistic.Properties {
         }
         
         /// <summary>
+        /// Looks up a localized string similar to 'Load Statistic'.
+        /// </summary>
+        public static string Button_LoadStatistic {
+            get {
+                return ResourceManager.GetString(ResourceNames.Button_LoadStatistic, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Looks up a localized string similar to 'Submit'.
         /// </summary>
         public static string Button_LoginSubmit {
@@ -126,6 +135,11 @@ namespace ETD_Statistic.Properties {
         /// Lists all the resource names as constant string fields.
         /// </summary>
         public class ResourceNames {
+            
+            /// <summary>
+            /// Stores the resource name 'Button_LoadStatistic'.
+            /// </summary>
+            public const string Button_LoadStatistic = "Button_LoadStatistic";
             
             /// <summary>
             /// Stores the resource name 'Button_LoginSubmit'.

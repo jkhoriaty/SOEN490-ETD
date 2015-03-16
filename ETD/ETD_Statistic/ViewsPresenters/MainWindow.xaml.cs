@@ -24,5 +24,10 @@ namespace ETD_Statistic.ViewsPresenters
         {
             InitializeComponent();
         }
+
+        private void LoadStatistic(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("statistic load");
+        }
     }
 }

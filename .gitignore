@@ -16,3 +16,8 @@ ETD/ETD_UnitTest/bin/Debug/
 *.cache
 *.lref
 *.manifest
+ETD/ETD_Statistic/obj/Debug/App.g.i.cs
+*.cache
+ETD/ETD_Statistic/obj/Debug/ETD_Statistic.csproj.FileListAbsolute.txt
+*.cache
+*.dll

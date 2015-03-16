@@ -10,6 +10,11 @@
 		MinHeight="700"
 		Height="700">
     <Grid>
-        
+        <Grid Margin="0,0,0,650">
+            <Button x:Uid="Button_LoadStatistic" Click="LoadStatistic" Content="{x:Static properties:Resources.Button_LoadStatistic}" Height="30" Width="100"/>
+        </Grid>
+        <Grid Margin="0,100,0,0">
+            
+        </Grid>
     </Grid>
 </Window>
