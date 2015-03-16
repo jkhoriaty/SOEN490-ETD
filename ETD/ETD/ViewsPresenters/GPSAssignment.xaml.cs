@@ -83,15 +83,12 @@ namespace ETD.ViewsPresenters
 
         private void Submit_Click(object sender, RoutedEventArgs e)
         {
-            foreach (Control ctrl in teamGrid.Children)
+            foreach (ComboBox ctrl in teamGrid.Children)
             {
-                if (ctrl is ComboBox)
-                {
-                    int index = Convert.ToInt32(ctrl.Name);
-                    
-                }
+                int index = Convert.ToInt32(ctrl.Name);
+                string index2 = ctrl.SelectedItem.ToString();
+                teamList[index].setGPSLocation(gpsLocationsDictionary[index2]);
             }
-
                 this.Close();
         }
     }
