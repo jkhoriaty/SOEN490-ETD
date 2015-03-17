@@ -39,33 +39,56 @@ namespace ETD.ViewsPresenters
     {
 
         List<Team> teamList = new List<Team>();//Contains a list of teams
+        Dictionary<string, GPSLocation> gpsLocationsDictionary = new Dictionary<string, GPSLocation>();
 
         public GPSAssignment()
         {
+            teamList = Team.getTeamList();
+            gpsLocationsDictionary = GPSLocation.getDictionary();
+            int row = 0;
             InitializeComponent();
 
-            teamList = Team.getTeamList();
-
-            foreach (Team team in teamList)
+            foreach (Team t in teamList)
             {
-                List<TeamMember> temp = new List<TeamMember>();
-                temp = team.getMemberList();
-                teamCB.Items.Add(team.getName());
+                Label teamName = new Label();
+                teamName.Content = t.getName();
+                Grid.SetRow(teamName, row);
+                Grid.SetColumn(teamName, 0);
 
-                foreach (TeamMember member in temp)
+                teamGrid.Children.Add(teamName);
+
+                ComboBox combo = new ComboBox();
+                combo.Name = row.ToString();
+                Grid.SetRow(combo, row);
+                Grid.SetColumn(combo, 1);
+
+                List<TeamMember> tempList = new List<TeamMember>();
+                tempList = t.getMemberList();
+
+                /*foreach (TeamMember temp in tempList)
                 {
-                    memberCB.Items.Add(member.getName());
+                    combo.Items.Add(temp.getName());
+                }*/
+
+                foreach (KeyValuePair<string, GPSLocation> entry in gpsLocationsDictionary)
+                {
+                    combo.Items.Add(entry.Key);
                 }
+
+                teamGrid.Children.Add(combo);
+                row++;
             }
+
         }
 
         private void Submit_Click(object sender, RoutedEventArgs e)
         {
-                
-                /*The code to link the chosen GPS signal with the team
-                 * member selected above goes here.
-                 * TODO: Finish this tonight. ~Greg*/
-
+            foreach (ComboBox ctrl in teamGrid.Children)
+            {
+                int index = Convert.ToInt32(ctrl.Name);
+                string index2 = ctrl.SelectedItem.ToString();
+                teamList[index].setGPSLocation(gpsLocationsDictionary[index2]);
+            }
                 this.Close();
         }
     }

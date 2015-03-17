@@ -38,6 +38,11 @@ namespace ETD.Models.Objects
 			}
 		}
 
+        internal static Dictionary<string, GPSLocation> getDictionary()
+        {
+            return gpsLocationsDictionary;
+        }
+
 		//Method that will translate the lattitude to a map X value
 		internal double getMapX()
 		{
