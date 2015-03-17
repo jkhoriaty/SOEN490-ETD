@@ -85,7 +85,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.TimersInterv
 
 		private void UpdateTimer(TimeSpan elapsed, Label timer, Label status, bool ongoing, int deadline)
 		{
-			timer.Content = elapsed.TotalMinutes + ":";
+			timer.Content = elapsed.Minutes + ":";
 			if (elapsed.Seconds < 10)
 			{
 				timer.Content += "0";
