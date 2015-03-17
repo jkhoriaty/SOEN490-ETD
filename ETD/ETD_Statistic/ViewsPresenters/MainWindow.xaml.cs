@@ -33,5 +33,8 @@ namespace ETD_Statistic.ViewsPresenters
             statsView.Content = sv;
             statisticView.Child = statsView;
         }
+
+        private void ExportToPDF(object sender, RoutedEventArgs e)
+        { }
     }
 }

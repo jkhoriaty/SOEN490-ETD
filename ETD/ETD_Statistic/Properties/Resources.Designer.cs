@@ -87,6 +87,15 @@ namespace ETD_Statistic.Properties {
         }
         
         /// <summary>
+        /// Looks up a localized string similar to 'Export to PDF'.
+        /// </summary>
+        public static string Button_ExportPDF {
+            get {
+                return ResourceManager.GetString(ResourceNames.Button_ExportPDF, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Looks up a localized string similar to 'Load Statistic'.
         /// </summary>
         public static string Button_LoadStatistic {
@@ -135,6 +144,11 @@ namespace ETD_Statistic.Properties {
         /// Lists all the resource names as constant string fields.
         /// </summary>
         public class ResourceNames {
+            
+            /// <summary>
+            /// Stores the resource name 'Button_ExportPDF'.
+            /// </summary>
+            public const string Button_ExportPDF = "Button_ExportPDF";
             
             /// <summary>
             /// Stores the resource name 'Button_LoadStatistic'.
