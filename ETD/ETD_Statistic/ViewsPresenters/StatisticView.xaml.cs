@@ -10,28 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using ETD_Statistic.ViewsPresenters;
 
 namespace ETD_Statistic.ViewsPresenters
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for StatisticView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class StatisticView : Page
     {
-        public MainWindow()
+        public StatisticView()
         {
             InitializeComponent();
-        }
-
-        private void LoadStatistic(object sender, RoutedEventArgs e)
-        {
-            StatisticView sv = new StatisticView();
-            Frame statsView = new Frame();
-            statsView.Content = sv;
-            statisticView.Child = statsView;
         }
     }
 }
