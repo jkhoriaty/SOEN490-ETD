@@ -13,6 +13,10 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ETD_Statistic.ViewsPresenters;
+using System.Windows.Xps;
+using System.Windows.Xps.Packaging;
+using System.Windows.Xps.Serialization;
+using System.IO;
 
 namespace ETD_Statistic.ViewsPresenters
 {
@@ -21,6 +25,7 @@ namespace ETD_Statistic.ViewsPresenters
     /// </summary>
     public partial class MainWindow : Window
     {
+        DocumentViewer docViewer = new DocumentViewer();
         public MainWindow()
         {
             InitializeComponent();
@@ -34,7 +39,44 @@ namespace ETD_Statistic.ViewsPresenters
             statisticView.Children.Add(statsView);
         }
 
-        private void ExportToPDF(object sender, RoutedEventArgs e)
-        { }
+        public void ExportWPF(StackPanel element)
+        {
+            StackPanel sp = new StackPanel();
+            sp.DataContext = element;
+            FixedDocument fixedDoc = new FixedDocument();
+            PageContent pageCont = new PageContent();
+            FixedPage fixedPage = new FixedPage();
+
+            fixedPage.Children.Add(sp);
+            ((System.Windows.Markup.IAddChild)pageCont).AddChild(fixedPage);
+            fixedDoc.Pages.Add(pageCont);
+
+            docViewer.Document = fixedDoc;
+
+        }
+
+        public void SaveXPS()
+        {
+            Microsoft.Win32.SaveFileDialog save = new Microsoft.Win32.SaveFileDialog();
+            save.FileName = "StatisticReport";
+            save.DefaultExt = ".xps";
+            save.Filter = "XPS Documents (.xps)|*.xps";
+
+            Nullable<bool> result = save.ShowDialog();
+            if (result == true)
+            {
+                string fileName = save.FileName;
+                FixedDocument doc = (FixedDocument)docViewer.Document;
+                XpsDocument xpsDoc = new XpsDocument(fileName, FileAccess.ReadWrite);
+                System.Windows.Xps.XpsDocumentWriter xpsWriter = XpsDocument.CreateXpsDocumentWriter(xpsDoc);
+                xpsDoc.Close();
+            }
+        }
+
+        public void ExportToPDF(object sender, RoutedEventArgs e)
+        {
+            //ExportWPF(statisticView);
+            SaveXPS();
+        }
     }
 }
