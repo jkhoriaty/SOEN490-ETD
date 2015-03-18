@@ -61,6 +61,9 @@
     <Compile Include="CustomObjects\CustomUIObjects\Pin.cs" />
     <Compile Include="CustomObjects\CustomUIObjects\ResourceLine.cs" />
     <Compile Include="CustomObjects\CustomUIObjects\TeamPin.cs" />
+    <Compile Include="CustomObjects\PopupForms\ShiftsSection.xaml.cs">
+      <DependentUpon>ShiftsSection.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Models\Objects\ABC.cs" />
     <Compile Include="Models\Objects\InterventionAdditionalInfo.cs" />
     <Compile Include="Models\Objects\MapMod.cs" />
@@ -76,6 +79,7 @@
     <Compile Include="Models\Objects\Resource.cs" />
     <Compile Include="CustomObjects\PopupForms\FormPopup.cs" />
     <Compile Include="CustomObjects\PopupForms\RegisteredVolunteersPopup.cs" />
+    <Compile Include="Models\Objects\Shift.cs" />
     <Compile Include="Properties\Resources.en.Designer.cs">
       <DependentUpon>Resources.en.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -218,6 +222,10 @@
   -->
   <ItemGroup>
     <Page Include="CustomObjects\PopupForms\FollowUpSectionForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomObjects\PopupForms\ShiftsSection.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
