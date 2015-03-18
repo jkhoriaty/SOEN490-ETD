@@ -51,8 +51,7 @@ namespace ETD_Statistic.ViewsPresenters
             ((System.Windows.Markup.IAddChild)pageCont).AddChild(fixedPage);
             fixedDoc.Pages.Add(pageCont);
 
-            docViewer.Document = fixedDoc;
-
+            docViewer.Document = fixedDoc;           
         }
 
         public void SaveXPS()
@@ -69,13 +68,14 @@ namespace ETD_Statistic.ViewsPresenters
                 FixedDocument doc = (FixedDocument)docViewer.Document;
                 XpsDocument xpsDoc = new XpsDocument(fileName, FileAccess.ReadWrite);
                 System.Windows.Xps.XpsDocumentWriter xpsWriter = XpsDocument.CreateXpsDocumentWriter(xpsDoc);
+                xpsWriter.Write(doc);
                 xpsDoc.Close();
             }
         }
 
         public void ExportToPDF(object sender, RoutedEventArgs e)
         {
-            //ExportWPF(statisticView);
+            ExportWPF(buttonView);
             SaveXPS();
         }
     }
