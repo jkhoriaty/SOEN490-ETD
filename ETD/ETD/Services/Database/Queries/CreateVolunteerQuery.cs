@@ -11,7 +11,7 @@ namespace ETD.Services.Database.Queries
     {
         public CreateVolunteerQuery(string name, Trainings training)
         {
-            sql = "INSERT INTO [Volunteers] (Volunteer_ID, Name, Training_Level) VALUES (null, '" + name + "', '" + training.ToString() + "')";
+            sql = "INSERT INTO [Volunteers] (Name, Training_Level) VALUES ('" + name + "', " + training.ToString() + ")";
         }
     }
 }
