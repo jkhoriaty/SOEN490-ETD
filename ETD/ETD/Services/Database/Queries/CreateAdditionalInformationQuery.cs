@@ -10,7 +10,7 @@ namespace ETD.Services.Database.Queries
     {
         public CreateAdditionalInformationQuery(int interventionID, String information, DateTime timestamp)
         {
-            sql = "INSERT INTO [AdditionalInformations] (Intervention_ID, Information, Timestamp) VALUES (" + interventionID + ", '" + information + "', '" + DateTimeSQLite(timestamp) + "')";
+            sql = "INSERT INTO [Additional_Informations] (Intervention_ID, Information, Timestamp) VALUES (" + interventionID + ", '" + information + "', '" + DateTimeSQLite(timestamp) + "')";
         }
     }
 }

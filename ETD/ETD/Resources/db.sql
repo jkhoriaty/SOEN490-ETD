@@ -36,10 +36,10 @@ CONSTRAINT "fkey0" FOREIGN KEY ("Intervention_ID") REFERENCES "Interventions" ("
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for AdditionalInformations
+-- Table structure for Additional_Informations
 -- ----------------------------
-DROP TABLE IF EXISTS "main"."AdditionalInformations";
-CREATE TABLE "AdditionalInformations" (
+DROP TABLE IF EXISTS "main"."Additional_Informations";
+CREATE TABLE "Additional_Informations" (
 "Additional_Info_ID"  INTEGER NOT NULL,
 "Intervention_ID"  INTEGER NOT NULL,
 "Information"  TEXT NOT NULL,
@@ -49,7 +49,7 @@ CONSTRAINT "fkey0" FOREIGN KEY ("Intervention_ID") REFERENCES "Interventions" ("
 );
 
 -- ----------------------------
--- Records of AdditionalInformations
+-- Records of Additional_Informations
 -- ----------------------------
 
 -- ----------------------------

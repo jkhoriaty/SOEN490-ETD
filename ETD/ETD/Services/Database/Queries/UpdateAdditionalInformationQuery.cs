@@ -10,8 +10,8 @@ namespace ETD.Services.Database.Queries
     {
         public UpdateAdditionalInformationQuery(int additionalInfoID, String information, DateTime timestamp)
         {
-            sql = "UPDATE [AdditionalInformations] " +
-                  "SET Information=" + information + ", Timestamp='" + timestamp.ToString("MM/dd/yyyy HH:mm:ss") +
+            sql = "UPDATE [Additional_Informations] " +
+                  "SET Information=" + information + ", Timestamp='" + DateTimeSQLite(timestamp) +
                   "WHERE Additional_Info_ID=" + additionalInfoID + ";";
         }
     }
