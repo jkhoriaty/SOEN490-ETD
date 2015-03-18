@@ -31,7 +31,7 @@ namespace ETD_Statistic.ViewsPresenters
             StatisticView sv = new StatisticView();
             Frame statsView = new Frame();
             statsView.Content = sv;
-            statisticView.Child = statsView;
+            statisticView.Children.Add(statsView);
         }
 
         private void ExportToPDF(object sender, RoutedEventArgs e)

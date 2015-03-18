@@ -141,4 +141,28 @@
     <value>Invalid username or password</value>
     <comment>LoginPage</comment>
   </data>
+  <data name="TextBlock_Finance" xml:space="preserve">
+    <value>Finance and Meals</value>
+    <comment>StatisticView</comment>
+  </data>
+  <data name="TextBlock_OrganizationFollowUp" xml:space="preserve">
+    <value>Organization Followup</value>
+    <comment>StatisticView</comment>
+  </data>
+  <data name="TextBlock_ParticularSituation" xml:space="preserve">
+    <value>Particular Situation and Interventions</value>
+    <comment>StatisticView</comment>
+  </data>
+  <data name="TextBlock_SupervisorFollowUp" xml:space="preserve">
+    <value>Supervisor/Responsible Invidual Followup</value>
+    <comment>StatisticView</comment>
+  </data>
+  <data name="TextBlock_Vehicle" xml:space="preserve">
+    <value>Material and Vehicles</value>
+    <comment>StatisticView</comment>
+  </data>
+  <data name="TextBlock_VolunteerFollowUp" xml:space="preserve">
+    <value>Volunteer Followup</value>
+    <comment>StatisticView</comment>
+  </data>
 </root>
