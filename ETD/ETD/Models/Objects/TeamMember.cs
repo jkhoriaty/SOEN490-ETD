@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ETD.Services.Database;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -31,6 +32,11 @@ namespace ETD.Models.Objects
             this.name = name;
             this.trainingLevel = training;
             this.departure = departure;
+            if (Operation.currentOperation != null)
+            {
+                this.operationID = Operation.currentOperation.getID();
+            }
+            this.volunteerID = StaticDBConnection.NonQueryDatabaseWithID("INSERT INTO [Volunteers] (Name, Training_Level) VALUES ('" + name + "', " + 1+(int)training + ")");
         }
 
         //Accessors

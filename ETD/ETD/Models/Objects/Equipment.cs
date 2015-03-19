@@ -1,4 +1,5 @@
 ﻿using ETD.Models.ArchitecturalObjects;
+using ETD.Services.Database;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,9 +29,14 @@ namespace ETD.Models.Objects
         //Creates an equipment and notifies the list of observers
 		public Equipment(String name)
 		{
-			equipmentType = (Equipments)Enum.Parse(typeof(Equipments), name);
+			this.equipmentType = (Equipments)Enum.Parse(typeof(Equipments), name);
 			equipmentList.Add(this);
 			ClassModifiedNotification(typeof(Equipment));
+            if (Operation.currentOperation != null)
+            {
+                this.operationID = Operation.currentOperation.getID();
+            }
+            this.equipmentID = StaticDBConnection.NonQueryDatabaseWithID("INSERT INTO [Equipments] (Operation_ID, Type_ID) VALUES (" + operationID + ", " + 1+(int)equipmentType + ")");
 		}
 
         //Deletes an equipment and notifies the list of observers

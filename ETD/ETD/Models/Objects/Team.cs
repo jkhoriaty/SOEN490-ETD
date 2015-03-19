@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using ETD.CustomObjects.CustomUIObjects;
 using ETD.Models.ArchitecturalObjects;
 using System.Windows;
+using ETD.Services.Database;
 
 /// <summary>
 /// Team Model Object, containing TeamMember and Equipment classes
@@ -31,21 +32,33 @@ namespace ETD.Models.Objects
 		List<TeamMember> memberList = new List<TeamMember>();
         List<Equipment> equipmentList = new List<Equipment>();
 		Statuses status;
-		Trainings highestLevelOfTraining = 0;
+		Trainings highestLevelOfTraining = Trainings.firstAid;
 
         //Creates a new team
         public Team(String name)
         {
             this.name = name;
 			status = Statuses.available;
-			teamList.Add(this);
+            if (Operation.currentOperation != null)
+            {
+                this.operationID = Operation.currentOperation.getID();
+            }
+            this.teamID = StaticDBConnection.NonQueryDatabaseWithID("INSERT INTO [Teams] (Operation_ID, Name, Status) VALUES (" + operationID + ", '" + name + "', " + 1+(int)status + ")");
+            teamList.Add(this);
 			ClassModifiedNotification(typeof(Team));
+            
         }
 
 		//Deletes a Team
 		public static void DeleteTeam(Team team)
 		{
 			teamList.Remove(team);
+            while(team.memberList.Count > 0)
+            {
+                StaticDBConnection.NonQueryDatabase("UPDATE [Team_Members] SET Disbanded='" + StaticDBConnection.DateTimeSQLite(DateTime.Now) + "' WHERE Volunteer_ID=" + team.getMember(0).getID() + " AND Team_ID=" + team.getID() + ";");
+                team.memberList.RemoveAt(0);
+                
+            }
 			ClassModifiedNotification(typeof(Team));
 		}
 
@@ -68,11 +81,24 @@ namespace ETD.Models.Objects
             if(memberList.Count <= 2)
             {
                 memberList.Add(member);
+                StaticDBConnection.NonQueryDatabase("INSERT INTO [Team_Members] (Team_ID, Volunteer_ID, Departure, Joined) VALUES (" + teamID + ", " + member.getID() + ", '" + StaticDBConnection.DateTimeSQLite(member.getDeparture()) + "', '" + StaticDBConnection.DateTimeSQLite(DateTime.Now) + "');");
                 if ((int)highestLevelOfTraining < (int)member.getTrainingLevel())
 				{
                     highestLevelOfTraining = member.getTrainingLevel();
 				}
 				InstanceModifiedNotification();
+                return true;
+            }
+            return false;
+        }
+
+        private bool RemoveMember(TeamMember member)
+        {
+            if (memberList.Contains(member))
+            {
+                memberList.Remove(member);
+                StaticDBConnection.NonQueryDatabase("UPDATE [Team_Members] SET Disbanded='" + StaticDBConnection.DateTimeSQLite(DateTime.Now) + "' WHERE Volunteer_ID=" + member.getID() + ";");
+                InstanceModifiedNotification();
                 return true;
             }
             return false;
@@ -84,6 +110,7 @@ namespace ETD.Models.Objects
             if (equipmentList.Count < 3)
             {
 				equipmentList.Add(equipment);
+                StaticDBConnection.NonQueryDatabase("INSERT INTO [Assigned_Equipment] (Equipment_ID, Team_ID, Assigned_Time) VALUES (" + equipment.getID() + ", " + teamID + ", '" + StaticDBConnection.DateTimeSQLite(DateTime.Now) + "');");
 				InstanceModifiedNotification();
                 return true;
             }
@@ -94,9 +121,12 @@ namespace ETD.Models.Objects
 		//Removing equipment from the team list
         public void RemoveEquipment(Equipment equipment)
         {
-
-			equipmentList.Remove(equipment);
-			InstanceModifiedNotification();
+            if (equipmentList.Contains(equipment))
+            {
+                equipmentList.Remove(equipment);
+                StaticDBConnection.NonQueryDatabase("UPDATE [Assigned_Equipment] SET Removed_Time='" + StaticDBConnection.DateTimeSQLite(DateTime.Now) + "' WHERE Equipment_ID=" + equipment.getID() + " AND Team_ID=" + teamID + ";");
+                InstanceModifiedNotification();
+            }
 		}
 
 		//Mutators

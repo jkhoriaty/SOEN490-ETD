@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ETD.Services.Database;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -35,10 +36,26 @@ namespace ETD.Models.Objects
             this.breathingFrequency = -1;
             this.circulation = "notSet"; 
             this.circulationFrequency = -1;
+
+            this.abcID = StaticDBConnection.NonQueryDatabaseWithID("INSERT INTO [ABCs] (Intervention_ID) VALUES (" + interventionID + ");");
+        }
+
+        public ABC(Intervention intervention)
+        {
+            this.consciousness = "notSet";
+            this.disoriented = false;
+            this.airways = "notSet";
+            this.breathing = "notSet";
+            this.breathingFrequency = -1;
+            this.circulation = "notSet";
+            this.circulationFrequency = -1;
+            this.interventionID = intervention.getID();
+
+            this.abcID = StaticDBConnection.NonQueryDatabaseWithID("INSERT INTO [ABCs] (Intervention_ID) VALUES (" + interventionID + ");");
         }
 
         //User inputs default values for all ABC objects
-        public ABC(String consciousness, bool disoriented, String airways, String breathing, int breathingFrequency, String circulation, int circulationFrequency)
+        public ABC(int intervention, String consciousness, bool disoriented, String airways, String breathing, int breathingFrequency, String circulation, int circulationFrequency)
         {
             this.consciousness = consciousness;
             this.disoriented = disoriented;
@@ -47,6 +64,8 @@ namespace ETD.Models.Objects
             this.breathingFrequency = breathingFrequency;
             this.circulation = circulation;
             this.circulationFrequency = circulationFrequency;
+            this.interventionID = intervention;
+            this.abcID = StaticDBConnection.NonQueryDatabaseWithID("INSERT INTO [ABCs] (Intervention_ID, Consciousness, Disoriented, Airways, Breathing, Breathing_Frequency, Circulation, Circulation_Frequency) VALUES (" + interventionID + ", '" + consciousness + "', " + disoriented + ", '" + airways + "', '" + breathing + "', " + breathingFrequency + ", '" + circulation + "', " + circulationFrequency + ");");
         }
 
         //Accessor methods

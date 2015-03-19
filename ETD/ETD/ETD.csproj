@@ -402,9 +402,7 @@
     <Content Include="Icons\statExport.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="Resources\db.sql">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <Content Include="Resources\db.sql" />
   </ItemGroup>
   <!--
     Icons

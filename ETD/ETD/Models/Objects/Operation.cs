@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ETD.Services.Database;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,7 @@ namespace ETD.Models.Objects
 
     public class Operation
     {
+        public static Operation currentOperation = null;
         //Database reflection variables
         private int operationID;
 
@@ -30,6 +32,8 @@ namespace ETD.Models.Objects
             this.shiftStart = shiftStart;
             this.shiftEnd = shiftEnd;
             this.dispatcherName = dispatcherName;
+            this.operationID = StaticDBConnection.NonQueryDatabaseWithID("INSERT INTO [Operations] (Name, Acronym, Shift_Start, Shift_End, Dispatcher) VALUES ('" + operationName + "', '" + acronym + "', '" + StaticDBConnection.DateTimeSQLite(shiftStart) + "', '" + StaticDBConnection.DateTimeSQLite(shiftEnd) + "', '" + dispatcherName + "')");
+            currentOperation = this;
 		}
 
         //Accessors

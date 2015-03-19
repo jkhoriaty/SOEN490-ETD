@@ -1,4 +1,5 @@
 ﻿using ETD.Models.ArchitecturalObjects;
+using ETD.Services.Database;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -63,11 +64,17 @@ namespace ETD.Models.Objects
             this.interventionNumber = ++lastIntervention;
             this.timeOfCall = DateTime.Now;
             this.additionalInfo = new InterventionAdditionalInfo[10];
-            this.abc = new ABC();
+            this.abc = new ABC(this);
 			this.isConcludedBool = false;
 
             activeInterventionList.Add(this);
             ClassModifiedNotification(typeof(Intervention));
+            
+            if (Operation.currentOperation != null)
+            {
+                this.operationID = Operation.currentOperation.getID();
+            }
+            this.interventionID = StaticDBConnection.NonQueryDatabaseWithID("INSERT INTO [Interventions] (Operation_ID, Intervention_Number, Time_Of_Call) VALUES (" + operationID + ", " + interventionNumber + ", '" + StaticDBConnection.DateTimeSQLite(timeOfCall) + "')");
         }
 
 		//Set intervention as completed
@@ -96,7 +103,7 @@ namespace ETD.Models.Objects
 
 		public void AddInterveningTeam(Team team)
 		{
-			resourceList.Add(new Resource(team));
+			resourceList.Add(new Resource(this, team));
 			InstanceModifiedNotification();
 		}
 

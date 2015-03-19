@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ETD.Services.Database;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -30,6 +31,7 @@ namespace ETD.Models.Objects
 			this.intervening = intervening;
 			this.moving = moving;
 			this.arrival = arrival;
+            this.resourceID = StaticDBConnection.NonQueryDatabaseWithID("INSERT INTO [Resources] (Intervention_ID, Name, Team_ID, Intervening, Moving, Arrival) VALUES (" + interventionID + ", '" + resourceName + "', " + team.getID() + ", " + intervening + "', '" + StaticDBConnection.DateTimeSQLite(moving) + "', '" + StaticDBConnection.DateTimeSQLite(arrival) + ")");
 		}
 
         public Resource(Team team)
@@ -38,6 +40,16 @@ namespace ETD.Models.Objects
 			this.intervening = true;
 			this.moving = DateTime.Now;
 			this.movingBool = true;
+            this.resourceID = StaticDBConnection.NonQueryDatabaseWithID("INSERT INTO [Resources] (Intervention_ID, Team_ID) VALUES (" + interventionID + ", " + team.getID() + ")");
+        }
+        public Resource(Intervention intervention, Team team)
+        {
+            this.team = team;
+            this.intervening = true;
+            this.moving = DateTime.Now;
+            this.movingBool = true;
+            this.interventionID = intervention.getID();
+            this.resourceID = StaticDBConnection.NonQueryDatabaseWithID("INSERT INTO [Resources] (Intervention_ID, Team_ID) VALUES (" + interventionID + ", " + team.getID() + ")");
         }
 
         public String getResourceName()

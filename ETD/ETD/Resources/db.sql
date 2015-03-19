@@ -12,8 +12,6 @@ File Encoding         : 65001
 Date: 2015-03-18 00:38:04
 */
 
-PRAGMA foreign_keys = OFF;
-
 -- ----------------------------
 -- Table structure for ABCs
 -- ----------------------------
@@ -334,3 +332,5 @@ FOREIGN KEY ("Training_Level") REFERENCES "Trainings" ("Training_ID") ON DELETE 
 -- ----------------------------
 -- Records of Volunteers
 -- ----------------------------
+
+PRAGMA foreign_keys = ON;

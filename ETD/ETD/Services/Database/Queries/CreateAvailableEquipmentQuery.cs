@@ -10,7 +10,7 @@ namespace ETD.Services.Database.Queries
     {
         public CreateAvailableEquipmentQuery(int operationID, int typeID)
         {
-            sql = "INSERT INTO [Available_Equipments] (Operation_ID, Type_ID) VALUES (" + operationID+ ", " + typeID + ")";
+            sql = "INSERT INTO [Equipments] (Operation_ID, Type_ID) VALUES (" + operationID+ ", " + typeID + ")";
         }
     }
 }
