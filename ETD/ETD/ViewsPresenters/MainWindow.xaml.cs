@@ -29,7 +29,6 @@ using ETD.Models.ArchitecturalObjects;
 using System.Globalization;
 using System.Diagnostics;
 
-
 namespace ETD.ViewsPresenters
 {
 	/// <summary>
@@ -346,6 +345,18 @@ namespace ETD.ViewsPresenters
                 CultureResources.ChangeCulture(selected_NativeName);
 
                 //could apply a theme tied to this culture if desired
+            }
+        }
+
+        protected void FormCloseConfirmation(Object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (System.Windows.Forms.MessageBox.Show("Would you like to fill out additional information. Confirm?", "Close Application", System.Windows.Forms.MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.No)
+            {
+                System.Windows.Forms.MessageBox.Show("The application has been closed successfully.", "Application Closed!", System.Windows.Forms.MessageBoxButtons.OK);
+            }
+            else
+            {
+                e.Cancel = true;
             }
         }
     }
