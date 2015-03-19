@@ -8,7 +8,7 @@ namespace ETD.Models.Objects
 {
     class Shift
     {
-        private static List<Shift> shiftsList = new List<Shift>();//Contains a list of requests
+        private static List<Shift> shiftsList = new List<Shift>();//Contains a list of shifts
 
         private String team;
         private String sector;
@@ -19,7 +19,7 @@ namespace ETD.Models.Objects
         private int shiftDuration;
         private Shift[] shiftInfo = new Shift[100];
 
-        //Creates a new
+        //Creates a new shift
         public Shift(String team, String sector, DayOfWeek date, String sectorStatus, DateTime teamsectorStartTimeMap, DateTime teamsectorEndTimeMap, int shiftDuration) 
         {
             this.team = team;
