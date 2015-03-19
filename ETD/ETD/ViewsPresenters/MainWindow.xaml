@@ -39,6 +39,7 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
                 <!-- Here go all the buttons right-->
+                <Button x:Uid="Button_Statistics" Content="{Binding Path=Button_Statistics, Source={StaticResource Resources}}" Click="ShowStatistics" IsEnabled="true"/>
                 <ComboBox Visibility="Collapsed" Name="AI" Width="130" Margin="1,0,1,0" VerticalAlignment="Center">
                     <ComboBoxItem x:Uid="ComboBoxItem_Rectangle" Content="{Binding Path=ComboBoxItem_Rectangle, Source={StaticResource Resources}}" Name="rectangle" Selected="CreateMapModificationPin"/>
                     <ComboBoxItem x:Uid="ComboBoxItem_Stairs" Content="{Binding Path=ComboBoxItem_Stairs, Source={StaticResource Resources}}" Name="stairs" Selected="CreateMapModificationPin"/>

@@ -27,6 +27,7 @@ namespace ETD.Models.Objects
         List<Equipment> equipmentList = new List<Equipment>();
 		Statuses status;
 		Trainings highestLevelOfTraining = 0;
+		int interventionCount = 0;
 
         //Creates a new team
         public Team(String name)
@@ -182,7 +183,14 @@ namespace ETD.Models.Objects
             }
             return null;
         }
-
+		public void incrementInterventionCount()
+		{
+			interventionCount++;
+		}
+		public int getInterventionCount()
+		{
+			return interventionCount;
+		}
         //Swapping method used to reorder teams in the team section
         public static void Swap(Team team, String direction)
         {

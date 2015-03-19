@@ -348,6 +348,11 @@ namespace ETD.ViewsPresenters
                 //could apply a theme tied to this culture if desired
             }
         }
+
+		private void ShowStatistics(object sender, RoutedEventArgs e)
+		{
+			ETD.Models.Objects.Statistics statistics = new ETD.Models.Objects.Statistics();
+		}
     }
 
 }

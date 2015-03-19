@@ -43,6 +43,7 @@ namespace ETD.Models.Objects
         private String conclusionAdditionalInfo;
         private DateTime conclusionTime;
 		private bool isConcludedBool;
+		private DateTime firstTeamArrivalTime;
 
         private DateTime call911Time;
         private String meetingPoint;
@@ -61,6 +62,7 @@ namespace ETD.Models.Objects
             this.additionalInfo = new InterventionAdditionalInfo[10];
             this.abc = new ABC();
 			this.isConcludedBool = false;
+			this.firstTeamArrivalTime = DateTime.MinValue;
 
             activeInterventionList.Add(this);
             ClassModifiedNotification(typeof(Intervention));
@@ -92,6 +94,11 @@ namespace ETD.Models.Objects
 
 		public void AddInterveningTeam(Team team)
 		{
+			if(firstTeamArrivalTime == DateTime.MinValue)
+			{
+				firstTeamArrivalTime = DateTime.Now;
+			}
+			team.incrementInterventionCount();
 			resourceList.Add(new Resource(team));
 			InstanceModifiedNotification();
 		}
@@ -141,6 +148,11 @@ namespace ETD.Models.Objects
 		public int getInterventionNumber()
 		{
 			return interventionNumber;
+		}
+		
+		public DateTime getFirstTeamArrivalTime()
+		{
+			return this.firstTeamArrivalTime;
 		}
 
 		public void setTimeOfCall(DateTime timeOfCall)
