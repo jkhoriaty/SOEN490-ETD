@@ -16,7 +16,11 @@ namespace ETD.Models.Objects
     {
 		public static List<Observer> observerList = new List<Observer>();
 
-		private static int lastIntervention = 0;
+        //Database reflection variables
+        private int interventionID;
+        private int operationID;
+
+        private static int lastIntervention = 0;
 		private static List<Intervention> activeInterventionList = new List<Intervention>();
 		private static List<Intervention> completedInterventionList = new List<Intervention>();
 
@@ -396,5 +400,15 @@ namespace ETD.Models.Objects
 		{
 			InstanceModifiedNotification();
 		}
+
+        public int getID()
+        {
+            return interventionID;
+        }
+
+        public int getParentID()
+        {
+            return operationID;
+        }
     }
 }

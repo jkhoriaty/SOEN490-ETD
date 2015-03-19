@@ -12,6 +12,10 @@ namespace ETD.Models.Objects
 
     public class InterventionAdditionalInfo
     {
+        //Database reflection variables
+        private int additionalInfoID;
+        private int interventionID;
+
         private String information;
         private DateTime timestamp;
 
@@ -23,6 +27,15 @@ namespace ETD.Models.Objects
         }
 
         //Accessors
+        public int getID()
+        {
+            return additionalInfoID;
+        }
+
+        public int getParentID()
+        {
+            return interventionID;
+        }
 
         //Returns the additional information for the intervention
         public String getInformation()

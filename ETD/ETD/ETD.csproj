@@ -88,6 +88,7 @@
     </Compile>
     <Compile Include="Services\CultureResources.cs" />
     <Compile Include="Services\DatabaseServices.cs" />
+    <Compile Include="Services\Database\StaticDBConnection.cs" />
     <Compile Include="Services\Database\DBConnection.cs" />
     <Compile Include="Services\Database\DBQuery.cs" />
     <Compile Include="Services\Database\Queries\CreateABCQuery.cs" />
@@ -101,7 +102,15 @@
     <Compile Include="Services\Database\Queries\CreateTeamQuery.cs" />
     <Compile Include="Services\Database\Queries\CreateVolunteerQuery.cs" />
     <Compile Include="Services\Database\Queries\GetABCQuery.cs" />
+    <Compile Include="Services\Database\Queries\GetAdditionalInformationQuery.cs" />
+    <Compile Include="Services\Database\Queries\GetAssignedEquipmentQuery.cs" />
+    <Compile Include="Services\Database\Queries\GetAvailableEquipmentQuery.cs" />
+    <Compile Include="Services\Database\Queries\GetInterventionQuery.cs" />
     <Compile Include="Services\Database\Queries\GetOperationQuery.cs" />
+    <Compile Include="Services\Database\Queries\GetResourceQuery.cs" />
+    <Compile Include="Services\Database\Queries\GetTeamMemberQuery.cs" />
+    <Compile Include="Services\Database\Queries\GetTeamQuery.cs" />
+    <Compile Include="Services\Database\Queries\GetVolunteerQuery.cs" />
     <Compile Include="Services\Database\Queries\SelectEventQuery.cs" />
     <Compile Include="Services\Database\Queries\UpdateABCQuery.cs" />
     <Compile Include="Services\Database\Queries\UpdateAdditionalInformationQuery.cs" />

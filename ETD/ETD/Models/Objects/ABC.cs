@@ -12,6 +12,10 @@ namespace ETD.Models.Objects
 
     public class ABC
     {
+        //Database reflection variables
+        private int abcID;
+        private int interventionID;
+
         //ABC objects
         private String consciousness;
         private bool disoriented;
@@ -46,6 +50,15 @@ namespace ETD.Models.Objects
         }
 
         //Accessor methods
+        public int getID()
+        {
+            return abcID;
+        }
+
+        public int getParentID()
+        {
+            return interventionID;
+        }
         public String getConsciousness()
         {
             return this.consciousness;

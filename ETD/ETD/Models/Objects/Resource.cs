@@ -11,6 +11,10 @@ namespace ETD.Models.Objects
     /// </summary>
     public class Resource
     {
+        //Database reflection variables
+        private int resourceID;
+        private int interventionID;
+
         private String resourceName;
         private Team team;
 		private bool intervening;
@@ -91,6 +95,16 @@ namespace ETD.Models.Objects
         public DateTime getArrivalTime()
         {
             return arrival;
+        }
+
+        public int getID()
+        {
+            return resourceID;
+        }
+
+        public int getParentID()
+        {
+            return interventionID;
         }
     }
 }

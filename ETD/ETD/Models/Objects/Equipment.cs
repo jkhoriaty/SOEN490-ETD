@@ -16,6 +16,10 @@ namespace ETD.Models.Objects
 
 	public class Equipment : Observable
     {
+        //Database reflection variables
+        private int equipmentID;
+        private int operationID;
+
 		private static List<Equipment> equipmentList = new List<Equipment>();//Contains a list of equipments
 
 		private Equipments equipmentType;
@@ -43,7 +47,15 @@ namespace ETD.Models.Objects
 		}
 
 		//Accessors
+        public int getID()
+        {
+            return equipmentID;
+        }
 
+        public int getParentID()
+        {
+            return operationID;
+        }
         //Returns the equipment type
 		public Equipments getEquipmentType()
 		{

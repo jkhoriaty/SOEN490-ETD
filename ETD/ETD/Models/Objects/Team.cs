@@ -17,9 +17,14 @@ namespace ETD.Models.Objects
 
     public class Team : Observable
 	{
+
 		private static List<Observer> observerList = new List<Observer>();//Contains a List of observers
 
 		static List<Team> teamList = new List<Team>();//Contains a list of teams
+
+        //Database reflection variables
+        private int teamID;
+        private int operationID;
 
         //Variables used for a team
         String name;
@@ -181,6 +186,16 @@ namespace ETD.Models.Objects
                 }
             }
             return null;
+        }
+
+        public int getID()
+        {
+            return teamID;
+        }
+
+        public int getParentID()
+        {
+            return operationID;
         }
 
         //Swapping method used to reorder teams in the team section

@@ -15,6 +15,10 @@ namespace ETD.Models.Objects
 
     public class TeamMember
     {
+        //Database reflection variables
+        private int volunteerID;
+        private int operationID;
+
         //Variables used for a team member
         public String name;
         public Trainings trainingLevel;
@@ -30,6 +34,16 @@ namespace ETD.Models.Objects
         }
 
         //Accessors
+
+        public int getID()
+        {
+            return volunteerID;
+        }
+
+        public int getParentID()
+        {
+            return operationID;
+        }
 
         //Returns team member departure time
         public DateTime getDeparture()

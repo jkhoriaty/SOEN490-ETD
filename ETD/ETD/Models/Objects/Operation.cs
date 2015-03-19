@@ -12,6 +12,9 @@ namespace ETD.Models.Objects
 
     public class Operation
     {
+        //Database reflection variables
+        private int operationID;
+
         //Variables used during an operation
         private String operationName;
         private String acronym;
@@ -30,6 +33,10 @@ namespace ETD.Models.Objects
 		}
 
         //Accessors
+        public int getID()
+        {
+            return operationID;
+        }
 
         //Returns the operation name
         public String getOperationName()
