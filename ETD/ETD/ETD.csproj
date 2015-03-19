@@ -159,6 +159,9 @@
     <Compile Include="ViewsPresenters\TeamsSection\TeamsSectionPage.xaml.cs">
       <DependentUpon>TeamsSectionPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewsPresenters\AdditionalStatisticInfo.xaml.cs">
+      <DependentUpon>AdditionalStatisticInfo.xaml</DependentUpon>
+    </Compile>
     <None Include="packages.config" />
     <None Include="Resources\EDT.sqlite3">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -333,6 +336,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ViewsPresenters\TeamsSection\TeamsSectionPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ViewsPresenters\AdditionalStatisticInfo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

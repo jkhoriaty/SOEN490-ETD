@@ -348,11 +348,21 @@ namespace ETD.ViewsPresenters
             }
         }
 
+
+        //method to show confirmation upon closing of main window, asking if end of operation or not, if yes asking if user wants to input additional information
         protected void FormCloseConfirmation(Object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (System.Windows.Forms.MessageBox.Show("Would you like to fill out additional information. Confirm?", "Close Application", System.Windows.Forms.MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.No)
+            if (System.Windows.Forms.MessageBox.Show("Would you like to end the operation. Confirm?", "Close Application", System.Windows.Forms.MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
             {
-                System.Windows.Forms.MessageBox.Show("The application has been closed successfully.", "Application Closed!", System.Windows.Forms.MessageBoxButtons.OK);
+                if (System.Windows.Forms.MessageBox.Show("Would you like to fill out additional information. Confirm?", "Close Application", System.Windows.Forms.MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.No)
+                {
+                    System.Windows.Forms.MessageBox.Show("The application has been closed successfully.", "Closing Application", System.Windows.Forms.MessageBoxButtons.OK);
+                }
+                else
+                {
+                    AdditionalStatisticInfo asi = new AdditionalStatisticInfo();
+                    asi.Show();
+                }
             }
             else
             {
