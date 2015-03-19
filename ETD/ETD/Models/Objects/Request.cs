@@ -12,9 +12,9 @@ namespace ETD.Models.Objects
 
     public class Request
     {
-		private static List<Request> requestList = new List<Request>();//Contains a list of requests
+		private static List<Request> requestList = new List<Request>();//Contains a list of shifts
 
-        //Variables used for a request
+        //Variables used for a shift
 		private String client;
 		private String request;
 		private String handledby;
