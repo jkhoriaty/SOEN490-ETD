@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace ETD.Services.Database.Queries
 {
-    class CreateCallQuery : DBQuery
+    class GetInterventionQuery : DBQuery
     {
-        public CreateCallQuery(int ID)
+        public GetInterventionQuery()
         {
-            sql = "INSERT INTO [Ambulance_Calls] (Call_ID, Intervention_ID) VALUES (null, '" + ID + "')";
+            sql = "SELECT * FROM [Interventions];";
         }
     }
 }

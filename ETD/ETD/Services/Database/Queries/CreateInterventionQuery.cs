@@ -8,9 +8,9 @@ namespace ETD.Services.Database.Queries
 {
     class CreateInterventionQuery : DBQuery
     {
-        public CreateInterventionQuery(int ID, string event_Name)
+        public CreateInterventionQuery(int operationID, int interventionNumber, DateTime timeOfCall)
         {
-            sql = "INSERT INTO [Interventions] (Intervention_ID, Event_ID, Start_Time) VALUES ('" + ID + "', '" + event_Name + "', CURRENT_TIME)";
+            sql = "INSERT INTO [Interventions] (Operation_ID, Intervention_Number, Time_Of_Call) VALUES (" + operationID + ", " + interventionNumber + ", '" + DateTimeSQLite(timeOfCall) + "')";
         }
     }
 }

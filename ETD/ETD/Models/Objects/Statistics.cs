@@ -81,8 +81,12 @@ namespace ETD.Models.Objects
 			{
 				total += team.getInterventionCount();
 			}
-			total = total / Team.getTeamList().Count;
-			interventionsPerTeam = total;
+			try
+			{
+				total = total / Team.getTeamList().Count;
+				interventionsPerTeam = total;
+			}
+			catch { }
 		}
 	}
 }

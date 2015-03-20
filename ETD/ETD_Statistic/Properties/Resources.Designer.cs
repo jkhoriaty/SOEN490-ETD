@@ -87,6 +87,15 @@ namespace ETD_Statistic.Properties {
         }
         
         /// <summary>
+        /// Looks up a localized string similar to 'Export to PDF'.
+        /// </summary>
+        public static string Button_ExportPDF {
+            get {
+                return ResourceManager.GetString(ResourceNames.Button_ExportPDF, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Looks up a localized string similar to 'Load Statistic'.
         /// </summary>
         public static string Button_LoadStatistic {
@@ -132,9 +141,68 @@ namespace ETD_Statistic.Properties {
         }
         
         /// <summary>
+        /// Looks up a localized string similar to 'Finance and Meals'.
+        /// </summary>
+        public static string TextBlock_Finance {
+            get {
+                return ResourceManager.GetString(ResourceNames.TextBlock_Finance, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Organization Followup'.
+        /// </summary>
+        public static string TextBlock_OrganizationFollowUp {
+            get {
+                return ResourceManager.GetString(ResourceNames.TextBlock_OrganizationFollowUp, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Particular Situation and Interventions'.
+        /// </summary>
+        public static string TextBlock_ParticularSituation {
+            get {
+                return ResourceManager.GetString(ResourceNames.TextBlock_ParticularSituation, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Supervisor/Responsible Invidual Followup'.
+        /// </summary>
+        public static string TextBlock_SupervisorFollowUp {
+            get {
+                return ResourceManager.GetString(ResourceNames.TextBlock_SupervisorFollowUp, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Material and Vehicles'.
+        /// </summary>
+        public static string TextBlock_Vehicle {
+            get {
+                return ResourceManager.GetString(ResourceNames.TextBlock_Vehicle, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Volunteer Followup'.
+        /// </summary>
+        public static string TextBlock_VolunteerFollowUp {
+            get {
+                return ResourceManager.GetString(ResourceNames.TextBlock_VolunteerFollowUp, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Lists all the resource names as constant string fields.
         /// </summary>
         public class ResourceNames {
+            
+            /// <summary>
+            /// Stores the resource name 'Button_ExportPDF'.
+            /// </summary>
+            public const string Button_ExportPDF = "Button_ExportPDF";
             
             /// <summary>
             /// Stores the resource name 'Button_LoadStatistic'.
@@ -160,6 +228,36 @@ namespace ETD_Statistic.Properties {
             /// Stores the resource name 'MessageBox_Notification_InvalidCredentials'.
             /// </summary>
             public const string MessageBox_Notification_InvalidCredentials = "MessageBox_Notification_InvalidCredentials";
+            
+            /// <summary>
+            /// Stores the resource name 'TextBlock_Finance'.
+            /// </summary>
+            public const string TextBlock_Finance = "TextBlock_Finance";
+            
+            /// <summary>
+            /// Stores the resource name 'TextBlock_OrganizationFollowUp'.
+            /// </summary>
+            public const string TextBlock_OrganizationFollowUp = "TextBlock_OrganizationFollowUp";
+            
+            /// <summary>
+            /// Stores the resource name 'TextBlock_ParticularSituation'.
+            /// </summary>
+            public const string TextBlock_ParticularSituation = "TextBlock_ParticularSituation";
+            
+            /// <summary>
+            /// Stores the resource name 'TextBlock_SupervisorFollowUp'.
+            /// </summary>
+            public const string TextBlock_SupervisorFollowUp = "TextBlock_SupervisorFollowUp";
+            
+            /// <summary>
+            /// Stores the resource name 'TextBlock_Vehicle'.
+            /// </summary>
+            public const string TextBlock_Vehicle = "TextBlock_Vehicle";
+            
+            /// <summary>
+            /// Stores the resource name 'TextBlock_VolunteerFollowUp'.
+            /// </summary>
+            public const string TextBlock_VolunteerFollowUp = "TextBlock_VolunteerFollowUp";
         }
     }
 }
