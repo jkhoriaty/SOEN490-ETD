@@ -52,7 +52,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.TimersInterv
 			CreateResourcesTimers();
 
 			DispatcherTimer dispatcherTimer = new DispatcherTimer();
-			dispatcherTimer.Tick += new EventHandler(refresh);
+			dispatcherTimer.Tick += new EventHandler(Refresh);
 			dispatcherTimer.Interval = new TimeSpan(0, 0, 1); //Update every second
 			dispatcherTimer.Start();
 		}
