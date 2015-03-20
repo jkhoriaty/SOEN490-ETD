@@ -211,7 +211,7 @@ namespace ETD.Services
                     System.IO.MemoryStream ms = new System.IO.MemoryStream();
                     pngEncoder.Save(ms);
                     ms.Close();
-                    System.IO.File.WriteAllBytes(desktopFolder + AIFileName + ".png", ms.ToArray());//Save the modified map as an image 
+                    System.IO.File.WriteAllBytes(desktopFolder + "\\" + AIFileName + ".png", ms.ToArray());//Save the modified map as an image 
                 }
                 catch (Exception err)
                 {
