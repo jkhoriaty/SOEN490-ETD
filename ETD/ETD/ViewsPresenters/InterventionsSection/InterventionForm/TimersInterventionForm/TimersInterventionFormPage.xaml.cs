@@ -58,7 +58,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.TimersInterv
 		}
 
 		//Method runs every second
-		public void refresh(object sender, EventArgs e)
+		public void Refresh(object sender, EventArgs e)
 		{
 			TimeSpan elapsed;
 			bool ongoing = true;
