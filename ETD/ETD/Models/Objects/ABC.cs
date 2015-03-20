@@ -117,36 +117,43 @@ namespace ETD.Models.Objects
         public void setConsciousness(String consciousness)
         {
             this.consciousness = consciousness;
+            StaticDBConnection.NonQueryDatabase("UPDATE [ABC] SET Consciousness='" + consciousness + "' WHERE Intervention_ID=" + abcID + ";");
         }
 
         public void setDisoriented(bool disoriented)
         {
             this.disoriented = disoriented;
+            StaticDBConnection.NonQueryDatabase("UPDATE [ABC] SET Disoriented=" + disoriented + " WHERE Intervention_ID=" + abcID + ";");
         }
 
         public void setAirways(String airways)
         {
             this.airways = airways;
+            StaticDBConnection.NonQueryDatabase("UPDATE [ABC] SET Airways='" + airways + "' WHERE Intervention_ID=" + abcID + ";");
         }
 
         public void setBreathing(String breathing)
         {
             this.breathing = breathing;
+            StaticDBConnection.NonQueryDatabase("UPDATE [ABC] SET Breathing='" + breathing + "' WHERE Intervention_ID=" + abcID + ";");
         }
 
         public void setBreathingFrequency(int breathingFrequency)
         {
             this.breathingFrequency = breathingFrequency;
+            StaticDBConnection.NonQueryDatabase("UPDATE [ABC] SET Breathing_Frequency=" + breathingFrequency + " WHERE Intervention_ID=" + abcID + ";");
         }
 
         public void setCirculation(String circulation)
         {
             this.circulation = circulation;
+            StaticDBConnection.NonQueryDatabase("UPDATE [ABC] SET Circulation='" + circulation + "' WHERE Intervention_ID=" + abcID + ";");
         }
     
         public void setCirculationFrequency(int circulationFrequency)
         {
             this.circulationFrequency = circulationFrequency;
+            StaticDBConnection.NonQueryDatabase("UPDATE [ABC] SET Circulation_Frequency=" + circulationFrequency + " WHERE Intervention_ID=" + abcID + ";");
         }
     }
 }

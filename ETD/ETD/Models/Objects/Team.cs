@@ -135,6 +135,7 @@ namespace ETD.Models.Objects
         public void setName(String name)
         {
             this.name = name;
+            StaticDBConnection.NonQueryDatabase("UPDATE [Resources] SET Name='" + name + "', HasArrived='TRUE' WHERE Team_ID=" + teamID + ";");
 			InstanceModifiedNotification();
         }
 
@@ -143,6 +144,7 @@ namespace ETD.Models.Objects
         {
 			this.status = (Statuses)Enum.Parse(typeof(Statuses), s);
 			InstanceModifiedNotification();
+            
         }
 
 		//Accessors

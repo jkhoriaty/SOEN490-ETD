@@ -60,6 +60,7 @@ namespace ETD.Models.Objects
 		public void setResourceName(string resourceName)
 		{
 			this.resourceName = resourceName;
+            StaticDBConnection.NonQueryDatabase("UPDATE [Resources] SET Name='" + resourceName + "'WHERE Resource_ID=" + resourceID + ";");
 		}
 
         public Team getTeam()
@@ -75,12 +76,14 @@ namespace ETD.Models.Objects
 		public void setIntervening(bool intervening)
 		{
 			this.intervening = intervening;
+            StaticDBConnection.NonQueryDatabase("UPDATE [Resources] SET Intervening='" + intervening + "' WHERE Resource_ID=" + resourceID + ";");
 		}
 
 		public void setMoving(DateTime moving)
 		{
 			this.moving = moving;
 			this.movingBool = true;
+            StaticDBConnection.NonQueryDatabase("UPDATE [Resources] SET Moving='" + StaticDBConnection.DateTimeSQLite(moving) + "', HasArrived='TRUE' WHERE Resource_ID=" + resourceID + ";");
 		}
 
 		public bool isMoving()
@@ -97,6 +100,7 @@ namespace ETD.Models.Objects
         {
             this.arrival = arrival;
 			this.arrivedBool = true;
+            StaticDBConnection.NonQueryDatabase("UPDATE [Resources] SET Arrival='" + StaticDBConnection.DateTimeSQLite(arrival) + "', HasArrived='TRUE' WHERE Resource_ID=" + resourceID + ";");
         }
 
 		public bool hasArrived()
