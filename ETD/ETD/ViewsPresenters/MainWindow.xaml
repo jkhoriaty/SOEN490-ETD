@@ -44,6 +44,7 @@
                     <ComboBoxItem x:Uid="ComboBoxItem_Stairs" Content="{Binding Path=ComboBoxItem_Stairs, Source={StaticResource Resources}}" Name="stairs" Selected="CreateMapModificationPin"/>
                     <ComboBoxItem x:Uid="ComboBoxItem_Camp" Content="{Binding Path=ComboBoxItem_Camp, Source={StaticResource Resources}}" Name="camp" Selected="CreateMapModificationPin"/>
                     <ComboBoxItem x:Uid="ComboBoxItem_Line" Content="{Binding Path=ComboBoxItem_Line, Source={StaticResource Resources}}" Name="line" Selected="CreateMapModificationPin"/>
+                    <ComboBoxItem Content="Ramp" Name="ramp" Selected="CreateMapModificationPin"/>
 				</ComboBox>
 				<ComboBox Name="modeCB" SelectionChanged="ModeChange" Width="140">
                     <ComboBoxItem x:Uid="ComboBoxItem_RegularMode" Content="{Binding Path=ComboBoxItem_RegularMode, Source={StaticResource Resources}}"/>
