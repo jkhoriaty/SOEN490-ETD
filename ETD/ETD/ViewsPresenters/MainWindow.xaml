@@ -4,6 +4,7 @@
         xmlns:properties="clr-namespace:ETD.Properties"
         Title="Emergency Team Dispatcher"
 		WindowStartupLocation="CenterScreen"
+        Closing="FormCloseConfirmation"
 		WindowState="Maximized"
 		SizeChanged="setSectionsHeight"
 		StateChanged="setSectionsHeight"

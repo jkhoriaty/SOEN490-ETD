@@ -1311,6 +1311,15 @@ namespace ETD.Properties {
         }
         
         /// <summary>
+        /// Looks up a localized string similar to 'Finance and Meals'.
+        /// </summary>
+        public static string TextBlock_Finance {
+            get {
+                return ResourceManager.GetString(ResourceNames.TextBlock_Finance, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Looks up a localized string similar to 'Follow Up'.
         /// </summary>
         public static string TextBlock_FollowUp {
@@ -1365,6 +1374,24 @@ namespace ETD.Properties {
         }
         
         /// <summary>
+        /// Looks up a localized string similar to 'Organization Followup'.
+        /// </summary>
+        public static string TextBlock_OrganizationFollowUp {
+            get {
+                return ResourceManager.GetString(ResourceNames.TextBlock_OrganizationFollowUp, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Particular Situation and Interventions'.
+        /// </summary>
+        public static string TextBlock_ParticularSituation {
+            get {
+                return ResourceManager.GetString(ResourceNames.TextBlock_ParticularSituation, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Looks up a localized string similar to 'Recipient'.
         /// </summary>
         public static string TextBlock_Recipient {
@@ -1392,6 +1419,15 @@ namespace ETD.Properties {
         }
         
         /// <summary>
+        /// Looks up a localized string similar to 'Supervisor/Responsible Invidual Followup'.
+        /// </summary>
+        public static string TextBlock_SupervisorFollowUp {
+            get {
+                return ResourceManager.GetString(ResourceNames.TextBlock_SupervisorFollowUp, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Looks up a localized string similar to 'Team'.
         /// </summary>
         public static string TextBlock_Team {
@@ -1415,6 +1451,24 @@ namespace ETD.Properties {
         public static string TextBlock_Vehicle {
             get {
                 return ResourceManager.GetString(ResourceNames.TextBlock_Vehicle, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Material and Vehicles'.
+        /// </summary>
+        public static string TextBlock_VehicleFollowUp {
+            get {
+                return ResourceManager.GetString(ResourceNames.TextBlock_VehicleFollowUp, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Volunteer Followup'.
+        /// </summary>
+        public static string TextBlock_VolunteerFollowUp {
+            get {
+                return ResourceManager.GetString(ResourceNames.TextBlock_VolunteerFollowUp, _resourceCulture);
             }
         }
         
@@ -2167,6 +2221,11 @@ namespace ETD.Properties {
             public const string TextBlock_Deadlines = "TextBlock_Deadlines";
             
             /// <summary>
+            /// Stores the resource name 'TextBlock_Finance'.
+            /// </summary>
+            public const string TextBlock_Finance = "TextBlock_Finance";
+            
+            /// <summary>
             /// Stores the resource name 'TextBlock_FollowUp'.
             /// </summary>
             public const string TextBlock_FollowUp = "TextBlock_FollowUp";
@@ -2197,6 +2256,16 @@ namespace ETD.Properties {
             public const string TextBlock_MovingDeadline = "TextBlock_MovingDeadline";
             
             /// <summary>
+            /// Stores the resource name 'TextBlock_OrganizationFollowUp'.
+            /// </summary>
+            public const string TextBlock_OrganizationFollowUp = "TextBlock_OrganizationFollowUp";
+            
+            /// <summary>
+            /// Stores the resource name 'TextBlock_ParticularSituation'.
+            /// </summary>
+            public const string TextBlock_ParticularSituation = "TextBlock_ParticularSituation";
+            
+            /// <summary>
             /// Stores the resource name 'TextBlock_Recipient'.
             /// </summary>
             public const string TextBlock_Recipient = "TextBlock_Recipient";
@@ -2212,6 +2281,11 @@ namespace ETD.Properties {
             public const string TextBlock_Resources = "TextBlock_Resources";
             
             /// <summary>
+            /// Stores the resource name 'TextBlock_SupervisorFollowUp'.
+            /// </summary>
+            public const string TextBlock_SupervisorFollowUp = "TextBlock_SupervisorFollowUp";
+            
+            /// <summary>
             /// Stores the resource name 'TextBlock_Team'.
             /// </summary>
             public const string TextBlock_Team = "TextBlock_Team";
@@ -2225,6 +2299,16 @@ namespace ETD.Properties {
             /// Stores the resource name 'TextBlock_Vehicle'.
             /// </summary>
             public const string TextBlock_Vehicle = "TextBlock_Vehicle";
+            
+            /// <summary>
+            /// Stores the resource name 'TextBlock_VehicleFollowUp'.
+            /// </summary>
+            public const string TextBlock_VehicleFollowUp = "TextBlock_VehicleFollowUp";
+            
+            /// <summary>
+            /// Stores the resource name 'TextBlock_VolunteerFollowUp'.
+            /// </summary>
+            public const string TextBlock_VolunteerFollowUp = "TextBlock_VolunteerFollowUp";
             
             /// <summary>
             /// Stores the resource name 'TextBox_AdditionalInformation_Conclusion'.

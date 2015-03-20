@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ETD.Services.Database;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,10 @@ namespace ETD.Models.Objects
 
     public class TeamMember
     {
+        //Database reflection variables
+        private int volunteerID;
+        private int operationID;
+
         //Variables used for a team member
         public String name;
         public Trainings trainingLevel;
@@ -27,9 +32,24 @@ namespace ETD.Models.Objects
             this.name = name;
             this.trainingLevel = training;
             this.departure = departure;
+            if (Operation.currentOperation != null)
+            {
+                this.operationID = Operation.currentOperation.getID();
+            }
+            this.volunteerID = StaticDBConnection.NonQueryDatabaseWithID("INSERT INTO [Volunteers] (Name, Training_Level) VALUES ('" + name + "', " + 1+(int)training + ")");
         }
 
         //Accessors
+
+        public int getID()
+        {
+            return volunteerID;
+        }
+
+        public int getParentID()
+        {
+            return operationID;
+        }
 
         //Returns team member departure time
         public DateTime getDeparture()

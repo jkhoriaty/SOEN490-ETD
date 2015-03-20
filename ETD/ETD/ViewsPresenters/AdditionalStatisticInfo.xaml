@@ -1,0 +1,80 @@
+﻿<Window x:Class="ETD.ViewsPresenters.AdditionalStatisticInfo"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Closed="SavingInformation"
+        Title="Additional Statistic Information" Height="550" Width="700">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="300*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="75"/>
+            <RowDefinition Height="75"/>
+            <RowDefinition Height="75"/>
+            <RowDefinition Height="75"/>
+            <RowDefinition Height="75"/>
+            <RowDefinition Height="75"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Column="0" Grid.Row="0">
+            <Border BorderThickness="1,1,1,1" BorderBrush="Black">
+                <TextBlock FontSize="15" TextWrapping="Wrap" x:Uid="TextBlock_VolunteerFollowUp" Text="{Binding Path=TextBlock_VolunteerFollowUp, Source={StaticResource Resources}}" FontWeight="Bold" VerticalAlignment="Center"/>
+            </Border>
+        </Grid>
+        <Border Grid.Column="1" Grid.Row="0" BorderThickness="0,1,1,1" BorderBrush="Black">
+            <ScrollViewer>
+                <TextBox Name="VolunteerFollowUp" TextWrapping="Wrap"></TextBox>
+            </ScrollViewer>
+        </Border>
+        <Grid Grid.Column="0" Grid.Row="1">
+            <Border BorderThickness="1,0,1,1" BorderBrush="Black">
+                <TextBlock FontSize="15" TextWrapping="Wrap" x:Uid="TextBlock_Finance" Text="{Binding Path=TextBlock_Finance, Source={StaticResource Resources}}" FontWeight="Bold" VerticalAlignment="Center"/>
+            </Border>
+        </Grid>
+        <Border Grid.Column="1" Grid.Row="1" BorderThickness="0,0,1,1" BorderBrush="Black">
+            <ScrollViewer>
+                <TextBox Name="Finance" TextWrapping="Wrap"></TextBox>
+            </ScrollViewer>
+        </Border>
+        <Grid Grid.Column="0" Grid.Row="2" >
+            <Border BorderThickness="1,0,1,1" BorderBrush="Black">
+                <TextBlock FontSize="15" TextWrapping="Wrap" x:Uid="TextBlock_VehicleFollowUp" Text="{Binding Path=TextBlock_VehicleFollowUp, Source={StaticResource Resources}}" FontWeight="Bold" VerticalAlignment="Center"/>
+            </Border>
+        </Grid>
+        <Border Grid.Column="1" Grid.Row="2" BorderThickness="0,0,1,1" BorderBrush="Black">
+            <ScrollViewer>
+                <TextBox Name="Vehicle" TextWrapping="Wrap"></TextBox>
+            </ScrollViewer>
+        </Border>
+        <Grid Grid.Column="0" Grid.Row="3">
+            <Border BorderThickness="1,0,1,1" BorderBrush="Black">
+                <TextBlock FontSize="15" TextWrapping="Wrap" x:Uid="TextBlock_ParticularSituation" Text="{Binding Path=TextBlock_ParticularSituation, Source={StaticResource Resources}}" FontWeight="Bold" VerticalAlignment="Center"/>
+            </Border>
+        </Grid>
+        <Border Grid.Column="1" Grid.Row="3" BorderThickness="0,0,1,1" BorderBrush="Black">
+            <ScrollViewer>
+                <TextBox Name="ParticularSituation" TextWrapping="Wrap"></TextBox>
+            </ScrollViewer>
+        </Border>
+        <Grid Grid.Column="0" Grid.Row="4">
+            <Border BorderThickness="1,0,1,1" BorderBrush="Black">
+                <TextBlock FontSize="15" TextWrapping="Wrap" x:Uid="TextBlock_OrganizationFollowUp" Text="{Binding Path=TextBlock_OrganizationFollowUp, Source={StaticResource Resources}}" FontWeight="Bold" VerticalAlignment="Center"/>
+            </Border>
+        </Grid>
+        <Border Grid.Column="1" Grid.Row="4" BorderThickness="0,0,1,1" BorderBrush="Black">
+            <ScrollViewer>
+                <TextBox Name="OrganizationFollowUp" TextWrapping="Wrap"></TextBox>
+            </ScrollViewer>
+        </Border>
+        <Grid Grid.Column="0" Grid.Row="5">
+            <Border BorderThickness="1,0,1,1" BorderBrush="Black">
+                <TextBlock FontSize="15" TextWrapping="Wrap" x:Uid="TextBlock_SupervisorFollowUp" Text="{Binding Path=TextBlock_SupervisorFollowUp, Source={StaticResource Resources}}" FontWeight="Bold" VerticalAlignment="Center"/>
+            </Border>
+        </Grid>
+        <Border Grid.Column="1" Grid.Row="5" BorderThickness="0,0,1,1" BorderBrush="Black">
+            <ScrollViewer>
+                <TextBox Name="SupervisorFollowUp" TextWrapping="Wrap"></TextBox>
+            </ScrollViewer>
+        </Border>
+    </Grid>
+</Window>
