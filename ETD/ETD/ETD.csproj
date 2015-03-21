@@ -168,7 +168,7 @@
     </Compile>
     <None Include="packages.config" />
     <None Include="Resources\EDT.sqlite3">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -416,7 +416,9 @@
     <Content Include="Icons\statExport.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\db.sql" />
+    <Content Include="Resources\db.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <!--
     Icons

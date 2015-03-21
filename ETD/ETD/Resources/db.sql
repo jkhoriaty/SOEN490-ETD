@@ -9,8 +9,10 @@ Target Server Type    : SQLite
 Target Server Version : 30808
 File Encoding         : 65001
 
-Date: 2015-03-18 00:38:04
+Date: 2015-03-20 23:07:37
 */
+
+PRAGMA foreign_keys = OFF;
 
 -- ----------------------------
 -- Table structure for ABCs
@@ -19,7 +21,7 @@ DROP TABLE IF EXISTS "main"."ABCs";
 CREATE TABLE "ABCs" (
 "ABC_ID"  INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
 "Intervention_ID"  INTEGER NOT NULL,
-"Consciousess"  TEXT,
+"Consciousness"  TEXT,
 "Disoriented"  BOOLEAN,
 "Airways"  TEXT,
 "Breathing"  TEXT,
@@ -55,33 +57,17 @@ CONSTRAINT "fkey0" FOREIGN KEY ("Intervention_ID") REFERENCES "Interventions" ("
 -- ----------------------------
 DROP TABLE IF EXISTS "main"."Assigned_Equipment";
 CREATE TABLE "Assigned_Equipment" (
-"Available_ID"  INTEGER NOT NULL,
+"Equipment_ID"  INTEGER NOT NULL,
 "Team_ID"  INTEGER NOT NULL,
 "Assigned_Time"  DATETIME,
 "Removed_Time"  DATETIME,
-PRIMARY KEY ("Available_ID" ASC, "Team_ID" ASC),
-CONSTRAINT "fkey0" FOREIGN KEY ("Available_ID") REFERENCES "Available_Equipments" ("Available_ID") ON DELETE CASCADE ON UPDATE CASCADE,
+PRIMARY KEY ("Equipment_ID", "Team_ID" ASC),
+CONSTRAINT "fkey0" FOREIGN KEY ("Equipment_ID") REFERENCES "Equipments" ("Equipments_ID") ON DELETE CASCADE ON UPDATE CASCADE,
 CONSTRAINT "fkey1" FOREIGN KEY ("Team_ID") REFERENCES "Teams" ("Team_ID") ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- ----------------------------
 -- Records of Assigned_Equipment
--- ----------------------------
-
--- ----------------------------
--- Table structure for Available_Equipments
--- ----------------------------
-DROP TABLE IF EXISTS "main"."Available_Equipments";
-CREATE TABLE "Available_Equipments" (
-"Available_ID"  INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-"Operation_ID"  INTEGER NOT NULL,
-"Type_ID"  INTEGER NOT NULL,
-FOREIGN KEY ("Operation_ID") REFERENCES "Operations" ("Operation_ID") ON DELETE CASCADE ON UPDATE CASCADE,
-FOREIGN KEY ("Type_ID") REFERENCES "Equipments" ("Equipment_ID") ON DELETE CASCADE ON UPDATE CASCADE
-);
-
--- ----------------------------
--- Records of Available_Equipments
 -- ----------------------------
 
 -- ----------------------------
@@ -112,18 +98,34 @@ INSERT INTO "main"."Ending_Codes" VALUES (9, 'Other');
 DROP TABLE IF EXISTS "main"."Equipments";
 CREATE TABLE "Equipments" (
 "Equipment_ID"  INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-"Description"  TEXT NOT NULL
+"Operation_ID"  INTEGER NOT NULL,
+"Type_ID"  INTEGER NOT NULL,
+CONSTRAINT "fkey0" FOREIGN KEY ("Operation_ID") REFERENCES "Operations" ("Operation_ID") ON DELETE CASCADE ON UPDATE CASCADE,
+CONSTRAINT "fkey1" FOREIGN KEY ("Type_ID") REFERENCES "Equipment_Types" ("Equipment_ID") ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- ----------------------------
 -- Records of Equipments
 -- ----------------------------
-INSERT INTO "main"."Equipments" VALUES (1, 'Ambulance Cart');
-INSERT INTO "main"."Equipments" VALUES (2, 'Sitting Cart');
-INSERT INTO "main"."Equipments" VALUES (3, 'Epipen');
-INSERT INTO "main"."Equipments" VALUES (4, 'Transport Stretcher');
-INSERT INTO "main"."Equipments" VALUES (5, 'Mounted Stretcher');
-INSERT INTO "main"."Equipments" VALUES (6, 'Wheelchair');
+
+-- ----------------------------
+-- Table structure for Equipment_Types
+-- ----------------------------
+DROP TABLE IF EXISTS "main"."Equipment_Types";
+CREATE TABLE "Equipment_Types" (
+"Equipment_ID"  INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+"Description"  TEXT NOT NULL
+);
+
+-- ----------------------------
+-- Records of Equipment_Types
+-- ----------------------------
+INSERT INTO "main"."Equipment_Types" VALUES (1, 'Ambulance Cart');
+INSERT INTO "main"."Equipment_Types" VALUES (2, 'Sitting Cart');
+INSERT INTO "main"."Equipment_Types" VALUES (3, 'Epipen');
+INSERT INTO "main"."Equipment_Types" VALUES (4, 'Transport Stretcher');
+INSERT INTO "main"."Equipment_Types" VALUES (5, 'Mounted Stretcher');
+INSERT INTO "main"."Equipment_Types" VALUES (6, 'Wheelchair');
 
 -- ----------------------------
 -- Table structure for Interventions
@@ -200,12 +202,19 @@ CREATE TABLE "Operations" (
 "Acronym"  VARCHAR(3) NOT NULL,
 "Shift_Start"  DATETIME NOT NULL,
 "Shift_End"  DATETIME NOT NULL,
-"Dispatcher"  TEXT NOT NULL
+"Dispatcher"  TEXT NOT NULL,
+"VolunteerFollowUp"  TEXT,
+"Finance"  TEXT,
+"Vehicle"  TEXT,
+"ParticularSituation"  TEXT,
+"OrganizationFollowUp"  TEXT,
+"SupervisorFollowUp"  TEXT
 );
 
 -- ----------------------------
 -- Records of Operations
 -- ----------------------------
+INSERT INTO "main"."Operations" VALUES (0, 'Test Operation', 'TO', '2015-03-19 00:00:00', '2015-03-20 00:00:00', 'Tester', null, null, null, null, null, null);
 
 -- ----------------------------
 -- Table structure for Resources
@@ -238,16 +247,17 @@ CREATE TABLE sqlite_sequence(name,seq);
 -- ----------------------------
 -- Records of sqlite_sequence
 -- ----------------------------
-INSERT INTO "main"."sqlite_sequence" VALUES ('Equipments', 6);
+INSERT INTO "main"."sqlite_sequence" VALUES ('Equipment_Types', 6);
 INSERT INTO "main"."sqlite_sequence" VALUES ('Statuses', 4);
 INSERT INTO "main"."sqlite_sequence" VALUES ('Trainings', 3);
 INSERT INTO "main"."sqlite_sequence" VALUES ('Ending_Codes', 9);
 INSERT INTO "main"."sqlite_sequence" VALUES ('Intervention_Types', 25);
 INSERT INTO "main"."sqlite_sequence" VALUES ('Volunteers', 2);
-INSERT INTO "main"."sqlite_sequence" VALUES ('ABCs', 0);
 INSERT INTO "main"."sqlite_sequence" VALUES ('Interventions', 0);
-INSERT INTO "main"."sqlite_sequence" VALUES ('Operations', 0);
 INSERT INTO "main"."sqlite_sequence" VALUES ('Resources', 0);
+INSERT INTO "main"."sqlite_sequence" VALUES ('Equipments', 0);
+INSERT INTO "main"."sqlite_sequence" VALUES ('Operations', 0);
+INSERT INTO "main"."sqlite_sequence" VALUES ('ABCs', 0);
 
 -- ----------------------------
 -- Table structure for Statuses
@@ -332,5 +342,3 @@ FOREIGN KEY ("Training_Level") REFERENCES "Trainings" ("Training_ID") ON DELETE 
 -- ----------------------------
 -- Records of Volunteers
 -- ----------------------------
-
-PRAGMA foreign_keys = ON;

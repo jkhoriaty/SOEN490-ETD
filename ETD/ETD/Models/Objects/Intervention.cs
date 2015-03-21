@@ -181,7 +181,7 @@ namespace ETD.Models.Objects
 		public void setCallerName(String callerName)
 		{
 			this.callerName = callerName;
-            StaticDBConnection.NonQueryDatabase("UPDATE [Intervention] SET Caller='" + callerName + "' WHERE Intervention_ID=" + interventionID + ";");
+            StaticDBConnection.NonQueryDatabase("UPDATE [Interventions] SET Caller='" + callerName + "' WHERE Intervention_ID=" + interventionID + ";");
 		}
 
 		public String getCallerName()
@@ -192,7 +192,7 @@ namespace ETD.Models.Objects
 		public void setLocation(String location)
 		{
 			this.location = location;
-            StaticDBConnection.NonQueryDatabase("UPDATE [Intervention] SET Location='" + location + "' WHERE Intervention_ID=" + interventionID + ";");
+            StaticDBConnection.NonQueryDatabase("UPDATE [Interventions] SET Location='" + location + "' WHERE Intervention_ID=" + interventionID + ";");
 		}
 
 		public String getLocation()
@@ -213,7 +213,7 @@ namespace ETD.Models.Objects
         public void setCode(int code)
         {
             this.code = code;
-            StaticDBConnection.NonQueryDatabase("UPDATE [Intervention] SET Code=" + code + " WHERE Intervention_ID=" + interventionID + ";");
+            StaticDBConnection.NonQueryDatabase("UPDATE [Interventions] SET Code=" + code + " WHERE Intervention_ID=" + interventionID + ";");
 			InstanceModifiedNotification();
         }
         public int getCode()
@@ -224,7 +224,7 @@ namespace ETD.Models.Objects
         public void setGender(String gender)
         {
             this.gender = gender;
-            StaticDBConnection.NonQueryDatabase("UPDATE [Intervention] SET Gender='" + gender + "' WHERE Intervention_ID=" + interventionID + ";");
+            StaticDBConnection.NonQueryDatabase("UPDATE [Interventions] SET Gender='" + gender + "' WHERE Intervention_ID=" + interventionID + ";");
         }
         public String getGender()
         {
@@ -234,7 +234,10 @@ namespace ETD.Models.Objects
         public void setAge(String age) 
         {
             this.age = age;
-            StaticDBConnection.NonQueryDatabase("UPDATE [Intervention] SET Age=" + int.Parse(age) + " WHERE Intervention_ID=" + interventionID + ";");
+            if (age.Length > 0)
+            {
+                StaticDBConnection.NonQueryDatabase("UPDATE [Interventions] SET Age=" + int.Parse(age) + " WHERE Intervention_ID=" + interventionID + ";");
+            }
         }
         public String getAge()
         {
@@ -244,7 +247,7 @@ namespace ETD.Models.Objects
 		public void setChiefComplaint(String chiefComplaint)
 		{
 			this.chiefComplaint = chiefComplaint;
-            StaticDBConnection.NonQueryDatabase("UPDATE [Intervention] SET Chief_Complaint='" + chiefComplaint + "' WHERE Intervention_ID=" + interventionID + ";");
+            StaticDBConnection.NonQueryDatabase("UPDATE [Interventions] SET Chief_Complaint='" + chiefComplaint + "' WHERE Intervention_ID=" + interventionID + ";");
 			InstanceModifiedNotification();
 		}
 
@@ -256,7 +259,7 @@ namespace ETD.Models.Objects
 		public void setOtherChiefComplaint(String otherChiefComplaint)
 		{
 			this.otherChiefComplaint = otherChiefComplaint;
-            StaticDBConnection.NonQueryDatabase("UPDATE [Intervention] SET Other_Chief_Complaint='" + otherChiefComplaint + "' WHERE Intervention_ID=" + interventionID + ";");
+            StaticDBConnection.NonQueryDatabase("UPDATE [Interventions] SET Other_Chief_Complaint='" + otherChiefComplaint + "' WHERE Intervention_ID=" + interventionID + ";");
 		}
 
 		public String getOtherChiefComplaint()
