@@ -1,4 +1,5 @@
 ﻿using ETD.Models.ArchitecturalObjects;
+using ETD.Services.Database;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,11 @@ namespace ETD.Models.Objects
     {
 		public static List<Observer> observerList = new List<Observer>();
 
-		private static int lastIntervention = 0;
+        //Database reflection variables
+        private int interventionID;
+        private int operationID;
+
+        private static int lastIntervention = 0;
 		private static List<Intervention> activeInterventionList = new List<Intervention>();
 		private static List<Intervention> completedInterventionList = new List<Intervention>();
 
@@ -43,6 +48,7 @@ namespace ETD.Models.Objects
         private String conclusionAdditionalInfo;
         private DateTime conclusionTime;
 		private bool isConcludedBool;
+		private DateTime firstTeamArrivalTime;
 
         private DateTime call911Time;
         private String meetingPoint;
@@ -59,11 +65,18 @@ namespace ETD.Models.Objects
             this.interventionNumber = ++lastIntervention;
             this.timeOfCall = DateTime.Now;
             this.additionalInfo = new InterventionAdditionalInfo[10];
-            this.abc = new ABC();
+            this.abc = new ABC(this);
 			this.isConcludedBool = false;
+			this.firstTeamArrivalTime = DateTime.MinValue;
 
             activeInterventionList.Add(this);
             ClassModifiedNotification(typeof(Intervention));
+            
+            if (Operation.currentOperation != null)
+            {
+                this.operationID = Operation.currentOperation.getID();
+            }
+            this.interventionID = StaticDBConnection.NonQueryDatabaseWithID("INSERT INTO [Interventions] (Operation_ID, Intervention_Number, Time_Of_Call) VALUES (" + operationID + ", " + interventionNumber + ", '" + StaticDBConnection.DateTimeSQLite(timeOfCall) + "')");
         }
 
 		//Set intervention as completed
@@ -92,7 +105,13 @@ namespace ETD.Models.Objects
 
 		public void AddInterveningTeam(Team team)
 		{
-			resourceList.Add(new Resource(team));
+			if(firstTeamArrivalTime == DateTime.MinValue)
+			{
+				firstTeamArrivalTime = DateTime.Now;
+			}
+			team.incrementInterventionCount();
+			resourceList.Add(new Resource(this,team));
+
 			InstanceModifiedNotification();
 		}
 
@@ -142,6 +161,11 @@ namespace ETD.Models.Objects
 		{
 			return interventionNumber;
 		}
+		
+		public DateTime getFirstTeamArrivalTime()
+		{
+			return this.firstTeamArrivalTime;
+		}
 
 		public void setTimeOfCall(DateTime timeOfCall)
 		{
@@ -157,6 +181,7 @@ namespace ETD.Models.Objects
 		public void setCallerName(String callerName)
 		{
 			this.callerName = callerName;
+            StaticDBConnection.NonQueryDatabase("UPDATE [Interventions] SET Caller='" + callerName + "' WHERE Intervention_ID=" + interventionID + ";");
 		}
 
 		public String getCallerName()
@@ -167,6 +192,7 @@ namespace ETD.Models.Objects
 		public void setLocation(String location)
 		{
 			this.location = location;
+            StaticDBConnection.NonQueryDatabase("UPDATE [Interventions] SET Location='" + location + "' WHERE Intervention_ID=" + interventionID + ";");
 		}
 
 		public String getLocation()
@@ -187,6 +213,7 @@ namespace ETD.Models.Objects
         public void setCode(int code)
         {
             this.code = code;
+            StaticDBConnection.NonQueryDatabase("UPDATE [Interventions] SET Code=" + code + " WHERE Intervention_ID=" + interventionID + ";");
 			InstanceModifiedNotification();
         }
         public int getCode()
@@ -197,6 +224,7 @@ namespace ETD.Models.Objects
         public void setGender(String gender)
         {
             this.gender = gender;
+            StaticDBConnection.NonQueryDatabase("UPDATE [Interventions] SET Gender='" + gender + "' WHERE Intervention_ID=" + interventionID + ";");
         }
         public String getGender()
         {
@@ -206,6 +234,10 @@ namespace ETD.Models.Objects
         public void setAge(String age) 
         {
             this.age = age;
+            if (age.Length > 0)
+            {
+                StaticDBConnection.NonQueryDatabase("UPDATE [Interventions] SET Age=" + int.Parse(age) + " WHERE Intervention_ID=" + interventionID + ";");
+            }
         }
         public String getAge()
         {
@@ -215,6 +247,7 @@ namespace ETD.Models.Objects
 		public void setChiefComplaint(String chiefComplaint)
 		{
 			this.chiefComplaint = chiefComplaint;
+            StaticDBConnection.NonQueryDatabase("UPDATE [Interventions] SET Chief_Complaint='" + chiefComplaint + "' WHERE Intervention_ID=" + interventionID + ";");
 			InstanceModifiedNotification();
 		}
 
@@ -226,6 +259,7 @@ namespace ETD.Models.Objects
 		public void setOtherChiefComplaint(String otherChiefComplaint)
 		{
 			this.otherChiefComplaint = otherChiefComplaint;
+            StaticDBConnection.NonQueryDatabase("UPDATE [Interventions] SET Other_Chief_Complaint='" + otherChiefComplaint + "' WHERE Intervention_ID=" + interventionID + ";");
 		}
 
 		public String getOtherChiefComplaint()
@@ -246,6 +280,7 @@ namespace ETD.Models.Objects
 		public void setABC(ABC abc)
 		{
 			this.abc = abc;
+            StaticDBConnection.NonQueryDatabase("UPDATE [ABCs] SET Intervention_ID=" + interventionID + " WHERE ABC_ID=" + abc.getID() + ";");
 		}
 
 		public ABC getABC()
@@ -256,6 +291,7 @@ namespace ETD.Models.Objects
         public void setAdditionalInfo(int position, InterventionAdditionalInfo info)
         {
             this.additionalInfo[position] = info;
+            StaticDBConnection.NonQueryDatabase("UPDATE [AdditionalInformations] SET Intervention_ID=" + interventionID + " WHERE Additional_Info_ID=" + info.getID() + ";");
         }
 
 		public InterventionAdditionalInfo getAdditionalInfo(int position)
@@ -396,5 +432,15 @@ namespace ETD.Models.Objects
 		{
 			InstanceModifiedNotification();
 		}
+
+        public int getID()
+        {
+            return interventionID;
+        }
+
+        public int getParentID()
+        {
+            return operationID;
+        }
     }
 }

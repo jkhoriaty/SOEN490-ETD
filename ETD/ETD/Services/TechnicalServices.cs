@@ -72,12 +72,12 @@ namespace ETD.Services
         //Sets the image path for each map modification 
         private static Dictionary<MapMods, String> MapModPath = new Dictionary<MapMods, String>
         {
-            {MapMods.camp, @"\Icons\camp.png"},
+            {MapMods.camp, @"\Icons\camp2.png"},
             {MapMods.circle, @"\Icons\lineCanvas.png"},
             {MapMods.line, @"\Icons\lineCanvas.png"},
             {MapMods.rectangle, @"\Icons\lineCanvas.png"},
             {MapMods.square, @"\Icons\lineCanvas.png"},
-            {MapMods.stairs, @"\Icons\stairs.png"},
+            {MapMods.stairs, @"\Icons\stairs2.png"},
             {MapMods.ramp, @"\Icons\Ramp.png"}
         };
 
@@ -211,7 +211,7 @@ namespace ETD.Services
                     System.IO.MemoryStream ms = new System.IO.MemoryStream();
                     pngEncoder.Save(ms);
                     ms.Close();
-                    System.IO.File.WriteAllBytes(desktopFolder + AIFileName + ".png", ms.ToArray());//Save the modified map as an image 
+                    System.IO.File.WriteAllBytes(desktopFolder + "\\" + AIFileName + ".png", ms.ToArray());//Save the modified map as an image 
                 }
                 catch (Exception err)
                 {

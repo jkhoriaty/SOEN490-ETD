@@ -737,4 +737,28 @@
     <value>Heure</value>
     <comment>FollowUpSection</comment>
   </data>
+  <data name="TextBlock_Finance" xml:space="preserve">
+    <value>Finance et Repas</value>
+    <comment>AdditionalStatisticInfo</comment>
+  </data>
+  <data name="TextBlock_OrganizationFollowUp" xml:space="preserve">
+    <value>Suivis avec l'Organisation</value>
+    <comment>AdditionalStatisticInfo</comment>
+  </data>
+  <data name="TextBlock_ParticularSituation" xml:space="preserve">
+    <value>Situation et Interventions particulières</value>
+    <comment>AdditionalStatisticInfo</comment>
+  </data>
+  <data name="TextBlock_SupervisorFollowUp" xml:space="preserve">
+    <value>Suivis avec le(s) RO, Superviseurs et/ou RI</value>
+    <comment>AdditionalStatisticInfo</comment>
+  </data>
+  <data name="TextBlock_VehicleFollowUp" xml:space="preserve">
+    <value>Matériel et Véhicules</value>
+    <comment>AdditionalStatisticInfo</comment>
+  </data>
+  <data name="TextBlock_VolunteerFollowUp" xml:space="preserve">
+    <value>Suivis Auprès Des Bénévoles</value>
+    <comment>AdditionalStatisticInfo</comment>
+  </data>
 </root>

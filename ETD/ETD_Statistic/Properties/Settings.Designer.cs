@@ -26,5 +26,20 @@ namespace ETD_Statistic.Properties
                 return defaultInstance;
             }
         }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("English")]
+        public global::System.Globalization.CultureInfo DefaultCulture
+        {
+            get
+            {
+                return ((global::System.Globalization.CultureInfo)(this["DefaultCulture"]));
+            }
+            set
+            {
+                this["DefaultCulture"] = value;
+            }
+        }
     }
 }

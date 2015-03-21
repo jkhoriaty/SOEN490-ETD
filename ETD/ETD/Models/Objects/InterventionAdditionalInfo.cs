@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ETD.Services.Database;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,10 @@ namespace ETD.Models.Objects
 
     public class InterventionAdditionalInfo
     {
+        //Database reflection variables
+        private int additionalInfoID;
+        private int interventionID;
+
         private String information;
         private DateTime timestamp;
 
@@ -20,9 +25,29 @@ namespace ETD.Models.Objects
         {
             this.information = information;
             this.timestamp = timestamp;
+
+            this.additionalInfoID = StaticDBConnection.NonQueryDatabaseWithID("INSERT INTO [Additional_Informations] (Intervention_ID, Information, Timestamp) VALUES (" + interventionID + ", '" + information + "', '" + StaticDBConnection.DateTimeSQLite(timestamp) + "')");
+        }
+
+        public InterventionAdditionalInfo(Intervention intervention, String information, DateTime timestamp)
+        {
+            this.information = information;
+            this.timestamp = timestamp;
+
+            this.interventionID = intervention.getID();
+            this.additionalInfoID = StaticDBConnection.NonQueryDatabaseWithID("INSERT INTO [Additional_Informations] (Intervention_ID, Information, Timestamp) VALUES (" + interventionID + ", '" + information + "', '" + StaticDBConnection.DateTimeSQLite(timestamp) + "')");
         }
 
         //Accessors
+        public int getID()
+        {
+            return additionalInfoID;
+        }
+
+        public int getParentID()
+        {
+            return interventionID;
+        }
 
         //Returns the additional information for the intervention
         public String getInformation()

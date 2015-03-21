@@ -15,4 +15,17 @@ ETD/ETD_UnitTest/bin/Debug/
 *.cache
 *.cache
 *.lref
+*.manifest
+ETD/ETD_Statistic/obj/Debug/App.g.i.cs
+*.cache
+ETD/ETD_Statistic/obj/Debug/ETD_Statistic.csproj.FileListAbsolute.txt
+*.cache
+*.dll
+ETD/ETD_Statistic/bin/Debug/ETD_Statistic.exe
+ETD/ETD_Statistic/bin/Debug/ETD_Statistic.pdb
+ETD/ETD_Statistic/obj/Debug/ETD_Statistic.exe
+ETD/ETD_Statistic/obj/Debug/ETD_Statistic.g.resources
+ETD/ETD_Statistic/obj/Debug/ETD_Statistic.pdb
+ETD/ETD_Statistic/obj/Debug/ViewsPresenters/MainWindow.baml
+*.cache
 ETD/ETD_Statistic/obj/Debug/

@@ -28,6 +28,7 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <NuGetPackageImportStamp>03788353</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -60,6 +61,9 @@
     <Compile Include="CustomObjects\CustomUIObjects\Pin.cs" />
     <Compile Include="CustomObjects\CustomUIObjects\ResourceLine.cs" />
     <Compile Include="CustomObjects\CustomUIObjects\TeamPin.cs" />
+    <Compile Include="CustomObjects\PopupForms\Statistics.xaml.cs">
+      <DependentUpon>Statistics.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Models\Objects\ABC.cs" />
     <Compile Include="Models\Objects\GPSLocation.cs" />
     <Compile Include="Models\Objects\InterventionAdditionalInfo.cs" />
@@ -76,6 +80,7 @@
     <Compile Include="Models\Objects\Resource.cs" />
     <Compile Include="CustomObjects\PopupForms\FormPopup.cs" />
     <Compile Include="CustomObjects\PopupForms\RegisteredVolunteersPopup.cs" />
+    <Compile Include="Models\Objects\Statistics.cs" />
     <Compile Include="Properties\Resources.en.Designer.cs">
       <DependentUpon>Resources.en.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -87,8 +92,35 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Services\CultureResources.cs" />
+    <Compile Include="Services\Database\StaticDBConnection.cs" />
     <Compile Include="Services\GPSServices.cs" />
     <Compile Include="Services\Interfaces\GPSStatusCallbacks.cs" />
+    <Compile Include="Services\Database\DBConnection.cs" />
+    <Compile Include="Services\Database\DBQuery.cs" />
+    <Compile Include="Services\Database\Queries\CreateABCQuery.cs" />
+    <Compile Include="Services\Database\Queries\CreateAdditionalInformationQuery.cs" />
+    <Compile Include="Services\Database\Queries\CreateAssignedEquipmentQuery.cs" />
+    <Compile Include="Services\Database\Queries\CreateAvailableEquipmentQuery.cs" />
+    <Compile Include="Services\Database\Queries\CreateInterventionQuery.cs" />
+    <Compile Include="Services\Database\Queries\CreateOperationQuery.cs" />
+    <Compile Include="Services\Database\Queries\CreateResourceQuery.cs" />
+    <Compile Include="Services\Database\Queries\CreateTeamMemberQuery.cs" />
+    <Compile Include="Services\Database\Queries\CreateTeamQuery.cs" />
+    <Compile Include="Services\Database\Queries\CreateVolunteerQuery.cs" />
+    <Compile Include="Services\Database\Queries\GetABCQuery.cs" />
+    <Compile Include="Services\Database\Queries\GetAdditionalInformationQuery.cs" />
+    <Compile Include="Services\Database\Queries\GetAssignedEquipmentQuery.cs" />
+    <Compile Include="Services\Database\Queries\GetAvailableEquipmentQuery.cs" />
+    <Compile Include="Services\Database\Queries\GetInterventionQuery.cs" />
+    <Compile Include="Services\Database\Queries\GetOperationQuery.cs" />
+    <Compile Include="Services\Database\Queries\GetResourceQuery.cs" />
+    <Compile Include="Services\Database\Queries\GetTeamMemberQuery.cs" />
+    <Compile Include="Services\Database\Queries\GetTeamQuery.cs" />
+    <Compile Include="Services\Database\Queries\GetVolunteerQuery.cs" />
+    <Compile Include="Services\Database\Queries\SelectEventQuery.cs" />
+    <Compile Include="Services\Database\Queries\UpdateABCQuery.cs" />
+    <Compile Include="Services\Database\Queries\UpdateAdditionalInformationQuery.cs" />
+    <Compile Include="Services\Database\Queries\UpdateOperationQuery.cs" />
     <Compile Include="Services\NetworkServices.cs" />
     <Compile Include="Services\TextboxHandler.cs" />
     <Compile Include="ViewsPresenters\GPSAssignment.xaml.cs">
@@ -136,10 +168,21 @@
     <Compile Include="ViewsPresenters\TeamsSection\TeamsSectionPage.xaml.cs">
       <DependentUpon>TeamsSectionPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewsPresenters\AdditionalStatisticInfo.xaml.cs">
+      <DependentUpon>AdditionalStatisticInfo.xaml</DependentUpon>
+    </Compile>
+    <None Include="packages.config" />
+    <None Include="Resources\EDT.sqlite3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.SQLite">
+      <HintPath>..\packages\System.Data.SQLite.Core.1.0.96.0\lib\net45\System.Data.SQLite.dll</HintPath>
+    </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Presentation" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -208,6 +251,10 @@
   -->
   <ItemGroup>
     <Page Include="CustomObjects\PopupForms\FollowUpSectionForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomObjects\PopupForms\Statistics.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -309,6 +356,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="ViewsPresenters\AdditionalStatisticInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <!--
     Resources
@@ -318,6 +369,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Icons\camp.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\camp2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Icons\circle.png">
@@ -365,7 +419,13 @@
     <Content Include="Icons\stairs.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Icons\stairs2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Icons\statExport.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\db.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -451,7 +511,6 @@
   -->
   <ItemGroup>
     <Folder Include="Maps\" />
-    <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">
@@ -477,6 +536,13 @@
     Icons
   -->
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\System.Data.SQLite.Core.1.0.96.0\build\net45\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.96.0\build\net45\System.Data.SQLite.Core.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\System.Data.SQLite.Core.1.0.96.0\build\net45\System.Data.SQLite.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.Data.SQLite.Core.1.0.96.0\build\net45\System.Data.SQLite.Core.targets'))" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

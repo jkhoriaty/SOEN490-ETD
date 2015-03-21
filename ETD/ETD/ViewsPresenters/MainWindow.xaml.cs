@@ -30,7 +30,6 @@ using System.Globalization;
 using System.Diagnostics;
 using ETD.Services.Interfaces;
 
-
 namespace ETD.ViewsPresenters
 {
 	/// <summary>
@@ -334,6 +333,35 @@ namespace ETD.ViewsPresenters
 			//Redrawing map so that context menu items change language as well
 			mapSection.Update();
         }
+
+
+	private void ShowStatistics(object sender, RoutedEventArgs e)
+	{
+		ETD.Models.Objects.Statistics statistics = new ETD.Models.Objects.Statistics();
+	}
+
+
+        //method to show confirmation upon closing of main window, asking if end of operation or not, if yes asking if user wants to input additional information
+        protected void FormCloseConfirmation(Object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (System.Windows.Forms.MessageBox.Show("Would you like to end the operation. Confirm?", "Close Application", System.Windows.Forms.MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
+            {
+                if (System.Windows.Forms.MessageBox.Show("Would you like to fill out additional information. Confirm?", "Close Application", System.Windows.Forms.MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.No)
+                {
+                    System.Windows.Forms.MessageBox.Show("The application has been closed successfully.", "Closing Application", System.Windows.Forms.MessageBoxButtons.OK);
+                }
+                else
+                {
+                    AdditionalStatisticInfo asi = new AdditionalStatisticInfo();
+                    asi.Show();
+                }
+            }
+            else
+            {
+                e.Cancel = true;
+            }
+        }
+
     }
 
 }

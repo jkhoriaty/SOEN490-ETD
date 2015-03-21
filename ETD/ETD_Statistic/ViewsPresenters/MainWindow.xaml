@@ -1,5 +1,5 @@
 ﻿<Window x:Class="ETD_Statistic.ViewsPresenters.MainWindow"
-         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:properties="clr-namespace:ETD_Statistic.Properties"
         Title="Emergency Team Dispatcher Statistic"
@@ -10,6 +10,23 @@
 		MinHeight="700"
 		Height="700">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35"/>
+            <RowDefinition/>           
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <StackPanel Name="buttonView" Orientation="Horizontal" HorizontalAlignment="Center">
+                <StackPanel.Resources>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Margin" Value="10,0,0,0"/>
+                    </Style>
+                </StackPanel.Resources>
+                <Button x:Uid="Button_ExportPDF" Click="ExportToPDF" Content="{x:Static properties:Resources.Button_ExportPDF}" Height="30" Width="100" Margin="0,0,0,0"/>
+                <Button x:Uid="Button_LoadStatistic" Click="LoadStatistic" Content="{x:Static properties:Resources.Button_LoadStatistic}" Height="30" Width="100" Margin="15,0,0,0" />
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1">
+            <StackPanel Name="statisticView"/>
+        </Grid>
     </Grid>
 </Window>

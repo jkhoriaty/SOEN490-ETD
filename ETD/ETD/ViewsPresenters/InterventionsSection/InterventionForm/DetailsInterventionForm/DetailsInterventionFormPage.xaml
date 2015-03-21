@@ -38,7 +38,7 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <Label x:Uid="Label_Age" Content="{Binding Path=Label_Age, Mode=OneWay, Source={StaticResource Resources}}"/>
-                <TextBox Name="Age" Width="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" LostFocus="TextBoxes_LostFocus"/>
+                <TextBox Name="Age" Width="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
             </StackPanel>
         </UniformGrid>
         <Grid Margin="0,2,0,2">
