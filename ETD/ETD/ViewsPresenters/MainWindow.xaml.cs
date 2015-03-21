@@ -259,7 +259,24 @@ namespace ETD.ViewsPresenters
 			//Check if a team has been created
 			if(Team.getTeamList().Count > 0)
 			{
+				List<Team> registeredTeams = new List<Team>();
+				//Check if a team has been associated to a GPS Location
+				foreach(Team team in Team.getTeamList())
+				{
+					if(team.getGPSLocation() != null)
+					{
+						registeredTeams.Add(team);
+					}
+				}
+				
+				if(registeredTeams.Count != 0)
+				{
 
+				}
+				else
+				{
+					MessageBox.Show("No teams are associated with a GPS location. Please associate a team to a GPS location before entering the GPS setup.");
+				}
 			}
 			else
 			{

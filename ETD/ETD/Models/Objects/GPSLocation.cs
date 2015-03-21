@@ -57,14 +57,9 @@ namespace ETD.Models.Objects
 
 		//Setters
 
-		public void setLattitude(double lattitude)
+		public void setGPSCoordinates(double lattitude, double longitude)
 		{
 			this.lattitude = lattitude;
-			InstanceModifiedNotification();
-		}
-
-		public void setLongitude(double longitude)
-		{
 			this.longitude = longitude;
 			InstanceModifiedNotification();
 		}

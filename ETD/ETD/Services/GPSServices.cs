@@ -110,13 +110,12 @@ namespace ETD.Services
 			if (GPSLocation.getGPSLocationFromID(reply[1]) == null)
 			{
 				GPSLocation gpsLocation = new GPSLocation(reply[1], Double.Parse(reply[2]), Double.Parse(reply[3]));
-				Team team = new Team("A");
-				team.setGPSLocation(gpsLocation);
+				Team team = new Team("A"); //TODO remove
+				team.setGPSLocation(gpsLocation); //TODO remove
 			}
 			else
 			{
-				GPSLocation.getGPSLocationFromID(reply[1]).setLattitude(Double.Parse(reply[2]));
-				GPSLocation.getGPSLocationFromID(reply[1]).setLongitude(Double.Parse(reply[3]));
+				GPSLocation.getGPSLocationFromID(reply[1]).setGPSCoordinates(Double.Parse(reply[2]), Double.Parse(reply[3]));
 			}
 		}
 	}
