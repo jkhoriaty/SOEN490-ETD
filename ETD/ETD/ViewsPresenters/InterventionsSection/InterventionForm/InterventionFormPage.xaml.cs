@@ -109,7 +109,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm
 		{
 			BuildComponents();
             teamName.Text = (intervention.getResourceList().Count > 0) ? intervention.getResourceList().ElementAt(0).getTeam().getName() : "";
-			interventionType.Text = intervention.getNatureOfCall();
+			interventionType.Text = intervention.getChiefComplaint();
 			if(intervention.getCode() == 1)
 			{
 				interventionType.Foreground = new SolidColorBrush(Colors.Red);

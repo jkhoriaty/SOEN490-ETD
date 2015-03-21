@@ -93,12 +93,33 @@ namespace ETD.CustomObjects.CustomUIObjects
 			team.DeregisterInstanceObserver(this);
 		}
 
+		private string getMenuItemStatus(MenuItem menuItem)
+		{
+			string status = "";
+			switch (menuItem.Uid.ToString())
+			{
+				case "MenuItem_TeamPin_Available":
+					status = "available";
+					break;
+				case "MenuItem_TeamPin_Moving":
+					status = "moving";
+					break;
+				case "MenuItem_TeamPin_Intervening":
+					status = "intervening";
+					break;
+				case "MenuItem_TeamPin_Unavailable":
+					status = "unavailable";
+					break;
+			}
+			return status;
+		}
+
 		//Making sure the right item of the context menu is checked (it checks the actual status of the team)
 		private void CheckCurrentStatus_Opened(object sender, RoutedEventArgs e)
 		{
 			foreach(MenuItem menuItem in this.ContextMenu.Items)
 			{
-				menuItem.IsChecked = team.getStatus().ToString().Equals(menuItem.Header.ToString().ToLower());
+				menuItem.IsChecked = team.getStatus().ToString().Equals(getMenuItemStatus(menuItem));
 			}
 		}
 
@@ -106,10 +127,10 @@ namespace ETD.CustomObjects.CustomUIObjects
 		private void ChangeStatus_Click(object sender, RoutedEventArgs e)
 		{
 			MenuItem menuItem = (MenuItem)sender;
-			team.setStatus(menuItem.Header.ToString().ToLower());
+			team.setStatus(getMenuItemStatus(menuItem));
 
 			//Handling the case when the user sets the status of a team to intervening
-			if (menuItem.Header.ToString().ToLower().Equals("intervening"))
+			if (getMenuItemStatus(menuItem).Equals("intervening"))
 			{
 				//Handling the case of when the user sets a team to intervening but it is not assigned to an intervention yet. Create the new intervention and assign the team to it.
 				if(interventionPin == null)

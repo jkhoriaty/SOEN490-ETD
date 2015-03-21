@@ -83,9 +83,19 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.TimersInterv
 			}
 		}
 
+		//Changes the textbox
 		private void UpdateTimer(TimeSpan elapsed, Label timer, Label status, bool ongoing, int deadline)
 		{
-			timer.Content = elapsed.Minutes + ":";
+			timer.Content = "";
+			if(elapsed.Hours >= 1)
+			{
+				timer.Content += elapsed.Hours + ":";
+				if(elapsed.Minutes < 10)
+				{
+					timer.Content += "0";
+				}
+			}
+			timer.Content += elapsed.Minutes + ":";
 			if (elapsed.Seconds < 10)
 			{
 				timer.Content += "0";

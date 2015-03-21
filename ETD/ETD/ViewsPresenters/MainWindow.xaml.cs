@@ -244,13 +244,6 @@ namespace ETD.ViewsPresenters
 		{
             GPSAssignment subWindow = new GPSAssignment();
             subWindow.Show();
-
-			gpsServices.UpdateRegistered().Wait();
-			Dispatcher.Invoke(() =>
-			{
-				
-			});
-			newRegisteredCTR.Content = "0";
 		}
 
 		//Go through GPS setup
@@ -337,6 +330,9 @@ namespace ETD.ViewsPresenters
 
                 //could apply a theme tied to this culture if desired
             }
+
+			//Redrawing map so that context menu items change language as well
+			mapSection.Update();
         }
     }
 
