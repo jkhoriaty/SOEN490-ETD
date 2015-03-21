@@ -29,3 +29,5 @@ ETD/ETD_Statistic/obj/Debug/ETD_Statistic.pdb
 ETD/ETD_Statistic/obj/Debug/ViewsPresenters/MainWindow.baml
 *.cache
 ETD/ETD_Statistic/obj/Debug/
+ETD/ETD_Statistic/obj/Debug/ETD_Statistic.csproj.FileListAbsolute.txt
+ETD/ETD_Statistic/bin/Debug/System.Data.SQLite.xml

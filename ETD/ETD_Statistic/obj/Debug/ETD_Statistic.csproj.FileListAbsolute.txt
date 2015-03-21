@@ -28,3 +28,10 @@ K:\Workspace\SOEN490-ETD\ETD\ETD_Statistic\obj\Debug\ETD_Statistic.Properties.Re
 K:\Workspace\SOEN490-ETD\ETD\ETD_Statistic\obj\Debug\ETD_Statistic.csproj.GenerateResource.Cache
 K:\Workspace\SOEN490-ETD\ETD\ETD_Statistic\obj\Debug\ETD_Statistic.exe
 K:\Workspace\SOEN490-ETD\ETD\ETD_Statistic\obj\Debug\ETD_Statistic.pdb
+C:\Workspace\SOEN490-ETD\ETD\ETD_Statistic\bin\Debug\System.Data.SQLite.dll
+C:\Workspace\SOEN490-ETD\ETD\ETD_Statistic\bin\Debug\System.Data.SQLite.xml
+C:\Workspace\SOEN490-ETD\ETD\ETD_Statistic\obj\Debug\ETD_Statistic.csprojResolveAssemblyReference.cache
+C:\Workspace\SOEN490-ETD\ETD\ETD_Statistic\obj\Debug\ViewsPresenters\StatisticView.g.cs
+C:\Workspace\SOEN490-ETD\ETD\ETD_Statistic\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Workspace\SOEN490-ETD\ETD\ETD_Statistic\obj\Debug\ResourceDictionary.baml
+C:\Workspace\SOEN490-ETD\ETD\ETD_Statistic\obj\Debug\ViewsPresenters\StatisticView.baml
