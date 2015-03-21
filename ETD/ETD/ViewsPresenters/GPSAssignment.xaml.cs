@@ -83,13 +83,6 @@ namespace ETD.ViewsPresenters
 
         private void Submit_Click(object sender, RoutedEventArgs e)
         {
-           /* foreach (ComboBox ctrl in teamGrid.Children)
-            {
-                int index = Convert.ToInt32(ctrl.Name);
-                string index2 = ctrl.SelectedItem.ToString();
-                teamList[index].setGPSLocation(gpsLocationsDictionary[index2]);
-            }*/
-
             int teamIndex = 0;
 
             foreach (KeyValuePair<string, string> entry in volunteerList)
@@ -104,8 +97,6 @@ namespace ETD.ViewsPresenters
                 if (temp.SelectedItem != null)
                 {
                     string memberID = temp.SelectedItem.ToString();
-
-                    MessageBox.Show(memberID);
 
                     teamList[teamIndex].setGPSLocation(gpsLocationsDictionary[inverseVolunteerList[memberID]]);         
                 }   
