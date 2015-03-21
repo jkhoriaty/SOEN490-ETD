@@ -45,7 +45,9 @@ namespace ETD.ViewsPresenters
 
         //Forms used by the popup method
         private FollowUpSectionForm followupSection;
+        private ShiftsSection shiftSection;
         private FormPopup followupSectionFormPopupContainer;
+        private FormPopup shiftSectionPopupContainer;
 
         //Variables used when resizing the window
 		private double previousWidth;
@@ -71,6 +73,7 @@ namespace ETD.ViewsPresenters
 
             FormPopup.RegisterMainWindow(this);//Register main window as the master window, used for displaying popups
             followupSection = new FollowUpSectionForm();
+            shiftSection = new ShiftsSection();
             mapModificationSection = new AdditionalInfoPage(this);
 			teamsSection = new TeamsSectionPage(this);
 			mapSection = new MapSectionPage(this);
@@ -236,6 +239,12 @@ namespace ETD.ViewsPresenters
         private void ShowFollowUpSection(object sender, RoutedEventArgs e)
         {
             followupSectionFormPopupContainer = new FormPopup(followupSection);
+        }
+
+        //Displays Shifts section page
+        private void ShowShiftsSection(object sender, RoutedEventArgs e)
+        {
+            shiftSectionPopupContainer = new FormPopup(shiftSection);
         }
 
         //Display GPS position

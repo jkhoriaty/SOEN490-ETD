@@ -64,6 +64,9 @@
     <Compile Include="CustomObjects\PopupForms\Statistics.xaml.cs">
       <DependentUpon>Statistics.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CustomObjects\PopupForms\ShiftsSection.xaml.cs">
+      <DependentUpon>ShiftsSection.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Models\Objects\ABC.cs" />
     <Compile Include="Models\Objects\GPSLocation.cs" />
     <Compile Include="Models\Objects\InterventionAdditionalInfo.cs" />
@@ -81,6 +84,7 @@
     <Compile Include="CustomObjects\PopupForms\FormPopup.cs" />
     <Compile Include="CustomObjects\PopupForms\RegisteredVolunteersPopup.cs" />
     <Compile Include="Models\Objects\Statistics.cs" />
+    <Compile Include="Models\Objects\Shift.cs" />
     <Compile Include="Properties\Resources.en.Designer.cs">
       <DependentUpon>Resources.en.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -258,6 +262,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="CustomObjects\PopupForms\ShiftsSection.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ResourceDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -417,6 +425,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Icons\stairs.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\stairs2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Icons\stairs2.png">

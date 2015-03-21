@@ -1,0 +1,843 @@
+﻿<Page x:Class="ETD.CustomObjects.PopupForms.ShiftsSection"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:properties="clr-namespace:ETD.Properties"
+      mc:Ignorable="d" 
+      d:DesignHeight="400" d:DesignWidth="1400"
+	Title="ShiftsSection">
+
+    <ScrollViewer>
+        <Grid Background="White">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="115*"/>
+                <ColumnDefinition Width="172*"/>
+                <ColumnDefinition Width="172*"/>
+                <ColumnDefinition Width="172*"/>
+                <ColumnDefinition Width="172*"/>
+                <ColumnDefinition Width="172*"/>
+                <ColumnDefinition Width="172*"/>
+                <ColumnDefinition Width="172*"/>
+
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+             
+            </Grid.RowDefinitions>
+
+            <!-- ______________________________Header content______________________________ -->
+
+            <Border  Grid.Column="0" Grid.Row="1" BorderBrush="Black" BorderThickness="1,2,1,1">
+                <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal">
+                    <TextBlock   x:Uid="TextBlock_Team" Text="Team" FontSize="25" VerticalAlignment="Center" RenderTransformOrigin="1.294,0.509"/>
+                </StackPanel>
+            </Border>
+
+            <Border  Grid.Column="1" Grid.Row="0" BorderBrush="Black" BorderThickness="1,0,0,0">
+                <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal">
+                    <TextBlock   x:Uid="TextBlock_Sectors" Text="Sectors" FontSize="25" VerticalAlignment="Center" RenderTransformOrigin="1.294,0.509"/>
+                </StackPanel>
+            </Border>
+            
+            <Border  Grid.Column="0" Grid.Row="0" BorderBrush="Black" BorderThickness="1,1,1,0">
+                <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal">
+                    <TextBlock   x:Uid="TextBlock_Date" Text="Date" FontSize="25" VerticalAlignment="Center" RenderTransformOrigin="1.294,0.509"/>
+                </StackPanel>
+            </Border>
+
+
+            <!-- ______________________________Team content______________________________ -->
+
+            <Border Grid.Row="2" Grid.Column="0" BorderBrush="Black" BorderThickness="1,0,1,1">
+                <DockPanel>
+                    <TextBox Name="Team1" TextWrapping="Wrap" AcceptsReturn="True" BorderBrush="Black" BorderThickness="0,0,0,0" GotFocus="ShiftsSection_GotFocus"/>
+                </DockPanel>
+            </Border>
+
+            <Border Grid.Row="3" Grid.Column="0" BorderBrush="Black" BorderThickness="1,0,1,1">
+                <DockPanel>
+                    <TextBox Name="Team2" TextWrapping="Wrap" AcceptsReturn="True" BorderBrush="Black" BorderThickness="0,0,0,0" GotFocus="ShiftsSection_GotFocus"/>
+                </DockPanel>
+            </Border>
+
+            <Border Grid.Row="4" Grid.Column="0" BorderBrush="Black" BorderThickness="1,0,1,1">
+                <DockPanel>
+                    <TextBox Name="Team3" TextWrapping="Wrap" AcceptsReturn="True" BorderBrush="Black" BorderThickness="0,0,0,0" GotFocus="ShiftsSection_GotFocus"/>
+                </DockPanel>
+            </Border>
+
+            <Border Grid.Row="5" Grid.Column="0" BorderBrush="Black" BorderThickness="1,0,1,1">
+                <DockPanel>
+                    <TextBox Name="Team4" TextWrapping="Wrap" AcceptsReturn="True" BorderBrush="Black" BorderThickness="0,0,0,0" GotFocus="ShiftsSection_GotFocus"/>
+                </DockPanel>
+            </Border>
+
+            <Border Grid.Row="6" Grid.Column="0" BorderBrush="Black" BorderThickness="1,0,1,1">
+                <DockPanel>
+                    <TextBox Name="Team5" TextWrapping="Wrap" AcceptsReturn="True" BorderBrush="Black" BorderThickness="0,0,0,0" GotFocus="ShiftsSection_GotFocus"/>
+                </DockPanel>
+            </Border>
+
+            <Border Grid.Row="7" Grid.Column="0" BorderBrush="Black" BorderThickness="1,0,1,1">
+                <DockPanel>
+                    <TextBox Name="Team6" TextWrapping="Wrap" AcceptsReturn="True" BorderBrush="Black" BorderThickness="0,0,0,0" GotFocus="ShiftsSection_GotFocus"/>
+                </DockPanel>
+            </Border>
+
+
+            <!-- ______________________________Sector content______________________________ -->
+
+            <Border Grid.Row="1" Grid.Column="1" BorderBrush="Black" BorderThickness="1,0,0,1">
+                <DockPanel>
+                    <TextBox Name="Sector1" TextWrapping="Wrap" AcceptsReturn="True" BorderBrush="Black" BorderThickness="0,2,1,0" GotFocus="ShiftsSection_GotFocus"/>
+                </DockPanel>
+            </Border>
+
+            <Border Grid.Row="1" Grid.Column="2" BorderBrush="Black" BorderThickness="0,0,0,1">
+                <DockPanel>
+                    <TextBox Name="Sector2" TextWrapping="Wrap" AcceptsReturn="True" BorderBrush="Black" BorderThickness="0,2,1,0" GotFocus="ShiftsSection_GotFocus"/>
+                </DockPanel>
+            </Border>
+
+            <Border Grid.Row="1" Grid.Column="3" BorderBrush="Black" BorderThickness="0,0,0,1">
+                <DockPanel>
+                    <TextBox Name="Sector3" TextWrapping="Wrap" AcceptsReturn="True" BorderBrush="Black" BorderThickness="0,2,1,0" GotFocus="ShiftsSection_GotFocus"/>
+                </DockPanel>
+            </Border>
+
+            <Border Grid.Row="1" Grid.Column="4" BorderBrush="Black" BorderThickness="0,0,0,1">
+                <DockPanel>
+                    <TextBox Name="Sector4" TextWrapping="Wrap" AcceptsReturn="True" BorderBrush="Black" BorderThickness="0,2,1,0" GotFocus="ShiftsSection_GotFocus"/>
+                </DockPanel>
+            </Border>
+
+            <Border Grid.Row="1" Grid.Column="5" BorderBrush="Black" BorderThickness="0,0,0,1">
+                <DockPanel>
+                    <TextBox Name="Sector5" TextWrapping="Wrap" AcceptsReturn="True" BorderBrush="Black" BorderThickness="0,2,1,0" GotFocus="ShiftsSection_GotFocus"/>
+                </DockPanel>
+            </Border>
+
+            <Border Grid.Row="1" Grid.Column="6" BorderBrush="Black" BorderThickness="0,0,0,1">
+                <DockPanel>
+                    <TextBox Name="Sector6" TextWrapping="Wrap" AcceptsReturn="True" BorderBrush="Black" BorderThickness="0,2,1,0" GotFocus="ShiftsSection_GotFocus"/>
+                </DockPanel>
+            </Border>
+
+            <Border Grid.Row="1" Grid.Column="7" BorderBrush="Black" BorderThickness="0,0,0,1">
+                <DockPanel>
+                    <TextBox Name="Sector7" TextWrapping="Wrap" AcceptsReturn="True" BorderBrush="Black" BorderThickness="0,2,1,0" GotFocus="ShiftsSection_GotFocus"/>
+                </DockPanel>
+            </Border>
+
+           
+            <!-- ______________________________Team Sector content______________________________ -->
+
+            <!-- ____________Team 1 ____________ -->
+
+
+            <Border Grid.Row="2" Grid.Column="1" BorderBrush="Black" BorderThickness="1,0,1,1">
+                <DockPanel >
+ 
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="50" Width="180" >   
+                        <TextBox Text="hh" Width="25" Name="TimestamphhT1L1S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT1L1S" Click="StartTimestampTeamSector_Click"/>
+                        <TextBox  BorderBrush="Black" BorderThickness="0,0,2,0" Text="mm" Width="25" Name="TimestampmmT1L1S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+          
+                        <TextBox BorderBrush="Black" BorderThickness="1,0,0,0" Text="hh" Width="25" Name="TimestamphhT1L1E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT1L1E" Click="EndTimestampTeamSector_Click"/>
+                        <TextBox BorderBrush="Black" BorderThickness="0,0,1,0" Text="mm" Width="25" Name="TimestampmmT1L1E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Background="Green"  Foreground="White" FontWeight="SemiBold" Content="Start" Width="30" Name="Team1Sector1ShiftStart" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="StartShift_Click" />
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+            <Border Grid.Row="2" Grid.Column="2" BorderBrush="Black" BorderThickness="1,0,1,1">
+                <DockPanel>
+                 
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="50" >
+                        <TextBox Text="hh" Width="25" Name="TimestamphhT1L2S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT1L2S" Click="StartTimestampTeamSector_Click"/>
+                        <TextBox  BorderBrush="Black" BorderThickness="0,0,2,0" Text="mm" Width="25" Name="TimestampmmT1L2S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+
+                        <TextBox BorderBrush="Black" BorderThickness="1,0,0,0" Text="hh" Width="25" Name="TimestamphhT1L2E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT1L2E" Click="EndTimestampTeamSector_Click"/>
+                        <TextBox BorderBrush="Black" BorderThickness="0,0,1,0" Text="mm" Width="25" Name="TimestampmmT1L2E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Background="Green" Foreground="White" FontWeight="SemiBold" Content="Start" Width="30" Name="Team1Sector2ShiftStart" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="StartShift_Click"/>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+            <Border Grid.Row="2" Grid.Column="3" BorderBrush="Black" BorderThickness="1,0,1,1">
+                <DockPanel>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="50" >
+                        <TextBox Text="hh" Width="25" Name="TimestamphhT1L3S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT1L3S" Click="StartTimestampTeamSector_Click"/>
+                        <TextBox  BorderBrush="Black" BorderThickness="0,0,2,0" Text="mm" Width="25" Name="TimestampmmT1L3S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+
+                        <TextBox BorderBrush="Black" BorderThickness="1,0,0,0" Text="hh" Width="25" Name="TimestamphhT1L3E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT1L3E" Click="EndTimestampTeamSector_Click"/>
+                        <TextBox BorderBrush="Black" BorderThickness="0,0,1,0" Text="mm" Width="25" Name="TimestampmmT1L3E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Background="Green" Foreground="White" FontWeight="SemiBold" Content="Start" Width="30" Name="Team1Sector3ShiftStart" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="StartShift_Click"/>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+            <Border Grid.Row="2" Grid.Column="4" BorderBrush="Black" BorderThickness="1,0,1,1">
+                <DockPanel>
+   
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="50" >
+                        <TextBox Text="hh" Width="25" Name="TimestamphhT1L4S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT1L4S" Click="StartTimestampTeamSector_Click"/>
+                        <TextBox  BorderBrush="Black" BorderThickness="0,0,2,0" Text="mm" Width="25" Name="TimestampmmT1L4S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+
+                        <TextBox BorderBrush="Black" BorderThickness="1,0,0,0" Text="hh" Width="25" Name="TimestamphhT1L4E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT1L4E" Click="EndTimestampTeamSector_Click"/>
+                        <TextBox BorderBrush="Black" BorderThickness="0,0,1,0" Text="mm" Width="25" Name="TimestampmmT1L4E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Background="Green" Foreground="White" FontWeight="SemiBold" Content="Start" Width="30" Name="Team1Sector4ShiftStart" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="StartShift_Click"/>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+            <Border Grid.Row="2" Grid.Column="5" BorderBrush="Black" BorderThickness="1,0,1,1">
+                <DockPanel>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="50" >
+                        <TextBox Text="hh" Width="25" Name="TimestamphhT1L5S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT1L5S" Click="StartTimestampTeamSector_Click"/>
+                        <TextBox  BorderBrush="Black" BorderThickness="0,0,2,0" Text="mm" Width="25" Name="TimestampmmT1L5S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+
+                        <TextBox BorderBrush="Black" BorderThickness="1,0,0,0" Text="hh" Width="25" Name="TimestamphhT1L5E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT1L5E" Click="EndTimestampTeamSector_Click"/>
+                        <TextBox BorderBrush="Black" BorderThickness="0,0,1,0" Text="mm" Width="25" Name="TimestampmmT1L5E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Background="Green" Foreground="White" FontWeight="SemiBold" Content="Start" Width="30" Name="Team1Sector5ShiftStart" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="StartShift_Click"/>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+            <Border Grid.Row="2" Grid.Column="6" BorderBrush="Black" BorderThickness="1,0,1,1">
+                <DockPanel>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="50" >
+                        <TextBox Text="hh" Width="25" Name="TimestamphhT1L6S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT1L6S" Click="StartTimestampTeamSector_Click"/>
+                        <TextBox  BorderBrush="Black" BorderThickness="0,0,2,0" Text="mm" Width="25" Name="TimestampmmT1L6S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+
+                        <TextBox BorderBrush="Black" BorderThickness="1,0,0,0" Text="hh" Width="25" Name="TimestamphhT1L6E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT1L6E" Click="EndTimestampTeamSector_Click"/>
+                        <TextBox BorderBrush="Black" BorderThickness="0,0,1,0" Text="mm" Width="25" Name="TimestampmmT1L6E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Background="Green" Foreground="White" FontWeight="SemiBold" Content="Start" Width="30" Name="Team1Sector6ShiftStart" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="StartShift_Click"/>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+            <Border Grid.Row="2" Grid.Column="7" BorderBrush="Black" BorderThickness="1,0,1,1">
+                <DockPanel>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="50" >
+                        <TextBox Text="hh" Width="25" Name="TimestamphhT1L7S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT1L7S" Click="StartTimestampTeamSector_Click"/>
+                        <TextBox  BorderBrush="Black" BorderThickness="0,0,2,0" Text="mm" Width="25" Name="TimestampmmT1L7S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+
+                        <TextBox BorderBrush="Black" BorderThickness="1,0,0,0" Text="hh" Width="25" Name="TimestamphhT1L7E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT1L7E" Click="EndTimestampTeamSector_Click"/>
+                        <TextBox BorderBrush="Black" BorderThickness="0,0,1,0" Text="mm" Width="25" Name="TimestampmmT1L7E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Background="Green" Foreground="White" FontWeight="SemiBold" Content="Start" Width="30" Name="Team1Sector7ShiftStart" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="StartShift_Click"/>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+
+            <!-- ____________Team 2 ____________ -->
+
+
+            <Border Grid.Row="3" Grid.Column="1" BorderBrush="Black" BorderThickness="1,0,1,1">
+                <DockPanel>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="50" >
+                        <TextBox Text="hh" Width="25" Name="TimestamphhT2L1S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT2L1S" Click="StartTimestampTeamSector_Click"/>
+                        <TextBox  BorderBrush="Black" BorderThickness="0,0,2,0" Text="mm" Width="25" Name="TimestampmmT2L1S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+
+                        <TextBox BorderBrush="Black" BorderThickness="1,0,0,0" Text="hh" Width="25" Name="TimestamphhT2L1E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT2L1E" Click="EndTimestampTeamSector_Click"/>
+                        <TextBox BorderBrush="Black" BorderThickness="0,0,1,0" Text="mm" Width="25" Name="TimestampmmT2L1E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Background="Green" Foreground="White" FontWeight="SemiBold" Content="Start" Width="30" Name="Team2Sector1ShiftStart" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="StartShift_Click" />
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+            <Border Grid.Row="3" Grid.Column="2" BorderBrush="Black" BorderThickness="1,0,1,1">
+                <DockPanel>
+                
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="50"  >
+                        <TextBox Text="hh" Width="25" Name="TimestamphhT2L2S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT2L2S" Click="StartTimestampTeamSector_Click"/>
+                        <TextBox  BorderBrush="Black" BorderThickness="0,0,2,0" Text="mm" Width="25" Name="TimestampmmT2L2S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+
+                        <TextBox BorderBrush="Black" BorderThickness="1,0,0,0" Text="hh" Width="25" Name="TimestamphhT2L2E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT2L2E" Click="EndTimestampTeamSector_Click"/>
+                        <TextBox BorderBrush="Black" BorderThickness="0,0,1,0" Text="mm" Width="25" Name="TimestampmmT2L2E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Background="Green" Foreground="White" FontWeight="SemiBold" Content="Start" Width="30" Name="Team2Sector2ShiftStart" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="StartShift_Click"/>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+            <Border Grid.Row="3" Grid.Column="3" BorderBrush="Black" BorderThickness="1,0,1,1">
+                <DockPanel>
+                 
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="50" >
+                        <TextBox Text="hh" Width="25" Name="TimestamphhT2L3S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT2L3S" Click="StartTimestampTeamSector_Click"/>
+                        <TextBox  BorderBrush="Black" BorderThickness="0,0,2,0" Text="mm" Width="25" Name="TimestampmmT2L3S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+
+                        <TextBox BorderBrush="Black" BorderThickness="1,0,0,0" Text="hh" Width="25" Name="TimestamphhT2L3E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT2L3E" Click="EndTimestampTeamSector_Click"/>
+                        <TextBox BorderBrush="Black" BorderThickness="0,0,1,0" Text="mm" Width="25" Name="TimestampmmT2L3E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Background="Green" Foreground="White" FontWeight="SemiBold" Content="Start" Width="30" Name="Team2Sector3ShiftStart" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="StartShift_Click"/>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+            <Border Grid.Row="3" Grid.Column="4" BorderBrush="Black" BorderThickness="1,0,1,1">
+                <DockPanel>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="50" >
+                        <TextBox Text="hh" Width="25" Name="TimestamphhT2L4S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT2L4S" Click="StartTimestampTeamSector_Click"/>
+                        <TextBox  BorderBrush="Black" BorderThickness="0,0,2,0" Text="mm" Width="25" Name="TimestampmmT2L4S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+
+                        <TextBox BorderBrush="Black" BorderThickness="1,0,0,0" Text="hh" Width="25" Name="TimestamphhT2L4E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT2L4E" Click="EndTimestampTeamSector_Click"/>
+                        <TextBox BorderBrush="Black" BorderThickness="0,0,1,0" Text="mm" Width="25" Name="TimestampmmT2L4E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Background="Green" Foreground="White" FontWeight="SemiBold" Content="Start" Width="30" Name="Team2Sector4ShiftStart" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="StartShift_Click"/>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+            <Border Grid.Row="3" Grid.Column="5" BorderBrush="Black" BorderThickness="1,0,1,1">
+                <DockPanel>
+                
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="50" >
+                        <TextBox Text="hh" Width="25" Name="TimestamphhT2L5S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT2L5S" Click="StartTimestampTeamSector_Click"/>
+                        <TextBox  BorderBrush="Black" BorderThickness="0,0,2,0" Text="mm" Width="25" Name="TimestampmmT2L5S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+
+                        <TextBox BorderBrush="Black" BorderThickness="1,0,0,0" Text="hh" Width="25" Name="TimestamphhT2L5E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT2L5E" Click="EndTimestampTeamSector_Click"/>
+                        <TextBox BorderBrush="Black" BorderThickness="0,0,1,0" Text="mm" Width="25" Name="TimestampmmT2L5E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Background="Green" Foreground="White" FontWeight="SemiBold" Content="Start" Width="30" Name="Team2Sector5ShiftStart" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="StartShift_Click"/>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+            <Border Grid.Row="3" Grid.Column="6" BorderBrush="Black" BorderThickness="1,0,1,1">
+                <DockPanel>
+                
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="50" >
+                        <TextBox Text="hh" Width="25" Name="TimestamphhT2L6S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT2L6S" Click="StartTimestampTeamSector_Click"/>
+                        <TextBox  BorderBrush="Black" BorderThickness="0,0,2,0" Text="mm" Width="25" Name="TimestampmmT2L6S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+
+                        <TextBox BorderBrush="Black" BorderThickness="1,0,0,0" Text="hh" Width="25" Name="TimestamphhT2L6E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT2L6E" Click="EndTimestampTeamSector_Click"/>
+                        <TextBox BorderBrush="Black" BorderThickness="0,0,1,0" Text="mm" Width="25" Name="TimestampmmT2L6E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Background="Green" Foreground="White" FontWeight="SemiBold" Content="Start" Width="30" Name="Team2Sector6ShiftStart" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="StartShift_Click"/>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+            <Border Grid.Row="3" Grid.Column="7" BorderBrush="Black" BorderThickness="1,0,1,1">
+                <DockPanel>
+                
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="50" >
+                        <TextBox Text="hh" Width="25" Name="TimestamphhT2L7S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT2L7S" Click="StartTimestampTeamSector_Click"/>
+                        <TextBox  BorderBrush="Black" BorderThickness="0,0,2,0" Text="mm" Width="25" Name="TimestampmmT2L7S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+
+                        <TextBox BorderBrush="Black" BorderThickness="1,0,0,0" Text="hh" Width="25" Name="TimestamphhT2L7E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT2L7E" Click="EndTimestampTeamSector_Click"/>
+                        <TextBox BorderBrush="Black" BorderThickness="0,0,1,0" Text="mm" Width="25" Name="TimestampmmT2L7E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Background="Green" Foreground="White" FontWeight="SemiBold" Content="Start" Width="30" Name="Team2Sector7ShiftStart" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="StartShift_Click"/>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+
+            <!-- ____________Team 3 ____________ -->
+
+
+            <Border Grid.Row="4" Grid.Column="1" BorderBrush="Black" BorderThickness="1,0,1,1">
+                <DockPanel>
+                   
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="50"  >
+                        <TextBox Text="hh" Width="25" Name="TimestamphhT3L1S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT3L1S" Click="StartTimestampTeamSector_Click"/>
+                        <TextBox  BorderBrush="Black" BorderThickness="0,0,2,0" Text="mm" Width="25" Name="TimestampmmT3L1S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+
+                        <TextBox BorderBrush="Black" BorderThickness="1,0,0,0" Text="hh" Width="25" Name="TimestamphhT3L1E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT3L1E" Click="EndTimestampTeamSector_Click"/>
+                        <TextBox BorderBrush="Black" BorderThickness="0,0,1,0" Text="mm" Width="25" Name="TimestampmmT3L1E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Background="Green" Foreground="White" FontWeight="SemiBold" Content="Start" Width="30" Name="Team3Sector1ShiftStart" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="StartShift_Click"/>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+            <Border Grid.Row="4" Grid.Column="2" BorderBrush="Black" BorderThickness="1,0,1,1">
+                <DockPanel>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="50"  >
+                        <TextBox Text="hh" Width="25" Name="TimestamphhT3L2S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT3L2S" Click="StartTimestampTeamSector_Click"/>
+                        <TextBox  BorderBrush="Black" BorderThickness="0,0,2,0" Text="mm" Width="25" Name="TimestampmmT3L2S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+
+                        <TextBox BorderBrush="Black" BorderThickness="1,0,0,0" Text="hh" Width="25" Name="TimestamphhT3L2E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT3L2E" Click="EndTimestampTeamSector_Click"/>
+                        <TextBox BorderBrush="Black" BorderThickness="0,0,1,0" Text="mm" Width="25" Name="TimestampmmT3L2E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Background="Green" Foreground="White" FontWeight="SemiBold" Content="Start" Width="30" Name="Team3Sector2ShiftStart" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="StartShift_Click"/>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+            <Border Grid.Row="4" Grid.Column="3" BorderBrush="Black" BorderThickness="1,0,1,1">
+                <DockPanel>
+             
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="50" >
+                        <TextBox Text="hh" Width="25" Name="TimestamphhT3L3S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT3L3S" Click="StartTimestampTeamSector_Click"/>
+                        <TextBox  BorderBrush="Black" BorderThickness="0,0,2,0" Text="mm" Width="25" Name="TimestampmmT3L3S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+
+                        <TextBox BorderBrush="Black" BorderThickness="1,0,0,0" Text="hh" Width="25" Name="TimestamphhT3L3E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT3L3E" Click="EndTimestampTeamSector_Click"/>
+                        <TextBox BorderBrush="Black" BorderThickness="0,0,1,0" Text="mm" Width="25" Name="TimestampmmT3L3E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Background="Green" Foreground="White" FontWeight="SemiBold" Content="Start" Width="30" Name="Team3Sector3ShiftStart" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="StartShift_Click"/>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+            <Border Grid.Row="4" Grid.Column="4" BorderBrush="Black" BorderThickness="1,0,1,1">
+                <DockPanel>
+                
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="50" >
+                        <TextBox Text="hh" Width="25" Name="TimestamphhT3L4S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT3L4S" Click="StartTimestampTeamSector_Click"/>
+                        <TextBox  BorderBrush="Black" BorderThickness="0,0,2,0" Text="mm" Width="25" Name="TimestampmmT3L4S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+
+                        <TextBox BorderBrush="Black" BorderThickness="1,0,0,0" Text="hh" Width="25" Name="TimestamphhT3L4E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT3L4E" Click="EndTimestampTeamSector_Click"/>
+                        <TextBox BorderBrush="Black" BorderThickness="0,0,1,0" Text="mm" Width="25" Name="TimestampmmT3L4E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Background="Green" Foreground="White" FontWeight="SemiBold" Content="Start" Width="30" Name="Team3Sector4ShiftStart" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="StartShift_Click"/>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+            <Border Grid.Row="4" Grid.Column="5" BorderBrush="Black" BorderThickness="1,0,1,1">
+                <DockPanel>
+               
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="50" >
+                        <TextBox Text="hh" Width="25" Name="TimestamphhT3L5S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT3L5S" Click="StartTimestampTeamSector_Click"/>
+                        <TextBox  BorderBrush="Black" BorderThickness="0,0,2,0" Text="mm" Width="25" Name="TimestampmmT3L5S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+
+                        <TextBox BorderBrush="Black" BorderThickness="1,0,0,0" Text="hh" Width="25" Name="TimestamphhT3L5E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT3L5E" Click="EndTimestampTeamSector_Click"/>
+                        <TextBox BorderBrush="Black" BorderThickness="0,0,1,0" Text="mm" Width="25" Name="TimestampmmT3L5E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Background="Green" Foreground="White" FontWeight="SemiBold" Content="Start" Width="30" Name="Team3Sector5ShiftStart" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="StartShift_Click"/>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+            <Border Grid.Row="4" Grid.Column="6" BorderBrush="Black" BorderThickness="1,0,1,1">
+                <DockPanel>
+                
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="50" >
+                        <TextBox Text="hh" Width="25" Name="TimestamphhT3L6S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT3L6S" Click="StartTimestampTeamSector_Click"/>
+                        <TextBox  BorderBrush="Black" BorderThickness="0,0,2,0" Text="mm" Width="25" Name="TimestampmmT3L6S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+
+                        <TextBox BorderBrush="Black" BorderThickness="1,0,0,0" Text="hh" Width="25" Name="TimestamphhT3L6E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT3L6E" Click="EndTimestampTeamSector_Click"/>
+                        <TextBox BorderBrush="Black" BorderThickness="0,0,1,0" Text="mm" Width="25" Name="TimestampmmT3L6E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Background="Green" Foreground="White" FontWeight="SemiBold" Content="Start" Width="30" Name="Team3Sector6ShiftStart" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="StartShift_Click"/>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+            <Border Grid.Row="4" Grid.Column="7" BorderBrush="Black" BorderThickness="1,0,1,1">
+                <DockPanel>
+                 
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="50" >
+                        <TextBox Text="hh" Width="25" Name="TimestamphhT3L7S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT3L7S" Click="StartTimestampTeamSector_Click"/>
+                        <TextBox  BorderBrush="Black" BorderThickness="0,0,2,0" Text="mm" Width="25" Name="TimestampmmT3L7S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+
+                        <TextBox BorderBrush="Black" BorderThickness="1,0,0,0" Text="hh" Width="25" Name="TimestamphhT3L7E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT3L7E" Click="EndTimestampTeamSector_Click"/>
+                        <TextBox BorderBrush="Black" BorderThickness="0,0,1,0" Text="mm" Width="25" Name="TimestampmmT3L7E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Background="Green" Foreground="White" FontWeight="SemiBold" Content="Start" Width="30" Name="Team3Sector7ShiftStart" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="StartShift_Click"/>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+
+            <!-- ____________Team 4 ____________ -->
+
+
+            <Border Grid.Row="5" Grid.Column="1" BorderBrush="Black" BorderThickness="1,0,1,1">
+                <DockPanel>
+                
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="50"  >
+                        <TextBox Text="hh" Width="25" Name="TimestamphhT4L1S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT4L1S" Click="StartTimestampTeamSector_Click"/>
+                        <TextBox  BorderBrush="Black" BorderThickness="0,0,2,0" Text="mm" Width="25" Name="TimestampmmT4L1S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+
+                        <TextBox BorderBrush="Black" BorderThickness="1,0,0,0" Text="hh" Width="25" Name="TimestamphhT4L1E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT4L1E" Click="EndTimestampTeamSector_Click"/>
+                        <TextBox BorderBrush="Black" BorderThickness="0,0,1,0" Text="mm" Width="25" Name="TimestampmmT4L1E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Background="Green" Foreground="White" FontWeight="SemiBold" Content="Start" Width="30" Name="Team4Sector1ShiftStart" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="StartShift_Click" />
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+            <Border Grid.Row="5" Grid.Column="2" BorderBrush="Black" BorderThickness="1,0,1,1">
+                <DockPanel>
+                 
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="50" >
+                        <TextBox Text="hh" Width="25" Name="TimestamphhT4L2S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT4L2S" Click="StartTimestampTeamSector_Click"/>
+                        <TextBox  BorderBrush="Black" BorderThickness="0,0,2,0" Text="mm" Width="25" Name="TimestampmmT4L2S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+
+                        <TextBox BorderBrush="Black" BorderThickness="1,0,0,0" Text="hh" Width="25" Name="TimestamphhT4L2E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT4L2E" Click="EndTimestampTeamSector_Click"/>
+                        <TextBox BorderBrush="Black" BorderThickness="0,0,1,0" Text="mm" Width="25" Name="TimestampmmT4L2E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Background="Green" Foreground="White" FontWeight="SemiBold" Content="Start" Width="30" Name="Team4Sector2ShiftStart" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="StartShift_Click" />
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+            <Border Grid.Row="5" Grid.Column="3" BorderBrush="Black" BorderThickness="1,0,1,1">
+                <DockPanel>
+                
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="50">
+                        <TextBox Text="hh" Width="25" Name="TimestamphhT4L3S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT4L3S" Click="StartTimestampTeamSector_Click"/>
+                        <TextBox  BorderBrush="Black" BorderThickness="0,0,2,0" Text="mm" Width="25" Name="TimestampmmT4L3S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+
+                        <TextBox BorderBrush="Black" BorderThickness="1,0,0,0" Text="hh" Width="25" Name="TimestamphhT4L3E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT4L3E" Click="EndTimestampTeamSector_Click"/>
+                        <TextBox BorderBrush="Black" BorderThickness="0,0,1,0" Text="mm" Width="25" Name="TimestampmmT4L3E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Background="Green" Foreground="White" FontWeight="SemiBold" Content="Start" Width="30" Name="Team4Sector3ShiftStart" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="StartShift_Click"/>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+            <Border Grid.Row="5" Grid.Column="4" BorderBrush="Black" BorderThickness="1,0,1,1">
+                <DockPanel>
+                 
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="50" >
+                        <TextBox Text="hh" Width="25" Name="TimestamphhT4L4S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT4L4S" Click="StartTimestampTeamSector_Click"/>
+                        <TextBox  BorderBrush="Black" BorderThickness="0,0,2,0" Text="mm" Width="25" Name="TimestampmmT4L4S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+
+                        <TextBox BorderBrush="Black" BorderThickness="1,0,0,0" Text="hh" Width="25" Name="TimestamphhT4L4E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT4L4E" Click="EndTimestampTeamSector_Click"/>
+                        <TextBox BorderBrush="Black" BorderThickness="0,0,1,0" Text="mm" Width="25" Name="TimestampmmT4L4E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Background="Green" Foreground="White" FontWeight="SemiBold" Content="Start" Width="30" Name="Team4Sector4ShiftStart" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="StartShift_Click"/>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+            <Border Grid.Row="5" Grid.Column="5" BorderBrush="Black" BorderThickness="1,0,1,1">
+                <DockPanel>
+              
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="50">
+                        <TextBox Text="hh" Width="25" Name="TimestamphhT4L5S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT4L5S" Click="StartTimestampTeamSector_Click"/>
+                        <TextBox  BorderBrush="Black" BorderThickness="0,0,2,0" Text="mm" Width="25" Name="TimestampmmT4L5S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+
+                        <TextBox BorderBrush="Black" BorderThickness="1,0,0,0" Text="hh" Width="25" Name="TimestamphhT4L5E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT4L5E" Click="EndTimestampTeamSector_Click"/>
+                        <TextBox BorderBrush="Black" BorderThickness="0,0,1,0" Text="mm" Width="25" Name="TimestampmmT4L5E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Background="Green" Foreground="White" FontWeight="SemiBold" Content="Start" Width="30" Name="Team4Sector5ShiftStart" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="StartShift_Click"/>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+            <Border Grid.Row="5" Grid.Column="6" BorderBrush="Black" BorderThickness="1,0,1,1">
+                <DockPanel>
+                
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="50" >
+                        <TextBox Text="hh" Width="25" Name="TimestamphhT4L6S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT4L6S" Click="StartTimestampTeamSector_Click"/>
+                        <TextBox  BorderBrush="Black" BorderThickness="0,0,2,0" Text="mm" Width="25" Name="TimestampmmT4L6S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+
+                        <TextBox BorderBrush="Black" BorderThickness="1,0,0,0" Text="hh" Width="25" Name="TimestamphhT4L6E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT4L6E" Click="EndTimestampTeamSector_Click"/>
+                        <TextBox BorderBrush="Black" BorderThickness="0,0,1,0" Text="mm" Width="25" Name="TimestampmmT4L6E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Background="Green" Foreground="White" FontWeight="SemiBold" Content="Start" Width="30" Name="Team4Sector6ShiftStart" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="StartShift_Click"/>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+            <Border Grid.Row="5" Grid.Column="7" BorderBrush="Black" BorderThickness="1,0,1,1">
+                <DockPanel>
+                 
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="50" >
+                        <TextBox Text="hh" Width="25" Name="TimestamphhT4L7S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT4L7S" Click="StartTimestampTeamSector_Click"/>
+                        <TextBox  BorderBrush="Black" BorderThickness="0,0,2,0" Text="mm" Width="25" Name="TimestampmmT4L7S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+
+                        <TextBox BorderBrush="Black" BorderThickness="1,0,0,0" Text="hh" Width="25" Name="TimestamphhT4L7E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT4L7E" Click="EndTimestampTeamSector_Click"/>
+                        <TextBox BorderBrush="Black" BorderThickness="0,0,1,0" Text="mm" Width="25" Name="TimestampmmT4L7E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Background="Green" Foreground="White" FontWeight="SemiBold" Content="Start" Width="30" Name="Team4Sector7ShiftStart" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="StartShift_Click"/>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+
+            <!-- ____________Team 5 ____________ -->
+
+
+            <Border Grid.Row="6" Grid.Column="1" BorderBrush="Black" BorderThickness="1,0,1,1">
+                <DockPanel>
+                
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="50">
+                        <TextBox Text="hh" Width="25" Name="TimestamphhT5L1S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT5L1S" Click="StartTimestampTeamSector_Click"/>
+                        <TextBox  BorderBrush="Black" BorderThickness="0,0,2,0" Text="mm" Width="25" Name="TimestampmmT5L1S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+
+                        <TextBox BorderBrush="Black" BorderThickness="1,0,0,0" Text="hh" Width="25" Name="TimestamphhT5L1E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT5L1E" Click="EndTimestampTeamSector_Click"/>
+                        <TextBox BorderBrush="Black" BorderThickness="0,0,1,0" Text="mm" Width="25" Name="TimestampmmT5L1E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Background="Green" Foreground="White" FontWeight="SemiBold" Content="Start" Width="30" Name="Team5Sector1ShiftStart" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="StartShift_Click"/>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+            <Border Grid.Row="6" Grid.Column="2" BorderBrush="Black" BorderThickness="1,0,1,1">
+                <DockPanel>
+                
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="50" >
+                        <TextBox Text="hh" Width="25" Name="TimestamphhT5L2S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT5L2S" Click="StartTimestampTeamSector_Click"/>
+                        <TextBox  BorderBrush="Black" BorderThickness="0,0,2,0" Text="mm" Width="25" Name="TimestampmmT5L2S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+
+                        <TextBox BorderBrush="Black" BorderThickness="1,0,0,0" Text="hh" Width="25" Name="TimestamphhT5L2E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT5L2E" Click="EndTimestampTeamSector_Click"/>
+                        <TextBox BorderBrush="Black" BorderThickness="0,0,1,0" Text="mm" Width="25" Name="TimestampmmT5L2E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Background="Green" Foreground="White" FontWeight="SemiBold" Content="Start" Width="30" Name="Team5Sector2ShiftStart" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="StartShift_Click"/>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+            <Border Grid.Row="6" Grid.Column="3" BorderBrush="Black" BorderThickness="1,0,1,1">
+                <DockPanel>
+              
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="50" >
+                        <TextBox Text="hh" Width="25" Name="TimestamphhT5L3S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT5L3S" Click="StartTimestampTeamSector_Click"/>
+                        <TextBox  BorderBrush="Black" BorderThickness="0,0,2,0" Text="mm" Width="25" Name="TimestampmmT5L3S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+
+                        <TextBox BorderBrush="Black" BorderThickness="1,0,0,0" Text="hh" Width="25" Name="TimestamphhT5L3E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT5L3E" Click="EndTimestampTeamSector_Click"/>
+                        <TextBox BorderBrush="Black" BorderThickness="0,0,1,0" Text="mm" Width="25" Name="TimestampmmT5L3E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Background="Green" Foreground="White" FontWeight="SemiBold" Content="Start" Width="30" Name="Team5Sector3ShiftStart" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="StartShift_Click"/>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+            <Border Grid.Row="6" Grid.Column="4" BorderBrush="Black" BorderThickness="1,0,1,1">
+                <DockPanel>
+                
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="50" >
+                        <TextBox Text="hh" Width="25" Name="TimestamphhT5L4S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT5L4S" Click="StartTimestampTeamSector_Click"/>
+                        <TextBox  BorderBrush="Black" BorderThickness="0,0,2,0" Text="mm" Width="25" Name="TimestampmmT5L4S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+
+                        <TextBox BorderBrush="Black" BorderThickness="1,0,0,0" Text="hh" Width="25" Name="TimestamphhT5L4E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT5L4E" Click="EndTimestampTeamSector_Click"/>
+                        <TextBox BorderBrush="Black" BorderThickness="0,0,1,0" Text="mm" Width="25" Name="TimestampmmT5L4E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Background="Green" Foreground="White" FontWeight="SemiBold" Content="Start" Width="30" Name="Team5Sector4ShiftStart" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="StartShift_Click"/>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+            <Border Grid.Row="6" Grid.Column="5" BorderBrush="Black" BorderThickness="1,0,1,1">
+                <DockPanel>
+                
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="50">
+                        <TextBox Text="hh" Width="25" Name="TimestamphhT5L5S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT5L5S" Click="StartTimestampTeamSector_Click"/>
+                        <TextBox  BorderBrush="Black" BorderThickness="0,0,2,0" Text="mm" Width="25" Name="TimestampmmT5L5S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+
+                        <TextBox BorderBrush="Black" BorderThickness="1,0,0,0" Text="hh" Width="25" Name="TimestamphhT5L5E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT5L5E" Click="EndTimestampTeamSector_Click"/>
+                        <TextBox BorderBrush="Black" BorderThickness="0,0,1,0" Text="mm" Width="25" Name="TimestampmmT5L5E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Background="Green" Foreground="White" FontWeight="SemiBold" Content="Start" Width="30" Name="Team5Sector5ShiftStart" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="StartShift_Click"/>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+            <Border Grid.Row="6" Grid.Column="6" BorderBrush="Black" BorderThickness="1,0,1,1">
+                <DockPanel>
+                 
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="50" >
+                        <TextBox Text="hh" Width="25" Name="TimestamphhT5L6S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT5L6S" Click="StartTimestampTeamSector_Click"/>
+                        <TextBox  BorderBrush="Black" BorderThickness="0,0,2,0" Text="mm" Width="25" Name="TimestampmmT5L6S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+
+                        <TextBox BorderBrush="Black" BorderThickness="1,0,0,0" Text="hh" Width="25" Name="TimestamphhT5L6E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT5L6E" Click="EndTimestampTeamSector_Click"/>
+                        <TextBox BorderBrush="Black" BorderThickness="0,0,1,0" Text="mm" Width="25" Name="TimestampmmT5L6E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Background="Green" Foreground="White" FontWeight="SemiBold" Content="Start" Width="30" Name="Team5Sector6ShiftStart" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="StartShift_Click"/>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+            <Border Grid.Row="6" Grid.Column="7" BorderBrush="Black" BorderThickness="1,0,1,1">
+                <DockPanel>
+                
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="50" >
+                        <TextBox Text="hh" Width="25" Name="TimestamphhT5L7S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT5L7S" Click="StartTimestampTeamSector_Click"/>
+                        <TextBox  BorderBrush="Black" BorderThickness="0,0,2,0" Text="mm" Width="25" Name="TimestampmmT5L7S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+
+                        <TextBox BorderBrush="Black" BorderThickness="1,0,0,0" Text="hh" Width="25" Name="TimestamphhT5L7E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT5L7E" Click="EndTimestampTeamSector_Click"/>
+                        <TextBox BorderBrush="Black" BorderThickness="0,0,1,0" Text="mm" Width="25" Name="TimestampmmT5L7E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Background="Green" Foreground="White" FontWeight="SemiBold" Content="Start" Width="30" Name="Team5Sector7ShiftStart" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="StartShift_Click"/>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+            <!-- ____________Team 6 ____________ -->
+
+
+            <Border Grid.Row="7" Grid.Column="1" BorderBrush="Black" BorderThickness="1,0,1,1">
+                <DockPanel>
+           
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="50" >
+                        <TextBox Text="hh" Width="25" Name="TimestamphhT6L1S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT6L1S" Click="StartTimestampTeamSector_Click"/>
+                        <TextBox  BorderBrush="Black" BorderThickness="0,0,2,0" Text="mm" Width="25" Name="TimestampmmT6L1S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+
+                        <TextBox BorderBrush="Black" BorderThickness="1,0,0,0" Text="hh" Width="25" Name="TimestamphhT6L1E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT6L1E" Click="EndTimestampTeamSector_Click"/>
+                        <TextBox BorderBrush="Black" BorderThickness="0,0,1,0" Text="mm" Width="25" Name="TimestampmmT6L1E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Background="Green" Foreground="White" FontWeight="SemiBold" Content="Start" Width="30" Name="Team6Sector1ShiftStart" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  Click="StartShift_Click"/>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+            <Border Grid.Row="7" Grid.Column="2" BorderBrush="Black" BorderThickness="1,0,1,1">
+                <DockPanel>
+               
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="50" >
+                        <TextBox Text="hh" Width="25" Name="TimestamphhT6L2S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT6L2S" Click="StartTimestampTeamSector_Click"/>
+                        <TextBox  BorderBrush="Black" BorderThickness="0,0,2,0" Text="mm" Width="25" Name="TimestampmmT6L2S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+
+                        <TextBox BorderBrush="Black" BorderThickness="1,0,0,0" Text="hh" Width="25" Name="TimestamphhT6L2E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT6L2E" Click="EndTimestampTeamSector_Click"/>
+                        <TextBox BorderBrush="Black" BorderThickness="0,0,1,0" Text="mm" Width="25" Name="TimestampmmT6L2E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Background="Green" Foreground="White" FontWeight="SemiBold" Content="Start" Width="30" Name="Team6Sector2ShiftStart" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  Click="StartShift_Click"/>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+            <Border Grid.Row="7" Grid.Column="3" BorderBrush="Black" BorderThickness="1,0,1,1">
+                <DockPanel>
+               
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="50" >
+                        <TextBox Text="hh" Width="25" Name="TimestamphhT6L3S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT6L3S" Click="StartTimestampTeamSector_Click"/>
+                        <TextBox  BorderBrush="Black" BorderThickness="0,0,2,0" Text="mm" Width="25" Name="TimestampmmT6L3S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+
+                        <TextBox BorderBrush="Black" BorderThickness="1,0,0,0" Text="hh" Width="25" Name="TimestamphhT6L3E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT6L3E" Click="EndTimestampTeamSector_Click"/>
+                        <TextBox BorderBrush="Black" BorderThickness="0,0,1,0" Text="mm" Width="25" Name="TimestampmmT6L3E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Background="Green" Foreground="White" FontWeight="SemiBold" Content="Start" Width="30" Name="Team6Sector3ShiftStart" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  Click="StartShift_Click"/>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+            <Border Grid.Row="7" Grid.Column="4" BorderBrush="Black" BorderThickness="1,0,1,1">
+                <DockPanel>
+              
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="50">
+                        <TextBox Text="hh" Width="25" Name="TimestamphhT6L4S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT6L4S" Click="StartTimestampTeamSector_Click"/>
+                        <TextBox  BorderBrush="Black" BorderThickness="0,0,2,0" Text="mm" Width="25" Name="TimestampmmT6L4S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+
+                        <TextBox BorderBrush="Black" BorderThickness="1,0,0,0" Text="hh" Width="25" Name="TimestamphhT6L4E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT6L4E" Click="EndTimestampTeamSector_Click"/>
+                        <TextBox BorderBrush="Black" BorderThickness="0,0,1,0" Text="mm" Width="25" Name="TimestampmmT6L4E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Background="Green" Foreground="White" FontWeight="SemiBold" Content="Start" Width="30" Name="Team6Sector4ShiftStart" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  Click="StartShift_Click"/>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+            <Border Grid.Row="7" Grid.Column="5" BorderBrush="Black" BorderThickness="1,0,1,1">
+                <DockPanel>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="50" >
+                        <TextBox Text="hh" Width="25" Name="TimestamphhT6L5S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT6L5S" Click="StartTimestampTeamSector_Click"/>
+                        <TextBox  BorderBrush="Black" BorderThickness="0,0,2,0" Text="mm" Width="25" Name="TimestampmmT6L5S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+
+                        <TextBox BorderBrush="Black" BorderThickness="1,0,0,0" Text="hh" Width="25" Name="TimestamphhT6L5E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT6L5E" Click="EndTimestampTeamSector_Click"/>
+                        <TextBox BorderBrush="Black" BorderThickness="0,0,1,0" Text="mm" Width="25" Name="TimestampmmT6L5E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Background="Green" Foreground="White" FontWeight="SemiBold" Content="Start" Width="30" Name="Team6Sector5ShiftStart" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  Click="StartShift_Click"/>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+            <Border Grid.Row="7" Grid.Column="6" BorderBrush="Black" BorderThickness="1,0,1,1">
+                <DockPanel>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="50" >
+                        <TextBox Text="hh" Width="25" Name="TimestamphhT6L6S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT6L6S" Click="StartTimestampTeamSector_Click"/>
+                        <TextBox  BorderBrush="Black" BorderThickness="0,0,2,0" Text="mm" Width="25" Name="TimestampmmT6L6S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+
+                        <TextBox BorderBrush="Black" BorderThickness="1,0,0,0" Text="hh" Width="25" Name="TimestamphhT6L6E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT6L6E" Click="EndTimestampTeamSector_Click"/>
+                        <TextBox BorderBrush="Black" BorderThickness="0,0,1,0" Text="mm" Width="25" Name="TimestampmmT6L6E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Background="Green" Foreground="White" FontWeight="SemiBold" Content="Start" Width="30" Name="Team6Sector6ShiftStart" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  Click="StartShift_Click" />
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+            <Border Grid.Row="7" Grid.Column="7" BorderBrush="Black" BorderThickness="1,0,1,1">
+                <DockPanel>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="50" >
+                        <TextBox Text="hh" Width="25" Name="TimestamphhT6L7S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT6L7S" Click="StartTimestampTeamSector_Click"/>
+                        <TextBox  BorderBrush="Black" BorderThickness="0,0,2,0" Text="mm" Width="25" Name="TimestampmmT6L7S" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+
+                        <TextBox BorderBrush="Black" BorderThickness="1,0,0,0" Text="hh" Width="25" Name="TimestamphhT6L7E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Width="25" Content=":" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Name="TimestampT6L7E" Click="EndTimestampTeamSector_Click"/>
+                        <TextBox BorderBrush="Black" BorderThickness="0,0,1,0" Text="mm" Width="25" Name="TimestampmmT6L7E" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
+                        <Button Background="Green" Foreground="White" FontWeight="SemiBold" Content="Start" Width="30" Name="Team6Sector7ShiftStart"  VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  Click="StartShift_Click" />
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+        </Grid>
+    </ScrollViewer>
+</Page>

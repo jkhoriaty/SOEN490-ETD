@@ -4,7 +4,6 @@
         xmlns:properties="clr-namespace:ETD.Properties"
         Title="Emergency Team Dispatcher"
 		WindowStartupLocation="CenterScreen"
-        Closing="FormCloseConfirmation"
 		WindowState="Maximized"
 		SizeChanged="setSectionsHeight"
 		StateChanged="setSectionsHeight"
@@ -33,26 +32,26 @@
         <Grid Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
                 <!-- Here go all the buttons left -->
-                <Button x:Uid="Button_GPSLocations" Content="{Binding Path=Button_GPSLocations, Source={StaticResource Resources}}" Name="GPSLocationsTextBlock" Click="ShowGPSLocations_Click" IsEnabled="False"/>
+				<Button x:Uid="Button_GPSLocations" Content="{Binding Path=Button_GPSLocations, Source={StaticResource Resources}}" Name="GPSLocationsTextBlock" Click="ShowGPSLocations_Click" IsEnabled="False"/>
                 <Label Content="0" Name="newRegisteredCTR" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
 				<Button Content="GPS Setup" Name="GPSSetup_Button" Click="GPSSetup_Click"/>
-                <Border BorderThickness="0.5" BorderBrush="Black" Margin="3,0,3,0" VerticalAlignment="Stretch"/>
+				<Border BorderThickness="0.5" BorderBrush="Black" Margin="3,0,3,0" VerticalAlignment="Stretch"/>
                 <ComboBox IsSynchronizedWithCurrentItem="True" VerticalAlignment="Center" Height="Auto" x:Name="ComboBox_Languages" ItemsSource="{Binding Path=SupportedCulturesNames, Mode=OneWay, Source={StaticResource CultureResourcesDS}}" Width="Auto"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
                 <!-- Here go all the buttons right-->
-                <Button x:Uid="Button_Statistics" Content="{Binding Path=Button_Statistics, Source={StaticResource Resources}}" Click="ShowStatistics" IsEnabled="true"/>
                 <ComboBox Visibility="Collapsed" Name="AI" Width="130" Margin="1,0,1,0" VerticalAlignment="Center">
                     <ComboBoxItem x:Uid="ComboBoxItem_Rectangle" Content="{Binding Path=ComboBoxItem_Rectangle, Source={StaticResource Resources}}" Name="rectangle" Selected="CreateMapModificationPin"/>
                     <ComboBoxItem x:Uid="ComboBoxItem_Stairs" Content="{Binding Path=ComboBoxItem_Stairs, Source={StaticResource Resources}}" Name="stairs" Selected="CreateMapModificationPin"/>
                     <ComboBoxItem x:Uid="ComboBoxItem_Camp" Content="{Binding Path=ComboBoxItem_Camp, Source={StaticResource Resources}}" Name="camp" Selected="CreateMapModificationPin"/>
                     <ComboBoxItem x:Uid="ComboBoxItem_Line" Content="{Binding Path=ComboBoxItem_Line, Source={StaticResource Resources}}" Name="line" Selected="CreateMapModificationPin"/>
-                    <ComboBoxItem Content="ramp"  Name="ramp" Selected="CreateMapModificationPin"/>
+                    <ComboBoxItem Content="Ramp" Name="ramp" Selected="CreateMapModificationPin"/>
 				</ComboBox>
 				<ComboBox Name="modeCB" SelectionChanged="ModeChange" Width="140">
                     <ComboBoxItem x:Uid="ComboBoxItem_RegularMode" Content="{Binding Path=ComboBoxItem_RegularMode, Source={StaticResource Resources}}"/>
                     <ComboBoxItem x:Uid="ComboBoxItem_EditMode" Content="{Binding Path=ComboBoxItem_EditMode, Source={StaticResource Resources}}"/>
 				</ComboBox>
+                <Button Content="Shifts" Click="ShowShiftsSection" IsEnabled="true"/>
                 <Button x:Uid="Button_FollowUp" Content="{Binding Path=Button_FollowUp, Source={StaticResource Resources}}" Click="ShowFollowUpSection" IsEnabled="true"/>
                 <Border BorderThickness="0.5" BorderBrush="Black" Margin="3,0,3,0" VerticalAlignment="Stretch"/>
                 <Button x:Uid="Button_LoadMap" Content="{Binding Path=Button_LoadMap, Source={StaticResource Resources}}" Name="Load_Map" Click="LoadMap" Margin="2,0,2,0"/>

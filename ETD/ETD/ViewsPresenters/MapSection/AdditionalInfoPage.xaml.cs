@@ -144,7 +144,7 @@ namespace ETD.ViewsPresenters.MapSection
                 {
                     mapModObject.Margin = new Thickness(NewPt2.X, NewPt2.Y, NewPt1.X, NewPt1.Y);
                 }
-
+      
                 if (NewPt1.X < NewPt2.X && NewPt1.Y < NewPt2.Y) //draw from top left to bottom right 
                 {
                     mapModObject.Margin = new Thickness(NewPt1.X, NewPt1.Y, NewPt2.X, NewPt2.Y);
@@ -154,12 +154,12 @@ namespace ETD.ViewsPresenters.MapSection
                 {
                     mapModObject.Margin = new Thickness(NewPt1.X, NewPt2.Y, NewPt2.X, NewPt1.Y);
                 }
-
+                
                 if (NewPt1.X > NewPt2.X && NewPt1.Y < NewPt2.Y) //draw from top right to bottom left
                 {
                     mapModObject.Margin = new Thickness(NewPt2.X, NewPt1.Y, NewPt1.X, NewPt2.Y);
                 }
-
+                
                 objectList.Add(mapModObject);
                 AdditionalMap.Children.Add(mapModObject);
              
