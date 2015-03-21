@@ -40,6 +40,8 @@ namespace ETD.ViewsPresenters
 
         List<Team> teamList = new List<Team>();//Contains a list of teams
         Dictionary<string, GPSLocation> gpsLocationsDictionary = new Dictionary<string, GPSLocation>();
+        Dictionary<string, string> volunteerList = new Dictionary<string,string>();
+        Dictionary<string, string> inverseVolunteerList = new Dictionary<string, string>();
 
         public GPSAssignment()
         {
@@ -58,21 +60,19 @@ namespace ETD.ViewsPresenters
                 teamGrid.Children.Add(teamName);
 
                 ComboBox combo = new ComboBox();
-                combo.Name = row.ToString();
+                String forName = row.ToString();
+                //combo.Name = forName;
                 Grid.SetRow(combo, row);
                 Grid.SetColumn(combo, 1);
 
                 List<TeamMember> tempList = new List<TeamMember>();
                 tempList = t.getMemberList();
 
-                /*foreach (TeamMember temp in tempList)
-                {
-                    combo.Items.Add(temp.getName());
-                }*/
+                volunteerList = GPSServices.getUsers();
 
-                foreach (KeyValuePair<string, GPSLocation> entry in gpsLocationsDictionary)
+                foreach (KeyValuePair<string, string> entry in volunteerList)
                 {
-                    combo.Items.Add(entry.Key);
+                    combo.Items.Add(entry.Value);
                 }
 
                 teamGrid.Children.Add(combo);
@@ -83,11 +83,32 @@ namespace ETD.ViewsPresenters
 
         private void Submit_Click(object sender, RoutedEventArgs e)
         {
-            foreach (ComboBox ctrl in teamGrid.Children)
+           /* foreach (ComboBox ctrl in teamGrid.Children)
             {
                 int index = Convert.ToInt32(ctrl.Name);
                 string index2 = ctrl.SelectedItem.ToString();
                 teamList[index].setGPSLocation(gpsLocationsDictionary[index2]);
+            }*/
+
+            int teamIndex = 0;
+
+            foreach (KeyValuePair<string, string> entry in volunteerList)
+            {
+                inverseVolunteerList.Add(entry.Value, entry.Key);
+            }
+
+            foreach (ComboBox ctrl in teamGrid.Children.OfType<ComboBox>())
+            {
+                ComboBox temp = new ComboBox();
+                temp = ctrl;
+                if (temp.SelectedItem != null)
+                {
+                    string memberID = temp.SelectedItem.ToString();
+
+                    MessageBox.Show(memberID);
+
+                    teamList[teamIndex].setGPSLocation(gpsLocationsDictionary[inverseVolunteerList[memberID]]);         
+                }   
             }
                 this.Close();
         }

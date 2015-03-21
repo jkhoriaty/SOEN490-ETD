@@ -118,5 +118,10 @@ namespace ETD.Services
 				GPSLocation.getGPSLocationFromID(reply[1]).setGPSCoordinates(Double.Parse(reply[2]), Double.Parse(reply[3]));
 			}
 		}
+
+        internal static Dictionary<string, string> getUsers()
+        {
+            return registeredVolunteers;
+        }
 	}
 }
