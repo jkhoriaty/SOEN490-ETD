@@ -148,15 +148,12 @@ namespace ETD.CustomObjects.PopupForms
                         Grid.SetColumn(newShift.getTeamNameTextBox(), columnPosition);
                         Grid.SetRow(newShift.getTeamNameTextBox(), sectorRowPosition);
                     
-
-
                     //teamMap.Add("Team" + (teamNumber - 1).ToString() + "s" + (sectorRowPosition - 1).ToString(), newShift.getTeamNameTextBox());
 
                     for (int i = 0; i < sectorMap.Count(); i++)
                     {
                         ShiftLine newShift3 = new ShiftLine(currentShift);
-
-                 
+  
                         Shifts_grid.Children.Add(newShift3.getTeamNameTextBox());
                         Grid.SetColumn(newShift3.getTeamNameTextBox(), i+1);
                         Grid.SetRow(newShift3.getTeamNameTextBox(), sectorRowPosition);
@@ -164,7 +161,6 @@ namespace ETD.CustomObjects.PopupForms
                         // teamMap.Add("Team" + (teamNumber).ToString() + "s" + (columnPosition - 1).ToString(), newShift2.getTeamNameTextBox());
  
                     }
-
             }
         }
 
@@ -178,5 +174,16 @@ namespace ETD.CustomObjects.PopupForms
 
         }
 
+        //Focus on the follow up or completion time stamp text box
+        private void TextBoxes_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBoxHandler.GotFocus(sender, e);
+        }
+
+        //Recovering the fields default text if left empty
+        private void TextBoxes_LostFocus(object sender, RoutedEventArgs e)
+        {
+            TextBoxHandler.LostFocus(sender, e);
+        }
     }
 }

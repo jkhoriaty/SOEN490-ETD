@@ -23,9 +23,8 @@
             <!-- ______________________________Header content______________________________ -->
 
             <Border  Grid.Column="0" Grid.Row="0" BorderBrush="Black" BorderThickness="1,1,1,1">
-                <TextBox  TextChanged="getShiftDuration" x:Uid="TextBlock_Duration" Name="Duration" Text="Duration" FontSize="20"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" RenderTransformOrigin="1.294,0.509" Height="51" Margin="0,-1"/>
+                <TextBox  TextChanged="getShiftDuration" x:Uid="TextBlock_Duration" Name="Duration" Text="Duration" FontSize="20"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" RenderTransformOrigin="1.294,0.509" Height="51" Margin="0,-1" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus"/>
             </Border>
-
 
             <Border  Grid.Column="0" Grid.Row="1" BorderBrush="Black" BorderThickness="1,1,1,1">
                 <TextBlock   x:Uid="TextBlock_SectorsHours" Text="Sectors /  Hours" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" RenderTransformOrigin="1.294,0.509"/>
