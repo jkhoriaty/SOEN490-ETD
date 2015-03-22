@@ -84,6 +84,8 @@ namespace ETD.ViewsPresenters
         private void Submit_Click(object sender, RoutedEventArgs e)
         {
             int teamIndex = 0;
+            List<string> noDuplicates = new List<string>();
+            bool duplicates = false;
 
             foreach (KeyValuePair<string, string> entry in volunteerList)
             {
@@ -98,10 +100,24 @@ namespace ETD.ViewsPresenters
                 {
                     string memberID = temp.SelectedItem.ToString();
 
+                    if (!noDuplicates.Contains(memberID))
+                    {
+                        noDuplicates.Add(memberID);
+                    }
+                    else
+                        duplicates = true;
+
                     teamList[teamIndex].setGPSLocation(gpsLocationsDictionary[inverseVolunteerList[memberID]]);         
                 }   
             }
+            if (duplicates == false)
+            {
                 this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Each team member can be assigned to at most one team.");
+            }
         }
     }
 }

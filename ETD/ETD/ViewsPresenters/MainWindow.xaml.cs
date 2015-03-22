@@ -250,8 +250,11 @@ namespace ETD.ViewsPresenters
         //Display GPS position
 		private void ShowGPSLocations_Click(object sender, RoutedEventArgs e)
 		{
-            GPSAssignment subWindow = new GPSAssignment();
-            subWindow.Show();
+            if (!Team.getTeamList().Any())
+            {
+                GPSAssignment subWindow = new GPSAssignment();
+                subWindow.Show();
+            }
 		}
 
 		//Go through GPS setup
