@@ -214,7 +214,7 @@ namespace ETD.Models.Objects
         {
             this.code = code;
             StaticDBConnection.NonQueryDatabase("UPDATE [Interventions] SET Code=" + code + " WHERE Intervention_ID=" + interventionID + ";");
-			InstanceModifiedNotification();
+			//InstanceModifiedNotification();
         }
         public int getCode()
         {
@@ -248,7 +248,7 @@ namespace ETD.Models.Objects
 		{
 			this.chiefComplaint = chiefComplaint;
             StaticDBConnection.NonQueryDatabase("UPDATE [Interventions] SET Chief_Complaint='" + chiefComplaint + "' WHERE Intervention_ID=" + interventionID + ";");
-			InstanceModifiedNotification();
+			//InstanceModifiedNotification();
 		}
 
 		public String getChiefComplaint()

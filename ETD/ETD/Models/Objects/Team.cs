@@ -37,6 +37,8 @@ namespace ETD.Models.Objects
 		Trainings highestLevelOfTraining = Trainings.firstAid;
 		GPSLocation gpsLocation;
 		int interventionCount = 0;
+		int code1Count = 0;
+		int code2Count = 0;
 
         //Creates a new team
         public Team(String name)
@@ -64,6 +66,32 @@ namespace ETD.Models.Objects
                 
             }
 			ClassModifiedNotification(typeof(Team));
+		}
+
+		public void IncrementCode1()
+		{
+			this.code1Count++;
+		}
+
+		public void ResetCodeCount()
+		{
+			this.code1Count = 0;
+			this.code2Count = 0;
+		}
+		
+		public void IncrementCode2()
+		{
+			this.code2Count++;
+		}
+
+		public int getCode1Count()
+		{
+			return this.code1Count;
+		}
+
+		public int getCode2Count()
+		{
+			return this.code2Count;
 		}
 
         //Checks if the team with the same name was already created
