@@ -31,7 +31,7 @@ namespace ETD_Statistic.ViewsPresenters
             InitializeComponent();
         }
 
-        private void LoadStatistic(object sender, RoutedEventArgs e)
+        public void LoadStatistic(object sender, RoutedEventArgs e)
         {
             statisticView.Children.Clear();
             StatisticView sv = new StatisticView();
@@ -40,7 +40,12 @@ namespace ETD_Statistic.ViewsPresenters
             statisticView.Children.Add(statsView);
         }
 
-        private void LoadPreviousOperations(object sender, RoutedEventArgs e)
+        public void printMessage()
+        {
+            MessageBox.Show("testing");
+        }
+
+        public void LoadPreviousOperations(object sender, RoutedEventArgs e)
         {
             statisticView.Children.Clear();
             PreviousOperationView pov = new PreviousOperationView();
