@@ -76,6 +76,24 @@ namespace ETD.ViewsPresenters
                 }
 
                 teamGrid.Children.Add(combo);
+
+                
+                if (t.getGPSLocation() != null)
+                {
+                    foreach (KeyValuePair<string, GPSLocation> entry in gpsLocationsDictionary)
+                    {
+                        if (entry.Value == t.getGPSLocation())
+                        {
+                            foreach (KeyValuePair<string, string> ID in volunteerList)
+                            {
+                                if (entry.Key == ID.Key)
+                                {
+                                    combo.Text = ID.Key;
+                                }
+                            }
+                        }
+                    }
+                }
                 row++;
             }
 
