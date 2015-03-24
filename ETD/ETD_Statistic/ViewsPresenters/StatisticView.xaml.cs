@@ -34,7 +34,6 @@ namespace ETD_Statistic.ViewsPresenters
             OrganizationFollowUp.TextWrapping = TextWrapping.Wrap;
             SupervisorFollowUp.TextWrapping = TextWrapping.Wrap;
 
-
             VolunteerFollowUp.Text = "Volunteer TO BE COMPLETEDVolunteer TO BE COMPLETEDVolunteer TO BE COMPLETEDVolunteer TO BE COMPLETEDVolunteer TO BE COMPLETEDVolunteer TO BE COMPLETEDVolunteer TO BE COMPLETEDVolunteer TO BE COMPLETED";
             Finance.Text = "TO BE COMPLETED TO BE COMPLETED D";
             Vehicle.Text = "TO BE COMPLETED TO BE COMPLETED  TO BE COMPLETED TO BE COMPLETED TO BE COMPLETED";

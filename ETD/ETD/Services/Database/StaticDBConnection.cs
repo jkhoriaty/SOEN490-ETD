@@ -10,7 +10,7 @@ using System.IO;
 
 namespace ETD.Services.Database
 {
-    class StaticDBConnection
+    public class StaticDBConnection
     {
         private static SQLiteConnection m_dbConnection;
 
@@ -31,7 +31,7 @@ namespace ETD.Services.Database
            else
            {
                //m_dbConnection = new SQLiteConnection(@"Data Source='.\Resources\EDT.sqlite3';Version=3;");
-               m_dbConnection = new SQLiteConnection(@"Data Source='..\..\..\CommonResources\EDT.sqlite3';Version=3;");
+               m_dbConnection = new SQLiteConnection(@"Data Source='..\..\..\CommonResources\EDT.sqlite3';Version=3;datetimeformat=CurrentCulture;");
            }
        }
 
@@ -40,7 +40,7 @@ namespace ETD.Services.Database
             //SQLiteConnection.CreateFile(@".\Resources\EDT.sqlite3");
             SQLiteConnection.CreateFile(@"..\..\..\CommonResources\EDT.sqlite3");
             //m_dbConnection = new SQLiteConnection(@"Data Source='.\Resources\EDT.sqlite3';Version=3;");
-            m_dbConnection = new SQLiteConnection(@"Data Source='..\..\..\CommonResources\EDT.sqlite3';Version=3;");
+            m_dbConnection = new SQLiteConnection(@"Data Source='..\..\..\CommonResources\EDT.sqlite3';Version=3;datetimeformat=CurrentCulture;");
             m_dbConnection.Open();
             //String query = File.ReadAllText(@".\Resources\db.sql");
             String query = File.ReadAllText(@"..\..\..\CommonResources\db.sql");
@@ -49,7 +49,7 @@ namespace ETD.Services.Database
             m_dbConnection.Close();            
         }
 
-       private static void OpenDatabase()
+       public static void OpenDatabase()
         {
             m_dbConnection.Open();
             while (m_dbConnection.State != System.Data.ConnectionState.Open)
@@ -58,7 +58,7 @@ namespace ETD.Services.Database
             }
         }
 
-       private static void CloseConnection()
+       public static void CloseConnection()
         {
             m_dbConnection.Close();
             while (m_dbConnection.State != System.Data.ConnectionState.Closed)
@@ -108,6 +108,7 @@ namespace ETD.Services.Database
            return results;
        }
 
+        //call close connection after running function
        public static SQLiteDataReader QueryDatabase(string query)
         {
             if (m_dbConnection.State == System.Data.ConnectionState.Broken)
@@ -120,7 +121,7 @@ namespace ETD.Services.Database
             }
             SQLiteCommand command = new SQLiteCommand(query, m_dbConnection);
             SQLiteDataReader reader = command.ExecuteReader();
-            CloseConnection();
+            //CloseConnection();
             return reader;
         }
 
