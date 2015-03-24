@@ -8,6 +8,7 @@
 		SizeChanged="setSectionsHeight"
 		StateChanged="setSectionsHeight"
 		Closed="WindowClosed"
+        Closing="FormCloseConfirmation"
 		MinWidth="1200"
 		Width="1200"
 		MinHeight="700"
