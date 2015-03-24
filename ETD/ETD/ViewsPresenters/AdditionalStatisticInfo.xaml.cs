@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using ETD.Models.Objects;
 
 namespace ETD.ViewsPresenters
 {
@@ -26,6 +27,8 @@ namespace ETD.ViewsPresenters
 
         protected void SavingInformation(Object sender, System.EventArgs e)
         {
+            int id = Operation.currentOperation.getID();
+            //StaticDBConnection.NonQueryDatabase("UPDATE [Team_Members] SET Disbanded='" + StaticDBConnection.DateTimeSQLite(DateTime.Now) + "' WHERE Volunteer_ID=" + team.getMember(0).getID() + " AND Team_ID=" + team.getID() + ";");
             MessageBox.Show("The information have been saved!");
         }
     }
