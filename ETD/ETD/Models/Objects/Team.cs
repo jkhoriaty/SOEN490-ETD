@@ -17,6 +17,7 @@ namespace ETD.Models.Objects
     //Possible team status
 	public enum Statuses {available, moving, intervening, unavailable};
 
+    [Serializable()]
     public class Team : Observable
 	{
 

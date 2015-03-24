@@ -14,6 +14,7 @@ namespace ETD.Models.Objects
     //Level of trainings
 	public enum Trainings {firstAid, firstResponder, medicine};
 
+    [Serializable()]
     public class TeamMember
     {
         //Database reflection variables

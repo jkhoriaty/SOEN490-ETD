@@ -13,6 +13,7 @@ namespace ETD.Models.Objects
     /// Intervention Model Object
     /// </summary>
 
+    [Serializable()]
     public class Intervention : Observable
     {
 		public static List<Observer> observerList = new List<Observer>();

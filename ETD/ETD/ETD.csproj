@@ -126,6 +126,7 @@
     <Compile Include="Services\Database\Queries\UpdateAdditionalInformationQuery.cs" />
     <Compile Include="Services\Database\Queries\UpdateOperationQuery.cs" />
     <Compile Include="Services\NetworkServices.cs" />
+    <Compile Include="Services\Serializer.cs" />
     <Compile Include="Services\TextboxHandler.cs" />
     <Compile Include="ViewsPresenters\GPSAssignment.xaml.cs">
       <DependentUpon>GPSAssignment.xaml</DependentUpon>

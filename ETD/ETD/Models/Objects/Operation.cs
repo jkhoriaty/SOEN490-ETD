@@ -11,6 +11,7 @@ namespace ETD.Models.Objects
     /// Operation Model Object
     /// </summary>
 
+    [Serializable()]
     public class Operation
     {
         public static Operation currentOperation = null;
