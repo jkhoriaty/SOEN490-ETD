@@ -213,13 +213,13 @@ namespace ETD.ViewsPresenters
 			ComboBox parent = modeCB;
             foreach (ComboBoxItem mi in parent.Items)
             {
-                if (mi.Content.Equals(ETD.Properties.Resources.ComboBoxItem_RegularMode) && (mi.IsSelected))//lock the map modification section
+                if (mi.Content.Equals("RegularMode") && (mi.IsSelected))//lock the map modification section
                 {
                     AI.Visibility = Visibility.Collapsed;
                     mapModificationSection.IsEnabled = false;
                     mapSection.IsEnabled = true;
                 }
-                else if (mi.Content.Equals(ETD.Properties.Resources.ComboBoxItem_EditMode) && (mi.IsSelected))//lock the map section
+                else if (mi.Content.Equals("EditMode") && (mi.IsSelected))//lock the map section
                 {
                     AI.Visibility = Visibility.Visible;
                     mapModificationSection.IsEnabled = true;
