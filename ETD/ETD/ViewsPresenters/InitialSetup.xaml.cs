@@ -32,10 +32,10 @@ namespace ETD.ViewsPresenters
             Serializer serializer = Serializer.Instance;
             if(serializer.Recoverable())
             {
-                ETD.Models.Objects.Operation initInfo = serializer.RecoverOperation();
-                Serializer.Instance.SetOperation(initInfo);
                 MainWindow mw = new MainWindow();
                 mw.Show();
+                serializer.PerformRecovery();
+                serializer.StartBackUp();
                 this.Close();
             }
         }
@@ -48,6 +48,7 @@ namespace ETD.ViewsPresenters
                 Serializer.Instance.SetOperation(initInfo);
                 MainWindow mw = new MainWindow();
                 mw.Show();
+                Serializer.Instance.StartBackUp();
                 this.Close();
             }
         }

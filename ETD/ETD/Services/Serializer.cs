@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
+using ETD.Services.Database;
 
 namespace ETD.Services
 {
@@ -39,7 +40,7 @@ namespace ETD.Services
             serializer = new BinaryFormatter();
             timer = new Timer(backupRate);
             timer.Elapsed += new ElapsedEventHandler(BackUpEvent);
-            timer.Enabled = true;
+            timer.Enabled = false;
         }
 
         public static Serializer Instance
@@ -56,7 +57,7 @@ namespace ETD.Services
 
         private void BackUpEvent(object sender, ElapsedEventArgs e)
         {
-            BackUp();
+                BackUp();
         }
         private void BackUp()
         {
@@ -70,6 +71,7 @@ namespace ETD.Services
                 serializer.Serialize(fileStream, savedOperation);
                 fileStream.Close();
             }
+            /*
             foreach(Team t in savedTeams)
             {
                 fileStream = File.Create(outputDirectory + "Team" + t.getID() + ".tmp");
@@ -81,7 +83,7 @@ namespace ETD.Services
                 fileStream = File.Create(outputDirectory + "Intervention" + i.getID() + ".tmp");
                 serializer.Serialize(fileStream, i);
                 fileStream.Close();
-            }
+            }*/
         }
 
         public void CleanUp()
@@ -97,7 +99,15 @@ namespace ETD.Services
             return Directory.Exists(outputDirectory);
         }
 
-        public Operation RecoverOperation()
+        public void PerformRecovery()
+        {
+            savedOperation = RecoverOperation();
+            Operation.currentOperation = savedOperation;
+            savedTeams = RecoverTeams();
+            Console.Write("");
+        }
+
+        private Operation RecoverOperation()
         {
             Operation recovered = null;
             if (Recoverable())
@@ -118,7 +128,20 @@ namespace ETD.Services
         {
             List<Team> recovered = new List<Team>();
             //TODO: Recovery Code
+            System.Data.SQLite.SQLiteDataReader results = StaticDBConnection.QueryDatabase("SELECT Team_ID FROM [Teams] WHERE Operation_ID = " + savedOperation.getID() + ";");
+            while (results.Read())
+            {
+                recovered.Add(new Team(results.GetInt32(0)));   
+            }
+
             return recovered;
+        }
+
+        //Mutators
+
+        public void StartBackUp()
+        {
+            timer.Enabled = true;
         }
 
         public bool AddTeam(Team team)

@@ -20,7 +20,7 @@ namespace ETD.Models.Objects
     [Serializable()]
     public class Team : Observable
 	{
-
+        [field: NonSerialized()]
 		private static List<Observer> observerList = new List<Observer>();//Contains a List of observers
 
 		static List<Team> teamList = new List<Team>();//Contains a list of teams
@@ -45,12 +45,37 @@ namespace ETD.Models.Objects
         public Team(String name)
         {
             this.name = name;
-			status = Statuses.available;
+			
+            status = Statuses.available;
             if (Operation.currentOperation != null)
             {
                 this.operationID = Operation.currentOperation.getID();
             }
-            this.teamID = StaticDBConnection.NonQueryDatabaseWithID("INSERT INTO [Teams] (Operation_ID, Name, Status) VALUES (" + operationID + ", '" + name + "', " + 1+(int)status + ")");
+            this.teamID = StaticDBConnection.NonQueryDatabaseWithID("INSERT INTO [Teams] (Operation_ID, Name, Status) VALUES (" + operationID + ", '" + name + "', " + (int)status + ")");
+            teamList.Add(this);
+			ClassModifiedNotification(typeof(Team));
+            
+        }
+
+        public Team(int id)
+        {
+            this.teamID = id;
+            System.Data.SQLite.SQLiteDataReader results = StaticDBConnection.QueryDatabase("SELECT * FROM [Teams] WHERE Team_ID=" + id + ";");
+            results.Read();
+            this.name = results["Name"].ToString();
+            this.status = (Statuses)int.Parse(results["Status"].ToString());
+            this.operationID = int.Parse(results["Operation_ID"].ToString());
+
+            results = StaticDBConnection.QueryDatabase("SELECT Volunteer_ID FROM [Team_Members] WHERE Team_ID = " + id + ";");
+            while(results.Read())
+            {
+                TeamMember member = new TeamMember(id, results.GetInt32(0));
+                memberList.Add(member);
+                if ((int)highestLevelOfTraining < (int)member.getTrainingLevel())
+                {
+                    highestLevelOfTraining = member.getTrainingLevel();
+                }
+            }
             teamList.Add(this);
 			ClassModifiedNotification(typeof(Team));
             
@@ -321,5 +346,6 @@ namespace ETD.Models.Objects
                 }
             }
         }
+
     }
 }
