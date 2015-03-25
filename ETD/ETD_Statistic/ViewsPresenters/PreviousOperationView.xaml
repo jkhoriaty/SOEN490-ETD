@@ -8,6 +8,6 @@
 	Title="PreviousOperationView">
 
     <Grid>
-        <StackPanel Name="previousOperation" Margin="30"></StackPanel>
+        <StackPanel Name="previousOperation" Margin="30" MouseLeftButtonDown="OperationClicked"></StackPanel>
     </Grid>
 </Page>
