@@ -52,6 +52,7 @@ namespace ETD.CustomObjects.PopupForms
                 //Set up default shift properties
                 currentShift = new Shift("-", "-", shiftDuration);
                 shiftline = new ShiftLine(currentShift);
+
                 shiftline.getStartTimeButton().Click += NextShiftTime;
                 shiftline.getSectorNameTextBox().KeyDown += NewSector;
 
@@ -89,6 +90,7 @@ namespace ETD.CustomObjects.PopupForms
                 rowPosition++;
                 columnPosition++;
                 teamNumber++;
+                shiftDuration = Convert.ToInt32(ShiftDuration.Text.ToString());
 
                 //Create a new shift
                 ShiftLine newShift = new ShiftLine(currentShift);
@@ -106,12 +108,32 @@ namespace ETD.CustomObjects.PopupForms
 
                 //Predict next shift
 
-                // if hh>12 hh+1, if hh=12 hh=1
                 String newShiftHH = shiftStartTimeMap["Start Time " + (columnPosition -1).ToString()][0].Text.ToString();
-                newShift.getStartTimeHHTextBox().Text = Convert.ToString(Convert.ToInt32(newShiftHH));
-
                 String newShiftMM = shiftStartTimeMap["Start Time " + (columnPosition -1).ToString()][1].Text.ToString();
-                newShift.getStartTimeMMTextBox().Text = Convert.ToString(Convert.ToInt32(newShiftMM) + shiftDuration);
+ 
+                if (!newShiftHH.Equals("hh") && !newShiftMM.Equals("mm")) 
+                {
+                    if ((Convert.ToInt32(newShiftMM) + shiftDuration) >= 60)//Loop back to 0min plus the difference between the minutes fromt he old and new shift
+                    {
+                        int newMM = (Convert.ToInt32(newShiftMM) + shiftDuration) - 60;
+                        newShift.getStartTimeMMTextBox().Text = Convert.ToString(newMM);
+
+                        if(Convert.ToInt32(newShiftHH) == 12)//Loop back to 1am
+                        {
+                            newShift.getStartTimeHHTextBox().Text = "1";
+                        }
+                        else
+                        {
+                             newShift.getStartTimeHHTextBox().Text = Convert.ToString(Convert.ToInt32(newShiftHH)+1);
+                        }
+                       
+                    }
+                    else
+                    {
+                        newShift.getStartTimeMMTextBox().Text = Convert.ToString(Convert.ToInt32(newShiftMM) + shiftDuration);
+                        newShift.getStartTimeHHTextBox().Text = Convert.ToString(Convert.ToInt32(newShiftHH));
+                    }          
+                }
 
                 //Add a new column of teams
                 int originalshiftpos = 2;

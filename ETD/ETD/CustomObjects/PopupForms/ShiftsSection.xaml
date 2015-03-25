@@ -32,7 +32,8 @@
             </Border>
 
             <Border  Grid.Column="0" Grid.Row="1" BorderBrush="Black" BorderThickness="1,1,1,1">
-                <TextBlock   x:Uid="TextBlock_SectorsHours" Text="Sectors /  Hours" FontSize="19" VerticalAlignment="Center" HorizontalAlignment="Center" RenderTransformOrigin="1.294,0.509"/>
+                <TextBlock   
+                    x:Uid="TextBlock_SectorsHours" Text="Sectors /  Hours" FontSize="19" VerticalAlignment="Center" HorizontalAlignment="Center" RenderTransformOrigin="1.294,0.509"/>
             </Border>
 
         </Grid>
