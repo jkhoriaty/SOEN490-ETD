@@ -28,12 +28,7 @@ namespace ETD.CustomObjects.CustomUIObjects
         private TextBox startTimeHHTextBox;
         private Button startTimeButton;
         private TextBox startTimeMMTextBox;
-    
-        private Border nextShiftBorder;
-        private StackPanel nextShiftStackPanel;
-        private TextBox nextShiftHHTextBox;
-        private Button nextShiftButton;
-        private TextBox nextShiftMMTextBox;
+
  
         public ShiftLine(Shift shift)
         {
@@ -97,6 +92,7 @@ namespace ETD.CustomObjects.CustomUIObjects
             startTimeStackPanel.VerticalAlignment = VerticalAlignment.Center;
             startTimeBorder.Child = startTimeStackPanel;
 
+            //HH
             startTimeHHTextBox = new TextBox();
             startTimeHHTextBox.Width = 60;
             startTimeHHTextBox.Height = 50;
@@ -117,6 +113,7 @@ namespace ETD.CustomObjects.CustomUIObjects
             
             startTimeStackPanel.Children.Add(startTimeButton);
 
+            //MM
             startTimeMMTextBox = new TextBox();
             startTimeMMTextBox.Width = 60;
             startTimeMMTextBox.Height = 50;

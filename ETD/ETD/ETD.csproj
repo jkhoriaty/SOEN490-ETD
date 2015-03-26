@@ -59,6 +59,7 @@
     <Compile Include="CustomObjects\CustomUIObjects\InterventionPin.cs" />
     <Compile Include="CustomObjects\CustomUIObjects\MapModPin.cs" />
     <Compile Include="CustomObjects\CustomUIObjects\Pin.cs" />
+    <Compile Include="CustomObjects\CustomUIObjects\RequestLine.cs" />
     <Compile Include="CustomObjects\CustomUIObjects\ResourceLine.cs" />
     <Compile Include="CustomObjects\CustomUIObjects\ShiftLine.cs" />
     <Compile Include="CustomObjects\CustomUIObjects\TeamPin.cs" />

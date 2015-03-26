@@ -15,9 +15,16 @@ namespace ETD.Models.Objects
 		private static List<Request> requestList = new List<Request>();//Contains a list of requests
 
         //Variables used for a request
+        private String timeHH;
+        private String timeMM;
+        private String followupHH;
+        private String followupMM;
+        private String completionHH;
+        private String completionMM;
+
 		private String client;
 		private String request;
-		private String handledby;
+        private String handledBy;
         private String recipient;
         private DateTime time;
         private DateTime followupTimestampMap;
@@ -25,18 +32,36 @@ namespace ETD.Models.Objects
 		private Request[] followupInfo = new Request[100];
 
         //Creates a new request
-        public Request(DateTime time, String client, String request,String recipient, String handledby, DateTime followupTimestampMap, DateTime completionTimestampMap)
+        public Request(DateTime time, String client, String request, String recipient, String handledBy, DateTime followupTimestampMap, DateTime completionTimestampMap)
 		{
             this.time = time;
             this.client = client;
             this.request = request;
             this.recipient = recipient;
-            this.handledby = handledby;
+            this.handledBy = handledBy;
             this.followupTimestampMap = followupTimestampMap;
             this.completionTimestampMap = completionTimestampMap;
 
 			requestList.Add(this);
 		}
+
+        //Used by RequestLine.cs
+        public Request(String timeHH,String timeMM, String client, String request, String recipient, String handledBy, String followupHH, String followupMM, String completionHH, String completionMM)
+        {
+            this.timeHH = timeHH;
+            this.timeMM = timeMM;
+            this.client = client;
+            this.request = request;
+            this.recipient = recipient;
+            this.handledBy = handledBy;
+            this.followupHH = followupHH;
+            this.followupMM = followupMM;
+            this.completionHH = completionHH;
+            this.completionMM = completionMM;
+
+            requestList.Add(this);
+        }
+
 
         //Accessors
 
