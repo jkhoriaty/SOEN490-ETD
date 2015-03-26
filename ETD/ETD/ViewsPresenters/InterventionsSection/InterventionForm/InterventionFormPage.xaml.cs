@@ -173,6 +173,11 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm
 			TimersInterventionFormPage.setMovingDeadline(deadline);
 		}
 
+        public void DeregisterFormFromObserver()
+        {
+            intervention.DeregisterInstanceObserver(this);
+        }
+
         private void DisableForms()
         {
             timersFrame.IsEnabled = false;
