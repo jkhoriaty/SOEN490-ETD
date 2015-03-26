@@ -9,7 +9,7 @@
             <ColumnDefinition Width="300*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="250"/>
+            <RowDefinition Height="200"/>
             <RowDefinition Height="50"/>
             <RowDefinition Height="50"/>
             <RowDefinition Height="50"/>
@@ -21,10 +21,11 @@
         </Grid.RowDefinitions>
         <Grid Name ="DescriptionBlock" Grid.Row="0" Grid.ColumnSpan="2">
             <TextBlock Name="OperationID" FontWeight="ExtraBold" FontStyle="Italic" FontSize="25" Foreground="MediumSpringGreen" TextAlignment="Center" Margin="0,10,0,0"></TextBlock>
-            <TextBlock Name= "BeginDate" FontWeight="SemiBold" FontStyle="Italic" FontSize="15" Foreground="Salmon" TextAlignment="Left" Margin="0,40,0,0"> </TextBlock>
-            <TextBlock Name="EndingDate" FontWeight="SemiBold" FontStyle="Italic" FontSize="15" Foreground="Salmon" TextAlignment="Left" Margin="0,60,0,0"></TextBlock>
-            <TextBlock Name="EventName" FontWeight="SemiBold" FontStyle="Italic" FontSize="15" Foreground="Salmon" TextAlignment="Left" Margin="0,80,0,0"></TextBlock>
-            <TextBlock Name="TeamCount" FontWeight="SemiBold" FontStyle="Italic" FontSize="15" Foreground="Salmon" TextAlignment="Right" Margin="0,80,0,0"></TextBlock>
+            <TextBlock Name= "BeginDate" FontWeight="SemiBold" FontStyle="Italic" FontSize="15" Foreground="Salmon" TextAlignment="Left" Margin="0,50,0,0"> </TextBlock>
+            <TextBlock Name="EndingDate" FontWeight="SemiBold" FontStyle="Italic" FontSize="15" Foreground="Salmon" TextAlignment="Left" Margin="0,70,0,0"></TextBlock>
+            <TextBlock Name="DispatcherName" FontWeight="SemiBold" FontStyle="Italic" FontSize="15" Foreground="Salmon" TextAlignment="Left" Margin="0,90,0,0"></TextBlock>
+            <TextBlock Name="TeamCount" FontWeight="SemiBold" FontStyle="Italic" FontSize="15" Foreground="Salmon" TextAlignment="Right" Margin="0,90,0,0"></TextBlock>
+            <TextBlock Name="VolunteerCount" FontWeight="SemiBold" FontStyle="Italic" FontSize="15" Foreground="Salmon" TextAlignment="Right" Margin="0,110,0,0"></TextBlock>
         </Grid>
         <Grid Grid.Column="0" Grid.Row="1">
             <Border BorderThickness="1,1,1,1" BorderBrush="Black">

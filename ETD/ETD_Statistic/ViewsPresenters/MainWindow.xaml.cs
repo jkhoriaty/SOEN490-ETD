@@ -55,15 +55,29 @@ namespace ETD_Statistic.ViewsPresenters
             statisticView.Children.Add(operationView);
         }
 
-        public void ExportWPF(StackPanel element)
+        public void ExportWPF(Button element)
         {
-            StackPanel sp = new StackPanel();
-            sp.DataContext = element;
+            Button sp = new Button();
+            sp.DataContext = element.Content;
             FixedDocument fixedDoc = new FixedDocument();
             PageContent pageCont = new PageContent();
             FixedPage fixedPage = new FixedPage();
+            //fixedPage.Background = Brushes.Blue;
 
-            fixedPage.Children.Add(sp);
+            //testing
+            /*
+            TextBlock tb = new TextBlock();
+            tb.Text = "TESTING PAGE";
+            tb.FontSize = 30;
+            fixedPage.Children.Add((UIElement)tb);
+            */
+            fixedPage.Children.Add((UIElement)sp);
+
+            Size sz = new Size(96 * 8.5, 96 * 11);
+            fixedPage.Measure(sz);
+            fixedPage.Arrange(new Rect(new Point(), sz));
+            fixedPage.UpdateLayout();
+  
             ((System.Windows.Markup.IAddChild)pageCont).AddChild(fixedPage);
             fixedDoc.Pages.Add(pageCont);
 
