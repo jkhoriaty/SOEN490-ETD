@@ -10,6 +10,7 @@ namespace ETD.Models.Objects
     /// Request Model Object
     /// </summary>
 
+    [Serializable()]
     public class Request
     {
 		private static List<Request> requestList = new List<Request>();//Contains a list of requests

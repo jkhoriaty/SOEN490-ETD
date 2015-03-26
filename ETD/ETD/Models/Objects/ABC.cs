@@ -11,6 +11,7 @@ namespace ETD.Models.Objects
     /// Airways Breathing Circulation Model Object
     /// </summary>
 
+    [Serializable()]
     public class ABC
     {
         //Database reflection variables

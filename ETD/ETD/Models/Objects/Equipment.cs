@@ -15,7 +15,9 @@ namespace ETD.Models.Objects
     //Equipment types
 	public enum Equipments {ambulanceCart, sittingCart, epipen, transportStretcher, mountedStretcher, wheelchair};
 
-	public class Equipment : Observable
+
+    [Serializable()]
+    public class Equipment : Observable
     {
         //Database reflection variables
         private int equipmentID;

@@ -129,6 +129,10 @@
     <value>Submit</value>
     <comment>Login</comment>
   </data>
+  <data name="Button_ViewPreviousOperations" xml:space="preserve">
+    <value>View Previous Operations</value>
+    <comment>StatisticView</comment>
+  </data>
   <data name="Label_Password" xml:space="preserve">
     <value>Password: </value>
     <comment>Login</comment>

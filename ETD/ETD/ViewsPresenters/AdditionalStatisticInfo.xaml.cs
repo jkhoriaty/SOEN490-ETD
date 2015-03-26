@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using ETD.Models.Objects;
+using ETD.Services.Database;
 
 namespace ETD.ViewsPresenters
 {
@@ -26,6 +28,16 @@ namespace ETD.ViewsPresenters
 
         protected void SavingInformation(Object sender, System.EventArgs e)
         {
+            int id = Operation.currentOperation.getID();
+            string VolunteerFollowUpText = VolunteerFollowUp.Text;
+            string FinanceText = Finance.Text;
+            string VehicleText = Vehicle.Text;
+            string ParticularSituationText = ParticularSituation.Text;
+            string OrganizationFollowUpText = OrganizationFollowUp.Text;
+            string SupervisorFollowUpText = SupervisorFollowUp.Text;
+
+            //pushing changes to the db file for extra information at the end of the operation
+            StaticDBConnection.NonQueryDatabase("UPDATE [Operations] SET VolunteerFollowUp= '" + VolunteerFollowUpText + "', Finance= '" + FinanceText + "', Vehicle= '" + VehicleText + "', ParticularSituation= '" + ParticularSituationText + "', OrganizationFollowUp= '" + OrganizationFollowUpText + "', SupervisorFollowUp= '" + SupervisorFollowUpText + "' WHERE Operation_ID =" + id + ";");
             MessageBox.Show("The information have been saved!");
         }
     }

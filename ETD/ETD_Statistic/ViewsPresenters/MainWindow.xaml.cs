@@ -31,12 +31,28 @@ namespace ETD_Statistic.ViewsPresenters
             InitializeComponent();
         }
 
-        private void LoadStatistic(object sender, RoutedEventArgs e)
+        public void LoadStatistic(object sender, RoutedEventArgs e)
         {
+            statisticView.Children.Clear();
             StatisticView sv = new StatisticView();
             Frame statsView = new Frame();
             statsView.Content = sv;
             statisticView.Children.Add(statsView);
+        }
+
+        public void printMessage()
+        {
+            MessageBox.Show("testing");
+        }
+
+        public void LoadPreviousOperations(object sender, RoutedEventArgs e)
+        {
+            statisticView.Children.Clear();
+            PreviousOperationView pov = new PreviousOperationView();
+            Frame operationView = new Frame();
+            operationView.Content = pov;
+            statisticView.HorizontalAlignment = HorizontalAlignment.Center;
+            statisticView.Children.Add(operationView);
         }
 
         public void ExportWPF(StackPanel element)
@@ -78,5 +94,7 @@ namespace ETD_Statistic.ViewsPresenters
             ExportWPF(buttonView);
             SaveXPS();
         }
+
+
     }
 }
