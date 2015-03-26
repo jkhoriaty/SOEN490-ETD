@@ -3,43 +3,43 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:properties="clr-namespace:ETD.Properties"
         Title="InitialSetup" Height="300" Width="300">
-    <StackPanel>
+    <StackPanel Margin="10">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" SharedSizeGroup="Label"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
             <RowDefinition Height="30"/>
             <RowDefinition Height="30"/>
             <RowDefinition Height="30"/>
             <RowDefinition Height="30"/>
             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
-            <Label x:Uid="Label_OperationName" Grid.Row ="0" Grid.Column="0" Content="{Binding Path=Label_OperationName, Source={StaticResource Resources}}" />
-            <TextBox Grid.Row="0" Grid.Column="1" Name="operationName" />
-            <Label x:Uid="Label_Acronym" Grid.Row="1" Grid.Column="0" Content="{Binding Path=Label_Acronym, Source={StaticResource Resources}}" />
-            <TextBox Grid.Row="1" Grid.Column="1" Name="acronym" />
-            <Label x:Uid="Label_ShiftStartDate" Grid.Row="2" Grid.Column="0" Content="{Binding Path=Label_ShiftStartDate, Source={StaticResource Resources}}" />
-            <DatePicker Grid.Row="2" Grid.Column="1" Name="shiftStartDate" />
-            <Label x:Uid="Label_ShiftStartTime" Grid.Row="3" Grid.Column="0" Content="{Binding Path=Label_ShiftStartTime, Source={StaticResource Resources}}" />
-            <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal">
-                <TextBox HorizontalContentAlignment="Center" Name="shiftStartTimehh" Width="30" MaxLength="2" GotFocus="Text_Enter" LostFocus="Text_Fillhh">hh</TextBox>
-                <TextBox HorizontalContentAlignment="Center" Name="shiftStartTimemm" Width="30" MaxLength="2" GotFocus="Text_Enter" LostFocus="Text_Fillmm">mm</TextBox>
+            <Label x:Uid="Label_OperationName" Grid.Row ="0" Grid.Column="0" Content="{Binding Path=Label_OperationName, Source={StaticResource Resources}}" Margin="1"/>
+            <TextBox VerticalContentAlignment="Center" TextAlignment="Center" Grid.Row="0" Grid.Column="1" Name="operationName" Margin="1"/>
+            <Label HorizontalContentAlignment="Center" VerticalContentAlignment="Center" x:Uid="Label_Acronym" Grid.Row="1" Grid.Column="0" Content="{Binding Path=Label_Acronym, Source={StaticResource Resources}}" Margin="1"/>
+            <TextBox VerticalContentAlignment="Center" TextAlignment="Center" Grid.Row="1" Grid.Column="1" Name="acronym" Margin="1" />
+            <Label HorizontalContentAlignment="Center" VerticalContentAlignment="Center" x:Uid="Label_ShiftStartDate" Grid.Row="2" Grid.Column="0" Content="{Binding Path=Label_ShiftStartDate, Source={StaticResource Resources}}" Margin="1" />
+            <DatePicker Grid.Row="2" Grid.Column="1" Name="shiftStartDate" Margin="1" />
+            <Label HorizontalContentAlignment="Center" VerticalContentAlignment="Center" x:Uid="Label_ShiftStartTime" Grid.Row="3" Grid.Column="0" Content="{Binding Path=Label_ShiftStartTime, Source={StaticResource Resources}}" Margin="1" />
+            <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" Margin="1">
+                <TextBox VerticalContentAlignment="Center" Margin="1" HorizontalContentAlignment="Center" Name="shiftStartTimehh" Width="30" MaxLength="2" GotFocus="Text_Enter" LostFocus="Text_Fillhh">hh</TextBox>
+                <TextBox VerticalContentAlignment="Center" Margin="1" HorizontalContentAlignment="Center" Name="shiftStartTimemm" Width="30" MaxLength="2" GotFocus="Text_Enter" LostFocus="Text_Fillmm">mm</TextBox>
             </StackPanel>
-            <Label x:Uid="Label_ShiftEndDate" Grid.Row="4" Grid.Column="0" Content="{Binding Path=Label_ShiftEndDate, Source={StaticResource Resources}}" />
-            <DatePicker Grid.Row="4" Grid.Column="1" Name="shiftEndDate" />
-            <Label x:Uid="Label_ShiftEndTime" Grid.Row="5" Grid.Column="0" Content="{Binding Path=Label_ShiftEndTime, Source={StaticResource Resources}}" />
-            <StackPanel Grid.Row="5" Grid.Column="1" Orientation="Horizontal">
-                <TextBox HorizontalContentAlignment="Center" Name="shiftEndTimehh" Width="30" MaxLength="2" GotFocus="Text_Enter" LostFocus="Text_Fillhh">hh</TextBox>
-                <TextBox HorizontalContentAlignment="Center" Name="shiftEndTimemm" Width="30" MaxLength="2" GotFocus="Text_Enter" LostFocus="Text_Fillmm">mm</TextBox>
+            <Label HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="1" x:Uid="Label_ShiftEndDate" Grid.Row="4" Grid.Column="0" Content="{Binding Path=Label_ShiftEndDate, Source={StaticResource Resources}}" />
+            <DatePicker Margin="1" Grid.Row="4" Grid.Column="1" Name="shiftEndDate" />
+            <Label HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="1" x:Uid="Label_ShiftEndTime" Grid.Row="5" Grid.Column="0" Content="{Binding Path=Label_ShiftEndTime, Source={StaticResource Resources}}" />
+            <StackPanel Margin="1" Grid.Row="5" Grid.Column="1" Orientation="Horizontal">
+                <TextBox VerticalContentAlignment="Center" TextAlignment="Center" Margin="1" HorizontalContentAlignment="Center" Name="shiftEndTimehh" Width="30" MaxLength="2" GotFocus="Text_Enter" LostFocus="Text_Fillhh">hh</TextBox>
+                <TextBox VerticalContentAlignment="Center" TextAlignment="Center" Margin="1" HorizontalContentAlignment="Center" Name="shiftEndTimemm" Width="30" MaxLength="2" GotFocus="Text_Enter" LostFocus="Text_Fillmm">mm</TextBox>
             </StackPanel>
-            <Label x:Uid="Label_DispatcherName" Grid.Row="6" Grid.Column="0" Content="{Binding Path=Label_DispatcherName, Source={StaticResource Resources}}" />
-            <TextBox Grid.Row="6" Grid.Column="1" Name="dispatcherName" />
+            <Label HorizontalContentAlignment="Center" Margin="1" x:Uid="Label_DispatcherName" Grid.Row="6" Grid.Column="0" Content="{Binding Path=Label_DispatcherName, Source={StaticResource Resources}}" />
+            <TextBox VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="1"  Grid.Row="6" Grid.Column="1" Name="dispatcherName" />
         </Grid>
-        <Button x:Uid="Button_Submit" Click="Submit_Click" Width="100" Content="{Binding Path=Button_Submit, Source={StaticResource Resources}}" />
+        <Button x:Uid="Button_Submit" Margin="7" Click="Submit_Click" Width="100" Content="{Binding Path=Button_Submit, Source={StaticResource Resources}}" />
         
     </StackPanel>
 </Window>
