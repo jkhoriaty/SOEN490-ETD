@@ -14,7 +14,7 @@ namespace ETD.Services.Database.Queries
         }
         public CreateABCQuery(int interventionID, string consciousness, bool disoriented, string airways, string breathing, int breathingFrequency, string circulation, int circulationFrequency)
         {
-            sql = "INSERT INTO [ABCs] (Intervention_ID, Consciousness, Disoriented, Airways, Breathing, Breathing_Frequency, Circulation, Circulation_Frequency) VALUES (" + interventionID + ", '" + consciousness + "', " + disoriented + ", '" + airways + "', '" + breathing + "', " + breathingFrequency + ", '" + circulation + "', " + circulationFrequency + ");" ;
+            sql = "INSERT INTO [ABCs] (Intervention_ID, Consciousness, Disoriented, Airways, Breathing, Breathing_Frequency, Circulation, Circulation_Frequency) VALUES (" + interventionID + ", '" + consciousness.Replace("'", "''") + "', " + disoriented + ", '" + airways.Replace("'", "''") + "', '" + breathing.Replace("'", "''") + "', " + breathingFrequency + ", '" + circulation.Replace("'", "''") + "', " + circulationFrequency + ");";
         }
     }
 }

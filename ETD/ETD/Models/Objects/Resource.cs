@@ -32,7 +32,7 @@ namespace ETD.Models.Objects
 			this.intervening = intervening;
 			this.moving = moving;
 			this.arrival = arrival;
-            this.resourceID = StaticDBConnection.NonQueryDatabaseWithID("INSERT INTO [Resources] (Intervention_ID, Name, Team_ID, Intervening, Moving, Arrival) VALUES (" + interventionID + ", '" + resourceName + "', " + team.getID() + ", " + intervening + "', '" + StaticDBConnection.DateTimeSQLite(moving) + "', '" + StaticDBConnection.DateTimeSQLite(arrival) + ")");
+            this.resourceID = StaticDBConnection.NonQueryDatabaseWithID("INSERT INTO [Resources] (Intervention_ID, Name, Team_ID, Intervening, Moving, Arrival) VALUES (" + interventionID + ", '" + resourceName.Replace("'", "''") + "', " + team.getID() + ", " + intervening + "', '" + StaticDBConnection.DateTimeSQLite(moving) + "', '" + StaticDBConnection.DateTimeSQLite(arrival) + ")");
 		}
 
         public Resource(Team team)
@@ -61,7 +61,7 @@ namespace ETD.Models.Objects
 		public void setResourceName(string resourceName)
 		{
 			this.resourceName = resourceName;
-            StaticDBConnection.NonQueryDatabase("UPDATE [Resources] SET Name='" + resourceName + "'WHERE Resource_ID=" + resourceID + ";");
+            StaticDBConnection.NonQueryDatabase("UPDATE [Resources] SET Name='" + resourceName.Replace("'", "''") + "'WHERE Resource_ID=" + resourceID + ";");
 		}
 
         public Team getTeam()
