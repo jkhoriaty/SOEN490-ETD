@@ -148,7 +148,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.DetailsInter
 			interventionForm.interventionType.Text = intervention.getChiefComplaint();
         }
 
-        public void PersistencyUpdate()
+/*        public void PersistencyUpdate()
         {
             try
             {
@@ -156,7 +156,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.DetailsInter
                 int hours = int.Parse(Callhh.Text);
                 int minutes = int.Parse(Callmm.Text);
                 callTime = callTime.Date + (new TimeSpan(hours, minutes, callTime.Second));
-                intervention.setTimeOfCall(callTime);
+                intervention.setTimeOfCall(DateTime.Now);
             }
             catch (Exception e) { }
 
@@ -202,7 +202,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.DetailsInter
             }
             catch (Exception e) { }
         }
-
+*/
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             try
