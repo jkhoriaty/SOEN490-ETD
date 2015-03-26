@@ -29,3 +29,12 @@ ETD/ETD_Statistic/obj/Debug/ETD_Statistic.pdb
 ETD/ETD_Statistic/obj/Debug/ViewsPresenters/MainWindow.baml
 *.cache
 ETD/ETD_Statistic/obj/Debug/
+ETD/ETD_Statistic/obj/Debug/ETD_Statistic.csproj.FileListAbsolute.txt
+ETD/ETD_Statistic/bin/Debug/System.Data.SQLite.xml
+ETD/ETD_Statistic/bin/Debug/Icons/*
+ETD/Builds/Debug/ETD/
+ETD/Builds/Debug/ETD_Statistics/
+ETD/Builds/Debug/ETD_UnitTest/
+ETD/Builds/Release/ETD/
+ETD/Builds/Release/ETD_Statistics/
+ETD/Builds/Release/ETD_UnitTest/

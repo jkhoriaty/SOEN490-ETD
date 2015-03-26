@@ -5,21 +5,18 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
-	Title="MapSectionPage">
-	
-	<Canvas Name="Canvas_map">
+	Title="MapSectionPage" >
 
-	</Canvas>
-
-	<Page.Resources>
-		<ContextMenu x:Key="ContextMenu">
-			<!--Click="Zoom_Click" for menu items if need to implement--> 
-            <MenuItem Header="100%" Tag="map"/>
-			<MenuItem Header="120%" Tag="map"/>
-			<MenuItem Header="140%" Tag="map"/>
-			<MenuItem Header="160%" Tag="map"/>
-			<MenuItem Header="180%" Tag="map"/>
-			<MenuItem Header="200%" Tag="map"/>
-		</ContextMenu>
+    <Canvas Name="Canvas_map" ContextMenu="{DynamicResource ZoomContextMenu}"/>
+    <Page.Resources>
+        <ContextMenu x:Key="ZoomContextMenu">
+            <!--Click="Zoom_Click" for menu items if need to implement-->
+            <MenuItem Header="100%" Tag="Canvas_map"/>
+            <MenuItem Header="120%" Tag="Canvas_map"/>
+            <MenuItem Header="140%" Tag="Canvas_map"/>
+            <MenuItem Header="160%" Tag="Canvas_map"/>
+            <MenuItem Header="180%" Tag="Canvas_map"/>
+            <MenuItem Header="200%" Tag="Canvas_map"/>
+        </ContextMenu>
     </Page.Resources>
 </Page>

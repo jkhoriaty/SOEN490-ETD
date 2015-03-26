@@ -10,6 +10,7 @@ namespace ETD.Models.Objects
     /// <summary>
     /// Resource Model Object
     /// </summary>
+    [Serializable()]
     public class Resource
     {
         //Database reflection variables

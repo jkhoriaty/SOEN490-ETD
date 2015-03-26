@@ -114,6 +114,15 @@ namespace ETD_Statistic.Properties {
         }
         
         /// <summary>
+        /// Looks up a localized string similar to 'View Previous Operations'.
+        /// </summary>
+        public static string Button_ViewPreviousOperations {
+            get {
+                return ResourceManager.GetString(ResourceNames.Button_ViewPreviousOperations, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Looks up a localized string similar to 'Password: '.
         /// </summary>
         public static string Label_Password {
@@ -213,6 +222,11 @@ namespace ETD_Statistic.Properties {
             /// Stores the resource name 'Button_LoginSubmit'.
             /// </summary>
             public const string Button_LoginSubmit = "Button_LoginSubmit";
+            
+            /// <summary>
+            /// Stores the resource name 'Button_ViewPreviousOperations'.
+            /// </summary>
+            public const string Button_ViewPreviousOperations = "Button_ViewPreviousOperations";
             
             /// <summary>
             /// Stores the resource name 'Label_Password'.

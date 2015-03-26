@@ -14,11 +14,12 @@ namespace ETD.Models.Objects
     //Level of trainings
 	public enum Trainings {firstAid, firstResponder, medicine};
 
+    [Serializable()]
     public class TeamMember
     {
         //Database reflection variables
         private int volunteerID;
-        private int operationID;
+        private int teamID;
 
         //Variables used for a team member
         public String name;
@@ -32,11 +33,24 @@ namespace ETD.Models.Objects
             this.name = name;
             this.trainingLevel = training;
             this.departure = departure;
+            
+            this.volunteerID = StaticDBConnection.NonQueryDatabaseWithID("INSERT INTO [Volunteers] (Name, Training_Level) VALUES ('" + name + "', " + (int)training + ")");
+        }
+
+        public TeamMember(int teamId, int volunteerId)
+        {
+            this.volunteerID = volunteerId;
+            this.teamID = teamId;
+            System.Data.SQLite.SQLiteDataReader results = StaticDBConnection.QueryDatabase("SELECT Volunteers.Name, Volunteers.Training_Level, Team_Members.Departure FROM [Team_Members] INNER JOIN [Volunteers] ON Team_Members.Volunteer_ID = Volunteers.Volunteer_ID WHERE Team_Members.Team_ID = " + teamId + " AND Team_Members.Volunteer_ID = " + volunteerId + ";");
+            results.Read();
+            this.name = results.GetString(0);
+            this.trainingLevel = (Trainings)results.GetInt32(1);
+            this.departure = results.GetDateTime(2);
             if (Operation.currentOperation != null)
             {
-                this.operationID = Operation.currentOperation.getID();
+                this.teamID = Operation.currentOperation.getID();
             }
-            this.volunteerID = StaticDBConnection.NonQueryDatabaseWithID("INSERT INTO [Volunteers] (Name, Training_Level) VALUES ('" + name + "', " + 1+(int)training + ")");
+            
         }
 
         //Accessors
@@ -48,7 +62,7 @@ namespace ETD.Models.Objects
 
         public int getParentID()
         {
-            return operationID;
+            return teamID;
         }
 
         //Returns team member departure time

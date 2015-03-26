@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace ETD_Statistic.Model
 {
-    class Statistic
+    public static class Statistic
     {
-        DateTime startTime;
+        /*DateTime startTime;
         DateTime endTime;
         int numberOfInterventions;
         String teamManager;
@@ -17,7 +17,22 @@ namespace ETD_Statistic.Model
         String volunteer;
         int expenses;
         String situations;
+         */
+        static int operationID;
 
+
+        public static void setOperationID(String operation)
+        {
+            operationID = int.Parse(operation.Substring(9));
+        }
+
+        public static int getOperationID()
+        {
+            return operationID;
+        }
+        
+
+        /*
         public Statistic(DateTime start, DateTime end)
         {
             startTime = start;
@@ -48,7 +63,7 @@ namespace ETD_Statistic.Model
         public void setEndTime()
         { 
         }
-
+        */
 
     }
 }

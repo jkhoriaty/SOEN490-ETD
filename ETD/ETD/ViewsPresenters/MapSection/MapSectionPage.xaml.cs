@@ -138,7 +138,7 @@ namespace ETD.ViewsPresenters.MapSection
 			pin.DragStop(Canvas_map, e);
 		}
 
-		/*
+		
 		//Upon right click store mouse position to know where to zoom
         private void Map_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -206,6 +206,6 @@ namespace ETD.ViewsPresenters.MapSection
                 TT = new TranslateTransform(TTX, TTY);
                 imgbrush.Transform = TT;
             }
-        }*/
+        }
 	}
 }

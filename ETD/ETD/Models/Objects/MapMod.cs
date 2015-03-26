@@ -14,6 +14,7 @@ namespace ETD.Models.Objects
     //Mapmofidication items
     public enum MapMods { camp, circle, line, ramp, rectangle, square, stairs, text };
 
+    [Serializable()]
     public class MapMod : Observable
     {
         private static List<MapMod> mapModList = new List<MapMod>();//Contains a list of map modification objects

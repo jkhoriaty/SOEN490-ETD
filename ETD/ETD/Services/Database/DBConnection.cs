@@ -16,22 +16,34 @@ namespace ETD.Services.Database
 
        public DBConnection()
        {
+           /*
            if (!File.Exists(@".\Resources\EDT.sqlite3"))
+           {
+               CreateDatabase();
+           }
+            else
+           {
+               m_dbConnection = new SQLiteConnection(@"Data Source='.\Resources\EDT.sqlite3';Version=3;");
+           }*/
+           if (!File.Exists("c:\\EDT.sqlite3"))
            {
                CreateDatabase();
            }
            else
            {
-               m_dbConnection = new SQLiteConnection(@"Data Source='.\Resources\EDT.sqlite3';Version=3;");
+               m_dbConnection = new SQLiteConnection("c:\\EDT.sqlite3");
            }
        }
 
         private void CreateDatabase()
         {
-            SQLiteConnection.CreateFile(@".\Resources\EDT.sqlite3");
-            m_dbConnection = new SQLiteConnection(@"Data Source='.\Resources\EDT.sqlite3';Version=3;");
+            //SQLiteConnection.CreateFile(@".\Resources\EDT.sqlite3");
+            SQLiteConnection.CreateFile("c:\\EDT.sqlite3");
+            //m_dbConnection = new SQLiteConnection(@"Data Source='.\Resources\EDT.sqlite3';Version=3;");
+            m_dbConnection = new SQLiteConnection(@"Data Source='c:\EDT.sqlite3';Version=3;");
             m_dbConnection.Open();
-            String query = File.ReadAllText(@".\Resources\db.sql");
+            //String query = File.ReadAllText(@".\Resources\db.sql");
+            String query = File.ReadAllText("c:\\db.sql");
             SQLiteCommand command = new SQLiteCommand(query, m_dbConnection);
             command.ExecuteNonQuery();
             m_dbConnection.Close();            

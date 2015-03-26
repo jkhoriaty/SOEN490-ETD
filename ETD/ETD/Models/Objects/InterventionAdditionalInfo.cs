@@ -11,6 +11,7 @@ namespace ETD.Models.Objects
     /// Intervention Additional Information Model Object
     /// </summary>
 
+    [Serializable()]
     public class InterventionAdditionalInfo
     {
         //Database reflection variables
