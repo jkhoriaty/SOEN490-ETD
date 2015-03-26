@@ -113,6 +113,14 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.DetailsInter
             ComboBox comboBox = (ComboBox)sender;
             ComboBoxItem item = (ComboBoxItem)comboBox.SelectedItem;
             intervention.setCode(Convert.ToInt32(item.Content));
+			if (intervention.getCode() == 1)
+			{
+				interventionForm.interventionType.Foreground = new SolidColorBrush(Colors.Red);
+			}
+			else
+			{
+				interventionForm.interventionType.Foreground = new SolidColorBrush(Colors.Black);
+			}
         }
 
         private void Gender_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -137,6 +145,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.DetailsInter
                 Grid.SetColumnSpan(Complaint, 2);
                 intervention.setChiefComplaint("" + item.Content);
             }
+			interventionForm.interventionType.Text = intervention.getChiefComplaint();
         }
 
         public void PersistencyUpdate()
