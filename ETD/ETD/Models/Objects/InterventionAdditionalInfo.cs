@@ -27,7 +27,7 @@ namespace ETD.Models.Objects
             this.information = information;
             this.timestamp = timestamp;
 
-            this.additionalInfoID = StaticDBConnection.NonQueryDatabaseWithID("INSERT INTO [Additional_Informations] (Intervention_ID, Information, Timestamp) VALUES (" + interventionID + ", '" + information + "', '" + StaticDBConnection.DateTimeSQLite(timestamp) + "')");
+            this.additionalInfoID = StaticDBConnection.NonQueryDatabaseWithID("INSERT INTO [Additional_Informations] (Intervention_ID, Information, Timestamp) VALUES (" + interventionID + ", '" + information.Replace("'", "''") + "', '" + StaticDBConnection.DateTimeSQLite(timestamp) + "')");
         }
 
         public InterventionAdditionalInfo(Intervention intervention, String information, DateTime timestamp)
@@ -36,7 +36,7 @@ namespace ETD.Models.Objects
             this.timestamp = timestamp;
 
             this.interventionID = intervention.getID();
-            this.additionalInfoID = StaticDBConnection.NonQueryDatabaseWithID("INSERT INTO [Additional_Informations] (Intervention_ID, Information, Timestamp) VALUES (" + interventionID + ", '" + information + "', '" + StaticDBConnection.DateTimeSQLite(timestamp) + "')");
+            this.additionalInfoID = StaticDBConnection.NonQueryDatabaseWithID("INSERT INTO [Additional_Informations] (Intervention_ID, Information, Timestamp) VALUES (" + interventionID + ", '" + information.Replace("'", "''") + "', '" + StaticDBConnection.DateTimeSQLite(timestamp) + "')");
         }
 
         //Accessors

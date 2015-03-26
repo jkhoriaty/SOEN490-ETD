@@ -51,7 +51,7 @@ namespace ETD.Models.Objects
             {
                 this.operationID = Operation.currentOperation.getID();
             }
-            this.teamID = StaticDBConnection.NonQueryDatabaseWithID("INSERT INTO [Teams] (Operation_ID, Name, Status) VALUES (" + operationID + ", '" + name + "', " + (int)status + ")");
+            this.teamID = StaticDBConnection.NonQueryDatabaseWithID("INSERT INTO [Teams] (Operation_ID, Name, Status) VALUES (" + operationID + ", '" + name.Replace("'", "''") + "', " + (int)status + ")");
             teamList.Add(this);
 			ClassModifiedNotification(typeof(Team));
             
@@ -193,7 +193,7 @@ namespace ETD.Models.Objects
         public void setName(String name)
         {
             this.name = name;
-            StaticDBConnection.NonQueryDatabase("UPDATE [Resources] SET Name='" + name + "', HasArrived='TRUE' WHERE Team_ID=" + teamID + ";");
+            StaticDBConnection.NonQueryDatabase("UPDATE [Resources] SET Name='" + name.Replace("'", "''") + "', HasArrived='TRUE' WHERE Team_ID=" + teamID + ";");
 			InstanceModifiedNotification();
         }
 

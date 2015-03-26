@@ -66,7 +66,7 @@ namespace ETD.Models.Objects
             this.circulation = circulation;
             this.circulationFrequency = circulationFrequency;
             this.interventionID = intervention;
-            this.abcID = StaticDBConnection.NonQueryDatabaseWithID("INSERT INTO [ABCs] (Intervention_ID, Consciousness, Disoriented, Airways, Breathing, Breathing_Frequency, Circulation, Circulation_Frequency) VALUES (" + interventionID + ", '" + consciousness + "', " + disoriented + ", '" + airways + "', '" + breathing + "', " + breathingFrequency + ", '" + circulation + "', " + circulationFrequency + ");");
+            this.abcID = StaticDBConnection.NonQueryDatabaseWithID("INSERT INTO [ABCs] (Intervention_ID, Consciousness, Disoriented, Airways, Breathing, Breathing_Frequency, Circulation, Circulation_Frequency) VALUES (" + interventionID + ", '" + consciousness.Replace("'", "''") + "', " + disoriented + ", '" + airways.Replace("'", "''") + "', '" + breathing.Replace("'", "''") + "', " + breathingFrequency + ", '" + circulation.Replace("'", "''") + "', " + circulationFrequency + ");");
         }
 
         //Accessor methods
@@ -118,7 +118,7 @@ namespace ETD.Models.Objects
         public void setConsciousness(String consciousness)
         {
             this.consciousness = consciousness;
-            StaticDBConnection.NonQueryDatabase("UPDATE [ABCs] SET Consciousness='" + consciousness + "' WHERE Intervention_ID=" + abcID + ";");
+            StaticDBConnection.NonQueryDatabase("UPDATE [ABCs] SET Consciousness='" + consciousness.Replace("'", "''") + "' WHERE Intervention_ID=" + abcID + ";");
         }
 
         public void setDisoriented(bool disoriented)
@@ -130,13 +130,13 @@ namespace ETD.Models.Objects
         public void setAirways(String airways)
         {
             this.airways = airways;
-            StaticDBConnection.NonQueryDatabase("UPDATE [ABCs] SET Airways='" + airways + "' WHERE Intervention_ID=" + abcID + ";");
+            StaticDBConnection.NonQueryDatabase("UPDATE [ABCs] SET Airways='" + airways.Replace("'", "''") + "' WHERE Intervention_ID=" + abcID + ";");
         }
 
         public void setBreathing(String breathing)
         {
             this.breathing = breathing;
-            StaticDBConnection.NonQueryDatabase("UPDATE [ABCs] SET Breathing='" + breathing + "' WHERE Intervention_ID=" + abcID + ";");
+            StaticDBConnection.NonQueryDatabase("UPDATE [ABCs] SET Breathing='" + breathing.Replace("'", "''") + "' WHERE Intervention_ID=" + abcID + ";");
         }
 
         public void setBreathingFrequency(int breathingFrequency)
@@ -148,7 +148,7 @@ namespace ETD.Models.Objects
         public void setCirculation(String circulation)
         {
             this.circulation = circulation;
-            StaticDBConnection.NonQueryDatabase("UPDATE [ABCs] SET Circulation='" + circulation + "' WHERE Intervention_ID=" + abcID + ";");
+            StaticDBConnection.NonQueryDatabase("UPDATE [ABCs] SET Circulation='" + circulation.Replace("'", "''") + "' WHERE Intervention_ID=" + abcID + ";");
         }
     
         public void setCirculationFrequency(int circulationFrequency)
