@@ -55,19 +55,23 @@ namespace ETD_Statistic.ViewsPresenters
             statisticView.Children.Add(operationView);
         }
 
-        public void ExportWPF()
+        public void ExportWPF(Button element)
         {
-            StatisticView sv = new StatisticView();
-
+            Button sp = new Button();
+            sp.DataContext = element.Content;
             FixedDocument fixedDoc = new FixedDocument();
             PageContent pageCont = new PageContent();
             FixedPage fixedPage = new FixedPage();
-            fixedPage.Margin = new Thickness(50);
-            Frame frame = new Frame();
-            frame.Content = sv;
+            //fixedPage.Background = Brushes.Blue;
 
-            fixedPage.Children.Add(frame);
-
+            //testing
+            /*
+            TextBlock tb = new TextBlock();
+            tb.Text = "TESTING PAGE";
+            tb.FontSize = 30;
+            fixedPage.Children.Add((UIElement)tb);
+            */
+            fixedPage.Children.Add((UIElement)sp);
 
             Size sz = new Size(96 * 8.5, 96 * 11);
             fixedPage.Measure(sz);
@@ -101,7 +105,7 @@ namespace ETD_Statistic.ViewsPresenters
 
         public void ExportToPDF(object sender, RoutedEventArgs e)
         {
-            ExportWPF();
+            ExportWPF(buttonView);
             SaveXPS();
         }
 
