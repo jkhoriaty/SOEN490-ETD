@@ -40,11 +40,6 @@ namespace ETD_Statistic.ViewsPresenters
             statisticView.Children.Add(statsView);
         }
 
-        public void printMessage()
-        {
-            MessageBox.Show("testing");
-        }
-
         public void LoadPreviousOperations(object sender, RoutedEventArgs e)
         {
             statisticView.Children.Clear();
