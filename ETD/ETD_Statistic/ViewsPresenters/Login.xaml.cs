@@ -36,14 +36,14 @@ namespace ETD_Statistic.ViewsPresenters
 
         private bool IsFormValid()
         {
-            if (username.Text != "admin" && password.Text != "admin")
+            if ((username.Text.Equals("admin")) && (password.Text.Equals("admin")))
             {
-                MessageBox.Show(ETD_Statistic.Properties.Resources.MessageBox_Notification_InvalidCredentials);
-                return false;
+                return true;             
             }
             else
             {
-                return true;
+                MessageBox.Show(ETD_Statistic.Properties.Resources.MessageBox_Notification_InvalidCredentials);
+                return false;
             }
         }
     }
