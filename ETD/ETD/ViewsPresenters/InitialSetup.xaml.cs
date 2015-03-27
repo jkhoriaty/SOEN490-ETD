@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Text.RegularExpressions;
 using ETD.Services;
+using ETD.Services.Database;
+using System.Data.SQLite;
 
 namespace ETD.ViewsPresenters
 {
@@ -42,6 +44,15 @@ namespace ETD.ViewsPresenters
 
         private void Submit_Click(object sender, RoutedEventArgs e)
         {
+			/*SQLiteDataReader reader = StaticDBConnection.QueryDatabase("SELECT DISTINCT Dispatcher FROM Operations");
+			while (reader.Read())
+			{
+				MessageBox.Show(reader["Dispatcher"].ToString());
+			}
+			StaticDBConnection.CloseConnection();*/
+			
+
+
             if(IsFormValid()) //if the form is valid, create an instance of mainwindow
             {                
                 ETD.Models.Objects.Operation initInfo = new ETD.Models.Objects.Operation(operationName.Text, acronym.Text, shiftStart, shiftEnd, dispatcherName.Text);
@@ -51,6 +62,7 @@ namespace ETD.ViewsPresenters
                 Serializer.Instance.StartBackUp();
                 this.Close();
             }
+ 
         }
 
         internal void Text_Enter(object sender, RoutedEventArgs e)

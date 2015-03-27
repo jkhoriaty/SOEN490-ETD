@@ -97,7 +97,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.ABCIntervent
         }
 
         //No longer needed
-		public void PersistencyUpdate()
+/*		public void PersistencyUpdate()
 		{
             
 			String consciousness;
@@ -150,7 +150,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.ABCIntervent
 			//intervention.setABC(new ABC(consciousness, disoriented, airways, breathing, breathingFrequency, circulation, circulationFrequency));
             //FillForm(abc);
 		}
-
+		*/
         private void ConsciousnessBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             String consciousness;
