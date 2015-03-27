@@ -40,17 +40,18 @@ namespace ETD.ViewsPresenters
                 serializer.StartBackUp();
                 this.Close();
             }
+			SQLiteDataReader reader = StaticDBConnection.QueryDatabase("SELECT Name FROM Volunteers");
+			while (reader.Read())
+			{
+				ComboBoxItem cbItem = new ComboBoxItem();
+				cbItem.Content = reader["Name"].ToString();
+				dispatcherName.Items.Add(cbItem);
+			}
+			StaticDBConnection.CloseConnection();
         }
 
         private void Submit_Click(object sender, RoutedEventArgs e)
         {
-			/*SQLiteDataReader reader = StaticDBConnection.QueryDatabase("SELECT DISTINCT Dispatcher FROM Operations");
-			while (reader.Read())
-			{
-				MessageBox.Show(reader["Dispatcher"].ToString());
-			}
-			StaticDBConnection.CloseConnection();*/
-			
 
 
             if(IsFormValid()) //if the form is valid, create an instance of mainwindow
