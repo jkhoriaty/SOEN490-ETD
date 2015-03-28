@@ -260,11 +260,15 @@ namespace ETD.ViewsPresenters
         //Display GPS position
 		private void ShowGPSLocations_Click(object sender, RoutedEventArgs e)
 		{
-            if (!Team.getTeamList().Any())
+            if (Team.getTeamList().Any())
             {
                 GPSAssignment subWindow = new GPSAssignment();
                 subWindow.Show();
             }
+			else
+			{
+				MessageBox.Show("No teams are created. Please create teams in order to associate them with GPS locations.");
+			}
 		}
 
 		//Go through GPS setup
