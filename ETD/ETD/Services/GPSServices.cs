@@ -197,6 +197,7 @@ namespace ETD.Services
 			contextMenu.Items.Add(tagPointMenuItem);
 			teamPin.ContextMenu = contextMenu;
 
+			//Replacing pin on the map for tagging
 			mapSection.Canvas_map.Children.Add(teamPin);
 			double[] previousPinPosition = Pin.getPreviousPinPosition(teamPin.getRelatedObject());
 			if (previousPinPosition == null)
@@ -204,6 +205,14 @@ namespace ETD.Services
 				previousPinPosition = new double[] { teamPin.Width / 2, teamPin.Height / 2 }; //Top-left corner
 			}
 			teamPin.setPinPosition(previousPinPosition[0], previousPinPosition[1]);
+
+			//Clearing the reference points in case the user is going through the setup again for any reason
+			if(GPSLocation.gpsConfigured == true)
+			{
+				GPSLocation.gpsConfigured = false;
+				GPSLocation.referencePoints.Clear();
+				MessageBox.Show("Previous setup is cleared. You can now proceed to re-setup the GPS");
+			}
 
 			MessageBox.Show("Team " + teamPin.getTeam().getName() + " selected. Please ask the team to position themselves at different locations of the site.\n"
 				+ "As soon as they reach a particular location, wait at least 10 seconds and then tag the position by placing the team pin on the equivalent point on the map, right click on it, and select \"Tag point\".\n"
@@ -221,10 +230,13 @@ namespace ETD.Services
 			if(GPSLocation.referencePoints.Count == 2)
 			{
 				MessageBox.Show("Setup completed");
-				List<GPSLocation> list = new List<GPSLocation>();
-				list.Add(new GPSLocation(45.497401, -73.578224, 179, 313));
-				list.Add(new GPSLocation(45.495637, -73.579325, 580, 473));
-				GPSLocation.referencePoints = list;
+
+				//CONCORDIA TESTING - debug
+				//List<GPSLocation> list = new List<GPSLocation>();
+				//list.Add(new GPSLocation(45.497401, -73.578224, 179, 313));
+				//list.Add(new GPSLocation(45.495637, -73.579325, 580, 473));
+				//GPSLocation.referencePoints = list;
+
 				GPSLocation.setConfigured(true); //Change flag to signify that the setup is successfully done
 				mapSection.Update(); //Readding all the pins to the map
 				setupOngoing = false;

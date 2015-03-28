@@ -68,8 +68,8 @@ namespace ETD.Models.Objects
 			//Handling case when the current position is equal to the reference position
 			if(lattitude == referencePoints.ElementAt(0).getLattitude() && longitude == referencePoints.ElementAt(0).getLongitude())
 			{
-				X = referencePoints.ElementAt(0).getX();
-				Y = referencePoints.ElementAt(0).getY();
+				X = referencePoints.ElementAt(0).getX() / xRatio;
+				Y = referencePoints.ElementAt(0).getY() / yRatio;
 				return;
 			}
 

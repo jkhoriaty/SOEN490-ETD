@@ -24,7 +24,6 @@ namespace ETD.ViewsPresenters.MapSection
 
 		//Drag-and-Drop related variable
 		private bool pinDragInProgress;
-		private Pin draggedPin;
 
         ImageBrush imgbrush;
         internal String zoomLevel = "100%";

@@ -55,6 +55,9 @@ namespace ETD.ViewsPresenters
 		private double imageWidth;
 		private double imageHeight;
 
+		//Variable used for exception handling
+		private bool mapAdded = false;
+
 		public MainWindow()
 		{
             //hook up DataChanged event to get notification to make culture-related changes in code
@@ -151,6 +154,7 @@ namespace ETD.ViewsPresenters
 				imageHeight = coloredImage.Height;
 
                 mapModificationSection.setMap(coloredImage);
+				mapAdded = true;
 			}
 		}
 
@@ -281,37 +285,43 @@ namespace ETD.ViewsPresenters
 				return;
 			}
 
+			//Handling case when no maps were added
+			if(mapAdded == false)
+			{
+				MessageBox.Show("Please load a map before entering setup.");
+				return;
+			}
+
+			//Handling case when no teams were created
+			if (Team.getTeamList().Count == 0)
+			{
+				MessageBox.Show("No teams are associated with a GPS location. Please associate a team to a GPS location before entering the GPS setup.");
+				return;
+			}
+
 			//Check if click was to cancel setup or start it
 			if (GPSServices.setupOngoing == false)
 			{
-				//Check if a team has been created
-				if (Team.getTeamList().Count > 0)
+				//Create and populate list of registered teams
+				List<Team> registeredTeams = new List<Team>();
+				foreach (Team team in Team.getTeamList())
 				{
-					//Create and populate list of registered teams
-					List<Team> registeredTeams = new List<Team>();
-					foreach (Team team in Team.getTeamList())
+					if (team.getGPSLocation() != null)
 					{
-						if (team.getGPSLocation() != null)
-						{
-							registeredTeams.Add(team);
-						}
+						registeredTeams.Add(team);
 					}
+				}
 
-					//Check if there is at least one team that is registered, it will be used for setup
-					if (registeredTeams.Count != 0)
-					{
-						GPSSetup_Button.Background = new SolidColorBrush(Colors.Red);
-						GPSSetup_Button.Foreground = new SolidColorBrush(Colors.White);
-						GPSServices.SetupGPSToMapTranslation_Start(mapSection, registeredTeams);
-					}
-					else
-					{
-						MessageBox.Show("No teams are associated with a GPS location. Please associate a team to a GPS location before entering the GPS setup.");
-					}
+				//Check if there is at least one team that is registered, it will be used for setup
+				if (registeredTeams.Count != 0)
+				{
+					GPSSetup_Button.Background = new SolidColorBrush(Colors.Red);
+					GPSSetup_Button.Foreground = new SolidColorBrush(Colors.White);
+					GPSServices.SetupGPSToMapTranslation_Start(mapSection, registeredTeams);
 				}
 				else
 				{
-					MessageBox.Show("No teams have been created yet. Please create a team and associate it to a GPS position before entering GPS setup.");
+					MessageBox.Show("No teams are associated with a GPS location. Please associate a team to a GPS location before entering the GPS setup.");
 				}
 			}
 			else
