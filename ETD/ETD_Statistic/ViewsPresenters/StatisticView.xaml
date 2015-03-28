@@ -3,7 +3,8 @@
         xmlns:properties="clr-namespace:ETD_Statistic.Properties"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="StatisticView" Width="1000">
-        <StackPanel Margin="50,0,30,0">
+    <ScrollViewer VerticalScrollBarVisibility="Visible">
+        <StackPanel>
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="200"/>
@@ -29,48 +30,48 @@
                     <TextBlock Name="VolunteerCount" FontWeight="SemiBold" FontStyle="Italic" FontSize="15" Foreground="Salmon" TextAlignment="Right" Margin="0,110,0,0"></TextBlock>
                 </Grid>
                 <Grid Grid.Column="0" Grid.Row="1">
-                    <Border BorderThickness="1,1,1,1" BorderBrush="Black">
-                        <TextBlock Height="50" Margin="20,0,0,0" FontWeight="Bold" VerticalAlignment="Center" FontSize="15" x:Uid="TextBlock_VolunteerFollowUp" Text="{x:Static properties:Resources.TextBlock_VolunteerFollowUp}"/>
+                    <Border Height="50" BorderThickness="1,1,1,1" BorderBrush="Black">
+                        <TextBlock Margin="20,0,0,0" FontWeight="Bold" VerticalAlignment="Center" FontSize="15" x:Uid="TextBlock_VolunteerFollowUp" Text="{x:Static properties:Resources.TextBlock_VolunteerFollowUp}"/>
                     </Border>
                 </Grid>
                 <Border Grid.Column="1" Grid.Row="1" BorderThickness="0,1,1,1" BorderBrush="Black">
                     <TextBlock Name="VolunteerFollowUp"/>
                 </Border>
                 <Grid Grid.Column="0" Grid.Row="2">
-                    <Border BorderThickness="1,0,1,1" BorderBrush="Black">
-                        <TextBlock Margin="20,0,0,0" Height="50" FontSize="15" x:Uid="TextBlock_Finance" Text="{x:Static properties:Resources.TextBlock_Finance}" FontWeight="Bold" VerticalAlignment="Center"/>
+                    <Border Height="50" BorderThickness="1,0,1,1" BorderBrush="Black">
+                        <TextBlock Margin="20,0,0,0" FontSize="15" x:Uid="TextBlock_Finance" Text="{x:Static properties:Resources.TextBlock_Finance}" FontWeight="Bold" VerticalAlignment="Center"/>
                     </Border>
                 </Grid>
                 <Border Grid.Column="1" Grid.Row="2" BorderThickness="0,0,1,1" BorderBrush="Black">
                     <TextBlock Name="Finance"></TextBlock>
                 </Border>
                 <Grid Grid.Column="0" Grid.Row="3" >
-                    <Border BorderThickness="1,0,1,1" BorderBrush="Black">
-                        <TextBlock Margin="20,0,0,0" Height="50" FontSize="15" x:Uid="TextBlock_Vehicle" Text="{x:Static properties:Resources.TextBlock_Vehicle}" FontWeight="Bold" VerticalAlignment="Center"/>
+                    <Border Height="50" BorderThickness="1,0,1,1" BorderBrush="Black">
+                        <TextBlock Margin="20,0,0,0" FontSize="15" x:Uid="TextBlock_Vehicle" Text="{x:Static properties:Resources.TextBlock_Vehicle}" FontWeight="Bold" VerticalAlignment="Center"/>
                     </Border>
                 </Grid>
                 <Border Grid.Column="1" Grid.Row="3" BorderThickness="0,0,1,1" BorderBrush="Black">
                     <TextBlock Name="Vehicle"></TextBlock>
                 </Border>
                 <Grid Grid.Column="0" Grid.Row="4">
-                    <Border BorderThickness="1,0,1,1" BorderBrush="Black">
-                        <TextBlock TextWrapping="Wrap" Height="50" Margin="20,0,0,0" FontSize="15" x:Uid="TextBlock_ParticularSituation" Text="{x:Static properties:Resources.TextBlock_ParticularSituation}" FontWeight="Bold" VerticalAlignment="Center"/>
+                    <Border Height="50" BorderThickness="1,0,1,1" BorderBrush="Black">
+                        <TextBlock TextWrapping="Wrap" Margin="20,0,0,0" FontSize="15" x:Uid="TextBlock_ParticularSituation" Text="{x:Static properties:Resources.TextBlock_ParticularSituation}" FontWeight="Bold" VerticalAlignment="Center"/>
                     </Border>
                 </Grid>
                 <Border Grid.Column="1" Grid.Row="4" BorderThickness="0,0,1,1" BorderBrush="Black">
                     <TextBlock Name="ParticularSituation"></TextBlock>
                 </Border>
                 <Grid Grid.Column="0" Grid.Row="5">
-                    <Border BorderThickness="1,0,1,1" BorderBrush="Black">
-                        <TextBlock FontSize="15"  Height="50" Margin="20,0,0,0" x:Uid="TextBlock_OrganizationFollowUp" Text="{x:Static properties:Resources.TextBlock_OrganizationFollowUp}" FontWeight="Bold" VerticalAlignment="Center"/>
+                    <Border Height="50" BorderThickness="1,0,1,1" BorderBrush="Black">
+                        <TextBlock FontSize="15" Margin="20,0,0,0" x:Uid="TextBlock_OrganizationFollowUp" Text="{x:Static properties:Resources.TextBlock_OrganizationFollowUp}" FontWeight="Bold" VerticalAlignment="Center"/>
                     </Border>
                 </Grid>
                 <Border Grid.Column="1" Grid.Row="5" BorderThickness="0,0,1,1" BorderBrush="Black">
                     <TextBlock Name="OrganizationFollowUp"></TextBlock>
                 </Border>
                 <Grid Grid.Column="0" Grid.Row="6">
-                    <Border BorderThickness="1,0,1,1" BorderBrush="Black">
-                        <TextBlock TextWrapping="Wrap"  Height="50"  FontSize="15" Margin="20,0,0,0" x:Uid="TextBlock_SupervisorFollowUp" Text="{x:Static properties:Resources.TextBlock_SupervisorFollowUp}" FontWeight="Bold" VerticalAlignment="Center"/>
+                    <Border Height="50" BorderThickness="1,0,1,1" BorderBrush="Black">
+                        <TextBlock TextWrapping="Wrap" FontSize="15" Margin="20,0,0,0" x:Uid="TextBlock_SupervisorFollowUp" Text="{x:Static properties:Resources.TextBlock_SupervisorFollowUp}" FontWeight="Bold" VerticalAlignment="Center"/>
                     </Border>
                 </Grid>
                 <Border Grid.Column="1" Grid.Row="6" BorderThickness="0,0,1,1" BorderBrush="Black">
@@ -78,4 +79,5 @@
                 </Border>
             </Grid>
         </StackPanel>
+    </ScrollViewer>
 </Page>
