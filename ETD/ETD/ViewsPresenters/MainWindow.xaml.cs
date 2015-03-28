@@ -274,7 +274,15 @@ namespace ETD.ViewsPresenters
                 }
                 else
                 {
-                    MessageBox.Show("No teams are created. Please create teams in order to associate them with GPS locations.");
+                    if (!Team.getTeamList().Any())
+                    {
+                        MessageBox.Show("No teams are created. Please create teams in order to associate them with GPS locations.");
+                    }
+
+                    else if (GPSLocation.getDictionary().Any())
+                    {
+                        MessageBox.Show("There are no volunteers with registered GPS', please have a volunteer register their device to use this feature.");
+                    }
                 }
             }
 		}
