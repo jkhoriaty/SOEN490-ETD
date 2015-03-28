@@ -135,6 +135,7 @@ namespace ETD.ViewsPresenters
             if (duplicates == false)
             {
                 this.Close();
+                MainWindow.CloseGPSWindow();
             }
             else
             {

@@ -42,6 +42,7 @@ namespace ETD.ViewsPresenters
 		private MapSectionPage mapSection;
 		private InterventionSectionPage interventionsSection;
         private AdditionalInfoPage mapModificationSection;
+        private static GPSAssignment subWindow;
 
         //Forms used by the popup method
         private FollowUpSectionForm followupSection;
@@ -260,16 +261,24 @@ namespace ETD.ViewsPresenters
         //Display GPS position
 		private void ShowGPSLocations_Click(object sender, RoutedEventArgs e)
 		{
-            if (Team.getTeamList().Any())
+            if (subWindow == null)
             {
-                GPSAssignment subWindow = new GPSAssignment();
-                subWindow.Show();
+                if (Team.getTeamList().Any() && GPSLocation.getDictionary().Any())
+                {
+                    subWindow = new GPSAssignment();
+                    subWindow.Show();
+                }
+                else
+                {
+                    MessageBox.Show("No teams are created. Please create teams in order to associate them with GPS locations.");
+                }
             }
-			else
-			{
-				MessageBox.Show("No teams are created. Please create teams in order to associate them with GPS locations.");
-			}
 		}
+
+        public static void CloseGPSWindow()
+        {
+            subWindow = null;
+        }
 
 		//Go through GPS setup
 		private void GPSSetup_Click(object sender, RoutedEventArgs e)
