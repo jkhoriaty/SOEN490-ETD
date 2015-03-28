@@ -1,7 +1,7 @@
 /*
 Navicat SQLite Data Transfer
 
-Source Server         : ETD
+Source Server         : ETD-Debug
 Source Server Version : 30808
 Source Host           : :0
 
@@ -9,7 +9,7 @@ Target Server Type    : SQLite
 Target Server Version : 30808
 File Encoding         : 65001
 
-Date: 2015-03-25 12:16:42
+Date: 2015-03-26 14:44:15
 */
 
 PRAGMA foreign_keys = OFF;
@@ -21,7 +21,7 @@ DROP TABLE IF EXISTS "main"."ABCs";
 CREATE TABLE "ABCs" (
 "ABC_ID"  INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
 "Intervention_ID"  INTEGER NOT NULL,
-"Consciousess"  TEXT,
+"Consciousness"  TEXT,
 "Disoriented"  BOOLEAN,
 "Airways"  TEXT,
 "Breathing"  TEXT,
@@ -34,9 +34,6 @@ CONSTRAINT "fkey0" FOREIGN KEY ("Intervention_ID") REFERENCES "Interventions" ("
 -- ----------------------------
 -- Records of ABCs
 -- ----------------------------
-INSERT INTO "main"."ABCs" VALUES (1, 0, null, null, null, null, null, null, null);
-INSERT INTO "main"."ABCs" VALUES (2, 0, null, null, null, null, null, null, null);
-INSERT INTO "main"."ABCs" VALUES (3, 0, null, null, null, null, null, null, null);
 
 -- ----------------------------
 -- Table structure for Additional_Informations
@@ -64,9 +61,9 @@ CREATE TABLE "Assigned_Equipment" (
 "Team_ID"  INTEGER NOT NULL,
 "Assigned_Time"  DATETIME,
 "Removed_Time"  DATETIME,
-PRIMARY KEY ("Equipment_ID", "Team_ID" ASC),
-CONSTRAINT "fkey0" FOREIGN KEY ("Equipment_ID") REFERENCES "Equipments" ("Equipments_ID") ON DELETE CASCADE ON UPDATE CASCADE,
-CONSTRAINT "fkey1" FOREIGN KEY ("Team_ID") REFERENCES "Teams" ("Team_ID") ON DELETE CASCADE ON UPDATE CASCADE
+PRIMARY KEY ("Equipment_ID" ASC, "Team_ID" ASC),
+CONSTRAINT "fkey0" FOREIGN KEY ("Equipment_ID") REFERENCES "Equipments" ("Equipment_ID") ON DELETE CASCADE ON UPDATE CASCADE,
+CONSTRAINT "fkey1" FOREIGN KEY ("Team_ID") REFERENCES "Teams" ("Team_ID")
 );
 
 -- ----------------------------
@@ -155,9 +152,6 @@ CONSTRAINT "fkey2" FOREIGN KEY ("Conclusion") REFERENCES "Ending_Codes" ("Ending
 -- ----------------------------
 -- Records of Interventions
 -- ----------------------------
-INSERT INTO "main"."Interventions" VALUES (1, 6, 1, '2015-3-24 16:48:14.842', 'A', 'RandomStreet', null, 2, 'M', 12, 'Seizures', null, null);
-INSERT INTO "main"."Interventions" VALUES (2, 7, 1, '2015-3-24 19:25:25.873', 'Tester', 'Location', null, 1, 'M', 19, null, null, null);
-INSERT INTO "main"."Interventions" VALUES (3, 0, 1, '2015-3-25 0:20:32.200', null, null, null, null, null, null, null, null, null);
 
 -- ----------------------------
 -- Table structure for Operations
@@ -182,16 +176,6 @@ CREATE TABLE "Operations" (
 -- Records of Operations
 -- ----------------------------
 INSERT INTO "main"."Operations" VALUES (0, 'Test Operation', 'TO', '2015-3-19 0:0:0', '2015-3-20 12:12:12.0', 'Tester', null, null, null, null, null, null);
-INSERT INTO "main"."Operations" VALUES (1, 'A', 'A', '2015-3-14 12:12:0.0', '2015-3-21 12:12:0.0', 'A', 'blahhhhh', 'blah', null, null, null, null);
-INSERT INTO "main"."Operations" VALUES (2, 'C', 'C', '2015-3-28 12:0:0.0', '2015-4-2 10:0:0.0', 'C', null, null, null, null, null, null);
-INSERT INTO "main"."Operations" VALUES (3, 'D', 'D', '2015-3-14 12:0:0.0', '2015-3-15 13:0:0.0', 'D', null, null, null, null, null, null);
-INSERT INTO "main"."Operations" VALUES (4, 'E', 'E', '2015-3-21 12:11:0.0', '2015-3-22 12:11:0.0', 'A', 'Volunteer A injuered', '10$ Meals', 'None', 'None', '', 'Blehhhhhh');
-INSERT INTO "main"."Operations" VALUES (5, 'E', 'E', '2015-3-19 12:12:0.0', '2015-3-22 12:12:0.0', 'A', null, null, null, null, null, null);
-INSERT INTO "main"."Operations" VALUES (6, 'Lo', 'L', '2015-3-13 12:0:0.0', '2015-3-14 13:0:0.0', 'L', 'Random text', '', '', '', '', 'Mr. A');
-INSERT INTO "main"."Operations" VALUES (7, 'TestingTeams', 'TT', '2015-1-14 12:0:0.0', '2015-1-15 12:0:0.0', 'T', 'AAAAA', 'RANDOMTEST', 'LKJLSF', 'SLDKJFL', 'SDLKFJKLS', 'SDLKFJ');
-INSERT INTO "main"."Operations" VALUES (8, 'Bob', 'te', '2015-3-4 21:30:0.0', '2015-4-4 21:21:0.0', 'bob', '', '', '', '', '', '');
-INSERT INTO "main"."Operations" VALUES (9, 'Bob', 'Te', '2015-2-22 21:21:0.0', '2015-4-3 21:21:0.0', 'bob', null, null, null, null, null, null);
-INSERT INTO "main"."Operations" VALUES (10, 'Bob', 'te', '2001-1-1 21:21:0.0', '2002-2-2 21:21:0.0', 'bob', '', '', '', '', '', '');
 
 -- ----------------------------
 -- Table structure for Resources
@@ -214,8 +198,6 @@ CONSTRAINT "fkey1" FOREIGN KEY ("Intervention_ID") REFERENCES "Interventions" ("
 -- ----------------------------
 -- Records of Resources
 -- ----------------------------
-INSERT INTO "main"."Resources" VALUES (1, 1, null, 6, null, null, 'FALSE', null, 'FALSE');
-INSERT INTO "main"."Resources" VALUES (2, 2, null, 9, null, null, 'FALSE', null, 'FALSE');
 
 -- ----------------------------
 -- Table structure for sqlite_sequence
@@ -230,13 +212,13 @@ INSERT INTO "main"."sqlite_sequence" VALUES ('Equipment_Types', 6);
 INSERT INTO "main"."sqlite_sequence" VALUES ('Statuses', 4);
 INSERT INTO "main"."sqlite_sequence" VALUES ('Trainings', 3);
 INSERT INTO "main"."sqlite_sequence" VALUES ('Ending_Codes', 9);
-INSERT INTO "main"."sqlite_sequence" VALUES ('Volunteers', 13);
-INSERT INTO "main"."sqlite_sequence" VALUES ('ABCs', 3);
-INSERT INTO "main"."sqlite_sequence" VALUES ('Resources', 2);
+INSERT INTO "main"."sqlite_sequence" VALUES ('Volunteers', 0);
+INSERT INTO "main"."sqlite_sequence" VALUES ('Resources', 0);
 INSERT INTO "main"."sqlite_sequence" VALUES ('Equipments', 0);
-INSERT INTO "main"."sqlite_sequence" VALUES ('Operations', 10);
-INSERT INTO "main"."sqlite_sequence" VALUES ('Teams', 9);
-INSERT INTO "main"."sqlite_sequence" VALUES ('Interventions', 3);
+INSERT INTO "main"."sqlite_sequence" VALUES ('Operations', 0);
+INSERT INTO "main"."sqlite_sequence" VALUES ('Teams', 0);
+INSERT INTO "main"."sqlite_sequence" VALUES ('Interventions', 0);
+INSERT INTO "main"."sqlite_sequence" VALUES ('ABCs', 0);
 
 -- ----------------------------
 -- Table structure for Statuses
@@ -250,10 +232,10 @@ CREATE TABLE "Statuses" (
 -- ----------------------------
 -- Records of Statuses
 -- ----------------------------
-INSERT INTO "main"."Statuses" VALUES (1, 'Available');
-INSERT INTO "main"."Statuses" VALUES (2, 'Moving');
-INSERT INTO "main"."Statuses" VALUES (3, 'Intervening');
-INSERT INTO "main"."Statuses" VALUES (4, 'Unavailable');
+INSERT INTO "main"."Statuses" VALUES (0, 'Available');
+INSERT INTO "main"."Statuses" VALUES (1, 'Moving');
+INSERT INTO "main"."Statuses" VALUES (2, 'Intervening');
+INSERT INTO "main"."Statuses" VALUES (3, 'Unavailable');
 
 -- ----------------------------
 -- Table structure for Teams
@@ -271,15 +253,6 @@ FOREIGN KEY ("Status") REFERENCES "Statuses" ("Status_ID") ON DELETE CASCADE ON 
 -- ----------------------------
 -- Records of Teams
 -- ----------------------------
-INSERT INTO "main"."Teams" VALUES (1, 1, 'A', 10);
-INSERT INTO "main"."Teams" VALUES (2, 2, 'C', 10);
-INSERT INTO "main"."Teams" VALUES (3, 3, 'D', 10);
-INSERT INTO "main"."Teams" VALUES (4, 4, 'E', 10);
-INSERT INTO "main"."Teams" VALUES (5, 5, 'E', 10);
-INSERT INTO "main"."Teams" VALUES (6, 6, 'B', 10);
-INSERT INTO "main"."Teams" VALUES (7, 7, 'A', 10);
-INSERT INTO "main"."Teams" VALUES (8, 7, 'B', 10);
-INSERT INTO "main"."Teams" VALUES (9, 7, 'C', 10);
 
 -- ----------------------------
 -- Table structure for Team_Members
@@ -299,17 +272,6 @@ CONSTRAINT "fkey1" FOREIGN KEY ("Volunteer_ID") REFERENCES "Volunteers" ("Volunt
 -- ----------------------------
 -- Records of Team_Members
 -- ----------------------------
-INSERT INTO "main"."Team_Members" VALUES (1, 3, '2015-3-24 12:0:57.0', '2015-3-23 22:39:57.518', null);
-INSERT INTO "main"."Team_Members" VALUES (2, 4, '2015-3-24 12:0:37.0', '2015-3-23 22:57:37.415', null);
-INSERT INTO "main"."Team_Members" VALUES (3, 5, '2015-3-24 12:0:16.0', '2015-3-23 22:59:17.26', null);
-INSERT INTO "main"."Team_Members" VALUES (4, 6, '2015-3-24 12:0:29.0', '2015-3-23 23:0:29.603', null);
-INSERT INTO "main"."Team_Members" VALUES (5, 7, '2015-3-24 12:0:35.0', '2015-3-24 1:49:35.780', null);
-INSERT INTO "main"."Team_Members" VALUES (6, 8, '2015-3-25 12:0:13.0', '2015-3-24 16:48:13.587', null);
-INSERT INTO "main"."Team_Members" VALUES (7, 9, '2015-3-25 12:0:5.0', '2015-3-24 19:25:5.390', null);
-INSERT INTO "main"."Team_Members" VALUES (7, 10, '2015-3-25 12:0:5.0', '2015-3-24 19:25:5.411', null);
-INSERT INTO "main"."Team_Members" VALUES (8, 11, '2015-3-25 12:0:13.0', '2015-3-24 19:25:13.211', null);
-INSERT INTO "main"."Team_Members" VALUES (9, 12, '2015-3-25 11:0:23.0', '2015-3-24 19:25:23.524', null);
-INSERT INTO "main"."Team_Members" VALUES (9, 13, '2015-3-25 12:0:23.0', '2015-3-24 19:25:23.542', null);
 
 -- ----------------------------
 -- Table structure for Trainings
@@ -323,9 +285,9 @@ CREATE TABLE "Trainings" (
 -- ----------------------------
 -- Records of Trainings
 -- ----------------------------
-INSERT INTO "main"."Trainings" VALUES (1, 'General First Aid');
-INSERT INTO "main"."Trainings" VALUES (2, 'First Responder');
-INSERT INTO "main"."Trainings" VALUES (3, 'Medicine');
+INSERT INTO "main"."Trainings" VALUES (0, 'General First Aid');
+INSERT INTO "main"."Trainings" VALUES (1, 'First Responder');
+INSERT INTO "main"."Trainings" VALUES (2, 'Medicine');
 
 -- ----------------------------
 -- Table structure for Volunteers
@@ -341,14 +303,3 @@ FOREIGN KEY ("Training_Level") REFERENCES "Trainings" ("Training_ID") ON DELETE 
 -- ----------------------------
 -- Records of Volunteers
 -- ----------------------------
-INSERT INTO "main"."Volunteers" VALUES (3, 'A', 11);
-INSERT INTO "main"."Volunteers" VALUES (4, 'C', 10);
-INSERT INTO "main"."Volunteers" VALUES (5, 'D', 11);
-INSERT INTO "main"."Volunteers" VALUES (6, 'E', 11);
-INSERT INTO "main"."Volunteers" VALUES (7, 'E', 10);
-INSERT INTO "main"."Volunteers" VALUES (8, 'B', 11);
-INSERT INTO "main"."Volunteers" VALUES (9, 'A', 11);
-INSERT INTO "main"."Volunteers" VALUES (10, 'B', 11);
-INSERT INTO "main"."Volunteers" VALUES (11, 'Aaa', 11);
-INSERT INTO "main"."Volunteers" VALUES (12, 'C', 10);
-INSERT INTO "main"."Volunteers" VALUES (13, 'D', 10);

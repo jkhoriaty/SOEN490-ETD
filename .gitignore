@@ -32,9 +32,13 @@ ETD/ETD_Statistic/obj/Debug/
 ETD/ETD_Statistic/obj/Debug/ETD_Statistic.csproj.FileListAbsolute.txt
 ETD/ETD_Statistic/bin/Debug/System.Data.SQLite.xml
 ETD/ETD_Statistic/bin/Debug/Icons/*
+ETD/Builds/Debug/CommonResources/
 ETD/Builds/Debug/ETD/
 ETD/Builds/Debug/ETD_Statistics/
 ETD/Builds/Debug/ETD_UnitTest/
+ETD/Builds/Release/CommonResources/
 ETD/Builds/Release/ETD/
 ETD/Builds/Release/ETD_Statistics/
 ETD/Builds/Release/ETD_UnitTest/
+ETD/Builds/Debug/CommonResources/*
+

@@ -37,6 +37,7 @@ namespace ETD_Statistic.ViewsPresenters
             SQLiteDataReader reader = StaticDBConnection.QueryDatabase("SELECT * FROM Operations ORDER BY Shift_Start");
             while(reader.Read())
             {
+
                 tb = new TextBlock();
                 tb.FontSize = 20;
                 tb.FontWeight = FontWeights.Bold;
@@ -45,6 +46,7 @@ namespace ETD_Statistic.ViewsPresenters
                 DateTime startDate = Convert.ToDateTime(reader["Shift_Start"].ToString());
                 DateTime endDate = Convert.ToDateTime(reader["Shift_End"].ToString());
                 tb.Text = "Operation ID: " + reader["Operation_ID"] + " Operation Name: " + reader["Name"] + " Start: " + startDate.ToString("g")+ " End: " + endDate.ToString("g");
+                tb.MouseLeftButtonDown += new MouseButtonEventHandler(OperationClicked);
                 previousOperation.Children.Add(tb);
             }
             StaticDBConnection.CloseConnection();

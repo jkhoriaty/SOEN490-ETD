@@ -55,9 +55,9 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm
 			setInterventionNumber(intervention.getInterventionNumber());
 			//Set the intervention type RED if it is of code 1
 
-			dispatcherTimer.Tick += new EventHandler(PersistencyUpdate);
-			dispatcherTimer.Interval += new TimeSpan(0, 0, 30);
-			dispatcherTimer.Start();
+			//dispatcherTimer.Tick += new EventHandler(PersistencyUpdate);
+			//dispatcherTimer.Interval += new TimeSpan(0, 0, 30);
+			//dispatcherTimer.Start();
 
 			BuildComponents();
             
@@ -131,17 +131,17 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm
 		}
 
 		//Runs once per minute - Registers all changes in the form to the intervention object
-		public void PersistencyUpdate(object sender, EventArgs e)
+/*		public void PersistencyUpdate(object sender, EventArgs e)
 		{
             
-			detailsPage.PersistencyUpdate();
+			//detailsPage.PersistencyUpdate();
 			//resourcesPage.PersistencyUpdate();
 			//abcPage.PersistencyUpdate();
 			//additionalInfoPage.PersistencyUpdate();
-			endPage.PersistencyUpdate();
+			//endPage.PersistencyUpdate();
              
 		}
-
+		*/
 		//Hiding intervention form after completion
 		public void CompleteIntervention(int offset)
 		{
@@ -172,6 +172,11 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm
 		{
 			TimersInterventionFormPage.setMovingDeadline(deadline);
 		}
+
+        public void DeregisterFormFromObserver()
+        {
+            intervention.DeregisterInstanceObserver(this);
+        }
 
         private void DisableForms()
         {

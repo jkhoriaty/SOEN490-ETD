@@ -33,7 +33,7 @@ namespace ETD.Models.Objects
             this.shiftStart = shiftStart;
             this.shiftEnd = shiftEnd;
             this.dispatcherName = dispatcherName;
-            this.operationID = StaticDBConnection.NonQueryDatabaseWithID("INSERT INTO [Operations] (Name, Acronym, Shift_Start, Shift_End, Dispatcher) VALUES ('" + operationName + "', '" + acronym + "', '" + StaticDBConnection.DateTimeSQLite(shiftStart) + "', '" + StaticDBConnection.DateTimeSQLite(shiftEnd) + "', '" + dispatcherName + "')");
+            this.operationID = StaticDBConnection.NonQueryDatabaseWithID("INSERT INTO [Operations] (Name, Acronym, Shift_Start, Shift_End, Dispatcher) VALUES ('" + operationName.Replace("'", "''") + "', '" + acronym.Replace("'", "''") + "', '" + StaticDBConnection.DateTimeSQLite(shiftStart) + "', '" + StaticDBConnection.DateTimeSQLite(shiftEnd) + "', '" + dispatcherName.Replace("'", "''") + "')");
             currentOperation = this;
 		}
 

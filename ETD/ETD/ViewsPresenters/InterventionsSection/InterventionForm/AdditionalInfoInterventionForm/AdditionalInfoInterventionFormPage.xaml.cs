@@ -101,7 +101,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.AdditionalIn
             
         }
 
-		public void PersistencyUpdate()
+/*		public void PersistencyUpdate()
 		{
 			if(!AdditionalInformation0.Text.Equals(""))
 			{
@@ -153,7 +153,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.AdditionalIn
 				UpdateAdditionalInformation(9, AdditionalInformation9, Timestamphh9, Timestampmm9);
 			}
 		}
-
+*/
 		private void UpdateAdditionalInformation(int position, TextBox AdditionalInformation, TextBox TimestamphhBox, TextBox TimestampmmBox)
 		{
 			int timestamphh = 0;

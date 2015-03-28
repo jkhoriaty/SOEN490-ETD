@@ -33,8 +33,7 @@ namespace ETD.Models.Objects
             this.name = name;
             this.trainingLevel = training;
             this.departure = departure;
-            
-            this.volunteerID = StaticDBConnection.NonQueryDatabaseWithID("INSERT INTO [Volunteers] (Name, Training_Level) VALUES ('" + name + "', " + (int)training + ")");
+            this.volunteerID = StaticDBConnection.NonQueryDatabaseWithID("INSERT INTO [Volunteers] (Name, Training_Level) VALUES ('" + name.Replace("'", "''") + "', " + (int)training + ")");
         }
 
         public TeamMember(int teamId, int volunteerId)

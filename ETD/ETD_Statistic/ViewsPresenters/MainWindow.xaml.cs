@@ -40,11 +40,6 @@ namespace ETD_Statistic.ViewsPresenters
             statisticView.Children.Add(statsView);
         }
 
-        public void printMessage()
-        {
-            MessageBox.Show("testing");
-        }
-
         public void LoadPreviousOperations(object sender, RoutedEventArgs e)
         {
             statisticView.Children.Clear();
@@ -55,15 +50,25 @@ namespace ETD_Statistic.ViewsPresenters
             statisticView.Children.Add(operationView);
         }
 
-        public void ExportWPF(StackPanel element)
+        public void ExportWPF()
         {
-            StackPanel sp = new StackPanel();
-            sp.DataContext = element;
+            StatisticView sv = new StatisticView();
+
             FixedDocument fixedDoc = new FixedDocument();
             PageContent pageCont = new PageContent();
             FixedPage fixedPage = new FixedPage();
+            fixedPage.Margin = new Thickness(50);
+            Frame frame = new Frame();
+            frame.Content = sv;
 
-            fixedPage.Children.Add(sp);
+            fixedPage.Children.Add(frame);
+
+
+            Size sz = new Size(96 * 8.5, 96 * 11);
+            fixedPage.Measure(sz);
+            fixedPage.Arrange(new Rect(new Point(), sz));
+            fixedPage.UpdateLayout();
+  
             ((System.Windows.Markup.IAddChild)pageCont).AddChild(fixedPage);
             fixedDoc.Pages.Add(pageCont);
 
@@ -91,7 +96,7 @@ namespace ETD_Statistic.ViewsPresenters
 
         public void ExportToPDF(object sender, RoutedEventArgs e)
         {
-            ExportWPF(buttonView);
+            ExportWPF();
             SaveXPS();
         }
 

@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Text.RegularExpressions;
 using ETD.Services;
+using ETD.Services.Database;
+using System.Data.SQLite;
 
 namespace ETD.ViewsPresenters
 {
@@ -38,10 +40,20 @@ namespace ETD.ViewsPresenters
                 serializer.StartBackUp();
                 this.Close();
             }
+			SQLiteDataReader reader = StaticDBConnection.QueryDatabase("SELECT Name FROM Volunteers");
+			while (reader.Read())
+			{
+				ComboBoxItem cbItem = new ComboBoxItem();
+				cbItem.Content = reader["Name"].ToString();
+				dispatcherName.Items.Add(cbItem);
+			}
+			StaticDBConnection.CloseConnection();
         }
 
         private void Submit_Click(object sender, RoutedEventArgs e)
         {
+
+
             if(IsFormValid()) //if the form is valid, create an instance of mainwindow
             {                
                 ETD.Models.Objects.Operation initInfo = new ETD.Models.Objects.Operation(operationName.Text, acronym.Text, shiftStart, shiftEnd, dispatcherName.Text);
@@ -51,6 +63,7 @@ namespace ETD.ViewsPresenters
                 Serializer.Instance.StartBackUp();
                 this.Close();
             }
+ 
         }
 
         internal void Text_Enter(object sender, RoutedEventArgs e)

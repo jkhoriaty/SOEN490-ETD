@@ -27,11 +27,13 @@ namespace ETD.ViewsPresenters.InterventionsSection
 	public partial class InterventionSectionPage : Page, Observer
 	{
 		private MainWindow mainWindow;
+        private List<InterventionFormPage> pages;
 
 		public InterventionSectionPage(MainWindow mainWindow)
 		{
 			InitializeComponent();
 			this.mainWindow = mainWindow;
+            pages = new List<InterventionFormPage>();
 
             Observable.RegisterClassObserver(typeof(Intervention), this);
 		}
@@ -125,12 +127,18 @@ namespace ETD.ViewsPresenters.InterventionsSection
 
         public void Update()
         {
+            foreach(InterventionFormPage form in pages)
+            {
+                form.DeregisterFormFromObserver();
+            }
+            pages.Clear();
             InterventionsList.Children.Clear();
 
             foreach (Intervention intervention in Intervention.getActiveInterventionList())
             {
                 Frame frame = new Frame();
                 InterventionFormPage form = new InterventionFormPage(this, intervention);
+                pages.Add(form);
                 frame.Content = form;
                 frame.Name = "Intervention_" + form.getInterventionNumber();
                 frame.Tag = "Ongoing";
