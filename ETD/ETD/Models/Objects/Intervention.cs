@@ -51,6 +51,7 @@ namespace ETD.Models.Objects
 		private bool isConcludedBool;
 		private DateTime firstTeamArrivalTime;
 
+        private int callID;
         private DateTime call911Time;
         private String meetingPoint;
         private String firstResponderCompany;
@@ -69,6 +70,7 @@ namespace ETD.Models.Objects
             this.abc = new ABC(this);
 			this.isConcludedBool = false;
 			this.firstTeamArrivalTime = DateTime.MinValue;
+            this.callID = -1;
 
             activeInterventionList.Add(this);
             ClassModifiedNotification(typeof(Intervention));
@@ -78,6 +80,31 @@ namespace ETD.Models.Objects
                 this.operationID = Operation.currentOperation.getID();
             }
             this.interventionID = StaticDBConnection.NonQueryDatabaseWithID("INSERT INTO [Interventions] (Operation_ID, Intervention_Number, Time_Of_Call) VALUES (" + operationID + ", " + interventionNumber + ", '" + StaticDBConnection.DateTimeSQLite(timeOfCall) + "')");
+        }
+
+        public Intervention(int id)
+        {
+            this.interventionID = id;
+            this.callID = -1;
+            System.Data.SQLite.SQLiteDataReader results = StaticDBConnection.QueryDatabase("SELECT Operation_ID, Intervention_Number, Time_Of_Call, Caller, Location, Nature_Of_Call, Code, Gender, Age, Chief_Complaint, Other_Chief_Complaint FROM [Interventions] WHERE Intervention_ID=" + id + ";");
+            results.Read();
+
+            this.operationID = results.GetInt32(0);
+            this.interventionNumber = results.GetInt32(1);
+            this.timeOfCall = results.GetDateTime(2);
+            this.callerName = (results.IsDBNull(3)) ? "" : results.GetString(3);
+            this.location = (results.IsDBNull(4)) ? "" : results.GetString(4);
+            this.natureOfCall = (results.IsDBNull(5)) ? "" : results.GetString(5);
+            this.code = (results.IsDBNull(6)) ? 0 : results.GetInt32(6);
+            this.gender = (results.IsDBNull(7)) ? "" : results.GetString(7);
+            this.age = (results.IsDBNull(8)) ? "" : results.GetInt32(8).ToString();
+            this.chiefComplaint = (results.IsDBNull(9)) ? "" : results.GetString(9);
+            this.otherChiefComplaint = (results.IsDBNull(10)) ? "" : results.GetString(10);
+
+            this.resourceList = new List<Resource>();
+            this.abc = new ABC(this.interventionID);
+
+
         }
 
 		//Set intervention as completed
@@ -205,6 +232,7 @@ namespace ETD.Models.Objects
 		public void setNatureOfCall(String natureOfCall)
 		{
 			this.natureOfCall = natureOfCall;
+            StaticDBConnection.NonQueryDatabase("UPDATE [Interventions] SET Nature_Of_Call='" + natureOfCall.Replace("'", "''") + "' WHERE Intervention_ID=" + interventionID + ";");
 		}
 
 		public String getNatureOfCall()
@@ -308,6 +336,7 @@ namespace ETD.Models.Objects
 		public void setConclusion(String conclusion)
 		{
 			this.conclusion = conclusion;
+            StaticDBConnection.NonQueryDatabase("UPDATE [Interventions] SET Conclusion='" + conclusion.Replace("'", "''") + "' WHERE Intervention_ID=" + interventionID + ";");
 		}
 
 		public String getConclusion()
@@ -323,6 +352,7 @@ namespace ETD.Models.Objects
 		public void setConclusionAdditionalInfo(String additionalInfo)
 		{
             this.conclusionAdditionalInfo = additionalInfo;
+            StaticDBConnection.NonQueryDatabase("UPDATE [Interventions] SET Conclusion_Info='" + additionalInfo.Replace("'", "''") + "' WHERE Intervention_ID=" + interventionID + ";");
 		}
 
 		public String getConclusionAdditionalInfo()
@@ -333,6 +363,7 @@ namespace ETD.Models.Objects
 		public void setConclusionTime(DateTime conclusionTime)
 		{
 			this.conclusionTime = conclusionTime;
+            StaticDBConnection.NonQueryDatabase("UPDATE [Interventions] SET Conclusion_Time='" + StaticDBConnection.DateTimeSQLite(conclusionTime) + "' WHERE Intervention_ID=" + interventionID + ";");
 		}
 
 		public DateTime getConclusionTime()
@@ -342,7 +373,12 @@ namespace ETD.Models.Objects
 
 		public void setCall911Time(DateTime call911Time)
 		{
-			this.call911Time = call911Time;
+            this.callID = StaticDBConnection.NonQueryDatabaseWithID("INSERT INTO [Calls] (Intervention_ID) VALUES (" + this.interventionID + ");");
+			if (callID > -1)
+            {
+                this.call911Time = call911Time;
+                StaticDBConnection.NonQueryDatabase("UPDATE [Calls] SET Call_Time='" + StaticDBConnection.DateTimeSQLite(call911Time) + "' WHERE Call_ID=" + callID + ";");
+            }
 		}
 
 		public DateTime getCall911Time()
@@ -352,7 +388,11 @@ namespace ETD.Models.Objects
 
 		public void setMeetingPoint(String meetingPoint)
 		{
-			this.meetingPoint = meetingPoint;
+            if (callID > -1)
+            {
+                this.meetingPoint = meetingPoint;
+                StaticDBConnection.NonQueryDatabase("UPDATE [Calls] SET Meeting_Point='" + meetingPoint.Replace("'", "''") + "' WHERE Call_ID=" + callID + ";");
+            }
 		}
 
 		public String getMeetingPoint()
@@ -362,7 +402,11 @@ namespace ETD.Models.Objects
 
 		public void setFirstResponderCompany(String firstResponderCompany)
 		{
-			this.firstResponderCompany = firstResponderCompany;
+            if (callID > -1)
+            {
+                this.firstResponderCompany = firstResponderCompany;
+                StaticDBConnection.NonQueryDatabase("UPDATE [Calls] SET First_Responder_Company='" + firstResponderCompany.Replace("'", "''") + "' WHERE Call_ID=" + callID + ";");
+            }
 		}
 
 		public String getFirstResponderCompany()
@@ -372,7 +416,11 @@ namespace ETD.Models.Objects
 
 		public void setFirstResponderVehicle(String firstResponderVehicle)
 		{
-			this.firstResponderVehicle = firstResponderVehicle;
+            if (callID > -1)
+            {
+                this.firstResponderVehicle = firstResponderVehicle;
+                StaticDBConnection.NonQueryDatabase("UPDATE [Calls] SET First_Responder_Vehicle='" + firstResponderVehicle.Replace("'", "''") + "' WHERE Call_ID=" + callID + ";");
+            }
 		}
 
 		public String getFirstResponderVehicle()
@@ -382,7 +430,11 @@ namespace ETD.Models.Objects
 
 		public void setFirstResponderArrivalTime(DateTime firstResponderArrivalTime)
 		{
-			this.firstResponderArrivalTime = firstResponderArrivalTime;
+            if (callID > -1)
+            {
+                this.firstResponderArrivalTime = firstResponderArrivalTime;
+                StaticDBConnection.NonQueryDatabase("UPDATE [Calls] SET Ambulance_Time='" + StaticDBConnection.DateTimeSQLite(firstResponderArrivalTime) + "' WHERE Call_ID=" + callID + ";");
+            }
 		}
 
 		public DateTime getFirstResponderArrivalTime()
@@ -392,7 +444,11 @@ namespace ETD.Models.Objects
 
 		public void setAmbulanceCompany(String ambulanceCompany)
 		{
-			this.ambulanceCompany = ambulanceCompany;
+            if (callID > -1)
+            {
+                this.ambulanceCompany = ambulanceCompany;
+                StaticDBConnection.NonQueryDatabase("UPDATE [Calls] SET Ambulance_Company='" + ambulanceCompany.Replace("'", "''") + "' WHERE Call_ID=" + callID + ";");
+            }
 		}
 
 		public String getAmbulanceCompany()
@@ -402,7 +458,11 @@ namespace ETD.Models.Objects
 
 		public void setAmbulanceVehicle(String ambulanceVehicle)
 		{
-			this.ambulanceVehicle = ambulanceVehicle;
+			if (callID > -1)
+            {
+                this.ambulanceVehicle = ambulanceVehicle;
+                StaticDBConnection.NonQueryDatabase("UPDATE [Calls] SET Ambulance_Vehicle='" + ambulanceVehicle.Replace("'", "''") + "' WHERE Call_ID=" + callID + ";");
+            }
 		}
 
 		public String getAmbulanceVehicle()
@@ -412,7 +472,11 @@ namespace ETD.Models.Objects
 
 		public void setAmbulanceArrivalTime(DateTime ambulanceArrivalTime)
 		{
-			this.ambulanceArrivalTime = ambulanceArrivalTime;
+            if (callID > -1)
+            {
+                this.ambulanceArrivalTime = ambulanceArrivalTime;
+                StaticDBConnection.NonQueryDatabase("UPDATE [Calls] SET Ambulance_Time='" + StaticDBConnection.DateTimeSQLite(ambulanceArrivalTime) + "' WHERE Call_ID=" + callID + ";");
+            }
 		}
 
 		public DateTime getAmbulanceArrivalTime()

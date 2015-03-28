@@ -134,11 +134,11 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm
 		public void PersistencyUpdate(object sender, EventArgs e)
 		{
             
-			detailsPage.PersistencyUpdate();
+			//detailsPage.PersistencyUpdate();
 			//resourcesPage.PersistencyUpdate();
 			//abcPage.PersistencyUpdate();
 			//additionalInfoPage.PersistencyUpdate();
-			endPage.PersistencyUpdate();
+			//endPage.PersistencyUpdate();
              
 		}
 
