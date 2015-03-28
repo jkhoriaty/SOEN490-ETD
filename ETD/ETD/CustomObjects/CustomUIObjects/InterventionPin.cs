@@ -67,7 +67,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 			//Move the intervention pin using the GPS location of one of its intervening teams
 			if(gpsLocation != null && GPSLocation.gpsConfigured == true)
 			{
-				setPinPosition(gpsLocation.getMapX(), gpsLocation.getMapY());
+				setPinPosition(gpsLocation.getX(), gpsLocation.getY());
 				CollisionDetectionAndResolution(false);
 			}
 		}
