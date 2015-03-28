@@ -39,7 +39,7 @@
                 <TextBox VerticalContentAlignment="Center" TextAlignment="Center" Margin="1" HorizontalContentAlignment="Center" Name="shiftEndTimemm" Width="30" MaxLength="2" GotFocus="Text_Enter" LostFocus="Text_Fillmm">mm</TextBox>
             </StackPanel>
             <Label HorizontalContentAlignment="Center" Margin="1" x:Uid="Label_DispatcherName" Grid.Row="6" Grid.Column="0" Content="{Binding Path=Label_DispatcherName, Source={StaticResource Resources}}" />
-            <ComboBox VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="1"  Grid.Row="6" Grid.Column="1" Name="dispatcherName" />
+            <TextBox VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="1"  Grid.Row="6" Grid.Column="1" Name="dispatcherName" />
             <Label HorizontalContentAlignment="Center" Margin="1" x:Uid="Label_Supervisor" Grid.Row="7" Grid.Column="0" Content="Supervisor Name" />
             <TextBox VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="1"  Grid.Row="7" Grid.Column="1" Name="supervisorName" />
             <Label HorizontalContentAlignment="Center" Margin="1" x:Uid="Label_OperationManager" Grid.Row="8" Grid.Column="0" Content="Operation Manager Name" />

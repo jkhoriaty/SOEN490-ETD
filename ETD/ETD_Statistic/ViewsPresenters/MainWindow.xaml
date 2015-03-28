@@ -27,7 +27,9 @@
             </StackPanel>
         </Grid>
         <Grid Grid.Row="1">
-            <StackPanel Name="statisticView"/>
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <StackPanel Name="statisticView"/>
+            </ScrollViewer>
         </Grid>
     </Grid>
 </Window>
