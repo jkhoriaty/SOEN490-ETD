@@ -94,18 +94,34 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.DetailsInter
         private void TextBoxes_LostFocus(object sender, RoutedEventArgs e)
         {
             TextBoxHandler.LostFocus(sender, e);
-            intervention.setCallerName(this.CallerName.Text);
-            intervention.setLocation(this.Location.Text);
-            intervention.setNatureOfCall(this.NatureOfCall.Text);
-            intervention.setAge(this.Age.Text);
-			if((TextBox)sender == OtherChiefComplaint)
+            if (((TextBox)sender == CallerName) && !this.CallerName.Text.Equals(ETD.Properties.Resources.TextBox_CallerName))
+            {
+                intervention.setCallerName(this.CallerName.Text);
+            }
+            if (((TextBox)sender == Location) && !this.Location.Text.Equals(ETD.Properties.Resources.TextBox_Location))
+            {
+                intervention.setLocation(this.Location.Text);
+            }
+            if (((TextBox)sender == NatureOfCall) && !this.NatureOfCall.Text.Equals(ETD.Properties.Resources.TextBox_Nature))
+            {
+                intervention.setNatureOfCall(this.NatureOfCall.Text);
+            }
+            if (((TextBox)sender == Age) && !this.Age.Text.Equals(""))
+            {
+                intervention.setAge(this.Age.Text);
+            }
+
+            if (((TextBox)sender == OtherChiefComplaint) && !this.OtherChiefComplaint.Text.Equals(""))
 			{
-				intervention.setChiefComplaint(OtherChiefComplaint.Text);
+				intervention.setOtherChiefComplaint(OtherChiefComplaint.Text);
 			}
-            int hh = int.Parse(Callhh.Text);
-            int mm = int.Parse(Callmm.Text);
-            DateTime timeOfCall = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, hh, mm, 0);
-            intervention.setTimeOfCall(timeOfCall);
+            if (((TextBox)sender == Callhh) || ((TextBox)sender == Callmm))
+            {
+                int hh = int.Parse(Callhh.Text);
+                int mm = int.Parse(Callmm.Text);
+                DateTime timeOfCall = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, hh, mm, 0);
+                intervention.setTimeOfCall(timeOfCall);
+            }
         }
 
         private void Priority_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -137,14 +153,13 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.DetailsInter
             {
                 Grid.SetColumnSpan(Complaint, 1);
                 OtherChiefComplaint.Visibility = Visibility.Visible;
-                intervention.setChiefComplaint("" + OtherChiefComplaint.Text);
             }
             else
             {
                 OtherChiefComplaint.Visibility = Visibility.Collapsed;
                 Grid.SetColumnSpan(Complaint, 2);
-                intervention.setChiefComplaint("" + item.Content);
             }
+            intervention.setChiefComplaint("" + item.Content);
 			interventionForm.interventionType.Text = intervention.getChiefComplaint();
         }
 

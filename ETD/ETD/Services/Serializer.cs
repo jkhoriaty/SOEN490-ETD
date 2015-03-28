@@ -104,7 +104,7 @@ namespace ETD.Services
             savedOperation = RecoverOperation();
             Operation.currentOperation = savedOperation;
             savedTeams = RecoverTeams();
-            Console.Write("");
+            //savedInterventions = RecoverInterventions();
         }
 
         private Operation RecoverOperation()
@@ -120,11 +120,10 @@ namespace ETD.Services
                     fileStream.Close();
                 }
             }
-            //TODO: Recovery Code
             return recovered;
         }
 
-        public List<Team> RecoverTeams()
+        private List<Team> RecoverTeams()
         {
             List<Team> recovered = new List<Team>();
             //TODO: Recovery Code
@@ -133,7 +132,23 @@ namespace ETD.Services
             {
                 recovered.Add(new Team(results.GetInt32(0)));   
             }
+            StaticDBConnection.CloseConnection();
+            return recovered;
+        }
 
+        private List<Intervention> RecoverInterventions()
+        {
+            List<Intervention> recovered = new List<Intervention>();
+            //TODO: Recovery Code
+            System.Data.SQLite.SQLiteDataReader results = StaticDBConnection.QueryDatabase("SELECT Intervention_ID FROM [Interventions] WHERE Operation_ID = " + savedOperation.getID() + ";");
+            if (results.HasRows)
+            {
+                while (results.Read())
+                {
+                    recovered.Add(new Intervention(results.GetInt32(0)));
+                }
+            }
+            StaticDBConnection.CloseConnection();
             return recovered;
         }
 

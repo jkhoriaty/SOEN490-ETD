@@ -145,6 +145,10 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
 					{
 						intervention.Completed();
                         intervention.setConclusionTime(endTime);
+                        if (Grid.GetColumnSpan(ComboBoxBorder) == 1 )
+                        {
+                            intervention.setConclusionAdditionalInfo(AdditionalInformation.Text);
+                        }
 						interventionForm.CompleteIntervention(offset);
 					}
 				}
