@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using ETD.CustomObjects.CustomUIObjects;
 using ETD.Services;
 using System.Windows.Shapes;
+using Microsoft.VisualBasic;
 
 namespace ETD.ViewsPresenters.MapSection
 {
@@ -31,6 +32,7 @@ namespace ETD.ViewsPresenters.MapSection
         private List<Line> Lines = new List<Line>();
         private Line newline;
         private bool ContainsLine = false;
+        private static object slock = new object();
 
         //Drawing shapes variables
         private List<object> objectList = new List<object>();//Contains the list of added map modification items
@@ -43,6 +45,7 @@ namespace ETD.ViewsPresenters.MapSection
 		{
 			InitializeComponent();
 			this.mainWindow = mainWindow;
+
             AdditionalMap.Focus();
 			Observable.RegisterClassObserver(typeof(MapMod), this);
 		}
@@ -166,10 +169,47 @@ namespace ETD.ViewsPresenters.MapSection
             }
         }
 
+
+        internal void DeleteLine(object sender, MouseEventArgs e)
+        {
+             bool isEmpty = !objectList.Any();//Checks if the list of map modification object is empty
+
+            //When the mouse is moving and the escape key is pressed, remove the most recently added map modification item
+             if (Keyboard.IsKeyDown(Key.Escape) && !isEmpty)
+             {
+                 try
+                 {
+                     int objectIndex = objectList.Count - 1;
+                     AdditionalMap.Children.RemoveAt(objectList.Count);
+                     //    MessageBox.Show("");
+                     if (objectIndex == 0 && objectList[0] != null)
+                     {
+                         objectList.RemoveAt(0);
+
+                     }
+                     else
+                     {
+                         objectList.RemoveAt(objectIndex);
+
+                     }
+
+                 }
+                 catch (Exception ex)
+                 {
+
+                 }
+             }
+        }
+
+        //Fix asynchronous error when deleting shapes and lines
+        void ThreadProc()
+        {
+            MessageBox.Show("Deleting");
+        }
+
         //When the mouse is moving, get its position to create the selected map modification item
         internal void Move(object sender, MouseEventArgs e)
         {
-
             if (e.LeftButton == MouseButtonState.Pressed)
             {
                 NewPt2 = e.GetPosition(AdditionalMap);
@@ -177,30 +217,42 @@ namespace ETD.ViewsPresenters.MapSection
 
             bool isEmpty = !objectList.Any();//Checks if the list of map modification object is empty
 
+
             //When the mouse is moving and the escape key is pressed, remove the most recently added map modification item
-            if (Keyboard.IsKeyDown(Key.Escape) && !isEmpty)
+            if (Keyboard.IsKeyDown(Key.Escape) )
             {
-                try
-                {
-                    int objectIndex = objectList.Count - 1;
-                    AdditionalMap.Children.RemoveAt(objectList.Count);
-
-                    if (objectIndex == 0 && objectList[0] != null)
+                if (!isEmpty)
+                {   
+                    try
                     {
-                        objectList.RemoveAt(0);
+                        int objectIndex = objectList.Count - 1;
+                        AdditionalMap.Children.RemoveAt(objectList.Count);
+
+                        //Fix asynchronous error when deleting shapes and lines
+                        System.Threading.Thread t = new System.Threading.Thread(new System.Threading.ThreadStart(ThreadProc));
+                        t.Start();
+                        System.Threading.Thread.Sleep(100);
+                        if (t.IsAlive)
+                        {
+                            t.Abort();
+                        }
+                       
+                        //Deleting additional map info
+                        if (objectIndex == 0 && objectList[0] != null)
+                        {
+                            objectList.RemoveAt(0);
+                        }
+                        else
+                        {
+                            objectList.RemoveAt(objectIndex);
+                        }
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        objectList.RemoveAt(objectIndex);
+
                     }
-
                 }
-                catch (Exception ex)
-                {
-
-                }
-               
-            }
+            } 
         }
 
         //Stopped drawing 
