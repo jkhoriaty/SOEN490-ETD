@@ -432,6 +432,12 @@ namespace ETD.ViewsPresenters
         //method to show confirmation upon closing of main window, asking if end of operation or not, if yes asking if user wants to input additional information
         protected void FormCloseConfirmation(Object sender, System.ComponentModel.CancelEventArgs e)
         {
+            if (subWindow != null)
+            {
+                subWindow.Close();
+            }
+            
+
             if (System.Windows.Forms.MessageBox.Show("Would you like to end the operation. Confirm?", "Close Application", System.Windows.Forms.MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
             {
                 Serializer.Instance.CleanUp();
