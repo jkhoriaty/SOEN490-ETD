@@ -40,14 +40,40 @@ namespace ETD.ViewsPresenters
                 serializer.StartBackUp();
                 this.Close();
             }
+
+			ComboBoxItem createUserItem = new ComboBoxItem();
+			createUserItem.Content = "NEW USER";
+			createUserItem.FontStyle = FontStyles.Italic;
+			createUserItem.FontWeight = FontWeights.Bold;
+
+			ComboBoxItem createUserItemSupervisor = new ComboBoxItem();
+			createUserItemSupervisor.Content = "NEW USER";
+			createUserItemSupervisor.FontStyle = FontStyles.Italic;
+			createUserItemSupervisor.FontWeight = FontWeights.Bold;
+
+			ComboBoxItem createUserItemOpManager = new ComboBoxItem();
+			createUserItemOpManager.Content = "NEW USER";
+			createUserItemOpManager.FontStyle = FontStyles.Italic;
+			createUserItemOpManager.FontWeight = FontWeights.Bold;
+
+			dispatcherName.Items.Add(createUserItem);
+			supervisorName.Items.Add(createUserItemSupervisor);
+			opManagerName.Items.Add(createUserItemOpManager);
+			StaticDBConnection.CloseConnection();
+
 			SQLiteDataReader reader = StaticDBConnection.QueryDatabase("SELECT Name FROM Volunteers");
 			while (reader.Read())
 			{
 				ComboBoxItem cbItem = new ComboBoxItem();
 				cbItem.Content = reader["Name"].ToString();
+				ComboBoxItem cbItemSupervisor = new ComboBoxItem();
+				cbItemSupervisor.Content = reader["Name"].ToString();
+				ComboBoxItem cbItemOpManager = new ComboBoxItem();
+				cbItemOpManager.Content = reader["Name"].ToString();
 				dispatcherName.Items.Add(cbItem);
+				supervisorName.Items.Add(cbItemSupervisor);
+				opManagerName.Items.Add(cbItemOpManager);
 			}
-			StaticDBConnection.CloseConnection();
         }
 
         private void Submit_Click(object sender, RoutedEventArgs e)
@@ -65,7 +91,6 @@ namespace ETD.ViewsPresenters
             }
  
         }
-
         internal void Text_Enter(object sender, RoutedEventArgs e)
         {
             TextBox box = sender as TextBox;
@@ -161,5 +186,121 @@ namespace ETD.ViewsPresenters
             return true;
         }
 
+		private void dispatcherName_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+			if(dispatcherName.SelectedIndex == 0)
+			{
+				dispatcherName.Visibility = Visibility.Hidden;
+				Textbox_DispatcherName.Visibility = Visibility.Visible;
+				Button_OKDispatcherName.Visibility = Visibility.Visible;
+				Button_CancelDispatcherName.Visibility = Visibility.Visible;
+			}
+		}
+
+		private void supervisorName_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+			if (supervisorName.SelectedIndex == 0)
+			{
+				supervisorName.Visibility = Visibility.Hidden;
+				Textbox_SupervisorName.Visibility = Visibility.Visible;
+				Button_OKSupervisorName.Visibility = Visibility.Visible;
+				Button_CancelSupervisorName.Visibility = Visibility.Visible;
+			}
+		}
+
+		private void opManagerName_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+			if (opManagerName.SelectedIndex == 0)
+			{
+				opManagerName.Visibility = Visibility.Hidden;
+				Textbox_OperationManagerName.Visibility = Visibility.Visible;
+				Button_OKOperationManagerName.Visibility = Visibility.Visible;
+				Button_CancelOperationManagerName.Visibility = Visibility.Visible;
+			}
+		}
+
+		private void Button_CancelDispatcherName_Click(object sender, RoutedEventArgs e)
+		{
+			Textbox_DispatcherName.Visibility = Visibility.Hidden;
+			Button_OKDispatcherName.Visibility = Visibility.Hidden;
+			Button_CancelDispatcherName.Visibility = Visibility.Hidden;
+			dispatcherName.Visibility = Visibility.Visible;
+		}
+
+		private void Button_OKDispatcherName_Click(object sender, RoutedEventArgs e)
+		{
+			if(Textbox_DispatcherName.Text == "")
+			{
+				MessageBox.Show("Please enter a user name.");
+			}
+			else
+			{
+				StaticDBConnection.NonQueryDatabase("INSERT INTO [Volunteers] (Name, Training_Level) VALUES ('" + Textbox_DispatcherName.Text + "', 0);");
+				Textbox_DispatcherName.Visibility = Visibility.Hidden;
+				Button_OKDispatcherName.Visibility = Visibility.Hidden;
+				Button_CancelDispatcherName.Visibility = Visibility.Hidden;
+				dispatcherName.Visibility = Visibility.Visible;
+
+				ComboBoxItem newUser = new ComboBoxItem();
+				newUser.Content = Textbox_DispatcherName.Text;
+				dispatcherName.Items.Add(newUser);
+				dispatcherName.SelectedItem = newUser;
+			}
+		}
+
+		private void Button_CancelSupervisorName_Click(object sender, RoutedEventArgs e)
+		{
+			Textbox_SupervisorName.Visibility = Visibility.Hidden;
+			Button_OKSupervisorName.Visibility = Visibility.Hidden;
+			Button_CancelSupervisorName.Visibility = Visibility.Hidden;
+			supervisorName.Visibility = Visibility.Visible;
+		}
+		private void Button_OKSupervisorName_Click(object sender, RoutedEventArgs e)
+		{
+			if (Textbox_SupervisorName.Text == "")
+			{
+				MessageBox.Show("Please enter a user name.");
+			}
+			else
+			{
+				StaticDBConnection.NonQueryDatabase("INSERT INTO [Volunteers] (Name, Training_Level) VALUES ('" + Textbox_SupervisorName.Text + "', 0);");
+				Textbox_SupervisorName.Visibility = Visibility.Hidden;
+				Button_OKSupervisorName.Visibility = Visibility.Hidden;
+				Button_CancelSupervisorName.Visibility = Visibility.Hidden;
+				supervisorName.Visibility = Visibility.Visible;
+
+				ComboBoxItem newUser = new ComboBoxItem();
+				newUser.Content = Textbox_SupervisorName.Text;
+				supervisorName.Items.Add(newUser);
+				supervisorName.SelectedItem = newUser;
+			}
+		}
+		private void Button_CancelOperationManagerName_Click(object sender, RoutedEventArgs e)
+		{
+			Textbox_OperationManagerName.Visibility = Visibility.Hidden;
+			Button_OKOperationManagerName.Visibility = Visibility.Hidden;
+			Button_CancelOperationManagerName.Visibility = Visibility.Hidden;
+			opManagerName.Visibility = Visibility.Visible;
+		}
+		private void Button_OKOperationManagerName_Click(object sender, RoutedEventArgs e)
+		{
+			if (Textbox_OperationManagerName.Text == "")
+			{
+				MessageBox.Show("Please enter a user name.");
+			}
+			else
+			{
+				StaticDBConnection.NonQueryDatabase("INSERT INTO [Volunteers] (Name, Training_Level) VALUES ('" + Textbox_OperationManagerName.Text + "', 0);");
+				Textbox_OperationManagerName.Visibility = Visibility.Hidden;
+				Button_OKOperationManagerName.Visibility = Visibility.Hidden;
+				Button_CancelOperationManagerName.Visibility = Visibility.Hidden;
+				opManagerName.Visibility = Visibility.Visible;
+
+				ComboBoxItem newUser = new ComboBoxItem();
+				newUser.Content = Textbox_OperationManagerName.Text;
+				opManagerName.Items.Add(newUser);
+				opManagerName.SelectedItem = newUser;
+			}
+		}
     }
 }
