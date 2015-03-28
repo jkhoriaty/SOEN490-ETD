@@ -10,5 +10,6 @@ namespace ETD.Services.Interfaces
 	{
 		void NotifyConnectionSuccess();
 		void NotifyConnectionFail();
+		void SetupCompleted();
 	}
 }

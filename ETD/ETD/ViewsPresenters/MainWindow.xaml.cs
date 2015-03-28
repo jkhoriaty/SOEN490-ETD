@@ -52,6 +52,8 @@ namespace ETD.ViewsPresenters
         //Variables used when resizing the window
 		private double previousWidth;
 		private double previousHeight;
+		private double imageWidth;
+		private double imageHeight;
 
 		public MainWindow()
 		{
@@ -120,6 +122,9 @@ namespace ETD.ViewsPresenters
 
 			previousWidth = MapSection.ActualWidth;
 			previousHeight = MapSection.ActualHeight;
+
+			GPSLocation.xRatio = imageWidth / mapSection.Canvas_map.ActualWidth;
+			GPSLocation.yRatio = imageHeight / mapSection.Canvas_map.ActualHeight;
 		}
 
 		//Click: Load Map
@@ -140,6 +145,10 @@ namespace ETD.ViewsPresenters
 				//Keeping track of the distortion added when the image is scaled to fit the map section
 				GPSLocation.xRatio = coloredImage.Width / mapSection.Canvas_map.ActualWidth;
 				GPSLocation.yRatio =  coloredImage.Height/ mapSection.Canvas_map.ActualHeight;
+				
+				//Keeping track of the image size so that ratios can be changed when window is resized
+				imageWidth = coloredImage.Width;
+				imageHeight = coloredImage.Height;
 
                 mapModificationSection.setMap(coloredImage);
 			}
@@ -258,34 +267,52 @@ namespace ETD.ViewsPresenters
 		//Go through GPS setup
 		private void GPSSetup_Click(object sender, RoutedEventArgs e)
 		{
-			//Check if a team has been created
-			if(Team.getTeamList().Count > 0)
+			//Handling case when the application is not connected to the server
+			if(GPSServices.connectedToServer == false)
 			{
-				//Create and populate list of registered teams
-				List<Team> registeredTeams = new List<Team>();
-				foreach(Team team in Team.getTeamList())
+				MessageBox.Show("Connection to server is unsuccessful, cannot enter setup.");
+				return;
+			}
+
+			//Check if click was to cancel setup or start it
+			if (GPSServices.setupOngoing == false)
+			{
+				//Check if a team has been created
+				if (Team.getTeamList().Count > 0)
 				{
-					if(team.getGPSLocation() != null)
+					//Create and populate list of registered teams
+					List<Team> registeredTeams = new List<Team>();
+					foreach (Team team in Team.getTeamList())
 					{
-						registeredTeams.Add(team);
+						if (team.getGPSLocation() != null)
+						{
+							registeredTeams.Add(team);
+						}
 					}
-				}
-				
-				//Check if there is at least one team that is registered, it will be used for setup
-				if(registeredTeams.Count != 0)
-				{
-					GPSSetup_Button.Background = new SolidColorBrush(Colors.Red);
-					GPSSetup_Button.Foreground = new SolidColorBrush(Colors.White);
-					GPSServices.SetupGPSToMapTranslation_Start(mapSection, registeredTeams);
+
+					//Check if there is at least one team that is registered, it will be used for setup
+					if (registeredTeams.Count != 0)
+					{
+						GPSSetup_Button.Background = new SolidColorBrush(Colors.Red);
+						GPSSetup_Button.Foreground = new SolidColorBrush(Colors.White);
+						GPSServices.SetupGPSToMapTranslation_Start(mapSection, registeredTeams);
+					}
+					else
+					{
+						MessageBox.Show("No teams are associated with a GPS location. Please associate a team to a GPS location before entering the GPS setup.");
+					}
 				}
 				else
 				{
-					MessageBox.Show("No teams are associated with a GPS location. Please associate a team to a GPS location before entering the GPS setup.");
+					MessageBox.Show("No teams have been created yet. Please create a team and associate it to a GPS position before entering GPS setup.");
 				}
 			}
 			else
 			{
-				MessageBox.Show("No teams have been created yet. Please create a team and associate it to a GPS position before entering GPS setup.");
+				GPSServices.setupOngoing = false;
+				GPSSetup_Button.ClearValue(Button.BackgroundProperty);
+				GPSSetup_Button.ClearValue(Button.ForegroundProperty);
+				mapSection.Update(); //Redrawing everything on the map
 			}
 		}
 
@@ -294,9 +321,9 @@ namespace ETD.ViewsPresenters
 		{
 			Dispatcher.Invoke(() =>
 			{
+				GPSLocationsTextBlock.IsEnabled = true;
 				GPSLocationsTextBlock.Background = new SolidColorBrush(Colors.Green);
 				GPSLocationsTextBlock.Foreground = new SolidColorBrush(Colors.White);
-				GPSLocationsTextBlock.IsEnabled = true;
 			});
 		}
 
@@ -305,10 +332,26 @@ namespace ETD.ViewsPresenters
 		{
 			Dispatcher.Invoke(() =>
 			{
+				GPSLocationsTextBlock.IsEnabled = false;
 				GPSLocationsTextBlock.Background = new SolidColorBrush(Colors.Red);
 				GPSLocationsTextBlock.Foreground = new SolidColorBrush(Colors.White);
-				GPSLocationsTextBlock.IsEnabled = false;
+
+				if(GPSServices.setupOngoing == true)
+				{
+					MessageBox.Show("Connection lost, setup exited.");
+
+					GPSServices.setupOngoing = false;
+					GPSSetup_Button.ClearValue(Button.BackgroundProperty);
+					GPSSetup_Button.ClearValue(Button.ForegroundProperty);
+					mapSection.Update(); //Redrawing everything on the map
+				}
 			});
+		}
+
+		//Notification of setup completion
+		public void SetupCompleted()
+		{
+			GPSSetup_Button.Background = new SolidColorBrush(Colors.Green);
 		}
 
         ////Code written by: Andrew Wood
@@ -347,12 +390,10 @@ namespace ETD.ViewsPresenters
 			mapSection.Update();
         }
 
-
-	private void ShowStatistics(object sender, RoutedEventArgs e)
-	{
-		ETD.Models.Objects.Statistics statistics = new ETD.Models.Objects.Statistics();
-	}
-
+		private void ShowStatistics(object sender, RoutedEventArgs e)
+		{
+			ETD.Models.Objects.Statistics statistics = new ETD.Models.Objects.Statistics();
+		}
 
         //method to show confirmation upon closing of main window, asking if end of operation or not, if yes asking if user wants to input additional information
         protected void FormCloseConfirmation(Object sender, System.ComponentModel.CancelEventArgs e)
@@ -375,7 +416,5 @@ namespace ETD.ViewsPresenters
                 e.Cancel = true;
             }
         }
-
     }
-
 }

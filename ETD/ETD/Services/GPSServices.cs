@@ -16,15 +16,17 @@ namespace ETD.Services
 {
 	class GPSServices
 	{
-		private static GPSStatusCallbacks caller;
+		private static GPSStatusCallbacks gpsStatusCallbacks;
 		private static DispatcherTimer dispatcherTimer = new DispatcherTimer();
 		private static MapSectionPage mapSection;
+		internal static bool connectedToServer = false;
+		internal static bool setupOngoing = false;
 
 		private static Dictionary<string, string> registeredVolunteers = new Dictionary<string, string>();
 
 		internal static void StartServices(GPSStatusCallbacks newCaller)
 		{
-			caller = newCaller;
+			gpsStatusCallbacks = newCaller;
 
 			//Start polling the server for GPS locations
 			dispatcherTimer.Tick += new EventHandler(Refresh);
@@ -58,11 +60,13 @@ namespace ETD.Services
 		{
 			if (reply == null) //Connection failed
 			{
-				caller.NotifyConnectionFail();
+				gpsStatusCallbacks.NotifyConnectionFail();
+				connectedToServer = false;
 			}
 			else
 			{
-				caller.NotifyConnectionSuccess();
+				gpsStatusCallbacks.NotifyConnectionSuccess();
+				connectedToServer = true;
 				int newCtr = 0;
 				for (int i = 1; i < (reply.Length - 1); i++)
 				{
@@ -132,6 +136,8 @@ namespace ETD.Services
 		//Setting up translation of GPS coordinates (lattitude and longitude) to Map coordinates (x, y)
 		internal static void SetupGPSToMapTranslation_Start(MapSectionPage mapSectionInstance, List<Team> registeredTeams)
 		{
+			setupOngoing = true;
+
 			MessageBox.Show("Entering setup, please refrain from creating new teams, equipements and interventions while in the setup phase (while the GPS setup button is red).\n"
 				+ "Click on the GPS setup button to exit setup, if normal operation of the software is required.");
 
@@ -219,8 +225,10 @@ namespace ETD.Services
 				list.Add(new GPSLocation(45.497401, -73.578224, 179, 313));
 				list.Add(new GPSLocation(45.495637, -73.579325, 580, 473));
 				GPSLocation.referencePoints = list;
-				GPSLocation.setConfigured(true);
-				mapSection.Update();
+				GPSLocation.setConfigured(true); //Change flag to signify that the setup is successfully done
+				mapSection.Update(); //Readding all the pins to the map
+				setupOngoing = false;
+				gpsStatusCallbacks.SetupCompleted(); //Notifying caller
 			}
 		}
 
