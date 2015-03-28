@@ -76,6 +76,24 @@ namespace ETD.ViewsPresenters
                 }
 
                 teamGrid.Children.Add(combo);
+
+                
+                if (t.getGPSLocation() != null)
+                {
+                    foreach (KeyValuePair<string, GPSLocation> entry in gpsLocationsDictionary)
+                    {
+                        if (entry.Value == t.getGPSLocation())
+                        {
+                            foreach (KeyValuePair<string, string> ID in volunteerList)
+                            {
+                                if (entry.Key == ID.Key)
+                                {
+                                    combo.Text = ID.Key;
+                                }
+                            }
+                        }
+                    }
+                }
                 row++;
             }
 
@@ -83,14 +101,9 @@ namespace ETD.ViewsPresenters
 
         private void Submit_Click(object sender, RoutedEventArgs e)
         {
-           /* foreach (ComboBox ctrl in teamGrid.Children)
-            {
-                int index = Convert.ToInt32(ctrl.Name);
-                string index2 = ctrl.SelectedItem.ToString();
-                teamList[index].setGPSLocation(gpsLocationsDictionary[index2]);
-            }*/
-
             int teamIndex = 0;
+            List<string> noDuplicates = new List<string>();
+            bool duplicates = false;
 
             foreach (KeyValuePair<string, string> entry in volunteerList)
             {
@@ -105,12 +118,24 @@ namespace ETD.ViewsPresenters
                 {
                     string memberID = temp.SelectedItem.ToString();
 
-                    MessageBox.Show(memberID);
+                    if (!noDuplicates.Contains(memberID))
+                    {
+                        noDuplicates.Add(memberID);
+                    }
+                    else
+                        duplicates = true;
 
                     teamList[teamIndex].setGPSLocation(gpsLocationsDictionary[inverseVolunteerList[memberID]]);         
                 }   
             }
+            if (duplicates == false)
+            {
                 this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Each team member can be assigned to at most one team.");
+            }
         }
     }
 }
