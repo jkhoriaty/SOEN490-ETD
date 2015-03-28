@@ -107,8 +107,12 @@ namespace ETD.ViewsPresenters
 
             foreach (KeyValuePair<string, string> entry in volunteerList)
             {
-                inverseVolunteerList.Add(entry.Value, entry.Key);
+                if (!inverseVolunteerList.ContainsKey(entry.Value))
+                {
+                    inverseVolunteerList.Add(entry.Value, entry.Key);
+                }
             }
+            
 
             foreach (ComboBox ctrl in teamGrid.Children.OfType<ComboBox>())
             {
@@ -131,6 +135,7 @@ namespace ETD.ViewsPresenters
             if (duplicates == false)
             {
                 this.Close();
+                MainWindow.CloseGPSWindow();
             }
             else
             {

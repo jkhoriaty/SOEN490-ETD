@@ -136,3 +136,5 @@ C:\Workspace\SOEN490-ETD\ETD\Builds\Debug\ETD_Statistics\Icons\WheelChair.png
 C:\Workspace\SOEN490-ETD\ETD\Builds\Debug\ETD_Statistics\Resources\EDT.sqlite3
 C:\Workspace\SOEN490-ETD\ETD\Builds\Debug\ETD_Statistics\ETD_Statistic.exe
 C:\Workspace\SOEN490-ETD\ETD\Builds\Debug\ETD_Statistics\ETD_Statistic.pdb
+C:\Workspace\SOEN490-ETD\ETD\ETD_Statistic\obj\Debug\ViewsPresenters\InterventionView.baml
+C:\Workspace\SOEN490-ETD\ETD\ETD_Statistic\obj\Debug\ViewsPresenters\InterventionView.g.cs

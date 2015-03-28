@@ -63,9 +63,14 @@ namespace ETD_Statistic.ViewsPresenters
         {
             previousOperation.Children.Clear();
             StatisticView sv = new StatisticView();
+            InterventionView iv = new InterventionView();
+            Frame interView = new Frame();
             Frame statsView = new Frame();
             statsView.Content = sv;
+            interView.Content = iv;
             previousOperation.Children.Add(statsView);
+            previousOperation.Children.Add(interView);
+               
         }
     }
 }
