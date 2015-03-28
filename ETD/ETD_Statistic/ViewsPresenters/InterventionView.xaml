@@ -1,0 +1,246 @@
+﻿<Page x:Class="ETD_Statistic.ViewsPresenters.InterventionView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="1200" d:DesignWidth="750"
+	Title="InterventionView">
+    <StackPanel Margin="50,0,30,0">
+        <Grid Name="ComplaintGrid" Margin="0,100,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="130"/>
+                <ColumnDefinition Width="60" />
+                <ColumnDefinition Width="60" />
+                <ColumnDefinition Width="70" />
+                <ColumnDefinition Width="60" />
+                <ColumnDefinition Width="60" />
+                <ColumnDefinition Width="70" />
+                <ColumnDefinition Width="60" />
+                <ColumnDefinition Width="60" />
+                <ColumnDefinition Width="70" />
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            
+            <!-- For the title fields on first row-->
+            <Border Grid.Column="0" Grid.RowSpan="2" BorderThickness="1,1,1,1" BorderBrush="Black">
+                <TextBlock Height="40" Margin="5,0,0,0" FontWeight="ExtraBold" VerticalAlignment="Center" FontSize="15" Text="Complaint"/>
+            </Border>
+            <Border Grid.ColumnSpan="3" Grid.Column="1" Grid.Row="0" BorderThickness="0,1,1,1" BorderBrush="Black">
+                <TextBlock TextWrapping="Wrap" Height="40" Margin="5,0,0,0" FontWeight="ExtraBold" VerticalAlignment="Center" FontSize="15" Text="Without Ambulance Services"/>
+            </Border>
+            <Border Grid.ColumnSpan="3" Grid.Column="4" Grid.Row="0" BorderThickness="0,1,1,1" BorderBrush="Black">
+                <TextBlock TextWrapping="Wrap" Height="40" Margin="5,0,0,0" FontWeight="ExtraBold" VerticalAlignment="Center" FontSize="15" Text="With Ambulance Services"/>
+            </Border>
+            <Border Grid.ColumnSpan="3" Grid.Column="7" Grid.Row="0" BorderThickness="0,1,1,1" BorderBrush="Black">
+                <TextBlock TextWrapping="Wrap" Height="40" Margin="50,0,0,0" FontWeight="ExtraBold" VerticalAlignment="Center" FontSize="20" Text="TOTAL"/>
+            </Border>
+            <Border Grid.Column="1" Grid.Row="1" BorderThickness="0,0,1,5" BorderBrush="Black">
+                <TextBlock Height="30" Margin="3,0,0,0" FontWeight="SemiBold" VerticalAlignment="Center" FontSize="13" Text="Children"/>
+            </Border>
+            <Border Grid.Column="2" Grid.Row="1" BorderThickness="0,0,1,5" BorderBrush="Black">
+                <TextBlock Height="30" Margin="5,0,0,0" FontWeight="SemiBold" VerticalAlignment="Center" FontSize="13" Text="Adult"/>
+            </Border>
+            <Border Grid.Column="3" Grid.Row="1" BorderThickness="0,0,1,5" BorderBrush="Black">
+                <TextBlock Height="30" Margin="6,0,0,0" FontWeight="SemiBold" VerticalAlignment="Center" FontSize="13" Text="TOTAL"/>
+            </Border>
+            <Border Grid.Column="4" Grid.Row="1" BorderThickness="0,0,1,5" BorderBrush="Black">
+                <TextBlock Height="30" Margin="3,0,0,0" FontWeight="SemiBold" VerticalAlignment="Center" FontSize="13" Text="Children"/>
+            </Border>
+            <Border Grid.Column="5" Grid.Row="1" BorderThickness="0,0,1,5" BorderBrush="Black">
+                <TextBlock Height="30" Margin="5,0,0,0" FontWeight="SemiBold" VerticalAlignment="Center" FontSize="13" Text="Adult"/>
+            </Border>
+            <Border Grid.Column="6" Grid.Row="1" BorderThickness="0,0,1,5" BorderBrush="Black">
+                <TextBlock Height="30" Margin="6,0,0,0" FontWeight="SemiBold" VerticalAlignment="Center" FontSize="13" Text="TOTAL"/>
+            </Border>
+            <Border Grid.Column="7" Grid.Row="1" BorderThickness="0,0,1,5" BorderBrush="Black">
+                <TextBlock Height="30" Margin="3,0,0,0" FontWeight="SemiBold" VerticalAlignment="Center" FontSize="13" Text="Children"/>
+            </Border>
+            <Border Grid.Column="8" Grid.Row="1" BorderThickness="0,0,1,5" BorderBrush="Black">
+                <TextBlock Height="30" Margin="5,0,0,0" FontWeight="SemiBold" VerticalAlignment="Center" FontSize="13" Text="Adult"/>
+            </Border>
+            <Border Grid.Column="9" Grid.Row="1" BorderThickness="0,0,1,5" BorderBrush="Black">
+                <TextBlock Height="30" Margin="6,0,0,0" FontWeight="SemiBold" VerticalAlignment="Center" FontSize="13" Text="TOTAL"/>
+            </Border>
+            
+            <!-- end of title for first row-->
+
+
+            <!-- header for first columns -->
+            <Border Grid.Column="0" Grid.Row="2" BorderThickness="1,0,5,1" BorderBrush="Black">
+                <TextBlock TextWrapping="Wrap" Height="40" Margin="5,0,0,0" FontWeight="Bold" VerticalAlignment="Center" FontSize="13" Text="Abdominal Pain"/>
+            </Border>
+            <Border Grid.Column="0" Grid.Row="3" BorderThickness="1,0,5,1" BorderBrush="Black">
+                <TextBlock TextWrapping="Wrap" Height="40" Margin="5,0,0,0" FontWeight="Bold" VerticalAlignment="Center" FontSize="13" Text="Allergy (Mild)"/>
+            </Border>
+            <Border Grid.Column="0" Grid.Row="4" BorderThickness="1,0,5,1" BorderBrush="Black">
+                <TextBlock TextWrapping="Wrap" Height="40" Margin="5,0,0,0" FontWeight="Bold" VerticalAlignment="Center" FontSize="13" Text="Anaphylaxis"/>
+            </Border>
+            <Border Grid.Column="0" Grid.Row="5" BorderThickness="1,0,5,1" BorderBrush="Black">
+                <TextBlock TextWrapping="Wrap" Height="40" Margin="5,0,0,0" FontWeight="Bold" VerticalAlignment="Center" FontSize="13" Text="Behavioural Disorder"/>
+            </Border>
+            <Border Grid.Column="0" Grid.Row="6" BorderThickness="1,0,5,1" BorderBrush="Black">
+                <TextBlock TextWrapping="Wrap" Height="40" Margin="5,0,0,0" FontWeight="Bold" VerticalAlignment="Center" FontSize="13" Text="Burn"/>
+            </Border>
+            <Border Grid.Column="0" Grid.Row="7" BorderThickness="1,0,5,1" BorderBrush="Black">
+                <TextBlock TextWrapping="Wrap" Height="40" Margin="5,0,0,0" FontWeight="Bold" VerticalAlignment="Center" FontSize="13" Text="Cardiac Arrest"/>
+            </Border>
+            <Border Grid.Column="0" Grid.Row="8" BorderThickness="1,0,5,1" BorderBrush="Black">
+                <TextBlock TextWrapping="Wrap" Height="40" Margin="5,0,0,0" FontWeight="Bold" VerticalAlignment="Center" FontSize="13" Text="Seizures"/>
+            </Border>
+            <Border Grid.Column="0" Grid.Row="9" BorderThickness="1,0,5,1" BorderBrush="Black">
+                <TextBlock TextWrapping="Wrap" Height="40" Margin="5,0,0,0" FontWeight="Bold" VerticalAlignment="Center" FontSize="13" Text="Environmental Related Disorder"/>
+            </Border>
+            <Border Grid.Column="0" Grid.Row="10" BorderThickness="1,0,5,1" BorderBrush="Black">
+                <TextBlock TextWrapping="Wrap" Height="40" Margin="5,0,0,0" FontWeight="Bold" VerticalAlignment="Center" FontSize="13" Text="Head/Spine Injury"/>
+            </Border>
+            <Border Grid.Column="0" Grid.Row="11" BorderThickness="1,0,5,1" BorderBrush="Black">
+                <TextBlock TextWrapping="Wrap" Height="40" Margin="5,0,0,0" FontWeight="Bold" VerticalAlignment="Center" FontSize="13" Text="Headache"/>
+            </Border>
+            <Border Grid.Column="0" Grid.Row="12" BorderThickness="1,0,5,1" BorderBrush="Black">
+                <TextBlock TextWrapping="Wrap" Height="40" Margin="5,0,0,0" FontWeight="Bold" VerticalAlignment="Center" FontSize="13" Text="Hemorrhage"/>
+            </Border>
+            <Border Grid.Column="0" Grid.Row="13" BorderThickness="1,0,5,1" BorderBrush="Black">
+                <TextBlock TextWrapping="Wrap" Height="40" Margin="5,0,0,0" FontWeight="Bold" VerticalAlignment="Center" FontSize="13" Text="Insect Bite"/>
+            </Border>
+            <Border Grid.Column="0" Grid.Row="14" BorderThickness="1,0,5,1" BorderBrush="Black">
+                <TextBlock TextWrapping="Wrap" Height="40" Margin="5,0,0,0" FontWeight="Bold" VerticalAlignment="Center" FontSize="13" Text="Intoxication"/>
+            </Border>
+            <Border Grid.Column="0" Grid.Row="15" BorderThickness="1,0,5,1" BorderBrush="Black">
+                <TextBlock TextWrapping="Wrap" Height="40" Margin="5,0,0,0" FontWeight="Bold" VerticalAlignment="Center" FontSize="13" Text="Musculoskeletal"/>
+            </Border>
+            <Border Grid.Column="0" Grid.Row="16" BorderThickness="1,0,5,1" BorderBrush="Black">
+                <TextBlock TextWrapping="Wrap" Height="40" Margin="5,0,0,0" FontWeight="Bold" VerticalAlignment="Center" FontSize="13" Text="Nosebleed"/>
+            </Border>
+            <Border Grid.Column="0" Grid.Row="17" BorderThickness="1,0,5,1" BorderBrush="Black">
+                <TextBlock TextWrapping="Wrap" Height="40" Margin="5,0,0,0" FontWeight="Bold" VerticalAlignment="Center" FontSize="13" Text="Ocular"/>
+            </Border>
+            <Border Grid.Column="0" Grid.Row="18" BorderThickness="1,0,5,1" BorderBrush="Black">
+                <TextBlock TextWrapping="Wrap" Height="40" Margin="5,0,0,0" FontWeight="Bold" VerticalAlignment="Center" FontSize="13" Text="Oral"/>
+            </Border>
+            <Border Grid.Column="0" Grid.Row="19" BorderThickness="1,0,5,1" BorderBrush="Black">
+                <TextBlock TextWrapping="Wrap" Height="40" Margin="5,0,0,0" FontWeight="Bold" VerticalAlignment="Center" FontSize="13" Text="Respiratory"/>
+            </Border>
+            <Border Grid.Column="0" Grid.Row="20" BorderThickness="1,0,5,1" BorderBrush="Black">
+                <TextBlock TextWrapping="Wrap" Height="40" Margin="5,0,0,0" FontWeight="Bold" VerticalAlignment="Center" FontSize="13" Text="Respiratory Arrest"/>
+            </Border>
+            <Border Grid.Column="0" Grid.Row="21" BorderThickness="1,0,5,1" BorderBrush="Black">
+                <TextBlock TextWrapping="Wrap" Height="40" Margin="5,0,0,0" FontWeight="Bold" VerticalAlignment="Center" FontSize="13" Text="Soft Tissue Injury"/>
+            </Border>
+            <Border Grid.Column="0" Grid.Row="22" BorderThickness="1,0,5,1" BorderBrush="Black">
+                <TextBlock TextWrapping="Wrap" Height="40" Margin="5,0,0,0" FontWeight="Bold" VerticalAlignment="Center" FontSize="13" Text="Suspected Stroke"/>
+            </Border>
+            <Border Grid.Column="0" Grid.Row="23" BorderThickness="1,0,5,1" BorderBrush="Black">
+                <TextBlock TextWrapping="Wrap" Height="40" Margin="5,0,0,0" FontWeight="Bold" VerticalAlignment="Center" FontSize="13" Text="Chest Pain"/>
+            </Border>
+            <Border Grid.Column="0" Grid.Row="24" BorderThickness="1,0,5,1" BorderBrush="Black">
+                <TextBlock TextWrapping="Wrap" Height="40" Margin="5,0,0,0" FontWeight="Bold" VerticalAlignment="Center" FontSize="13" Text="Unconscious"/>
+            </Border>
+            <Border Grid.Column="0" Grid.Row="25" BorderThickness="1,0,5,1" BorderBrush="Black">
+                <TextBlock TextWrapping="Wrap" Height="40" Margin="5,0,0,0" FontWeight="Bold" VerticalAlignment="Center" FontSize="13" Text="Weakness/Fainting"/>
+            </Border>
+            <Border Grid.Column="0" Grid.Row="26" BorderThickness="1,0,5,1" BorderBrush="Black">
+                <TextBlock TextWrapping="Wrap" Height="40" Margin="5,0,0,0" FontWeight="Bold" VerticalAlignment="Center" FontSize="13" Text="Other"/>
+            </Border>
+
+            <!-- end of header for first columns -->
+            
+            <!-- start of data columns Abdominal Pain WA for without ambulance-->
+            <Border Grid.Row="2" Grid.Column="1" BorderThickness="0,0,1,1" BorderBrush="Black">
+                <TextBlock Name="AbdominalPainChildWA" Text="0" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+            </Border>
+            <Border Grid.Row="2" Grid.Column="2" BorderThickness="0,0,1,1" BorderBrush="Black">
+                <TextBlock Name="AbdominalPainAdultWA" Text="0" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+            </Border>
+            <Border Grid.Row="2" Grid.Column="3" BorderThickness="0,0,1,1" BorderBrush="Black">
+                <TextBlock Name="AbdominalPainTotalWA" Text="0" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+            </Border>
+
+            <Border Grid.Row="2" Grid.Column="4" BorderThickness="0,0,1,1" BorderBrush="Black">
+                <TextBlock Name="AbdominalPainChildA" Text="0" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+            </Border>
+            <Border Grid.Row="2" Grid.Column="5" BorderThickness="0,0,1,1" BorderBrush="Black">
+                <TextBlock Name="AbdominalPainAdultA" Text="0" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+            </Border>
+            <Border Grid.Row="2" Grid.Column="6" BorderThickness="0,0,1,1" BorderBrush="Black">
+                <TextBlock Name="AbdominalPainTotalA" Text="0" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+            </Border>
+
+            <Border Grid.Row="2" Grid.Column="7" BorderThickness="0,0,1,1" BorderBrush="Black">
+                <TextBlock Name="AbdominalPainChildTotal" Text="0" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+            </Border>
+            <Border Grid.Row="2" Grid.Column="8" BorderThickness="0,0,1,1" BorderBrush="Black">
+                <TextBlock Name="AbdominalPainAdultTotal" Text="0" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+            </Border>
+            <Border Grid.Row="2" Grid.Column="9" BorderThickness="0,0,1,1" BorderBrush="Black">
+                <TextBlock Name="AbdominalPainTotalTotal" Text="0" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+            </Border>
+
+            <!-- start of data columns Allergy WA for without ambulance-->
+            <Border Grid.Row="3" Grid.Column="1" BorderThickness="0,0,1,1" BorderBrush="Black">
+                <TextBlock Name="AllergyChildWA" Text="0" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+            </Border>
+            <Border Grid.Row="3" Grid.Column="2" BorderThickness="0,0,1,1" BorderBrush="Black">
+                <TextBlock Name="AllergyAdultWA" Text="0" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+            </Border>
+            <Border Grid.Row="3" Grid.Column="3" BorderThickness="0,0,1,1" BorderBrush="Black">
+                <TextBlock Name="AllergyTotalWA" Text="0" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+            </Border>
+
+            <Border Grid.Row="3" Grid.Column="4" BorderThickness="0,0,1,1" BorderBrush="Black">
+                <TextBlock Name="AllergyChildA" Text="0" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+            </Border>
+            <Border Grid.Row="3" Grid.Column="5" BorderThickness="0,0,1,1" BorderBrush="Black">
+                <TextBlock Name="AllergyAdultA" Text="0" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+            </Border>
+            <Border Grid.Row="3" Grid.Column="6" BorderThickness="0,0,1,1" BorderBrush="Black">
+                <TextBlock Name="AllergyTotalA" Text="0" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+            </Border>
+
+            <Border Grid.Row="3" Grid.Column="7" BorderThickness="0,0,1,1" BorderBrush="Black">
+                <TextBlock Name="AllergyChildTotal" Text="0" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+            </Border>
+            <Border Grid.Row="3" Grid.Column="8" BorderThickness="0,0,1,1" BorderBrush="Black">
+                <TextBlock Name="AllergyAdultTotal" Text="0" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+            </Border>
+            <Border Grid.Row="3" Grid.Column="9" BorderThickness="0,0,1,1" BorderBrush="Black">
+                <TextBlock Name="AllergyTotalTotal" Text="0" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+            </Border>
+            
+            
+            
+
+
+        </Grid>
+    </StackPanel>
+</Page>
