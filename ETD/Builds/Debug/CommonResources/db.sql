@@ -9,7 +9,7 @@ Target Server Type    : SQLite
 Target Server Version : 30808
 File Encoding         : 65001
 
-Date: 2015-03-26 14:44:15
+Date: 2015-03-27 22:14:07
 */
 
 PRAGMA foreign_keys = OFF;
@@ -22,7 +22,7 @@ CREATE TABLE "ABCs" (
 "ABC_ID"  INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
 "Intervention_ID"  INTEGER NOT NULL,
 "Consciousness"  TEXT,
-"Disoriented"  BOOLEAN,
+"Disoriented"  BOOLEAN DEFAULT False,
 "Airways"  TEXT,
 "Breathing"  TEXT,
 "Breathing_Frequency"  INTEGER,
@@ -71,26 +71,26 @@ CONSTRAINT "fkey1" FOREIGN KEY ("Team_ID") REFERENCES "Teams" ("Team_ID")
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for Ending_Codes
+-- Table structure for Calls
 -- ----------------------------
-DROP TABLE IF EXISTS "main"."Ending_Codes";
-CREATE TABLE [Ending_Codes] (
-[Ending_Code] INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-[Description] TEXT  NOT NULL
+DROP TABLE IF EXISTS "main"."Calls";
+CREATE TABLE "Calls" (
+"Call_ID"  INTEGER NOT NULL,
+"Intervention_ID"  INTEGER,
+"Call_Time"  DATETIME,
+"Meeting_Point"  TEXT,
+"First_Responder_Time"  DATETIME,
+"First_Responder_Company"  TEXT,
+"First_Responder_Vehicle"  TEXT,
+"Ambulance_Time"  DATETIME,
+"Ambulance_Company"  TEXT,
+"Ambulance_Vehicle"  TEXT,
+PRIMARY KEY ("Call_ID")
 );
 
 -- ----------------------------
--- Records of Ending_Codes
+-- Records of Calls
 -- ----------------------------
-INSERT INTO "main"."Ending_Codes" VALUES (1, 'Return to site');
-INSERT INTO "main"."Ending_Codes" VALUES (2, 'Return to home');
-INSERT INTO "main"."Ending_Codes" VALUES (3, 'Referred to doctor');
-INSERT INTO "main"."Ending_Codes" VALUES (4, 'Equipment distribution');
-INSERT INTO "main"."Ending_Codes" VALUES (5, 911);
-INSERT INTO "main"."Ending_Codes" VALUES (6, 'Patient not found');
-INSERT INTO "main"."Ending_Codes" VALUES (7, 'Treatment Refusal');
-INSERT INTO "main"."Ending_Codes" VALUES (8, 'No interventions');
-INSERT INTO "main"."Ending_Codes" VALUES (9, 'Other');
 
 -- ----------------------------
 -- Table structure for Equipments
@@ -144,9 +144,10 @@ CREATE TABLE "Interventions" (
 "Age"  INTEGER,
 "Chief_Complaint"  TEXT,
 "Other_Chief_Complaint"  TEXT,
-"Conclusion"  INTEGER,
-CONSTRAINT "fkey0" FOREIGN KEY ("Operation_ID") REFERENCES "Operations" ("Operation_ID") ON DELETE CASCADE ON UPDATE CASCADE,
-CONSTRAINT "fkey2" FOREIGN KEY ("Conclusion") REFERENCES "Ending_Codes" ("Ending_Code")
+"Conclusion"  TEXT,
+"Conclusion_Info"  TEXT,
+"Conclusion_Time"  DATETIME,
+CONSTRAINT "fkey0" FOREIGN KEY ("Operation_ID") REFERENCES "Operations" ("Operation_ID") ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- ----------------------------
@@ -175,7 +176,6 @@ CREATE TABLE "Operations" (
 -- ----------------------------
 -- Records of Operations
 -- ----------------------------
-INSERT INTO "main"."Operations" VALUES (0, 'Test Operation', 'TO', '2015-3-19 0:0:0', '2015-3-20 12:12:12.0', 'Tester', null, null, null, null, null, null);
 
 -- ----------------------------
 -- Table structure for Resources
@@ -211,7 +211,6 @@ CREATE TABLE sqlite_sequence(name,seq);
 INSERT INTO "main"."sqlite_sequence" VALUES ('Equipment_Types', 6);
 INSERT INTO "main"."sqlite_sequence" VALUES ('Statuses', 4);
 INSERT INTO "main"."sqlite_sequence" VALUES ('Trainings', 3);
-INSERT INTO "main"."sqlite_sequence" VALUES ('Ending_Codes', 9);
 INSERT INTO "main"."sqlite_sequence" VALUES ('Volunteers', 0);
 INSERT INTO "main"."sqlite_sequence" VALUES ('Resources', 0);
 INSERT INTO "main"."sqlite_sequence" VALUES ('Equipments', 0);
