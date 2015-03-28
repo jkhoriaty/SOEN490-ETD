@@ -17,6 +17,7 @@ using System.Windows.Xps;
 using System.Windows.Xps.Packaging;
 using System.Windows.Xps.Serialization;
 using System.IO;
+using System.Windows.Markup;
 
 namespace ETD_Statistic.ViewsPresenters
 {
@@ -40,11 +41,6 @@ namespace ETD_Statistic.ViewsPresenters
             statisticView.Children.Add(statsView);
         }
 
-        public void printMessage()
-        {
-            MessageBox.Show("testing");
-        }
-
         public void LoadPreviousOperations(object sender, RoutedEventArgs e)
         {
             statisticView.Children.Clear();
@@ -55,15 +51,24 @@ namespace ETD_Statistic.ViewsPresenters
             statisticView.Children.Add(operationView);
         }
 
-        public void ExportWPF(StackPanel element)
+        public void ExportWPF()
         {
-            StackPanel sp = new StackPanel();
-            sp.DataContext = element;
+            StatisticView sv = new StatisticView();
+
             FixedDocument fixedDoc = new FixedDocument();
             PageContent pageCont = new PageContent();
             FixedPage fixedPage = new FixedPage();
+            Frame frame = new Frame();
+            frame.Content = sv;
 
-            fixedPage.Children.Add(sp);
+            fixedPage.Children.Add(frame);
+
+
+            //Size sz = new Size(96 * 8.5, 96 * 11);
+            //fixedPage.Measure(sz);
+            //fixedPage.Arrange(new Rect(new Point(), sz));
+            //fixedPage.UpdateLayout();
+  
             ((System.Windows.Markup.IAddChild)pageCont).AddChild(fixedPage);
             fixedDoc.Pages.Add(pageCont);
 
@@ -89,12 +94,41 @@ namespace ETD_Statistic.ViewsPresenters
             }
         }
 
-        public void ExportToPDF(object sender, RoutedEventArgs e)
+        private FixedDocument PageSplitter(StatisticView page)
         {
-            ExportWPF(buttonView);
-            SaveXPS();
+            FixedDocument fd = new FixedDocument();
+            double y = 0;
+            Size size = page.DesiredSize;
+            double width = 96 * 8.5;
+            double height = 96 * 11; 
+            while(y < size.Height)
+            {
+                VisualBrush vb = new VisualBrush(page);
+                vb.Stretch = Stretch.None;
+                vb.AlignmentX = AlignmentX.Left;
+                vb.AlignmentY = AlignmentY.Top;
+                vb.ViewboxUnits = BrushMappingMode.Absolute;
+                vb.TileMode = TileMode.None;
+                //vb.Viewbox = new Rect { 0, y, width, height};
+                PageContent pc = new PageContent();
+                FixedPage fp = new FixedPage();
+                ((IAddChild)pc).AddChild(page);
+                fd.Pages.Add(pc);
+                //fp.Width = width;
+                //fp.Height = height;
+                //Canvas canvas = new Canvas();
+
+                y += height;
+
+            }
+            return fd;
+ 
         }
 
-
+        public void ExportToPDF(object sender, RoutedEventArgs e)
+        {
+            ExportWPF();
+            SaveXPS();
+        }
     }
 }

@@ -82,7 +82,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 			//Making the appropriate movement with the information provided by GPS
 			if(interventionPin == null && gpsLocation != null && GPSLocation.gpsConfigured == true)
 			{
-				setPinPosition(gpsLocation.getMapX(), gpsLocation.getMapY()); //Move the team
+				setPinPosition(gpsLocation.getX(), gpsLocation.getY()); //Move the team
 				CollisionDetectionAndResolution(true);
 			}
 		}

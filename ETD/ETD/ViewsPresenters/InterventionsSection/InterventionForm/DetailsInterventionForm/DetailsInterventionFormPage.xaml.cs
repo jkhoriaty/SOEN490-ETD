@@ -129,6 +129,14 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.DetailsInter
             ComboBox comboBox = (ComboBox)sender;
             ComboBoxItem item = (ComboBoxItem)comboBox.SelectedItem;
             intervention.setCode(Convert.ToInt32(item.Content));
+			if (intervention.getCode() == 1)
+			{
+				interventionForm.interventionType.Foreground = new SolidColorBrush(Colors.Red);
+			}
+			else
+			{
+				interventionForm.interventionType.Foreground = new SolidColorBrush(Colors.Black);
+			}
         }
 
         private void Gender_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -152,9 +160,10 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.DetailsInter
                 Grid.SetColumnSpan(Complaint, 2);
             }
             intervention.setChiefComplaint("" + item.Content);
+			interventionForm.interventionType.Text = intervention.getChiefComplaint();
         }
 
-        public void PersistencyUpdate()
+/*        public void PersistencyUpdate()
         {
             try
             {
@@ -162,7 +171,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.DetailsInter
                 int hours = int.Parse(Callhh.Text);
                 int minutes = int.Parse(Callmm.Text);
                 callTime = callTime.Date + (new TimeSpan(hours, minutes, callTime.Second));
-                intervention.setTimeOfCall(callTime);
+                intervention.setTimeOfCall(DateTime.Now);
             }
             catch (Exception e) { }
 
@@ -208,7 +217,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.DetailsInter
             }
             catch (Exception e) { }
         }
-
+*/
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             try

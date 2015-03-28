@@ -251,9 +251,6 @@ namespace ETD.CustomObjects.CustomUIObjects
 			}
 			this.ReleaseMouseCapture();
 
-			var mousePos = e.GetPosition(Canvas_map);
-			MessageBox.Show(mousePos.X + " " + mousePos.Y);
-
 			CollisionDetectionAndResolution(false);
 		}
 

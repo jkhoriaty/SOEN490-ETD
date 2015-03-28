@@ -31,7 +31,9 @@ namespace ETD_Statistic.ViewsPresenters
         String organizationFollowUpText;
         String supervisorFollowUpText;
         String eventName;
+        String dispatcherName;
         int teamCount;
+        int volunteerCount;
 
         public StatisticView()
         {
@@ -42,7 +44,8 @@ namespace ETD_Statistic.ViewsPresenters
         private void GenerateStatisticSummary()
         {
             getOperationInformationFromDatabase();
-            getTeamCountFromDatabase();
+            getTeamCount();
+            getVolunteerCount();
        
             VolunteerFollowUp.TextWrapping = TextWrapping.Wrap;
             Finance.TextWrapping = TextWrapping.Wrap;
@@ -51,11 +54,12 @@ namespace ETD_Statistic.ViewsPresenters
             OrganizationFollowUp.TextWrapping = TextWrapping.Wrap;
             SupervisorFollowUp.TextWrapping = TextWrapping.Wrap;
 
-            OperationID.Text = "Operation " + Statistic.getOperationID();
+            OperationID.Text = "Operation " + Statistic.getOperationID() + " : " + eventName;
             BeginDate.Text = "Start Date: " + startDate.ToString("g");
             EndingDate.Text = "End Date: " + endDate.ToString("g");
-            EventName.Text = "Name of Event: " + eventName;
+            DispatcherName.Text = "Dispatcher: " + dispatcherName;
             TeamCount.Text = "Number of teams: " + teamCount.ToString();
+            VolunteerCount.Text = "Number of volunteers: " + volunteerCount.ToString();
             VolunteerFollowUp.Text = volunteerFollowUpText;
             Finance.Text = financeText;
             Vehicle.Text = vehicleText;
@@ -79,20 +83,30 @@ namespace ETD_Statistic.ViewsPresenters
                 organizationFollowUpText = reader["OrganizationFollowUp"].ToString();
                 supervisorFollowUpText = reader["SupervisorFollowUp"].ToString();
                 eventName = reader["Name"].ToString();
-
+                dispatcherName = reader["Dispatcher"].ToString();
             }
             StaticDBConnection.CloseConnection();
         }
 
-        private void getTeamCountFromDatabase()
+        private void getTeamCount()
         {
-            SQLiteDataReader reader = StaticDBConnection.QueryDatabase("SELECT count(*) as Count from Teams WHERE Operation_ID=" + Statistic.getOperationID());
+            SQLiteDataReader reader = StaticDBConnection.QueryDatabase("SELECT count(*) as Count FROM Teams WHERE Operation_ID=" + Statistic.getOperationID());
             while (reader.Read())
             {
                 teamCount = int.Parse(reader["Count"].ToString());
             }
             StaticDBConnection.CloseConnection();
-
         }
+
+        private void getVolunteerCount()
+        {
+            SQLiteDataReader reader = StaticDBConnection.QueryDatabase("SELECT count(*) as Num FROM (Volunteers JOIN Team_Members ON Volunteers.Volunteer_ID = Team_Members.Volunteer_ID) JOIN Teams ON Team_Members.Team_ID = Teams.Team_ID WHERE Operation_ID =" + Statistic.getOperationID());
+            while (reader.Read())
+            {
+                volunteerCount = int.Parse(reader["Num"].ToString());
+            }
+            StaticDBConnection.CloseConnection();
+        }
+
     }
 }

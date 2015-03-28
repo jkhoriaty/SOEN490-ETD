@@ -203,7 +203,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
 			}
 			selectionChanged = true;
 		}
-
+/*
 		public void PersistencyUpdate()
 		{
 			String conclusion;
@@ -288,7 +288,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
 			intervention.ResourceModified();
 			
 		}
-
+*/
 		private void End_Click(object sender, RoutedEventArgs e)
 		{
 			TextBoxHandler.setNow(Endhh, Endmm);

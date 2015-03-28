@@ -15,19 +15,21 @@
             <RowDefinition/>           
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
-            <StackPanel Name="buttonView" Orientation="Horizontal" HorizontalAlignment="Center">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <StackPanel.Resources>
                     <Style TargetType="{x:Type Button}">
                         <Setter Property="Margin" Value="10,0,0,0"/>
                     </Style>
                 </StackPanel.Resources>
-                <Button x:Uid="Button_ExportPDF" Click="ExportToPDF" Content="{x:Static properties:Resources.Button_ExportPDF}" Height="30" Width="100" Margin="0,0,0,0"/>
+                <Button Name="buttonView" x:Uid="Button_ExportPDF" Click="ExportToPDF" Content="{x:Static properties:Resources.Button_ExportPDF}" Height="30" Width="100" Margin="0,0,0,0"/>
                 <Button x:Uid="Button_LoadStatistic" Click="LoadStatistic" Content="{x:Static properties:Resources.Button_LoadStatistic}" Height="30" Width="100" Margin="15,0,0,0" />
                 <Button x:Uid="Button_ViewPreviousOperations" Click="LoadPreviousOperations" Content="{x:Static properties:Resources.Button_ViewPreviousOperations}" Height="30" Width="150" />
             </StackPanel>
         </Grid>
         <Grid Grid.Row="1">
-            <StackPanel Name="statisticView"/>
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <StackPanel Name="statisticView"/>
+            </ScrollViewer>
         </Grid>
     </Grid>
 </Window>
