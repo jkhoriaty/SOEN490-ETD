@@ -53,9 +53,6 @@ namespace ETD.ViewsPresenters
 		private double previousWidth;
 		private double previousHeight;
 
-		//Services variables
-		GPSServices gpsServices;
-
 		public MainWindow()
 		{
             //hook up DataChanged event to get notification to make culture-related changes in code
@@ -104,7 +101,7 @@ namespace ETD.ViewsPresenters
 			InterventionsSection.Child = interventionsFrame;
 
 			//Starting GPS Services tasks
-			gpsServices = new GPSServices(this);
+			GPSServices.StartServices(this);
 		}
 
         //window closed
@@ -139,6 +136,10 @@ namespace ETD.ViewsPresenters
 			{
 				System.IO.FileInfo File = new System.IO.FileInfo(openFileDialog.FileName);
 				coloredImage = new BitmapImage(new Uri(openFileDialog.FileName));
+				
+				//Keeping track of the distortion added when the image is scaled to fit the map section
+				GPSLocation.xRatio = coloredImage.Width / mapSection.Canvas_map.ActualWidth;
+				GPSLocation.yRatio =  coloredImage.Height/ mapSection.Canvas_map.ActualHeight;
 
                 mapModificationSection.setMap(coloredImage);
 			}
@@ -260,8 +261,8 @@ namespace ETD.ViewsPresenters
 			//Check if a team has been created
 			if(Team.getTeamList().Count > 0)
 			{
+				//Create and populate list of registered teams
 				List<Team> registeredTeams = new List<Team>();
-				//Check if a team has been associated to a GPS Location
 				foreach(Team team in Team.getTeamList())
 				{
 					if(team.getGPSLocation() != null)
@@ -270,9 +271,12 @@ namespace ETD.ViewsPresenters
 					}
 				}
 				
+				//Check if there is at least one team that is registered, it will be used for setup
 				if(registeredTeams.Count != 0)
 				{
-
+					GPSSetup_Button.Background = new SolidColorBrush(Colors.Red);
+					GPSSetup_Button.Foreground = new SolidColorBrush(Colors.White);
+					GPSServices.SetupGPSToMapTranslation_Start(mapSection, registeredTeams);
 				}
 				else
 				{
