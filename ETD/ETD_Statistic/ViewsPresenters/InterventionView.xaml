@@ -96,7 +96,7 @@
             <!-- end of title for first row-->
 
 
-            <!-- header for first columns -->
+            <!-- header for first columns 
             <Border Grid.Column="0" Grid.Row="2" BorderThickness="1,0,5,1" BorderBrush="Black">
                 <TextBlock TextWrapping="Wrap" Height="40" Margin="5,0,0,0" FontWeight="Bold" VerticalAlignment="Center" FontSize="13" Text="Abdominal Pain"/>
             </Border>
@@ -172,10 +172,12 @@
             <Border Grid.Column="0" Grid.Row="26" BorderThickness="1,0,5,1" BorderBrush="Black">
                 <TextBlock TextWrapping="Wrap" Height="40" Margin="5,0,0,0" FontWeight="Bold" VerticalAlignment="Center" FontSize="13" Text="Other"/>
             </Border>
+            
+            -->
 
             <!-- end of header for first columns -->
             
-            <!-- start of data columns Abdominal Pain WA for without ambulance-->
+            <!-- start of data columns Abdominal Pain WA for without ambulance
             <Border Grid.Row="2" Grid.Column="1" BorderThickness="0,0,1,1" BorderBrush="Black">
                 <TextBlock Name="AbdominalPainChildWA" Text="0" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
             </Border>
@@ -205,8 +207,10 @@
             <Border Grid.Row="2" Grid.Column="9" BorderThickness="0,0,1,1" BorderBrush="Black">
                 <TextBlock Name="AbdominalPainTotalTotal" Text="0" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
             </Border>
+            
+            -->
 
-            <!-- start of data columns Allergy WA for without ambulance-->
+            <!-- start of data columns Allergy WA for without ambulance
             <Border Grid.Row="3" Grid.Column="1" BorderThickness="0,0,1,1" BorderBrush="Black">
                 <TextBlock Name="AllergyChildWA" Text="0" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
             </Border>
@@ -236,7 +240,7 @@
             <Border Grid.Row="3" Grid.Column="9" BorderThickness="0,0,1,1" BorderBrush="Black">
                 <TextBlock Name="AllergyTotalTotal" Text="0" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
             </Border>
-            
+            -->
             
             
 
