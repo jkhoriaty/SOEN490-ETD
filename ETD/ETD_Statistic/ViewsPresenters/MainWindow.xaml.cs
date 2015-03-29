@@ -17,6 +17,7 @@ using System.Windows.Xps;
 using System.Windows.Xps.Packaging;
 using System.Windows.Xps.Serialization;
 using System.IO;
+using System.IO.Packaging;
 using System.Windows.Markup;
 
 namespace ETD_Statistic.ViewsPresenters
@@ -87,31 +88,38 @@ namespace ETD_Statistic.ViewsPresenters
             docViewer.Document = fixedDoc;           
         }
 
-        public void SaveXPS()
+        //function to save WPF document as XPS then transform into PDF with PdfSharp dll
+        public void SavePDF()
         {
             Microsoft.Win32.SaveFileDialog save = new Microsoft.Win32.SaveFileDialog();
             save.FileName = "StatisticReport";
-            save.DefaultExt = ".xps";
-            save.Filter = "XPS Documents (.xps)|*.xps";
+            save.DefaultExt = ".pdf";
+            save.Filter = "PDF Documents (.pdf)|*.pdf";
             save.OverwritePrompt = true;
 
             Nullable<bool> result = save.ShowDialog();
             if (result == true)
             {
                 string fileName = save.FileName;
-
                 if (System.IO.File.Exists(fileName))
                 {
                     System.IO.File.Delete(fileName);
                 }
 
+                MemoryStream ms = new MemoryStream();
+                Package pkg = Package.Open(ms, FileMode.Create);
                 FixedDocument doc = (FixedDocument)docViewer.Document;
-                XpsDocument xpsDoc = new XpsDocument(fileName, FileAccess.ReadWrite);
+                //XpsDocument xpsDoc = new XpsDocument(fileName, FileAccess.ReadWrite);
+                XpsDocument xpsDoc = new XpsDocument(pkg);
                 System.Windows.Xps.XpsDocumentWriter xpsWriter = XpsDocument.CreateXpsDocumentWriter(xpsDoc);
                 xpsWriter.Write(doc);
                 xpsDoc.Close();
+                pkg.Close();
+                var xpsToPdf = PdfSharp.Xps.XpsModel.XpsDocument.Open(ms);
+                PdfSharp.Xps.XpsConverter.Convert(xpsToPdf, fileName, 0);
             }
         }
+
 
         private FixedDocument PageSplitter(StatisticView page)
         {
@@ -147,7 +155,7 @@ namespace ETD_Statistic.ViewsPresenters
         public void ExportToPDF(object sender, RoutedEventArgs e)
         {
             ExportWPF();
-            SaveXPS();
+            SavePDF();
         }
     }
 }
