@@ -42,6 +42,7 @@ namespace ETD.ViewsPresenters
 		private MapSectionPage mapSection;
 		private InterventionSectionPage interventionsSection;
         private AdditionalInfoPage mapModificationSection;
+        private static GPSAssignment subWindow;
 
         //Forms used by the popup method
         private FollowUpSectionForm followupSection;
@@ -54,6 +55,9 @@ namespace ETD.ViewsPresenters
 		private double previousHeight;
 		private double imageWidth;
 		private double imageHeight;
+
+		//Variable used for exception handling
+		private bool mapAdded = false;
 
 		public MainWindow()
 		{
@@ -151,6 +155,7 @@ namespace ETD.ViewsPresenters
 				imageHeight = coloredImage.Height;
 
                 mapModificationSection.setMap(coloredImage);
+				mapAdded = true;
 			}
 		}
 
@@ -260,16 +265,32 @@ namespace ETD.ViewsPresenters
         //Display GPS position
 		private void ShowGPSLocations_Click(object sender, RoutedEventArgs e)
 		{
-            if (Team.getTeamList().Any())
+            if (subWindow == null)
             {
-                GPSAssignment subWindow = new GPSAssignment();
-                subWindow.Show();
+                if (Team.getTeamList().Any() && GPSLocation.getDictionary().Any())
+                {
+                    subWindow = new GPSAssignment();
+                    subWindow.Show();
+                }
+                else
+                {
+                    if (!Team.getTeamList().Any())
+                    {
+                        MessageBox.Show("No teams are created. Please create teams in order to associate them with GPS locations.");
+                    }
+
+                    else if (GPSLocation.getDictionary().Any())
+                    {
+                        MessageBox.Show("There are no volunteers with registered GPS', please have a volunteer register their device to use this feature.");
+                    }
+                }
             }
-			else
-			{
-				MessageBox.Show("No teams are created. Please create teams in order to associate them with GPS locations.");
-			}
 		}
+
+        public static void CloseGPSWindow()
+        {
+            subWindow = null;
+        }
 
 		//Go through GPS setup
 		private void GPSSetup_Click(object sender, RoutedEventArgs e)
@@ -281,37 +302,43 @@ namespace ETD.ViewsPresenters
 				return;
 			}
 
+			//Handling case when no maps were added
+			if(mapAdded == false)
+			{
+				MessageBox.Show("Please load a map before entering setup.");
+				return;
+			}
+
+			//Handling case when no teams were created
+			if (Team.getTeamList().Count == 0)
+			{
+				MessageBox.Show("No teams are associated with a GPS location. Please associate a team to a GPS location before entering the GPS setup.");
+				return;
+			}
+
 			//Check if click was to cancel setup or start it
 			if (GPSServices.setupOngoing == false)
 			{
-				//Check if a team has been created
-				if (Team.getTeamList().Count > 0)
+				//Create and populate list of registered teams
+				List<Team> registeredTeams = new List<Team>();
+				foreach (Team team in Team.getTeamList())
 				{
-					//Create and populate list of registered teams
-					List<Team> registeredTeams = new List<Team>();
-					foreach (Team team in Team.getTeamList())
+					if (team.getGPSLocation() != null)
 					{
-						if (team.getGPSLocation() != null)
-						{
-							registeredTeams.Add(team);
-						}
+						registeredTeams.Add(team);
 					}
+				}
 
-					//Check if there is at least one team that is registered, it will be used for setup
-					if (registeredTeams.Count != 0)
-					{
-						GPSSetup_Button.Background = new SolidColorBrush(Colors.Red);
-						GPSSetup_Button.Foreground = new SolidColorBrush(Colors.White);
-						GPSServices.SetupGPSToMapTranslation_Start(mapSection, registeredTeams);
-					}
-					else
-					{
-						MessageBox.Show("No teams are associated with a GPS location. Please associate a team to a GPS location before entering the GPS setup.");
-					}
+				//Check if there is at least one team that is registered, it will be used for setup
+				if (registeredTeams.Count != 0)
+				{
+					GPSSetup_Button.Background = new SolidColorBrush(Colors.Red);
+					GPSSetup_Button.Foreground = new SolidColorBrush(Colors.White);
+					GPSServices.SetupGPSToMapTranslation_Start(mapSection, registeredTeams);
 				}
 				else
 				{
-					MessageBox.Show("No teams have been created yet. Please create a team and associate it to a GPS position before entering GPS setup.");
+					MessageBox.Show("No teams are associated with a GPS location. Please associate a team to a GPS location before entering the GPS setup.");
 				}
 			}
 			else
@@ -405,6 +432,12 @@ namespace ETD.ViewsPresenters
         //method to show confirmation upon closing of main window, asking if end of operation or not, if yes asking if user wants to input additional information
         protected void FormCloseConfirmation(Object sender, System.ComponentModel.CancelEventArgs e)
         {
+            if (subWindow != null)
+            {
+                subWindow.Close();
+            }
+            
+
             if (System.Windows.Forms.MessageBox.Show("Would you like to end the operation. Confirm?", "Close Application", System.Windows.Forms.MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
             {
                 Serializer.Instance.CleanUp();

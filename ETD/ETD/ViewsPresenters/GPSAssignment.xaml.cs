@@ -130,11 +130,14 @@ namespace ETD.ViewsPresenters
                         duplicates = true;
 
                     teamList[teamIndex].setGPSLocation(gpsLocationsDictionary[inverseVolunteerList[memberID]]);         
-                }   
+                }
+
+                teamIndex++;
             }
             if (duplicates == false)
             {
                 this.Close();
+                MainWindow.CloseGPSWindow();
             }
             else
             {

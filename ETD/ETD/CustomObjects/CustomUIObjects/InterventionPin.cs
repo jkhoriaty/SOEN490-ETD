@@ -33,13 +33,6 @@ namespace ETD.CustomObjects.CustomUIObjects
 			foreach(TeamPin teamPin in getInterveningTeamsPin())
 			{
 				teamPin.setInterventionPin(this);
-
-				//Have the intervention track the position of a team intervening on it so that it moves instead of the team
-				if(gpsLocation == null && teamPin.getTeam().getGPSLocation() != null)
-				{
-					gpsLocation = teamPin.getTeam().getGPSLocation();
-					gpsLocation.RegisterInstanceObserver(this);
-				}
 			}
 
 			//Register as an observer to the intervention instance so that any modification to it are reflected on the map, e.g. addition of a team
@@ -63,6 +56,19 @@ namespace ETD.CustomObjects.CustomUIObjects
 				interventionContainer.PlaceAll();
 				interventionContainer.CollisionDetectionAndResolution(false);
 			}
+
+            //Have the intervention track the position of a team intervening on it so that it moves instead of the team
+            if (gpsLocation == null)
+            {
+                foreach (TeamPin teamPin in getInterveningTeamsPin())
+                {
+                    if (teamPin.getTeam().getGPSLocation() != null)
+                    {
+                        gpsLocation = teamPin.getTeam().getGPSLocation();
+                        gpsLocation.RegisterInstanceObserver(this);
+                    }
+                }
+            }
 
 			//Move the intervention pin using the GPS location of one of its intervening teams
 			if(gpsLocation != null && GPSLocation.gpsConfigured == true)
