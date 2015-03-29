@@ -132,25 +132,6 @@ namespace ETD.CustomObjects.CustomUIObjects
             startTimeMMTextBox.Text = "mm";
         }
 
-        //Called when the colon in the startTime column is clicked
-        private void startTime_Click(object sender, RoutedEventArgs e)
-        {
-      
-            try
-            {
-                int hh = int.Parse(startTimeHHTextBox.Text);
-                int mm = int.Parse(startTimeMMTextBox.Text);
-                
-                DateTime startTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, hh, mm, DateTime.Now.Second);
-                int nextShift = (int)DateTime.Now.Subtract(startTime).TotalSeconds;
-                  
-                
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ETD.Properties.Resources.MessageBox_Notification_InvalidTime);
-            }
-        }
 
         //Called when the textboxes gain focus
         private void TextBoxes_GotFocus(object sender, RoutedEventArgs e)

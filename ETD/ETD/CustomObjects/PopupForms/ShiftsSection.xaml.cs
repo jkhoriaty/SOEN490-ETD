@@ -32,7 +32,7 @@ namespace ETD.CustomObjects.PopupForms
         int teamNumber = 1;
         int rowPosition = 2;
         int columnPosition = 1;
-        int sectorRowPosition = 2;
+        int sectorPosition = 2;
 
         int shiftDuration = 30;//Default shift duration
         private Dictionary<String, TextBox> teamMap = new Dictionary<String, TextBox>();//Contains all teams
@@ -40,7 +40,6 @@ namespace ETD.CustomObjects.PopupForms
         private Dictionary<String, TextBox[]> durationTimeMap = new Dictionary<String, TextBox[]>();//Contains shift duration
         private Dictionary<String, TextBox[]> shiftStartTimeMap = new Dictionary<String, TextBox[]>();//Contains shift start time duration
  
-
         public ShiftsSection()
         {
             InitializeComponent();  
@@ -49,144 +48,171 @@ namespace ETD.CustomObjects.PopupForms
 
         private void PopulateShiftForm()
         {
-                //Set up default shift properties
-                currentShift = new Shift("-", "-", shiftDuration);
-                shiftline = new ShiftLine(currentShift);
+            //Set up default shift properties
+            currentShift = new Shift("-", "-", shiftDuration);
+            shiftline = new ShiftLine(currentShift);
 
-                shiftline.getStartTimeButton().Click += NextShiftTime;
-                shiftline.getSectorNameTextBox().KeyDown += NewSector;
+            shiftline.getStartTimeButton().Click += NextShiftTime;
+            shiftline.getSectorNameTextBox().KeyDown += NewSector;
 
-                RowDefinition sectorRowDefinition = new RowDefinition();
-                sectorRowDefinition.Height = new GridLength(50);
-                Shifts_grid.RowDefinitions.Add(sectorRowDefinition);
+            RowDefinition sectorRowDefinition = new RowDefinition();
+            sectorRowDefinition.Height = new GridLength(50);
+            Shifts_grid.RowDefinitions.Add(sectorRowDefinition);
 
-                //populate sector
-                Shifts_grid.Children.Add(shiftline.getSectorNameTextBox());
-                Grid.SetColumn(shiftline.getSectorNameTextBox(), 0);
-                Grid.SetRow(shiftline.getSectorNameTextBox(), rowPosition);
+            //populate sector
+            Shifts_grid.Children.Add(shiftline.getSectorNameTextBox());
+            Grid.SetColumn(shiftline.getSectorNameTextBox(), 0);
+            Grid.SetRow(shiftline.getSectorNameTextBox(), rowPosition);
 
-                Grid.SetColumn(shiftline.getSectorNameBorder(), 0);
-                Grid.SetRow(shiftline.getSectorNameBorder(), rowPosition);
-                sectorMap.Add("Sector" + (rowPosition - 1).ToString(), shiftline.getSectorNameTextBox());
+            Grid.SetColumn(shiftline.getSectorNameBorder(), 0);
+            Grid.SetRow(shiftline.getSectorNameBorder(), rowPosition);
+            sectorMap.Add("Sector" + (rowPosition - 1).ToString(), shiftline.getSectorNameTextBox());
 
-                //populate team
-                Shifts_grid.Children.Add(shiftline.getTeamNameTextBox());
-                Grid.SetColumn(shiftline.getTeamNameTextBox(), columnPosition);
-                Grid.SetRow(shiftline.getTeamNameTextBox(), rowPosition);
+            //populate team
+            Shifts_grid.Children.Add(shiftline.getTeamNameTextBox());
+            Grid.SetColumn(shiftline.getTeamNameTextBox(), columnPosition);
+            Grid.SetRow(shiftline.getTeamNameTextBox(), rowPosition);
 
-               // teamMap.Add("Team" + (teamNumber).ToString(), shiftline.getTeamNameTextBox());
+            teamMap.Add("Team" + (teamNumber).ToString() + "Sector" + (sectorPosition - 1), shiftline.getTeamNameTextBox());
 
-                //populate time
-                Shifts_grid.Children.Add(shiftline.getStartTimeBorder());
-                Grid.SetColumn(shiftline.getStartTimeBorder(), columnPosition);
-                Grid.SetRow(shiftline.getStartTimeBorder(), 1);
+            //populate time
+            Shifts_grid.Children.Add(shiftline.getStartTimeBorder());
+            Grid.SetColumn(shiftline.getStartTimeBorder(), columnPosition);
+            Grid.SetRow(shiftline.getStartTimeBorder(), 1);
 
-                shiftStartTimeMap.Add("Start Time " + (columnPosition).ToString(), TextBoxHandler.textboxArray(shiftline.getStartTimeHHTextBox(), shiftline.getStartTimeMMTextBox()));
+            shiftStartTimeMap.Add("Start Time " + (columnPosition).ToString(), TextBoxHandler.textboxArray(shiftline.getStartTimeHHTextBox(), shiftline.getStartTimeMMTextBox()));
 
         }
 
         public void NextShiftTime(object sender, RoutedEventArgs e)
         {
-                rowPosition++;
-                columnPosition++;
-                teamNumber++;
-                shiftDuration = Convert.ToInt32(ShiftDuration.Text.ToString());
+            rowPosition++;
+            columnPosition++;
+            teamNumber++;
+            int sectorRowPosition = 2;
+            shiftDuration = Convert.ToInt32(ShiftDuration.Text.ToString());
 
-                //Create a new shift
-                ShiftLine newShift = new ShiftLine(currentShift);
-                newShift.getStartTimeButton().Click += NextShiftTime;
+            //Create a new shift
+            ShiftLine newShift = new ShiftLine(currentShift);
+            newShift.getStartTimeButton().Click += NextShiftTime;
 
-                //Set up new shift properties
-                ColumnDefinition colDefinition = new ColumnDefinition();
-                colDefinition.Width =  new GridLength(172);
-                Shifts_grid.ColumnDefinitions.Add(colDefinition);
-                Shifts_grid.Children.Add(newShift.getStartTimeBorder());
-                Grid.SetColumn(newShift.getStartTimeBorder(), columnPosition);
-                Grid.SetRow(newShift.getStartTimeBorder(), 1);
+            //Set up new shift properties
+            ColumnDefinition colDefinition = new ColumnDefinition();
+            colDefinition.Width =  new GridLength(172);
+            Shifts_grid.ColumnDefinitions.Add(colDefinition);
 
-                shiftStartTimeMap.Add("Start Time " + (columnPosition).ToString(), TextBoxHandler.textboxArray(newShift.getStartTimeHHTextBox(), newShift.getStartTimeMMTextBox()));
+            Shifts_grid.Children.Add(newShift.getStartTimeBorder());
+            Grid.SetColumn(newShift.getStartTimeBorder(), columnPosition);
+            Grid.SetRow(newShift.getStartTimeBorder(), 1);
 
-                //Predict next shift
+            shiftStartTimeMap.Add("Start Time " + (columnPosition).ToString(), TextBoxHandler.textboxArray(newShift.getStartTimeHHTextBox(), newShift.getStartTimeMMTextBox()));
 
-                String newShiftHH = shiftStartTimeMap["Start Time " + (columnPosition -1).ToString()][0].Text.ToString();
-                String newShiftMM = shiftStartTimeMap["Start Time " + (columnPosition -1).ToString()][1].Text.ToString();
+            //Predict next shift
+            String newShiftHH = shiftStartTimeMap["Start Time " + (columnPosition -1).ToString()][0].Text.ToString();
+            String newShiftMM = shiftStartTimeMap["Start Time " + (columnPosition -1).ToString()][1].Text.ToString();
  
-                if (!newShiftHH.Equals("hh") && !newShiftMM.Equals("mm")) 
+            if (!newShiftHH.Equals("hh") && !newShiftMM.Equals("mm")) 
+            {
+                if ((Convert.ToInt32(newShiftMM) + shiftDuration) >= 60)//Loop back to 0min plus the difference between the minutes fromt he old and new shift
                 {
-                    if ((Convert.ToInt32(newShiftMM) + shiftDuration) >= 60)//Loop back to 0min plus the difference between the minutes fromt he old and new shift
-                    {
-                        int newMM = (Convert.ToInt32(newShiftMM) + shiftDuration) - 60;
-                        newShift.getStartTimeMMTextBox().Text = Convert.ToString(newMM);
+                    int newMM = (Convert.ToInt32(newShiftMM) + shiftDuration) - 60;
+                    newShift.getStartTimeMMTextBox().Text = Convert.ToString(newMM);
 
-                        if(Convert.ToInt32(newShiftHH) == 12)//Loop back to 1am
-                        {
-                            newShift.getStartTimeHHTextBox().Text = "1";
-                        }
-                        else
-                        {
-                             newShift.getStartTimeHHTextBox().Text = Convert.ToString(Convert.ToInt32(newShiftHH)+1);
-                        }
-                       
+                    if(Convert.ToInt32(newShiftHH) == 12)//Loop back to 1am
+                    {
+                        newShift.getStartTimeHHTextBox().Text = "1";
                     }
                     else
                     {
-                        newShift.getStartTimeMMTextBox().Text = Convert.ToString(Convert.ToInt32(newShiftMM) + shiftDuration);
-                        newShift.getStartTimeHHTextBox().Text = Convert.ToString(Convert.ToInt32(newShiftHH));
-                    }          
+                            newShift.getStartTimeHHTextBox().Text = Convert.ToString(Convert.ToInt32(newShiftHH)+1);
+                    }
+                       
                 }
-
-                //Add a new column of teams
-                int originalshiftpos = 2;
-                for (int i = 0; i < sectorMap.Count(); i++)
+                else
                 {
-                    ShiftLine newShift2 = new ShiftLine(currentShift);
+                    newShift.getStartTimeMMTextBox().Text = Convert.ToString(Convert.ToInt32(newShiftMM) + shiftDuration);
+                    newShift.getStartTimeHHTextBox().Text = Convert.ToString(Convert.ToInt32(newShiftHH));
+                }          
+            }
 
-                    //team
-                    Shifts_grid.Children.Add(newShift2.getTeamNameTextBox());
-                    Grid.SetColumn(newShift2.getTeamNameTextBox(), columnPosition);
-                    Grid.SetRow(newShift2.getTeamNameTextBox(), originalshiftpos);
+            //Team rotation
+            int originalshiftpos = 2;
+            int sector = 2;
+           
+            if (sectorMap.Count() == 1)
+            {
+                ShiftLine newShift2 = new ShiftLine(currentShift);
+                Shifts_grid.Children.Add(newShift2.getTeamNameTextBox());
+                Grid.SetColumn(newShift2.getTeamNameTextBox(), columnPosition);
+                Grid.SetRow(newShift2.getTeamNameTextBox(), originalshiftpos);
 
-                   // teamMap.Add("Team" + (teamNumber).ToString() + "s" + (columnPosition - 1).ToString(), newShift2.getTeamNameTextBox());
-                    originalshiftpos++;
+                teamMap.Add("Team" + (teamNumber).ToString() + "Sector" + (sectorRowPosition - 1).ToString(), newShift2.getTeamNameTextBox());
+            }
+
+            for (int i = 0; i < sectorMap.Count() && sectorMap.Count()>1 ; i++)
+            {
+                ShiftLine newShift2 = new ShiftLine(currentShift);
+                String rotatedTeam;
+
+                Shifts_grid.Children.Add(newShift2.getTeamNameTextBox());
+                Grid.SetColumn(newShift2.getTeamNameTextBox(), columnPosition);
+                Grid.SetRow(newShift2.getTeamNameTextBox(), originalshiftpos);
+
+                teamMap.Add("Team" + (teamNumber).ToString() + "Sector" + (sectorRowPosition - 1).ToString(), newShift2.getTeamNameTextBox());
+
+                if ((sectorMap.Count()) == (sectorRowPosition - 1))
+                    {
+                        rotatedTeam = teamMap["Team" + (teamNumber - 1) + "Sector" + 1.ToString()].Text.ToString();
+                        teamMap["Team" + (teamNumber).ToString() + "Sector" + (sectorRowPosition - 1).ToString()].Text = rotatedTeam;
+                    }
+                else
+                {
+                    rotatedTeam = teamMap["Team" + (teamNumber - 1) + "Sector" + (sector).ToString()].Text.ToString();
+                    teamMap["Team" + (teamNumber).ToString() + "Sector" + (sectorRowPosition - 1).ToString()].Text = rotatedTeam;     
                 }
-   
+
+                sector++;
+                sectorRowPosition++;
+                originalshiftpos++;
+            }  
         }
 
         public void NewSector(object sender, KeyEventArgs e)
         {
             if (Keyboard.IsKeyDown(Key.Enter))
             {      
-                    //Set up a new sector field
-                    sectorRowPosition++;
-                    ShiftLine newShift = new ShiftLine(currentShift);
-                    newShift.getSectorNameTextBox().KeyDown += NewSector;
+                //Set up a new sector field
+                sectorPosition++;
+                teamNumber = 1;
+                ShiftLine newShift = new ShiftLine(currentShift);
+                newShift.getSectorNameTextBox().KeyDown += NewSector;
 
-                    RowDefinition sectorRowDefinition = new RowDefinition();
-                    sectorRowDefinition.Height = new GridLength(50);
-                    Shifts_grid.RowDefinitions.Add(sectorRowDefinition);
+                RowDefinition sectorRowDefinition = new RowDefinition();
+                sectorRowDefinition.Height = new GridLength(50);
+                Shifts_grid.RowDefinitions.Add(sectorRowDefinition);
 
-                    Shifts_grid.Children.Add(newShift.getSectorNameTextBox());
-                    Grid.SetRow(newShift.getSectorNameTextBox(), sectorRowPosition);
+                Shifts_grid.Children.Add(newShift.getSectorNameTextBox());
+                Grid.SetRow(newShift.getSectorNameTextBox(), sectorPosition);
 
-                    sectorMap.Add("Sector" + (sectorRowPosition - 1).ToString(), newShift.getSectorNameTextBox());
+                sectorMap.Add("Sector" + (sectorPosition - 1).ToString(), newShift.getSectorNameTextBox());
 
-                    //Add a new row of teams
-                    Shifts_grid.Children.Add(newShift.getTeamNameTextBox());
-                    Grid.SetColumn(newShift.getTeamNameTextBox(), columnPosition);
-                    Grid.SetRow(newShift.getTeamNameTextBox(), sectorRowPosition);
-                    
-                    //teamMap.Add("Team" + (teamNumber - 1).ToString() + "s" + (sectorRowPosition - 1).ToString(), newShift.getTeamNameTextBox());
+                //Add a new row of teams
+                Shifts_grid.Children.Add(newShift.getTeamNameTextBox());
+                Grid.SetRow(newShift.getTeamNameTextBox(), sectorPosition);
+                Grid.SetColumn(newShift.getTeamNameTextBox(), 1);
 
-                    for (int i = 0; i < sectorMap.Count(); i++)
-                    {
-                        ShiftLine newShift3 = new ShiftLine(currentShift);
-  
-                        Shifts_grid.Children.Add(newShift3.getTeamNameTextBox());
-                        Grid.SetColumn(newShift3.getTeamNameTextBox(), i+1);
-                        Grid.SetRow(newShift3.getTeamNameTextBox(), sectorRowPosition);
+                teamMap.Add("Team" + (teamNumber).ToString() + "Sector" + (sectorPosition - 1).ToString(), newShift.getTeamNameTextBox());
 
-                        // teamMap.Add("Team" + (teamNumber).ToString() + "s" + (columnPosition - 1).ToString(), newShift2.getTeamNameTextBox());
-                    }
+                for (int i = 0; i < columnPosition-1; i++)
+                {
+                    teamNumber++;
+                    ShiftLine newShift3 = new ShiftLine(currentShift);
+                    Shifts_grid.Children.Add(newShift3.getTeamNameTextBox());
+                    Grid.SetColumn(newShift3.getTeamNameTextBox(), i+2);
+                    Grid.SetRow(newShift3.getTeamNameTextBox(), sectorPosition);
+
+                    teamMap.Add("Team" + (teamNumber).ToString() + "Sector" + (sectorPosition - 1).ToString(), newShift3.getTeamNameTextBox());
+                }
             }
         }
 

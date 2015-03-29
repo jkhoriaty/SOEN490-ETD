@@ -185,7 +185,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.SQLite">
-      <HintPath>..\..\..\..\..\..\Desktop\System.Data.SQLite_DLL\System.Data.SQLite.dll</HintPath>
+      <HintPath>..\..\..\SOEN 490\System.Data.SQLite_DLL\System.Data.SQLite.dll</HintPath>
     </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
