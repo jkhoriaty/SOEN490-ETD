@@ -145,9 +145,6 @@
     <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\ETD\ETD.csproj">
       <Project>{c7115e86-5030-47a2-96f8-27a3e228cafc}</Project>
       <Name>ETD</Name>

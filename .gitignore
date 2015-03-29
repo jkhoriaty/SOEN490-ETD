@@ -42,3 +42,4 @@ ETD/Builds/Release/ETD_UnitTest/
 ETD/Builds/Debug/CommonResources/*
 
 ETD/ETD_Statistic/ViewsPresenters/PreviousOperationView.xaml.cs
+ETD/ETD_Statistic/obj/Debug/ETD_Statistic.csproj.FileListAbsolute.txt
