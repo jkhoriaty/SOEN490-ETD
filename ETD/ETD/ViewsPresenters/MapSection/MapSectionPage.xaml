@@ -5,9 +5,12 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
+      Background="Transparent"
+      ContextMenu="{DynamicResource ZoomContextMenu}"
+      Name="Page_mapSection"
 	Title="MapSectionPage" >
 
-    <Canvas Name="Canvas_map" ContextMenu="{DynamicResource ZoomContextMenu}"/>
+    <Canvas Name="Canvas_map"/>
     <Page.Resources>
         <ContextMenu x:Key="ZoomContextMenu">
             <!--Click="Zoom_Click" for menu items if need to implement-->

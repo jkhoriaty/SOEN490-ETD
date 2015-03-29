@@ -230,12 +230,16 @@ namespace ETD.ViewsPresenters
             {
                 if (mi.Content.Equals(ETD.Properties.Resources.ComboBoxItem_RegularMode) && (mi.IsSelected))//lock the map modification section
                 {
+                    mapSection.Page_mapSection.Background = new SolidColorBrush(Colors.Transparent);
+
                     AI.Visibility = Visibility.Collapsed;
                     mapModificationSection.IsEnabled = false;
                     mapSection.IsEnabled = true;
                 }
                 else if (mi.Content.Equals(ETD.Properties.Resources.ComboBoxItem_EditMode) && (mi.IsSelected))//lock the map section
                 {
+                    mapSection.Page_mapSection.ClearValue(Page.BackgroundProperty);
+
                     AI.Visibility = Visibility.Visible;
                     mapModificationSection.IsEnabled = true;
                     mapSection.IsEnabled = false;
