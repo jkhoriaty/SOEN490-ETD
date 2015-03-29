@@ -92,12 +92,22 @@ namespace ETD.Models.Objects
 			double dxScaled = dx * distanceRatio;
 			double dyScaled = dy * distanceRatio;
 
-			//Determining if the point is on top of or to the right of the reference line
+			//Determining if the point is in the clockwise or anti-clockwise direction of the reference line
 			double referenceBearing = GPSServices.CalculateGPSBearing(referencePoints.ElementAt(0).getLattitude(), referencePoints.ElementAt(0).getLongitude(), referencePoints.ElementAt(1).getLattitude(), referencePoints.ElementAt(1).getLongitude());
 			double actualBearing = GPSServices.CalculateGPSBearing(referencePoints.ElementAt(0).getLattitude(), referencePoints.ElementAt(0).getLongitude(), lattitude, longitude);
-			if(actualBearing < referenceBearing || (referenceBearing + 180 < 360 && actualBearing > (referenceBearing + 180)))
+			if(referenceBearing < 180)
 			{
-				angleA = -angleA; //Changing direction of rotation
+				if(actualBearing < referenceBearing || actualBearing > (referenceBearing + 180))
+				{
+					angleA = -angleA; //Changing direction of rotation
+				}
+			}
+			else
+			{
+				if(actualBearing < referenceBearing && actualBearing > (referenceBearing - 180))
+				{
+					angleA = -angleA; //Changing direction of rotation
+				}
 			}
 
 			//Rotate vector to get the vector that start at the first reference point and ends at the current location of the team
