@@ -93,11 +93,18 @@ namespace ETD_Statistic.ViewsPresenters
             save.FileName = "StatisticReport";
             save.DefaultExt = ".xps";
             save.Filter = "XPS Documents (.xps)|*.xps";
+            save.OverwritePrompt = true;
 
             Nullable<bool> result = save.ShowDialog();
             if (result == true)
             {
                 string fileName = save.FileName;
+
+                if (System.IO.File.Exists(fileName))
+                {
+                    System.IO.File.Delete(fileName);
+                }
+
                 FixedDocument doc = (FixedDocument)docViewer.Document;
                 XpsDocument xpsDoc = new XpsDocument(fileName, FileAccess.ReadWrite);
                 System.Windows.Xps.XpsDocumentWriter xpsWriter = XpsDocument.CreateXpsDocumentWriter(xpsDoc);
