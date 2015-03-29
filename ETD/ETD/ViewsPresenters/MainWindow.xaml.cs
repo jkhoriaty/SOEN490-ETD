@@ -42,7 +42,7 @@ namespace ETD.ViewsPresenters
 		private MapSectionPage mapSection;
 		private InterventionSectionPage interventionsSection;
         private AdditionalInfoPage mapModificationSection;
-        private static GPSAssignment subWindow;
+        private GPSAssignment subWindow;
 
         //Forms used by the popup method
         private FollowUpSectionForm followupSection;
@@ -269,7 +269,7 @@ namespace ETD.ViewsPresenters
             {
                 if (Team.getTeamList().Any() && GPSLocation.getDictionary().Any())
                 {
-                    subWindow = new GPSAssignment();
+                    subWindow = new GPSAssignment(this);
                     subWindow.Show();
                 }
                 else
@@ -287,7 +287,7 @@ namespace ETD.ViewsPresenters
             }
 		}
 
-        public static void CloseGPSWindow()
+        public void CloseGPSWindow()
         {
             subWindow = null;
         }

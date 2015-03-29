@@ -19,7 +19,7 @@ namespace ETD.Models.Objects
 		internal static List<GPSLocation> referencePoints = new List<GPSLocation>();
 		internal static bool gpsConfigured = false;
 
-		private string id;
+		public string id;
 		private double lattitude;
 		private double longitude;
 		private double X;

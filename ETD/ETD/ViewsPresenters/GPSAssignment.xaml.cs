@@ -42,9 +42,11 @@ namespace ETD.ViewsPresenters
         Dictionary<string, GPSLocation> gpsLocationsDictionary = new Dictionary<string, GPSLocation>();
         Dictionary<string, string> volunteerList = new Dictionary<string,string>();
         Dictionary<string, string> inverseVolunteerList = new Dictionary<string, string>();
+        MainWindow caller;
 
-        public GPSAssignment()
+        public GPSAssignment(MainWindow caller)
         {
+            this.caller = caller;
             teamList = Team.getTeamList();
             gpsLocationsDictionary = GPSLocation.getDictionary();
             int row = 0;
@@ -75,21 +77,27 @@ namespace ETD.ViewsPresenters
                     combo.Items.Add(entry.Value);
                 }
 
+                combo.Items.Add(" ");
+
                 teamGrid.Children.Add(combo);
 
                 
                 if (t.getGPSLocation() != null)
                 {
+                    int tempIndex = 0;
+
                     foreach (KeyValuePair<string, GPSLocation> entry in gpsLocationsDictionary)
                     {
-                        if (entry.Value == t.getGPSLocation())
+                        if (entry.Value.id == t.getGPSLocation().id)
                         {
                             foreach (KeyValuePair<string, string> ID in volunteerList)
                             {
                                 if (entry.Key == ID.Key)
                                 {
-                                    combo.Text = ID.Key;
+                                    combo.SelectedIndex = tempIndex;
                                 }
+
+                                tempIndex++;
                             }
                         }
                     }
@@ -118,7 +126,7 @@ namespace ETD.ViewsPresenters
             {
                 ComboBox temp = new ComboBox();
                 temp = ctrl;
-                if (temp.SelectedItem != null)
+                if (temp.SelectedItem != null && temp.SelectedItem != " ")
                 {
                     string memberID = temp.SelectedItem.ToString();
 
@@ -129,7 +137,12 @@ namespace ETD.ViewsPresenters
                     else
                         duplicates = true;
 
-                    teamList[teamIndex].setGPSLocation(gpsLocationsDictionary[inverseVolunteerList[memberID]]);         
+                    teamList[teamIndex].setGPSLocation(gpsLocationsDictionary[inverseVolunteerList[memberID]]);
+                }
+
+                else if (temp.SelectedItem == " ")
+                {
+                    teamList[teamIndex].setGPSLocation(null);
                 }
 
                 teamIndex++;
@@ -137,12 +150,17 @@ namespace ETD.ViewsPresenters
             if (duplicates == false)
             {
                 this.Close();
-                MainWindow.CloseGPSWindow();
+                caller.CloseGPSWindow();
             }
             else
             {
                 MessageBox.Show("Each team member can be assigned to at most one team.");
             }
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            caller.CloseGPSWindow();
         }
     }
 }
