@@ -23,6 +23,8 @@ namespace ETD.Services
 		internal static bool setupOngoing = false;
 
 		private static Dictionary<string, string> registeredVolunteers = new Dictionary<string, string>();
+        private static Dictionary<string, int> connectionStatus = new Dictionary<string,int> ();
+        private static Dictionary<string, int> timeMIA = new Dictionary<string,int> ();
 
 		internal static void StartServices(GPSStatusCallbacks newCaller)
 		{
@@ -74,11 +76,30 @@ namespace ETD.Services
 					if (!registeredVolunteers.ContainsKey(volunteerInfo[0]))
 					{
 						registeredVolunteers.Add(volunteerInfo[0], volunteerInfo[1]);
+                        connectionStatus.Add(volunteerInfo[0], 1);
+                        timeMIA.Add(volunteerInfo[0], 0);
 						newCtr++;
 					}
 					else
 					{
-						registeredVolunteers[volunteerInfo[0]] = volunteerInfo[1];
+                        if (registeredVolunteers[volunteerInfo[0]] == volunteerInfo[1])
+                        {
+                            timeMIA[volunteerInfo[0]]++;
+                            if (timeMIA[volunteerInfo[0]] <= 3)
+                            {
+                                connectionStatus[volunteerInfo[0]] = 0;
+                            }
+                            else
+                            {
+                                connectionStatus[volunteerInfo[0]] = -1;
+                            }
+                        }
+                        else
+                        {
+                            timeMIA[volunteerInfo[0]] = 0;
+                            connectionStatus[volunteerInfo[0]] = 1;
+                            registeredVolunteers[volunteerInfo[0]] = volunteerInfo[1];
+                        }
 					}
 				}
 				//Dispatcher.Invoke(() => newRegisteredCTR.Content = "" + newCtr);
