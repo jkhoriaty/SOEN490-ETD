@@ -35,7 +35,6 @@ namespace ETD.Models.Objects
         List<Equipment> equipmentList = new List<Equipment>();
 		Statuses status;
 
-        public string registeredMemberName;
 		Trainings highestLevelOfTraining = Trainings.firstAid;
 		GPSLocation gpsLocation;
 		int interventionCount = 0;

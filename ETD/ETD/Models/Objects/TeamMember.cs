@@ -1,6 +1,7 @@
 ﻿using ETD.Services.Database;
 using System;
 using System.Collections.Generic;
+using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using System.Windows.Controls;
@@ -18,7 +19,7 @@ namespace ETD.Models.Objects
     public class TeamMember
     {
         //Database reflection variables
-        private int volunteerID;
+		private int volunteerID;
         private int teamID;
 
         //Variables used for a team member
