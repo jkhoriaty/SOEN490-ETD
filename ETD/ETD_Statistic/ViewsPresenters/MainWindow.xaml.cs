@@ -54,14 +54,23 @@ namespace ETD_Statistic.ViewsPresenters
         public void ExportWPF()
         {
             StatisticView sv = new StatisticView();
+            InterventionView iv = new InterventionView();
 
             FixedDocument fixedDoc = new FixedDocument();
-            PageContent pageCont = new PageContent();
-            FixedPage fixedPage = new FixedPage();
-            Frame frame = new Frame();
-            frame.Content = sv;
+            PageContent firstPageCont = new PageContent();
+            PageContent secondPageCont = new PageContent();
 
-            fixedPage.Children.Add(frame);
+            FixedPage firstFixedPage = new FixedPage();
+            FixedPage secondFixedPage = new FixedPage();
+
+            Frame svFrame = new Frame();
+            Frame ivFrame = new Frame();
+
+            svFrame.Content = sv;
+            ivFrame.Content = iv;
+
+            firstFixedPage.Children.Add(svFrame);
+            secondFixedPage.Children.Add(ivFrame);
 
 
             //Size sz = new Size(96 * 8.5, 96 * 11);
@@ -69,8 +78,11 @@ namespace ETD_Statistic.ViewsPresenters
             //fixedPage.Arrange(new Rect(new Point(), sz));
             //fixedPage.UpdateLayout();
   
-            ((System.Windows.Markup.IAddChild)pageCont).AddChild(fixedPage);
-            fixedDoc.Pages.Add(pageCont);
+            ((System.Windows.Markup.IAddChild)firstPageCont).AddChild(firstFixedPage);
+            ((System.Windows.Markup.IAddChild)secondPageCont).AddChild(secondFixedPage);
+
+            fixedDoc.Pages.Add(firstPageCont);
+            fixedDoc.Pages.Add(secondPageCont);
 
             docViewer.Document = fixedDoc;           
         }

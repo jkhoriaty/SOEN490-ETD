@@ -7,6 +7,7 @@
       d:DesignHeight="1200" d:DesignWidth="750"
 	Title="InterventionView">
     <StackPanel Margin="50,0,30,0">
+        <TextBlock Margin="200,150,150,0" FontStyle="Oblique" FontWeight="ExtraBold" FontSize="25" Foreground="DarkSlateBlue" Text="Intervention Statistic"/>
         <Grid Name="ComplaintGrid" Margin="0,100,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="130"/>

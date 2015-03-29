@@ -21,7 +21,7 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Grid Name ="DescriptionBlock" Grid.Row="0" Grid.ColumnSpan="2">
-                    <TextBlock Name="OperationID" FontWeight="ExtraBold" FontStyle="Italic" FontSize="25" Foreground="MediumSpringGreen" TextAlignment="Center" Margin="0,10,0,0"></TextBlock>
+                    <TextBlock Name="OperationID" FontWeight="ExtraBold" FontStyle="Oblique" Foreground="DarkSlateBlue" FontSize="25" TextAlignment="Center" Margin="0,10,0,0"></TextBlock>
                     <TextBlock Name= "BeginDate" FontWeight="SemiBold" FontStyle="Italic" FontSize="15" Foreground="Salmon" TextAlignment="Left" Margin="0,50,0,0"></TextBlock>
                     <TextBlock Name="EndingDate" FontWeight="SemiBold" FontStyle="Italic" FontSize="15" Foreground="Salmon" TextAlignment="Left" Margin="0,70,0,0"></TextBlock>
                     <TextBlock Name="DispatcherName" FontWeight="SemiBold" FontStyle="Italic" FontSize="15" Foreground="Salmon" TextAlignment="Left" Margin="0,90,0,0"></TextBlock>
