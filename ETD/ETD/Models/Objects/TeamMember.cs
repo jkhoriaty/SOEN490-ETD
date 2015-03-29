@@ -1,6 +1,7 @@
 ﻿using ETD.Services.Database;
 using System;
 using System.Collections.Generic;
+using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using System.Windows.Controls;
@@ -18,7 +19,7 @@ namespace ETD.Models.Objects
     public class TeamMember
     {
         //Database reflection variables
-        private int volunteerID;
+		private int volunteerID;
         private int teamID;
 
         //Variables used for a team member
@@ -33,7 +34,18 @@ namespace ETD.Models.Objects
             this.name = name;
             this.trainingLevel = training;
             this.departure = departure;
-            this.volunteerID = StaticDBConnection.NonQueryDatabaseWithID("INSERT INTO [Volunteers] (Name, Training_Level) VALUES ('" + name.Replace("'", "''") + "', " + (int)training + ")");
+			try
+			{
+				SQLiteDataReader reader = StaticDBConnection.QueryDatabase("Select Volunteer_ID FROM [Volunteers] WHERE Name='" + name + "'");
+				reader.Read();
+				this.volunteerID = Convert.ToInt32(reader["Volunteer_ID"].ToString());
+				reader.Close();
+				StaticDBConnection.NonQueryDatabase("UPDATE [Volunteers] SET Training_Level=" + (int)this.trainingLevel + " WHERE Volunteer_ID=" + this.volunteerID + ";");
+			}
+			catch
+			{
+				this.volunteerID = StaticDBConnection.NonQueryDatabaseWithID("INSERT INTO [Volunteers] (Name, Training_Level) VALUES ('" + name.Replace("'", "''") + "', " + (int)training + ")");
+			}
         }
 
         public TeamMember(int teamId, int volunteerId)
