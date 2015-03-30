@@ -37,7 +37,7 @@ namespace ETD_Statistic.ViewsPresenters
             SQLiteDataReader reader = StaticDBConnection.QueryDatabase("SELECT * FROM Operations ORDER BY Shift_Start");
             while(reader.Read())
             {
-
+                /*
                 tb = new TextBlock();
                 tb.FontSize = 20;
                 tb.FontWeight = FontWeights.Bold;
@@ -47,14 +47,24 @@ namespace ETD_Statistic.ViewsPresenters
                 DateTime endDate = Convert.ToDateTime(reader["Shift_End"].ToString());
                 tb.Text = "Operation ID: " + reader["Operation_ID"] + " Operation Name: " + reader["Name"] + " Start: " + startDate.ToString("g")+ " End: " + endDate.ToString("g");
                 tb.MouseLeftButtonDown += new MouseButtonEventHandler(OperationClicked);
-                previousOperation.Children.Add(tb);
+                 */
+                CheckBox cb = new CheckBox();
+                cb.FontSize = 20;
+                cb.FontWeight = FontWeights.Bold;
+                cb.Foreground = Brushes.CadetBlue;
+                cb.Name = "operation" + reader["Operation_ID"];
+                DateTime startDate = Convert.ToDateTime(reader["Shift_Start"].ToString());
+                DateTime endDate = Convert.ToDateTime(reader["Shift_End"].ToString());
+                cb.Content = "Operation ID: " + reader["Operation_ID"] + " Operation Name: " + reader["Name"] + " Start: " + startDate.ToString("g") + " End: " + endDate.ToString("g");
+                cb.MouseLeftButtonDown += new MouseButtonEventHandler(OperationClicked);
+                previousOperation.Children.Add(cb);
             }
             StaticDBConnection.CloseConnection();
         }
 
         private void OperationClicked(object sender, RoutedEventArgs e)
         {
-            TextBlock t = e.Source as TextBlock;
+            CheckBox t = e.Source as CheckBox;
             Statistic.setOperationID(t.Name.ToString());
             LoadStatistic(sender, e);
         }
