@@ -87,17 +87,17 @@ namespace ETD.Services
                             timeMIA[volunteerInfo[0]]++;
                             if (timeMIA[volunteerInfo[0]] <= 3)
                             {
-                                connectionStatus[volunteerInfo[0]] = 0;
+                                connectionStatus[volunteerInfo[0]] = 0; //Connection status unknown (failed connection but waiting for retry before setting it as not connected)
                             }
                             else
                             {
-                                connectionStatus[volunteerInfo[0]] = -1;
+                                connectionStatus[volunteerInfo[0]] = -1; //Not connected
                             }
                         }
                         else
                         {
                             timeMIA[volunteerInfo[0]] = 0;
-                            connectionStatus[volunteerInfo[0]] = 1;
+                            connectionStatus[volunteerInfo[0]] = 1; //Connected
                             registeredVolunteers[volunteerInfo[0]] = volunteerInfo[1];
                         }
 					}
