@@ -51,7 +51,7 @@ namespace ETD.Models.Objects
             this.circulationFrequency = -1;
             this.interventionID = intervention.getID();
 
-            this.abcID = StaticDBConnection.NonQueryDatabaseWithID("INSERT INTO [ABCs] (Intervention_ID) VALUES (" + interventionID + ");");
+          //  this.abcID = StaticDBConnection.NonQueryDatabaseWithID("INSERT INTO [ABCs] (Intervention_ID) VALUES (" + interventionID + ");");
         }
 
         //User inputs default values for all ABC objects

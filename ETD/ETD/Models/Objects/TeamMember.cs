@@ -36,7 +36,7 @@ namespace ETD.Models.Objects
             {
                 this.operationID = Operation.currentOperation.getID();
             }
-            this.volunteerID = StaticDBConnection.NonQueryDatabaseWithID("INSERT INTO [Volunteers] (Name, Training_Level) VALUES ('" + name + "', " + 1+(int)training + ")");
+           // this.volunteerID = StaticDBConnection.NonQueryDatabaseWithID("INSERT INTO [Volunteers] (Name, Training_Level) VALUES ('" + name + "', " + 1+(int)training + ")");
         }
 
         //Accessors

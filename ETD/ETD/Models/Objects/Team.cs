@@ -47,7 +47,7 @@ namespace ETD.Models.Objects
             {
                 this.operationID = Operation.currentOperation.getID();
             }
-            this.teamID = StaticDBConnection.NonQueryDatabaseWithID("INSERT INTO [Teams] (Operation_ID, Name, Status) VALUES (" + operationID + ", '" + name + "', " + 1+(int)status + ")");
+           // this.teamID = StaticDBConnection.NonQueryDatabaseWithID("INSERT INTO [Teams] (Operation_ID, Name, Status) VALUES (" + operationID + ", '" + name + "', " + 1+(int)status + ")");
             teamList.Add(this);
 			ClassModifiedNotification(typeof(Team));
             
@@ -85,7 +85,7 @@ namespace ETD.Models.Objects
             if(memberList.Count <= 2)
             {
                 memberList.Add(member);
-                StaticDBConnection.NonQueryDatabase("INSERT INTO [Team_Members] (Team_ID, Volunteer_ID, Departure, Joined) VALUES (" + teamID + ", " + member.getID() + ", '" + StaticDBConnection.DateTimeSQLite(member.getDeparture()) + "', '" + StaticDBConnection.DateTimeSQLite(DateTime.Now) + "');");
+             //   StaticDBConnection.NonQueryDatabase("INSERT INTO [Team_Members] (Team_ID, Volunteer_ID, Departure, Joined) VALUES (" + teamID + ", " + member.getID() + ", '" + StaticDBConnection.DateTimeSQLite(member.getDeparture()) + "', '" + StaticDBConnection.DateTimeSQLite(DateTime.Now) + "');");
                 if ((int)highestLevelOfTraining < (int)member.getTrainingLevel())
 				{
                     highestLevelOfTraining = member.getTrainingLevel();
@@ -139,7 +139,7 @@ namespace ETD.Models.Objects
         public void setName(String name)
         {
             this.name = name;
-            StaticDBConnection.NonQueryDatabase("UPDATE [Resources] SET Name='" + name + "', HasArrived='TRUE' WHERE Team_ID=" + teamID + ";");
+           // StaticDBConnection.NonQueryDatabase("UPDATE [Resources] SET Name='" + name + "', HasArrived='TRUE' WHERE Team_ID=" + teamID + ";");
 			InstanceModifiedNotification();
         }
 

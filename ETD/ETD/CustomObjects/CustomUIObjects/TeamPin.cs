@@ -20,11 +20,11 @@ namespace ETD.CustomObjects.CustomUIObjects
 		private Team team;
 		private GPSLocation gpsLocation;
 		private InterventionPin interventionPin;
-
+        private MapSectionPage mapSection;
 		public TeamPin(Team team, MapSectionPage mapSection) : base(team, mapSection, size)
 		{
 			this.team = team; //Providing a link to the team that this pin represents
-
+            this.mapSection = mapSection;
 			//Updating image to match training and status of team in addition to text
 			Update();
 
@@ -186,22 +186,28 @@ namespace ETD.CustomObjects.CustomUIObjects
 			//Handling the case when the team was in an intervention, choose between keeping it on the intervention (for an accidental drag-and-drop) or removing it from the intervention
 			if (interventionPin != null && interventionPin.getInterventionContainer() != null)
 			{
+
 				if(SufficientOverlap(interventionPin.getInterventionContainer())) //Considered accidental drag-and-drop
 				{
 					interventionPin.getInterventionContainer().PlaceAll();
 				}
 				else //Remove team from intervention
 				{
-					interventionPin.getIntervention().RemoveInterveningTeam(team);
-					team.setStatus("unavailable");
+                    if (!team.getStatus().ToString().Equals("intervening"))
+                    {
+                        interventionPin.getIntervention().RemoveInterveningTeam(team);
+                        team.setStatus("unavailable");
 
-					//If it was the last team on that intervention and it has been removed, force redrawing of the map so that the InterventionContainer is removed
-					if(interventionPin.getInterveningTeamsPin().Count == 0)
-					{
-						mapSection.Update();
-					}
+                        //If it was the last team on that intervention and it has been removed, force redrawing of the map so that the InterventionContainer is removed
+                        if (interventionPin.getInterveningTeamsPin().Count == 0)
+                        {
+                            mapSection.Update();
+                        }
 
-					interventionPin = null;
+                        interventionPin = null;
+                    }
+					
+                 
 				}
 			}
 			else if(team.getStatus().ToString().Equals("available")) //If the team was available and has been moved, set the team as moving
@@ -223,12 +229,41 @@ namespace ETD.CustomObjects.CustomUIObjects
 			//SpecialCollision: Team is dropped on intervention, add team to intervention
 			if(fixedPin.IsOfType("InterventionPin") && SufficientOverlap(fixedPin))
 			{
-				interventionPin = (InterventionPin)fixedPin;
-				interventionPin.getIntervention().AddInterveningTeam(team);
-				return true;
+                interventionPin = (InterventionPin)fixedPin;
+
+
+                if (team.getStatus().ToString().Equals("intervening"))
+                        {
+                            MessageBox.Show("test");
+                           
+                            Team team2 = new Team(this.getTeam().getName());
+                            TeamPin teampin2 = new TeamPin(team2, mapSection);
+
+                            teampin2.getTeam().setStatus("moving");
+             
+                            teampin2.getTeam().setName(teampin2.getTeam().getName()[0] + interventionPin.getIntervention().getInterventionNumber().ToString());
+                            interventionPin.getIntervention().AddInterveningTeam(teampin2.getTeam());
+                            return true;
+                        }
+                else
+                {
+                    interventionPin.getIntervention().AddInterveningTeam(team);
+                    return true;
+                }
+     
+				
+				
 			}
 
-			//SpecialCollsion: Collision detection between team and intervention container
+            //SpecialCollision: Collision detection between a team and its fragments
+            if (fixedPin.IsOfType("TeamPin"))
+            {
+                
+           
+            }
+
+
+			//SpecialCollision: Collision detection between team and intervention container
 			if(fixedPin.IsOfType("InterventionContainer"))
 			{
 				if(interventionPin != null && interventionPin.getInterveningTeamsPin().Contains(this))
