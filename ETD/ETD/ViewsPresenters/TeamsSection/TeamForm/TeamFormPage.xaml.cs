@@ -123,14 +123,30 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 				Team team = new Team(teamNameStr);
 
 				//Create first member
-				String mem1Name = ComboBox_TeamMemberName1.Text;
+				String mem1Name;
+				if(ComboBox_TeamMemberName1.Visibility == Visibility.Visible)
+				{ 
+					mem1Name = ComboBox_TeamMemberName1.Text;
+				}
+				else 
+				{
+					mem1Name = teamMember1.Text;
+				}
 				DateTime mem1Departure = CheckDepartureTime(new DateTime(dateNow.Year, dateNow.Month, dateNow.Day, int.Parse(departurehh1.Text), int.Parse(departuremm1.Text), dateNow.Second));
 				Trainings mem1LvlOfTraining = (Trainings)lvlOfTraining1.SelectedIndex;
 				TeamMember mem_1 = new TeamMember(mem1Name, mem1LvlOfTraining, mem1Departure);
 				team.AddMember(mem_1);
 
 				//Create second member
-				String mem2Name = ComboBox_TeamMemberName2.Text;
+				String mem2Name;
+				if(ComboBox_TeamMemberName2.Visibility == Visibility.Visible)
+				{ 
+					mem2Name = ComboBox_TeamMemberName2.Text;
+				}
+				else 
+				{
+					mem2Name = teamMember2.Text;
+				}
 				if (mem2Name != "")
 				{
 					DateTime mem2Departure = CheckDepartureTime(new DateTime(dateNow.Year, dateNow.Month, dateNow.Day, int.Parse(departurehh2.Text), int.Parse(departuremm2.Text), dateNow.Second));
@@ -140,7 +156,15 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 				}
 
 				//Create third member
-				String mem3Name = ComboBox_TeamMemberName3.Text;
+				String mem3Name;
+				if (ComboBox_TeamMemberName3.Visibility == Visibility.Visible)
+				{
+					mem3Name = ComboBox_TeamMemberName3.Text;
+				}
+				else
+				{
+					mem3Name = teamMember3.Text;
+				}
                 if (mem3Name != "")
 				{
 					DateTime mem3Departure = CheckDepartureTime(new DateTime(dateNow.Year, dateNow.Month, dateNow.Day, int.Parse(departurehh3.Text), int.Parse(departuremm3.Text), dateNow.Second));
@@ -379,11 +403,15 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 
 		private void ComboBox_TeamMemberName1_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
+			if(ComboBox_TeamMemberName1.SelectedIndex == -1)
+			{
+				return;
+			}
 			if (ComboBox_TeamMemberName1.SelectedIndex == 0)
 			{
 				ComboBox_TeamMemberName1.Visibility = Visibility.Collapsed;
 				teamMember1.Visibility = Visibility.Visible;
-				Button_OKTeamMember1.Visibility = Visibility.Visible;
+				//Button_OKTeamMember1.Visibility = Visibility.Visible;
 				Button_CancelTeamMember1.Visibility = Visibility.Visible;
 			}
 			else
@@ -403,11 +431,15 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 
 		private void ComboBox_TeamMemberName2_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
+			if(ComboBox_TeamMemberName2.SelectedIndex == -1)
+			{
+				return;
+			}
 			if (ComboBox_TeamMemberName2.SelectedIndex == 0)
 			{
 				ComboBox_TeamMemberName2.Visibility = Visibility.Collapsed;
 				teamMember2.Visibility = Visibility.Visible;
-				Button_OKTeamMember2.Visibility = Visibility.Visible;
+				//Button_OKTeamMember2.Visibility = Visibility.Visible;
 				Button_CancelTeamMember2.Visibility = Visibility.Visible;
 			}
 			else
@@ -423,11 +455,15 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 
 		private void ComboBox_TeamMemberName3_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
+			if (ComboBox_TeamMemberName3.SelectedIndex == -1)
+			{
+				return;
+			}
 			if (ComboBox_TeamMemberName3.SelectedIndex == 0)
 			{
 				ComboBox_TeamMemberName3.Visibility = Visibility.Collapsed;
 				teamMember3.Visibility = Visibility.Visible;
-				Button_OKTeamMember3.Visibility = Visibility.Visible;
+				//Button_OKTeamMember3.Visibility = Visibility.Visible;
 				Button_CancelTeamMember3.Visibility = Visibility.Visible;
 			}
 			else
@@ -445,8 +481,9 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 		{
 			ComboBox_TeamMemberName1.Visibility = Visibility.Visible;
 			teamMember1.Visibility = Visibility.Collapsed;
-			Button_OKTeamMember1.Visibility = Visibility.Collapsed;
+			//Button_OKTeamMember1.Visibility = Visibility.Collapsed;
 			Button_CancelTeamMember1.Visibility = Visibility.Collapsed;
+			ComboBox_TeamMemberName1.SelectedIndex = -1;
 		}
 
 		private void Button_OKTeamMember1_Click(object sender, RoutedEventArgs e)
@@ -459,7 +496,7 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 			{
 				//StaticDBConnection.NonQueryDatabase("INSERT INTO [Volunteers] (Name, Training_Level) VALUES ('" + teamMember1.Text + "', 0);");
 				teamMember1.Visibility = Visibility.Collapsed;
-				Button_OKTeamMember1.Visibility = Visibility.Collapsed;
+				//Button_OKTeamMember1.Visibility = Visibility.Collapsed;
 				Button_CancelTeamMember1.Visibility = Visibility.Collapsed;
 				ComboBox_TeamMemberName1.Visibility = Visibility.Visible;
 
@@ -474,8 +511,9 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 		{
 			ComboBox_TeamMemberName2.Visibility = Visibility.Visible;
 			teamMember2.Visibility = Visibility.Collapsed;
-			Button_OKTeamMember2.Visibility = Visibility.Collapsed;
+			//Button_OKTeamMember2.Visibility = Visibility.Collapsed;
 			Button_CancelTeamMember2.Visibility = Visibility.Collapsed;
+			ComboBox_TeamMemberName2.SelectedIndex = -1;
 		}
 
 		private void Button_OKTeamMember2_Click(object sender, RoutedEventArgs e)
@@ -488,7 +526,7 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 			{
 				//StaticDBConnection.NonQueryDatabase("INSERT INTO [Volunteers] (Name, Training_Level) VALUES ('" + teamMember2.Text + "', 0);");
 				teamMember2.Visibility = Visibility.Collapsed;
-				Button_OKTeamMember2.Visibility = Visibility.Collapsed;
+				//Button_OKTeamMember2.Visibility = Visibility.Collapsed;
 				Button_CancelTeamMember2.Visibility = Visibility.Collapsed;
 				ComboBox_TeamMemberName2.Visibility = Visibility.Visible;
 
@@ -503,8 +541,9 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 		{
 			ComboBox_TeamMemberName1.Visibility = Visibility.Visible;
 			teamMember1.Visibility = Visibility.Collapsed;
-			Button_OKTeamMember1.Visibility = Visibility.Collapsed;
+			//Button_OKTeamMember1.Visibility = Visibility.Collapsed;
 			Button_CancelTeamMember1.Visibility = Visibility.Collapsed;
+			ComboBox_TeamMemberName3.SelectedIndex = -1;
 		}
 
 		private void Button_OKTeamMember3_Click(object sender, RoutedEventArgs e)
@@ -517,7 +556,7 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 			{
 				//StaticDBConnection.NonQueryDatabase("Replace INTO [Volunteers] (Name, Training_Level) VALUES ('" + teamMember3.Text + "', 0);");
 				teamMember3.Visibility = Visibility.Collapsed;
-				Button_OKTeamMember3.Visibility = Visibility.Collapsed;
+				//Button_OKTeamMember3.Visibility = Visibility.Collapsed;
 				Button_CancelTeamMember3.Visibility = Visibility.Collapsed;
 				ComboBox_TeamMemberName3.Visibility = Visibility.Visible;
 
