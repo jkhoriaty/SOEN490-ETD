@@ -38,7 +38,7 @@ namespace ETD_Statistic.ViewsPresenters
 
         private void GenerateComplainName()
         {
-            SQLiteDataReader reader = StaticDBConnection.QueryDatabase("SELECT DISTINCT Chief_Complaint FROM Interventions WHERE Operation_ID =" + Statistic.getOperationID());
+            SQLiteDataReader reader = StaticDBConnection.QueryDatabase("SELECT DISTINCT Chief_Complaint FROM Interventions WHERE Operation_ID IN " + Statistic.getOperationID());
             while (reader.Read())
             {
                 RowDefinition rd = new RowDefinition();
@@ -83,7 +83,7 @@ namespace ETD_Statistic.ViewsPresenters
         {
             //generating table for Children without ambulance services
 
-            SQLiteDataReader childrenReader = StaticDBConnection.QueryDatabase("SELECT count(*) as Count from Interventions WHERE Conclusion NOT LIKE '911' AND Operation_ID=" + Statistic.getOperationID() +" AND Chief_Complaint='"+complaint+"' AND Age < 18");
+            SQLiteDataReader childrenReader = StaticDBConnection.QueryDatabase("SELECT count(*) as Count from Interventions WHERE Conclusion NOT LIKE '911' AND Operation_ID IN " + Statistic.getOperationID() +" AND Chief_Complaint='"+complaint+"' AND Age < 18");
             while (childrenReader.Read())
             {
                 RowDefinition rd = new RowDefinition();
@@ -109,7 +109,7 @@ namespace ETD_Statistic.ViewsPresenters
             }
 
             //generating table for Adult without ambulance services
-            SQLiteDataReader adultReader = StaticDBConnection.QueryDatabase("SELECT count(*) as Count from Interventions WHERE Conclusion NOT LIKE '911' AND Operation_ID=" + Statistic.getOperationID() + " AND Chief_Complaint='" + complaint + "' AND Age >= 18");
+            SQLiteDataReader adultReader = StaticDBConnection.QueryDatabase("SELECT count(*) as Count from Interventions WHERE Conclusion NOT LIKE '911' AND Operation_ID IN " + Statistic.getOperationID() + " AND Chief_Complaint='" + complaint + "' AND Age >= 18");
             while (adultReader.Read())
             {
                 RowDefinition rd = new RowDefinition();
@@ -160,7 +160,7 @@ namespace ETD_Statistic.ViewsPresenters
         private void GenerateInterventionWithAmbulance(int row, String complaint)
         {
             //generating table for Children with ambulance services
-            SQLiteDataReader childrenReader = StaticDBConnection.QueryDatabase("SELECT count(*) as Count from Interventions WHERE Conclusion LIKE '911' AND Operation_ID=" + Statistic.getOperationID() + " AND Chief_Complaint='" + complaint + "' AND Age < 18");
+            SQLiteDataReader childrenReader = StaticDBConnection.QueryDatabase("SELECT count(*) as Count from Interventions WHERE Conclusion LIKE '911' AND Operation_ID IN " + Statistic.getOperationID() + " AND Chief_Complaint='" + complaint + "' AND Age < 18");
             while (childrenReader.Read())
             {
                 RowDefinition rd = new RowDefinition();
@@ -186,7 +186,7 @@ namespace ETD_Statistic.ViewsPresenters
             }
 
             //generating table for Adult with ambulance services
-            SQLiteDataReader adultReader = StaticDBConnection.QueryDatabase("SELECT count(*) as Count from Interventions WHERE Conclusion LIKE '911' AND Operation_ID=" + Statistic.getOperationID() + " AND Chief_Complaint='" + complaint + "' AND Age >= 18");
+            SQLiteDataReader adultReader = StaticDBConnection.QueryDatabase("SELECT count(*) as Count from Interventions WHERE Conclusion LIKE '911' AND Operation_ID IN " + Statistic.getOperationID() + " AND Chief_Complaint='" + complaint + "' AND Age >= 18");
             while (adultReader.Read())
             {
                 RowDefinition rd = new RowDefinition();

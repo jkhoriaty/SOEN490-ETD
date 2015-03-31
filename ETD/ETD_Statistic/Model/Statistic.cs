@@ -3,67 +3,50 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections;
 
 namespace ETD_Statistic.Model
 {
     public static class Statistic
     {
-        /*DateTime startTime;
-        DateTime endTime;
-        int numberOfInterventions;
-        String teamManager;
-        String weatherCondition;
-        String client;
-        String volunteer;
-        int expenses;
-        String situations;
-         */
-        static int operationID;
+        static ArrayList operationList = new ArrayList();
+        static String operationID;
+        static String operationString; 
 
 
         public static void setOperationID(String operation)
         {
-            operationID = int.Parse(operation.Substring(9));
+            operationID = operation[9].ToString();
+            operationList.Add(operationID);
         }
 
-        public static int getOperationID()
+        public static String getOperationID()
         {
-            return operationID;
+            operationString = string.Join(",", operationList.ToArray());
+            operationString = "(" + operationString + ")";
+            return operationString;
         }
-        
 
-        /*
-        public Statistic(DateTime start, DateTime end)
+        public static ArrayList getOperationList()
         {
-            startTime = start;
-            endTime = end;
-            numberOfInterventions = 0;
-            teamManager = null;
-            weatherCondition = null;
-            client = null;
-            volunteer = null;
-            expenses = 0;
-            situations = null;
+            return operationList;
         }
 
-        public void getInterventionCountChildren(String type)
+        public static void removeOperationID(String operation)
         {
-            
+            operationID = operation[9].ToString(); 
+            operationList.Remove(operationID);
         }
 
-        public void getInterventionCountAdult(String type)
+        public static void clearOperationsList()
         {
-
+            operationList.Clear();
         }
 
-        public void setStartTime()
+        public static int getListSize()
         {
+            return operationList.Count;
         }
-
-        public void setEndTime()
-        { 
-        }
-        */
-
+     
     }
 }

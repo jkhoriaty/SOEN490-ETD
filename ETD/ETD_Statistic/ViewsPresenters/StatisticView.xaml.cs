@@ -54,23 +54,32 @@ namespace ETD_Statistic.ViewsPresenters
             OrganizationFollowUp.TextWrapping = TextWrapping.Wrap;
             SupervisorFollowUp.TextWrapping = TextWrapping.Wrap;
 
-            OperationID.Text = "Operation " + Statistic.getOperationID() + " : " + eventName;
-            BeginDate.Text = "Start Date: " + startDate.ToString("g");
-            EndingDate.Text = "End Date: " + endDate.ToString("g");
-            DispatcherName.Text = "Dispatcher: " + dispatcherName;
-            TeamCount.Text = "Number of teams: " + teamCount.ToString();
-            VolunteerCount.Text = "Number of volunteers: " + volunteerCount.ToString();
-            VolunteerFollowUp.Text = volunteerFollowUpText;
-            Finance.Text = financeText;
-            Vehicle.Text = vehicleText;
-            ParticularSituation.Text = particularSituationText;
-            OrganizationFollowUp.Text = organizationFollowUpText;
-            SupervisorFollowUp.Text = supervisorFollowUpText;           
+            if (Statistic.getListSize() == 1)
+            {
+                OperationID.Text = "Operation " + Statistic.getOperationID() + " : " + eventName;
+                BeginDate.Text = "Start Date: " + startDate.ToString("g");
+                EndingDate.Text = "End Date: " + endDate.ToString("g");
+                DispatcherName.Text = "Dispatcher: " + dispatcherName;
+                TeamCount.Text = "Number of teams: " + teamCount.ToString();
+                VolunteerCount.Text = "Number of volunteers: " + volunteerCount.ToString();
+
+                gridVisibility.Visibility = Visibility.Visible;
+                VolunteerFollowUp.Text = volunteerFollowUpText;
+                Finance.Text = financeText;
+                Vehicle.Text = vehicleText;
+                ParticularSituation.Text = particularSituationText;
+                OrganizationFollowUp.Text = organizationFollowUpText;
+                SupervisorFollowUp.Text = supervisorFollowUpText;
+            }
+            else
+            {
+                GenerateViewForMultiDayStatistic();
+            }
         }
 
         private void getOperationInformationFromDatabase()
         {
-            SQLiteDataReader reader = StaticDBConnection.QueryDatabase("SELECT * FROM Operations WHERE Operation_ID="+Statistic.getOperationID());
+            SQLiteDataReader reader = StaticDBConnection.QueryDatabase("SELECT * FROM Operations WHERE Operation_ID IN "+Statistic.getOperationID());
             while (reader.Read())
             {
                               
@@ -90,7 +99,7 @@ namespace ETD_Statistic.ViewsPresenters
 
         private void getTeamCount()
         {
-            SQLiteDataReader reader = StaticDBConnection.QueryDatabase("SELECT count(*) as Count FROM Teams WHERE Operation_ID=" + Statistic.getOperationID());
+            SQLiteDataReader reader = StaticDBConnection.QueryDatabase("SELECT count(*) as Count FROM Teams WHERE Operation_ID IN " + Statistic.getOperationID());
             while (reader.Read())
             {
                 teamCount = int.Parse(reader["Count"].ToString());
@@ -100,12 +109,37 @@ namespace ETD_Statistic.ViewsPresenters
 
         private void getVolunteerCount()
         {
-            SQLiteDataReader reader = StaticDBConnection.QueryDatabase("SELECT count(*) as Num FROM (Volunteers JOIN Team_Members ON Volunteers.Volunteer_ID = Team_Members.Volunteer_ID) JOIN Teams ON Team_Members.Team_ID = Teams.Team_ID WHERE Operation_ID =" + Statistic.getOperationID());
+            SQLiteDataReader reader = StaticDBConnection.QueryDatabase("SELECT count(*) as Num FROM (Volunteers JOIN Team_Members ON Volunteers.Volunteer_ID = Team_Members.Volunteer_ID) JOIN Teams ON Team_Members.Team_ID = Teams.Team_ID WHERE Operation_ID IN " + Statistic.getOperationID());
             while (reader.Read())
             {
                 volunteerCount = int.Parse(reader["Num"].ToString());
             }
             StaticDBConnection.CloseConnection();
+        }
+
+        private void GenerateViewForMultiDayStatistic()
+        {
+            MultiDayOperationID.Text = "Operations: " + Statistic.getOperationID();
+            foreach (String i in Statistic.getOperationList())
+            {
+                SQLiteDataReader reader = StaticDBConnection.QueryDatabase("SELECT * FROM Operations WHERE Operation_ID IN " + Statistic.getOperationID());
+                while (reader.Read())
+                {
+                    
+                    startDate = Convert.ToDateTime(reader["Shift_Start"].ToString());
+                    endDate = Convert.ToDateTime(reader["Shift_End"].ToString());
+                    volunteerFollowUpText = reader["VolunteerFollowUp"].ToString();
+                    financeText = reader["Finance"].ToString();
+                    vehicleText = reader["Vehicle"].ToString();
+                    particularSituationText = reader["ParticularSituation"].ToString();
+                    organizationFollowUpText = reader["OrganizationFollowUp"].ToString();
+                    supervisorFollowUpText = reader["SupervisorFollowUp"].ToString();
+                    eventName = reader["Name"].ToString();
+                    dispatcherName = reader["Dispatcher"].ToString();
+                }
+            }
+            StaticDBConnection.CloseConnection();
+
         }
 
     }

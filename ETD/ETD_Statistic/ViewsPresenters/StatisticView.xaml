@@ -4,7 +4,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="StatisticView" Width="1000">
         <StackPanel Margin="50,0,30,0">
-            <Grid>
+        <Grid Margin="0,0,300,0" Width="700" Name="multiDayView" Grid.Column="0">
+            <TextBlock Name="MultiDayOperationID" FontWeight="ExtraBold" FontStyle="Oblique" Foreground="DarkSlateBlue" FontSize="25" TextAlignment="Center" Margin="0,10,0,0"></TextBlock>
+        </Grid>
+        <Grid Name="gridVisibility" Visibility="Collapsed">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="200"/>
                     <ColumnDefinition Width="500"/>
