@@ -16,7 +16,9 @@
 
 			<!-- Information on Team Member 1-->
 			<StackPanel>
-                <ComboBox SelectionChanged="ComboBox_TeamMemberName1_SelectionChanged" Name="ComboBox_TeamMemberName1"></ComboBox>
+                <Border Name="Border_TeamMemberName1" BorderThickness="1">
+                    <ComboBox SelectionChanged="ComboBox_TeamMemberName1_SelectionChanged" Name="ComboBox_TeamMemberName1"></ComboBox>
+                </Border>
                 <TextBox Visibility="Collapsed" x:Uid="TextBox_TeamMemberName" Name="teamMember1" Text="{Binding Path=TextBox_TeamMemberName, Mode=OneWay, Source={StaticResource Resources}}" FontSize="18" Margin="0,2,0,2" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus" MaxLength="20"/>
           
                 <Button Click="Button_CancelTeamMember1_Click" Visibility="Collapsed" Name="Button_CancelTeamMember1">Cancel</Button>
@@ -56,7 +58,9 @@
 			<StackPanel Name="member2" Visibility="Collapsed">
 				<Border BorderBrush="Black" BorderThickness="1" Margin="0,3,0,3"></Border>
                 <TextBox Visibility="Collapsed" x:Uid="TextBox_TeamMemberName" Name="teamMember2" Text="{Binding Path=TextBox_TeamMemberName, Mode=OneWay, Source={StaticResource Resources}}" FontSize="18" Margin="0,2,0,2" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus" MaxLength="20"/>
-                <ComboBox SelectionChanged="ComboBox_TeamMemberName2_SelectionChanged" Name="ComboBox_TeamMemberName2"></ComboBox>
+                <Border Name="Border_TeamMemberName2" BorderThickness="1">
+                    <ComboBox SelectionChanged="ComboBox_TeamMemberName2_SelectionChanged" Name="ComboBox_TeamMemberName2"></ComboBox>
+                </Border>
                 <Button Click="Button_CancelTeamMember2_Click" Visibility="Collapsed" Name="Button_CancelTeamMember2">Cancel</Button>
                 <UniformGrid Rows="1" Margin="0,2,0,2">
                     <Label x:Uid="Label_DepartureTime" Content="{Binding Path=Label_DepartureTime, Mode=OneWay, Source={StaticResource Resources}}"/>
@@ -87,7 +91,9 @@
 			<StackPanel Name="member3" Visibility="Collapsed">
 				<Border BorderBrush="Black" BorderThickness="1" Margin="0,3,0,3"></Border>
                 <TextBox Visibility="Collapsed" x:Uid="TextBox_TeamMemberName" Name="teamMember3" Text="{Binding Path=TextBox_TeamMemberName, Mode=OneWay, Source={StaticResource Resources}}" FontSize="18" Margin="0,2,0,2" GotFocus="TextBoxes_GotFocus" LostFocus="TextBoxes_LostFocus" MaxLength="20"/>
-                <ComboBox SelectionChanged="ComboBox_TeamMemberName3_SelectionChanged" Name="ComboBox_TeamMemberName3"></ComboBox>
+                <Border Name="Border_TeamMemberName3" BorderThickness="1">
+                    <ComboBox SelectionChanged="ComboBox_TeamMemberName3_SelectionChanged" Name="ComboBox_TeamMemberName3"></ComboBox>
+                </Border>
                 <Button Click="Button_CancelTeamMember3_Click" Visibility="Collapsed" Name="Button_CancelTeamMember3">Cancel</Button>
                 <UniformGrid Rows="1" Margin="0,2,0,2">
                     <Label x:Uid="Label_DepartureTime" Content="{Binding Path=Label_DepartureTime, Mode=OneWay, Source={StaticResource Resources}}"/>

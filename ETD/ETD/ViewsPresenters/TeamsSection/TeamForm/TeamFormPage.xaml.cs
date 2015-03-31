@@ -210,6 +210,22 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 			List<Control> textboxFailedValidation = new List<Control>();
 			List<Border> comboboxFailedValidation = new List<Border>();
 
+			//Team members
+			if(teamMember1.Text == "Team Member Name" && (ComboBox_TeamMemberName1.SelectedIndex == -1 || ComboBox_TeamMemberName1.SelectedIndex == 0))
+			{
+				textboxFailedValidation.Add(teamMember1);
+				comboboxFailedValidation.Add(Border_TeamMemberName1);
+			}
+			if (teamMember2.Text == "Team Member Name" && (ComboBox_TeamMemberName2.SelectedIndex == -1 || ComboBox_TeamMemberName2.SelectedIndex == 0))
+			{
+				textboxFailedValidation.Add(teamMember2);
+				comboboxFailedValidation.Add(Border_TeamMemberName2);
+			}
+			if (teamMember3.Text == "Team Member Name" && (ComboBox_TeamMemberName3.SelectedIndex == -1 || ComboBox_TeamMemberName3.SelectedIndex == 0))
+			{
+				textboxFailedValidation.Add(teamMember3);
+				comboboxFailedValidation.Add(Border_TeamMemberName3);
+			}
 			//Team Name
 			if(teamName.Text.Equals("Team Name"))
 			{
