@@ -21,9 +21,9 @@ namespace ETD.Models.Objects
     public class Team : Observable
 	{
         [field: NonSerialized()]
-		private static List<Observer> observerList = new List<Observer>();//Contains a List of observers
+		private static List<Observer> observerList;//Contains a List of observers
 
-		static List<Team> teamList = new List<Team>();//Contains a list of teams
+		static List<Team> teamList;//Contains a list of teams
 
         //Database reflection variables
         private int teamID;
@@ -40,6 +40,12 @@ namespace ETD.Models.Objects
 		int interventionCount = 0;
 		int code1Count = 0;
 		int code2Count = 0;
+
+        static Team()
+        {
+            observerList = new List<Observer>();
+            teamList = new List<Team>();
+        }
 
         //Creates a new team
         public Team(String name)
@@ -345,6 +351,12 @@ namespace ETD.Models.Objects
                     }                    
                 }
             }
+        }
+
+        public static void InsertTeam(Team team)
+        {
+            teamList.Add(team);
+            ClassModifiedNotification(typeof(Team));
         }
 
     }
