@@ -51,15 +51,24 @@ namespace ETD.ViewsPresenters
 			createUserItemSupervisor.FontStyle = FontStyles.Italic;
 			createUserItemSupervisor.FontWeight = FontWeights.Bold;
 
-			ComboBoxItem createUserItemOpManager = new ComboBoxItem();
+			/*ComboBoxItem createUserItemOpManager = new ComboBoxItem();
 			createUserItemOpManager.Content = "NEW USER";
 			createUserItemOpManager.FontStyle = FontStyles.Italic;
-			createUserItemOpManager.FontWeight = FontWeights.Bold;
+			createUserItemOpManager.FontWeight = FontWeights.Bold;*/
 
 			dispatcherName.Items.Add(createUserItem);
 			supervisorName.Items.Add(createUserItemSupervisor);
-			opManagerName.Items.Add(createUserItemOpManager);
+			//opManagerName.Items.Add(createUserItemOpManager);
+
+			ComboBoxItem supervisorItem = new ComboBoxItem();
+			supervisorItem.Content = "Supervisor";
+
+			ComboBoxItem opManagerItem = new ComboBoxItem();
+			opManagerItem.Content = "Operation Manager";
 			
+			Combobox_SupervisorOperationManager.Items.Add(supervisorItem);
+			Combobox_SupervisorOperationManager.Items.Add(opManagerItem);
+
 
             using (SQLiteDataReader reader = StaticDBConnection.QueryDatabase("SELECT Name FROM Volunteers"))
             {
@@ -73,7 +82,7 @@ namespace ETD.ViewsPresenters
                     cbItemOpManager.Content = reader["Name"].ToString();
                     dispatcherName.Items.Add(cbItem);
                     supervisorName.Items.Add(cbItemSupervisor);
-                    opManagerName.Items.Add(cbItemOpManager);
+                    //opManagerName.Items.Add(cbItemOpManager);
                 }
             }
             StaticDBConnection.CloseConnection();
@@ -211,7 +220,7 @@ namespace ETD.ViewsPresenters
 			}
 		}
 
-		private void opManagerName_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		/*private void opManagerName_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
 			if (opManagerName.SelectedIndex == 0)
 			{
@@ -220,7 +229,7 @@ namespace ETD.ViewsPresenters
 				Button_OKOperationManagerName.Visibility = Visibility.Visible;
 				Button_CancelOperationManagerName.Visibility = Visibility.Visible;
 			}
-		}
+		}*/
 
 		private void Button_CancelDispatcherName_Click(object sender, RoutedEventArgs e)
 		{
@@ -279,7 +288,7 @@ namespace ETD.ViewsPresenters
 				supervisorName.SelectedItem = newUser;
 			}
 		}
-		private void Button_CancelOperationManagerName_Click(object sender, RoutedEventArgs e)
+		/*private void Button_CancelOperationManagerName_Click(object sender, RoutedEventArgs e)
 		{
 			Textbox_OperationManagerName.Visibility = Visibility.Hidden;
 			Button_OKOperationManagerName.Visibility = Visibility.Hidden;
@@ -306,5 +315,6 @@ namespace ETD.ViewsPresenters
 				opManagerName.SelectedItem = newUser;
 			}
 		}
+		*/
     }
 }
