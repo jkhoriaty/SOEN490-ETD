@@ -3,6 +3,7 @@
 
     <string name="app_name">ETD Location App</string>
     <string name="action_settings">Settings</string>
+    <string name="welcome">Welcome to the Emergency Dispatcher Software's Android Companion</string>
     <string name="hello">Please Enter your information.</string>
     <string name="name">Name: </string>
     <string name="login">Login.</string>
