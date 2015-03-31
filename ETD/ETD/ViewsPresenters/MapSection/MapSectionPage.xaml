@@ -6,20 +6,24 @@
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
       Background="Transparent"
-      ContextMenu="{DynamicResource ZoomContextMenu}"
+      ContextMenu="{DynamicResource ZoomContextMenuDefault}"
+      MouseRightButtonDown="Map_MouseRightButtonDown"
       Name="Page_mapSection"
 	Title="MapSectionPage" >
 
     <Canvas Name="Canvas_map"/>
     <Page.Resources>
-        <ContextMenu x:Key="ZoomContextMenu">
+        <ContextMenu x:Key="ZoomContextMenuDefault" Name="ZoomContextDefault">
             <!--Click="Zoom_Click" for menu items if need to implement-->
-            <MenuItem Header="100%" Tag="Canvas_map"/>
-            <MenuItem Header="120%" Tag="Canvas_map"/>
-            <MenuItem Header="140%" Tag="Canvas_map"/>
-            <MenuItem Header="160%" Tag="Canvas_map"/>
-            <MenuItem Header="180%" Tag="Canvas_map"/>
-            <MenuItem Header="200%" Tag="Canvas_map"/>
+            <MenuItem Header="100%" Tag="Canvas_map" Click="Zoom_Click"/>
+            <MenuItem Header="120%" Tag="Canvas_map" Click="Zoom_Click"/>
+            <MenuItem Header="140%" Tag="Canvas_map" Click="Zoom_Click"/>
+            <MenuItem Header="160%" Tag="Canvas_map" Click="Zoom_Click"/>
+            <MenuItem Header="180%" Tag="Canvas_map" Click="Zoom_Click"/>
+            <MenuItem Header="200%" Tag="Canvas_map" Click="Zoom_Click"/>
+        </ContextMenu>
+        <ContextMenu x:Key="ZoomContextMenuZoomed" Name="ZoomContextZoomed">
+            <MenuItem Header="100%" Tag="Canvas_map" Click="Zoom_Click"/>
         </ContextMenu>
     </Page.Resources>
 </Page>

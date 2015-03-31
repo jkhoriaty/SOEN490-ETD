@@ -21,11 +21,13 @@ namespace ETD.ViewsPresenters.MapSection
 	public partial class MapSectionPage : Page, Observer
 	{
 		MainWindow mainWindow;
+        AdditionalInfoPage additionalInfo;
 
 		//Drag-and-Drop related variable
 		private bool pinDragInProgress;
 
-        ImageBrush imgbrush;
+        ImageBrush imgbrush = new ImageBrush();
+        ImageBrush original = new ImageBrush();
         internal String zoomLevel = "100%";
 
         double mouseX;
@@ -33,10 +35,11 @@ namespace ETD.ViewsPresenters.MapSection
         double TTX;
         double TTY;
 
-		public MapSectionPage(MainWindow mainWindow)
+		public MapSectionPage(MainWindow mainWindow, AdditionalInfoPage additionalInfo)
 		{
 			InitializeComponent();
 			this.mainWindow = mainWindow;
+            this.additionalInfo = additionalInfo;
 
 			Observable.RegisterClassObserver(typeof(Team), this);
 			Observable.RegisterClassObserver(typeof(Intervention), this);
@@ -149,6 +152,9 @@ namespace ETD.ViewsPresenters.MapSection
 
 		public void Zoom_Click(object sender, EventArgs e)
         {
+            imgbrush = (ImageBrush)additionalInfo.AdditionalMap.Background;
+            original = (ImageBrush)additionalInfo.AdditionalMap.Background;
+
             MenuItem mi = (MenuItem)sender;
             zoomLevel = (String)mi.Header;
             switch(zoomLevel)
@@ -180,11 +186,10 @@ namespace ETD.ViewsPresenters.MapSection
             ST.ScaleX = 1;
             ST.ScaleY = 1;
             imgbrush.RelativeTransform = ST;
+            
+            imgbrush.ClearValue(ImageBrush.TransformProperty);
 
-            TranslateTransform TT;
-
-            TT = new TranslateTransform(-TTX, -TTY);
-            imgbrush.Transform = TT;
+    
         }
 
         public void ScaleMap(double ratio)
