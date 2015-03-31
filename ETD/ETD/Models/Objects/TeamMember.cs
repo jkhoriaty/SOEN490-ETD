@@ -37,10 +37,12 @@ namespace ETD.Models.Objects
             this.departure = departure;
 			try
 			{
-				SQLiteDataReader reader = StaticDBConnection.QueryDatabase("Select Volunteer_ID FROM [Volunteers] WHERE Name='" + name + "'");
-				reader.Read();
-				this.volunteerID = Convert.ToInt32(reader["Volunteer_ID"].ToString());
-				reader.Close();
+                using (SQLiteDataReader reader = StaticDBConnection.QueryDatabase("Select Volunteer_ID FROM [Volunteers] WHERE Name='" + name + "'"))
+                {
+                    reader.Read();
+                    this.volunteerID = Convert.ToInt32(reader["Volunteer_ID"].ToString());
+                }
+                StaticDBConnection.CloseConnection();
 				StaticDBConnection.NonQueryDatabase("UPDATE [Volunteers] SET Training_Level=" + (int)this.trainingLevel + " WHERE Volunteer_ID=" + this.volunteerID + ";");
 			}
 			catch
@@ -53,11 +55,17 @@ namespace ETD.Models.Objects
         {
             this.volunteerID = volunteerId;
             this.teamID = teamId;
-            System.Data.SQLite.SQLiteDataReader results = StaticDBConnection.QueryDatabase("SELECT Volunteers.Name, Volunteers.Training_Level, Team_Members.Departure FROM [Team_Members] INNER JOIN [Volunteers] ON Team_Members.Volunteer_ID = Volunteers.Volunteer_ID WHERE Team_Members.Team_ID = " + teamId + " AND Team_Members.Volunteer_ID = " + volunteerId + ";");
-            results.Read();
-            this.name = results.GetString(0);
-            this.trainingLevel = (Trainings)results.GetInt32(1);
-            this.departure = results.GetDateTime(2);
+            using (System.Data.SQLite.SQLiteDataReader results = StaticDBConnection.QueryDatabase("SELECT Volunteers.Name, Volunteers.Training_Level, Team_Members.Departure FROM [Team_Members] INNER JOIN [Volunteers] ON Team_Members.Volunteer_ID = Volunteers.Volunteer_ID WHERE Team_Members.Team_ID = " + teamId + " AND Team_Members.Volunteer_ID = " + volunteerId + ";"))
+            {
+                if (results != null)
+                {
+                    results.Read();
+                    this.name = results.GetString(0);
+                    this.trainingLevel = (Trainings)results.GetInt32(1);
+                    this.departure = results.GetDateTime(2);
+                }
+            }
+            StaticDBConnection.CloseConnection();
             if (Operation.currentOperation != null)
             {
                 this.teamID = Operation.currentOperation.getID();

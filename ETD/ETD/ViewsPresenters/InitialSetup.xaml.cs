@@ -59,21 +59,24 @@ namespace ETD.ViewsPresenters
 			dispatcherName.Items.Add(createUserItem);
 			supervisorName.Items.Add(createUserItemSupervisor);
 			opManagerName.Items.Add(createUserItemOpManager);
-			StaticDBConnection.CloseConnection();
+			
 
-			SQLiteDataReader reader = StaticDBConnection.QueryDatabase("SELECT Name FROM Volunteers");
-			while (reader.Read())
-			{
-				ComboBoxItem cbItem = new ComboBoxItem();
-				cbItem.Content = reader["Name"].ToString();
-				ComboBoxItem cbItemSupervisor = new ComboBoxItem();
-				cbItemSupervisor.Content = reader["Name"].ToString();
-				ComboBoxItem cbItemOpManager = new ComboBoxItem();
-				cbItemOpManager.Content = reader["Name"].ToString();
-				dispatcherName.Items.Add(cbItem);
-				supervisorName.Items.Add(cbItemSupervisor);
-				opManagerName.Items.Add(cbItemOpManager);
-			}
+            using (SQLiteDataReader reader = StaticDBConnection.QueryDatabase("SELECT Name FROM Volunteers"))
+            {
+                while (reader.Read())
+                {
+                    ComboBoxItem cbItem = new ComboBoxItem();
+                    cbItem.Content = reader["Name"].ToString();
+                    ComboBoxItem cbItemSupervisor = new ComboBoxItem();
+                    cbItemSupervisor.Content = reader["Name"].ToString();
+                    ComboBoxItem cbItemOpManager = new ComboBoxItem();
+                    cbItemOpManager.Content = reader["Name"].ToString();
+                    dispatcherName.Items.Add(cbItem);
+                    supervisorName.Items.Add(cbItemSupervisor);
+                    opManagerName.Items.Add(cbItemOpManager);
+                }
+            }
+            StaticDBConnection.CloseConnection();
         }
 
         private void Submit_Click(object sender, RoutedEventArgs e)

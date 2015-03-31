@@ -58,17 +58,20 @@ namespace ETD.Models.Objects
         public ABC(int id)
         {
             this.abcID = id;
-            System.Data.SQLite.SQLiteDataReader results = StaticDBConnection.QueryDatabase("SELECT Intervention_ID, Consciousness, Disoriented, Airways, Breathing, Breathing_Frequency, Circulation, Circulation_Frequency FROM [ABCs] WHERE ABC_ID=" + id + ";");
-            results.Read();
+            using (System.Data.SQLite.SQLiteDataReader results = StaticDBConnection.QueryDatabase("SELECT Intervention_ID, Consciousness, Disoriented, Airways, Breathing, Breathing_Frequency, Circulation, Circulation_Frequency FROM [ABCs] WHERE ABC_ID=" + id + ";"))
+            {
+                results.Read();
 
-            this.interventionID = (results.IsDBNull(0)) ? 0 : results.GetInt32(0);
-            this.consciousness = (results.IsDBNull(1)) ? "" : results.GetString(1);
-            this.disoriented = (results.IsDBNull(2)) ? false : Convert.ToBoolean(results.GetString(2));
-            this.airways = (results.IsDBNull(3)) ? "" : results.GetString(3);
-            this.breathing = (results.IsDBNull(4)) ? "" : results.GetString(4);
-            this.breathingFrequency = (results.IsDBNull(5)) ? 0 : results.GetInt32(5);
-            this.circulation = (results.IsDBNull(6)) ? "" : results.GetString(6);
-            this.circulationFrequency = (results.IsDBNull(7)) ? 0 : results.GetInt32(7);
+                this.interventionID = (results.IsDBNull(0)) ? 0 : results.GetInt32(0);
+                this.consciousness = (results.IsDBNull(1)) ? "" : results.GetString(1);
+                this.disoriented = (results.IsDBNull(2)) ? false : Convert.ToBoolean(results.GetString(2));
+                this.airways = (results.IsDBNull(3)) ? "" : results.GetString(3);
+                this.breathing = (results.IsDBNull(4)) ? "" : results.GetString(4);
+                this.breathingFrequency = (results.IsDBNull(5)) ? 0 : results.GetInt32(5);
+                this.circulation = (results.IsDBNull(6)) ? "" : results.GetString(6);
+                this.circulationFrequency = (results.IsDBNull(7)) ? 0 : results.GetInt32(7);
+            }
+            StaticDBConnection.CloseConnection();
         }
 
         //User inputs default values for all ABC objects

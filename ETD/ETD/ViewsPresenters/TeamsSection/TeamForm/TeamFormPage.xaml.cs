@@ -57,19 +57,22 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 			ComboBox_TeamMemberName2.Items.Add(createUserItem2);
 			ComboBox_TeamMemberName3.Items.Add(createUserItem3);
 
-			SQLiteDataReader reader = StaticDBConnection.QueryDatabase("SELECT Name FROM Volunteers");
-			while (reader.Read())
-			{
-				ComboBoxItem cbItem = new ComboBoxItem();
-				cbItem.Content = reader["Name"].ToString();
-				ComboBoxItem cbItem2 = new ComboBoxItem();
-				cbItem2.Content = reader["Name"].ToString();
-				ComboBoxItem cbItem3 = new ComboBoxItem();
-				cbItem3.Content = reader["Name"].ToString();
-				ComboBox_TeamMemberName1.Items.Add(cbItem);
-				ComboBox_TeamMemberName2.Items.Add(cbItem2);
-				ComboBox_TeamMemberName3.Items.Add(cbItem3);
-			}
+            using (SQLiteDataReader reader = StaticDBConnection.QueryDatabase("SELECT Name FROM Volunteers"))
+            {
+                while (reader.Read())
+                {
+                    ComboBoxItem cbItem = new ComboBoxItem();
+                    cbItem.Content = reader["Name"].ToString();
+                    ComboBoxItem cbItem2 = new ComboBoxItem();
+                    cbItem2.Content = reader["Name"].ToString();
+                    ComboBoxItem cbItem3 = new ComboBoxItem();
+                    cbItem3.Content = reader["Name"].ToString();
+                    ComboBox_TeamMemberName1.Items.Add(cbItem);
+                    ComboBox_TeamMemberName2.Items.Add(cbItem2);
+                    ComboBox_TeamMemberName3.Items.Add(cbItem3);
+                }
+            }
+            StaticDBConnection.CloseConnection();
         }
 
 		//Click: Add Member
@@ -390,10 +393,13 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 			{
 				ComboBoxItem memberNameItem = new ComboBoxItem();
 				memberNameItem = (ComboBoxItem)ComboBox_TeamMemberName1.SelectedItem;
-				SQLiteDataReader reader = StaticDBConnection.QueryDatabase("Select Training_Level FROM [Volunteers] WHERE Name='" + memberNameItem.Content.ToString() + "'");
-				reader.Read();
+                using (SQLiteDataReader reader = StaticDBConnection.QueryDatabase("Select Training_Level FROM [Volunteers] WHERE Name='" + memberNameItem.Content.ToString() + "'"))
+                {
+                    reader.Read();
 
-				lvlOfTraining1.SelectedIndex = Convert.ToInt32(reader["Training_Level"].ToString());
+                    lvlOfTraining1.SelectedIndex = Convert.ToInt32(reader["Training_Level"].ToString());
+                }
+                StaticDBConnection.CloseConnection();
 			}
 		}
 
@@ -410,10 +416,13 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 			{
 				ComboBoxItem memberNameItem = new ComboBoxItem();
 				memberNameItem = (ComboBoxItem)ComboBox_TeamMemberName2.SelectedItem;
-				SQLiteDataReader reader = StaticDBConnection.QueryDatabase("Select Training_Level FROM [Volunteers] WHERE Name='" + memberNameItem.Content.ToString() + "'");
-				reader.Read();
+                using (SQLiteDataReader reader = StaticDBConnection.QueryDatabase("Select Training_Level FROM [Volunteers] WHERE Name='" + memberNameItem.Content.ToString() + "'"))
+                {
+                    reader.Read();
 
-				lvlOfTraining2.SelectedIndex = Convert.ToInt32(reader["Training_Level"].ToString());
+                    lvlOfTraining2.SelectedIndex = Convert.ToInt32(reader["Training_Level"].ToString());
+                }
+                StaticDBConnection.CloseConnection();
 			}
 		}
 
@@ -430,10 +439,13 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 			{
 				ComboBoxItem memberNameItem = new ComboBoxItem();
 				memberNameItem = (ComboBoxItem)ComboBox_TeamMemberName3.SelectedItem;
-				SQLiteDataReader reader = StaticDBConnection.QueryDatabase("Select Training_Level FROM [Volunteers] WHERE Name='" + memberNameItem.Content.ToString() + "'");
-				reader.Read();
+                using (SQLiteDataReader reader = StaticDBConnection.QueryDatabase("Select Training_Level FROM [Volunteers] WHERE Name='" + memberNameItem.Content.ToString() + "'"))
+                {
+                    reader.Read();
 
-				lvlOfTraining3.SelectedIndex = Convert.ToInt32(reader["Training_Level"].ToString());
+                    lvlOfTraining3.SelectedIndex = Convert.ToInt32(reader["Training_Level"].ToString());
+                }
+                StaticDBConnection.CloseConnection();
 			}
 		}
 

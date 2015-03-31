@@ -86,21 +86,26 @@ namespace ETD.Models.Objects
         {
             this.interventionID = id;
             this.callID = -1;
-            System.Data.SQLite.SQLiteDataReader results = StaticDBConnection.QueryDatabase("SELECT Operation_ID, Intervention_Number, Time_Of_Call, Caller, Location, Nature_Of_Call, Code, Gender, Age, Chief_Complaint, Other_Chief_Complaint FROM [Interventions] WHERE Intervention_ID=" + id + ";");
-            results.Read();
+            using (System.Data.SQLite.SQLiteDataReader results = StaticDBConnection.QueryDatabase("SELECT Operation_ID, Intervention_Number, Time_Of_Call, Caller, Location, Nature_Of_Call, Code, Gender, Age, Chief_Complaint, Other_Chief_Complaint FROM [Interventions] WHERE Intervention_ID=" + id + ";"))
+            {
+                if (results != null)
+                {
+                    results.Read();
 
-            this.operationID = results.GetInt32(0);
-            this.interventionNumber = results.GetInt32(1);
-            this.timeOfCall = results.GetDateTime(2);
-            this.callerName = (results.IsDBNull(3)) ? "" : results.GetString(3);
-            this.location = (results.IsDBNull(4)) ? "" : results.GetString(4);
-            this.natureOfCall = (results.IsDBNull(5)) ? "" : results.GetString(5);
-            this.code = (results.IsDBNull(6)) ? 0 : results.GetInt32(6);
-            this.gender = (results.IsDBNull(7)) ? "" : results.GetString(7);
-            this.age = (results.IsDBNull(8)) ? "" : results.GetInt32(8).ToString();
-            this.chiefComplaint = (results.IsDBNull(9)) ? "" : results.GetString(9);
-            this.otherChiefComplaint = (results.IsDBNull(10)) ? "" : results.GetString(10);
-
+                    this.operationID = results.GetInt32(0);
+                    this.interventionNumber = results.GetInt32(1);
+                    this.timeOfCall = results.GetDateTime(2);
+                    this.callerName = (results.IsDBNull(3)) ? "" : results.GetString(3);
+                    this.location = (results.IsDBNull(4)) ? "" : results.GetString(4);
+                    this.natureOfCall = (results.IsDBNull(5)) ? "" : results.GetString(5);
+                    this.code = (results.IsDBNull(6)) ? 0 : results.GetInt32(6);
+                    this.gender = (results.IsDBNull(7)) ? "" : results.GetString(7);
+                    this.age = (results.IsDBNull(8)) ? "" : results.GetInt32(8).ToString();
+                    this.chiefComplaint = (results.IsDBNull(9)) ? "" : results.GetString(9);
+                    this.otherChiefComplaint = (results.IsDBNull(10)) ? "" : results.GetString(10);
+                }
+            }
+            StaticDBConnection.CloseConnection();
             this.resourceList = new List<Resource>();
             this.abc = new ABC(this.interventionID);
 
