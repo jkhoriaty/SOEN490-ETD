@@ -28,7 +28,7 @@ public class LocationTransmission extends ActionBarActivity
     Button locationTransmission;
     Button backToLogin;
     CheckBox checkBox;
-    Boolean isBroadCasting = true;
+    Boolean isBroadCasting = false;
     Intent serviceIntent;
 
 	@Override

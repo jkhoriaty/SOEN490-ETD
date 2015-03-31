@@ -82,7 +82,6 @@ namespace ETD_Statistic.ViewsPresenters
             SQLiteDataReader reader = StaticDBConnection.QueryDatabase("SELECT * FROM Operations WHERE Operation_ID IN "+Statistic.getOperationID());
             while (reader.Read())
             {
-                              
                 startDate = Convert.ToDateTime(reader["Shift_Start"].ToString());
                 endDate = Convert.ToDateTime(reader["Shift_End"].ToString());
                 volunteerFollowUpText = reader["VolunteerFollowUp"].ToString();

@@ -16,7 +16,7 @@
             <Label x:Uid="Label_Username" Grid.Row ="0" Grid.Column="0" Content="{x:Static properties:Resources.Label_Username}" />
             <TextBox Grid.Row="0" Grid.Column="1" x:Name="username" Width="250" Margin="0,0,0,2"/>
             <Label x:Uid="Label_Password" Grid.Row="1" Grid.Column="0" Content="{x:Static properties:Resources.Label_Password}" />
-            <TextBox Grid.Row="1" Grid.Column="1" x:Name="password" Width="250" Margin="0,2,0,0"/>
+            <PasswordBox Grid.Row="1" Grid.Column="1" x:Name="password" Width="250" Margin="0,2,0,0"/>
         </Grid>
         <Button x:Uid="Button_LoginSubmit" Click="Submit_Click" Width="100" Content="{x:Static properties:Resources.Button_LoginSubmit}" Margin="110,10,110,0" />
     </StackPanel>
