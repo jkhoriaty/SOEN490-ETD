@@ -40,7 +40,7 @@ namespace ETD.Services
             serializer = new BinaryFormatter();
             timer = new Timer(backupRate);
             timer.Elapsed += new ElapsedEventHandler(BackUpEvent);
-            timer.Enabled = false;
+            timer.Start();
         }
 
         public static Serializer Instance
@@ -88,9 +88,17 @@ namespace ETD.Services
 
         public void CleanUp()
         {
+            timer.Stop();
             if(Directory.Exists(outputDirectory))
             {
-                Directory.Delete(outputDirectory, true);
+                try
+                {
+                    Directory.Delete(outputDirectory, true);
+                }
+                catch(Exception e)
+                {
+                    Console.Write(e.Message);
+                }
             }
         }
 
