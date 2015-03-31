@@ -277,7 +277,7 @@ namespace ETD.Models.Objects
 		public void setChiefComplaint(String chiefComplaint)
 		{
 			this.chiefComplaint = chiefComplaint;
-            StaticDBConnection.NonQueryDatabase("UPDATE [Interventions] SET Chief_Complaint='" + chiefComplaint.Replace("'", "''") + "' WHERE Intervention_ID=" + interventionID + ";");
+            StaticDBConnection.NonQueryDatabase("UPDATE [Interventions] SET Chief_Complaint='" + StaticDBConnection.GetResourceName(chiefComplaint).Replace("'", "''") + "' WHERE Intervention_ID=" + interventionID + ";");
 			//InstanceModifiedNotification();
 		}
 
@@ -336,7 +336,7 @@ namespace ETD.Models.Objects
 		public void setConclusion(String conclusion)
 		{
 			this.conclusion = conclusion;
-            StaticDBConnection.NonQueryDatabase("UPDATE [Interventions] SET Conclusion='" + conclusion.Replace("'", "''") + "' WHERE Intervention_ID=" + interventionID + ";");
+            StaticDBConnection.NonQueryDatabase("UPDATE [Interventions] SET Conclusion='" + StaticDBConnection.GetResourceName(conclusion).Replace("'", "''") + "' WHERE Intervention_ID=" + interventionID + ";");
 		}
 
 		public String getConclusion()

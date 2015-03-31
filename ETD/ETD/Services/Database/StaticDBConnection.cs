@@ -7,6 +7,7 @@ using System.Data.SQLite;
 using ETD.Models.Objects;
 using ETD.Services.Database.Queries;
 using System.IO;
+using System.Reflection;
 
 namespace ETD.Services.Database
 {
@@ -130,5 +131,31 @@ namespace ETD.Services.Database
            string dateTimeFormat = "{0}-{1}-{2} {3}:{4}:{5}.{6}";
            return string.Format(dateTimeFormat, datetime.Year, datetime.Month, datetime.Day, datetime.Hour, datetime.Minute, datetime.Second, datetime.Millisecond);
        }
+
+        public static string GetResourceName(string value)
+        {
+            string result = "";
+            MethodInfo[] methods = typeof(Properties.Resources).GetMethods(BindingFlags.Static | BindingFlags.Public);
+            foreach(MethodInfo mi in methods)
+            {
+                if(mi.ReturnType.Equals(typeof(string)) && (mi.Invoke(null,null) as string).Equals(value))
+                {
+                    return mi.Name;
+                }
+
+            }
+            return result;
+        }
+
+        public static string GetResource(string methodName)
+        {
+            string result = "";
+            MethodInfo method = typeof(Properties.Resources).GetMethod(methodName);
+            if(method != null)
+            {
+                result = (string)method.Invoke(null, null);
+            }
+            return result;
+        }
     }
 }
