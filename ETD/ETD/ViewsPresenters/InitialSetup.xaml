@@ -48,7 +48,7 @@
             <Button Click="Button_CancelSupervisorName_Click" Visibility="Hidden" Name="Button_CancelSupervisorName" Grid.Row="7" Grid.Column="1" Margin="250,1,0,0">Cancel</Button>
             <Button Click="Button_OKSupervisorName_Click" Visibility="Hidden" Name="Button_OKSupervisorName" Grid.Row="7" Grid.Column="1" Margin="204,1,71,0">OK</Button>
         </Grid>
-        <Button Name="Button_Add" Margin="7">Add Supervisor/Operation Manager</Button>
+        <Button Click="Button_Add_Supervisor_Manager_Click" Name="Button_Add_Supervisor_Manager" Margin="7">Add Supervisor/Operation Manager</Button>
         <Button x:Uid="Button_Submit" Margin="0" Click="Submit_Click" Width="100" Content="{Binding Path=Button_Submit, Source={StaticResource Resources}}" />
 
     </StackPanel>

@@ -288,6 +288,27 @@ namespace ETD.ViewsPresenters
 				supervisorName.SelectedItem = newUser;
 			}
 		}
+
+		private void Button_Add_Supervisor_Manager_Click(object sender, RoutedEventArgs e)
+		{
+			RowDefinition rowDef = new RowDefinition();
+			InitialSetupGrid.RowDefinitions.Add(rowDef);
+
+			ComboBox supervisorManagerCBox = new ComboBox();
+
+			ComboBoxItem supervisorItem = new ComboBoxItem();
+			supervisorItem.Content = "Supervisor";
+			supervisorManagerCBox.Items.Add(supervisorItem);
+
+			ComboBoxItem operationManagerItem = new ComboBoxItem();
+			operationManagerItem.Content = "Operation Manager";
+			supervisorManagerCBox.Items.Add(operationManagerItem);
+
+			//test.Content = "TEST";
+			InitialSetupGrid.Children.Add(supervisorManagerCBox);
+			Grid.SetRow(supervisorManagerCBox, 10);
+			Grid.SetColumn(supervisorManagerCBox, 0);
+		}
 		/*private void Button_CancelOperationManagerName_Click(object sender, RoutedEventArgs e)
 		{
 			Textbox_OperationManagerName.Visibility = Visibility.Hidden;
