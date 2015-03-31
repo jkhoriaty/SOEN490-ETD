@@ -508,5 +508,17 @@ namespace ETD.Models.Objects
         {
             return operationID;
         }
+
+        public static void AddActiveIntervention(Intervention intervention)
+        {
+            activeInterventionList.Add(intervention);
+            ClassModifiedNotification(typeof(Intervention));
+        }
+
+        public static void AddCompletedIntervention(Intervention intervention)
+        {
+            completedInterventionList.Add(intervention);
+            ClassModifiedNotification(typeof(Intervention));
+        }
     }
 }

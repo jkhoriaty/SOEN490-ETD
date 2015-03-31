@@ -36,7 +36,7 @@ namespace ETD_Statistic.ViewsPresenters
 
         private bool IsFormValid()
         {
-            if ((username.Text.Equals("admin")) && (password.Text.Equals("admin")))
+            if ((username.Text.Equals("admin")) && (password.Password.Equals("admin")))
             {
                 return true;             
             }
