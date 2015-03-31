@@ -225,6 +225,7 @@ namespace ETD.ViewsPresenters
 			Button_OKDispatcherName.Visibility = Visibility.Hidden;
 			Button_CancelDispatcherName.Visibility = Visibility.Hidden;
 			dispatcherName.Visibility = Visibility.Visible;
+			dispatcherName.SelectedIndex = -1;
 		}
 
 		private void Button_OKDispatcherName_Click(object sender, RoutedEventArgs e)

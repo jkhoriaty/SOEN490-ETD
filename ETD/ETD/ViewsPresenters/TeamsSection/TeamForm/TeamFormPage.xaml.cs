@@ -393,7 +393,11 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 				SQLiteDataReader reader = StaticDBConnection.QueryDatabase("Select Training_Level FROM [Volunteers] WHERE Name='" + memberNameItem.Content.ToString() + "'");
 				reader.Read();
 
-				lvlOfTraining1.SelectedIndex = Convert.ToInt32(reader["Training_Level"].ToString());
+				try
+				{
+					lvlOfTraining1.SelectedIndex = Convert.ToInt32(reader["Training_Level"].ToString());
+				}
+				catch { }
 			}
 		}
 
