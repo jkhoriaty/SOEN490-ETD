@@ -114,8 +114,6 @@ namespace ETD_Statistic.ViewsPresenters
             SQLiteDataReader adultReader = StaticDBConnection.QueryDatabase("SELECT count(*) as Count from Interventions WHERE Conclusion NOT LIKE 'get_ComboBoxItem_Conclusion_911' AND Conclusion NOT LIKE 'NULL' AND Operation_ID IN " + Statistic.getOperationID() + " AND Chief_Complaint='" + complaint + "' AND Age >= 18");
             while (adultReader.Read())
             {
-                MessageBox.Show(Statistic.getOperationID());
-                MessageBox.Show(complaint.ToString());
                 RowDefinition rd = new RowDefinition();
                 rd.Height = new GridLength(40);
                 ComplaintGrid.RowDefinitions.Add(rd);
