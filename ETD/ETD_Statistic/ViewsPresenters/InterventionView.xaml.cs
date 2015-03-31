@@ -29,8 +29,12 @@ namespace ETD_Statistic.ViewsPresenters
         int count = 2;
         static int countWithoutAmbulance = 0;
         static int countWithAmbulance = 0;
-        static int totalChildrenCount = 0;
-        static int totalAdultCount = 0;
+        //keeping track of total in the horizontal rows
+        static int totalChildrenHoriCount = 0;
+        static int totalAdultHoriCount = 0;
+        //keeping track of vertical total amount
+        static int totalChildrenVertical = 0;
+        static int totalAdultVertical = 0;
         public InterventionView()
         {
             InitializeComponent();
@@ -66,18 +70,21 @@ namespace ETD_Statistic.ViewsPresenters
                 Grid.SetRow(border, count);
                 GenerateInterventionWithoutAmbulance(count, complaint);
                 GenerateInterventionWithAmbulance(count, complaint);
-                GenerateTotalTable(count);
+                GenerateTotalTableHorizontal(count);
 
                 //resetting the total counters
                 countWithoutAmbulance = 0;
                 countWithAmbulance = 0;
-                totalChildrenCount = 0;
-                totalAdultCount = 0;
-
+                totalChildrenHoriCount = 0;
+                totalAdultHoriCount = 0;
+                
                 count++;
                 
             }
             StaticDBConnection.CloseConnection();
+            GenerateTotalTableVertical(count);
+            totalChildrenVertical = 0;
+            totalAdultVertical = 0;
            
         }
 
@@ -87,10 +94,7 @@ namespace ETD_Statistic.ViewsPresenters
 
             SQLiteDataReader childrenReader = StaticDBConnection.QueryDatabase("SELECT count(*) as Count from Interventions WHERE Conclusion NOT LIKE 'get_ComboBoxItem_Conclusion_911' AND Conclusion NOT LIKE 'NULL' AND Operation_ID IN " + Statistic.getOperationID() + " AND Chief_Complaint='" + complaint + "' AND Age < 18");
             while (childrenReader.Read())
-            {
-                RowDefinition rd = new RowDefinition();
-                rd.Height = new GridLength(40);
-                ComplaintGrid.RowDefinitions.Add(rd);
+            {              
                 Border border = new Border();
                 border.BorderThickness = new Thickness(0, 0, 1, 1);
                 border.BorderBrush = new SolidColorBrush(Colors.Black);
@@ -103,7 +107,7 @@ namespace ETD_Statistic.ViewsPresenters
                 tb.HorizontalAlignment = HorizontalAlignment.Center;
                 tb.Text = childrenReader["Count"].ToString();
                 countWithoutAmbulance += int.Parse(tb.Text.ToString());
-                totalChildrenCount += int.Parse(tb.Text.ToString());
+                totalChildrenHoriCount += int.Parse(tb.Text.ToString());
                 border.Child = tb;
                 ComplaintGrid.Children.Add(border);
                 Grid.SetColumn(border, 1);
@@ -113,10 +117,7 @@ namespace ETD_Statistic.ViewsPresenters
             //generating table for Adult without ambulance services
             SQLiteDataReader adultReader = StaticDBConnection.QueryDatabase("SELECT count(*) as Count from Interventions WHERE Conclusion NOT LIKE 'get_ComboBoxItem_Conclusion_911' AND Conclusion NOT LIKE 'NULL' AND Operation_ID IN " + Statistic.getOperationID() + " AND Chief_Complaint='" + complaint + "' AND Age >= 18");
             while (adultReader.Read())
-            {
-                RowDefinition rd = new RowDefinition();
-                rd.Height = new GridLength(40);
-                ComplaintGrid.RowDefinitions.Add(rd);
+            {               
                 Border border = new Border();
                 border.BorderThickness = new Thickness(0, 0, 1, 1);
                 border.BorderBrush = new SolidColorBrush(Colors.Black);
@@ -129,17 +130,14 @@ namespace ETD_Statistic.ViewsPresenters
                 tb.HorizontalAlignment = HorizontalAlignment.Center;
                 tb.Text = adultReader["Count"].ToString();
                 countWithoutAmbulance += int.Parse(tb.Text.ToString());
-                totalAdultCount += int.Parse(tb.Text.ToString());
+                totalAdultHoriCount += int.Parse(tb.Text.ToString());
                 border.Child = tb;
                 ComplaintGrid.Children.Add(border);
                 Grid.SetColumn(border, 2);
                 Grid.SetRow(border, row);
             }
 
-            //generating total table for without amublance services
-            RowDefinition rowDef = new RowDefinition();
-            rowDef.Height = new GridLength(40);
-            ComplaintGrid.RowDefinitions.Add(rowDef);
+            //generating total table for without amublance services          
             Border totalBorder = new Border();
             totalBorder.BorderThickness = new Thickness(0, 0, 1, 1);
             totalBorder.BorderBrush = new SolidColorBrush(Colors.Black);
@@ -165,9 +163,6 @@ namespace ETD_Statistic.ViewsPresenters
             SQLiteDataReader childrenReader = StaticDBConnection.QueryDatabase("SELECT count(*) as Count from Interventions WHERE Conclusion LIKE 'get_ComboBoxItem_Conclusion_911' AND Operation_ID IN " + Statistic.getOperationID() + " AND Chief_Complaint='" + complaint + "' AND Age < 18");
             while (childrenReader.Read())
             {
-                RowDefinition rd = new RowDefinition();
-                rd.Height = new GridLength(40);
-                ComplaintGrid.RowDefinitions.Add(rd);
                 Border border = new Border();
                 border.BorderThickness = new Thickness(0, 0, 1, 1);
                 border.BorderBrush = new SolidColorBrush(Colors.Black);
@@ -180,7 +175,7 @@ namespace ETD_Statistic.ViewsPresenters
                 tb.HorizontalAlignment = HorizontalAlignment.Center;
                 tb.Text = childrenReader["Count"].ToString();
                 countWithAmbulance += int.Parse(tb.Text.ToString());
-                totalChildrenCount += int.Parse(tb.Text.ToString());
+                totalChildrenHoriCount += int.Parse(tb.Text.ToString());
                 border.Child = tb;
                 ComplaintGrid.Children.Add(border);
                 Grid.SetColumn(border, 4);
@@ -190,10 +185,7 @@ namespace ETD_Statistic.ViewsPresenters
             //generating table for Adult with ambulance services
             SQLiteDataReader adultReader = StaticDBConnection.QueryDatabase("SELECT count(*) as Count from Interventions WHERE Conclusion LIKE 'get_ComboBoxItem_Conclusion_911' AND Operation_ID IN " + Statistic.getOperationID() + " AND Chief_Complaint='" + complaint + "' AND Age >= 18");
             while (adultReader.Read())
-            {
-                RowDefinition rd = new RowDefinition();
-                rd.Height = new GridLength(40);
-                ComplaintGrid.RowDefinitions.Add(rd);
+            {               
                 Border border = new Border();
                 border.BorderThickness = new Thickness(0, 0, 1, 1);
                 border.BorderBrush = new SolidColorBrush(Colors.Black);
@@ -206,17 +198,14 @@ namespace ETD_Statistic.ViewsPresenters
                 tb.HorizontalAlignment = HorizontalAlignment.Center;
                 tb.Text = adultReader["Count"].ToString();
                 countWithAmbulance += int.Parse(tb.Text.ToString());
-                totalAdultCount += int.Parse(tb.Text.ToString());
+                totalAdultHoriCount += int.Parse(tb.Text.ToString());
                 border.Child = tb;
                 ComplaintGrid.Children.Add(border);
                 Grid.SetColumn(border, 5);
                 Grid.SetRow(border, row);
             }
 
-            //generating total table for with amublance services
-            RowDefinition rowDef = new RowDefinition();
-            rowDef.Height = new GridLength(40);
-            ComplaintGrid.RowDefinitions.Add(rowDef);
+            //generating total table for with amublance services          
             Border totalBorder = new Border();
             totalBorder.BorderThickness = new Thickness(0, 0, 1, 1);
             totalBorder.BorderBrush = new SolidColorBrush(Colors.Black);
@@ -236,13 +225,10 @@ namespace ETD_Statistic.ViewsPresenters
  
         }
 
-        private void GenerateTotalTable(int row)
+        private void GenerateTotalTableHorizontal(int row)
         {
 
-            //generating row for children total
-            RowDefinition childRd = new RowDefinition();
-            childRd.Height = new GridLength(40);
-            ComplaintGrid.RowDefinitions.Add(childRd);
+            //generating row for children total          
             Border childBorder = new Border();
             childBorder.BorderThickness = new Thickness(0, 0, 1, 1);
             childBorder.BorderBrush = new SolidColorBrush(Colors.Black);
@@ -253,16 +239,13 @@ namespace ETD_Statistic.ViewsPresenters
             childTb.Margin = new Thickness(3, 0, 0, 0);
             childTb.VerticalAlignment = VerticalAlignment.Center;
             childTb.HorizontalAlignment = HorizontalAlignment.Center;
-            childTb.Text = totalChildrenCount.ToString();
+            childTb.Text = totalChildrenHoriCount.ToString();
             childBorder.Child = childTb;
             ComplaintGrid.Children.Add(childBorder);
             Grid.SetColumn(childBorder, 7);
             Grid.SetRow(childBorder, row);
 
-            //generating row for adult total
-            RowDefinition adultRd = new RowDefinition();
-            adultRd.Height = new GridLength(40);
-            ComplaintGrid.RowDefinitions.Add(adultRd);
+            //generating row for adult total           
             Border adultBorder = new Border();
             adultBorder.BorderThickness = new Thickness(0, 0, 1, 1);
             adultBorder.BorderBrush = new SolidColorBrush(Colors.Black);
@@ -273,16 +256,13 @@ namespace ETD_Statistic.ViewsPresenters
             adultTb.Margin = new Thickness(3, 0, 0, 0);
             adultTb.VerticalAlignment = VerticalAlignment.Center;
             adultTb.HorizontalAlignment = HorizontalAlignment.Center;
-            adultTb.Text = totalAdultCount.ToString();
+            adultTb.Text = totalAdultHoriCount.ToString();
             adultBorder.Child = adultTb;
             ComplaintGrid.Children.Add(adultBorder);
             Grid.SetColumn(adultBorder, 8);
             Grid.SetRow(adultBorder, row);
 
-            //generating row for total of everything
-            RowDefinition totalRd = new RowDefinition();
-            totalRd.Height = new GridLength(40);
-            ComplaintGrid.RowDefinitions.Add(totalRd);
+            //generating row for total of everything          
             Border totalBorder = new Border();
             totalBorder.BorderThickness = new Thickness(0, 0, 1, 1);
             totalBorder.BorderBrush = new SolidColorBrush(Colors.Black);
@@ -293,12 +273,74 @@ namespace ETD_Statistic.ViewsPresenters
             totalTb.Margin = new Thickness(3, 0, 0, 0);
             totalTb.VerticalAlignment = VerticalAlignment.Center;
             totalTb.HorizontalAlignment = HorizontalAlignment.Center;
-            totalTb.Text = (totalAdultCount + totalChildrenCount).ToString();
+            totalTb.Text = (totalAdultHoriCount + totalChildrenHoriCount).ToString();
+            totalChildrenVertical += totalChildrenHoriCount;
+            totalAdultVertical += totalAdultHoriCount;
             totalBorder.Child = totalTb;
             ComplaintGrid.Children.Add(totalBorder);
             Grid.SetColumn(totalBorder, 9);
             Grid.SetRow(totalBorder, row);
  
+        }
+
+        private void GenerateTotalTableVertical(int row)
+        {
+
+            RowDefinition totalRow = new RowDefinition();
+            totalRow.Height = new GridLength(40);
+            ComplaintGrid.RowDefinitions.Add(totalRow);
+
+            //setting total for children
+            Border border = new Border();
+            border.BorderThickness = new Thickness(5, 1, 5, 5);
+            border.BorderBrush = new SolidColorBrush(Colors.Black);
+            TextBlock tb = new TextBlock();
+            tb.VerticalAlignment = VerticalAlignment.Center;
+            tb.HorizontalAlignment = HorizontalAlignment.Center;
+            tb.FontWeight = FontWeights.Bold;
+            tb.Height = 40;
+            tb.FontSize = 13;
+            tb.Margin = new Thickness(5, 0, 0, 0);
+            tb.Text = totalChildrenVertical.ToString();
+            border.Child = tb;
+            ComplaintGrid.Children.Add(border);
+            Grid.SetColumn(border, 7);
+            Grid.SetRow(border, row + 1);
+          
+
+            //setting total for adult
+            Border adultBorder = new Border();
+            adultBorder.BorderThickness = new Thickness(1, 1, 1, 5);
+            adultBorder.BorderBrush = new SolidColorBrush(Colors.Black);
+            TextBlock adultTb = new TextBlock();
+            adultTb.VerticalAlignment = VerticalAlignment.Center;
+            adultTb.HorizontalAlignment = HorizontalAlignment.Center;
+            adultTb.FontWeight = FontWeights.Bold;
+            adultTb.Height = 40;
+            adultTb.FontSize = 13;
+            adultTb.Margin = new Thickness(5, 0, 0, 0);
+            adultTb.Text = totalAdultVertical.ToString();
+            adultBorder.Child = adultTb;
+            ComplaintGrid.Children.Add(adultBorder);
+            Grid.SetColumn(adultBorder, 8);
+            Grid.SetRow(adultBorder, row + 1);
+
+            //setting total for total
+            Border totalBorder = new Border();
+            totalBorder.BorderThickness = new Thickness(5, 1, 5, 5);
+            totalBorder.BorderBrush = new SolidColorBrush(Colors.Black);
+            TextBlock totalTb = new TextBlock();
+            totalTb.VerticalAlignment = VerticalAlignment.Center;
+            totalTb.HorizontalAlignment = HorizontalAlignment.Center;
+            totalTb.FontWeight = FontWeights.Bold;
+            totalTb.Height = 40;
+            totalTb.FontSize = 13;
+            totalTb.Margin = new Thickness(5, 0, 0, 0);
+            totalTb.Text = (totalChildrenVertical+totalAdultVertical).ToString();
+            totalBorder.Child = totalTb;
+            ComplaintGrid.Children.Add(totalBorder);
+            Grid.SetColumn(totalBorder, 9);
+            Grid.SetRow(totalBorder, row + 1);
         }
 
     }
