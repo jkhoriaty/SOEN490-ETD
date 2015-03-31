@@ -12,19 +12,20 @@ using ETD.Services.Database;
 
 namespace ETD.Services
 {
-    class Serializer
+    class Serializer : Observer
     {
         //Singleton variable
         private static Serializer instance;
 
         //Settings variables
         private const string outputDirectory = ".\\Temp\\";
-        private const int backupRate = 5000; //interval of backups, in milliseconds
+        private const int backupRate = 15000; //interval of backups, in milliseconds
 
         //Objects to backup
-        private List<Team> savedTeams;
-        private List<Intervention> savedInterventions;
-        private Operation savedOperation;
+        private List<Team> teams;
+        private List<Intervention> activeInterventions;
+        private List<Intervention> completedInterventions;
+        private Operation operation;
 
         //Objects needed for serialization
         private Timer timer;
@@ -34,13 +35,15 @@ namespace ETD.Services
 
         private Serializer()
         {
-            savedTeams = new List<Team>();
-            savedInterventions = new List<Intervention>();
+            teams = new List<Team>();
+            activeInterventions = new List<Intervention>();
+            completedInterventions = new List<Intervention>();
+            Observable.RegisterClassObserver(typeof(Team), this);
+            Observable.RegisterClassObserver(typeof(Intervention), this);
 
             serializer = new BinaryFormatter();
             timer = new Timer(backupRate);
             timer.Elapsed += new ElapsedEventHandler(BackUpEvent);
-            timer.Start();
         }
 
         public static Serializer Instance
@@ -61,34 +64,41 @@ namespace ETD.Services
         }
         private void BackUp()
         {
+            CleanUp();
             if(!Directory.Exists(outputDirectory))
             {
                 Directory.CreateDirectory(outputDirectory);
             }
-            if (savedOperation != null && !File.Exists(outputDirectory + "Operation" + savedOperation.getID()))
+            if (operation != null && !File.Exists(outputDirectory + "Operation" + operation.getID()))
             {
-                fileStream = File.Create(outputDirectory + "Operation" + savedOperation.getID() + ".tmp");
-                serializer.Serialize(fileStream, savedOperation);
+                fileStream = File.Create(outputDirectory + "Operation" + operation.getID() + ".tmp");
+                serializer.Serialize(fileStream, operation);
                 fileStream.Close();
             }
-            /*
-            foreach(Team t in savedTeams)
+            foreach(Team t in teams)
             {
                 fileStream = File.Create(outputDirectory + "Team" + t.getID() + ".tmp");
                 serializer.Serialize(fileStream, t);
                 fileStream.Close();
             }
-            foreach (Intervention i in savedInterventions)
+            foreach (Intervention i in activeInterventions)
             {
-                fileStream = File.Create(outputDirectory + "Intervention" + i.getID() + ".tmp");
+                fileStream = File.Create(outputDirectory + "ActiveIntervention" + i.getID() + ".tmp");
                 serializer.Serialize(fileStream, i);
                 fileStream.Close();
-            }*/
+            }
+            foreach (Intervention i in completedInterventions)
+            {
+                fileStream = File.Create(outputDirectory + "CompletedIntervention" + i.getID() + ".tmp");
+                serializer.Serialize(fileStream, i);
+                fileStream.Close();
+            }
+            StartBackUp();
         }
 
         public void CleanUp()
         {
-            timer.Stop();
+            StopBackUp();
             if(Directory.Exists(outputDirectory))
             {
                 try
@@ -109,10 +119,11 @@ namespace ETD.Services
 
         public void PerformRecovery()
         {
-            savedOperation = RecoverOperation();
-            Operation.currentOperation = savedOperation;
-            savedTeams = RecoverTeams();
-            //savedInterventions = RecoverInterventions();
+            operation = RecoverOperation();
+            Operation.currentOperation = operation;
+            RecoverTeams();
+            RecoverActiveInterventions();
+            RecoverCompletedInterventions();
         }
 
         private Operation RecoverOperation()
@@ -131,85 +142,76 @@ namespace ETD.Services
             return recovered;
         }
 
-        private List<Team> RecoverTeams()
+        private void RecoverTeams()
         {
-            List<Team> recovered = new List<Team>();
-            //TODO: Recovery Code
-            System.Data.SQLite.SQLiteDataReader results = StaticDBConnection.QueryDatabase("SELECT Team_ID FROM [Teams] WHERE Operation_ID = " + savedOperation.getID() + ";");
-            while (results.Read())
+            if (Recoverable())
             {
-                recovered.Add(new Team(results.GetInt32(0)));   
-            }
-            StaticDBConnection.CloseConnection();
-            return recovered;
-        }
-
-        private List<Intervention> RecoverInterventions()
-        {
-            List<Intervention> recovered = new List<Intervention>();
-            //TODO: Recovery Code
-            System.Data.SQLite.SQLiteDataReader results = StaticDBConnection.QueryDatabase("SELECT Intervention_ID FROM [Interventions] WHERE Operation_ID = " + savedOperation.getID() + ";");
-            if (results.HasRows)
-            {
-                while (results.Read())
+                String[] filenames = Directory.GetFiles(outputDirectory, "Team*.tmp");
+                if (filenames.Length > 0)
                 {
-                    recovered.Add(new Intervention(results.GetInt32(0)));
+                    foreach (string fn in filenames)
+                    {
+                        fileStream = File.OpenRead(fn);
+                        Team.InsertTeam((Team)serializer.Deserialize(fileStream));
+                        fileStream.Close();
+                    }
                 }
             }
-            StaticDBConnection.CloseConnection();
-            return recovered;
+        }
+        private void RecoverActiveInterventions()
+        {
+            if (Recoverable())
+            {
+                String[] filenames = Directory.GetFiles(outputDirectory, "ActiveIntervention*.tmp");
+                if (filenames.Length > 0)
+                {
+                    foreach (string fn in filenames)
+                    {
+                        fileStream = File.OpenRead(fn);
+                        Intervention.AddActiveIntervention((Intervention)serializer.Deserialize(fileStream));
+                        fileStream.Close();
+                    }
+                }
+            }
+        }
+        private void RecoverCompletedInterventions()
+        {
+            if (Recoverable())
+            {
+                String[] filenames = Directory.GetFiles(outputDirectory, "CompletedIntervention*.tmp");
+                if (filenames.Length > 0)
+                {
+                    foreach (string fn in filenames)
+                    {
+                        fileStream = File.OpenRead(fn);
+                        Intervention.AddCompletedIntervention((Intervention)serializer.Deserialize(fileStream));
+                        fileStream.Close();
+                    }
+                }
+            }
+        }
+
+        public void Update()
+        {
+            teams = Team.getTeamList();
+            activeInterventions = Intervention.getActiveInterventionList();
+            completedInterventions = Intervention.getCompletedInterventionList();
         }
 
         //Mutators
 
         public void StartBackUp()
         {
-            timer.Enabled = true;
+            timer.Start();
         }
-
-        public bool AddTeam(Team team)
+        public void StopBackUp()
         {
-            if (!savedTeams.Contains(team))
-            {
-                savedTeams.Add(team);
-                return true;
-            }
-            return false;
-        }
-
-        public bool RemoveTeam(Team team)
-        {
-            if (savedTeams.Contains(team))
-            {
-                savedTeams.Remove(team);
-                return true;
-            }
-            return false;
-        }
-
-        public bool AddIntervention(Intervention intervention)
-        {
-            if (!savedInterventions.Contains(intervention))
-            {
-                savedInterventions.Add(intervention);
-                return true;
-            }
-            return false;
-        }
-
-        public bool RemoveIntervention(Intervention intervention)
-        {
-            if (savedInterventions.Contains(intervention))
-            {
-                savedInterventions.Remove(intervention);
-                return true;
-            }
-            return false;
+            timer.Stop();
         }
 
         public bool SetOperation(Operation operation)
         {
-            this.savedOperation = operation;
+            this.operation = operation;
             return true;
         }
         
