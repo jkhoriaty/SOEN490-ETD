@@ -139,3 +139,5 @@ C:\Workspace\SOEN490-ETD\ETD\ETD_Statistic\obj\Debug\ETD_Statistic.Properties.Re
 C:\Workspace\SOEN490-ETD\ETD\ETD_Statistic\obj\Debug\ETD_Statistic.csproj.GenerateResource.Cache
 C:\Workspace\SOEN490-ETD\ETD\ETD_Statistic\obj\Debug\ETD_Statistic.exe
 C:\Workspace\SOEN490-ETD\ETD\ETD_Statistic\obj\Debug\ETD_Statistic.pdb
+C:\Workspace\SOEN490-ETD\ETD\ETD_Statistic\obj\Debug\VolunteerStatisticView.baml
+C:\Workspace\SOEN490-ETD\ETD\ETD_Statistic\obj\Debug\VolunteerStatisticView.g.cs
