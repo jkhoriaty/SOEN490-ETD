@@ -377,6 +377,7 @@ namespace ETD.ViewsPresenters
 				if(GPSServices.setupOngoing == true)
 				{
 					MessageBox.Show("Connection lost, setup exited.");
+					NotifyConnectionFail();
 
 					GPSServices.setupOngoing = false;
 					GPSSetup_Button.ClearValue(Button.BackgroundProperty);
