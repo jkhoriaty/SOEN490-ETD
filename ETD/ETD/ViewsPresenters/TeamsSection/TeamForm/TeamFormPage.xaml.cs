@@ -425,12 +425,13 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
                 {
                     reader.Read();
 
-				try
-				{
-					lvlOfTraining1.SelectedIndex = Convert.ToInt32(reader["Training_Level"].ToString());
-				}
-				catch { }
-                StaticDBConnection.CloseConnection();
+                    try
+                    {
+                        lvlOfTraining1.SelectedIndex = Convert.ToInt32(reader["Training_Level"].ToString());
+                    }
+                    catch { }
+                    StaticDBConnection.CloseConnection();
+                }
 			}
 		}
 
