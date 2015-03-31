@@ -70,6 +70,8 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 				ComboBox_TeamMemberName2.Items.Add(cbItem2);
 				ComboBox_TeamMemberName3.Items.Add(cbItem3);
 			}
+            reader.Dispose();
+            StaticDBConnection.CloseConnection();
         }
 
 		//Click: Add Member
@@ -393,7 +395,9 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 				SQLiteDataReader reader = StaticDBConnection.QueryDatabase("Select Training_Level FROM [Volunteers] WHERE Name='" + memberNameItem.Content.ToString() + "'");
 				reader.Read();
 
-				lvlOfTraining1.SelectedIndex = Convert.ToInt32(reader["Training_Level"].ToString());
+				lvlOfTraining1.SelectedIndex = reader.GetInt32(0);
+                reader.Dispose();
+                StaticDBConnection.CloseConnection();
 			}
 		}
 
@@ -413,7 +417,9 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 				SQLiteDataReader reader = StaticDBConnection.QueryDatabase("Select Training_Level FROM [Volunteers] WHERE Name='" + memberNameItem.Content.ToString() + "'");
 				reader.Read();
 
-				lvlOfTraining2.SelectedIndex = Convert.ToInt32(reader["Training_Level"].ToString());
+				lvlOfTraining2.SelectedIndex = reader.GetInt32(0);
+                reader.Dispose();
+                StaticDBConnection.CloseConnection();
 			}
 		}
 
@@ -433,7 +439,9 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 				SQLiteDataReader reader = StaticDBConnection.QueryDatabase("Select Training_Level FROM [Volunteers] WHERE Name='" + memberNameItem.Content.ToString() + "'");
 				reader.Read();
 
-				lvlOfTraining3.SelectedIndex = Convert.ToInt32(reader["Training_Level"].ToString());
+				lvlOfTraining3.SelectedIndex = reader.GetInt32(0);
+                reader.Dispose();
+                StaticDBConnection.CloseConnection();
 			}
 		}
 

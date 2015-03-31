@@ -25,7 +25,6 @@ namespace ETD_Statistic.ViewsPresenters
     public partial class InterventionView : Page
     {
         String complaint;
-        String displayComplaint;
         int count = 2;
         static int countWithoutAmbulance = 0;
         static int countWithAmbulance = 0;
@@ -57,9 +56,8 @@ namespace ETD_Statistic.ViewsPresenters
                 tb.HorizontalAlignment = HorizontalAlignment.Center;
                 tb.TextWrapping = TextWrapping.Wrap;
                 complaint = reader["Chief_Complaint"].ToString();
-                displayComplaint = StaticDBConnection.GetResource(complaint);
                 tb.Name = reader["Chief_Complaint"].ToString();
-                tb.Text = displayComplaint;
+                tb.Text = reader["Chief_Complaint"].ToString();
                 border.Child = tb;
                 ComplaintGrid.Children.Add(border);
                 Grid.SetColumn(border, 0);
@@ -85,7 +83,7 @@ namespace ETD_Statistic.ViewsPresenters
         {
             //generating table for Children without ambulance services
 
-            SQLiteDataReader childrenReader = StaticDBConnection.QueryDatabase("SELECT count(*) as Count from Interventions WHERE Conclusion NOT LIKE 'get_ComboBoxItem_Conclusion_911' AND Conclusion NOT LIKE 'NULL' AND Operation_ID IN " + Statistic.getOperationID() + " AND Chief_Complaint='" + complaint + "' AND Age < 18");
+            SQLiteDataReader childrenReader = StaticDBConnection.QueryDatabase("SELECT count(*) as Count from Interventions WHERE Conclusion NOT LIKE '911' AND Operation_ID IN " + Statistic.getOperationID() +" AND Chief_Complaint='"+complaint+"' AND Age < 18");
             while (childrenReader.Read())
             {
                 RowDefinition rd = new RowDefinition();
@@ -111,11 +109,9 @@ namespace ETD_Statistic.ViewsPresenters
             }
 
             //generating table for Adult without ambulance services
-            SQLiteDataReader adultReader = StaticDBConnection.QueryDatabase("SELECT count(*) as Count from Interventions WHERE Conclusion NOT LIKE 'get_ComboBoxItem_Conclusion_911' AND Conclusion NOT LIKE 'NULL' AND Operation_ID IN " + Statistic.getOperationID() + " AND Chief_Complaint='" + complaint + "' AND Age >= 18");
+            SQLiteDataReader adultReader = StaticDBConnection.QueryDatabase("SELECT count(*) as Count from Interventions WHERE Conclusion NOT LIKE '911' AND Operation_ID IN " + Statistic.getOperationID() + " AND Chief_Complaint='" + complaint + "' AND Age >= 18");
             while (adultReader.Read())
             {
-                MessageBox.Show(Statistic.getOperationID());
-                MessageBox.Show(complaint.ToString());
                 RowDefinition rd = new RowDefinition();
                 rd.Height = new GridLength(40);
                 ComplaintGrid.RowDefinitions.Add(rd);
@@ -164,7 +160,7 @@ namespace ETD_Statistic.ViewsPresenters
         private void GenerateInterventionWithAmbulance(int row, String complaint)
         {
             //generating table for Children with ambulance services
-            SQLiteDataReader childrenReader = StaticDBConnection.QueryDatabase("SELECT count(*) as Count from Interventions WHERE Conclusion LIKE 'get_ComboBoxItem_Conclusion_911' AND Operation_ID IN " + Statistic.getOperationID() + " AND Chief_Complaint='" + complaint + "' AND Age < 18");
+            SQLiteDataReader childrenReader = StaticDBConnection.QueryDatabase("SELECT count(*) as Count from Interventions WHERE Conclusion LIKE '911' AND Operation_ID IN " + Statistic.getOperationID() + " AND Chief_Complaint='" + complaint + "' AND Age < 18");
             while (childrenReader.Read())
             {
                 RowDefinition rd = new RowDefinition();
@@ -190,7 +186,7 @@ namespace ETD_Statistic.ViewsPresenters
             }
 
             //generating table for Adult with ambulance services
-            SQLiteDataReader adultReader = StaticDBConnection.QueryDatabase("SELECT count(*) as Count from Interventions WHERE Conclusion LIKE 'get_ComboBoxItem_Conclusion_911' AND Operation_ID IN " + Statistic.getOperationID() + " AND Chief_Complaint='" + complaint + "' AND Age >= 18");
+            SQLiteDataReader adultReader = StaticDBConnection.QueryDatabase("SELECT count(*) as Count from Interventions WHERE Conclusion LIKE '911' AND Operation_ID IN " + Statistic.getOperationID() + " AND Chief_Complaint='" + complaint + "' AND Age >= 18");
             while (adultReader.Read())
             {
                 RowDefinition rd = new RowDefinition();
