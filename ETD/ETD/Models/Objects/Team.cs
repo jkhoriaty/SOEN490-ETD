@@ -64,35 +64,6 @@ namespace ETD.Models.Objects
             
         }
 
-        public Team(int id)
-        {
-            this.teamID = id;
-            using (System.Data.SQLite.SQLiteDataReader results = StaticDBConnection.QueryDatabase("SELECT * FROM [Teams] WHERE Team_ID=" + id + ";"))
-            {
-                results.Read();
-                this.name = results["Name"].ToString();
-                this.status = (Statuses)int.Parse(results["Status"].ToString());
-                this.operationID = int.Parse(results["Operation_ID"].ToString());
-            }
-            StaticDBConnection.CloseConnection();
-            using (System.Data.SQLite.SQLiteDataReader results = StaticDBConnection.QueryDatabase("SELECT Volunteer_ID FROM [Team_Members] WHERE Team_ID = " + id + ";"))
-            {
-                while (results.Read())
-                {
-                    TeamMember member = new TeamMember(id, results.GetInt32(0));
-                    memberList.Add(member);
-                    if ((int)highestLevelOfTraining < (int)member.getTrainingLevel())
-                    {
-                        highestLevelOfTraining = member.getTrainingLevel();
-                    }
-                }
-            }
-            StaticDBConnection.CloseConnection();
-            teamList.Add(this);
-			ClassModifiedNotification(typeof(Team));
-            
-        }
-
         //Create a duplicate team
         public Team(Team team)
         {

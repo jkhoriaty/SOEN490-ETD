@@ -51,28 +51,6 @@ namespace ETD.Models.Objects
 			}
         }
 
-        public TeamMember(int teamId, int volunteerId)
-        {
-            this.volunteerID = volunteerId;
-            this.teamID = teamId;
-            using (System.Data.SQLite.SQLiteDataReader results = StaticDBConnection.QueryDatabase("SELECT Volunteers.Name, Volunteers.Training_Level, Team_Members.Departure FROM [Team_Members] INNER JOIN [Volunteers] ON Team_Members.Volunteer_ID = Volunteers.Volunteer_ID WHERE Team_Members.Team_ID = " + teamId + " AND Team_Members.Volunteer_ID = " + volunteerId + ";"))
-            {
-                if (results != null)
-                {
-                    results.Read();
-                    this.name = results.GetString(0);
-                    this.trainingLevel = (Trainings)results.GetInt32(1);
-                    this.departure = results.GetDateTime(2);
-                }
-            }
-            StaticDBConnection.CloseConnection();
-            if (Operation.currentOperation != null)
-            {
-                this.teamID = Operation.currentOperation.getID();
-            }
-            
-        }
-
         //Accessors
 
         public int getID()

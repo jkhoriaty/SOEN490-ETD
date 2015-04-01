@@ -20,12 +20,14 @@ namespace ETD.Models.Objects
         private static List<MapMod> mapModList = new List<MapMod>();//Contains a list of map modification objects
 
         private MapMods mapModType;
+        private int mapModID;
 
         //Creates a map modification object
         public MapMod(String name)
        {
            mapModType = (MapMods)Enum.Parse(typeof(MapMods), name);
            mapModList.Add(this);
+           mapModID = mapModList.Count;
            ClassModifiedNotification(typeof(MapMod));
        }
 
@@ -43,5 +45,9 @@ namespace ETD.Models.Objects
             return mapModList;
         }
 
+        public int getID()
+        {
+            return mapModID;
+        }
     }
 }

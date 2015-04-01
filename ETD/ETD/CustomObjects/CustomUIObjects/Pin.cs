@@ -521,21 +521,28 @@ namespace ETD.CustomObjects.CustomUIObjects
             {
                 if(p.GetType().Equals(type) && type.Equals(typeof(TeamPin)))
                 {
-                    if(((TeamPin)p).getTeam().getID() == id)
+                    if (((Team)p.getRelatedObject()).getID() == id)
                     {
                         return p;
                     }
                 }
                 else if (p.GetType().Equals(type) && type.Equals(typeof(InterventionPin)))
                 {
-                    if (((InterventionPin)p).getIntervention().getID() == id)
+                    if (((Intervention)p.getRelatedObject()).getID() == id)
                     {
                         return p;
                     }
                 }
                 else if (p.GetType().Equals(type) && type.Equals(typeof(EquipmentPin)))
                 {
-                    if (((EquipmentPin)p).getEquipment().getID() == id)
+                    if (((Equipment)p.getRelatedObject()).getID() == id)
+                    {
+                        return p;
+                    }
+                }
+                else if (p.GetType().Equals(type) && type.Equals(typeof(MapModPin)))
+                {
+                    if (((MapMod)p.getRelatedObject()).getID() == id)
                     {
                         return p;
                     }

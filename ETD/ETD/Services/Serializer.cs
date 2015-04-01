@@ -86,6 +86,7 @@ namespace ETD.Services
             BackUpCompletedInterventions();
             BackUpEquipments();
             BackUpRequests();
+            BackUpMapMods();
             BackUpPinPositions();
 
             StartBackUp();
@@ -189,6 +190,24 @@ namespace ETD.Services
                 }
             }
         }
+        private void BackUpMapMods()
+        {
+            List<MapMod> mods = new List<MapMod>(MapMod.getMapModList());
+            int count = 1;
+            foreach (MapMod mm in mods)
+            {
+                try
+                {
+                    fileStream = File.Create(outputDirectory + "MapMod" + mm.getID() + ".tmp");
+                    serializer.Serialize(fileStream, mm);
+                    fileStream.Close();
+                }
+                catch (Exception ex)
+                {
+                    LogException(ex);
+                }
+            }
+        }
         private void BackUpPinPositions()
         {
             try
@@ -209,6 +228,10 @@ namespace ETD.Services
                     else if (p.GetType().Equals(typeof(EquipmentPin)))
                     {
                         fileStream.Write(((EquipmentPin)p).getEquipment().getID() + ";");
+                    }
+                    else if (p.GetType().Equals(typeof(MapModPin)))
+                    {
+                        fileStream.Write(((MapMod)((MapModPin)p).getRelatedObject()).getID() + ";");
                     }
                     System.Windows.Application.Current.Dispatcher.Invoke(new Action(() =>
                     {
@@ -258,6 +281,7 @@ namespace ETD.Services
             RecoverCompletedInterventions();
             RecoverEquipments();
             RecoverRequests();
+            RecoverMapMods();
             RecoverPinPositions();
             if (partial)
             {
@@ -404,6 +428,30 @@ namespace ETD.Services
                 }
             }
             
+        }
+        private void RecoverMapMods()
+        {
+            if (Recoverable())
+            {
+                String[] filenames = Directory.GetFiles(outputDirectory, "MapMod*.tmp");
+                if (filenames.Length > 0)
+                {
+                    foreach (string fn in filenames)
+                    {
+                        try
+                        {
+                            fileStream = File.OpenRead(fn);
+                            MapMod.getMapModList().Add(((MapMod)serializer.Deserialize(fileStream)));
+                            fileStream.Close();
+                        }
+                        catch (Exception ex)
+                        {
+                            LogException(ex);
+                        }
+                    }
+                }
+            }
+
         }
         private void RecoverPinPositions()
         {
