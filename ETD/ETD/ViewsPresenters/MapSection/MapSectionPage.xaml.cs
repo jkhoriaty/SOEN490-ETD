@@ -27,7 +27,7 @@ namespace ETD.ViewsPresenters.MapSection
 		private bool pinDragInProgress;
 
         ImageBrush imgbrush = new ImageBrush();
-        ImageBrush original = new ImageBrush();
+        //ImageBrush original = new ImageBrush();
         internal String zoomLevel = "100%";
         bool isZoomed = false;
 
@@ -185,13 +185,17 @@ namespace ETD.ViewsPresenters.MapSection
             {
                 this.ContextMenu = this.Resources["ZoomContextMenuZoomed"] as ContextMenu;
             }
+
+            var mousePos = e.GetPosition(Canvas_map);
+            mouseX = mousePos.X;
+            mouseX = mousePos.Y;
         }
 		
 
 		public void Zoom_Click(object sender, EventArgs e)
         {
             imgbrush = (ImageBrush)additionalInfo.AdditionalMap.Background;
-            original = (ImageBrush)additionalInfo.AdditionalMap.Background;
+            //original = (ImageBrush)additionalInfo.AdditionalMap.Background;
 
             MenuItem mi = (MenuItem)sender;
             zoomLevel = (String)mi.Header;
@@ -232,6 +236,8 @@ namespace ETD.ViewsPresenters.MapSection
             imgbrush.RelativeTransform = ST;
             
             imgbrush.ClearValue(ImageBrush.TransformProperty);
+
+            this.Update();
         }
 
         public void ScaleMap(double ratio)
@@ -239,6 +245,8 @@ namespace ETD.ViewsPresenters.MapSection
             ScaleMapDefault();
             if (ratio != 1)
             {
+                Pin.ClearAllPins(Canvas_map);
+
                 ScaleTransform ST = new ScaleTransform();
                 ST.ScaleX = ratio;
                 ST.ScaleY = ratio;
