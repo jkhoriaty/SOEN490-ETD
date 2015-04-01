@@ -165,9 +165,6 @@ namespace ETD.ViewsPresenters.MapSection
 		//Upon right click store mouse position to know where to zoom
         private void Map_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
-            //var mousePos = e.GetPosition(Canvas_map);
-            //mouseX = mousePos.X;
-            //mouseY = mousePos.Y;
             if (isZoomed == false)
             {
                 this.ContextMenu = this.Resources["ZoomContextMenuDefault"] as ContextMenu;
@@ -242,8 +239,6 @@ namespace ETD.ViewsPresenters.MapSection
 
                 TT = new TranslateTransform(TTX, TTY);
                 imgbrush.Transform = TT;
-
-                this.ContextMenu = this.Resources["ZoomContextMenuDefault"] as ContextMenu;
             }
         }
 	}
