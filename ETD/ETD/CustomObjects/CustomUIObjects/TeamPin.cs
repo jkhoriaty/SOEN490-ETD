@@ -80,10 +80,16 @@ namespace ETD.CustomObjects.CustomUIObjects
 			base.setText(team.getName()); //Although the text doesn't change, we have to redraw it for it not to be hidden by the image
 
 			//Making the appropriate movement with the information provided by GPS
-			if(interventionPin == null && gpsLocation != null && GPSLocation.gpsConfigured == true)
+			if(this != draggedPin && team.getStatus() != Statuses.intervening && gpsLocation != null && GPSLocation.gpsConfigured == true)
 			{
 				setPinPosition(gpsLocation.getX(), gpsLocation.getY()); //Move the team
 				CollisionDetectionAndResolution(true);
+
+				//Updating arrow if any for it to point from the current teams position to its destination
+				if (destinationArrowDictionnary.ContainsKey(team) && destinationArrowDictionnary[team] != null)
+				{
+					destinationArrowDictionnary[team].DrawArrow(getX(), getY());
+				}
 			}
 		}
 
@@ -128,6 +134,12 @@ namespace ETD.CustomObjects.CustomUIObjects
 		{
 			MenuItem menuItem = (MenuItem)sender;
 			team.setStatus(getMenuItemStatus(menuItem));
+
+			//Clearing the arrow if the team got to where they are going
+			if (getMenuItemStatus(menuItem).Equals("available") || getMenuItemStatus(menuItem).Equals("intervening"))
+			{
+				ClearArrow();
+			}
 
 			//Handling the case when the user sets the status of a team to intervening
 			if (getMenuItemStatus(menuItem).Equals("intervening"))
@@ -193,6 +205,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 				else //Remove team from intervention
 				{
 					interventionPin.getIntervention().RemoveInterveningTeam(team);
+					interventionPin.SelectGPSLocation();
 					team.setStatus("unavailable");
 
 					//If it was the last team on that intervention and it has been removed, force redrawing of the map so that the InterventionContainer is removed
@@ -210,6 +223,13 @@ namespace ETD.CustomObjects.CustomUIObjects
 			}
 
 			base.DragStop(Canvas_map, e);
+
+			//Handle situation when the TeamPin is tracked by GPS and the user moves it
+			if (gpsLocation != null && GPSLocation.gpsConfigured == true)
+			{
+				//Create and draw the arrow to the destination point and replace pin at current GPS position
+				GPSPinDrop();
+			}
 		}
 
 		internal void setInterventionPin(InterventionPin interventionPin)

@@ -98,7 +98,7 @@ namespace ETD.Services
                         {
                             timeMIA[volunteerInfo[0]] = 0;
                             connectionStatus[volunteerInfo[0]] = 1; //Connected
-                            registeredVolunteers[volunteerInfo[0]] = volunteerInfo[1];
+                            registeredVolunteers[volunteerInfo[0]] = volunteerInfo[1]; //Updating location
                         }
 					}
 				}

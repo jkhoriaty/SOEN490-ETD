@@ -12,7 +12,8 @@ namespace ETD.CustomObjects.CustomUIObjects
 	class Arrow
 	{
 		//Constants
-		const double spokeAngle = 30;
+		const double spokeAngle = 20;
+		const double spokeLength = 20;
 
 		//Start and end point coordinates
 		double X1;
@@ -28,22 +29,8 @@ namespace ETD.CustomObjects.CustomUIObjects
 		public Arrow(Canvas Canvas_map, double X1, double Y1, double X2, double Y2)
 		{
 			BuildLines();
-
-			Canvas_map.Children.Add(mainLine);
-			Canvas_map.Children.Add(spoke1);
-			Canvas_map.Children.Add(spoke2);
-
-			setPoints(X1, Y1, X2, Y2);
-		}
-
-		internal void setPoints(double X1, double Y1, double X2, double Y2)
-		{
-			this.X1 = X1;
-			this.Y1 = Y1;
-			this.X2 = X2;
-			this.Y2 = Y2;
-
-			DrawLines();
+			ShowLines(Canvas_map);
+			DrawArrow(X1, Y1, X2, Y2);
 		}
 
 		//Creating all lines
@@ -62,7 +49,22 @@ namespace ETD.CustomObjects.CustomUIObjects
 			spoke2.StrokeThickness = 2;
 		}
 
-		private void DrawLines()
+		//Adding the lines to the map
+		internal void ShowLines(Canvas Canvas_map)
+		{
+			Canvas_map.Children.Add(mainLine);
+			Canvas_map.Children.Add(spoke1);
+			Canvas_map.Children.Add(spoke2);
+		}
+
+		//Draw line with the same destination
+		internal void DrawArrow(double X1, double Y1)
+		{
+			DrawArrow(X1, Y1, mainLine.X2, mainLine.Y2);
+		}
+
+		//Fixing the start and end point of the main line and the 2 spokes of the arrow
+		internal void DrawArrow(double X1, double Y1, double X2, double Y2)
 		{
 			//Fixing main line
 			mainLine.X1 = X1;
@@ -80,15 +82,19 @@ namespace ETD.CustomObjects.CustomUIObjects
 			//Normalizing the vector
 			double dxUnit = dx / length;
 			double dyUnit = dy / length;
+
+			//Setting length of spoke
+			double spokeX = dxUnit * spokeLength;
+			double spokeY = dyUnit * spokeLength;
 			
 			//Getting vector for the end point of spoke1
 			double radAngle = spokeAngle / 180 * Math.PI;
-			double xVector1 = (dxUnit * Math.Cos(radAngle)) - (dyUnit * Math.Sin(radAngle));
-			double yVector1 = (dxUnit * Math.Sin(radAngle)) + (dyUnit * Math.Cos(radAngle));
+			double xVector1 = (spokeX * Math.Cos(radAngle)) - (spokeY * Math.Sin(radAngle));
+			double yVector1 = (spokeX * Math.Sin(radAngle)) + (spokeY * Math.Cos(radAngle));
 
 			//Getting vector for the end point of spoke2
-			double xVector2 = (dxUnit * Math.Cos(-spokeAngle)) - (dyUnit * Math.Sin(-spokeAngle));
-			double yVector2 = (dxUnit * Math.Sin(-spokeAngle)) + (dyUnit * Math.Cos(-spokeAngle));
+			double xVector2 = (spokeX * Math.Cos(-radAngle)) - (spokeY * Math.Sin(-radAngle));
+			double yVector2 = (spokeX * Math.Sin(-radAngle)) + (spokeY * Math.Cos(-radAngle));
 
 			//Getting end point of the spoke1
 			double xSpoke1 = X2 + xVector1;
@@ -105,33 +111,18 @@ namespace ETD.CustomObjects.CustomUIObjects
 			spoke1.Y2 = ySpoke1;
 
 			//Creating and fixing spoke2
-			spoke2.X1 = X1;
-			spoke2.Y1 = Y1;
+			spoke2.X1 = X2;
+			spoke2.Y1 = Y2;
 			spoke2.X2 = xSpoke2;
 			spoke2.Y2 = ySpoke2;
 		}
 
 		//Removing arrow from map
-		public void clearArrow(Canvas Canvas_map)
+		public void ClearArrow(Canvas Canvas_map)
 		{
 			Canvas_map.Children.Remove(mainLine);
 			Canvas_map.Children.Remove(spoke1);
 			Canvas_map.Children.Remove(spoke2);
-		}
-
-		public Line getMainLine()
-		{
-			return mainLine;
-		}
-
-		public Line getSpoke1()
-		{
-			return spoke1;
-		}
-
-		public Line getSpoke2()
-		{
-			return spoke2;
 		}
 	}
 }

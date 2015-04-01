@@ -55,6 +55,12 @@ namespace ETD.ViewsPresenters.MapSection
 				TeamPin teamPin = new TeamPin(team, this);
 				Canvas_map.Children.Add(teamPin);
 
+				//Redrawing arrow if the pin has one
+				if(Pin.getPinArrow(team) != null)
+				{
+					Pin.getPinArrow(team).ShowLines(Canvas_map);
+				}
+
 				//Setting the pin to it's previous position, if it exists, or to the top-left corner
 				bool ignoreSpecialCollisions = false;
 				double[] previousPinPosition = Pin.getPreviousPinPosition(team);
@@ -72,6 +78,12 @@ namespace ETD.ViewsPresenters.MapSection
 			{
 				InterventionPin interventionPin = new InterventionPin(intervention, this);
 				Canvas_map.Children.Add(interventionPin);
+
+				//Redrawing arrow if the pin has one
+				if (Pin.getPinArrow(intervention) != null)
+				{
+					Pin.getPinArrow(intervention).ShowLines(Canvas_map);
+				}
 
 				//Setting the pin to it's previous position, if it exists, or to the top-left corner
 				bool ignoreSpecialCollisions = false;

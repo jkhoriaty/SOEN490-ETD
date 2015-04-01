@@ -58,23 +58,45 @@ namespace ETD.CustomObjects.CustomUIObjects
 			}
 
             //Have the intervention track the position of a team intervening on it so that it moves instead of the team
-            if (gpsLocation == null)
-            {
-                foreach (TeamPin teamPin in getInterveningTeamsPin())
-                {
-                    if (teamPin.getTeam().getGPSLocation() != null)
-                    {
-                        gpsLocation = teamPin.getTeam().getGPSLocation();
-                        gpsLocation.RegisterInstanceObserver(this);
-                    }
-                }
-            }
-
-			//Move the intervention pin using the GPS location of one of its intervening teams
-			if(gpsLocation != null && GPSLocation.gpsConfigured == true)
+            if(GPSLocation.gpsConfigured == true)
 			{
-				setPinPosition(gpsLocation.getX(), gpsLocation.getY());
-				CollisionDetectionAndResolution(false);
+				if (gpsLocation == null)
+				{
+					SelectGPSLocation();
+				}
+				else
+				{
+					//Move the intervention pin using the GPS location of one of its intervening teams
+					setPinPosition(gpsLocation.getX(), gpsLocation.getY());
+					CollisionDetectionAndResolution(false); //False to avoid collision with its own intervention border
+
+					//Updating arrow if any for it to point from the current interventions position to its destination
+					if (destinationArrowDictionnary.ContainsKey(intervention) && destinationArrowDictionnary[intervention] != null)
+					{
+						destinationArrowDictionnary[intervention].DrawArrow(getX(), getY());
+					}
+				}
+			}
+		}
+
+		//Choosing which (if any) gps location to use for the intervention coordinates
+		internal void SelectGPSLocation()
+		{
+			//Dissociate from last GPS coordinates
+			if(gpsLocation != null)
+			{
+				gpsLocation.DeregisterInstanceObserver(this);
+				gpsLocation = null;
+			}
+
+			//Find a team that has a GPS location and attach self to it
+			foreach (TeamPin teamPin in getInterveningTeamsPin())
+			{
+				if (teamPin.getTeam().getGPSLocation() != null && teamPin.getTeam().getStatus() == Statuses.intervening)
+				{
+					gpsLocation = teamPin.getTeam().getGPSLocation();
+					gpsLocation.RegisterInstanceObserver(this);
+				}
 			}
 		}
 
@@ -112,6 +134,36 @@ namespace ETD.CustomObjects.CustomUIObjects
 			{
 				interventionContainer.PlaceAll();
 			}
+		}
+
+		//Override default DragStop to add functionality
+		public override void DragStop(Canvas Canvas_map, MouseButtonEventArgs e)
+		{
+			base.DragStop(Canvas_map, e);
+
+			//Handle situation when the InterventionPin is tracked by GPS and the user moves it
+			if (gpsLocation != null && GPSLocation.gpsConfigured == true)
+			{
+				//Create and draw the arrow to the destination point and replace pin at current GPS position
+				GPSPinDrop();
+
+				Update(); //Triggering arrow drawing
+
+				//Creating a context menu for the intervention pin so that the user can inform the software that the intervention and its teams arrived at destination
+				MenuItem menuItem = new MenuItem();
+				menuItem.Header = "In position";
+				menuItem.Click += SetArrived_Click;
+
+				ContextMenu contextMenu = new ContextMenu();
+				contextMenu.Items.Add(menuItem);
+				this.ContextMenu = contextMenu;
+			}
+		}
+
+		//Called when team is moved and tracked by GPS and it gets to its destination
+		private void SetArrived_Click(object sender, RoutedEventArgs e)
+		{
+			ClearArrow();
 		}
 
 		//Make a list of the TeamPin of the teams intervening on this intervention

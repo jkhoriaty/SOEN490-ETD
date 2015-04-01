@@ -19,13 +19,17 @@ namespace ETD.CustomObjects.CustomUIObjects
 	{
 		internal static List<Pin> pinList = new List<Pin>(); //Contains all pins, used for collision detection
 		private static Dictionary<object, double[]> pinPositionList = new Dictionary<object, double[]>(); //Used to recover previous pin position after Update callback that clears the whole map
+		
+		internal static Pin draggedPin;//Pin used for collision detection, detects whether a pin is currently being moved on the map, is also used as a lock to disallow the GPS to move the pin while it's being dragged
 
-		private static Pin draggedPin;//Pin used for collision detection, detects whether a pin is currently being moved on the map
-
-		internal object relatedObject;//Creates an object used for position recovery
+		internal object relatedObject;//Pointer to object used for position recovery
 		
         internal MapSectionPage mapSection;//Page on which team, intervention and equipment pins can be added
-        private AdditionalInfoPage aiSection;//Page on which map modification pins can be added
+
+		//Variables used to draw arrow if item is tracked by GPS
+		internal double startX = -1;
+		internal double startY = -1;
+		internal static Dictionary<object, Arrow> destinationArrowDictionnary = new Dictionary<object, Arrow>();
 
 		//Creating regular pin
 		public Pin(object relatedObject, MapSectionPage mapSection, int size) : base()
@@ -81,6 +85,19 @@ namespace ETD.CustomObjects.CustomUIObjects
 		public static List<Pin> getPinList()
 		{
 			return pinList;
+		}
+
+		//Used for redrawing arrows after the whole map is redrawn
+		internal static Arrow getPinArrow(object pinRelatedObject)
+		{
+			if(destinationArrowDictionnary.ContainsKey(pinRelatedObject))
+			{
+				return destinationArrowDictionnary[pinRelatedObject];
+			}
+			else
+			{
+				return null;
+			}
 		}
 
 		//Setting the pins' background image to the passed image
@@ -223,6 +240,10 @@ namespace ETD.CustomObjects.CustomUIObjects
 		public virtual void DragStart()
 		{
 			draggedPin = this;
+
+			//Keeping track of the start position of the pin being dragged in case the pin is tracked by GPS
+			startX = getX();
+			startY = getY();
 		}
 
 		//Drag in progress (when mouse moves and a pin is clicked)
@@ -252,6 +273,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 			this.ReleaseMouseCapture();
 
 			CollisionDetectionAndResolution(false);
+			draggedPin = null;
 		}
 
 		//Returns true if this pin (the moved pin) overlaps the fixed pin passed as an argument more than 25%, false otherwise
@@ -264,6 +286,34 @@ namespace ETD.CustomObjects.CustomUIObjects
 			else
 			{
 				return false;
+			}
+		}
+
+		//Handling case when a pin tracked by GPS is dropped
+		internal void GPSPinDrop()
+		{
+			//Create and draw the arrow to the destination point
+			if (!destinationArrowDictionnary.ContainsKey(relatedObject))
+			{
+				destinationArrowDictionnary.Add(relatedObject, null); //Create the entry if inexistant
+			}
+			else if (destinationArrowDictionnary[relatedObject] != null)
+			{
+				destinationArrowDictionnary[relatedObject].ClearArrow(mapSection.Canvas_map); //Clear the arrow that it contains if it does exist
+			}
+			destinationArrowDictionnary[relatedObject] = new Arrow(mapSection.Canvas_map, startX, startY, getX(), getY());
+
+			//Replacing pin at the start point and ensuring it doesn't get added to an intervention by mistake
+			setPinPosition(startX, startY);
+			CollisionDetectionAndResolution(true);
+		}
+
+		internal void ClearArrow()
+		{
+			if (destinationArrowDictionnary.ContainsKey(relatedObject) && destinationArrowDictionnary[relatedObject] != null)
+			{
+				destinationArrowDictionnary[relatedObject].ClearArrow(mapSection.Canvas_map);
+				destinationArrowDictionnary[relatedObject] = null;
 			}
 		}
 
