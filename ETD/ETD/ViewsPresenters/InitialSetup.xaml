@@ -2,12 +2,12 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:properties="clr-namespace:ETD.Properties"
-        Title="Initial Setup" Height="370" Width="500">
+        Title="Initial Setup" Height="400" Width="500">
     <StackPanel Margin="10">
-        <Grid>
+        <Grid Name="InitialSetupGrid">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" SharedSizeGroup="Label"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="175" SharedSizeGroup="Label"/>
+                <ColumnDefinition Width="325"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="30"/>
@@ -18,9 +18,8 @@
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="30"/>
-                <RowDefinition Height="30"/>
             </Grid.RowDefinitions>
-            <Label x:Uid="Label_OperationName" Grid.Row ="0" Grid.Column="0" Content="{Binding Path=Label_OperationName, Source={StaticResource Resources}}" Margin="1"/>
+            <Label HorizontalContentAlignment="Center" x:Uid="Label_OperationName" Grid.Row ="0" Grid.Column="0" Content="{Binding Path=Label_OperationName, Source={StaticResource Resources}}" Margin="1"/>
             <TextBox VerticalContentAlignment="Center" TextAlignment="Center" Grid.Row="0" Grid.Column="1" Name="operationName" Margin="1"/>
             <Label HorizontalContentAlignment="Center" VerticalContentAlignment="Center" x:Uid="Label_Acronym" Grid.Row="1" Grid.Column="0" Content="{Binding Path=Label_Acronym, Source={StaticResource Resources}}" Margin="1"/>
             <TextBox VerticalContentAlignment="Center" TextAlignment="Center" Grid.Row="1" Grid.Column="1" Name="acronym" Margin="1" />
@@ -39,22 +38,20 @@
                 <TextBox VerticalContentAlignment="Center" TextAlignment="Center" Margin="1" HorizontalContentAlignment="Center" Name="shiftEndTimemm" Width="30" MaxLength="2" GotFocus="Text_Enter" LostFocus="Text_Fillmm">mm</TextBox>
             </StackPanel>
             <Label HorizontalContentAlignment="Center" Margin="1" x:Uid="Label_DispatcherName" Grid.Row="6" Grid.Column="0" Content="{Binding Path=Label_DispatcherName, Source={StaticResource Resources}}" />
-            <ComboBox SelectionChanged="dispatcherName_SelectionChanged" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="1"  Grid.Row="6" Grid.Column="1" Name="dispatcherName" />
-            <TextBox Visibility="Hidden" Margin="0,0,117,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Grid.Row="6" Grid.Column="1" Name="Textbox_DispatcherName" />
-            <Button Click="Button_CancelDispatcherName_Click" Visibility="Hidden" Name="Button_CancelDispatcherName" Grid.Row="6" Grid.Column="1" Margin="250,1,0,0">Cancel</Button>
-            <Button Click="Button_OKDispatcherName_Click" Visibility="Hidden" Name="Button_OKDispatcherName" Grid.Row="6" Grid.Column="1" Margin="204,1,71,0">OK</Button>
-            <Label HorizontalContentAlignment="Center" Margin="1" x:Uid="Label_Supervisor" Grid.Row="7" Grid.Column="0" Content="Supervisor Name" />
-            <ComboBox SelectionChanged="supervisorName_SelectionChanged" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="1"  Grid.Row="7" Grid.Column="1" Name="supervisorName" />
+            <StackPanel Name="StackPanel_DispatcherName" Orientation="Horizontal" Grid.Row="6" Grid.Column="1" Width="Auto">
+                <ComboBox Width="280" Visibility="Visible" SelectionChanged="dispatcherName_SelectionChanged" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Name="dispatcherName" />
+                <TextBox Visibility="Collapsed" Width="180" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Name="Textbox_DispatcherName" />
+                <Button Width="30" Click="Button_OKDispatcherName_Click" Visibility="Collapsed" Name="Button_OKDispatcherName">OK</Button>
+                <Button Width="70" Click="Button_CancelDispatcherName_Click" Visibility="Collapsed" Name="Button_CancelDispatcherName" >Cancel</Button>
+            </StackPanel>
+            <ComboBox Name="Combobox_SupervisorOperationManager" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="1" x:Uid="Combobox_SupervisorOperationManager" Grid.Row="7" Grid.Column="0"/>
+            <ComboBox HorizontalAlignment="Left" Width="280" SelectionChanged="supervisorName_SelectionChanged" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  Grid.Row="7" Grid.Column="1" Name="supervisorName" />
             <TextBox Visibility="Hidden" Margin="0,0,117,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Grid.Row="7" Grid.Column="1" Name="Textbox_SupervisorName" />
             <Button Click="Button_CancelSupervisorName_Click" Visibility="Hidden" Name="Button_CancelSupervisorName" Grid.Row="7" Grid.Column="1" Margin="250,1,0,0">Cancel</Button>
             <Button Click="Button_OKSupervisorName_Click" Visibility="Hidden" Name="Button_OKSupervisorName" Grid.Row="7" Grid.Column="1" Margin="204,1,71,0">OK</Button>
-            <Label HorizontalContentAlignment="Center" Margin="1" x:Uid="Label_OperationManager" Grid.Row="8" Grid.Column="0" Content="Operation Manager Name" />
-            <ComboBox SelectionChanged="opManagerName_SelectionChanged" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="1"  Grid.Row="8" Grid.Column="1" Name="opManagerName" />
-            <TextBox Visibility="Hidden" Margin="0,0,117,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Grid.Row="8" Grid.Column="1" Name="Textbox_OperationManagerName" />
-            <Button Click="Button_CancelOperationManagerName_Click" Visibility="Hidden" Name="Button_CancelOperationManagerName" Grid.Row="8" Grid.Column="1" Margin="250,1,0,0">Cancel</Button>
-            <Button Click="Button_OKOperationManagerName_Click" Visibility="Hidden" Name="Button_OKOperationManagerName" Grid.Row="8" Grid.Column="1" Margin="204,1,71,0">OK</Button>
         </Grid>
-        <Button x:Uid="Button_Submit" Margin="7" Click="Submit_Click" Width="100" Content="{Binding Path=Button_Submit, Source={StaticResource Resources}}" />
+        <Button Click="Button_Add_Supervisor_Manager_Click" Name="Button_Add_Supervisor_Manager" Margin="7">Add Supervisor/Operation Manager</Button>
+        <Button x:Uid="Button_Submit" Margin="0" Click="Submit_Click" Width="100" Content="{Binding Path=Button_Submit, Source={StaticResource Resources}}" />
 
     </StackPanel>
 </Window>

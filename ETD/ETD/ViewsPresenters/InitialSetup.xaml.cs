@@ -27,6 +27,7 @@ namespace ETD.ViewsPresenters
         DateTime shiftStart;
         String shiftEndStr;
         DateTime shiftEnd;
+		int lastGridRow;
 
         public InitialSetup()
         {
@@ -51,29 +52,43 @@ namespace ETD.ViewsPresenters
 			createUserItemSupervisor.FontStyle = FontStyles.Italic;
 			createUserItemSupervisor.FontWeight = FontWeights.Bold;
 
-			ComboBoxItem createUserItemOpManager = new ComboBoxItem();
+			/*ComboBoxItem createUserItemOpManager = new ComboBoxItem();
 			createUserItemOpManager.Content = "NEW USER";
 			createUserItemOpManager.FontStyle = FontStyles.Italic;
-			createUserItemOpManager.FontWeight = FontWeights.Bold;
+			createUserItemOpManager.FontWeight = FontWeights.Bold;*/
 
 			dispatcherName.Items.Add(createUserItem);
 			supervisorName.Items.Add(createUserItemSupervisor);
-			opManagerName.Items.Add(createUserItemOpManager);
-			StaticDBConnection.CloseConnection();
+			//opManagerName.Items.Add(createUserItemOpManager);
 
-			SQLiteDataReader reader = StaticDBConnection.QueryDatabase("SELECT Name FROM Volunteers");
-			while (reader.Read())
-			{
-				ComboBoxItem cbItem = new ComboBoxItem();
-				cbItem.Content = reader["Name"].ToString();
-				ComboBoxItem cbItemSupervisor = new ComboBoxItem();
-				cbItemSupervisor.Content = reader["Name"].ToString();
-				ComboBoxItem cbItemOpManager = new ComboBoxItem();
-				cbItemOpManager.Content = reader["Name"].ToString();
-				dispatcherName.Items.Add(cbItem);
-				supervisorName.Items.Add(cbItemSupervisor);
-				opManagerName.Items.Add(cbItemOpManager);
-			}
+			ComboBoxItem supervisorItem = new ComboBoxItem();
+			supervisorItem.Content = "Supervisor";
+
+			ComboBoxItem opManagerItem = new ComboBoxItem();
+			opManagerItem.Content = "Operation Manager";
+			
+			Combobox_SupervisorOperationManager.Items.Add(supervisorItem);
+			Combobox_SupervisorOperationManager.Items.Add(opManagerItem);
+
+			lastGridRow = InitialSetupGrid.RowDefinitions.Count;
+
+
+            using (SQLiteDataReader reader = StaticDBConnection.QueryDatabase("SELECT Name FROM Volunteers"))
+            {
+                while (reader.Read())
+                {
+                    ComboBoxItem cbItem = new ComboBoxItem();
+                    cbItem.Content = reader["Name"].ToString();
+                    ComboBoxItem cbItemSupervisor = new ComboBoxItem();
+                    cbItemSupervisor.Content = reader["Name"].ToString();
+                    ComboBoxItem cbItemOpManager = new ComboBoxItem();
+                    cbItemOpManager.Content = reader["Name"].ToString();
+                    dispatcherName.Items.Add(cbItem);
+                    supervisorName.Items.Add(cbItemSupervisor);
+                    //opManagerName.Items.Add(cbItemOpManager);
+                }
+            }
+            StaticDBConnection.CloseConnection();
         }
 
         private void Submit_Click(object sender, RoutedEventArgs e)
@@ -190,7 +205,7 @@ namespace ETD.ViewsPresenters
 		{
 			if(dispatcherName.SelectedIndex == 0)
 			{
-				dispatcherName.Visibility = Visibility.Hidden;
+				dispatcherName.Visibility = Visibility.Collapsed;
 				Textbox_DispatcherName.Visibility = Visibility.Visible;
 				Button_OKDispatcherName.Visibility = Visibility.Visible;
 				Button_CancelDispatcherName.Visibility = Visibility.Visible;
@@ -201,14 +216,14 @@ namespace ETD.ViewsPresenters
 		{
 			if (supervisorName.SelectedIndex == 0)
 			{
-				supervisorName.Visibility = Visibility.Hidden;
+				supervisorName.Visibility = Visibility.Collapsed;
 				Textbox_SupervisorName.Visibility = Visibility.Visible;
 				Button_OKSupervisorName.Visibility = Visibility.Visible;
 				Button_CancelSupervisorName.Visibility = Visibility.Visible;
 			}
 		}
 
-		private void opManagerName_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		/*private void opManagerName_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
 			if (opManagerName.SelectedIndex == 0)
 			{
@@ -217,14 +232,15 @@ namespace ETD.ViewsPresenters
 				Button_OKOperationManagerName.Visibility = Visibility.Visible;
 				Button_CancelOperationManagerName.Visibility = Visibility.Visible;
 			}
-		}
+		}*/
 
 		private void Button_CancelDispatcherName_Click(object sender, RoutedEventArgs e)
 		{
-			Textbox_DispatcherName.Visibility = Visibility.Hidden;
-			Button_OKDispatcherName.Visibility = Visibility.Hidden;
-			Button_CancelDispatcherName.Visibility = Visibility.Hidden;
+			Textbox_DispatcherName.Visibility = Visibility.Collapsed;
+			Button_OKDispatcherName.Visibility = Visibility.Collapsed;
+			Button_CancelDispatcherName.Visibility = Visibility.Collapsed;
 			dispatcherName.Visibility = Visibility.Visible;
+			dispatcherName.SelectedIndex = -1;
 		}
 
 		private void Button_OKDispatcherName_Click(object sender, RoutedEventArgs e)
@@ -236,9 +252,9 @@ namespace ETD.ViewsPresenters
 			else
 			{
 				StaticDBConnection.NonQueryDatabase("INSERT INTO [Volunteers] (Name, Training_Level) VALUES ('" + Textbox_DispatcherName.Text + "', 0);");
-				Textbox_DispatcherName.Visibility = Visibility.Hidden;
-				Button_OKDispatcherName.Visibility = Visibility.Hidden;
-				Button_CancelDispatcherName.Visibility = Visibility.Hidden;
+				Textbox_DispatcherName.Visibility = Visibility.Collapsed;
+				Button_OKDispatcherName.Visibility = Visibility.Collapsed;
+				Button_CancelDispatcherName.Visibility = Visibility.Collapsed;
 				dispatcherName.Visibility = Visibility.Visible;
 
 				ComboBoxItem newUser = new ComboBoxItem();
@@ -250,9 +266,9 @@ namespace ETD.ViewsPresenters
 
 		private void Button_CancelSupervisorName_Click(object sender, RoutedEventArgs e)
 		{
-			Textbox_SupervisorName.Visibility = Visibility.Hidden;
-			Button_OKSupervisorName.Visibility = Visibility.Hidden;
-			Button_CancelSupervisorName.Visibility = Visibility.Hidden;
+			Textbox_SupervisorName.Visibility = Visibility.Collapsed;
+			Button_OKSupervisorName.Visibility = Visibility.Collapsed;
+			Button_CancelSupervisorName.Visibility = Visibility.Collapsed;
 			supervisorName.Visibility = Visibility.Visible;
 		}
 		private void Button_OKSupervisorName_Click(object sender, RoutedEventArgs e)
@@ -264,9 +280,9 @@ namespace ETD.ViewsPresenters
 			else
 			{
 				StaticDBConnection.NonQueryDatabase("INSERT INTO [Volunteers] (Name, Training_Level) VALUES ('" + Textbox_SupervisorName.Text + "', 0);");
-				Textbox_SupervisorName.Visibility = Visibility.Hidden;
-				Button_OKSupervisorName.Visibility = Visibility.Hidden;
-				Button_CancelSupervisorName.Visibility = Visibility.Hidden;
+				Textbox_SupervisorName.Visibility = Visibility.Collapsed;
+				Button_OKSupervisorName.Visibility = Visibility.Collapsed;
+				Button_CancelSupervisorName.Visibility = Visibility.Collapsed;
 				supervisorName.Visibility = Visibility.Visible;
 
 				ComboBoxItem newUser = new ComboBoxItem();
@@ -275,7 +291,31 @@ namespace ETD.ViewsPresenters
 				supervisorName.SelectedItem = newUser;
 			}
 		}
-		private void Button_CancelOperationManagerName_Click(object sender, RoutedEventArgs e)
+
+		private void Button_Add_Supervisor_Manager_Click(object sender, RoutedEventArgs e)
+		{
+			RowDefinition rowDef = new RowDefinition();
+			rowDef.Height = new GridLength(30);
+			InitialSetupGrid.RowDefinitions.Add(rowDef);
+
+			ComboBox supervisorManagerCBox = new ComboBox();
+			supervisorManagerCBox.HorizontalContentAlignment = HorizontalAlignment.Center;
+			supervisorManagerCBox.VerticalContentAlignment = VerticalAlignment.Center;
+
+			ComboBoxItem supervisorItem = new ComboBoxItem();
+			supervisorItem.Content = "Supervisor";
+			supervisorManagerCBox.Items.Add(supervisorItem);
+
+			ComboBoxItem operationManagerItem = new ComboBoxItem();
+			operationManagerItem.Content = "Operation Manager";
+			supervisorManagerCBox.Items.Add(operationManagerItem);
+
+			InitialSetupGrid.Children.Add(supervisorManagerCBox);
+			Grid.SetRow(supervisorManagerCBox, lastGridRow);
+			Grid.SetColumn(supervisorManagerCBox, 0);
+			lastGridRow++;
+		}
+		/*private void Button_CancelOperationManagerName_Click(object sender, RoutedEventArgs e)
 		{
 			Textbox_OperationManagerName.Visibility = Visibility.Hidden;
 			Button_OKOperationManagerName.Visibility = Visibility.Hidden;
@@ -302,5 +342,6 @@ namespace ETD.ViewsPresenters
 				opManagerName.SelectedItem = newUser;
 			}
 		}
+		*/
     }
 }

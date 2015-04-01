@@ -1,7 +1,7 @@
 /*
 Navicat SQLite Data Transfer
 
-Source Server         : ETD-Debug
+Source Server         : ETD
 Source Server Version : 30808
 Source Host           : :0
 
@@ -9,7 +9,7 @@ Target Server Type    : SQLite
 Target Server Version : 30808
 File Encoding         : 65001
 
-Date: 2015-03-27 22:14:07
+Date: 2015-03-31 20:25:20
 */
 
 PRAGMA foreign_keys = OFF;
@@ -85,7 +85,8 @@ CREATE TABLE "Calls" (
 "Ambulance_Time"  DATETIME,
 "Ambulance_Company"  TEXT,
 "Ambulance_Vehicle"  TEXT,
-PRIMARY KEY ("Call_ID")
+PRIMARY KEY ("Call_ID" ASC),
+CONSTRAINT "fkey0" FOREIGN KEY ("Intervention_ID") REFERENCES "Interventions" ("Intervention_ID") ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- ----------------------------
@@ -126,6 +127,24 @@ INSERT INTO "main"."Equipment_Types" VALUES (3, 'Epipen');
 INSERT INTO "main"."Equipment_Types" VALUES (4, 'Transport Stretcher');
 INSERT INTO "main"."Equipment_Types" VALUES (5, 'Mounted Stretcher');
 INSERT INTO "main"."Equipment_Types" VALUES (6, 'Wheelchair');
+
+-- ----------------------------
+-- Table structure for Intervening_Teams
+-- ----------------------------
+DROP TABLE IF EXISTS "main"."Intervening_Teams";
+CREATE TABLE "Intervening_Teams" (
+"Intervention_ID"  INTEGER NOT NULL,
+"Team_ID"  INTEGER NOT NULL,
+"Started_Intervening"  DATETIME,
+"Stopped_Intervening"  DATETIME,
+PRIMARY KEY ("Intervention_ID" ASC, "Team_ID" ASC),
+FOREIGN KEY ("Intervention_ID") REFERENCES "Interventions" ("Intervention_ID") ON DELETE CASCADE ON UPDATE CASCADE,
+FOREIGN KEY ("Team_ID") REFERENCES "Teams" ("Team_ID") ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+-- ----------------------------
+-- Records of Intervening_Teams
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for Interventions
@@ -175,6 +194,26 @@ CREATE TABLE "Operations" (
 
 -- ----------------------------
 -- Records of Operations
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for Requests
+-- ----------------------------
+DROP TABLE IF EXISTS "main"."Requests";
+CREATE TABLE "Requests" (
+"Request_ID"  INTEGER NOT NULL,
+"Client"  TEXT,
+"Request"  TEXT,
+"Handled_By"  TEXT,
+"Recipient"  TEXT,
+"Time"  DATETIME,
+"FollowUp_Time"  DATETIME,
+"Completion_Time"  DATETIME,
+PRIMARY KEY ("Request_ID")
+);
+
+-- ----------------------------
+-- Records of Requests
 -- ----------------------------
 
 -- ----------------------------

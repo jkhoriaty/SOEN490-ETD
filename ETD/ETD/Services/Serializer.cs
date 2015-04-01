@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
 using ETD.Services.Database;
+using ETD.CustomObjects.CustomUIObjects;
 
 namespace ETD.Services
 {
@@ -25,6 +26,8 @@ namespace ETD.Services
         private List<Team> teams;
         private List<Intervention> activeInterventions;
         private List<Intervention> completedInterventions;
+        private List<Equipment> equipments;
+        private List<Request> requests;
         private Operation operation;
 
         //Objects needed for serialization
@@ -36,10 +39,17 @@ namespace ETD.Services
         private Serializer()
         {
             teams = new List<Team>();
+            Observable.RegisterClassObserver(typeof(Team), this);
+
             activeInterventions = new List<Intervention>();
             completedInterventions = new List<Intervention>();
-            Observable.RegisterClassObserver(typeof(Team), this);
             Observable.RegisterClassObserver(typeof(Intervention), this);
+
+            equipments = new List<Equipment>();
+            Observable.RegisterClassObserver(typeof(Equipment), this);
+
+            requests = new List<Request>();
+            Observable.RegisterClassObserver(typeof(Request), this);
 
             serializer = new BinaryFormatter();
             timer = new Timer(backupRate);
@@ -65,35 +75,98 @@ namespace ETD.Services
         private void BackUp()
         {
             CleanUp();
+            
             if(!Directory.Exists(outputDirectory))
             {
                 Directory.CreateDirectory(outputDirectory);
             }
-            if (operation != null && !File.Exists(outputDirectory + "Operation" + operation.getID()))
+            BackUpOperation();
+            BackUpTeams();
+            BackUpActiveInterventions();
+            BackUpCompletedInterventions();
+            BackUpEquipments();
+            BackUpPinPositions();
+
+            StartBackUp();
+        }
+
+        private void BackUpPinPositions()
+        {
+            List<Pin> pins = new List<Pin>(Pin.getPinList());
+            StreamWriter fileStream = new StreamWriter(outputDirectory + "PinsInfo.tmp");
+            foreach(Pin p in pins)
             {
-                fileStream = File.Create(outputDirectory + "Operation" + operation.getID() + ".tmp");
-                serializer.Serialize(fileStream, operation);
+                fileStream.Write(p.GetType() + ";");
+                if(p.GetType().Equals(typeof(TeamPin)))
+                {
+                    fileStream.Write(((TeamPin)p).getTeam().getID() + ";");
+                }
+                else if (p.GetType().Equals(typeof(InterventionPin)))
+                {
+                    fileStream.Write(((InterventionPin)p).getIntervention().getID() + ";");
+                }
+                else if (p.GetType().Equals(typeof(EquipmentPin)))
+                {
+                    fileStream.Write(((EquipmentPin)p).getEquipment().getID() + ";");
+                }
+                System.Windows.Application.Current.Dispatcher.Invoke(new Action(() =>
+                {
+                    fileStream.Write(p.getX() + ";");
+                    fileStream.WriteLine(p.getY());
+                }));
+                
+            }
+            fileStream.Close();
+        }
+
+        private void BackUpEquipments()
+        {
+            foreach (Equipment e in equipments)
+            {
+                fileStream = File.Create(outputDirectory + "Equipment" + e.getID() + ".tmp");
+                serializer.Serialize(fileStream, e);
                 fileStream.Close();
             }
-            foreach(Team t in teams)
-            {
-                fileStream = File.Create(outputDirectory + "Team" + t.getID() + ".tmp");
-                serializer.Serialize(fileStream, t);
-                fileStream.Close();
-            }
-            foreach (Intervention i in activeInterventions)
-            {
-                fileStream = File.Create(outputDirectory + "ActiveIntervention" + i.getID() + ".tmp");
-                serializer.Serialize(fileStream, i);
-                fileStream.Close();
-            }
+        }
+
+        private void BackUpCompletedInterventions()
+        {
             foreach (Intervention i in completedInterventions)
             {
                 fileStream = File.Create(outputDirectory + "CompletedIntervention" + i.getID() + ".tmp");
                 serializer.Serialize(fileStream, i);
                 fileStream.Close();
             }
-            StartBackUp();
+        }
+
+        private void BackUpActiveInterventions()
+        {
+            foreach (Intervention i in activeInterventions)
+            {
+                fileStream = File.Create(outputDirectory + "ActiveIntervention" + i.getID() + ".tmp");
+                serializer.Serialize(fileStream, i);
+                fileStream.Close();
+            }
+        }
+
+        private void BackUpTeams()
+        {
+            foreach (Team t in teams)
+            {
+                fileStream = File.Create(outputDirectory + "Team" + t.getID() + ".tmp");
+                serializer.Serialize(fileStream, t);
+                fileStream.Close();
+            }
+        }
+
+        private void BackUpOperation()
+        {
+            if (operation != null && !File.Exists(outputDirectory + "Operation" + operation.getID()))
+            {
+                fileStream = File.Create(outputDirectory + "Operation" + operation.getID() + ".tmp");
+                serializer.Serialize(fileStream, operation);
+                fileStream.Close();
+            }
         }
 
         public void CleanUp()
@@ -124,6 +197,8 @@ namespace ETD.Services
             RecoverTeams();
             RecoverActiveInterventions();
             RecoverCompletedInterventions();
+            RecoverEquipments();
+            RecoverPinPositions();
         }
 
         private Operation RecoverOperation()
@@ -191,11 +266,55 @@ namespace ETD.Services
             }
         }
 
+        private void RecoverEquipments()
+        {
+            if (Recoverable())
+            {
+                String[] filenames = Directory.GetFiles(outputDirectory, "Equipment*.tmp");
+                if (filenames.Length > 0)
+                {
+                    foreach (string fn in filenames)
+                    {
+                        fileStream = File.OpenRead(fn);
+                        Equipment.AddEquipment((Equipment)serializer.Deserialize(fileStream));
+                        fileStream.Close();
+                    }
+                }
+            }
+        }
+
+        private void RecoverPinPositions()
+        {
+            if (Recoverable())
+            {
+                if (File.Exists(outputDirectory + "PinsInfo.tmp"))
+                {
+                    StreamReader reader = new StreamReader(outputDirectory + "PinsInfo.tmp");
+                    string line = "";
+                    string[] lineInfo;
+
+                    while(!reader.EndOfStream)
+                    {
+                        line = reader.ReadLine();
+                        lineInfo = line.Split(new char[] { ';' });
+
+                        Pin p = Pin.MatchPin(Type.GetType(lineInfo[0]), int.Parse(lineInfo[1]));
+                        System.Windows.Application.Current.Dispatcher.Invoke(new Action(() =>
+                        {
+                            p.setPinPosition(double.Parse(lineInfo[2]), double.Parse(lineInfo[3]));
+                        }));
+                    }
+                }
+            }
+        }
+
         public void Update()
         {
             teams = Team.getTeamList();
             activeInterventions = Intervention.getActiveInterventionList();
             completedInterventions = Intervention.getCompletedInterventionList();
+            equipments = Equipment.getEquipmentList();
+            requests = Request.getRequestList();
         }
 
         //Mutators

@@ -70,6 +70,26 @@ namespace ETD.ViewsPresenters.MapSection
 				teamPin.CollisionDetectionAndResolution(ignoreSpecialCollisions);
 			}
 
+            //Creating team fragments when a team is split
+            foreach (Team team in Team.getSplitTeamList())
+            {
+                TeamPin teamPin = new TeamPin(team, this);
+                Canvas_map.Children.Add(teamPin);
+
+                //Setting the pin to it's previous position, if it exists, or to the top-left corner
+                bool ignoreSpecialCollisions = false;
+                double[] previousPinPosition = Pin.getPreviousPinPosition(team);
+                if (previousPinPosition == null)
+                {
+                    ignoreSpecialCollisions = true;
+                    previousPinPosition = new double[] { teamPin.Width / 2, teamPin.Height / 2 }; //Top-left corner
+                }
+                teamPin.setPinPosition(previousPinPosition[0], previousPinPosition[1]);
+                teamPin.CollisionDetectionAndResolution(ignoreSpecialCollisions);
+            }
+
+
+
 			//Creating all intervention pins and adding the map to their previous or a new position while detecting newly created collisions
 			foreach (Intervention intervention in Intervention.getActiveInterventionList())
 			{

@@ -24,6 +24,7 @@ namespace ETD.Models.Objects
 		private static List<Observer> observerList;//Contains a List of observers
 
 		static List<Team> teamList;//Contains a list of teams
+        private static List<Team> splitTeamList = new List<Team>();//Contains duplicates of teams when a team is split 
 
         //Database reflection variables
         private int teamID;
@@ -66,26 +67,54 @@ namespace ETD.Models.Objects
         public Team(int id)
         {
             this.teamID = id;
-            System.Data.SQLite.SQLiteDataReader results = StaticDBConnection.QueryDatabase("SELECT * FROM [Teams] WHERE Team_ID=" + id + ";");
-            results.Read();
-            this.name = results["Name"].ToString();
-            this.status = (Statuses)int.Parse(results["Status"].ToString());
-            this.operationID = int.Parse(results["Operation_ID"].ToString());
-
-            results = StaticDBConnection.QueryDatabase("SELECT Volunteer_ID FROM [Team_Members] WHERE Team_ID = " + id + ";");
-            while(results.Read())
+            using (System.Data.SQLite.SQLiteDataReader results = StaticDBConnection.QueryDatabase("SELECT * FROM [Teams] WHERE Team_ID=" + id + ";"))
             {
-                TeamMember member = new TeamMember(id, results.GetInt32(0));
-                memberList.Add(member);
-                if ((int)highestLevelOfTraining < (int)member.getTrainingLevel())
+                results.Read();
+                this.name = results["Name"].ToString();
+                this.status = (Statuses)int.Parse(results["Status"].ToString());
+                this.operationID = int.Parse(results["Operation_ID"].ToString());
+            }
+            StaticDBConnection.CloseConnection();
+            using (System.Data.SQLite.SQLiteDataReader results = StaticDBConnection.QueryDatabase("SELECT Volunteer_ID FROM [Team_Members] WHERE Team_ID = " + id + ";"))
+            {
+                while (results.Read())
                 {
-                    highestLevelOfTraining = member.getTrainingLevel();
+                    TeamMember member = new TeamMember(id, results.GetInt32(0));
+                    memberList.Add(member);
+                    if ((int)highestLevelOfTraining < (int)member.getTrainingLevel())
+                    {
+                        highestLevelOfTraining = member.getTrainingLevel();
+                    }
                 }
             }
+            StaticDBConnection.CloseConnection();
             teamList.Add(this);
 			ClassModifiedNotification(typeof(Team));
             
         }
+
+        //Create a duplicate team
+        public Team(Team team)
+        {
+            this.name = team.name;
+            this.interventionCount = team.interventionCount;
+            this.highestLevelOfTraining = team.highestLevelOfTraining;
+            this.memberList = team.memberList;
+            this.equipmentList = team.equipmentList;
+            this.teamID = team.teamID;
+            this.operationID = team.operationID;
+
+            status = Statuses.moving;
+            if (Operation.currentOperation != null)
+            {
+                this.operationID = Operation.currentOperation.getID();
+            }
+            splitTeamList.Add(this);
+
+            ClassModifiedNotification(typeof(Team));
+
+        }
+
 
 		//Deletes a Team
 		public static void DeleteTeam(Team team)
@@ -274,7 +303,24 @@ namespace ETD.Models.Objects
 		{
 			return memberList;
 		}
-        
+
+
+        public static List<Team> getSplitTeamList()
+        {
+            return splitTeamList;
+        }
+
+
+        public static void removeSplitTeam(Team team)
+        {
+            if (splitTeamList.Contains(team))
+            {
+                splitTeamList.Remove(team);
+                //StaticDBConnection.NonQueryDatabase("UPDATE [Assigned_Equipment] SET Removed_Time='" + StaticDBConnection.DateTimeSQLite(DateTime.Now) + "' WHERE Equipment_ID=" + equipment.getID() + " AND Team_ID=" + teamID + ";");
+                ClassModifiedNotification(typeof(Team));
+            }
+        }
+
         //Returns the Team Object from teamList with team name as an input
         public static Team getTeamObject(String teamName)
         {
