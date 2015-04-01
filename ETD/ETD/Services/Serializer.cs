@@ -13,6 +13,7 @@ using ETD.CustomObjects.CustomUIObjects;
 
 namespace ETD.Services
 {
+    public enum RecoveryResults {Failure, Partial, Success};
     class Serializer : Observer
     {
         //Singleton variable
@@ -32,6 +33,7 @@ namespace ETD.Services
         private Timer timer;
         private FileStream fileStream;
         private BinaryFormatter serializer;
+        private bool partial;
         
 
         private Serializer()
@@ -49,6 +51,8 @@ namespace ETD.Services
             serializer = new BinaryFormatter();
             timer = new Timer(backupRate);
             timer.Elapsed += new ElapsedEventHandler(BackUpEvent);
+
+            partial = false;
         }
 
         public static Serializer Instance
@@ -99,12 +103,7 @@ namespace ETD.Services
                 }
                 catch(Exception ex)
                 {
-                    StreamWriter log = new StreamWriter(@"..\log\error.log");
-                    log.WriteLine("An Exception was caught.");
-                    log.WriteLine("\nException Message:\n{0}", ex.Message);
-                    log.WriteLine("\nException Source:\n{0}", ex.Source);
-                    log.WriteLine("\nException Target:\n{0}", ex.TargetSite);
-                    log.WriteLine("\nException Stack Trace:\n{0}", ex.StackTrace);
+                    LogException(ex);
                 }
             }
         }
@@ -120,12 +119,7 @@ namespace ETD.Services
                 }
                 catch (Exception ex)
                 {
-                    StreamWriter log = new StreamWriter(@"..\log\error.log");
-                    log.WriteLine("An Exception was caught.");
-                    log.WriteLine("\nException Message:\n{0}", ex.Message);
-                    log.WriteLine("\nException Source:\n{0}", ex.Source);
-                    log.WriteLine("\nException Target:\n{0}", ex.TargetSite);
-                    log.WriteLine("\nException Stack Trace:\n{0}", ex.StackTrace);
+                    LogException(ex);
                 }
             }
         }
@@ -141,12 +135,7 @@ namespace ETD.Services
                 }
                 catch (Exception ex)
                 {
-                    StreamWriter log = new StreamWriter(@"..\log\error.log");
-                    log.WriteLine("An Exception was caught.");
-                    log.WriteLine("\nException Message:\n{0}", ex.Message);
-                    log.WriteLine("\nException Source:\n{0}", ex.Source);
-                    log.WriteLine("\nException Target:\n{0}", ex.TargetSite);
-                    log.WriteLine("\nException Stack Trace:\n{0}", ex.StackTrace);
+                    LogException(ex);
                 }
             }
         }
@@ -162,12 +151,7 @@ namespace ETD.Services
                 }
                 catch (Exception ex)
                 {
-                    StreamWriter log = new StreamWriter(@"..\log\error.log");
-                    log.WriteLine("An Exception was caught.");
-                    log.WriteLine("\nException Message:\n{0}", ex.Message);
-                    log.WriteLine("\nException Source:\n{0}", ex.Source);
-                    log.WriteLine("\nException Target:\n{0}", ex.TargetSite);
-                    log.WriteLine("\nException Stack Trace:\n{0}", ex.StackTrace);
+                    LogException(ex);
                 }
             }
         }
@@ -183,12 +167,7 @@ namespace ETD.Services
                 }
                 catch (Exception ex)
                 {
-                    StreamWriter log = new StreamWriter(@"..\log\error.log");
-                    log.WriteLine("An Exception was caught.");
-                    log.WriteLine("\nException Message:\n{0}", ex.Message);
-                    log.WriteLine("\nException Source:\n{0}", ex.Source);
-                    log.WriteLine("\nException Target:\n{0}", ex.TargetSite);
-                    log.WriteLine("\nException Stack Trace:\n{0}", ex.StackTrace);
+                    LogException(ex);
                 }
             }
         }
@@ -206,12 +185,7 @@ namespace ETD.Services
                 }
                 catch (Exception ex)
                 {
-                    StreamWriter log = new StreamWriter(@"..\log\error.log");
-                    log.WriteLine("An Exception was caught.");
-                    log.WriteLine("\nException Message:\n{0}", ex.Message);
-                    log.WriteLine("\nException Source:\n{0}", ex.Source);
-                    log.WriteLine("\nException Target:\n{0}", ex.TargetSite);
-                    log.WriteLine("\nException Stack Trace:\n{0}", ex.StackTrace);
+                    LogException(ex);
                 }
             }
         }
@@ -247,12 +221,7 @@ namespace ETD.Services
             }
             catch (Exception ex)
             {
-                StreamWriter log = new StreamWriter(@"..\log\error.log");
-                log.WriteLine("An Exception was caught.");
-                log.WriteLine("\nException Message:\n{0}", ex.Message);
-                log.WriteLine("\nException Source:\n{0}", ex.Source);
-                log.WriteLine("\nException Target:\n{0}", ex.TargetSite);
-                log.WriteLine("\nException Stack Trace:\n{0}", ex.StackTrace);
+                LogException(ex);
             }
         }
         
@@ -265,9 +234,9 @@ namespace ETD.Services
                 {
                     Directory.Delete(outputDirectory, true);
                 }
-                catch(Exception e)
+                catch(Exception ex)
                 {
-                    Console.Write(e.Message);
+                    LogException(ex);
                 }
             }
         }
@@ -277,15 +246,27 @@ namespace ETD.Services
             return Directory.Exists(outputDirectory);
         }
 
-        public void PerformRecovery()
+        public RecoveryResults PerformRecovery()
         {
             RecoverOperation();
+            if(Operation.currentOperation == null)
+            {
+                return RecoveryResults.Failure;
+            }
             RecoverTeams();
             RecoverActiveInterventions();
             RecoverCompletedInterventions();
             RecoverEquipments();
             RecoverRequests();
             RecoverPinPositions();
+            if (partial)
+            {
+                return RecoveryResults.Partial;
+            }
+            else
+            {
+                return RecoveryResults.Success;
+            }
         }
 
         private void RecoverOperation()
@@ -303,12 +284,7 @@ namespace ETD.Services
                     }
                     catch (Exception ex)
                     {
-                        StreamWriter log = new StreamWriter(@"..\log\error.log");
-                        log.WriteLine("An Exception was caught.");
-                        log.WriteLine("\nException Message:\n{0}", ex.Message);
-                        log.WriteLine("\nException Source:\n{0}", ex.Source);
-                        log.WriteLine("\nException Target:\n{0}", ex.TargetSite);
-                        log.WriteLine("\nException Stack Trace:\n{0}", ex.StackTrace);
+                        LogException(ex);
                     }
                 }
             }
@@ -330,12 +306,7 @@ namespace ETD.Services
                         }
                         catch (Exception ex)
                         {
-                            StreamWriter log = new StreamWriter(@"..\log\error.log");
-                            log.WriteLine("An Exception was caught.");
-                            log.WriteLine("\nException Message:\n{0}", ex.Message);
-                            log.WriteLine("\nException Source:\n{0}", ex.Source);
-                            log.WriteLine("\nException Target:\n{0}", ex.TargetSite);
-                            log.WriteLine("\nException Stack Trace:\n{0}", ex.StackTrace);
+                            LogException(ex);
                         }
                     }
                 }
@@ -358,12 +329,7 @@ namespace ETD.Services
                         }
                         catch (Exception ex)
                         {
-                            StreamWriter log = new StreamWriter(@"..\log\error.log");
-                            log.WriteLine("An Exception was caught.");
-                            log.WriteLine("\nException Message:\n{0}", ex.Message);
-                            log.WriteLine("\nException Source:\n{0}", ex.Source);
-                            log.WriteLine("\nException Target:\n{0}", ex.TargetSite);
-                            log.WriteLine("\nException Stack Trace:\n{0}", ex.StackTrace);
+                            LogException(ex);
                         }
                     }
                 }
@@ -386,12 +352,7 @@ namespace ETD.Services
                         }
                         catch (Exception ex)
                         {
-                            StreamWriter log = new StreamWriter(@"..\log\error.log");
-                            log.WriteLine("An Exception was caught.");
-                            log.WriteLine("\nException Message:\n{0}", ex.Message);
-                            log.WriteLine("\nException Source:\n{0}", ex.Source);
-                            log.WriteLine("\nException Target:\n{0}", ex.TargetSite);
-                            log.WriteLine("\nException Stack Trace:\n{0}", ex.StackTrace);
+                            LogException(ex);
                         }
                     }
                 }
@@ -414,12 +375,7 @@ namespace ETD.Services
                         }
                         catch (Exception ex)
                         {
-                            StreamWriter log = new StreamWriter(@"..\log\error.log");
-                            log.WriteLine("An Exception was caught.");
-                            log.WriteLine("\nException Message:\n{0}", ex.Message);
-                            log.WriteLine("\nException Source:\n{0}", ex.Source);
-                            log.WriteLine("\nException Target:\n{0}", ex.TargetSite);
-                            log.WriteLine("\nException Stack Trace:\n{0}", ex.StackTrace);
+                            LogException(ex);
                         }
                     }
                 }
@@ -442,12 +398,7 @@ namespace ETD.Services
                         }
                         catch (Exception ex)
                         {
-                            StreamWriter log = new StreamWriter(@"..\log\error.log");
-                            log.WriteLine("An Exception was caught.");
-                            log.WriteLine("\nException Message:\n{0}", ex.Message);
-                            log.WriteLine("\nException Source:\n{0}", ex.Source);
-                            log.WriteLine("\nException Target:\n{0}", ex.TargetSite);
-                            log.WriteLine("\nException Stack Trace:\n{0}", ex.StackTrace);
+                            LogException(ex);
                         }
                     }
                 }
@@ -480,12 +431,7 @@ namespace ETD.Services
                     }
                     catch (Exception ex)
                     {
-                        StreamWriter log = new StreamWriter(@"..\log\error.log");
-                        log.WriteLine("An Exception was caught.");
-                        log.WriteLine("\nException Message:\n{0}", ex.Message);
-                        log.WriteLine("\nException Source:\n{0}", ex.Source);
-                        log.WriteLine("\nException Target:\n{0}", ex.TargetSite);
-                        log.WriteLine("\nException Stack Trace:\n{0}", ex.StackTrace);
+                        LogException(ex);
                     }
                 }
             }
@@ -509,5 +455,24 @@ namespace ETD.Services
         {
             timer.Stop();
         } 
+
+        public void LogException(Exception ex)
+        {
+            partial = true;
+            fileStream.Close();
+            if (!Directory.Exists(".\\log\\"))
+            {
+                Directory.CreateDirectory(".\\log\\");
+            }
+            using (StreamWriter log = new StreamWriter(".\\log\\error.log", true))
+            {
+                log.WriteLine("An Exception was caught at " + DateTime.Now.ToString() + ". ");
+                log.WriteLine("Exception Message:\t{0}", ex.Message);
+                log.WriteLine("Exception Source:\t{0}", ex.Source);
+                log.WriteLine("Exception Target:\t{0}", ex.TargetSite);
+                log.WriteLine("Exception Stack Trace:\r\n{0}" + System.Environment.NewLine, ex.StackTrace);
+            }
+            
+        }
     }
 }

@@ -32,14 +32,32 @@ namespace ETD.ViewsPresenters
         public InitialSetup()
         {
             InitializeComponent();
+            
+            //Check and Attempt to recover
             Serializer serializer = Serializer.Instance;
             if(serializer.Recoverable())
             {
-                MainWindow mw = new MainWindow();
-                mw.Show();
-                serializer.PerformRecovery();
-                serializer.StartBackUp();
-                this.Close();
+                if (MessageBox.Show("Recovery files found. Would you like to attempt to recover?", "Operation Recovery", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    MainWindow mw = new MainWindow();
+                    mw.Show();
+                    switch(serializer.PerformRecovery())
+                    {
+                        case RecoveryResults.Partial: MessageBox.Show("Partial recovery made.");
+                            goto case RecoveryResults.Success;
+                        case RecoveryResults.Success: serializer.StartBackUp();
+                            this.Close();
+                            break;
+                        case RecoveryResults.Failure: MessageBox.Show("Recovery attempt failed. Restarting operation.");
+                            mw.ForceClose();
+                            serializer.CleanUp();
+                            break;
+                    }
+                }
+                else
+                {
+                    serializer.CleanUp();
+                }
             }
 
 			ComboBoxItem createUserItem = new ComboBoxItem();

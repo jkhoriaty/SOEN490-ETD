@@ -58,6 +58,7 @@ namespace ETD.ViewsPresenters
 
 		//Variable used for exception handling
 		private bool mapAdded = false;
+        private bool forceClose = false;
 
 		public MainWindow()
 		{
@@ -440,25 +441,33 @@ namespace ETD.ViewsPresenters
             {
                 subWindow.Close();
             }
-            
 
-            if (System.Windows.Forms.MessageBox.Show("Would you like to end the operation. Confirm?", "Close Application", System.Windows.Forms.MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
+            if (!forceClose)
             {
-                Serializer.Instance.CleanUp();
-                if (System.Windows.Forms.MessageBox.Show("Would you like to fill out additional information. Confirm?", "Close Application", System.Windows.Forms.MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.No)
+                if (System.Windows.Forms.MessageBox.Show("Would you like to end the operation. Confirm?", "Close Application", System.Windows.Forms.MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
                 {
-                    System.Windows.Forms.MessageBox.Show("The application has been closed successfully.", "Closing Application", System.Windows.Forms.MessageBoxButtons.OK);
+                    Serializer.Instance.CleanUp();
+                    if (System.Windows.Forms.MessageBox.Show("Would you like to fill out additional information. Confirm?", "Close Application", System.Windows.Forms.MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.No)
+                    {
+                        System.Windows.Forms.MessageBox.Show("The application has been closed successfully.", "Closing Application", System.Windows.Forms.MessageBoxButtons.OK);
+                    }
+                    else
+                    {
+                        AdditionalStatisticInfo asi = new AdditionalStatisticInfo();
+                        asi.Show();
+                    }
                 }
                 else
                 {
-                    AdditionalStatisticInfo asi = new AdditionalStatisticInfo();
-                    asi.Show();
+                    e.Cancel = true;
                 }
             }
-            else
-            {
-                e.Cancel = true;
-            }
+        }
+
+        public void ForceClose()
+        {
+            forceClose = true;
+            Close();
         }
     }
 }

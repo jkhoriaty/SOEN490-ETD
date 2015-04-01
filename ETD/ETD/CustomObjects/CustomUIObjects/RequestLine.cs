@@ -58,7 +58,7 @@ namespace ETD.CustomObjects.CustomUIObjects
         private TextBox completionMMTextBox;
 
 
-        public RequestLine(Request requestLine)
+        public RequestLine(Request request)
         {
             this.request = request;
             BuildLine();
