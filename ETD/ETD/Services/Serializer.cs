@@ -27,8 +27,6 @@ namespace ETD.Services
         private List<Intervention> activeInterventions;
         private List<Intervention> completedInterventions;
         private List<Equipment> equipments;
-        private List<Request> requests;
-        private Operation operation;
 
         //Objects needed for serialization
         private Timer timer;
@@ -47,9 +45,6 @@ namespace ETD.Services
 
             equipments = new List<Equipment>();
             Observable.RegisterClassObserver(typeof(Equipment), this);
-
-            requests = new List<Request>();
-            Observable.RegisterClassObserver(typeof(Request), this);
 
             serializer = new BinaryFormatter();
             timer = new Timer(backupRate);
@@ -80,95 +75,187 @@ namespace ETD.Services
             {
                 Directory.CreateDirectory(outputDirectory);
             }
+
             BackUpOperation();
             BackUpTeams();
             BackUpActiveInterventions();
             BackUpCompletedInterventions();
             BackUpEquipments();
+            BackUpRequests();
             BackUpPinPositions();
 
             StartBackUp();
         }
-
-        private void BackUpPinPositions()
+        private void BackUpOperation()
         {
-            List<Pin> pins = new List<Pin>(Pin.getPinList());
-            StreamWriter fileStream = new StreamWriter(outputDirectory + "PinsInfo.tmp");
-            foreach(Pin p in pins)
+            Operation operation = Operation.currentOperation;
+            if (operation != null && !File.Exists(outputDirectory + "Operation" + operation.getID()))
             {
-                fileStream.Write(p.GetType() + ";");
-                if(p.GetType().Equals(typeof(TeamPin)))
+                try
                 {
-                    fileStream.Write(((TeamPin)p).getTeam().getID() + ";");
+                    fileStream = File.Create(outputDirectory + "Operation" + operation.getID() + ".tmp");
+                    serializer.Serialize(fileStream, operation);
+                    fileStream.Close();
                 }
-                else if (p.GetType().Equals(typeof(InterventionPin)))
+                catch(Exception ex)
                 {
-                    fileStream.Write(((InterventionPin)p).getIntervention().getID() + ";");
+                    StreamWriter log = new StreamWriter(@"..\log\error.log");
+                    log.WriteLine("An Exception was caught.");
+                    log.WriteLine("\nException Message:\n{0}", ex.Message);
+                    log.WriteLine("\nException Source:\n{0}", ex.Source);
+                    log.WriteLine("\nException Target:\n{0}", ex.TargetSite);
+                    log.WriteLine("\nException Stack Trace:\n{0}", ex.StackTrace);
                 }
-                else if (p.GetType().Equals(typeof(EquipmentPin)))
-                {
-                    fileStream.Write(((EquipmentPin)p).getEquipment().getID() + ";");
-                }
-                System.Windows.Application.Current.Dispatcher.Invoke(new Action(() =>
-                {
-                    fileStream.Write(p.getX() + ";");
-                    fileStream.WriteLine(p.getY());
-                }));
-                
-            }
-            fileStream.Close();
-        }
-
-        private void BackUpEquipments()
-        {
-            foreach (Equipment e in equipments)
-            {
-                fileStream = File.Create(outputDirectory + "Equipment" + e.getID() + ".tmp");
-                serializer.Serialize(fileStream, e);
-                fileStream.Close();
             }
         }
-
-        private void BackUpCompletedInterventions()
-        {
-            foreach (Intervention i in completedInterventions)
-            {
-                fileStream = File.Create(outputDirectory + "CompletedIntervention" + i.getID() + ".tmp");
-                serializer.Serialize(fileStream, i);
-                fileStream.Close();
-            }
-        }
-
-        private void BackUpActiveInterventions()
-        {
-            foreach (Intervention i in activeInterventions)
-            {
-                fileStream = File.Create(outputDirectory + "ActiveIntervention" + i.getID() + ".tmp");
-                serializer.Serialize(fileStream, i);
-                fileStream.Close();
-            }
-        }
-
         private void BackUpTeams()
         {
             foreach (Team t in teams)
             {
-                fileStream = File.Create(outputDirectory + "Team" + t.getID() + ".tmp");
-                serializer.Serialize(fileStream, t);
-                fileStream.Close();
+                try
+                {
+                    fileStream = File.Create(outputDirectory + "Team" + t.getID() + ".tmp");
+                    serializer.Serialize(fileStream, t);
+                    fileStream.Close();
+                }
+                catch (Exception ex)
+                {
+                    StreamWriter log = new StreamWriter(@"..\log\error.log");
+                    log.WriteLine("An Exception was caught.");
+                    log.WriteLine("\nException Message:\n{0}", ex.Message);
+                    log.WriteLine("\nException Source:\n{0}", ex.Source);
+                    log.WriteLine("\nException Target:\n{0}", ex.TargetSite);
+                    log.WriteLine("\nException Stack Trace:\n{0}", ex.StackTrace);
+                }
             }
         }
-
-        private void BackUpOperation()
+        private void BackUpActiveInterventions()
         {
-            if (operation != null && !File.Exists(outputDirectory + "Operation" + operation.getID()))
+            foreach (Intervention i in activeInterventions)
             {
-                fileStream = File.Create(outputDirectory + "Operation" + operation.getID() + ".tmp");
-                serializer.Serialize(fileStream, operation);
-                fileStream.Close();
+                try
+                {
+                    fileStream = File.Create(outputDirectory + "ActiveIntervention" + i.getID() + ".tmp");
+                    serializer.Serialize(fileStream, i);
+                    fileStream.Close();
+                }
+                catch (Exception ex)
+                {
+                    StreamWriter log = new StreamWriter(@"..\log\error.log");
+                    log.WriteLine("An Exception was caught.");
+                    log.WriteLine("\nException Message:\n{0}", ex.Message);
+                    log.WriteLine("\nException Source:\n{0}", ex.Source);
+                    log.WriteLine("\nException Target:\n{0}", ex.TargetSite);
+                    log.WriteLine("\nException Stack Trace:\n{0}", ex.StackTrace);
+                }
             }
         }
+        private void BackUpCompletedInterventions()
+        {
+            foreach (Intervention i in completedInterventions)
+            {
+                try
+                {
+                    fileStream = File.Create(outputDirectory + "CompletedIntervention" + i.getID() + ".tmp");
+                    serializer.Serialize(fileStream, i);
+                    fileStream.Close();
+                }
+                catch (Exception ex)
+                {
+                    StreamWriter log = new StreamWriter(@"..\log\error.log");
+                    log.WriteLine("An Exception was caught.");
+                    log.WriteLine("\nException Message:\n{0}", ex.Message);
+                    log.WriteLine("\nException Source:\n{0}", ex.Source);
+                    log.WriteLine("\nException Target:\n{0}", ex.TargetSite);
+                    log.WriteLine("\nException Stack Trace:\n{0}", ex.StackTrace);
+                }
+            }
+        }
+        private void BackUpEquipments()
+        {
+            foreach (Equipment e in equipments)
+            {
+                try
+                {
+                    fileStream = File.Create(outputDirectory + "Equipment" + e.getID() + ".tmp");
+                    serializer.Serialize(fileStream, e);
+                    fileStream.Close();
+                }
+                catch (Exception ex)
+                {
+                    StreamWriter log = new StreamWriter(@"..\log\error.log");
+                    log.WriteLine("An Exception was caught.");
+                    log.WriteLine("\nException Message:\n{0}", ex.Message);
+                    log.WriteLine("\nException Source:\n{0}", ex.Source);
+                    log.WriteLine("\nException Target:\n{0}", ex.TargetSite);
+                    log.WriteLine("\nException Stack Trace:\n{0}", ex.StackTrace);
+                }
+            }
+        }
+        private void BackUpRequests()
+        {
+            List<Request> requests = new List<Request>(Request.getRequestList());
+            int count = 1;
+            foreach (Request r in requests)
+            {
+                try
+                {
+                    fileStream = File.Create(outputDirectory + "Request" + count++ + ".tmp");
+                    serializer.Serialize(fileStream, r);
+                    fileStream.Close();
+                }
+                catch (Exception ex)
+                {
+                    StreamWriter log = new StreamWriter(@"..\log\error.log");
+                    log.WriteLine("An Exception was caught.");
+                    log.WriteLine("\nException Message:\n{0}", ex.Message);
+                    log.WriteLine("\nException Source:\n{0}", ex.Source);
+                    log.WriteLine("\nException Target:\n{0}", ex.TargetSite);
+                    log.WriteLine("\nException Stack Trace:\n{0}", ex.StackTrace);
+                }
+            }
+        }
+        private void BackUpPinPositions()
+        {
+            try
+            {
+                List<Pin> pins = new List<Pin>(Pin.getPinList());
+                StreamWriter fileStream = new StreamWriter(outputDirectory + "PinsInfo.tmp");
+                foreach (Pin p in pins)
+                {
+                    fileStream.Write(p.GetType() + ";");
+                    if (p.GetType().Equals(typeof(TeamPin)))
+                    {
+                        fileStream.Write(((TeamPin)p).getTeam().getID() + ";");
+                    }
+                    else if (p.GetType().Equals(typeof(InterventionPin)))
+                    {
+                        fileStream.Write(((InterventionPin)p).getIntervention().getID() + ";");
+                    }
+                    else if (p.GetType().Equals(typeof(EquipmentPin)))
+                    {
+                        fileStream.Write(((EquipmentPin)p).getEquipment().getID() + ";");
+                    }
+                    System.Windows.Application.Current.Dispatcher.Invoke(new Action(() =>
+                    {
+                        fileStream.Write(p.getX() + ";");
+                        fileStream.WriteLine(p.getY());
+                    }));
 
+                }
+                fileStream.Close();
+            }
+            catch (Exception ex)
+            {
+                StreamWriter log = new StreamWriter(@"..\log\error.log");
+                log.WriteLine("An Exception was caught.");
+                log.WriteLine("\nException Message:\n{0}", ex.Message);
+                log.WriteLine("\nException Source:\n{0}", ex.Source);
+                log.WriteLine("\nException Target:\n{0}", ex.TargetSite);
+                log.WriteLine("\nException Stack Trace:\n{0}", ex.StackTrace);
+            }
+        }
+        
         public void CleanUp()
         {
             StopBackUp();
@@ -192,31 +279,40 @@ namespace ETD.Services
 
         public void PerformRecovery()
         {
-            operation = RecoverOperation();
-            Operation.currentOperation = operation;
+            RecoverOperation();
             RecoverTeams();
             RecoverActiveInterventions();
             RecoverCompletedInterventions();
             RecoverEquipments();
+            RecoverRequests();
             RecoverPinPositions();
         }
 
-        private Operation RecoverOperation()
+        private void RecoverOperation()
         {
-            Operation recovered = null;
             if (Recoverable())
             {
                 String[] filename = Directory.GetFiles(outputDirectory, "Operation*.tmp");
                 if(filename.Length > 0)
                 {
-                    fileStream = File.OpenRead(filename[0]);
-                    recovered = (Operation)serializer.Deserialize(fileStream);
-                    fileStream.Close();
+                    try
+                    {
+                        fileStream = File.OpenRead(filename[0]);
+                        Operation.currentOperation = (Operation)serializer.Deserialize(fileStream);
+                        fileStream.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        StreamWriter log = new StreamWriter(@"..\log\error.log");
+                        log.WriteLine("An Exception was caught.");
+                        log.WriteLine("\nException Message:\n{0}", ex.Message);
+                        log.WriteLine("\nException Source:\n{0}", ex.Source);
+                        log.WriteLine("\nException Target:\n{0}", ex.TargetSite);
+                        log.WriteLine("\nException Stack Trace:\n{0}", ex.StackTrace);
+                    }
                 }
             }
-            return recovered;
         }
-
         private void RecoverTeams()
         {
             if (Recoverable())
@@ -226,9 +322,21 @@ namespace ETD.Services
                 {
                     foreach (string fn in filenames)
                     {
-                        fileStream = File.OpenRead(fn);
-                        Team.InsertTeam((Team)serializer.Deserialize(fileStream));
-                        fileStream.Close();
+                        try
+                        {
+                            fileStream = File.OpenRead(fn);
+                            Team.InsertTeam((Team)serializer.Deserialize(fileStream));
+                            fileStream.Close();
+                        }
+                        catch (Exception ex)
+                        {
+                            StreamWriter log = new StreamWriter(@"..\log\error.log");
+                            log.WriteLine("An Exception was caught.");
+                            log.WriteLine("\nException Message:\n{0}", ex.Message);
+                            log.WriteLine("\nException Source:\n{0}", ex.Source);
+                            log.WriteLine("\nException Target:\n{0}", ex.TargetSite);
+                            log.WriteLine("\nException Stack Trace:\n{0}", ex.StackTrace);
+                        }
                     }
                 }
             }
@@ -242,9 +350,21 @@ namespace ETD.Services
                 {
                     foreach (string fn in filenames)
                     {
-                        fileStream = File.OpenRead(fn);
-                        Intervention.AddActiveIntervention((Intervention)serializer.Deserialize(fileStream));
-                        fileStream.Close();
+                        try
+                        {
+                            fileStream = File.OpenRead(fn);
+                            Intervention.AddActiveIntervention((Intervention)serializer.Deserialize(fileStream));
+                            fileStream.Close();
+                        }
+                        catch (Exception ex)
+                        {
+                            StreamWriter log = new StreamWriter(@"..\log\error.log");
+                            log.WriteLine("An Exception was caught.");
+                            log.WriteLine("\nException Message:\n{0}", ex.Message);
+                            log.WriteLine("\nException Source:\n{0}", ex.Source);
+                            log.WriteLine("\nException Target:\n{0}", ex.TargetSite);
+                            log.WriteLine("\nException Stack Trace:\n{0}", ex.StackTrace);
+                        }
                     }
                 }
             }
@@ -258,14 +378,25 @@ namespace ETD.Services
                 {
                     foreach (string fn in filenames)
                     {
-                        fileStream = File.OpenRead(fn);
-                        Intervention.AddCompletedIntervention((Intervention)serializer.Deserialize(fileStream));
-                        fileStream.Close();
+                        try
+                        {
+                            fileStream = File.OpenRead(fn);
+                            Intervention.AddCompletedIntervention((Intervention)serializer.Deserialize(fileStream));
+                            fileStream.Close();
+                        }
+                        catch (Exception ex)
+                        {
+                            StreamWriter log = new StreamWriter(@"..\log\error.log");
+                            log.WriteLine("An Exception was caught.");
+                            log.WriteLine("\nException Message:\n{0}", ex.Message);
+                            log.WriteLine("\nException Source:\n{0}", ex.Source);
+                            log.WriteLine("\nException Target:\n{0}", ex.TargetSite);
+                            log.WriteLine("\nException Stack Trace:\n{0}", ex.StackTrace);
+                        }
                     }
                 }
             }
         }
-
         private void RecoverEquipments()
         {
             if (Recoverable())
@@ -275,34 +406,86 @@ namespace ETD.Services
                 {
                     foreach (string fn in filenames)
                     {
-                        fileStream = File.OpenRead(fn);
-                        Equipment.AddEquipment((Equipment)serializer.Deserialize(fileStream));
-                        fileStream.Close();
+                        try
+                        {
+                            fileStream = File.OpenRead(fn);
+                            Equipment.AddEquipment((Equipment)serializer.Deserialize(fileStream));
+                            fileStream.Close();
+                        }
+                        catch (Exception ex)
+                        {
+                            StreamWriter log = new StreamWriter(@"..\log\error.log");
+                            log.WriteLine("An Exception was caught.");
+                            log.WriteLine("\nException Message:\n{0}", ex.Message);
+                            log.WriteLine("\nException Source:\n{0}", ex.Source);
+                            log.WriteLine("\nException Target:\n{0}", ex.TargetSite);
+                            log.WriteLine("\nException Stack Trace:\n{0}", ex.StackTrace);
+                        }
                     }
                 }
             }
         }
-
+        private void RecoverRequests()
+        {
+            if (Recoverable())
+            {
+                String[] filenames = Directory.GetFiles(outputDirectory, "Request*.tmp");
+                if (filenames.Length > 0)
+                {
+                    foreach (string fn in filenames)
+                    {
+                        try
+                        {
+                            fileStream = File.OpenRead(fn);
+                            Request.getRequestList().Add(((Request)serializer.Deserialize(fileStream)));
+                            fileStream.Close();
+                        }
+                        catch (Exception ex)
+                        {
+                            StreamWriter log = new StreamWriter(@"..\log\error.log");
+                            log.WriteLine("An Exception was caught.");
+                            log.WriteLine("\nException Message:\n{0}", ex.Message);
+                            log.WriteLine("\nException Source:\n{0}", ex.Source);
+                            log.WriteLine("\nException Target:\n{0}", ex.TargetSite);
+                            log.WriteLine("\nException Stack Trace:\n{0}", ex.StackTrace);
+                        }
+                    }
+                }
+            }
+            
+        }
         private void RecoverPinPositions()
         {
             if (Recoverable())
             {
                 if (File.Exists(outputDirectory + "PinsInfo.tmp"))
                 {
-                    StreamReader reader = new StreamReader(outputDirectory + "PinsInfo.tmp");
-                    string line = "";
-                    string[] lineInfo;
-
-                    while(!reader.EndOfStream)
+                    try
                     {
-                        line = reader.ReadLine();
-                        lineInfo = line.Split(new char[] { ';' });
+                        StreamReader reader = new StreamReader(outputDirectory + "PinsInfo.tmp");
+                        string line = "";
+                        string[] lineInfo;
 
-                        Pin p = Pin.MatchPin(Type.GetType(lineInfo[0]), int.Parse(lineInfo[1]));
-                        System.Windows.Application.Current.Dispatcher.Invoke(new Action(() =>
+                        while (!reader.EndOfStream)
                         {
-                            p.setPinPosition(double.Parse(lineInfo[2]), double.Parse(lineInfo[3]));
-                        }));
+                            line = reader.ReadLine();
+                            lineInfo = line.Split(new char[] { ';' });
+
+                            Pin p = Pin.MatchPin(Type.GetType(lineInfo[0]), int.Parse(lineInfo[1]));
+                            System.Windows.Application.Current.Dispatcher.Invoke(new Action(() =>
+                            {
+                                p.setPinPosition(double.Parse(lineInfo[2]), double.Parse(lineInfo[3]));
+                            }));
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        StreamWriter log = new StreamWriter(@"..\log\error.log");
+                        log.WriteLine("An Exception was caught.");
+                        log.WriteLine("\nException Message:\n{0}", ex.Message);
+                        log.WriteLine("\nException Source:\n{0}", ex.Source);
+                        log.WriteLine("\nException Target:\n{0}", ex.TargetSite);
+                        log.WriteLine("\nException Stack Trace:\n{0}", ex.StackTrace);
                     }
                 }
             }
@@ -314,7 +497,6 @@ namespace ETD.Services
             activeInterventions = Intervention.getActiveInterventionList();
             completedInterventions = Intervention.getCompletedInterventionList();
             equipments = Equipment.getEquipmentList();
-            requests = Request.getRequestList();
         }
 
         //Mutators
@@ -326,13 +508,6 @@ namespace ETD.Services
         public void StopBackUp()
         {
             timer.Stop();
-        }
-
-        public bool SetOperation(Operation operation)
-        {
-            this.operation = operation;
-            return true;
-        }
-        
+        } 
     }
 }

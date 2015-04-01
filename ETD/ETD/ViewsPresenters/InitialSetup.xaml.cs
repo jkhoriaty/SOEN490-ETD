@@ -98,7 +98,6 @@ namespace ETD.ViewsPresenters
             if(IsFormValid()) //if the form is valid, create an instance of mainwindow
             {                
                 ETD.Models.Objects.Operation initInfo = new ETD.Models.Objects.Operation(operationName.Text, acronym.Text, shiftStart, shiftEnd, dispatcherName.Text);
-                Serializer.Instance.SetOperation(initInfo);
                 MainWindow mw = new MainWindow();
                 mw.Show();
                 Serializer.Instance.StartBackUp();
