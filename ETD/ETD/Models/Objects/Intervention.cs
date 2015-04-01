@@ -145,6 +145,7 @@ namespace ETD.Models.Objects
 			team.incrementInterventionCount();
 			resourceList.Add(new Resource(this,team));
 
+            StaticDBConnection.NonQueryDatabase("INSERT INTO [Intervening_Teams] (Intervention_ID, Team_ID, Started_Intervening) VALUES (" + interventionID + ", " + team.getID() + ", '" + StaticDBConnection.DateTimeSQLite(DateTime.Now) + "');");
 			InstanceModifiedNotification();
 		}
 
@@ -155,6 +156,7 @@ namespace ETD.Models.Objects
 				if(resource.getTeam() == team)
 				{
 					resource.setIntervening(false);
+                    StaticDBConnection.NonQueryDatabase("UPDATE [Intervening_Teams] SET Stopped_Intervening='" + StaticDBConnection.DateTimeSQLite(DateTime.Now) + "' WHERE Intervention_ID=" + interventionID + " AND Team_ID=" + team.getID() + ";");
 				}
 			}
 			InstanceModifiedNotification();

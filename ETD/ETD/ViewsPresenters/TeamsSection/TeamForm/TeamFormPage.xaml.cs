@@ -452,8 +452,8 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
                         lvlOfTraining1.SelectedIndex = Convert.ToInt32(reader["Training_Level"].ToString());
                     }
                     catch { }
-                    StaticDBConnection.CloseConnection();
                 }
+                StaticDBConnection.CloseConnection();
 			}
 		}
 
