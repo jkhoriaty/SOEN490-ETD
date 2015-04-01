@@ -287,6 +287,7 @@ namespace ETD.ViewsPresenters
 			Button_OKSupervisorName.Visibility = Visibility.Collapsed;
 			Button_CancelSupervisorName.Visibility = Visibility.Collapsed;
 			supervisorName.Visibility = Visibility.Visible;
+			supervisorName.SelectedIndex = -1;
 		}
 		private void Button_OKSupervisorName_Click(object sender, RoutedEventArgs e)
 		{
@@ -315,6 +316,7 @@ namespace ETD.ViewsPresenters
 			rowDef.Height = new GridLength(30);
 			InitialSetupGrid.RowDefinitions.Add(rowDef);
 
+			//supervisor or operation manager box
 			ComboBox supervisorManagerCBox = new ComboBox();
 			supervisorManagerCBox.HorizontalContentAlignment = HorizontalAlignment.Center;
 			supervisorManagerCBox.VerticalContentAlignment = VerticalAlignment.Center;
@@ -330,7 +332,40 @@ namespace ETD.ViewsPresenters
 			InitialSetupGrid.Children.Add(supervisorManagerCBox);
 			Grid.SetRow(supervisorManagerCBox, lastGridRow);
 			Grid.SetColumn(supervisorManagerCBox, 0);
+
+			//Value box
+			ComboBox supervisorManagerValueCBox = new ComboBox();
+			supervisorManagerValueCBox.Name = ("VolunteerName" + lastGridRow);
+			supervisorManagerValueCBox.HorizontalAlignment = HorizontalAlignment.Left;
+			supervisorManagerValueCBox.HorizontalContentAlignment = HorizontalAlignment.Center;
+			supervisorManagerValueCBox.VerticalContentAlignment = VerticalAlignment.Center;
+			supervisorManagerValueCBox.Width = 280;
+
+			ComboBoxItem createUserItem = new ComboBoxItem();
+			createUserItem.Content = "NEW USER";
+			createUserItem.FontStyle = FontStyles.Italic;
+			createUserItem.FontWeight = FontWeights.Bold;
+			supervisorManagerValueCBox.Items.Add(createUserItem);
+			using (SQLiteDataReader reader = StaticDBConnection.QueryDatabase("SELECT Name FROM Volunteers"))
+			{
+				while (reader.Read())
+				{
+					ComboBoxItem cbItem = new ComboBoxItem();
+					cbItem.Content = reader["Name"].ToString();
+
+					supervisorManagerValueCBox.Items.Add(cbItem);
+				}
+			}
+			StaticDBConnection.CloseConnection();
+
+			InitialSetupGrid.Children.Add(supervisorManagerValueCBox);
+			Grid.SetRow(supervisorManagerValueCBox, lastGridRow);
+			Grid.SetColumn(supervisorManagerValueCBox, 1);
 			lastGridRow++;
+
+			InitialSetupForm.Height += 30;
+
+			
 		}
 		/*private void Button_CancelOperationManagerName_Click(object sender, RoutedEventArgs e)
 		{

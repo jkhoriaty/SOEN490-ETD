@@ -2,7 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:properties="clr-namespace:ETD.Properties"
-        Title="Initial Setup" Height="400" Width="500" ResizeMode="NoResize">
+        Title="Initial Setup" Height="400" Width="500" ResizeMode="NoResize" Name="InitialSetupForm">
     <StackPanel Margin="10">
         <Grid Name="InitialSetupGrid">
             <Grid.ColumnDefinitions>
@@ -45,11 +45,13 @@
                 <Button Width="70" Click="Button_CancelDispatcherName_Click" Visibility="Collapsed" Name="Button_CancelDispatcherName" >Cancel</Button>
             </StackPanel>
             <ComboBox Name="Combobox_SupervisorOperationManager" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="1" x:Uid="Combobox_SupervisorOperationManager" Grid.Row="7" Grid.Column="0"/>
-            <ComboBox HorizontalAlignment="Left" Width="280" SelectionChanged="supervisorName_SelectionChanged" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  Grid.Row="7" Grid.Column="1" Name="supervisorName" />
-            <TextBox Visibility="Hidden" Margin="0,0,117,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Grid.Row="7" Grid.Column="1" Name="Textbox_SupervisorName" />
-            <Button Click="Button_CancelSupervisorName_Click" Visibility="Hidden" Name="Button_CancelSupervisorName" Grid.Row="7" Grid.Column="1" Margin="250,1,0,0">Cancel</Button>
-            <Button Click="Button_OKSupervisorName_Click" Visibility="Hidden" Name="Button_OKSupervisorName" Grid.Row="7" Grid.Column="1" Margin="204,1,71,0">OK</Button>
-        </Grid>
+            <StackPanel Name="StackPanel_superManagerName" Orientation="Horizontal" Grid.Row="7" Grid.Column="1" Width="Auto">
+                <ComboBox HorizontalAlignment="Left" Width="280" SelectionChanged="supervisorName_SelectionChanged" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  Grid.Row="7" Grid.Column="1" Name="supervisorName" />
+                <TextBox Width="180" Visibility="Collapsed" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Name="Textbox_SupervisorName" />
+                <Button Width="30"  Click="Button_OKSupervisorName_Click" Visibility="Collapsed" Name="Button_OKSupervisorName">OK</Button>
+                <Button Width="70" Click="Button_CancelSupervisorName_Click" Visibility="Collapsed" Name="Button_CancelSupervisorName">Cancel</Button>
+            </StackPanel>
+            </Grid>
         <Button Click="Button_Add_Supervisor_Manager_Click" Name="Button_Add_Supervisor_Manager" Margin="7">Add Supervisor/Operation Manager</Button>
         <Button x:Uid="Button_Submit" Margin="0" Click="Submit_Click" Width="100" Content="{Binding Path=Button_Submit, Source={StaticResource Resources}}" />
 
