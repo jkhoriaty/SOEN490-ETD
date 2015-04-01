@@ -27,6 +27,7 @@ namespace ETD.ViewsPresenters
         DateTime shiftStart;
         String shiftEndStr;
         DateTime shiftEnd;
+		int lastGridRow;
 
         public InitialSetup()
         {
@@ -68,6 +69,8 @@ namespace ETD.ViewsPresenters
 			
 			Combobox_SupervisorOperationManager.Items.Add(supervisorItem);
 			Combobox_SupervisorOperationManager.Items.Add(opManagerItem);
+
+			lastGridRow = InitialSetupGrid.RowDefinitions.Count;
 
 
             using (SQLiteDataReader reader = StaticDBConnection.QueryDatabase("SELECT Name FROM Volunteers"))
@@ -202,7 +205,7 @@ namespace ETD.ViewsPresenters
 		{
 			if(dispatcherName.SelectedIndex == 0)
 			{
-				dispatcherName.Visibility = Visibility.Hidden;
+				dispatcherName.Visibility = Visibility.Collapsed;
 				Textbox_DispatcherName.Visibility = Visibility.Visible;
 				Button_OKDispatcherName.Visibility = Visibility.Visible;
 				Button_CancelDispatcherName.Visibility = Visibility.Visible;
@@ -213,7 +216,7 @@ namespace ETD.ViewsPresenters
 		{
 			if (supervisorName.SelectedIndex == 0)
 			{
-				supervisorName.Visibility = Visibility.Hidden;
+				supervisorName.Visibility = Visibility.Collapsed;
 				Textbox_SupervisorName.Visibility = Visibility.Visible;
 				Button_OKSupervisorName.Visibility = Visibility.Visible;
 				Button_CancelSupervisorName.Visibility = Visibility.Visible;
@@ -233,9 +236,9 @@ namespace ETD.ViewsPresenters
 
 		private void Button_CancelDispatcherName_Click(object sender, RoutedEventArgs e)
 		{
-			Textbox_DispatcherName.Visibility = Visibility.Hidden;
-			Button_OKDispatcherName.Visibility = Visibility.Hidden;
-			Button_CancelDispatcherName.Visibility = Visibility.Hidden;
+			Textbox_DispatcherName.Visibility = Visibility.Collapsed;
+			Button_OKDispatcherName.Visibility = Visibility.Collapsed;
+			Button_CancelDispatcherName.Visibility = Visibility.Collapsed;
 			dispatcherName.Visibility = Visibility.Visible;
 			dispatcherName.SelectedIndex = -1;
 		}
@@ -249,9 +252,9 @@ namespace ETD.ViewsPresenters
 			else
 			{
 				StaticDBConnection.NonQueryDatabase("INSERT INTO [Volunteers] (Name, Training_Level) VALUES ('" + Textbox_DispatcherName.Text + "', 0);");
-				Textbox_DispatcherName.Visibility = Visibility.Hidden;
-				Button_OKDispatcherName.Visibility = Visibility.Hidden;
-				Button_CancelDispatcherName.Visibility = Visibility.Hidden;
+				Textbox_DispatcherName.Visibility = Visibility.Collapsed;
+				Button_OKDispatcherName.Visibility = Visibility.Collapsed;
+				Button_CancelDispatcherName.Visibility = Visibility.Collapsed;
 				dispatcherName.Visibility = Visibility.Visible;
 
 				ComboBoxItem newUser = new ComboBoxItem();
@@ -263,9 +266,9 @@ namespace ETD.ViewsPresenters
 
 		private void Button_CancelSupervisorName_Click(object sender, RoutedEventArgs e)
 		{
-			Textbox_SupervisorName.Visibility = Visibility.Hidden;
-			Button_OKSupervisorName.Visibility = Visibility.Hidden;
-			Button_CancelSupervisorName.Visibility = Visibility.Hidden;
+			Textbox_SupervisorName.Visibility = Visibility.Collapsed;
+			Button_OKSupervisorName.Visibility = Visibility.Collapsed;
+			Button_CancelSupervisorName.Visibility = Visibility.Collapsed;
 			supervisorName.Visibility = Visibility.Visible;
 		}
 		private void Button_OKSupervisorName_Click(object sender, RoutedEventArgs e)
@@ -277,9 +280,9 @@ namespace ETD.ViewsPresenters
 			else
 			{
 				StaticDBConnection.NonQueryDatabase("INSERT INTO [Volunteers] (Name, Training_Level) VALUES ('" + Textbox_SupervisorName.Text + "', 0);");
-				Textbox_SupervisorName.Visibility = Visibility.Hidden;
-				Button_OKSupervisorName.Visibility = Visibility.Hidden;
-				Button_CancelSupervisorName.Visibility = Visibility.Hidden;
+				Textbox_SupervisorName.Visibility = Visibility.Collapsed;
+				Button_OKSupervisorName.Visibility = Visibility.Collapsed;
+				Button_CancelSupervisorName.Visibility = Visibility.Collapsed;
 				supervisorName.Visibility = Visibility.Visible;
 
 				ComboBoxItem newUser = new ComboBoxItem();
@@ -292,9 +295,12 @@ namespace ETD.ViewsPresenters
 		private void Button_Add_Supervisor_Manager_Click(object sender, RoutedEventArgs e)
 		{
 			RowDefinition rowDef = new RowDefinition();
+			rowDef.Height = new GridLength(30);
 			InitialSetupGrid.RowDefinitions.Add(rowDef);
 
 			ComboBox supervisorManagerCBox = new ComboBox();
+			supervisorManagerCBox.HorizontalContentAlignment = HorizontalAlignment.Center;
+			supervisorManagerCBox.VerticalContentAlignment = VerticalAlignment.Center;
 
 			ComboBoxItem supervisorItem = new ComboBoxItem();
 			supervisorItem.Content = "Supervisor";
@@ -304,10 +310,10 @@ namespace ETD.ViewsPresenters
 			operationManagerItem.Content = "Operation Manager";
 			supervisorManagerCBox.Items.Add(operationManagerItem);
 
-			//test.Content = "TEST";
 			InitialSetupGrid.Children.Add(supervisorManagerCBox);
-			Grid.SetRow(supervisorManagerCBox, 10);
+			Grid.SetRow(supervisorManagerCBox, lastGridRow);
 			Grid.SetColumn(supervisorManagerCBox, 0);
+			lastGridRow++;
 		}
 		/*private void Button_CancelOperationManagerName_Click(object sender, RoutedEventArgs e)
 		{
