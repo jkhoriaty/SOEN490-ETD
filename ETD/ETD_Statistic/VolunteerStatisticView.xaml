@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignWidth="700">
-    <StackPanel Margin="50,0,30,0">
+    <StackPanel Name="volunteerStats" Margin="50,0,30,0">
         <TextBlock Margin="200,50,150,0" FontStyle="Oblique" FontWeight="ExtraBold" FontSize="25" Foreground="DarkSlateBlue" Text="Volunteer Statistic"/>
         <Grid>
 
