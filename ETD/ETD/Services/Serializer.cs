@@ -27,6 +27,7 @@ namespace ETD.Services
         private List<Intervention> activeInterventions;
         private List<Intervention> completedInterventions;
         private List<Equipment> equipments;
+        private List<Request> requests;
         private Operation operation;
 
         //Objects needed for serialization
@@ -46,6 +47,9 @@ namespace ETD.Services
 
             equipments = new List<Equipment>();
             Observable.RegisterClassObserver(typeof(Equipment), this);
+
+            requests = new List<Request>();
+            Observable.RegisterClassObserver(typeof(Request), this);
 
             serializer = new BinaryFormatter();
             timer = new Timer(backupRate);
@@ -88,7 +92,7 @@ namespace ETD.Services
 
         private void BackUpPinPositions()
         {
-            List<Pin> pins = Pin.getPinList();
+            List<Pin> pins = new List<Pin>(Pin.getPinList());
             StreamWriter fileStream = new StreamWriter(outputDirectory + "PinsInfo.tmp");
             foreach(Pin p in pins)
             {
@@ -310,6 +314,7 @@ namespace ETD.Services
             activeInterventions = Intervention.getActiveInterventionList();
             completedInterventions = Intervention.getCompletedInterventionList();
             equipments = Equipment.getEquipmentList();
+            requests = Request.getRequestList();
         }
 
         //Mutators
