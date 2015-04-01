@@ -29,6 +29,7 @@ namespace ETD.ViewsPresenters.MapSection
         ImageBrush imgbrush = new ImageBrush();
         ImageBrush original = new ImageBrush();
         internal String zoomLevel = "100%";
+        bool isZoomed = false;
 
         double mouseX;
         double mouseY;
@@ -164,9 +165,14 @@ namespace ETD.ViewsPresenters.MapSection
 		//Upon right click store mouse position to know where to zoom
         private void Map_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
-            var mousePos = e.GetPosition(Canvas_map);
-            mouseX = mousePos.X;
-            mouseY = mousePos.Y;
+            if (isZoomed == false)
+            {
+                this.ContextMenu = this.Resources["ZoomContextMenuDefault"] as ContextMenu;
+            }
+            else
+            {
+                this.ContextMenu = this.Resources["ZoomContextMenuZoomed"] as ContextMenu;
+            }
         }
 		
 
@@ -181,21 +187,27 @@ namespace ETD.ViewsPresenters.MapSection
             {
                 case "100%":
                     ScaleMap(1);
+                    isZoomed = false;
                     break;
                 case "120%":
                     ScaleMap(1.2);
+                    isZoomed = true;
                     break;
                 case "140%":
                     ScaleMap(1.4);
+                    isZoomed = true;
                     break;
                 case "160%":
                     ScaleMap(1.6);
+                    isZoomed = true;
                     break;
                 case "180%":
                     ScaleMap(1.8);
+                    isZoomed = true;
                     break;
                 case "200%":
                     ScaleMap(2);
+                    isZoomed = true;
                     break;
             }
         }
@@ -208,8 +220,6 @@ namespace ETD.ViewsPresenters.MapSection
             imgbrush.RelativeTransform = ST;
             
             imgbrush.ClearValue(ImageBrush.TransformProperty);
-
-    
         }
 
         public void ScaleMap(double ratio)

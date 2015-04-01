@@ -6,10 +6,9 @@
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
       Background="Transparent"
-      ContextMenu="{DynamicResource ZoomContextMenuDefault}"
       MouseRightButtonDown="Map_MouseRightButtonDown"
       Name="Page_mapSection"
-	Title="MapSectionPage" >
+	  Title="MapSectionPage" >
 
     <Canvas Name="Canvas_map"/>
     <Page.Resources>
@@ -26,4 +25,5 @@
             <MenuItem Header="100%" Tag="Canvas_map" Click="Zoom_Click"/>
         </ContextMenu>
     </Page.Resources>
+
 </Page>

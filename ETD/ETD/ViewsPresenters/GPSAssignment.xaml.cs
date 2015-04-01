@@ -126,7 +126,7 @@ namespace ETD.ViewsPresenters
             {
                 ComboBox temp = new ComboBox();
                 temp = ctrl;
-                if (temp.SelectedItem != null && temp.SelectedItem != " ")
+                if (temp.SelectedItem != null && temp.SelectedItem.ToString() != " ")
                 {
                     string memberID = temp.SelectedItem.ToString();
 
@@ -140,7 +140,7 @@ namespace ETD.ViewsPresenters
                     teamList[teamIndex].setGPSLocation(gpsLocationsDictionary[inverseVolunteerList[memberID]]);
                 }
 
-                else if (temp.SelectedItem == " ")
+                else if (temp.SelectedItem.ToString() == " ")
                 {
                     teamList[teamIndex].setGPSLocation(null);
                 }
