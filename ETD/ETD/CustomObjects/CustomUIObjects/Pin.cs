@@ -323,6 +323,25 @@ namespace ETD.CustomObjects.CustomUIObjects
 			bool collisionDetected = true;
 			int verificationCount = 0; //Counter so that the program will be able to recognize when an object is stuck and bouncing around endlessly
 
+			//Replacing pin within bounds when it is dragged or moved by GPS outside of the map area
+			if(getX() < this.Width / 2)
+			{
+				setPinPosition(this.Width / 2, getY());
+			}
+			else if(getX() > mapSection.Canvas_map.ActualWidth - (this.Width / 2))
+			{
+				setPinPosition(mapSection.Canvas_map.ActualWidth - (this.Width / 2), getY());
+			}
+
+			if(getY() < this.Height / 2)
+			{
+				setPinPosition(getX(), this.Height / 2);
+			}
+			else if(getY() > mapSection.Canvas_map.ActualHeight - (this.Height / 2))
+			{
+				setPinPosition(getX(), mapSection.Canvas_map.ActualHeight - (this.Height / 2));
+			}
+
 			//Loop to make sure that last verification ensures no collision with any object
 			while (collisionDetected == true)
 			{
