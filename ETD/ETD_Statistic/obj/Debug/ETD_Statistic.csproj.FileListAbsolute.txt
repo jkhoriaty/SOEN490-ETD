@@ -126,6 +126,7 @@ C:\Workspace\SOEN490-ETD\ETD\ETD_Statistic\obj\Debug\ViewsPresenters\Login.g.cs
 C:\Workspace\SOEN490-ETD\ETD\ETD_Statistic\obj\Debug\ViewsPresenters\PreviousOperationView.g.cs
 C:\Workspace\SOEN490-ETD\ETD\ETD_Statistic\obj\Debug\ViewsPresenters\StatisticView.g.cs
 C:\Workspace\SOEN490-ETD\ETD\ETD_Statistic\obj\Debug\App.g.cs
+C:\Workspace\SOEN490-ETD\ETD\ETD_Statistic\obj\Debug\ETD_Statistic_Content.g.cs
 C:\Workspace\SOEN490-ETD\ETD\ETD_Statistic\obj\Debug\GeneratedInternalTypeHelper.g.cs
 C:\Workspace\SOEN490-ETD\ETD\ETD_Statistic\obj\Debug\ETD_Statistic_MarkupCompile.cache
 C:\Workspace\SOEN490-ETD\ETD\ETD_Statistic\obj\Debug\ETD_Statistic_MarkupCompile.lref
@@ -138,3 +139,5 @@ C:\Workspace\SOEN490-ETD\ETD\ETD_Statistic\obj\Debug\ETD_Statistic.Properties.Re
 C:\Workspace\SOEN490-ETD\ETD\ETD_Statistic\obj\Debug\ETD_Statistic.csproj.GenerateResource.Cache
 C:\Workspace\SOEN490-ETD\ETD\ETD_Statistic\obj\Debug\ETD_Statistic.exe
 C:\Workspace\SOEN490-ETD\ETD\ETD_Statistic\obj\Debug\ETD_Statistic.pdb
+C:\Workspace\SOEN490-ETD\ETD\ETD_Statistic\obj\Debug\VolunteerStatisticView.baml
+C:\Workspace\SOEN490-ETD\ETD\ETD_Statistic\obj\Debug\VolunteerStatisticView.g.cs

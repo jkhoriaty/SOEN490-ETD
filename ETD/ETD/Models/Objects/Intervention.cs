@@ -86,21 +86,26 @@ namespace ETD.Models.Objects
         {
             this.interventionID = id;
             this.callID = -1;
-            System.Data.SQLite.SQLiteDataReader results = StaticDBConnection.QueryDatabase("SELECT Operation_ID, Intervention_Number, Time_Of_Call, Caller, Location, Nature_Of_Call, Code, Gender, Age, Chief_Complaint, Other_Chief_Complaint FROM [Interventions] WHERE Intervention_ID=" + id + ";");
-            results.Read();
+            using (System.Data.SQLite.SQLiteDataReader results = StaticDBConnection.QueryDatabase("SELECT Operation_ID, Intervention_Number, Time_Of_Call, Caller, Location, Nature_Of_Call, Code, Gender, Age, Chief_Complaint, Other_Chief_Complaint FROM [Interventions] WHERE Intervention_ID=" + id + ";"))
+            {
+                if (results != null)
+                {
+                    results.Read();
 
-            this.operationID = results.GetInt32(0);
-            this.interventionNumber = results.GetInt32(1);
-            this.timeOfCall = results.GetDateTime(2);
-            this.callerName = (results.IsDBNull(3)) ? "" : results.GetString(3);
-            this.location = (results.IsDBNull(4)) ? "" : results.GetString(4);
-            this.natureOfCall = (results.IsDBNull(5)) ? "" : results.GetString(5);
-            this.code = (results.IsDBNull(6)) ? 0 : results.GetInt32(6);
-            this.gender = (results.IsDBNull(7)) ? "" : results.GetString(7);
-            this.age = (results.IsDBNull(8)) ? "" : results.GetInt32(8).ToString();
-            this.chiefComplaint = (results.IsDBNull(9)) ? "" : results.GetString(9);
-            this.otherChiefComplaint = (results.IsDBNull(10)) ? "" : results.GetString(10);
-
+                    this.operationID = results.GetInt32(0);
+                    this.interventionNumber = results.GetInt32(1);
+                    this.timeOfCall = results.GetDateTime(2);
+                    this.callerName = (results.IsDBNull(3)) ? "" : results.GetString(3);
+                    this.location = (results.IsDBNull(4)) ? "" : results.GetString(4);
+                    this.natureOfCall = (results.IsDBNull(5)) ? "" : results.GetString(5);
+                    this.code = (results.IsDBNull(6)) ? 0 : results.GetInt32(6);
+                    this.gender = (results.IsDBNull(7)) ? "" : results.GetString(7);
+                    this.age = (results.IsDBNull(8)) ? "" : results.GetInt32(8).ToString();
+                    this.chiefComplaint = (results.IsDBNull(9)) ? "" : results.GetString(9);
+                    this.otherChiefComplaint = (results.IsDBNull(10)) ? "" : results.GetString(10);
+                }
+            }
+            StaticDBConnection.CloseConnection();
             this.resourceList = new List<Resource>();
             this.abc = new ABC(this.interventionID);
 
@@ -140,6 +145,7 @@ namespace ETD.Models.Objects
 			team.incrementInterventionCount();
 			resourceList.Add(new Resource(this,team));
 
+            StaticDBConnection.NonQueryDatabase("INSERT INTO [Intervening_Teams] (Intervention_ID, Team_ID, Started_Intervening) VALUES (" + interventionID + ", " + team.getID() + ", '" + StaticDBConnection.DateTimeSQLite(DateTime.Now) + "');");
 			InstanceModifiedNotification();
 		}
 
@@ -150,6 +156,7 @@ namespace ETD.Models.Objects
 				if(resource.getTeam() == team)
 				{
 					resource.setIntervening(false);
+                    StaticDBConnection.NonQueryDatabase("UPDATE [Intervening_Teams] SET Stopped_Intervening='" + StaticDBConnection.DateTimeSQLite(DateTime.Now) + "' WHERE Intervention_ID=" + interventionID + " AND Team_ID=" + team.getID() + ";");
 				}
 			}
 			InstanceModifiedNotification();
@@ -507,6 +514,18 @@ namespace ETD.Models.Objects
         public int getParentID()
         {
             return operationID;
+        }
+
+        public static void AddActiveIntervention(Intervention intervention)
+        {
+            activeInterventionList.Add(intervention);
+            ClassModifiedNotification(typeof(Intervention));
+        }
+
+        public static void AddCompletedIntervention(Intervention intervention)
+        {
+            completedInterventionList.Add(intervention);
+            ClassModifiedNotification(typeof(Intervention));
         }
     }
 }

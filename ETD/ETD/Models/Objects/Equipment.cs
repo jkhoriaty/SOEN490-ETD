@@ -85,5 +85,11 @@ namespace ETD.Models.Objects
             ClassModifiedNotification(typeof(Equipment));
         }
 
+        public static void AddEquipment(Equipment equipment)
+        {
+            equipmentList.Add(equipment);
+            ClassModifiedNotification(typeof(Equipment));
+        }
+
     }
 }

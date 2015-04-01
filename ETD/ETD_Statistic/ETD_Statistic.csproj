@@ -88,6 +88,9 @@
     <Compile Include="ViewsPresenters\StatisticView.xaml.cs">
       <DependentUpon>StatisticView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="VolunteerStatisticView.xaml.cs">
+      <DependentUpon>VolunteerStatisticView.xaml</DependentUpon>
+    </Compile>
     <Page Include="ResourceDictionary.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -117,6 +120,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ViewsPresenters\StatisticView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VolunteerStatisticView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

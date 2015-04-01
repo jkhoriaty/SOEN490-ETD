@@ -7,6 +7,7 @@ using System.Windows;
 
 namespace ETD.Models.ArchitecturalObjects
 {
+    [Serializable()]
 	public abstract class Observable
 	{
 		/*
@@ -17,7 +18,13 @@ namespace ETD.Models.ArchitecturalObjects
 		 */
 
 		//The following section is for observers to register to an object, basically listen for creation and deletion of instances of that object
-		private static Dictionary<Type, List<Observer>> classObserverList = new Dictionary<Type, List<Observer>>(); //Where the Type is the class that the observer is interested in
+        [field: NonSerialized()]
+        private static Dictionary<Type, List<Observer>> classObserverList; //Where the Type is the class that the observer is interested in
+
+        static Observable()
+        {
+            classObserverList = new Dictionary<Type, List<Observer>>();
+        }
 
         //Add the new observer to the list of observers
 		public static void RegisterClassObserver(Type type, Observer observer)
@@ -48,10 +55,15 @@ namespace ETD.Models.ArchitecturalObjects
 		}
 
 		//The following is for observers that want to listen to only one instance of that object, e.g. when a team status changes or when a team is assigned to an intervention
+        [field: NonSerialized()]
 		private List<Observer> instanceObserverList = new List<Observer>();
 
 		public void RegisterInstanceObserver(Observer observer)
 		{
+            if(instanceObserverList == null)
+            {
+                instanceObserverList = new List<Observer>();
+            }
 			instanceObserverList.Add(observer);
 		}
 
@@ -65,6 +77,10 @@ namespace ETD.Models.ArchitecturalObjects
 
 		public void DeregisterInstanceObserver(Observer observer)
 		{
+            if (instanceObserverList == null)
+            {
+                instanceObserverList = new List<Observer>();
+            }
 			instanceObserverList.Remove(observer);
 		}
 	}

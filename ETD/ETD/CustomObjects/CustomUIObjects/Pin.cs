@@ -173,13 +173,13 @@ namespace ETD.CustomObjects.CustomUIObjects
 		}
 
 		//Get the X value of the center of the grid
-		internal double getX()
+		public double getX()
 		{
 			return Canvas.GetLeft(this) + (this.Width / 2);
 		}
 
 		//Get the Y value of the center of the grid
-		internal double getY()
+		public double getY()
 		{
 			return Canvas.GetTop(this) + (this.Height / 2);
 		}
@@ -495,5 +495,34 @@ namespace ETD.CustomObjects.CustomUIObjects
 		{
 			return;
 		}
+
+        public static Pin MatchPin(Type type, int id)
+        {
+            foreach(Pin p in pinList)
+            {
+                if(p.GetType().Equals(type) && type.Equals(typeof(TeamPin)))
+                {
+                    if(((TeamPin)p).getTeam().getID() == id)
+                    {
+                        return p;
+                    }
+                }
+                else if (p.GetType().Equals(type) && type.Equals(typeof(InterventionPin)))
+                {
+                    if (((InterventionPin)p).getIntervention().getID() == id)
+                    {
+                        return p;
+                    }
+                }
+                else if (p.GetType().Equals(type) && type.Equals(typeof(EquipmentPin)))
+                {
+                    if (((EquipmentPin)p).getEquipment().getID() == id)
+                    {
+                        return p;
+                    }
+                }
+            }
+            return null;
+        }
 	}
 }

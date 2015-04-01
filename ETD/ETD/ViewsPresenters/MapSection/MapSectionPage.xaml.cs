@@ -21,22 +21,26 @@ namespace ETD.ViewsPresenters.MapSection
 	public partial class MapSectionPage : Page, Observer
 	{
 		MainWindow mainWindow;
+        AdditionalInfoPage additionalInfo;
 
 		//Drag-and-Drop related variable
 		private bool pinDragInProgress;
 
-        ImageBrush imgbrush;
+        ImageBrush imgbrush = new ImageBrush();
+        ImageBrush original = new ImageBrush();
         internal String zoomLevel = "100%";
+        bool isZoomed = false;
 
         double mouseX;
         double mouseY;
         double TTX;
         double TTY;
 
-		public MapSectionPage(MainWindow mainWindow)
+		public MapSectionPage(MainWindow mainWindow, AdditionalInfoPage additionalInfo)
 		{
 			InitializeComponent();
 			this.mainWindow = mainWindow;
+            this.additionalInfo = additionalInfo;
 
 			Observable.RegisterClassObserver(typeof(Team), this);
 			Observable.RegisterClassObserver(typeof(Intervention), this);
@@ -72,6 +76,26 @@ namespace ETD.ViewsPresenters.MapSection
 				teamPin.setPinPosition(previousPinPosition[0], previousPinPosition[1]);
 				teamPin.CollisionDetectionAndResolution(ignoreSpecialCollisions);
 			}
+
+            //Creating team fragments when a team is split
+            foreach (Team team in Team.getSplitTeamList())
+            {
+                TeamPin teamPin = new TeamPin(team, this);
+                Canvas_map.Children.Add(teamPin);
+
+                //Setting the pin to it's previous position, if it exists, or to the top-left corner
+                bool ignoreSpecialCollisions = false;
+                double[] previousPinPosition = Pin.getPreviousPinPosition(team);
+                if (previousPinPosition == null)
+                {
+                    ignoreSpecialCollisions = true;
+                    previousPinPosition = new double[] { teamPin.Width / 2, teamPin.Height / 2 }; //Top-left corner
+                }
+                teamPin.setPinPosition(previousPinPosition[0], previousPinPosition[1]);
+                teamPin.CollisionDetectionAndResolution(ignoreSpecialCollisions);
+            }
+
+
 
 			//Creating all intervention pins and adding the map to their previous or a new position while detecting newly created collisions
 			foreach (Intervention intervention in Intervention.getActiveInterventionList())
@@ -153,35 +177,49 @@ namespace ETD.ViewsPresenters.MapSection
 		//Upon right click store mouse position to know where to zoom
         private void Map_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
-            var mousePos = e.GetPosition(Canvas_map);
-            mouseX = mousePos.X;
-            mouseY = mousePos.Y;
+            if (isZoomed == false)
+            {
+                this.ContextMenu = this.Resources["ZoomContextMenuDefault"] as ContextMenu;
+            }
+            else
+            {
+                this.ContextMenu = this.Resources["ZoomContextMenuZoomed"] as ContextMenu;
+            }
         }
 		
 
 		public void Zoom_Click(object sender, EventArgs e)
         {
+            imgbrush = (ImageBrush)additionalInfo.AdditionalMap.Background;
+            original = (ImageBrush)additionalInfo.AdditionalMap.Background;
+
             MenuItem mi = (MenuItem)sender;
             zoomLevel = (String)mi.Header;
             switch(zoomLevel)
             {
                 case "100%":
                     ScaleMap(1);
+                    isZoomed = false;
                     break;
                 case "120%":
                     ScaleMap(1.2);
+                    isZoomed = true;
                     break;
                 case "140%":
                     ScaleMap(1.4);
+                    isZoomed = true;
                     break;
                 case "160%":
                     ScaleMap(1.6);
+                    isZoomed = true;
                     break;
                 case "180%":
                     ScaleMap(1.8);
+                    isZoomed = true;
                     break;
                 case "200%":
                     ScaleMap(2);
+                    isZoomed = true;
                     break;
             }
         }
@@ -192,11 +230,8 @@ namespace ETD.ViewsPresenters.MapSection
             ST.ScaleX = 1;
             ST.ScaleY = 1;
             imgbrush.RelativeTransform = ST;
-
-            TranslateTransform TT;
-
-            TT = new TranslateTransform(-TTX, -TTY);
-            imgbrush.Transform = TT;
+            
+            imgbrush.ClearValue(ImageBrush.TransformProperty);
         }
 
         public void ScaleMap(double ratio)

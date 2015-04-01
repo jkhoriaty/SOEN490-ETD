@@ -9,6 +9,7 @@ using System.Windows;
 
 namespace ETD.Models.Objects
 {
+    [Serializable()]
 	public class GPSLocation : Observable
 	{
 		//Used to keep track of the difference between the to-scale image and the distorted map

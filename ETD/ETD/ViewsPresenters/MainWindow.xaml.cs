@@ -79,7 +79,7 @@ namespace ETD.ViewsPresenters
             shiftSection = new ShiftsSection();
             mapModificationSection = new AdditionalInfoPage(this);
 			teamsSection = new TeamsSectionPage(this);
-			mapSection = new MapSectionPage(this);
+			mapSection = new MapSectionPage(this, mapModificationSection);
 			interventionsSection = new InterventionSectionPage(this);
 
 			previousWidth = MapSection.ActualWidth;

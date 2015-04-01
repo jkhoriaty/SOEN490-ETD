@@ -59,5 +59,10 @@ namespace ETD.CustomObjects.CustomUIObjects
 			//If there are no special conditions return false
 			return false;
 		}
+
+        public Equipment getEquipment()
+        {
+            return equipment;
+        }
 	}
 }

@@ -47,6 +47,12 @@ namespace ETD_Statistic.Model
         {
             return operationList.Count;
         }
+
+        public static TimeSpan getDateDifference(DateTime start, DateTime end)
+        {
+            TimeSpan timeDifference = end.Subtract(start);
+            return timeDifference;
+        }
      
     }
 }
