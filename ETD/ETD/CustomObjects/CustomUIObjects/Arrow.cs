@@ -26,10 +26,14 @@ namespace ETD.CustomObjects.CustomUIObjects
 		Line spoke1;
 		Line spoke2;
 
+		//Miscellaneous
+		Canvas Canvas_map;
+		bool displayed = false;
+
 		public Arrow(Canvas Canvas_map, double X1, double Y1, double X2, double Y2)
 		{
+			this.Canvas_map = Canvas_map;
 			BuildLines();
-			ShowLines(Canvas_map);
 			DrawArrow(X1, Y1, X2, Y2);
 		}
 
@@ -50,16 +54,22 @@ namespace ETD.CustomObjects.CustomUIObjects
 		}
 
 		//Adding the lines to the map
-		internal void ShowLines(Canvas Canvas_map)
+		internal void DisplayArrow()
 		{
 			Canvas_map.Children.Add(mainLine);
 			Canvas_map.Children.Add(spoke1);
 			Canvas_map.Children.Add(spoke2);
+			displayed = true;
 		}
 
 		//Draw line with the same destination
 		internal void DrawArrow(double X1, double Y1)
 		{
+			//Display the arrow if it wasn't (e.g. whent he phone was offline or the connection with server failed)
+			if(!displayed)
+			{
+				DisplayArrow();
+			}
 			DrawArrow(X1, Y1, mainLine.X2, mainLine.Y2);
 		}
 
@@ -104,25 +114,33 @@ namespace ETD.CustomObjects.CustomUIObjects
 			double xSpoke2 = X2 + xVector2;
 			double ySpoke2 = Y2 + yVector2;
 
-			//Creating and fixing spoke1
-			spoke1.X1 = X2;
-			spoke1.Y1 = Y2;
-			spoke1.X2 = xSpoke1;
-			spoke1.Y2 = ySpoke1;
+			try
+			{
+				//Creating and fixing spoke1
+				spoke1.X1 = X2;
+				spoke1.Y1 = Y2;
+				spoke1.X2 = xSpoke1;
+				spoke1.Y2 = ySpoke1;
 
-			//Creating and fixing spoke2
-			spoke2.X1 = X2;
-			spoke2.Y1 = Y2;
-			spoke2.X2 = xSpoke2;
-			spoke2.Y2 = ySpoke2;
+				//Creating and fixing spoke2
+				spoke2.X1 = X2;
+				spoke2.Y1 = Y2;
+				spoke2.X2 = xSpoke2;
+				spoke2.Y2 = ySpoke2;
+			}
+			catch(Exception e)
+			{
+				HideArrow();
+			}
 		}
 
 		//Removing arrow from map
-		public void ClearArrow(Canvas Canvas_map)
+		public void HideArrow()
 		{
 			Canvas_map.Children.Remove(mainLine);
 			Canvas_map.Children.Remove(spoke1);
 			Canvas_map.Children.Remove(spoke2);
+			displayed = false;
 		}
 	}
 }

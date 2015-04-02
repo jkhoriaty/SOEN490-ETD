@@ -24,7 +24,6 @@ namespace ETD.Services
 
 		private static Dictionary<string, string> registeredVolunteers = new Dictionary<string, string>();
         private static Dictionary<string, int> connectionStatus = new Dictionary<string,int> ();
-        private static Dictionary<string, int> timeMIA = new Dictionary<string,int> ();
 
 		internal static void StartServices(GPSStatusCallbacks newCaller)
 		{
@@ -32,7 +31,7 @@ namespace ETD.Services
 
 			//Start polling the server for GPS locations
 			dispatcherTimer.Tick += new EventHandler(Refresh);
-			dispatcherTimer.Interval += new TimeSpan(0, 0, 5);
+			dispatcherTimer.Interval += new TimeSpan(0, 0, 10);
 			dispatcherTimer.Start();
 		}
 
@@ -69,40 +68,18 @@ namespace ETD.Services
 			{
 				gpsStatusCallbacks.NotifyConnectionSuccess();
 				connectedToServer = true;
-				int newCtr = 0;
 				for (int i = 1; i < (reply.Length - 1); i++)
 				{
 					String[] volunteerInfo = reply[i].Split('|');
 					if (!registeredVolunteers.ContainsKey(volunteerInfo[0]))
 					{
 						registeredVolunteers.Add(volunteerInfo[0], volunteerInfo[1]);
-                        connectionStatus.Add(volunteerInfo[0], 1);
-                        timeMIA.Add(volunteerInfo[0], 0);
-						newCtr++;
 					}
 					else
 					{
-                        if (registeredVolunteers[volunteerInfo[0]] == volunteerInfo[1])
-                        {
-                            timeMIA[volunteerInfo[0]]++;
-                            if (timeMIA[volunteerInfo[0]] <= 3)
-                            {
-                                connectionStatus[volunteerInfo[0]] = 0; //Connection status unknown (failed connection but waiting for retry before setting it as not connected)
-                            }
-                            else
-                            {
-                                connectionStatus[volunteerInfo[0]] = -1; //Not connected
-                            }
-                        }
-                        else
-                        {
-                            timeMIA[volunteerInfo[0]] = 0;
-                            connectionStatus[volunteerInfo[0]] = 1; //Connected
-                            registeredVolunteers[volunteerInfo[0]] = volunteerInfo[1]; //Updating location
-                        }
+						registeredVolunteers[volunteerInfo[0]] = volunteerInfo[1];
 					}
 				}
-				//Dispatcher.Invoke(() => newRegisteredCTR.Content = "" + newCtr);
 			}
 		}
 

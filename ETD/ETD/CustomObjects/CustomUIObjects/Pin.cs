@@ -290,7 +290,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 		}
 
 		//Handling case when a pin tracked by GPS is dropped
-		internal void GPSPinDrop()
+		internal void GPSPinDrop(bool tracked)
 		{
 			//Create and draw the arrow to the destination point
 			if (!destinationArrowDictionnary.ContainsKey(relatedObject))
@@ -299,20 +299,26 @@ namespace ETD.CustomObjects.CustomUIObjects
 			}
 			else if (destinationArrowDictionnary[relatedObject] != null)
 			{
-				destinationArrowDictionnary[relatedObject].ClearArrow(mapSection.Canvas_map); //Clear the arrow that it contains if it does exist
+				destinationArrowDictionnary[relatedObject].HideArrow(); //Clear the arrow that it contains if it does exist
 			}
 			destinationArrowDictionnary[relatedObject] = new Arrow(mapSection.Canvas_map, startX, startY, getX(), getY());
 
-			//Replacing pin at the start point and ensuring it doesn't get added to an intervention by mistake
-			setPinPosition(startX, startY);
-			CollisionDetectionAndResolution(true);
+			//Showing the line only if the team is tracked by GPS, i.e. if the phone is not offline or the connection to the server failed
+			if(tracked)
+			{
+				destinationArrowDictionnary[relatedObject].DisplayArrow();
+				
+				//Replacing pin at the start point and ensuring it doesn't get added to an intervention by mistake
+				setPinPosition(startX, startY);
+				CollisionDetectionAndResolution(true);
+			}
 		}
 
-		internal void ClearArrow()
+		internal void RemoveArrow()
 		{
 			if (destinationArrowDictionnary.ContainsKey(relatedObject) && destinationArrowDictionnary[relatedObject] != null)
 			{
-				destinationArrowDictionnary[relatedObject].ClearArrow(mapSection.Canvas_map);
+				destinationArrowDictionnary[relatedObject].HideArrow();
 				destinationArrowDictionnary[relatedObject] = null;
 			}
 		}
