@@ -65,7 +65,7 @@ namespace ETD.CustomObjects.CustomUIObjects
         private TextBox completionMMTextBox;
 
         Request request;
-        RequestLine requestLine;
+        RequestLine requestline;
         int rowNumber = 1;
         private String init = "-";
 
@@ -78,15 +78,21 @@ namespace ETD.CustomObjects.CustomUIObjects
         private Dictionary<String, TextBox[]> completionTimestampMap = new Dictionary<String, TextBox[]>();//Contains all completion time stamps
         private static List<RequestLine> requestLineList = new List<RequestLine>();
 
-        public void RequestLine()
+        public void doRequestLine(FollowUpSectionForm followupsection)
         {
-         
+            followupPage = followupsection;
+            populateRequestForm();
+
+        }
+
+        public void populateRequestForm()
+        {
             BuildLine();
             PopulateLine();
 
             //Set up default shift properties
             request = new Request(init, init, init, init, init, init, init, init, init, init);
-            requestLine = new RequestLine();
+            requestline = new RequestLine();
 
 
             RowDefinition sectorRowDefinition = new RowDefinition();
@@ -97,7 +103,7 @@ namespace ETD.CustomObjects.CustomUIObjects
             followupPage.getRequestGrid().Children.Add(this.getTimeBorder());
             Grid.SetColumn(this.getTimeBorder(), 0);
             Grid.SetRow(this.getTimeBorder(), rowNumber);
-   
+
 
             timestampMap.Add("Time" + rowNumber, TextBoxHandler.textboxArray(this.getTimeHHTextBox(), this.getTimeMMTextBox()));
 
@@ -153,10 +159,7 @@ namespace ETD.CustomObjects.CustomUIObjects
             completionTimestampMap.Add("CompletionTimestamp" + rowNumber, TextBoxHandler.textboxArray(this.getCompletionHHTextBox(), this.getCompletionMMTextBox()));
 
             requestLineList.Add(this);
-
         }
-
-
 
 
         //Create a new request row
@@ -165,7 +168,7 @@ namespace ETD.CustomObjects.CustomUIObjects
             if (Keyboard.IsKeyDown(Key.Enter))
             {
                 rowNumber++;
-                RequestLine();
+                populateRequestForm();
             }
         }
         private void BuildLine()
@@ -219,7 +222,7 @@ namespace ETD.CustomObjects.CustomUIObjects
             //client
             clientBorder = new Border();
             clientBorder.BorderBrush = new SolidColorBrush(Colors.Black);
-            clientBorder.BorderThickness = new Thickness(1, 0, 1,1);
+            clientBorder.BorderThickness = new Thickness(1, 0, 1, 1);
 
             clientStackPanel = new StackPanel();
             clientStackPanel.Orientation = Orientation.Horizontal;
@@ -503,7 +506,7 @@ namespace ETD.CustomObjects.CustomUIObjects
             timeMMTextBox.Text = "mm";
 
             //client
-            clientTextBox.Text = "-" ;
+            clientTextBox.Text = "-";
 
             //recipient
             recipientTextBox.Text = "-";
@@ -559,7 +562,7 @@ namespace ETD.CustomObjects.CustomUIObjects
             TextBoxHandler.setNow(timestampMap[bt.Name + rowNumber][0], timestampMap[bt.Name + rowNumber][1]);
         }
 
-
+        //return list of requests
         public static List<RequestLine> getRequestLineList()
         {
             return requestLineList;

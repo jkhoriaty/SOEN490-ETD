@@ -25,13 +25,14 @@ namespace ETD.CustomObjects.PopupForms
     {
         private FollowUpSectionForm followupPage;
         RequestLine requestLine;
-     
+
         //Create a follow up form containing a list of special requests made during the operation
         public FollowUpSectionForm()
         {
             InitializeComponent();
             RequestLine requestLine = new RequestLine();
-            PopulateRequestForm();
+            requestLine.doRequestLine(this);
+            // PopulateRequestForm();
         }
 
         private void PopulateRequestForm()
@@ -48,7 +49,7 @@ namespace ETD.CustomObjects.PopupForms
         {
             return Request_Grid;
         }
-    
+
 
     }
 
