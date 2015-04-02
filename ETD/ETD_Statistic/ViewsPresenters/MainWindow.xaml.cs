@@ -56,34 +56,40 @@ namespace ETD_Statistic.ViewsPresenters
         {
             StatisticView sv = new StatisticView();
             InterventionView iv = new InterventionView();
+            VolunteerStatisticView vs = new VolunteerStatisticView();
 
             FixedDocument fixedDoc = new FixedDocument();
             PageContent firstPageCont = new PageContent();
             PageContent secondPageCont = new PageContent();
+            PageContent thirdPageCont = new PageContent();
+
 
             FixedPage firstFixedPage = new FixedPage();
             FixedPage secondFixedPage = new FixedPage();
+            FixedPage thirdFixedPage = new FixedPage();
+
 
             Frame svFrame = new Frame();
             Frame ivFrame = new Frame();
+            Frame vsFrame = new Frame();
 
             svFrame.Content = sv;
             ivFrame.Content = iv;
+            vsFrame.Content = vs;
 
             firstFixedPage.Children.Add(svFrame);
             secondFixedPage.Children.Add(ivFrame);
-
-
-            //Size sz = new Size(96 * 8.5, 96 * 11);
-            //fixedPage.Measure(sz);
-            //fixedPage.Arrange(new Rect(new Point(), sz));
-            //fixedPage.UpdateLayout();
+            thirdFixedPage.Children.Add(vsFrame);
   
             ((System.Windows.Markup.IAddChild)firstPageCont).AddChild(firstFixedPage);
             ((System.Windows.Markup.IAddChild)secondPageCont).AddChild(secondFixedPage);
+            ((System.Windows.Markup.IAddChild)thirdPageCont).AddChild(thirdFixedPage);
+
 
             fixedDoc.Pages.Add(firstPageCont);
             fixedDoc.Pages.Add(secondPageCont);
+            fixedDoc.Pages.Add(thirdPageCont);
+
 
             docViewer.Document = fixedDoc;           
         }

@@ -70,6 +70,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Model\Statistic.cs" />
+    <Compile Include="Model\VolunteerStatistic.cs" />
+    <Compile Include="Model\VolunteerStatisticMapper.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

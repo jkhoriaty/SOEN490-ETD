@@ -16,7 +16,7 @@ namespace ETD_Statistic.Model
 
         public static void setOperationID(String operation)
         {
-            operationID = operation[9].ToString();
+            operationID = operation.Substring(9).ToString();
             operationList.Add(operationID);
         }
 
@@ -47,12 +47,6 @@ namespace ETD_Statistic.Model
         {
             return operationList.Count;
         }
-
-        public static TimeSpan getDateDifference(DateTime start, DateTime end)
-        {
-            TimeSpan timeDifference = end.Subtract(start);
-            return timeDifference;
-        }
-     
+   
     }
 }
