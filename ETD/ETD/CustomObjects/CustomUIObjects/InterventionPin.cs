@@ -64,7 +64,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 				{
 					SelectGPSLocation();
 				}
-				else
+				else if (GPSServices.connectedToServer && gpsLocation.PhoneOnline())
 				{
 					//Move the intervention pin using the GPS location of one of its intervening teams
 					setPinPosition(gpsLocation.getX(), gpsLocation.getY());
@@ -145,7 +145,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 			if (gpsLocation != null && GPSLocation.gpsConfigured == true)
 			{
 				//Create and draw the arrow to the destination point and replace pin at current GPS position
-				GPSPinDrop();
+				GPSPinDrop(GPSServices.connectedToServer && gpsLocation.PhoneOnline());
 
 				Update(); //Triggering arrow drawing
 
@@ -163,7 +163,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 		//Called when team is moved and tracked by GPS and it gets to its destination
 		private void SetArrived_Click(object sender, RoutedEventArgs e)
 		{
-			ClearArrow();
+			RemoveArrow();
 		}
 
 		//Make a list of the TeamPin of the teams intervening on this intervention

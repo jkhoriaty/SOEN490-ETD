@@ -62,7 +62,7 @@ namespace ETD.ViewsPresenters.MapSection
 				//Redrawing arrow if the pin has one
 				if(Pin.getPinArrow(team) != null)
 				{
-					Pin.getPinArrow(team).ShowLines(Canvas_map);
+					Pin.getPinArrow(team).DisplayArrow();
 				}
 
 				//Setting the pin to it's previous position, if it exists, or to the top-left corner
@@ -106,7 +106,7 @@ namespace ETD.ViewsPresenters.MapSection
 				//Redrawing arrow if the pin has one
 				if (Pin.getPinArrow(intervention) != null)
 				{
-					Pin.getPinArrow(intervention).ShowLines(Canvas_map);
+					Pin.getPinArrow(intervention).DisplayArrow();
 				}
 
 				//Setting the pin to it's previous position, if it exists, or to the top-left corner

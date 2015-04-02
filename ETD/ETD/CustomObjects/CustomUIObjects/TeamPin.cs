@@ -80,7 +80,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 			base.setText(team.getName()); //Although the text doesn't change, we have to redraw it for it not to be hidden by the image
 
 			//Making the appropriate movement with the information provided by GPS
-			if(this != draggedPin && team.getStatus() != Statuses.intervening && gpsLocation != null && GPSLocation.gpsConfigured == true)
+			if (this != draggedPin && team.getStatus() != Statuses.intervening && gpsLocation != null && GPSLocation.gpsConfigured == true && GPSServices.connectedToServer && gpsLocation.PhoneOnline())
 			{
 				setPinPosition(gpsLocation.getX(), gpsLocation.getY()); //Move the team
 				CollisionDetectionAndResolution(true);
@@ -138,7 +138,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 			//Clearing the arrow if the team got to where they are going
 			if (getMenuItemStatus(menuItem).Equals("available") || getMenuItemStatus(menuItem).Equals("intervening"))
 			{
-				ClearArrow();
+				RemoveArrow();
 			}
 
 			//Handling the case when the user sets the status of a team to intervening
@@ -204,20 +204,17 @@ namespace ETD.CustomObjects.CustomUIObjects
                 }
                 else //Remove team from intervention
                 {
-                    if (!team.getStatus().ToString().Equals("intervening"))
-                    {
-                        interventionPin.getIntervention().RemoveInterveningTeam(team);
+                    interventionPin.getIntervention().RemoveInterveningTeam(team);
 					interventionPin.SelectGPSLocation();
-                        team.setStatus("unavailable");
+                    team.setStatus("unavailable");
 
-                        //If it was the last team on that intervention and it has been removed, force redrawing of the map so that the InterventionContainer is removed
-                        if (interventionPin.getInterveningTeamsPin().Count == 0)
-                        {
-                            mapSection.Update();
-                        }
-
-                        interventionPin = null;
+                    //If it was the last team on that intervention and it has been removed, force redrawing of the map so that the InterventionContainer is removed
+                    if (interventionPin.getInterveningTeamsPin().Count == 0)
+                    {
+                        mapSection.Update();
                     }
+
+                    interventionPin = null;
                 }
 			}
 			else if(team.getStatus().ToString().Equals("available")) //If the team was available and has been moved, set the team as moving
@@ -231,7 +228,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 			if (gpsLocation != null && GPSLocation.gpsConfigured == true)
 			{
 				//Create and draw the arrow to the destination point and replace pin at current GPS position
-				GPSPinDrop();
+				GPSPinDrop(GPSServices.connectedToServer && gpsLocation.PhoneOnline());
 			}
 		}
 

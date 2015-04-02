@@ -20,11 +20,14 @@ namespace ETD.Models.Objects
 		internal static List<GPSLocation> referencePoints = new List<GPSLocation>();
 		internal static bool gpsConfigured = false;
 
+		private const int toleratedFailedUpdates = 3;
+
 		public string id;
 		private double lattitude;
 		private double longitude;
 		private double X;
 		private double Y;
+		private int consecutiveFailedUpdates = 0;
 
 		//Creating GPS locations from volunteers positions
 		public GPSLocation(string id, double lattitude, double longitude)
@@ -151,6 +154,18 @@ namespace ETD.Models.Objects
 			return Y;
 		}
 
+		internal bool PhoneOnline()
+		{
+			if(consecutiveFailedUpdates < 3)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
 		//Setters
 
 		public static void setConfigured(bool status)
@@ -160,8 +175,17 @@ namespace ETD.Models.Objects
 
 		public void setGPSCoordinates(double lattitude, double longitude)
 		{
-			this.lattitude = lattitude;
-			this.longitude = longitude;
+			if(this.lattitude == lattitude && this.longitude == longitude) //The server did not receive a location update for that team
+			{
+				consecutiveFailedUpdates++;
+			}
+			else
+			{
+				consecutiveFailedUpdates = 0;
+				
+				this.lattitude = lattitude;
+				this.longitude = longitude;
+			}
 
 			if (gpsConfigured)
 			{
