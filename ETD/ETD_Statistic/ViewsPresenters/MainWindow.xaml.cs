@@ -107,11 +107,17 @@ namespace ETD_Statistic.ViewsPresenters
             if (result == true)
             {
                 string fileName = save.FileName;
-                if (System.IO.File.Exists(fileName))
+                try
                 {
-                    System.IO.File.Delete(fileName);
+                    if (System.IO.File.Exists(fileName))
+                    {
+                        System.IO.File.Delete(fileName);
+                    }
                 }
 
+                catch (IOException e)
+                {
+                }
                 MemoryStream ms = new MemoryStream();
                 Package pkg = Package.Open(ms, FileMode.Create);
                 FixedDocument doc = (FixedDocument)docViewer.Document;

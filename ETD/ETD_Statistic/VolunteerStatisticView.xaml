@@ -4,15 +4,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignWidth="700">
+             d:DesignWidth="800">
     <StackPanel Margin="50,0,30,0">
         <TextBlock Margin="200,50,150,0" FontStyle="Oblique" FontWeight="ExtraBold" FontSize="25" Foreground="DarkSlateBlue" Text="Volunteer Statistic"/>
         <Grid Name="VolunteerStats" Margin="0,100,0,0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="200"/>
-                <ColumnDefinition Width="200"/>
-                <ColumnDefinition Width="200"/>
-                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="120"/>
+                <ColumnDefinition Width="180"/>
+                <ColumnDefinition Width="180"/>
+                <ColumnDefinition Width="120"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>

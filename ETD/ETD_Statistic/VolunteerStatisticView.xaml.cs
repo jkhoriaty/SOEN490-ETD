@@ -66,6 +66,7 @@ namespace ETD_Statistic
                 tb.Margin = new Thickness(15, 0, 0, 0);
                 tb.VerticalAlignment = VerticalAlignment.Center;
                 tb.HorizontalAlignment = HorizontalAlignment.Center;
+                tb.TextWrapping = TextWrapping.Wrap;
 
                 //Textblock creation for start time 
                 TextBlock tbStart = new TextBlock();
@@ -162,7 +163,7 @@ namespace ETD_Statistic
         private void CreateOperationIDColumn()
         {
             ColumnDefinition cd = new ColumnDefinition();
-            cd.Width = new GridLength(150);
+            cd.Width = new GridLength(120);
             VolunteerStats.ColumnDefinitions.Add(cd);
             Border border = new Border();
             border.BorderThickness = new Thickness(1, 1, 1, 5);
