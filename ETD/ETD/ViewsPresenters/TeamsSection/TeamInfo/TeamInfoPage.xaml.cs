@@ -123,5 +123,10 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamInfo
         {
             return team;
         }
+
+        public void DeregisterInstanceObserver()
+        {
+            team.DeregisterInstanceObserver(this);
+        }
 	}
 }

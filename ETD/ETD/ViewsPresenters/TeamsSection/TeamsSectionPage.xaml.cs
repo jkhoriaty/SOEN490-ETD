@@ -96,6 +96,13 @@ namespace ETD.ViewsPresenters.TeamsSection
 
 		public void Update()
 		{
+            foreach(Frame f in StackPanel_teamList.Children.OfType<Frame>())
+            {
+                if(f.Content != null && f.Content.GetType().Equals(typeof(TeamInfoPage)))
+                {
+                    ((TeamInfoPage)f.Content).DeregisterInstanceObserver();
+                }
+            }
 			StackPanel_teamList.Children.Clear();
 			foreach(Team team in Team.getTeamList())
 			{
