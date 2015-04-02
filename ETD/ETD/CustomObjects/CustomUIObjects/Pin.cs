@@ -193,6 +193,14 @@ namespace ETD.CustomObjects.CustomUIObjects
 			foreach(Pin pin in pinList)
 			{
 				pin.DeregisterPinFromObserver();
+				if((pin.IsOfType("TeamPin") && ((TeamPin)pin).gpsLocation != null))
+				{
+					((TeamPin)pin).gpsLocation.DeregisterInstanceObserver((TeamPin)pin);
+				}
+				else if ((pin.IsOfType("InterventionPin") && ((InterventionPin)pin).gpsLocation != null))
+				{
+					((InterventionPin)pin).gpsLocation.DeregisterInstanceObserver((InterventionPin)pin);
+				}
 			}
 
 			pinList.Clear();

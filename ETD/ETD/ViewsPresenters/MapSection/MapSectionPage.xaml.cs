@@ -180,7 +180,10 @@ namespace ETD.ViewsPresenters.MapSection
 		}
 
 		
-		//Upon right click store mouse position to know where to zoom
+		/*Upon right clicking, stores the mouse position so it knows where to zoom.
+         * This also displays one of two context menus based on whether or not the 
+         * map is already in a zoomed-in state. I.e. if it's already zoomed in, your
+         * only option is to zoom out before zooming in again.*/
         private void Map_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
             Point P = Mouse.GetPosition(Canvas_map);
@@ -195,17 +198,16 @@ namespace ETD.ViewsPresenters.MapSection
             {
                 this.ContextMenu = this.Resources["ZoomContextMenuZoomed"] as ContextMenu;
             }
-
-            //var mousePos = e.GetPosition(Canvas_map);
-            //mouseX = mousePos.X;
-            //mouseX = mousePos.Y;
         }
 		
 
+        /*Called from the context menu on the map page
+         *Reads in the value selected from the options and
+         *scales the map by that amount zooming in on the location
+         *of the mouse as the new center.*/
 		public void Zoom_Click(object sender, EventArgs e)
         {
             imgbrush = (ImageBrush)additionalInfo.AdditionalMap.Background;
-            //original = (ImageBrush)additionalInfo.AdditionalMap.Background;
 
             MenuItem mi = (MenuItem)sender;
             zoomLevel = (String)mi.Header;
@@ -238,6 +240,9 @@ namespace ETD.ViewsPresenters.MapSection
             }
         }
 		
+        /*This is called to reset the map back to its original
+         * 1.0 scale as well as centering it about its original
+         * middle.*/
 		public void ScaleMapDefault()
         {
             ScaleTransform ST = new ScaleTransform();
@@ -253,6 +258,9 @@ namespace ETD.ViewsPresenters.MapSection
             this.Update();
         }
 
+        /*Scales the map based on the chosen ration and centers
+         * it about the location of the mouse when the context menu
+         * was first opened.*/
         public void ScaleMap(double ratio)
         {
             ScaleMapDefault();

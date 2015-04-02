@@ -18,8 +18,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 		internal static int size = 40;//Sets the size of the team icon
 
 		private Team team;
-
-		private GPSLocation gpsLocation;
+		internal GPSLocation gpsLocation;
 		private InterventionPin interventionPin;
 		private MapSectionPage mapSection;
 		public TeamPin(Team team, MapSectionPage mapSection) : base(team, mapSection, size)

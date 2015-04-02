@@ -124,26 +124,27 @@ namespace ETD.ViewsPresenters
 
             foreach (ComboBox ctrl in teamGrid.Children.OfType<ComboBox>())
             {
-                ComboBox temp = new ComboBox();
-                temp = ctrl;
-                if (temp.SelectedItem != null && temp.SelectedItem.ToString() != " ")
-                {
-                    string memberID = temp.SelectedItem.ToString();
+				if (ctrl.SelectedItem != null)
+				{
+					if(ctrl.SelectedItem.ToString() != " ")
+					{
+						string memberID = ctrl.SelectedItem.ToString();
 
-                    if (!noDuplicates.Contains(memberID))
-                    {
-                        noDuplicates.Add(memberID);
-                    }
-                    else
-                        duplicates = true;
+						if (!noDuplicates.Contains(memberID))
+						{
+							noDuplicates.Add(memberID);
+						}
+						else
+							duplicates = true;
 
-                    teamList[teamIndex].setGPSLocation(gpsLocationsDictionary[inverseVolunteerList[memberID]]);
-                }
+						teamList[teamIndex].setGPSLocation(gpsLocationsDictionary[inverseVolunteerList[memberID]]);
+					}
 
-                else if (temp.SelectedItem.ToString() == " ")
-                {
-                    teamList[teamIndex].setGPSLocation(null);
-                }
+					else if (ctrl.SelectedItem.ToString() == " ")
+					{
+						teamList[teamIndex].setGPSLocation(null);
+					}
+				}
 
                 teamIndex++;
             }

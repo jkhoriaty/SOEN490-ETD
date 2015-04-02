@@ -28,6 +28,7 @@ namespace ETD.Models.Objects
 		private double X;
 		private double Y;
 		private int consecutiveFailedUpdates = 0;
+		private bool teamSplit = false;
 
 		//Creating GPS locations from volunteers positions
 		public GPSLocation(string id, double lattitude, double longitude)
@@ -156,14 +157,7 @@ namespace ETD.Models.Objects
 
 		internal bool PhoneOnline()
 		{
-			if(consecutiveFailedUpdates < 3)
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
+			return (consecutiveFailedUpdates < 3 && !teamSplit);
 		}
 
 		//Setters
@@ -192,6 +186,11 @@ namespace ETD.Models.Objects
 				TranslatePointToMap();
 				InstanceModifiedNotification();
 			}
+		}
+
+		internal void setTeamSplit(bool splitStatus)
+		{
+			teamSplit = splitStatus;
 		}
 	}
 }

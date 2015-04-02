@@ -19,7 +19,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 
 		private Intervention intervention;
 		private InterventionContainer interventionContainer;
-		private GPSLocation gpsLocation;
+		internal GPSLocation gpsLocation;
 
 		public InterventionPin(Intervention intervention, MapSectionPage mapSection) : base(intervention, mapSection, size)
 		{
