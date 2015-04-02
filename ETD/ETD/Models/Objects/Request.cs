@@ -16,6 +16,10 @@ namespace ETD.Models.Objects
 		private static List<Request> requestList = new List<Request>();//Contains a list of requests
 
         //Variables used for a request
+        private String client;
+        private String request;
+        private String handledBy;
+        private String recipient;
         private String timeHH;
         private String timeMM;
         private String followupHH;
@@ -23,10 +27,6 @@ namespace ETD.Models.Objects
         private String completionHH;
         private String completionMM;
 
-		private String client;
-		private String request;
-        private String handledBy;
-        private String recipient;
         private DateTime time;
         private DateTime followupTimestampMap;
 		private DateTime completionTimestampMap;
@@ -78,6 +78,55 @@ namespace ETD.Models.Objects
 			return followupInfo;
 		}
 
+        public void setTimeHH(String timeHH)
+        {
+            this.timeHH = timeHH;
+        }
+
+        public void setTimeMM(String timeMM)
+        {
+            this.timeMM = timeMM;
+        }
+
+        public void setClient(String client)
+        {
+            this.client = client;
+        }
+
+        public void setRequest(String request)
+        {
+            this.request = request;
+        }
+
+        public void setRecipient(String recipient)
+        {
+            this.recipient = recipient;
+        }
+
+        public void setHandledBy(String handledBy)
+        {
+            this.handledBy = handledBy;
+        }
+
+        public void setFollowUpHH(String followupHH)
+        {
+            this.followupHH = followupHH;
+        }
+
+        public void setFollowUpMM(String followupMM)
+        {
+            this.followupMM = followupMM;
+        }
+
+        public void setCompletionHH(String completionHH)
+        {
+            this.completionHH = completionHH;
+        }
+
+        public void setCompletionMM(String completionMM)
+        {
+            this.completionMM = completionMM;
+        }
         //Mutators
 
         //Sets the request's information

@@ -280,6 +280,7 @@ namespace ETD.CustomObjects.CustomUIObjects
             requestTextBox.BorderBrush = new SolidColorBrush(Colors.Black);
             requestTextBox.BorderThickness = new Thickness(0, 0, 1, 1);
             requestTextBox.KeyDown += NewRequest;
+
             //handled by
             handledByBorder = new Border();
             handledByBorder.BorderBrush = new SolidColorBrush(Colors.Black);
@@ -537,15 +538,68 @@ namespace ETD.CustomObjects.CustomUIObjects
         {
             TextBoxHandler.LostFocus(sender, e);
 
+            //If the textbox is for the resource name, update the resource
+            if ((TextBox)sender == requestTextBox)
+            {
+                UpdateRequest();
+            }
         }
 
+        private void UpdateRequest()
+        {
+            request.setClient(clientTextBox.Text);
+            request.setHandledBy(handledByTextBox.Text);
+            request.setRecipient(recipientTextBox.Text);
+            request.setRequest(requestTextBox.Text);
 
+            if (!timeHHTextBox.Text.Equals("hh") && !timeMMTextBox.Text.Equals("mm"))
+            {
+                try
+                {
+                    request.setTimeHH(timeHHTextBox.Text);
+                    request.setTimeMM(timeMMTextBox.Text);
+                }
+                catch (Exception e)
+                {
+                    return;
+                }
+            }
+
+            if (!followUpHHTextBox.Text.Equals("hh") && !followUpMMTextBox.Text.Equals("mm"))
+            {
+                try
+                {
+                    request.setFollowUpHH(followUpHHTextBox.Text);
+                    request.setFollowUpMM(followUpMMTextBox.Text);
+                }
+                catch (Exception e)
+                {
+                    return;
+                }
+            }
+
+            if (!completionHHTextBox.Text.Equals("hh") && !completionMMTextBox.Text.Equals("mm"))
+            {
+                try
+                {
+                    request.setCompletionHH(completionHHTextBox.Text);
+                    request.setCompletionMM(completionMMTextBox.Text);
+                }
+                catch (Exception e)
+                {
+                    return;
+                }
+            }
+
+        }
 
         //Sets the current hours and minutes in the passed TextBoxes
         public void TimeStampCompletion_Click(object sender, RoutedEventArgs e)
         {
             Button bt = (Button)sender;
             TextBoxHandler.setNow(completionTimestampMap[bt.Name + rowNumber][0], completionTimestampMap[bt.Name + rowNumber][1]);
+            request.setCompletionHH(completionTimestampMap[bt.Name + rowNumber][0].Text.ToString());
+            request.setCompletionMM(completionTimestampMap[bt.Name + rowNumber][1].Text.ToString());
         }
 
         //Sets the current hours and minutes in the passed TextBoxes
@@ -553,6 +607,8 @@ namespace ETD.CustomObjects.CustomUIObjects
         {
             Button bt = (Button)sender;
             TextBoxHandler.setNow(followupTimestampMap[bt.Name + rowNumber][0], followupTimestampMap[bt.Name + rowNumber][1]);
+            request.setFollowUpHH(followupTimestampMap[bt.Name + rowNumber][0].Text.ToString());
+            request.setFollowUpMM(followupTimestampMap[bt.Name + rowNumber][1].Text.ToString());
         }
 
         //Sets the current hours and minutes in the passed TextBoxes
@@ -560,6 +616,8 @@ namespace ETD.CustomObjects.CustomUIObjects
         {
             Button bt = (Button)sender;
             TextBoxHandler.setNow(timestampMap[bt.Name + rowNumber][0], timestampMap[bt.Name + rowNumber][1]);
+            request.setTimeHH(timestampMap[bt.Name + rowNumber][0].Text.ToString());
+            request.setTimeMM(timestampMap[bt.Name + rowNumber][1].Text.ToString());
         }
 
         //return list of requests
