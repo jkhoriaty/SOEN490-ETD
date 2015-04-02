@@ -487,10 +487,10 @@ namespace ETD.Services
 
         public void Update()
         {
-            teams = Team.getTeamList();
-            activeInterventions = Intervention.getActiveInterventionList();
-            completedInterventions = Intervention.getCompletedInterventionList();
-            equipments = Equipment.getEquipmentList();
+            teams = new List<Team>(Team.getTeamList());
+            activeInterventions = new List<Intervention>(Intervention.getActiveInterventionList());
+            completedInterventions = new List<Intervention>(Intervention.getCompletedInterventionList());
+            equipments = new List<Equipment>(Equipment.getEquipmentList());
         }
 
         //Mutators
