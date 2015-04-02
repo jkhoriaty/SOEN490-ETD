@@ -28,6 +28,10 @@ namespace ETD.ViewsPresenters
         String shiftEndStr;
         DateTime shiftEnd;
 		int lastGridRow;
+		List<ComboBox> allVolunteerCBoxes = new List<ComboBox>();
+		List<TextBox> allVolunteerTextBoxes = new List<TextBox>();
+		List<Button> allVolunteerOKButtons = new List<Button>();
+		List<Button> allVolunteerCancelButtons = new List<Button>();
 
         public InitialSetup()
         {
@@ -289,6 +293,7 @@ namespace ETD.ViewsPresenters
 			supervisorName.Visibility = Visibility.Visible;
 			supervisorName.SelectedIndex = -1;
 		}
+
 		private void Button_OKSupervisorName_Click(object sender, RoutedEventArgs e)
 		{
 			if (Textbox_SupervisorName.Text == "")
@@ -333,6 +338,36 @@ namespace ETD.ViewsPresenters
 			Grid.SetRow(supervisorManagerCBox, lastGridRow);
 			Grid.SetColumn(supervisorManagerCBox, 0);
 
+			StackPanel newVolunteerStackPanel = new StackPanel();
+			newVolunteerStackPanel.Orientation = Orientation.Horizontal;
+			Grid.SetRow(newVolunteerStackPanel, lastGridRow);
+			Grid.SetColumn(newVolunteerStackPanel, 1);
+			InitialSetupGrid.Children.Add(newVolunteerStackPanel);
+
+
+			TextBox newVolunteerBox = new TextBox();
+			newVolunteerBox.Name = ("Textbox_VolunteerName" + lastGridRow);
+			newVolunteerBox.Width = 180;
+			newVolunteerBox.Visibility = Visibility.Collapsed;
+			newVolunteerStackPanel.Children.Add(newVolunteerBox);
+			allVolunteerTextBoxes.Add(newVolunteerBox);
+
+			Button newOKButton = new Button();
+			newOKButton.Content = "OK";
+			newOKButton.Width = 30;
+			newOKButton.Click += new RoutedEventHandler(OKButtonClicked);
+			newOKButton.Visibility = Visibility.Collapsed;
+			newVolunteerStackPanel.Children.Add(newOKButton);
+			allVolunteerOKButtons.Add(newOKButton);
+
+			Button newCancelButton = new Button();
+			newCancelButton.Content = "Cancel";
+			newCancelButton.Width = 70;
+			newCancelButton.Click += new RoutedEventHandler(CancelButtonClicked);
+			newCancelButton.Visibility = Visibility.Collapsed;
+			newVolunteerStackPanel.Children.Add(newCancelButton);
+			allVolunteerCancelButtons.Add(newCancelButton);
+
 			//Value box
 			ComboBox supervisorManagerValueCBox = new ComboBox();
 			supervisorManagerValueCBox.Name = ("VolunteerName" + lastGridRow);
@@ -340,11 +375,14 @@ namespace ETD.ViewsPresenters
 			supervisorManagerValueCBox.HorizontalContentAlignment = HorizontalAlignment.Center;
 			supervisorManagerValueCBox.VerticalContentAlignment = VerticalAlignment.Center;
 			supervisorManagerValueCBox.Width = 280;
+			allVolunteerCBoxes.Add(supervisorManagerValueCBox);
 
 			ComboBoxItem createUserItem = new ComboBoxItem();
 			createUserItem.Content = "NEW USER";
 			createUserItem.FontStyle = FontStyles.Italic;
 			createUserItem.FontWeight = FontWeights.Bold;
+			createUserItem.Selected += new RoutedEventHandler(NewUserSelected);
+			
 			supervisorManagerValueCBox.Items.Add(createUserItem);
 			using (SQLiteDataReader reader = StaticDBConnection.QueryDatabase("SELECT Name FROM Volunteers"))
 			{
@@ -366,6 +404,31 @@ namespace ETD.ViewsPresenters
 			InitialSetupForm.Height += 30;
 
 			
+		}
+
+		private void NewUserSelected(object sender, EventArgs e)
+		{
+			ComboBoxItem cBoxItem = (ComboBoxItem)sender;
+			ComboBox cBox = (ComboBox)cBoxItem.Parent;
+			cBox.Visibility = Visibility.Collapsed;
+			allVolunteerTextBoxes[allVolunteerCBoxes.IndexOf(cBox)].Visibility = Visibility.Visible;
+			allVolunteerOKButtons[allVolunteerCBoxes.IndexOf(cBox)].Visibility = Visibility.Visible;
+			allVolunteerCancelButtons[allVolunteerCBoxes.IndexOf(cBox)].Visibility = Visibility.Visible;
+		}
+
+		private void OKButtonClicked(object sender, EventArgs e)
+		{
+			MessageBox.Show("To be coded");
+		}
+
+		private void CancelButtonClicked(object sender, EventArgs e)
+		{
+			Button btnCancel = (Button)sender;
+			btnCancel.Visibility = Visibility.Collapsed;
+			allVolunteerCBoxes[allVolunteerCancelButtons.IndexOf(btnCancel)].Visibility = Visibility.Visible;
+			allVolunteerCBoxes[allVolunteerCancelButtons.IndexOf(btnCancel)].SelectedIndex = -1;
+			allVolunteerTextBoxes[allVolunteerCancelButtons.IndexOf(btnCancel)].Visibility = Visibility.Collapsed;
+			allVolunteerOKButtons[allVolunteerCancelButtons.IndexOf(btnCancel)].Visibility = Visibility.Collapsed;
 		}
 		/*private void Button_CancelOperationManagerName_Click(object sender, RoutedEventArgs e)
 		{
