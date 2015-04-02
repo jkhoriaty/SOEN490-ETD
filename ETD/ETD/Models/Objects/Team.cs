@@ -214,8 +214,17 @@ namespace ETD.Models.Objects
 		//Associating the team to GPS locations
 		public void setGPSLocation(GPSLocation gpsLocation)
 		{
-			this.gpsLocation = gpsLocation;
-			ClassModifiedNotification(typeof(Team)); //Called so that the TeamPin registers interest in the GPSLocation upon creation
+            if (gpsLocation != null)
+            {
+                this.gpsLocation = gpsLocation;
+                ClassModifiedNotification(typeof(Team)); //Called so that the TeamPin registers interest in the GPSLocation upon creation
+            }
+            else
+            {
+                this.gpsLocation = null;
+                
+            }
+
 		}
 
 		//Accessors
