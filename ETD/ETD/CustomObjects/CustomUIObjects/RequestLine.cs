@@ -1,20 +1,27 @@
-﻿using ETD.Models.Objects;
-using ETD.Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
 using System.Windows.Media;
-using System.Web;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using ETD.Models.Objects;
+using ETD.Services;
+using ETD.CustomObjects.CustomUIObjects;
+using ETD.CustomObjects.PopupForms;
 
 namespace ETD.CustomObjects.CustomUIObjects
 {
     class RequestLine
     {
-        private Request request;
+        private FollowUpSectionForm followupPage;
 
         //time(hh/mm)
         private Border timeBorder;
@@ -57,15 +64,110 @@ namespace ETD.CustomObjects.CustomUIObjects
         private Button completionButton;
         private TextBox completionMMTextBox;
 
+        Request request;
+        RequestLine requestLine;
+        int rowNumber = 1;
+        private String init = "-";
 
-        public RequestLine(Request request)
+        private Dictionary<String, TextBox[]> timestampMap = new Dictionary<String, TextBox[]>();//Contains all time stamps
+        private Dictionary<String, TextBox> clientMap = new Dictionary<String, TextBox>();//Contains all clients
+        private Dictionary<String, TextBox> recipientMap = new Dictionary<String, TextBox>();//Contains all Recipients
+        private Dictionary<String, TextBox> requestMap = new Dictionary<String, TextBox>();//Contains all request
+        private Dictionary<String, TextBox> handledbyMap = new Dictionary<String, TextBox>();//Contains all handledby
+        private Dictionary<String, TextBox[]> followupTimestampMap = new Dictionary<String, TextBox[]>();//Contains all follow up time stamps
+        private Dictionary<String, TextBox[]> completionTimestampMap = new Dictionary<String, TextBox[]>();//Contains all completion time stamps
+        private static List<RequestLine> requestLineList = new List<RequestLine>();
+
+        public void RequestLine()
         {
-            this.request = request;
+         
             BuildLine();
             PopulateLine();
+
+            //Set up default shift properties
+            request = new Request(init, init, init, init, init, init, init, init, init, init);
+            requestLine = new RequestLine();
+
+
+            RowDefinition sectorRowDefinition = new RowDefinition();
+            sectorRowDefinition.Height = new GridLength(40);
+            followupPage.getRequestGrid().RowDefinitions.Add(sectorRowDefinition);
+
+            //populate time
+            followupPage.getRequestGrid().Children.Add(this.getTimeBorder());
+            Grid.SetColumn(this.getTimeBorder(), 0);
+            Grid.SetRow(this.getTimeBorder(), rowNumber);
+   
+
+            timestampMap.Add("Time" + rowNumber, TextBoxHandler.textboxArray(this.getTimeHHTextBox(), this.getTimeMMTextBox()));
+
+            //populate client
+            followupPage.getRequestGrid().Children.Add(this.getClientNameTextBox());
+            Grid.SetColumn(this.getClientNameBorder(), 1);
+            Grid.SetRow(this.getClientNameBorder(), rowNumber);
+            Grid.SetColumn(this.getClientNameTextBox(), 1);
+            Grid.SetRow(this.getClientNameTextBox(), rowNumber);
+
+            clientMap.Add("Client" + rowNumber, this.getClientNameTextBox());
+
+            //populate recipient
+            followupPage.getRequestGrid().Children.Add(this.getRecipientNameTextBox());
+            Grid.SetColumn(this.getRecipientNameBorder(), 2);
+            Grid.SetRow(this.getRecipientNameBorder(), rowNumber);
+            Grid.SetColumn(this.getRecipientNameTextBox(), 2);
+            Grid.SetRow(this.getRecipientNameTextBox(), rowNumber);
+
+            recipientMap.Add("Recipient" + rowNumber, this.getRecipientNameTextBox());
+
+            //populate request
+            followupPage.getRequestGrid().Children.Add(this.getRequestNameTextBox());
+            Grid.SetColumn(this.getRequestNameBorder(), 3);
+            Grid.SetRow(this.getRequestNameBorder(), rowNumber);
+            Grid.SetColumn(this.getRequestNameTextBox(), 3);
+            Grid.SetRow(this.getRequestNameTextBox(), rowNumber);
+
+            requestMap.Add("Request" + rowNumber, this.getRequestNameTextBox());
+
+            //populate handled by
+            followupPage.getRequestGrid().Children.Add(this.getHandledByNameTextBox());
+            Grid.SetColumn(this.getHandledByNameBorder(), 4);
+            Grid.SetRow(this.getHandledByNameBorder(), rowNumber);
+            Grid.SetColumn(this.getHandledByNameTextBox(), 4);
+            Grid.SetRow(this.getHandledByNameTextBox(), rowNumber);
+
+            handledbyMap.Add("HandledBy" + rowNumber, this.getHandledByNameTextBox());
+
+            //populate follow up
+            followupPage.getRequestGrid().Children.Add(this.getFollowUpBorder());
+            Grid.SetColumn(this.getFollowUpBorder(), 5);
+            Grid.SetRow(this.getFollowUpBorder(), rowNumber);
+
+
+            followupTimestampMap.Add("FollowUpTimestamp" + rowNumber, TextBoxHandler.textboxArray(this.getFollowUpHHTextBox(), this.getFollowUpMMTextBox()));
+
+            //populate completion
+            followupPage.getRequestGrid().Children.Add(this.getCompletionBorder());
+            Grid.SetColumn(this.getCompletionBorder(), 6);
+            Grid.SetRow(this.getCompletionBorder(), rowNumber);
+
+            completionTimestampMap.Add("CompletionTimestamp" + rowNumber, TextBoxHandler.textboxArray(this.getCompletionHHTextBox(), this.getCompletionMMTextBox()));
+
+            requestLineList.Add(this);
+
         }
 
 
+
+
+        //Create a new request row
+        public void NewRequest(object sender, KeyEventArgs e)
+        {
+            if (Keyboard.IsKeyDown(Key.Enter))
+            {
+                rowNumber++;
+                RequestLine();
+            }
+        }
         private void BuildLine()
         {
 
@@ -99,7 +201,7 @@ namespace ETD.CustomObjects.CustomUIObjects
             timeButton.HorizontalContentAlignment = HorizontalAlignment.Center;
             timeButton.VerticalContentAlignment = VerticalAlignment.Center;
             timeButton.Name = "Time";
-
+            timeButton.Click += TimestampTime_Click;
             timeStackPanel.Children.Add(timeButton);
 
             //MM
@@ -133,7 +235,7 @@ namespace ETD.CustomObjects.CustomUIObjects
             clientTextBox.VerticalContentAlignment = VerticalAlignment.Center;
             clientTextBox.BorderBrush = new SolidColorBrush(Colors.Black);
             clientTextBox.BorderThickness = new Thickness(0, 0, 0, 1);
-
+            clientTextBox.KeyDown += NewRequest;
 
             //recipient
             recipientBorder = new Border();
@@ -154,7 +256,7 @@ namespace ETD.CustomObjects.CustomUIObjects
             recipientTextBox.VerticalContentAlignment = VerticalAlignment.Center;
             recipientTextBox.BorderBrush = new SolidColorBrush(Colors.Black);
             recipientTextBox.BorderThickness = new Thickness(1, 0, 1, 1);
-
+            recipientTextBox.KeyDown += NewRequest;
             //request
             requestBorder = new Border();
             requestBorder.BorderBrush = new SolidColorBrush(Colors.Black);
@@ -174,7 +276,7 @@ namespace ETD.CustomObjects.CustomUIObjects
             requestTextBox.VerticalContentAlignment = VerticalAlignment.Center;
             requestTextBox.BorderBrush = new SolidColorBrush(Colors.Black);
             requestTextBox.BorderThickness = new Thickness(0, 0, 1, 1);
-
+            requestTextBox.KeyDown += NewRequest;
             //handled by
             handledByBorder = new Border();
             handledByBorder.BorderBrush = new SolidColorBrush(Colors.Black);
@@ -194,7 +296,7 @@ namespace ETD.CustomObjects.CustomUIObjects
             handledByTextBox.VerticalContentAlignment = VerticalAlignment.Center;
             handledByTextBox.BorderBrush = new SolidColorBrush(Colors.Black);
             handledByTextBox.BorderThickness = new Thickness(0, 0, 1, 1);
-
+            handledByTextBox.KeyDown += NewRequest;
 
             //follow up
 
@@ -227,7 +329,7 @@ namespace ETD.CustomObjects.CustomUIObjects
             followUpButton.HorizontalContentAlignment = HorizontalAlignment.Center;
             followUpButton.VerticalContentAlignment = VerticalAlignment.Center;
             followUpButton.Name = "FollowUpTimestamp";
-
+            followUpButton.Click += TimestampFollowUp_Click;
             followUpStackPanel.Children.Add(followUpButton);
 
             //MM
@@ -272,7 +374,7 @@ namespace ETD.CustomObjects.CustomUIObjects
             completionButton.HorizontalContentAlignment = HorizontalAlignment.Center;
             completionButton.VerticalContentAlignment = VerticalAlignment.Center;
             completionButton.Name = "CompletionTimestamp";
-
+            completionButton.Click += TimeStampCompletion_Click;
             completionStackPanel.Children.Add(completionButton);
 
             //MM
@@ -434,5 +536,33 @@ namespace ETD.CustomObjects.CustomUIObjects
 
         }
 
+
+
+        //Sets the current hours and minutes in the passed TextBoxes
+        public void TimeStampCompletion_Click(object sender, RoutedEventArgs e)
+        {
+            Button bt = (Button)sender;
+            TextBoxHandler.setNow(completionTimestampMap[bt.Name + rowNumber][0], completionTimestampMap[bt.Name + rowNumber][1]);
+        }
+
+        //Sets the current hours and minutes in the passed TextBoxes
+        public void TimestampFollowUp_Click(object sender, RoutedEventArgs e)
+        {
+            Button bt = (Button)sender;
+            TextBoxHandler.setNow(followupTimestampMap[bt.Name + rowNumber][0], followupTimestampMap[bt.Name + rowNumber][1]);
+        }
+
+        //Sets the current hours and minutes in the passed TextBoxes
+        public void TimestampTime_Click(object sender, RoutedEventArgs e)
+        {
+            Button bt = (Button)sender;
+            TextBoxHandler.setNow(timestampMap[bt.Name + rowNumber][0], timestampMap[bt.Name + rowNumber][1]);
+        }
+
+
+        public static List<RequestLine> getRequestLineList()
+        {
+            return requestLineList;
+        }
     }
 }
