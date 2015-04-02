@@ -217,14 +217,13 @@ namespace ETD.Models.Objects
             if (gpsLocation != null)
             {
                 this.gpsLocation = gpsLocation;
-                ClassModifiedNotification(typeof(Team)); //Called so that the TeamPin registers interest in the GPSLocation upon creation
             }
             else
             {
                 this.gpsLocation = null;
-                
             }
 
+            ClassModifiedNotification(typeof(Team)); //Called so that the TeamPin registers interest in the GPSLocation upon creation
 		}
 
 		//Accessors
