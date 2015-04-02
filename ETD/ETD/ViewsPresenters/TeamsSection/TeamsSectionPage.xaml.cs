@@ -74,7 +74,7 @@ namespace ETD.ViewsPresenters.TeamsSection
 		public void setTeamsSectionHeight(Border TeamsSection)
 		{
 			//11 to account for padding of 2 on top and 2 on the bottom in addition to 7 in margin to the CreateTeamButtonBorder
-			Scroller.MaxHeight = TeamsSection.ActualHeight - TeamsSectionLabel.ActualHeight - CreateTeamButtonBorder.ActualHeight - 11;
+			Scroller.MaxHeight = TeamsSection.ActualHeight - TeamsSectionLabel.ActualHeight - CreateTeamButtonBorder.ActualHeight - 100; //- 11;
 		}
 
 		//Clicking on the add team button

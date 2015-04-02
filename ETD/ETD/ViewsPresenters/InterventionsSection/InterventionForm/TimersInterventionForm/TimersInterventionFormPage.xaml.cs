@@ -291,9 +291,9 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.TimersInterv
 					Grid.SetRow(status911, rowNumber);
 					timersList.Children.Add(status911);
 				}
+				rowNumber++;
 			}
 
-			rowNumber++;
 			foreach(Resource resource in intervention.getResourceList())
 			{
 				resourceList.Add(resource);
