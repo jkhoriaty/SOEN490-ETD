@@ -78,8 +78,14 @@ namespace ETD.ViewsPresenters.MapSection
 			}
 
             //Creating team fragments when a team is split
-            foreach (Team team in Team.getSplitTeamList())
+            foreach (Team team in Team.getSplitTeamList().ToList())
             {
+				//Redrawing arrow if the pin has one
+				if (Pin.getPinArrow(team) != null)
+				{
+					Pin.getPinArrow(team).DisplayArrow();
+				}
+
                 TeamPin teamPin = new TeamPin(team, this);
                 Canvas_map.Children.Add(teamPin);
 

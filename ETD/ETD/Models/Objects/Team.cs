@@ -24,7 +24,7 @@ namespace ETD.Models.Objects
 		private static List<Observer> observerList;//Contains a List of observers
 
 		static List<Team> teamList;//Contains a list of teams
-        private static List<Team> splitTeamList = new List<Team>();//Contains duplicates of teams when a team is split 
+        static List<Team> splitTeamList = new List<Team>();//Contains duplicates of teams when a team is split 
 
         //Database reflection variables
         private int teamID;
@@ -74,6 +74,9 @@ namespace ETD.Models.Objects
             this.equipmentList = team.equipmentList;
             this.teamID = team.teamID;
             this.operationID = team.operationID;
+            this.status = team.status;
+            //this.gpsLocation = team.gpsLocation;
+
 
             status = Statuses.moving;
             if (Operation.currentOperation != null)

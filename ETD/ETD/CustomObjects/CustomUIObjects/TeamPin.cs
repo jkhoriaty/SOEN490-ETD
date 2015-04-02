@@ -18,6 +18,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 		internal static int size = 40;//Sets the size of the team icon
 
 		private Team team;
+
 		private GPSLocation gpsLocation;
 		private InterventionPin interventionPin;
 		private MapSectionPage mapSection;
@@ -29,7 +30,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 			Update();
 
 			//Creating a context menu for TeamPin objects
-			MenuItem[] menuItems = new MenuItem[4];
+			MenuItem[] menuItems = new MenuItem[5];
 
 			//Menu items for status change
 			menuItems[0] = new MenuItem();
@@ -47,6 +48,11 @@ namespace ETD.CustomObjects.CustomUIObjects
 			menuItems[3] = new MenuItem();
 			menuItems[3].Uid = "MenuItem_TeamPin_Unavailable";
 			menuItems[3].Header = ETD.Properties.Resources.MenuItem_TeamPin_Unavailable;
+
+
+            menuItems[4] = new MenuItem();
+            menuItems[4].Uid = "MenuItem_TeamPin_Split";
+            menuItems[4].Header = "Split team";
 
 			//Adding the method to be called when a menu item is clicked and adding the menuitem to the TeamPin context menu
 			ContextMenu contextMenu = new ContextMenu();
@@ -116,6 +122,9 @@ namespace ETD.CustomObjects.CustomUIObjects
 				case "MenuItem_TeamPin_Unavailable":
 					status = "unavailable";
 					break;
+                case "MenuItem_TeamPin_Split":
+                    status = "split";
+                    break;
 			}
 			return status;
 		}
@@ -133,48 +142,65 @@ namespace ETD.CustomObjects.CustomUIObjects
 		private void ChangeStatus_Click(object sender, RoutedEventArgs e)
 		{
 			MenuItem menuItem = (MenuItem)sender;
-			team.setStatus(getMenuItemStatus(menuItem));
 
-			//Clearing the arrow if the team got to where they are going
-			if (getMenuItemStatus(menuItem).Equals("available") || getMenuItemStatus(menuItem).Equals("intervening"))
-			{
-				RemoveArrow();
-			}
+            if (getMenuItemStatus(menuItem).ToString().Equals("split"))
+            {
+                Team team2 = new Team(this.getTeam());
+                TeamPin teampin2 = new TeamPin(team2, mapSection);
+                teampin2.getTeam().setStatus("moving");
+                teampin2.getTeam().setName(teampin2.getTeam().getName()[0].ToString() );
 
-			//Handling the case when the user sets the status of a team to intervening
-			if (getMenuItemStatus(menuItem).Equals("intervening"))
-			{
-				//Handling the case of when the user sets a team to intervening but it is not assigned to an intervention yet. Create the new intervention and assign the team to it.
-				if(interventionPin == null)
-				{
-					Intervention intervention = new Intervention();
+                this.getTeam().incrementInterventionCount();
+                //mapSection.Update();
+           
+            }
 
-					//Getting references to the new team and intervention pins
-					TeamPin teamPin = null; //Need to get a reference to the new teamPin and not use "this" because the map has been redrawn upon the intervention creation, i.e. this TeamPin is outdated
-					InterventionPin relatedInterventionPin = null;
-					foreach (Pin pin in pinList)
-					{
-						if(pin.relatedObject == team)
-						{
-							teamPin = (TeamPin)pin;
-						}
-						if (pin.relatedObject == intervention)
-						{
-							relatedInterventionPin = (InterventionPin)pin;
-							break;
-						}
-					}
+            else
+            {
+                team.setStatus(getMenuItemStatus(menuItem));
 
-					//Setting the position of the intervention to be the position of the team and calling collision detection on the teamPin for the team to be added to the intervention
-					relatedInterventionPin.setPinPosition(teamPin.getX(), teamPin.getY());
-					teamPin.CollisionDetectionAndResolution(false);
-				}
-				else
-				{
-					//Set team as "In position" on the intervention
-					interventionPin.getIntervention().InterveningTeamArrived(team);
-				}
-			}
+                //Clearing the arrow if the team got to where they are going
+                if (getMenuItemStatus(menuItem).Equals("available") || getMenuItemStatus(menuItem).Equals("intervening"))
+                {
+                    RemoveArrow();
+                }
+
+                //Handling the case when the user sets the status of a team to intervening
+                if (getMenuItemStatus(menuItem).Equals("intervening"))
+                {
+                    //Handling the case of when the user sets a team to intervening but it is not assigned to an intervention yet. Create the new intervention and assign the team to it.
+                    if (interventionPin == null)
+                    {
+                        Intervention intervention = new Intervention();
+
+                        //Getting references to the new team and intervention pins
+                        TeamPin teamPin = null; //Need to get a reference to the new teamPin and not use "this" because the map has been redrawn upon the intervention creation, i.e. this TeamPin is outdated
+                        InterventionPin relatedInterventionPin = null;
+                        foreach (Pin pin in pinList)
+                        {
+                            if (pin.relatedObject == team)
+                            {
+                                teamPin = (TeamPin)pin;
+                            }
+                            if (pin.relatedObject == intervention)
+                            {
+                                relatedInterventionPin = (InterventionPin)pin;
+                                break;
+                            }
+                        }
+
+                        //Setting the position of the intervention to be the position of the team and calling collision detection on the teamPin for the team to be added to the intervention
+                        relatedInterventionPin.setPinPosition(teamPin.getX(), teamPin.getY());
+                        teamPin.CollisionDetectionAndResolution(false);
+                    }
+                    else
+                    {
+                        //Set team as "In position" on the intervention
+                        interventionPin.getIntervention().InterveningTeamArrived(team);
+                    }
+                }
+            }
+			
 		}
 
 		//Moving the pin when the window is resized
@@ -248,9 +274,12 @@ namespace ETD.CustomObjects.CustomUIObjects
                 if (teamPin.getTeam().getName().Length < this.getTeam().getName().Length)
                 {
                     if (this.getTeam().getName()[0].ToString().Equals(teamPin.getTeam().getName()[0].ToString()) && team.getStatus().ToString().Equals("unavailable"))
-                    {
-                        //Team.removeSplitTeam(this.getTeam());
+                    {	
                         mapSection.Canvas_map.Children.Remove(this);
+                        Team.removeSplitTeam(this.getTeam());
+						RemoveArrow();
+						pinList.Remove(this);
+                        mapSection.Update();
                     }
                 }
             }
@@ -261,13 +290,11 @@ namespace ETD.CustomObjects.CustomUIObjects
                 interventionPin = (InterventionPin)fixedPin;
 
                 //Team dropped is already intervening on another intervention and must be split
-                if (team.getStatus().ToString().Equals("intervening"))
+                if (Team.getSplitTeamList().Count()>0)
                 {
-                    Team team2 = new Team(this.getTeam());
-                    TeamPin teampin2 = new TeamPin(team2, mapSection);
-                    teampin2.getTeam().setStatus("moving");
-                    teampin2.getTeam().setName(teampin2.getTeam().getName()[0] + interventionPin.getIntervention().getInterventionNumber().ToString());
-                    interventionPin.getIntervention().AddInterveningTeam(teampin2.getTeam());
+                    this.getTeam().setStatus("moving");
+                    this.getTeam().setName(this.getTeam().getName()[0] + interventionPin.getIntervention().getInterventionNumber().ToString());
+                    interventionPin.getIntervention().AddInterveningTeam(this.getTeam());
                     this.getTeam().incrementInterventionCount();
                     mapSection.Update();
                     return true;
