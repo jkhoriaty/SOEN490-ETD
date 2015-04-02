@@ -9,7 +9,7 @@ Target Server Type    : SQLite
 Target Server Version : 30808
 File Encoding         : 65001
 
-Date: 2015-03-31 20:25:20
+Date: 2015-04-01 21:35:46
 */
 
 PRAGMA foreign_keys = OFF;
@@ -202,6 +202,7 @@ CREATE TABLE "Operations" (
 DROP TABLE IF EXISTS "main"."Requests";
 CREATE TABLE "Requests" (
 "Request_ID"  INTEGER NOT NULL,
+"Operation_ID"  INTEGER,
 "Client"  TEXT,
 "Request"  TEXT,
 "Handled_By"  TEXT,
@@ -209,7 +210,8 @@ CREATE TABLE "Requests" (
 "Time"  DATETIME,
 "FollowUp_Time"  DATETIME,
 "Completion_Time"  DATETIME,
-PRIMARY KEY ("Request_ID")
+PRIMARY KEY ("Request_ID" ASC),
+FOREIGN KEY ("Operation_ID") REFERENCES "Operations" ("Operation_ID") ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- ----------------------------
