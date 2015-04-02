@@ -90,18 +90,20 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
 
 		private void TextBoxes_LostFocus(object sender, RoutedEventArgs e)
 		{
-			TextBoxHandler.LostFocus(sender, e);
+			
             try
             {
                 DateTime concTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, Convert.ToInt32(Endhh.Text), Convert.ToInt32(Endmm.Text), 0);
-                intervention.setConclusionTime(concTime);
-                intervention.setAmbulanceCompany(AmbulanceCompany.Text);
-                intervention.setAmbulanceVehicle(AmbulanceVehicle.Text);
-                intervention.setFirstResponderCompany(FirstResponderCompany.Text);
-                intervention.setFirstResponderVehicle(FirstResponderVehicle.Text);
-                intervention.setMeetingPoint(MeetingPoint.Text);
-            }
+				intervention.setConclusionTime(concTime);
+			}
             catch { }
+            
+            intervention.setAmbulanceCompany(AmbulanceCompany.Text);
+            intervention.setAmbulanceVehicle(AmbulanceVehicle.Text);
+            intervention.setFirstResponderCompany(FirstResponderCompany.Text);
+            intervention.setFirstResponderVehicle(FirstResponderVehicle.Text);
+            intervention.setMeetingPoint(MeetingPoint.Text);
+			TextBoxHandler.LostFocus(sender, e);
 		}
 
 		//Submitting end of intervention
