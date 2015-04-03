@@ -365,11 +365,11 @@ namespace ETD.Models.Objects
 
 		public void setMeetingPoint(String meetingPoint)
 		{
-            if (callID > -1)
-            {
-                this.meetingPoint = meetingPoint;
-                StaticDBConnection.NonQueryDatabase("UPDATE [Calls] SET Meeting_Point='" + meetingPoint.Replace("'", "''") + "' WHERE Call_ID=" + callID + ";");
-            }
+            //if (callID > -1)
+            //{
+			this.meetingPoint = meetingPoint;
+			StaticDBConnection.NonQueryDatabase("UPDATE [Calls] SET Meeting_Point='" + meetingPoint.Replace("'", "''") + "' WHERE Call_ID=" + callID + ";");
+            //}
 		}
 
 		public String getMeetingPoint()
@@ -379,11 +379,11 @@ namespace ETD.Models.Objects
 
 		public void setFirstResponderCompany(String firstResponderCompany)
 		{
-            if (callID > -1)
-            {
-                this.firstResponderCompany = firstResponderCompany;
-                StaticDBConnection.NonQueryDatabase("UPDATE [Calls] SET First_Responder_Company='" + firstResponderCompany.Replace("'", "''") + "' WHERE Call_ID=" + callID + ";");
-            }
+            //if (callID > -1)
+            //{
+			this.firstResponderCompany = firstResponderCompany;
+			StaticDBConnection.NonQueryDatabase("UPDATE [Calls] SET First_Responder_Company='" + firstResponderCompany.Replace("'", "''") + "' WHERE Call_ID=" + callID + ";");
+            //}
 		}
 
 		public String getFirstResponderCompany()
@@ -393,11 +393,11 @@ namespace ETD.Models.Objects
 
 		public void setFirstResponderVehicle(String firstResponderVehicle)
 		{
-            if (callID > -1)
-            {
-                this.firstResponderVehicle = firstResponderVehicle;
-                StaticDBConnection.NonQueryDatabase("UPDATE [Calls] SET First_Responder_Vehicle='" + firstResponderVehicle.Replace("'", "''") + "' WHERE Call_ID=" + callID + ";");
-            }
+			//if (callID > -1)
+            //{
+			this.firstResponderVehicle = firstResponderVehicle;
+			StaticDBConnection.NonQueryDatabase("UPDATE [Calls] SET First_Responder_Vehicle='" + firstResponderVehicle.Replace("'", "''") + "' WHERE Call_ID=" + callID + ";");
+			//}
 		}
 
 		public String getFirstResponderVehicle()
@@ -407,11 +407,11 @@ namespace ETD.Models.Objects
 
 		public void setFirstResponderArrivalTime(DateTime firstResponderArrivalTime)
 		{
-            if (callID > -1)
-            {
-                this.firstResponderArrivalTime = firstResponderArrivalTime;
-                StaticDBConnection.NonQueryDatabase("UPDATE [Calls] SET Ambulance_Time='" + StaticDBConnection.DateTimeSQLite(firstResponderArrivalTime) + "' WHERE Call_ID=" + callID + ";");
-            }
+            //if (callID > -1)
+            //{
+			this.firstResponderArrivalTime = firstResponderArrivalTime;
+			StaticDBConnection.NonQueryDatabase("UPDATE [Calls] SET Ambulance_Time='" + StaticDBConnection.DateTimeSQLite(firstResponderArrivalTime) + "' WHERE Call_ID=" + callID + ";");
+            //}
 		}
 
 		public DateTime getFirstResponderArrivalTime()
@@ -421,11 +421,11 @@ namespace ETD.Models.Objects
 
 		public void setAmbulanceCompany(String ambulanceCompany)
 		{
-            if (callID > -1)
-            {
-                this.ambulanceCompany = ambulanceCompany;
-                StaticDBConnection.NonQueryDatabase("UPDATE [Calls] SET Ambulance_Company='" + ambulanceCompany.Replace("'", "''") + "' WHERE Call_ID=" + callID + ";");
-            }
+            //if (callID > -1)
+            //{
+			this.ambulanceCompany = ambulanceCompany;
+			StaticDBConnection.NonQueryDatabase("UPDATE [Calls] SET Ambulance_Company='" + ambulanceCompany.Replace("'", "''") + "' WHERE Call_ID=" + callID + ";");
+            //}
 		}
 
 		public String getAmbulanceCompany()

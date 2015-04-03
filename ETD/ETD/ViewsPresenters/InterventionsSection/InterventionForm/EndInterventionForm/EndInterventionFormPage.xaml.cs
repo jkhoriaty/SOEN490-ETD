@@ -97,7 +97,6 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
 				intervention.setConclusionTime(concTime);
 			}
             catch { }
-            
             intervention.setAmbulanceCompany(AmbulanceCompany.Text);
             intervention.setAmbulanceVehicle(AmbulanceVehicle.Text);
             intervention.setFirstResponderCompany(FirstResponderCompany.Text);
