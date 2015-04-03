@@ -108,6 +108,20 @@ namespace ETD.Models.Objects
 
 		public void AddInterveningTeam(Team team)
 		{
+			foreach(Resource resource in resourceList)
+			{
+				if(resource.getTeam() == team)
+				{
+					resource.setIntervening(true);
+					InstanceModifiedNotification();
+					if(team.getStatus().ToString().Equals("intervening"))
+					{
+						team.setStatus("moving");
+					}
+					return;
+				}
+			}
+
 			if(firstTeamArrivalTime == DateTime.MinValue)
 			{
 				firstTeamArrivalTime = DateTime.Now;
@@ -121,13 +135,25 @@ namespace ETD.Models.Objects
 
 		public void RemoveInterveningTeam(Team team)
 		{
+			Resource resourceToRemove = null;
 			foreach(Resource resource in resourceList)
 			{
 				if(resource.getTeam() == team)
 				{
-					resource.setIntervening(false);
+					if(!resource.hasArrived())
+					{
+						resourceToRemove = resource;
+					}
+					else
+					{
+						resource.setIntervening(false);
+					}
                     StaticDBConnection.NonQueryDatabase("UPDATE [Intervening_Teams] SET Stopped_Intervening='" + StaticDBConnection.DateTimeSQLite(DateTime.Now) + "' WHERE Intervention_ID=" + interventionID + " AND Team_ID=" + team.getID() + ";");
 				}
+			}
+			if(resourceToRemove != null)
+			{
+				resourceList.Remove(resourceToRemove);
 			}
 			InstanceModifiedNotification();
 		}

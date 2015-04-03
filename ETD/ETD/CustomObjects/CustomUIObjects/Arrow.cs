@@ -15,12 +15,6 @@ namespace ETD.CustomObjects.CustomUIObjects
 		const double spokeAngle = 20;
 		const double spokeLength = 20;
 
-		//Start and end point coordinates
-		double X1;
-		double Y1;
-		double X2;
-		double Y2;
-
 		//Lines
 		Line mainLine;
 		Line spoke1;
@@ -63,7 +57,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 		}
 
 		//Draw line with the same destination
-		internal void DrawArrow(double X1, double Y1)
+		internal void ChangeStart(double X1, double Y1)
 		{
 			//Display the arrow if it wasn't (e.g. whent he phone was offline or the connection with server failed)
 			if(!displayed)
@@ -71,6 +65,16 @@ namespace ETD.CustomObjects.CustomUIObjects
 				DisplayArrow();
 			}
 			DrawArrow(X1, Y1, mainLine.X2, mainLine.Y2);
+		}
+
+		internal void ChangeEnd(double X2, double Y2)
+		{
+			//Display the arrow if it wasn't (e.g. whent he phone was offline or the connection with server failed)
+			if (!displayed)
+			{
+				DisplayArrow();
+			}
+			DrawArrow(mainLine.X1, mainLine.Y1, X2, Y2);
 		}
 
 		//Fixing the start and end point of the main line and the 2 spokes of the arrow

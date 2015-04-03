@@ -1,4 +1,6 @@
-﻿using ETD.ViewsPresenters.MapSection;
+﻿using ETD.Models.Objects;
+using ETD.Services;
+using ETD.ViewsPresenters.MapSection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -54,20 +56,42 @@ namespace ETD.CustomObjects.CustomUIObjects
 			double Y = interventionPin.getY() + (InterventionPin.size/2) + (TeamPin.size/2);
 			for (int i = 0; i < interventionPin.getInterveningTeamsPin().Count; i++)
 			{
+				TeamPin teamPin = interventionPin.getInterveningTeamsPin()[i];
 				if ((i % 2) == 0) //First item on line
 				{
 					if ((i + 1) == interventionPin.getInterveningTeamsPin().Count) //Single on the line
 					{
-						interventionPin.getInterveningTeamsPin()[i].setPinPosition(interventionPin.getX(), Y);
+						if (teamPin.gpsLocation != null && !teamPin.getTeam().getStatus().ToString().Equals("intervening") && destinationArrowDictionnary.ContainsKey(teamPin.getTeam()) && GPSLocation.gpsConfigured == true && GPSServices.connectedToServer && teamPin.gpsLocation.PhoneOnline())
+						{
+							destinationArrowDictionnary[teamPin.getTeam()].ChangeEnd(interventionPin.getX(), Y);
+						}
+						else
+						{
+							teamPin.setPinPosition(interventionPin.getX(), Y);
+						}
 					}
 					else //There's another item on the line
 					{
-						interventionPin.getInterveningTeamsPin()[i].setPinPosition(interventionPin.getX() - (TeamPin.size / 2), Y);
+						if (teamPin.gpsLocation != null && !teamPin.getTeam().getStatus().ToString().Equals("intervening") && destinationArrowDictionnary.ContainsKey(teamPin.getTeam()) && GPSLocation.gpsConfigured == true && GPSServices.connectedToServer && teamPin.gpsLocation.PhoneOnline())
+						{
+							destinationArrowDictionnary[teamPin.getTeam()].ChangeEnd(interventionPin.getX() - (TeamPin.size / 2), Y);
+						}
+						else
+						{
+							teamPin.setPinPosition(interventionPin.getX() - (TeamPin.size / 2), Y);
+						}
 					}
 				}
 				else //Second item on the line
 				{
-					interventionPin.getInterveningTeamsPin()[i].setPinPosition(interventionPin.getX() + (TeamPin.size / 2), Y);
+					if (teamPin.gpsLocation != null && !teamPin.getTeam().getStatus().ToString().Equals("intervening") && destinationArrowDictionnary.ContainsKey(teamPin.getTeam()) && GPSLocation.gpsConfigured == true && GPSServices.connectedToServer && teamPin.gpsLocation.PhoneOnline())
+					{
+						destinationArrowDictionnary[teamPin.getTeam()].ChangeEnd(interventionPin.getX() + (TeamPin.size / 2), Y);
+					}
+					else
+					{
+						teamPin.setPinPosition(interventionPin.getX() + (TeamPin.size / 2), Y);
+					}
 					Y += TeamPin.size;
 				}
 			}

@@ -75,8 +75,7 @@ namespace ETD.Models.Objects
             this.teamID = team.teamID;
             this.operationID = team.operationID;
             this.status = team.status;
-            //this.gpsLocation = team.gpsLocation;
-
+            this.gpsLocation = team.gpsLocation;
 
             status = Statuses.moving;
             if (Operation.currentOperation != null)
@@ -86,19 +85,27 @@ namespace ETD.Models.Objects
             splitTeamList.Add(this);
 
             ClassModifiedNotification(typeof(Team));
-
         }
-
 
 		//Deletes a Team
 		public static void DeleteTeam(Team team)
 		{
-			teamList.Remove(team);
+			DeleteTeam(team, teamList);
+		}
+
+		//Delete a fragment of a team when it was split and keep the initial team
+		public static void DeleteSplitTeam(Team team)
+		{
+			DeleteTeam(team, splitTeamList);
+		}
+
+		private static void DeleteTeam(Team team, List<Team> list)
+		{
+			list.Remove(team);
             while(team.memberList.Count > 0)
             {
                 StaticDBConnection.NonQueryDatabase("UPDATE [Team_Members] SET Disbanded='" + StaticDBConnection.DateTimeSQLite(DateTime.Now) + "' WHERE Volunteer_ID=" + team.getMember(0).getID() + " AND Team_ID=" + team.getID() + ";");
                 team.memberList.RemoveAt(0);
-                
             }
 			ClassModifiedNotification(typeof(Team));
 		}
@@ -292,7 +299,6 @@ namespace ETD.Models.Objects
             return splitTeamList;
         }
 
-
         public static void removeSplitTeam(Team team)
         {
             if (splitTeamList.Contains(team))
@@ -319,14 +325,15 @@ namespace ETD.Models.Objects
             return null;
         }
 
-	public void incrementInterventionCount()
-	{
-		interventionCount++;
-	}
-	public int getInterventionCount()
-	{
-		return interventionCount;
-	}
+		public void incrementInterventionCount()
+		{
+			interventionCount++;
+		}
+
+		public int getInterventionCount()
+		{
+			return interventionCount;
+		}
 
 
         public int getID()

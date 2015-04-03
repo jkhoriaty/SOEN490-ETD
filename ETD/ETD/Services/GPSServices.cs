@@ -205,7 +205,7 @@ namespace ETD.Services
 			teamPin.setPinPosition(previousPinPosition[0], previousPinPosition[1]);
 
 			//Clearing the reference points in case the user is going through the setup again for any reason
-			if(GPSLocation.gpsConfigured == true)
+			if(GPSLocation.gpsConfigured == true || GPSLocation.referencePoints.Count > 0)
 			{
 				GPSLocation.gpsConfigured = false;
 				GPSLocation.referencePoints.Clear();

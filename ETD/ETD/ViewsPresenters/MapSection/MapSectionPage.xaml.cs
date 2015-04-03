@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using ETD.CustomObjects.CustomUIObjects;
+using ETD.Services;
 
 namespace ETD.ViewsPresenters.MapSection
 {
@@ -60,7 +61,7 @@ namespace ETD.ViewsPresenters.MapSection
 				Canvas_map.Children.Add(teamPin);
 
 				//Redrawing arrow if the pin has one
-				if(Pin.getPinArrow(team) != null)
+				if (Pin.getPinArrow(team) != null && GPSServices.connectedToServer && teamPin.gpsLocation.PhoneOnline())
 				{
 					Pin.getPinArrow(team).DisplayArrow();
 				}
@@ -78,15 +79,26 @@ namespace ETD.ViewsPresenters.MapSection
 			}
 
             //Creating team fragments when a team is split
-            foreach (Team team in Team.getSplitTeamList().ToList())
+            foreach (Team team in Team.getSplitTeamList())
             {
-				//Redrawing arrow if the pin has one
-				if (Pin.getPinArrow(team) != null)
+				TeamPin parentTeamPin = null;
+				foreach(Team parentTeam in Team.getTeamList())
 				{
-					Pin.getPinArrow(team).DisplayArrow();
+					if(team.getID() == parentTeam.getID())
+					{
+						foreach(Pin pin in Pin.getPinList())
+						{
+							if(pin.relatedObject == parentTeam)
+							{
+								parentTeamPin = (TeamPin)pin;
+								break;
+							}
+						}
+						break;
+					}
 				}
 
-                TeamPin teamPin = new TeamPin(team, this);
+                TeamPin teamPin = new TeamPin(team, this, parentTeamPin);
                 Canvas_map.Children.Add(teamPin);
 
                 //Setting the pin to it's previous position, if it exists, or to the top-left corner
@@ -101,8 +113,6 @@ namespace ETD.ViewsPresenters.MapSection
                 teamPin.CollisionDetectionAndResolution(ignoreSpecialCollisions);
             }
 
-
-
 			//Creating all intervention pins and adding the map to their previous or a new position while detecting newly created collisions
 			foreach (Intervention intervention in Intervention.getActiveInterventionList())
 			{
@@ -110,7 +120,7 @@ namespace ETD.ViewsPresenters.MapSection
 				Canvas_map.Children.Add(interventionPin);
 
 				//Redrawing arrow if the pin has one
-				if (Pin.getPinArrow(intervention) != null)
+				if (Pin.getPinArrow(intervention) != null && GPSServices.connectedToServer && interventionPin.gpsLocation != null && interventionPin.gpsLocation.PhoneOnline())
 				{
 					Pin.getPinArrow(intervention).DisplayArrow();
 				}

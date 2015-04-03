@@ -41,6 +41,12 @@ namespace ETD.ViewsPresenters.InterventionsSection
 		//Adjusting the intervention section width
 		public void setInterventionsSectionWidth(Border InterventionsSection)
 		{
+			//If the items were not rendered yet, wait for the page to be loaded and then recall this method
+			if (InterventionsLabel.ActualWidth == 0 && CreateInterventionButton.ActualWidth == 0)
+			{
+				Loaded += delegate { setInterventionsSectionWidth(InterventionsSection); };
+				return;
+			}
 			Scroller.MaxWidth = InterventionsSection.ActualWidth - InterventionsLabel.ActualWidth - CreateInterventionButton.ActualWidth - 10;
 		}
 

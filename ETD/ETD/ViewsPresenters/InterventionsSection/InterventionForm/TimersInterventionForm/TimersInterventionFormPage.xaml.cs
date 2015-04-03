@@ -221,9 +221,15 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.TimersInterv
 					rowDefFR.Height = new GridLength(27);
 					timersList.RowDefinitions.Add(rowDefFR);
 
+					Label fr911 = new Label();
+					fr911.Content = "911";
+					Grid.SetColumn(fr911, 0);
+					Grid.SetRow(fr911, rowNumber);
+					timersList.Children.Add(fr911);
+
 					Label nameFR = new Label();
-					nameFR.Content = "FR";
-					Grid.SetColumn(nameFR, 0);
+					nameFR.Content = "First Responders";
+					Grid.SetColumn(nameFR, 1);
 					Grid.SetRow(nameFR, rowNumber);
 					timersList.Children.Add(nameFR);
 
@@ -246,9 +252,15 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.TimersInterv
 					rowDefAmb.Height = new GridLength(27);
 					timersList.RowDefinitions.Add(rowDefAmb);
 
+					Label ambulance911 = new Label();
+					ambulance911.Content = "911";
+					Grid.SetColumn(ambulance911, 0);
+					Grid.SetRow(ambulance911, rowNumber);
+					timersList.Children.Add(ambulance911);
+
 					Label nameAmb = new Label();
 					nameAmb.Content = "Ambulance";
-					Grid.SetColumn(nameAmb, 0);
+					Grid.SetColumn(nameAmb, 1);
 					Grid.SetRow(nameAmb, rowNumber);
 					timersList.Children.Add(nameAmb);
 

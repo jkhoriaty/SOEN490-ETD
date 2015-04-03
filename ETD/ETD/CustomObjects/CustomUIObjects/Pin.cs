@@ -287,7 +287,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 		//Returns true if this pin (the moved pin) overlaps the fixed pin passed as an argument more than 25%, false otherwise
 		internal bool SufficientOverlap(Pin fixedPin)
 		{
-			if (this.getX() > (fixedPin.getX() - (this.Width / 2)) && this.getX() < (fixedPin.getX() + (this.Width / 2)) && this.getY() > (fixedPin.getY() - (this.Height / 2)) && this.getY() < (fixedPin.getY() + (this.Height / 2)))
+			if (this.getX() > (fixedPin.getX() - (fixedPin.Width / 2)) && this.getX() < (fixedPin.getX() + (fixedPin.Width / 2)) && this.getY() > (fixedPin.getY() - (fixedPin.Height / 2)) && this.getY() < (fixedPin.getY() + (fixedPin.Height / 2)))
 			{
 				return true;
 			}
@@ -319,6 +319,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 				//Replacing pin at the start point and ensuring it doesn't get added to an intervention by mistake
 				setPinPosition(startX, startY);
 				CollisionDetectionAndResolution(true);
+				mapSection.Update();
 			}
 		}
 
@@ -342,7 +343,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 			{
 				setPinPosition(this.Width / 2, getY());
 			}
-			else if(getX() > mapSection.Canvas_map.ActualWidth - (this.Width / 2))
+			if(getX() > mapSection.Canvas_map.ActualWidth - (this.Width / 2))
 			{
 				setPinPosition(mapSection.Canvas_map.ActualWidth - (this.Width / 2), getY());
 			}
@@ -351,7 +352,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 			{
 				setPinPosition(getX(), this.Height / 2);
 			}
-			else if(getY() > mapSection.Canvas_map.ActualHeight - (this.Height / 2))
+			if(getY() > mapSection.Canvas_map.ActualHeight - (this.Height / 2))
 			{
 				setPinPosition(getX(), mapSection.Canvas_map.ActualHeight - (this.Height / 2));
 			}

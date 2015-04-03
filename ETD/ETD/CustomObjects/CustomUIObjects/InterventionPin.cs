@@ -73,7 +73,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 					//Updating arrow if any for it to point from the current interventions position to its destination
 					if (destinationArrowDictionnary.ContainsKey(intervention) && destinationArrowDictionnary[intervention] != null)
 					{
-						destinationArrowDictionnary[intervention].DrawArrow(getX(), getY());
+						destinationArrowDictionnary[intervention].ChangeStart(getX(), getY());
 					}
 				}
 			}
