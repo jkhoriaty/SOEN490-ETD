@@ -286,7 +286,7 @@ namespace ETD.ViewsPresenters
 
                     else if (!GPSLocation.getDictionary().Any())
                     {
-                        MessageBox.Show("There are no volunteers with registered GPS', please have a volunteer register their device to use this feature.");
+                        MessageBox.Show("No positions from volunteer have been received yet.");
                     }
                 }
             }
