@@ -12,10 +12,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ETD_Statistic.Model;
+using ETD.Services.Database;
 using ETD.Services.Database;
 using System.Data.SQLite;
-using ETD_Statistic.Model;
-
 
 namespace ETD_Statistic.ViewsPresenters
 {
@@ -24,7 +24,7 @@ namespace ETD_Statistic.ViewsPresenters
     /// </summary>
     public partial class InterventionView : Page
     {
-        String complaint;
+        InterventionStatisticMapper ism;
         String displayComplaint;
         int count = 2;
         static int countWithoutAmbulance = 0;
@@ -43,8 +43,9 @@ namespace ETD_Statistic.ViewsPresenters
 
         private void GenerateComplainName()
         {
-            SQLiteDataReader reader = StaticDBConnection.QueryDatabase("SELECT DISTINCT Chief_Complaint FROM Interventions WHERE Operation_ID IN " + Statistic.getOperationID());
-            while (reader.Read())
+            ism = new InterventionStatisticMapper();
+
+            foreach(String complaint in ism.getListComplaint())
             {
                 RowDefinition rd = new RowDefinition();
                 rd.Height = new GridLength(40);
@@ -60,9 +61,8 @@ namespace ETD_Statistic.ViewsPresenters
                 tb.VerticalAlignment = VerticalAlignment.Center;
                 tb.HorizontalAlignment = HorizontalAlignment.Center;
                 tb.TextWrapping = TextWrapping.Wrap;
-                complaint = reader["Chief_Complaint"].ToString();
                 displayComplaint = StaticDBConnection.GetResource(complaint);
-                tb.Name = reader["Chief_Complaint"].ToString();
+                tb.Name = complaint;
                 tb.Text = displayComplaint;
                 border.Child = tb;
                 ComplaintGrid.Children.Add(border);
@@ -91,10 +91,10 @@ namespace ETD_Statistic.ViewsPresenters
         private void GenerateInterventionWithoutAmbulance(int row, String complaint)
         {
             //generating table for Children without ambulance services
+            ism.getInterventionChildrenWithoutAmublanceCount(complaint);
 
-            SQLiteDataReader childrenReader = StaticDBConnection.QueryDatabase("SELECT count(*) as Count from Interventions WHERE Conclusion NOT LIKE 'get_ComboBoxItem_Conclusion_911' AND Conclusion NOT LIKE 'NULL' AND Operation_ID IN " + Statistic.getOperationID() + " AND Chief_Complaint='" + complaint + "' AND Age < 18");
-            while (childrenReader.Read())
-            {              
+            foreach (int count in ism.getInterventionChildrenWithoutAmublanceList())
+            {
                 Border border = new Border();
                 border.BorderThickness = new Thickness(0, 0, 1, 1);
                 border.BorderBrush = new SolidColorBrush(Colors.Black);
@@ -105,7 +105,7 @@ namespace ETD_Statistic.ViewsPresenters
                 tb.Margin = new Thickness(3, 0, 0, 0);
                 tb.VerticalAlignment = VerticalAlignment.Center;
                 tb.HorizontalAlignment = HorizontalAlignment.Center;
-                tb.Text = childrenReader["Count"].ToString();
+                tb.Text = count.ToString();
                 countWithoutAmbulance += int.Parse(tb.Text.ToString());
                 totalChildrenHoriCount += int.Parse(tb.Text.ToString());
                 border.Child = tb;
@@ -113,10 +113,12 @@ namespace ETD_Statistic.ViewsPresenters
                 Grid.SetColumn(border, 1);
                 Grid.SetRow(border, row);
             }
+            ism.clearInterventionChildrenWACountList();
 
             //generating table for Adult without ambulance services
-            SQLiteDataReader adultReader = StaticDBConnection.QueryDatabase("SELECT count(*) as Count from Interventions WHERE Conclusion NOT LIKE 'get_ComboBoxItem_Conclusion_911' AND Conclusion NOT LIKE 'NULL' AND Operation_ID IN " + Statistic.getOperationID() + " AND Chief_Complaint='" + complaint + "' AND Age >= 18");
-            while (adultReader.Read())
+            ism.getInterventionAdultWithoutAmublanceCount(complaint);
+            
+            foreach(int count in ism.getInterventionAdultWithoutAmublanceList())
             {               
                 Border border = new Border();
                 border.BorderThickness = new Thickness(0, 0, 1, 1);
@@ -128,7 +130,7 @@ namespace ETD_Statistic.ViewsPresenters
                 tb.Margin = new Thickness(3, 0, 0, 0);
                 tb.VerticalAlignment = VerticalAlignment.Center;
                 tb.HorizontalAlignment = HorizontalAlignment.Center;
-                tb.Text = adultReader["Count"].ToString();
+                tb.Text = count.ToString();
                 countWithoutAmbulance += int.Parse(tb.Text.ToString());
                 totalAdultHoriCount += int.Parse(tb.Text.ToString());
                 border.Child = tb;
@@ -136,6 +138,8 @@ namespace ETD_Statistic.ViewsPresenters
                 Grid.SetColumn(border, 2);
                 Grid.SetRow(border, row);
             }
+            ism.clearInterventionAdultWACountList();
+
 
             //generating total table for without amublance services          
             Border totalBorder = new Border();
@@ -160,8 +164,9 @@ namespace ETD_Statistic.ViewsPresenters
         private void GenerateInterventionWithAmbulance(int row, String complaint)
         {
             //generating table for Children with ambulance services
-            SQLiteDataReader childrenReader = StaticDBConnection.QueryDatabase("SELECT count(*) as Count from Interventions WHERE Conclusion LIKE 'get_ComboBoxItem_Conclusion_911' AND Operation_ID IN " + Statistic.getOperationID() + " AND Chief_Complaint='" + complaint + "' AND Age < 18");
-            while (childrenReader.Read())
+            ism.getInterventionChildrenWithAmublanceCount(complaint);
+
+            foreach(int count in ism.getInterventionChildrenWithAmublanceList())
             {
                 Border border = new Border();
                 border.BorderThickness = new Thickness(0, 0, 1, 1);
@@ -173,7 +178,7 @@ namespace ETD_Statistic.ViewsPresenters
                 tb.Margin = new Thickness(3, 0, 0, 0);
                 tb.VerticalAlignment = VerticalAlignment.Center;
                 tb.HorizontalAlignment = HorizontalAlignment.Center;
-                tb.Text = childrenReader["Count"].ToString();
+                tb.Text = count.ToString();
                 countWithAmbulance += int.Parse(tb.Text.ToString());
                 totalChildrenHoriCount += int.Parse(tb.Text.ToString());
                 border.Child = tb;
@@ -181,10 +186,13 @@ namespace ETD_Statistic.ViewsPresenters
                 Grid.SetColumn(border, 4);
                 Grid.SetRow(border, row);
             }
+            ism.clearInterventionChildrenACountList();
+
+
 
             //generating table for Adult with ambulance services
-            SQLiteDataReader adultReader = StaticDBConnection.QueryDatabase("SELECT count(*) as Count from Interventions WHERE Conclusion LIKE 'get_ComboBoxItem_Conclusion_911' AND Operation_ID IN " + Statistic.getOperationID() + " AND Chief_Complaint='" + complaint + "' AND Age >= 18");
-            while (adultReader.Read())
+            ism.getInterventionAdultWithAmublanceCount(complaint);
+            foreach(int count in ism.getInterventionAdultWithAmublanceList())
             {               
                 Border border = new Border();
                 border.BorderThickness = new Thickness(0, 0, 1, 1);
@@ -196,7 +204,7 @@ namespace ETD_Statistic.ViewsPresenters
                 tb.Margin = new Thickness(3, 0, 0, 0);
                 tb.VerticalAlignment = VerticalAlignment.Center;
                 tb.HorizontalAlignment = HorizontalAlignment.Center;
-                tb.Text = adultReader["Count"].ToString();
+                tb.Text = count.ToString();
                 countWithAmbulance += int.Parse(tb.Text.ToString());
                 totalAdultHoriCount += int.Parse(tb.Text.ToString());
                 border.Child = tb;
@@ -204,6 +212,7 @@ namespace ETD_Statistic.ViewsPresenters
                 Grid.SetColumn(border, 5);
                 Grid.SetRow(border, row);
             }
+            ism.clearInterventionAdultACountList();
 
             //generating total table for with amublance services          
             Border totalBorder = new Border();
