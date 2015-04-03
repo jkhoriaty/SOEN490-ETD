@@ -40,5 +40,3 @@ ETD/Builds/Release/ETD/
 ETD/Builds/Release/ETD_Statistics/
 ETD/Builds/Release/ETD_UnitTest/
 ETD/Builds/Debug/CommonResources/*
-
-ETD/ETD_Statistic/ViewsPresenters/PreviousOperationView.xaml.cs
