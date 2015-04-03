@@ -418,7 +418,26 @@ namespace ETD.ViewsPresenters
 
 		private void OKButtonClicked(object sender, EventArgs e)
 		{
-			MessageBox.Show("To be coded");
+			Button btnOK = (Button)sender;
+			TextBox volunteerTBox = allVolunteerTextBoxes[allVolunteerOKButtons.IndexOf(btnOK)];
+			btnOK.Visibility = Visibility.Collapsed;
+			allVolunteerCBoxes[allVolunteerOKButtons.IndexOf(btnOK)].Visibility = Visibility.Visible;
+			allVolunteerTextBoxes[allVolunteerOKButtons.IndexOf(btnOK)].Visibility = Visibility.Collapsed;
+			allVolunteerCancelButtons[allVolunteerOKButtons.IndexOf(btnOK)].Visibility = Visibility.Collapsed;
+
+			if (volunteerTBox.Text == "")
+			{
+				allVolunteerCBoxes[allVolunteerOKButtons.IndexOf(btnOK)].SelectedIndex = -1;
+			}
+			else
+			{
+				StaticDBConnection.NonQueryDatabase("INSERT INTO [Volunteers] (Name, Training_Level) VALUES ('" + volunteerTBox.Text + "', 0);");
+
+				ComboBoxItem newUser = new ComboBoxItem();
+				newUser.Content = volunteerTBox.Text;
+				allVolunteerCBoxes[allVolunteerOKButtons.IndexOf(btnOK)].Items.Add(newUser);
+				allVolunteerCBoxes[allVolunteerOKButtons.IndexOf(btnOK)].SelectedItem = newUser;
+			}
 		}
 
 		private void CancelButtonClicked(object sender, EventArgs e)
