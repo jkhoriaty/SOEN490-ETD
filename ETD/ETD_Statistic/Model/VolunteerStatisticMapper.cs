@@ -33,6 +33,7 @@ namespace ETD_Statistic.Model
 
         public List<VolunteerStatistic> getList()
         {
+            orderList();
             return volunteerStatisticList;
         }
 
@@ -41,7 +42,15 @@ namespace ETD_Statistic.Model
             volunteerStatisticList.Clear();
         }
 
+        public void RemoveFromList(VolunteerStatistic vs)
+        {
+            volunteerStatisticList.Remove(vs);
+        }
 
+        private void orderList()
+        {
+            volunteerStatisticList = volunteerStatisticList.OrderBy(VolunteerStatistic => VolunteerStatistic.getName()).ToList();
+        }
 
     }
 }
