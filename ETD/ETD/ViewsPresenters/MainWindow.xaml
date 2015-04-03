@@ -48,7 +48,7 @@
                     <ComboBoxItem x:Uid="ComboBoxItem_Line" Content="{Binding Path=ComboBoxItem_Line, Source={StaticResource Resources}}" Name="line" Selected="CreateMapModificationPin"/>
                     <ComboBoxItem Content="Ramp" Name="ramp" Selected="CreateMapModificationPin"/>
                     <ComboBoxItem Content="Circle" Name="circle" Selected="CreateMapModificationPin"/>
-                    <ComboBoxItem Content="Text" Name="text"/>
+                    <ComboBoxItem Content="Text" Name="text" Selected="CreateMapModificationPin"/>
 				</ComboBox>
 				<ComboBox Name="modeCB" SelectionChanged="ModeChange" Width="140">
                     <ComboBoxItem x:Uid="ComboBoxItem_RegularMode" Content="{Binding Path=ComboBoxItem_RegularMode, Source={StaticResource Resources}}"/>
