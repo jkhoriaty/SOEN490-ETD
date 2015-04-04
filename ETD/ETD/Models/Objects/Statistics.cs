@@ -8,16 +8,15 @@ using System.Windows.Controls;
 
 namespace ETD.Models.Objects
 {
-	class Statistics
+	public class Statistics
 	{
-		ETD.CustomObjects.PopupForms.Statistics statisticsPage;
+		public ETD.CustomObjects.PopupForms.Statistics statisticsPage;
 		public TimeSpan averageResponseTime;
 		public TimeSpan averageDuration;
 		public int numberOfOngoingInterventions;
 		public int numberOfCompletedInterventions;
 
-		Dictionary<string, int> numberOfInterventionsPerClassification = new Dictionary<string, int>();
-
+		public Dictionary<string, int> numberOfInterventionsPerClassification = new Dictionary<string, int>();
 
 		public Statistics()
         {
