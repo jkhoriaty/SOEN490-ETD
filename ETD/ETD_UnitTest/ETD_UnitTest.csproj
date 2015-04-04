@@ -61,6 +61,7 @@
     <Compile Include="ETD_Test\IntegrationTest\TeamUITest.cs" />
     <Compile Include="ETD_Test\IntegrationTest\EquipmentUITest.cs" />
     <Compile Include="ETD_Test\IntegrationTest\InterventionUITest.cs" />
+    <Compile Include="ETD_Test\ModelsObjectsTest\GPSLocationTest.cs" />
     <Compile Include="ETD_Test\ModelsObjectsTest\ShiftTest.cs" />
     <Compile Include="ETD_Test\ModelsObjectsTest\InterventionTest.cs" />
     <Compile Include="ETD_Test\ModelsObjectsTest\TeamTest.cs" />

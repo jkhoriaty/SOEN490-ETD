@@ -55,7 +55,7 @@ namespace ETD.Models.Objects
 		}
 
 		//Return GPSLocation instance using the phones ID
-		internal static GPSLocation getGPSLocationFromID(string id)
+		public static GPSLocation getGPSLocationFromID(string id)
 		{
 			if(gpsLocationsDictionary.ContainsKey(id))
 			{
@@ -130,27 +130,27 @@ namespace ETD.Models.Objects
 
 		// Getters
 
-        internal static Dictionary<string, GPSLocation> getDictionary()
+        public static Dictionary<string, GPSLocation> getDictionary()
         {
             return gpsLocationsDictionary;
         }
 
-		internal double getLattitude()
+		public double getLattitude()
 		{
 			return lattitude;
 		}
 
-		internal double getLongitude()
+		public double getLongitude()
 		{
 			return longitude;
 		}
 
-		internal double getX()
+		public double getX()
 		{
 			return X;
 		}
 
-		internal double getY()
+		public double getY()
 		{
 			return Y;
 		}
