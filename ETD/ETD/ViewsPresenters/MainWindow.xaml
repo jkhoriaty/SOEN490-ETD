@@ -50,7 +50,10 @@
                     <ComboBoxItem Content="Circle" Name="circle" Selected="CreateMapModificationPin"/>
                     <ComboBoxItem Content="Text" Name="text" Selected="CreateMapModificationPin"/>
 				</ComboBox>
-				<ComboBox Name="modeCB" SelectionChanged="ModeChange" Width="140">
+                <StackPanel Visibility="Collapsed" Orientation="Horizontal" HorizontalAlignment="Center" Height="27" Background="White" Name="AdditionalIntoTextStackPanel">
+                    <TextBox Text="Enter text" FontSize="15" Name="AdditionalInfoTextTextBlock" TextChanged="SetAdditionalTextInput" Width="100" VerticalAlignment="Center" RenderTransformOrigin="1.294,0.509" LostFocus="AdditionalTextInputTextBoxOnLostFocus" GotFocus="AdditionalTextInputTextBoxOnGotFocus"/>
+                </StackPanel>
+                <ComboBox Name="modeCB" SelectionChanged="ModeChange" Width="140">
                     <ComboBoxItem x:Uid="ComboBoxItem_RegularMode" Content="{Binding Path=ComboBoxItem_RegularMode, Source={StaticResource Resources}}"/>
                     <ComboBoxItem x:Uid="ComboBoxItem_EditMode" Content="{Binding Path=ComboBoxItem_EditMode, Source={StaticResource Resources}}"/>
 				</ComboBox>
