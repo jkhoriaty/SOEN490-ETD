@@ -244,7 +244,6 @@ namespace ETD.ViewsPresenters
                 {
 					if (mi.Name.Equals("text"))
 					{
-						MessageBox.Show(mi.Name.ToString());
 						AdditionalIntoTextStackPanel.Visibility = Visibility.Visible;
 						mapModificationSection.CreateMapModificationPin("" + mi.Name);
 					}
