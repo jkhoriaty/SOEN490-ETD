@@ -59,5 +59,10 @@ namespace ETD.Models.Objects
         {
             this.shiftInfo[position] = shiftInfo;
         }
+
+		public int getShiftDuration()
+		{
+			return shiftDuration;
+		}
     }
 }

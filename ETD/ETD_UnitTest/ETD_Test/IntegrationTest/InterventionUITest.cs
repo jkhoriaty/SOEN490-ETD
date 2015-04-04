@@ -15,7 +15,8 @@ namespace ETD_UnitTest.IntegrationTest
         public void CreateInterventionPinTest()
         {
             MainWindow window = new MainWindow();
-            MapSectionPage mapSectionPage = new MapSectionPage(window);
+			AdditionalInfoPage adInfo = new AdditionalInfoPage(window);
+            MapSectionPage mapSectionPage = new MapSectionPage(window, adInfo);
             Intervention iv = new Intervention();
             mapSectionPage.Update();
             bool check = false;
@@ -34,7 +35,8 @@ namespace ETD_UnitTest.IntegrationTest
         public void DeleteInterventionPinTest()
         {
             MainWindow window = new MainWindow();
-            MapSectionPage mapSectionPage = new MapSectionPage(window);
+			AdditionalInfoPage adInfo = new AdditionalInfoPage(window);
+            MapSectionPage mapSectionPage = new MapSectionPage(window, adInfo);
             Intervention iv = new Intervention();
             mapSectionPage.Update();
             bool check = false;

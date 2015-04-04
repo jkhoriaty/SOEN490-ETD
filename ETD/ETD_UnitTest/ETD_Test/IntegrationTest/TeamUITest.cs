@@ -15,7 +15,8 @@ namespace ETD_UnitTest
 		public void CreateTeamPinTest()
 		{
 			MainWindow window = new MainWindow();
-			MapSectionPage mapSectionPage = new MapSectionPage(window);
+			AdditionalInfoPage adInfo = new AdditionalInfoPage(window);
+			MapSectionPage mapSectionPage = new MapSectionPage(window, adInfo);
 			Team a = new Team("A");
 			mapSectionPage.Update();
 			
@@ -35,7 +36,8 @@ namespace ETD_UnitTest
         public void DeleteTeamPinTest()
         {
             MainWindow window = new MainWindow();
-            MapSectionPage mapSectionPage = new MapSectionPage(window);
+			AdditionalInfoPage adInfo = new AdditionalInfoPage(window);
+            MapSectionPage mapSectionPage = new MapSectionPage(window, adInfo);
             Team a = new Team("A");
             mapSectionPage.Update();
 

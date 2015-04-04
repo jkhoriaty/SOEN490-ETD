@@ -15,7 +15,8 @@ namespace ETD_UnitTest.IntegrationTest
         public void CreateEquipmentPinTest()
         {
             MainWindow window = new MainWindow();
-            MapSectionPage mapSectionPage = new MapSectionPage(window);
+			AdditionalInfoPage adInfo = new AdditionalInfoPage(window);
+            MapSectionPage mapSectionPage = new MapSectionPage(window, adInfo);
             Equipment equip = new Equipment("ambulanceCart");
             Team a = new Team("team");
             a.AddEquipment(equip);
@@ -36,7 +37,8 @@ namespace ETD_UnitTest.IntegrationTest
         public void DeleteEquipmentPinTest()
         {
             MainWindow window = new MainWindow();
-            MapSectionPage mapSectionPage = new MapSectionPage(window);
+			AdditionalInfoPage adInfo = new AdditionalInfoPage(window);
+            MapSectionPage mapSectionPage = new MapSectionPage(window, adInfo);
             Equipment equip = new Equipment("ambulanceCart");
             Team a = new Team("team");
             a.AddEquipment(equip);
