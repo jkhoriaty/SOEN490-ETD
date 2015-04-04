@@ -207,6 +207,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 			if(parentPin != null && SufficientOverlap(parentPin)) //Want to merge
 			{
 				Team.removeSplitTeam(team); //Delete the fragment
+				gpsLocation.setTeamSplit(false); //Reactivationg gps
 			}
 
 			//Identifying whether the user wants to split the team
@@ -229,7 +230,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 				//Disabling GPS because of its unreliability when the team is split
 				if(gpsLocation != null)
 				{
-					gpsLocation.setTeamSplit(true); 
+					gpsLocation.setTeamSplit(true);
 				}
 
 				//Creating team as a duplicate of the initial team, name it using the number of the intervention it is assigned to
