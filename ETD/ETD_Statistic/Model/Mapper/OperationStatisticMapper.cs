@@ -8,7 +8,7 @@ using System.Data.SQLite;
 
 namespace ETD_Statistic.Model
 {
-    class OperationStatisticMapper
+    public class OperationStatisticMapper
     {
         private List<OperationStatistic> operationStatisticList = new List<OperationStatistic>();
 

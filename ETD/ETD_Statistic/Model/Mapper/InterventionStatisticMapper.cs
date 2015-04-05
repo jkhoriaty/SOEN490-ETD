@@ -9,7 +9,7 @@ using ETD_Statistic.Model;
 
 namespace ETD_Statistic.Model
 {
-    class InterventionStatisticMapper
+    public class InterventionStatisticMapper
     {
         List<String> chiefComplaint = new List<String>();
         List<int> interventionChildrenWAList = new List<int>();

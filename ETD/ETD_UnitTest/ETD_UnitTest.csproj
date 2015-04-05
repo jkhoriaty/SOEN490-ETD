@@ -60,6 +60,9 @@
   <ItemGroup>
     <Compile Include="ETD_Statistic_Test\ModelsObjectsTest\StatisticTest.cs" />
     <Compile Include="ETD_Statistic_Test\ModelsObjectsTest\OperationStatisticTest.cs" />
+    <Compile Include="ETD_Statistic_Test\ModelsObjectsTest\InterventionStatisticMapperTest.cs" />
+    <Compile Include="ETD_Statistic_Test\ModelsObjectsTest\OperationStatisticMapperTest.cs" />
+    <Compile Include="ETD_Statistic_Test\ModelsObjectsTest\VolunteerStatisticMapperTest.cs" />
     <Compile Include="ETD_Statistic_Test\ModelsObjectsTest\VolunteerStatisticTest.cs" />
     <Compile Include="ETD_Test\IntegrationTest\TeamUITest.cs" />
     <Compile Include="ETD_Test\IntegrationTest\EquipmentUITest.cs" />
