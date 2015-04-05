@@ -99,6 +99,8 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm
 			endFrame.Content = endPage;
 			end.Content = endFrame;
 
+			teamName.Text = (intervention.getResourceList().Count > 0) ? intervention.getResourceList().ElementAt(0).getTeam().getName() : "";
+
 			if (intervention.IsCompleted())
 			{
 				DisableForms();
@@ -108,7 +110,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm
 		public void Update()
 		{
 			BuildComponents();
-            teamName.Text = (intervention.getResourceList().Count > 0) ? intervention.getResourceList().ElementAt(0).getTeam().getName() : "";
+			teamName.Text = (intervention.getResourceList().Count > 0) ? intervention.getResourceList().ElementAt(0).getTeam().getName() : "";
 			interventionType.Text = intervention.getChiefComplaint();
 			if(intervention.getCode() == 1)
 			{
