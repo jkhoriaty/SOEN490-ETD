@@ -165,7 +165,7 @@ namespace ETD.ViewsPresenters
             }
 
             //acronym regex
-            Regex acronymRgx = new Regex(@"^[a-zA-Z]{1,3}$");
+            Regex acronymRgx = new Regex(@"^[a-zA-Z]{1,4}$");
             if (!acronymRgx.Match(acronym.Text).Success)
             {
                 MessageBox.Show(ETD.Properties.Resources.MessageBox_Notification_InvalidAcronym);
@@ -189,8 +189,9 @@ namespace ETD.ViewsPresenters
             }
 
             //dispatcher
-            Regex nameRgx = new Regex(@"^[a-zA-Z '-]+$");
-            if (!nameRgx.Match(dispatcherName.Text).Success)
+            //Regex nameRgx = new Regex(@"^[a-zA-Z '-]+$");
+            //if (!nameRgx.Match(dispatcherName.Text).Success)
+            if(dispatcherName.Text == "")
             {
                 MessageBox.Show(ETD.Properties.Resources.MessageBox_Notification_InvalidDispatcherName);
                 return false;
