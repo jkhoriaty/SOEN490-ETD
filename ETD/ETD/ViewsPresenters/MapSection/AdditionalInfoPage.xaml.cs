@@ -39,6 +39,7 @@ namespace ETD.ViewsPresenters.MapSection
 		private System.Windows.Shapes.Shape mapModObject;
 		private int _startX, _startY;
 		private String mapModName;
+		private String textInput = "Default";
 
 		//Creates a new Additional map information page
 		public AdditionalInfoPage(MainWindow mainWindow)
@@ -89,12 +90,13 @@ namespace ETD.ViewsPresenters.MapSection
 			if (mapModName.Equals("rectangle"))
 			{
 				mapModObject = new System.Windows.Shapes.Rectangle();
-				mapModObject.StrokeThickness = 4;
+				mapModObject.StrokeThickness = 3;
 			}
 
 			if (mapModName.Equals("circle"))
 			{
 				mapModObject = new System.Windows.Shapes.Ellipse();
+				mapModObject.StrokeThickness = 3;
 			}
 
 			if (mapModName.Equals("ramp") || mapModName.Equals("camp") || mapModName.Equals("stairs"))
@@ -108,8 +110,19 @@ namespace ETD.ViewsPresenters.MapSection
 
 			if (mapModName.Equals("text"))
 			{
+				textInput = MainWindow.getAdditionalTextInput();
+
+				if (textInput == null || textInput.Equals(""))
+				{
+					textInput = "Enter text";
+				}
+				else
+				{
+					textInput = MainWindow.getAdditionalTextInput();
+				}
+			
 				System.Drawing.Font font = new System.Drawing.Font("Times New Roman",35.0f);
-				System.Drawing.Bitmap bitmap = DrawText("test", font, System.Drawing.Color.Black, System.Drawing.Color.Transparent);
+				System.Drawing.Bitmap bitmap = DrawText(textInput, font, System.Drawing.Color.Black, System.Drawing.Color.Transparent);
 
 				ToBitmapImage(bitmap);
 				BitmapImage bitmapimg = ToBitmapImage(bitmap);
@@ -155,7 +168,7 @@ namespace ETD.ViewsPresenters.MapSection
 				setMapModObjectType();
 
 				//If the item is a rectangle , draw a border. Otherwise, set it as transparent
-				if (mapModName.Equals("rectangle"))
+				if (mapModName.Equals("rectangle") || mapModName.Equals("circle"))
 				{
 					mapModObject.Stroke = System.Windows.Media.Brushes.Black;
 				}

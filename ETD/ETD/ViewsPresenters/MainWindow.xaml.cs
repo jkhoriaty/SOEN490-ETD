@@ -60,6 +60,9 @@ namespace ETD.ViewsPresenters
 		private bool mapAdded = false;
         private bool forceClose = false;
 
+		//Variable uesd when adding text to the map
+		private static String additionalTextInput;
+
 		public MainWindow()
 		{
             //hook up DataChanged event to get notification to make culture-related changes in code
@@ -174,6 +177,29 @@ namespace ETD.ViewsPresenters
 			}
 		}
 
+		//Called when the textboxes gain focus
+		private void AdditionalTextInputTextBoxOnGotFocus(object sender, RoutedEventArgs e)
+		{
+			TextBoxHandler.GotFocus(sender, e);	
+		}
+
+		//Called when the textboxes lose focus
+		private void AdditionalTextInputTextBoxOnLostFocus(object sender, RoutedEventArgs e)
+		{
+			TextBoxHandler.LostFocus(sender, e);	
+		}
+
+		//Called when the text has been changed
+		private void SetAdditionalTextInput(object sender, RoutedEventArgs e)
+		{
+			additionalTextInput = AdditionalInfoTextTextBlock.Text.ToString();
+		}
+
+		//Called to retrieve text when adding text to the map
+		internal static String getAdditionalTextInput()
+		{
+			return additionalTextInput;
+		}
 
         //Change intervention deadlines
 		private void ChangeDeadlines(object sender, RoutedEventArgs e)
@@ -216,7 +242,16 @@ namespace ETD.ViewsPresenters
             {
                 if (mi!=null && mi.IsSelected )
                 {
-                    mapModificationSection.CreateMapModificationPin("" + mi.Name);
+					if (mi.Name.Equals("text"))
+					{
+						AdditionalIntoTextStackPanel.Visibility = Visibility.Visible;
+						mapModificationSection.CreateMapModificationPin("" + mi.Name);
+					}
+					else
+					{
+						AdditionalIntoTextStackPanel.Visibility = Visibility.Collapsed;
+						mapModificationSection.CreateMapModificationPin("" + mi.Name);
+					}
                 }
             }  
         }
