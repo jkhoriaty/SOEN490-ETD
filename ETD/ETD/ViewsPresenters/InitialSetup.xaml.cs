@@ -174,18 +174,30 @@ namespace ETD.ViewsPresenters
 
 
             //start time regex
-            Regex timeRgx = new Regex(@"^[0-9]{2}$");
+            Regex timeRgx = new Regex(@"^[0-9]{1,2}$");
             if (!timeRgx.Match(shiftStartTimehh.Text).Success || !timeRgx.Match(shiftStartTimemm.Text).Success || (Convert.ToInt32(shiftStartTimehh.Text) < 0 || Convert.ToInt32(shiftStartTimehh.Text) > 24) || (Convert.ToInt32(shiftStartTimemm.Text) < 0 || Convert.ToInt32(shiftStartTimehh.Text) > 59))
             {
                 MessageBox.Show(ETD.Properties.Resources.MessageBox_Notification_InvalidStartTime);
                 return false;
             }
 
+            Regex hourAdjust = new Regex(@"^[0-9]{1}$");
+            if (hourAdjust.Match(shiftStartTimehh.Text).Success)
+            {
+                shiftStartTimehh.Text = "0" + shiftStartTimehh.Text;
+            }
+
+
             //end time regex
             if (!timeRgx.Match(shiftEndTimehh.Text).Success || !timeRgx.Match(shiftEndTimemm.Text).Success || (Convert.ToInt32(shiftEndTimehh.Text) < 0 || Convert.ToInt32(shiftEndTimehh.Text) > 24) || (Convert.ToInt32(shiftEndTimemm.Text) < 0 || Convert.ToInt32(shiftEndTimehh.Text) > 59))
             {
                 MessageBox.Show(ETD.Properties.Resources.MessageBox_Notification_InvalidEndTime);
                 return false;
+            }
+
+            if (hourAdjust.Match(shiftEndTimehh.Text).Success)
+            {
+                shiftEndTimehh.Text = "0" + shiftEndTimehh.Text;
             }
 
             //dispatcher
