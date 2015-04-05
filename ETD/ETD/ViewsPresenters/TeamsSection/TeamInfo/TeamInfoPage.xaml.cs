@@ -98,6 +98,7 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamInfo
             EquipmentIcon equip = (EquipmentIcon)sender;
             Team relatedTeam = equip.getTeam();
             Equipment relatedEquipment = equip.getEquip();
+			relatedEquipment.setAssigned(false);
 
             relatedTeam.RemoveEquipment(relatedEquipment);
         }
