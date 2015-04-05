@@ -189,8 +189,7 @@ namespace ETD.ViewsPresenters
             }
 
             //dispatcher
-            //Regex nameRgx = new Regex(@"^[a-zA-Z '-]+$");
-            //if (!nameRgx.Match(dispatcherName.Text).Success)
+
             if(dispatcherName.Text == "")
             {
                 MessageBox.Show(ETD.Properties.Resources.MessageBox_Notification_InvalidDispatcherName);
