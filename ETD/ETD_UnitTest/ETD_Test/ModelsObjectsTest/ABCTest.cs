@@ -25,7 +25,7 @@ namespace ETD_UnitTest
         [TestMethod]
         public void ABCCreationTest()
         {
-            ABC abc = new ABC(1, "cons", true, "air", "breath", 10, "circ", 15);
+            ABC abc = new ABC(2, "cons", true, "air", "breath", 10, "circ", 15);
             Assert.AreEqual(abc.getConsciousness(), "cons");
             Assert.AreEqual(abc.getDisoriented(), true);
             Assert.AreEqual(abc.getAirways(), "air");
