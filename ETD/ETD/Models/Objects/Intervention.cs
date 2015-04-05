@@ -377,11 +377,11 @@ namespace ETD.Models.Objects
 		public void setCall911Time(DateTime call911Time)
 		{
             this.callID = StaticDBConnection.NonQueryDatabaseWithID("INSERT INTO [Calls] (Intervention_ID) VALUES (" + this.interventionID + ");");
-			if (callID > -1)
-            {
-                this.call911Time = call911Time;
-                StaticDBConnection.NonQueryDatabase("UPDATE [Calls] SET Call_Time='" + StaticDBConnection.DateTimeSQLite(call911Time) + "' WHERE Call_ID=" + callID + ";");
-            }
+			//if (callID > -1)
+            //{
+			this.call911Time = call911Time;
+			StaticDBConnection.NonQueryDatabase("UPDATE [Calls] SET Call_Time='" + StaticDBConnection.DateTimeSQLite(call911Time) + "' WHERE Call_ID=" + callID + ";");
+            //}
 		}
 
 		public DateTime getCall911Time()
@@ -461,11 +461,11 @@ namespace ETD.Models.Objects
 
 		public void setAmbulanceVehicle(String ambulanceVehicle)
 		{
-			if (callID > -1)
-            {
-                this.ambulanceVehicle = ambulanceVehicle;
-                StaticDBConnection.NonQueryDatabase("UPDATE [Calls] SET Ambulance_Vehicle='" + ambulanceVehicle.Replace("'", "''") + "' WHERE Call_ID=" + callID + ";");
-            }
+			//if (callID > -1)
+            //{
+			this.ambulanceVehicle = ambulanceVehicle;
+			StaticDBConnection.NonQueryDatabase("UPDATE [Calls] SET Ambulance_Vehicle='" + ambulanceVehicle.Replace("'", "''") + "' WHERE Call_ID=" + callID + ";");
+            //}
 		}
 
 		public String getAmbulanceVehicle()
@@ -475,11 +475,11 @@ namespace ETD.Models.Objects
 
 		public void setAmbulanceArrivalTime(DateTime ambulanceArrivalTime)
 		{
-            if (callID > -1)
-            {
-                this.ambulanceArrivalTime = ambulanceArrivalTime;
-                StaticDBConnection.NonQueryDatabase("UPDATE [Calls] SET Ambulance_Time='" + StaticDBConnection.DateTimeSQLite(ambulanceArrivalTime) + "' WHERE Call_ID=" + callID + ";");
-            }
+            //if (callID > -1)
+            //{
+			this.ambulanceArrivalTime = ambulanceArrivalTime;
+			StaticDBConnection.NonQueryDatabase("UPDATE [Calls] SET Ambulance_Time='" + StaticDBConnection.DateTimeSQLite(ambulanceArrivalTime) + "' WHERE Call_ID=" + callID + ";");
+            //}
 		}
 
 		public DateTime getAmbulanceArrivalTime()

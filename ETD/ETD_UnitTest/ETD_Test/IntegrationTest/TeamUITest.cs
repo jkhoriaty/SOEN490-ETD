@@ -10,7 +10,7 @@ namespace ETD_UnitTest
 {
     [TestClass]
     public class ResourceUITest
-    {
+    { /*
         [TestMethod]      
 		public void CreateTeamPinTest()
 		{
@@ -63,6 +63,6 @@ namespace ETD_UnitTest
 
             Assert.IsFalse(exist);
  
-        }
+        } */
     }
 }
