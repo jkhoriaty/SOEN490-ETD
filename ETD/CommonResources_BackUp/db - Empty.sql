@@ -1,7 +1,7 @@
 /*
 Navicat SQLite Data Transfer
 
-Source Server         : ETD
+Source Server         : EDT
 Source Server Version : 30808
 Source Host           : :0
 
@@ -9,7 +9,7 @@ Target Server Type    : SQLite
 Target Server Version : 30808
 File Encoding         : 65001
 
-Date: 2015-04-01 21:35:46
+Date: 2015-04-04 21:47:39
 */
 
 PRAGMA foreign_keys = OFF;
@@ -57,11 +57,11 @@ CONSTRAINT "fkey0" FOREIGN KEY ("Intervention_ID") REFERENCES "Interventions" ("
 -- ----------------------------
 DROP TABLE IF EXISTS "main"."Assigned_Equipment";
 CREATE TABLE "Assigned_Equipment" (
+"Assignment_ID"  INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
 "Equipment_ID"  INTEGER NOT NULL,
 "Team_ID"  INTEGER NOT NULL,
 "Assigned_Time"  DATETIME,
 "Removed_Time"  DATETIME,
-PRIMARY KEY ("Equipment_ID" ASC, "Team_ID" ASC),
 CONSTRAINT "fkey0" FOREIGN KEY ("Equipment_ID") REFERENCES "Equipments" ("Equipment_ID") ON DELETE CASCADE ON UPDATE CASCADE,
 CONSTRAINT "fkey1" FOREIGN KEY ("Team_ID") REFERENCES "Teams" ("Team_ID")
 );
@@ -133,13 +133,13 @@ INSERT INTO "main"."Equipment_Types" VALUES (6, 'Wheelchair');
 -- ----------------------------
 DROP TABLE IF EXISTS "main"."Intervening_Teams";
 CREATE TABLE "Intervening_Teams" (
+"Intervening_ID"  INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
 "Intervention_ID"  INTEGER NOT NULL,
 "Team_ID"  INTEGER NOT NULL,
 "Started_Intervening"  DATETIME,
 "Stopped_Intervening"  DATETIME,
-PRIMARY KEY ("Intervention_ID" ASC, "Team_ID" ASC),
-FOREIGN KEY ("Intervention_ID") REFERENCES "Interventions" ("Intervention_ID") ON DELETE CASCADE ON UPDATE CASCADE,
-FOREIGN KEY ("Team_ID") REFERENCES "Teams" ("Team_ID") ON DELETE CASCADE ON UPDATE CASCADE
+CONSTRAINT "fkey0" FOREIGN KEY ("Intervention_ID") REFERENCES "Interventions" ("Intervention_ID") ON DELETE CASCADE ON UPDATE CASCADE,
+CONSTRAINT "fkey1" FOREIGN KEY ("Team_ID") REFERENCES "Teams" ("Team_ID") ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- ----------------------------
@@ -259,6 +259,8 @@ INSERT INTO "main"."sqlite_sequence" VALUES ('Operations', 0);
 INSERT INTO "main"."sqlite_sequence" VALUES ('Teams', 0);
 INSERT INTO "main"."sqlite_sequence" VALUES ('Interventions', 0);
 INSERT INTO "main"."sqlite_sequence" VALUES ('ABCs', 0);
+INSERT INTO "main"."sqlite_sequence" VALUES ('Intervening_Teams', 0);
+INSERT INTO "main"."sqlite_sequence" VALUES ('Assigned_Equipment', 0);
 
 -- ----------------------------
 -- Table structure for Statuses
