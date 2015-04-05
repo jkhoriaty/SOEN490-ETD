@@ -147,11 +147,10 @@ namespace ETD.ViewsPresenters.MapSection
 					Canvas_map.Children.Add(equipmentPin);
 
 					//Setting the pin to it's previous position, if it exists, or to the top-left corner
-					bool ignoreSpecialCollisions = false;
+					bool ignoreSpecialCollisions = true;
 					double[] previousPinPosition = Pin.getPreviousPinPosition(equipment);
 					if (previousPinPosition == null)
 					{
-						ignoreSpecialCollisions = true;
 						previousPinPosition = new double[] { Canvas_map.ActualWidth - (equipmentPin.Width / 2), (equipmentPin.Height / 2) }; //Top-right corner
 					}
 					equipmentPin.setPinPosition(previousPinPosition[0], previousPinPosition[1]);
