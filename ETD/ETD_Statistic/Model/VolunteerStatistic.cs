@@ -10,7 +10,7 @@ using System.Collections;
 
 namespace ETD_Statistic.Model
 {
-    class VolunteerStatistic
+    public class VolunteerStatistic
     {
         String volunteerName;
         DateTime startTime;

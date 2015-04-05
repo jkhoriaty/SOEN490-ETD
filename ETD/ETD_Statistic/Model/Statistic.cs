@@ -34,7 +34,7 @@ namespace ETD_Statistic.Model
 
         public static void removeOperationID(String operation)
         {
-            operationID = operation[9].ToString(); 
+            operationID = operation.Substring(9).ToString(); 
             operationList.Remove(operationID);
         }
 

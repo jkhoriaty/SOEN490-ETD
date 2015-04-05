@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ETD_Statistic.Model
 {
-    class OperationStatistic
+    public class OperationStatistic
     {
         DateTime startDate;
         DateTime endDate;
