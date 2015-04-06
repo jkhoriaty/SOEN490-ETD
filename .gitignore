@@ -41,3 +41,6 @@ ETD/Builds/Release/ETD_Statistics/
 ETD/Builds/Release/ETD_UnitTest/
 ETD/Builds/Debug/CommonResources/db.sql
 ETD/Builds/Debug/CommonResources/EDT.sqlite3
+ETD/ETD_Statistic/obj/Debug/ViewsPresenters/Login.g.cs
+ETD/ETD_Statistic/obj/Debug/App.g.cs
+ETD/ETD_Statistic/obj/Debug/ViewsPresenters/Login.g.cs

@@ -197,6 +197,9 @@ namespace ETD_UnitTest
         public void InterventionSetAmbulanceVehicleTest()
         {
             Intervention a = new Intervention();
+            DateTime now = DateTime.Now;
+            a.setCall911Time(now);
+            a.setAmbulanceArrivalTime(now);
             a.setAmbulanceVehicle("ambulancevehicle");
             Assert.AreEqual("ambulancevehicle", a.getAmbulanceVehicle());
         }
@@ -206,6 +209,7 @@ namespace ETD_UnitTest
         {
             Intervention a = new Intervention();
             DateTime now = DateTime.Now;
+            a.setCall911Time(now);
             a.setAmbulanceArrivalTime(now);
             Assert.AreEqual(now, a.getAmbulanceArrivalTime());
         }

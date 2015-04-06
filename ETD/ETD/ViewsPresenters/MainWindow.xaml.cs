@@ -29,6 +29,7 @@ using ETD.Models.ArchitecturalObjects;
 using System.Globalization;
 using System.Diagnostics;
 using ETD.Services.Interfaces;
+using ETD.Properties;
 
 namespace ETD.ViewsPresenters
 {

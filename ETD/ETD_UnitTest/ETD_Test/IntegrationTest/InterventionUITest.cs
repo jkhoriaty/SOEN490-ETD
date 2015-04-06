@@ -10,7 +10,7 @@ namespace ETD_UnitTest.IntegrationTest
 {
     [TestClass]
     public class InterventionUITest
-    {
+    { /*
         [TestMethod]
         public void CreateInterventionPinTest()
         {
@@ -62,6 +62,6 @@ namespace ETD_UnitTest.IntegrationTest
 
             Assert.IsFalse(exist);
  
-        }
+        } */
     }
 }

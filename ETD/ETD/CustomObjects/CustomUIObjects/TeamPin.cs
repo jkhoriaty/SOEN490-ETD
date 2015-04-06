@@ -176,11 +176,13 @@ namespace ETD.CustomObjects.CustomUIObjects
                     //Setting the position of the intervention to be the position of the team and calling collision detection on the teamPin for the team to be added to the intervention
                     relatedInterventionPin.setPinPosition(teamPin.getX(), teamPin.getY());
                     teamPin.CollisionDetectionAndResolution(false);
+                    relatedInterventionPin.getIntervention().InterveningTeamArrived(team);
                 }
                 else
                 {
                     //Set team as "In position" on the intervention
                     interventionPin.getIntervention().InterveningTeamArrived(team);
+                    
                 }
             }
 		}

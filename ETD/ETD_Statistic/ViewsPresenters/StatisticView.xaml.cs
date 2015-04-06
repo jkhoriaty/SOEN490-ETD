@@ -34,7 +34,7 @@ namespace ETD_Statistic.ViewsPresenters
         String dispatcherName;
         int teamCount;
         int volunteerCount;
-
+        OperationStatisticMapper osm = new OperationStatisticMapper();
         public StatisticView()
         {
             InitializeComponent();
@@ -79,41 +79,29 @@ namespace ETD_Statistic.ViewsPresenters
 
         private void getOperationInformationFromDatabase()
         {
-            SQLiteDataReader reader = StaticDBConnection.QueryDatabase("SELECT * FROM Operations WHERE Operation_ID IN "+Statistic.getOperationID());
-            while (reader.Read())
+            foreach(OperationStatistic os in osm.getList())
             {
-                startDate = Convert.ToDateTime(reader["Shift_Start"].ToString());
-                endDate = Convert.ToDateTime(reader["Shift_End"].ToString());
-                volunteerFollowUpText = reader["VolunteerFollowUp"].ToString();
-                financeText = reader["Finance"].ToString();
-                vehicleText = reader["Vehicle"].ToString();
-                particularSituationText = reader["ParticularSituation"].ToString();
-                organizationFollowUpText = reader["OrganizationFollowUp"].ToString();
-                supervisorFollowUpText = reader["SupervisorFollowUp"].ToString();
-                eventName = reader["Name"].ToString();
-                dispatcherName = reader["Dispatcher"].ToString();
+                startDate = os.getStartDate();
+                endDate = os.getEndDate();
+                volunteerFollowUpText = os.getVolunteerFollowup();
+                financeText = os.getFinance();
+                vehicleText = os.getVehicle();
+                particularSituationText = os.getParticularSituation();
+                organizationFollowUpText = os.getOrganizationFollowup();
+                supervisorFollowUpText = os.getSupervisorFollowup();
+                eventName = os.getEventName();
+                dispatcherName = os.getDispatcherName();
             }
-            StaticDBConnection.CloseConnection();
         }
 
         private void getTeamCount()
         {
-            SQLiteDataReader reader = StaticDBConnection.QueryDatabase("SELECT count(*) as Count FROM Teams WHERE Operation_ID IN " + Statistic.getOperationID());
-            while (reader.Read())
-            {
-                teamCount = int.Parse(reader["Count"].ToString());
-            }
-            StaticDBConnection.CloseConnection();
+            teamCount = osm.getTeamCountFromDB();          
         }
 
         private void getVolunteerCount()
         {
-            SQLiteDataReader reader = StaticDBConnection.QueryDatabase("SELECT count(*) as Num FROM (Volunteers JOIN Team_Members ON Volunteers.Volunteer_ID = Team_Members.Volunteer_ID) JOIN Teams ON Team_Members.Team_ID = Teams.Team_ID WHERE Operation_ID IN " + Statistic.getOperationID());
-            while (reader.Read())
-            {
-                volunteerCount = int.Parse(reader["Num"].ToString());
-            }
-            StaticDBConnection.CloseConnection();
+            volunteerCount = osm.getVolunteerCountFromDB();
         }
 
         private void GenerateViewForMultiDayStatistic()
@@ -121,23 +109,20 @@ namespace ETD_Statistic.ViewsPresenters
             MultiDayOperationID.Text = "Operations: " + Statistic.getOperationID();
             foreach (String i in Statistic.getOperationList())
             {
-                SQLiteDataReader reader = StaticDBConnection.QueryDatabase("SELECT * FROM Operations WHERE Operation_ID IN " + Statistic.getOperationID());
-                while (reader.Read())
+                foreach (OperationStatistic os in osm.getList())
                 {
-                    
-                    startDate = Convert.ToDateTime(reader["Shift_Start"].ToString());
-                    endDate = Convert.ToDateTime(reader["Shift_End"].ToString());
-                    volunteerFollowUpText = reader["VolunteerFollowUp"].ToString();
-                    financeText = reader["Finance"].ToString();
-                    vehicleText = reader["Vehicle"].ToString();
-                    particularSituationText = reader["ParticularSituation"].ToString();
-                    organizationFollowUpText = reader["OrganizationFollowUp"].ToString();
-                    supervisorFollowUpText = reader["SupervisorFollowUp"].ToString();
-                    eventName = reader["Name"].ToString();
-                    dispatcherName = reader["Dispatcher"].ToString();
+                    startDate = os.getStartDate();
+                    endDate = os.getEndDate();
+                    volunteerFollowUpText = os.getVolunteerFollowup();
+                    financeText = os.getFinance();
+                    vehicleText = os.getVehicle();
+                    particularSituationText = os.getParticularSituation();
+                    organizationFollowUpText = os.getOrganizationFollowup();
+                    supervisorFollowUpText = os.getSupervisorFollowup();
+                    eventName = os.getEventName();
+                    dispatcherName = os.getDispatcherName();
                 }
             }
-            StaticDBConnection.CloseConnection();
 
         }
 

@@ -58,6 +58,12 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="ETD_Statistic_Test\ModelsObjectsTest\StatisticTest.cs" />
+    <Compile Include="ETD_Statistic_Test\ModelsObjectsTest\OperationStatisticTest.cs" />
+    <Compile Include="ETD_Statistic_Test\ModelsObjectsTest\InterventionStatisticMapperTest.cs" />
+    <Compile Include="ETD_Statistic_Test\ModelsObjectsTest\OperationStatisticMapperTest.cs" />
+    <Compile Include="ETD_Statistic_Test\ModelsObjectsTest\VolunteerStatisticMapperTest.cs" />
+    <Compile Include="ETD_Statistic_Test\ModelsObjectsTest\VolunteerStatisticTest.cs" />
     <Compile Include="ETD_Test\IntegrationTest\TeamUITest.cs" />
     <Compile Include="ETD_Test\IntegrationTest\EquipmentUITest.cs" />
     <Compile Include="ETD_Test\IntegrationTest\InterventionUITest.cs" />
@@ -81,10 +87,12 @@
       <Project>{c7115e86-5030-47a2-96f8-27a3e228cafc}</Project>
       <Name>ETD</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ETD_Statistic\ETD_Statistic.csproj">
+      <Project>{d29d129b-076a-41e8-8bbd-dd28cd130bed}</Project>
+      <Name>ETD_Statistic</Name>
+    </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ETD_Statistic_Test\ModelsObjectsTest\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>

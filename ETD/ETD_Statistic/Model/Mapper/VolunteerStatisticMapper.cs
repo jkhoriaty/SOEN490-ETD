@@ -9,7 +9,7 @@ using System.Data.SQLite;
 
 namespace ETD_Statistic.Model
 {
-    class VolunteerStatisticMapper
+    public class VolunteerStatisticMapper
     {
         private List<VolunteerStatistic> volunteerStatisticList = new List<VolunteerStatistic>();
         String dbQuery = "SELECT Volunteers.Name as Name, Operation_ID, Joined, Departure FROM Team_Members JOIN Teams ON Teams.Team_ID = Team_Members.Team_ID JOIN Volunteers ON Team_Members.Volunteer_ID = Volunteers.Volunteer_ID WHERE Operation_ID IN " + Statistic.getOperationID();
@@ -40,11 +40,6 @@ namespace ETD_Statistic.Model
         public void ClearList()
         {
             volunteerStatisticList.Clear();
-        }
-
-        public void RemoveFromList(VolunteerStatistic vs)
-        {
-            volunteerStatisticList.Remove(vs);
         }
 
         private void orderList()

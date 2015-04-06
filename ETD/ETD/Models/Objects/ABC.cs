@@ -85,7 +85,7 @@ namespace ETD.Models.Objects
             this.circulation = circulation;
             this.circulationFrequency = circulationFrequency;
             this.interventionID = intervention;
-            this.abcID = StaticDBConnection.NonQueryDatabaseWithID("INSERT INTO [ABCs] (Intervention_ID, Consciousness, Disoriented, Airways, Breathing, Breathing_Frequency, Circulation, Circulation_Frequency) VALUES (" + interventionID + ", '" + consciousness.Replace("'", "''") + "', " + disoriented + ", '" + airways.Replace("'", "''") + "', '" + breathing.Replace("'", "''") + "', " + breathingFrequency + ", '" + circulation.Replace("'", "''") + "', " + circulationFrequency + ");");
+            this.abcID = StaticDBConnection.NonQueryDatabaseWithID("INSERT INTO [ABCs] (Intervention_ID, Consciousness, Disoriented, Airways, Breathing, Breathing_Frequency, Circulation, Circulation_Frequency) VALUES ('" + interventionID + "', '" + consciousness + "', '" + disoriented + "', '" + airways + "', '" + breathing + "', '" + breathingFrequency + "', '" + circulation + "', '" + circulationFrequency + "');");
         }
 
         //Accessor methods

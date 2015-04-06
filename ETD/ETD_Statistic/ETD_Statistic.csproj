@@ -69,10 +69,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Model\InterventionStatisticMapper.cs" />
+    <Compile Include="Model\Mapper\InterventionStatisticMapper.cs" />
+    <Compile Include="Model\Mapper\OperationStatisticMapper.cs" />
+    <Compile Include="Model\OperationStatistic.cs" />
     <Compile Include="Model\Statistic.cs" />
     <Compile Include="Model\VolunteerStatistic.cs" />
-    <Compile Include="Model\VolunteerStatisticMapper.cs" />
+    <Compile Include="Model\Mapper\VolunteerStatisticMapper.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

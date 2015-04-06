@@ -10,8 +10,8 @@ namespace ETD_UnitTest
         [TestMethod]
         public void InterventionAICreationTest()
         {
-            InterventionAdditionalInfo ai = new InterventionAdditionalInfo("info", DateTime.Now);
             DateTime dt = DateTime.Now;
+            InterventionAdditionalInfo ai = new InterventionAdditionalInfo("info", DateTime.Now);
             Assert.AreEqual(ai.getInformation(), "info");
             Assert.AreEqual(ai.getTimestamp(), dt);
         }
