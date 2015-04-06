@@ -319,7 +319,6 @@ namespace ETD.CustomObjects.CustomUIObjects
 				//Replacing pin at the start point and ensuring it doesn't get added to an intervention by mistake
 				setPinPosition(startX, startY);
 				CollisionDetectionAndResolution(true);
-				mapSection.Update();
 			}
 		}
 
