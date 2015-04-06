@@ -208,6 +208,13 @@ namespace ETD.CustomObjects.CustomUIObjects
 			{
 				Team.removeSplitTeam(team); //Delete the fragment
 				gpsLocation.setTeamSplit(false); //Reactivationg gps
+				
+				//Removing rogue arrows that might appear by movement of the teams or interventions while teams where split
+				RemoveArrow();
+				parentPin.RemoveArrow();
+				interventionPin.RemoveArrow();
+
+				mapSection.Update();
 			}
 
 			//Identifying whether the user wants to split the team
@@ -255,6 +262,10 @@ namespace ETD.CustomObjects.CustomUIObjects
 
 				//Calling collision detection on the duplicate teams' pin so that it gets added to the intervention it is placed on
 				team2Pin.CollisionDetectionAndResolution(false);
+				
+				//Ensuring that the initial team is still intervening
+				team.setStatus("intervening");
+				mapSection.Update();
 			}
 			else if (interventionPin != null && interventionPin.getInterventionContainer() != null) //Handling the case when the team was in an intervention, choose between keeping it on the intervention (for an accidental drag-and-drop) or removing it from the intervention
 			{
