@@ -209,12 +209,18 @@ namespace ETD.CustomObjects.CustomUIObjects
 			if(parentPin != null && SufficientOverlap(parentPin)) //Want to merge
 			{
 				Team.removeSplitTeam(team); //Delete the fragment
-				gpsLocation.setTeamSplit(false); //Reactivationg gps
+				if (gpsLocation != null)
+				{
+					gpsLocation.setTeamSplit(false); //Reactivationg gps
+				}
 				
 				//Removing rogue arrows that might appear by movement of the teams or interventions while teams where split
 				RemoveArrow();
 				parentPin.RemoveArrow();
-				interventionPin.RemoveArrow();
+				if (interventionPin != null)
+				{
+					interventionPin.RemoveArrow();
+				}
 
 				mapSection.Update();
 			}
@@ -245,7 +251,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 				//Creating team as a duplicate of the initial team, name it using the number of the intervention it is assigned to
 				Team team2 = new Team(team);
 				team2.setName(team.getName() + splitIntervention.getInterventionNumber());
-				team2.setStatus("moving");
+				team2.setStatus("moving"); //REMOVE
 
 				//Find the duplicate teams' pin
 				Pin team2Pin = null;
