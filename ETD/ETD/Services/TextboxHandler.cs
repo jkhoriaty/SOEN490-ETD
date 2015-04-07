@@ -105,7 +105,7 @@ namespace ETD.Services
             {
                 hh.Text = "" + hour;
             }
-			if (DateTime.Now.Minute < 10)
+			if (minute < 10)
 			{
 				mm.Text = "0" + minute;
 			}

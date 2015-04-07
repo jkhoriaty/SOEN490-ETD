@@ -63,7 +63,10 @@ namespace ETD.CustomObjects.CustomUIObjects
 					{
 						if (teamPin.gpsLocation != null && !teamPin.getTeam().getStatus().ToString().Equals("intervening") && destinationArrowDictionnary.ContainsKey(teamPin.getTeam()) && GPSLocation.gpsConfigured == true && GPSServices.connectedToServer && teamPin.gpsLocation.PhoneOnline())
 						{
-							destinationArrowDictionnary[teamPin.getTeam()].ChangeEnd(interventionPin.getX(), Y);
+							if(destinationArrowDictionnary[teamPin.getTeam()] != null)
+							{
+								destinationArrowDictionnary[teamPin.getTeam()].ChangeEnd(interventionPin.getX(), Y);
+							}
 						}
 						else
 						{
@@ -74,7 +77,10 @@ namespace ETD.CustomObjects.CustomUIObjects
 					{
 						if (teamPin.gpsLocation != null && !teamPin.getTeam().getStatus().ToString().Equals("intervening") && destinationArrowDictionnary.ContainsKey(teamPin.getTeam()) && GPSLocation.gpsConfigured == true && GPSServices.connectedToServer && teamPin.gpsLocation.PhoneOnline())
 						{
-							destinationArrowDictionnary[teamPin.getTeam()].ChangeEnd(interventionPin.getX() - (TeamPin.size / 2), Y);
+							if (destinationArrowDictionnary[teamPin.getTeam()] != null)
+							{
+								destinationArrowDictionnary[teamPin.getTeam()].ChangeEnd(interventionPin.getX() - (TeamPin.size / 2), Y);
+							}
 						}
 						else
 						{
@@ -86,7 +92,10 @@ namespace ETD.CustomObjects.CustomUIObjects
 				{
 					if (teamPin.gpsLocation != null && !teamPin.getTeam().getStatus().ToString().Equals("intervening") && destinationArrowDictionnary.ContainsKey(teamPin.getTeam()) && GPSLocation.gpsConfigured == true && GPSServices.connectedToServer && teamPin.gpsLocation.PhoneOnline())
 					{
-						destinationArrowDictionnary[teamPin.getTeam()].ChangeEnd(interventionPin.getX() + (TeamPin.size / 2), Y);
+						if (destinationArrowDictionnary[teamPin.getTeam()] != null)
+						{
+							destinationArrowDictionnary[teamPin.getTeam()].ChangeEnd(interventionPin.getX() + (TeamPin.size / 2), Y);
+						}
 					}
 					else
 					{
@@ -101,11 +110,6 @@ namespace ETD.CustomObjects.CustomUIObjects
 		{
 			Canvas.SetLeft(this, interventionPin_X - (this.Width/2));
 			Canvas.SetTop(this, interventionPin_Y - (interventionPin.Height/2));
-		}
-
-		internal override void MovePin(double widthRatio, double heightRatio)
-		{
-			return; //Ignore moving the pin in all cases, it will be moved with the intervention
 		}
 
 		//Handling special cases when collision detection is made on an InterventionContainer

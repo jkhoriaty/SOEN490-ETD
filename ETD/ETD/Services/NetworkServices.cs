@@ -15,7 +15,7 @@ namespace ETD.Services
 
 	class NetworkServices
 	{
-		static String serverIP = "192.168.0.200";
+		static String serverIP = "24.202.7.147";
 		static int serverPort = 2000;
 
 		internal static String[] ExecuteRequest(String request)

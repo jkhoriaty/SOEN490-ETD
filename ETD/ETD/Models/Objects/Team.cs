@@ -34,7 +34,7 @@ namespace ETD.Models.Objects
         String name;
 		List<TeamMember> memberList = new List<TeamMember>();
         List<Equipment> equipmentList = new List<Equipment>();
-		Statuses status;
+		volatile Statuses status;
 
 		Trainings highestLevelOfTraining = Trainings.firstAid;
 		GPSLocation gpsLocation;
