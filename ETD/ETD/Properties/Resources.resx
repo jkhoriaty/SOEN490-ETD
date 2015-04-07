@@ -185,12 +185,8 @@
     <value>Normal</value>
     <comment>ABCForm</comment>
   </data>
-  <data name="ComboBoxItem_Camp" xml:space="preserve">
+  <data name="ComboBoxItem_AI_Camp" xml:space="preserve">
     <value>Camp</value>
-    <comment>MainWindow</comment>
-  </data>
-  <data name="ComboBoxItem_Circle" xml:space="preserve">
-    <value>Circle</value>
     <comment>MainWindow</comment>
   </data>
   <data name="ComboBoxItem_Circulation_ChestPain" xml:space="preserve">
@@ -377,7 +373,7 @@
     <value>General First Aid</value>
     <comment>TeamForm</comment>
   </data>
-  <data name="ComboBoxItem_Line" xml:space="preserve">
+  <data name="ComboBoxItem_AI_Line" xml:space="preserve">
     <value>Line</value>
     <comment>MainWindow</comment>
   </data>
@@ -389,7 +385,7 @@
     <value>Mounted Stretcher</value>
     <comment>MainWindow</comment>
   </data>
-  <data name="ComboBoxItem_Rectangle" xml:space="preserve">
+  <data name="ComboBoxItem_AI_Rectangle" xml:space="preserve">
     <value>Rectangle</value>
     <comment>MainWindow</comment>
   </data>
@@ -401,7 +397,7 @@
     <value>Sitting Cart</value>
     <comment>MainWindow</comment>
   </data>
-  <data name="ComboBoxItem_Stairs" xml:space="preserve">
+  <data name="ComboBoxItem_AI_Stairs" xml:space="preserve">
     <value>Stairs</value>
     <comment>MainWindow</comment>
   </data>
@@ -760,5 +756,149 @@
   <data name="TextBlock_VolunteerFollowUp" xml:space="preserve">
     <value>Volunteer Followup</value>
     <comment>AdditionalStatisticInfo</comment>
+  </data>
+  <data name="Button_AddSupervisorManager" xml:space="preserve">
+    <value>Add Supervisor/Operation Manager</value>
+    <comment>InitialSetup</comment>
+  </data>
+  <data name="Button_GPSSetup" xml:space="preserve">
+    <value>GPS Setup</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="Button_Okay" xml:space="preserve">
+    <value>OK</value>
+    <comment>Multi</comment>
+  </data>
+  <data name="Button_Shifts" xml:space="preserve">
+    <value>Shifts</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="Button_Statistics" xml:space="preserve">
+    <value>Statistics</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="ComboBoxItem_AI_Circle" xml:space="preserve">
+    <value>Circle</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="ComboBoxItem_AI_Ramp" xml:space="preserve">
+    <value>Ramp</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="ComboBoxItem_AI_Text" xml:space="preserve">
+    <value>Text</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="Label_averageDurationTime" xml:space="preserve">
+    <value>Average Duration Time:</value>
+    <comment>Statistics</comment>
+  </data>
+  <data name="Label_averageResponseTime" xml:space="preserve">
+    <value>Average Response Time:</value>
+    <comment>Statistics</comment>
+  </data>
+  <data name="Label_noCompletedInterventions" xml:space="preserve">
+    <value>Number Of Completed Interventions:</value>
+    <comment>Statistics</comment>
+  </data>
+  <data name="Label_noOngoingInterventions" xml:space="preserve">
+    <value>Number Of Ongoing Interventions:</value>
+    <comment>Statistics</comment>
+  </data>
+  <data name="Label_Statistics" xml:space="preserve">
+    <value>Statistics</value>
+    <comment>Statistics</comment>
+  </data>
+  <data name="MessageBox_ClosedSuccessfully_Message" xml:space="preserve">
+    <value>The application has been closed successfully.</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="MessageBox_ClosedSuccessfully_Title" xml:space="preserve">
+    <value>Close Application</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="MessageBox_EndOperation_Message" xml:space="preserve">
+    <value>Would you like to end the operation?</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="MessageBox_EndOperation_Title" xml:space="preserve">
+    <value>Close Application</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="MessageBox_FillAdditionalInformation_Message" xml:space="preserve">
+    <value>Would you like to fill out the additional information form?</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="MessageBox_FillAdditionalInformation_Title" xml:space="preserve">
+    <value>Close Application</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="MessageBox_GPS_ConnectionLost" xml:space="preserve">
+    <value>Connection lost. Aborting GPS setup.</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="MessageBox_GPS_ConnectionUnsuccessful" xml:space="preserve">
+    <value>Connection to server is unsuccessful, cannot enter setup.</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="MessageBox_GPS_NoAssociation" xml:space="preserve">
+    <value>No teams are associated with a GPS location. Please associate a team to a GPS location before entering the GPS setup.</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="MessageBox_GPS_NoMap" xml:space="preserve">
+    <value>Please load a map before entering setup.</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="MessageBox_GPS_NoPositions" xml:space="preserve">
+    <value>No positions from volunteer have been received yet.</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="MessageBox_GPS_NoTeams" xml:space="preserve">
+    <value>No teams are created. Please create teams in order to associate them with GPS locations.</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="MessageBox_InformationSaved" xml:space="preserve">
+    <value>The information have been saved!</value>
+    <comment>AdditionalStatisticInfo</comment>
+  </data>
+  <data name="MessageBox_Recovery_FailedRecovery" xml:space="preserve">
+    <value>Recovery attempt failed. Restarting operation.</value>
+    <comment>InitialSetup</comment>
+  </data>
+  <data name="MessageBox_Recovery_PartialRecovery" xml:space="preserve">
+    <value>Partial recovery made.</value>
+    <comment>InitialSetup</comment>
+  </data>
+  <data name="MessageBox_Recovery_RecoveryFound" xml:space="preserve">
+    <value>Recovery files found. Would you like to attempt to recover?</value>
+    <comment>InitialSetup</comment>
+  </data>
+  <data name="MessageBox_Recovery_RecoveryFound_Title" xml:space="preserve">
+    <value>Operation Recovery</value>
+    <comment>InitialSetup</comment>
+  </data>
+  <data name="TextBlock_Duration" xml:space="preserve">
+    <value>Duration (min):</value>
+    <comment>ShiftsSection</comment>
+  </data>
+  <data name="TextBlock_SectorsHours" xml:space="preserve">
+    <value>Sectors / Hours</value>
+    <comment>ShiftsSection</comment>
+  </data>
+  <data name="TextBox_EnterText" xml:space="preserve">
+    <value>Enter Text</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="MessageBox_EnteringSetup" xml:space="preserve">
+    <value>Entering setup, please refrain from creating new teams, equipements and interventions while in the setup phase (while the 'GPS Setup' button is red).\nClick on the 'GPS Setup' button to exit setup.</value>
+    <comment>GPSService</comment>
+  </data>
+  <data name="MessageBox_EnterName" xml:space="preserve">
+    <value>Please enter a user name.</value>
+    <comment>InitialSetup</comment>
+  </data>
+  <data name="MessageBox_GPS_ChooseTeam" xml:space="preserve">
+    <value>From the teams that remain on the map, select one of them that will be used for the setup by right-clicking on the team and selecting \"Use this team for setup\".</value>
+    <comment>GPSService</comment>
   </data>
 </root>

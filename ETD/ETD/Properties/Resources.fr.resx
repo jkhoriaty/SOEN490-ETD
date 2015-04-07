@@ -185,14 +185,6 @@
     <value>Normale</value>
     <comment>ABCForm</comment>
   </data>
-  <data name="ComboBoxItem_Camp" xml:space="preserve">
-    <value>Poste</value>
-    <comment>MainWindow</comment>
-  </data>
-  <data name="ComboBoxItem_Circle" xml:space="preserve">
-    <value>Cercle</value>
-    <comment>MainWindow</comment>
-  </data>
   <data name="ComboBoxItem_Circulation_ChestPain" xml:space="preserve">
     <value>Douleur/Inconfort Thoracique</value>
     <comment>ABCForm</comment>
@@ -377,10 +369,6 @@
     <value>Secouriste Général</value>
     <comment>TeamForm</comment>
   </data>
-  <data name="ComboBoxItem_Line" xml:space="preserve">
-    <value>Ligne</value>
-    <comment>MainWindow</comment>
-  </data>
   <data name="ComboBoxItem_Medicine" xml:space="preserve">
     <value>Medicine</value>
     <comment>TeamForm</comment>
@@ -389,20 +377,12 @@
     <value>Civière Montée</value>
     <comment>MainWindow</comment>
   </data>
-  <data name="ComboBoxItem_Rectangle" xml:space="preserve">
-    <value>Rectangle</value>
-    <comment>MainWindow</comment>
-  </data>
   <data name="ComboBoxItem_RegularMode" xml:space="preserve">
     <value>Mode régulier</value>
     <comment>MainWindow</comment>
   </data>
   <data name="ComboBoxItem_SittingCart" xml:space="preserve">
     <value>Cart Assis</value>
-    <comment>MainWindow</comment>
-  </data>
-  <data name="ComboBoxItem_Stairs" xml:space="preserve">
-    <value>Escalier</value>
     <comment>MainWindow</comment>
   </data>
   <data name="ComboBoxItem_TransportStretcher" xml:space="preserve">
@@ -760,5 +740,165 @@
   <data name="TextBlock_VolunteerFollowUp" xml:space="preserve">
     <value>Suivis Auprès Des Bénévoles</value>
     <comment>AdditionalStatisticInfo</comment>
+  </data>
+  <data name="Button_AddSupervisorManager" xml:space="preserve">
+    <value>Ajouter Superviseur / Gérant d'Opération</value>
+    <comment>InitialSetup</comment>
+  </data>
+  <data name="Button_GPSSetup" xml:space="preserve">
+    <value>Configuration GPS</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="Button_Okay" xml:space="preserve">
+    <value>OK</value>
+    <comment>Multi</comment>
+  </data>
+  <data name="Button_Shifts" xml:space="preserve">
+    <value>Quarts</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="Button_Statistics" xml:space="preserve">
+    <value>Statistiques</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="ComboBoxItem_AI_Camp" xml:space="preserve">
+    <value>Camp</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="ComboBoxItem_AI_Circle" xml:space="preserve">
+    <value>Cercle</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="ComboBoxItem_AI_Line" xml:space="preserve">
+    <value>Ligne</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="ComboBoxItem_AI_Ramp" xml:space="preserve">
+    <value>Rampe</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="ComboBoxItem_AI_Rectangle" xml:space="preserve">
+    <value>Rectangle</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="ComboBoxItem_AI_Stairs" xml:space="preserve">
+    <value>Escaliers</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="ComboBoxItem_AI_Text" xml:space="preserve">
+    <value>Texte</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="Label_averageDurationTime" xml:space="preserve">
+    <value>Durée Moyenne:</value>
+    <comment>Statistics</comment>
+  </data>
+  <data name="Label_averageResponseTime" xml:space="preserve">
+    <value>Temps de Réponse Moyen:</value>
+    <comment>Statistics</comment>
+  </data>
+  <data name="Label_noCompletedInterventions" xml:space="preserve">
+    <value>Nombre d'Interventions Completées:</value>
+    <comment>Statistics</comment>
+  </data>
+  <data name="Label_noOngoingInterventions" xml:space="preserve">
+    <value>Nombre d'Interventions En Cours:</value>
+    <comment>Statistics</comment>
+  </data>
+  <data name="Label_Statistics" xml:space="preserve">
+    <value>Statistiques</value>
+    <comment>Statistics</comment>
+  </data>
+  <data name="MessageBox_ClosedSuccessfully_Message" xml:space="preserve">
+    <value>L'application a été fermé avec succès</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="MessageBox_ClosedSuccessfully_Title" xml:space="preserve">
+    <value>Fermeture d'Application</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="MessageBox_EndOperation_Message" xml:space="preserve">
+    <value>Voulez-vous terminer l'opération?</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="MessageBox_EndOperation_Title" xml:space="preserve">
+    <value>Fermeture d'Application</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="MessageBox_FillAdditionalInformation_Message" xml:space="preserve">
+    <value>Voulez-vous remplir le formulaire d'informations additionelles?</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="MessageBox_FillAdditionalInformation_Title" xml:space="preserve">
+    <value>Fermeture d'Application</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="MessageBox_GPS_ConnectionLost" xml:space="preserve">
+    <value>Perte de connexion. Abandon de la configuration du GPS.</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="MessageBox_GPS_ConnectionUnsuccessful" xml:space="preserve">
+    <value>Connexion au serveur échoué. Impossible de commencer la configuration du GPS.</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="MessageBox_GPS_NoAssociation" xml:space="preserve">
+    <value>Aucune équipe n'est associée à une position GPS. S'il vous plaît associer une équipe à une position GPS avant de commencer la configuration du GPS.</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="MessageBox_GPS_NoMap" xml:space="preserve">
+    <value>S'il vous plaît choisir une carte avant de commencer la configuration du GPS.</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="MessageBox_GPS_NoPositions" xml:space="preserve">
+    <value>Aucunes positions n'ont pas encore été reçu d'un bénévole.</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="MessageBox_GPS_NoTeams" xml:space="preserve">
+    <value>Aucune équipe a été crée. S'il vous plaît créer de équipes à fin de les associer à une position GPS.</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="MessageBox_InformationSaved" xml:space="preserve">
+    <value>L'information a été sauvegardée!</value>
+    <comment>AdditionalStatisticInfo</comment>
+  </data>
+  <data name="MessageBox_Recovery_FailedRecovery" xml:space="preserve">
+    <value>Récupération échoué. Recommencement de l'opération.</value>
+    <comment>InitialSetup</comment>
+  </data>
+  <data name="MessageBox_Recovery_PartialRecovery" xml:space="preserve">
+    <value>Récupération partielle effectuer.</value>
+    <comment>InitialSetup</comment>
+  </data>
+  <data name="MessageBox_Recovery_RecoveryFound" xml:space="preserve">
+    <value>Fichier de récupération trouvé. Voulez-vous essayer de récupérer l'opération en cours?</value>
+    <comment>InitialSetup</comment>
+  </data>
+  <data name="MessageBox_Recovery_RecoveryFound_Title" xml:space="preserve">
+    <value>Récupération d'Opération</value>
+    <comment>InitialSetup</comment>
+  </data>
+  <data name="TextBlock_Duration" xml:space="preserve">
+    <value>Durée (min):</value>
+    <comment>ShiftsSection</comment>
+  </data>
+  <data name="TextBlock_SectorsHours" xml:space="preserve">
+    <value>Secteurs / Heures</value>
+    <comment>ShiftsSection</comment>
+  </data>
+  <data name="TextBox_EnterText" xml:space="preserve">
+    <value>Écrire texte</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="MessageBox_EnteringSetup" xml:space="preserve">
+    <value>Commencement de la configuration du GPS. S'il vous plaît s'abstenir de créer de nouvelles équipes, équipments ou intervention pendant la phase de configuration (alors que le bouton 'Configuration GPS' est rouge).\nCliquez sur le bouton 'Configuration GPS' pour quitter la phase de configuration.</value>
+    <comment>GPSService</comment>
+  </data>
+  <data name="MessageBox_EnterName" xml:space="preserve">
+    <value>S'il vous plaît écrire un nom d'utilisateur.</value>
+    <comment>InitialSetup</comment>
+  </data>
+  <data name="MessageBox_GPS_ChooseTeam" xml:space="preserve">
+    <value>Parmi les équipes qui restent sur la carte, sélectionnez l'une d'entre elles qui sera utilisée</value>
+    <comment>GPSService</comment>
   </data>
 </root>

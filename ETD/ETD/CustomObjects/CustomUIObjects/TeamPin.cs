@@ -44,7 +44,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 			menuItems[1].Header = ETD.Properties.Resources.MenuItem_TeamPin_Moving;
 
 			menuItems[2] = new MenuItem();
-			menuItems[2].Uid = "MenuItem_TeamPin_Intervening";menuItems[2].Uid = "MenuItem_TeamPin_Intervening";
+			menuItems[2].Uid = "MenuItem_TeamPin_Intervening";
 			menuItems[2].Header = ETD.Properties.Resources.MenuItem_TeamPin_Intervening;
 
 			menuItems[3] = new MenuItem();

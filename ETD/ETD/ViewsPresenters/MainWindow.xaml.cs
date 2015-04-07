@@ -66,18 +66,11 @@ namespace ETD.ViewsPresenters
 
 		public MainWindow()
 		{
-            //hook up DataChanged event to get notification to make culture-related changes in code
-            CultureResources.ResourceProvider.DataChanged += new EventHandler(ResourceProvider_DataChanged);
-
-            //initialise with default culture
-            Debug.WriteLine(string.Format("Set culture to default [{0}]:", Properties.Settings.Default.DefaultCulture));
-            CultureResources.ChangeCulture(Properties.Settings.Default.DefaultCulture.NativeName);
-
-			InitializeComponent();
+            InitializeComponent();
 
             //only attach SelectionChanged event here to avoid the culture being updated twice
+            ComboBox_Languages.SelectedItem = Properties.Settings.Default.DefaultCulture.NativeName;
             this.ComboBox_Languages.SelectionChanged += new System.Windows.Controls.SelectionChangedEventHandler(this.ComboBox_Languages_SelectionChanged);
-            ComboBox_Languages.SelectedItem = Properties.Settings.Default.DefaultCulture;
 
             FormPopup.RegisterMainWindow(this);//Register main window as the master window, used for displaying popups
             followupSection = new FollowUpSectionForm();
@@ -246,12 +239,12 @@ namespace ETD.ViewsPresenters
 					if (mi.Name.Equals("text"))
 					{
 						AdditionalIntoTextStackPanel.Visibility = Visibility.Visible;
-						mapModificationSection.CreateMapModificationPin("" + mi.Name);
+						mapModificationSection.CreateMapModificationPin(mi.Name);
 					}
 					else
 					{
 						AdditionalIntoTextStackPanel.Visibility = Visibility.Collapsed;
-						mapModificationSection.CreateMapModificationPin("" + mi.Name);
+						mapModificationSection.CreateMapModificationPin(mi.Name);
 					}
                 }
             }  
@@ -317,12 +310,12 @@ namespace ETD.ViewsPresenters
                 {
                     if (!Team.getTeamList().Any())
                     {
-                        MessageBox.Show("No teams are created. Please create teams in order to associate them with GPS locations.");
+                        MessageBox.Show(Properties.Resources.MessageBox_GPS_NoTeams);
                     }
 
                     else if (!GPSLocation.getDictionary().Any())
                     {
-                        MessageBox.Show("No positions from volunteer have been received yet.");
+                        MessageBox.Show(Properties.Resources.MessageBox_GPS_NoPositions);
                     }
                 }
             }
@@ -339,21 +332,21 @@ namespace ETD.ViewsPresenters
 			//Handling case when the application is not connected to the server
 			if(GPSServices.connectedToServer == false)
 			{
-				MessageBox.Show("Connection to server is unsuccessful, cannot enter setup.");
+				MessageBox.Show(Properties.Resources.MessageBox_GPS_ConnectionUnsuccessful);
 				return;
 			}
 
 			//Handling case when no maps were added
 			if(mapAdded == false)
 			{
-				MessageBox.Show("Please load a map before entering setup.");
+				MessageBox.Show(Properties.Resources.MessageBox_GPS_NoMap);
 				return;
 			}
 
 			//Handling case when no teams were created
 			if (Team.getTeamList().Count == 0)
 			{
-				MessageBox.Show("No teams are associated with a GPS location. Please associate a team to a GPS location before entering the GPS setup.");
+				MessageBox.Show(Properties.Resources.MessageBox_GPS_NoAssociation);
 				return;
 			}
 
@@ -379,7 +372,7 @@ namespace ETD.ViewsPresenters
 				}
 				else
 				{
-					MessageBox.Show("No teams are associated with a GPS location. Please associate a team to a GPS location before entering the GPS setup.");
+					MessageBox.Show(Properties.Resources.MessageBox_GPS_NoAssociation);
 				}
 			}
 			else
@@ -413,7 +406,7 @@ namespace ETD.ViewsPresenters
 
 				if(GPSServices.setupOngoing == true)
 				{
-					MessageBox.Show("Connection lost, setup exited.");
+					MessageBox.Show(Properties.Resources.MessageBox_GPS_ConnectionLost);
 
 					GPSServices.setupOngoing = false;
 					GPSSetup_Button.ClearValue(Button.BackgroundProperty);
@@ -480,12 +473,12 @@ namespace ETD.ViewsPresenters
 
             if (!forceClose)
             {
-                if (System.Windows.Forms.MessageBox.Show("Would you like to end the operation. Confirm?", "Close Application", System.Windows.Forms.MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
+                if (System.Windows.Forms.MessageBox.Show(Properties.Resources.MessageBox_EndOperation_Message, Properties.Resources.MessageBox_EndOperation_Title, System.Windows.Forms.MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
                 {
                     Serializer.Instance.CleanUp();
-                    if (System.Windows.Forms.MessageBox.Show("Would you like to fill out additional information. Confirm?", "Close Application", System.Windows.Forms.MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.No)
+                    if (System.Windows.Forms.MessageBox.Show(Properties.Resources.MessageBox_FillAdditionalInformation_Message, Properties.Resources.MessageBox_FillAdditionalInformation_Title, System.Windows.Forms.MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.No)
                     {
-                        System.Windows.Forms.MessageBox.Show("The application has been closed successfully.", "Closing Application", System.Windows.Forms.MessageBoxButtons.OK);
+                        System.Windows.Forms.MessageBox.Show(Properties.Resources.MessageBox_ClosedSuccessfully_Message, Properties.Resources.MessageBox_ClosedSuccessfully_Title, System.Windows.Forms.MessageBoxButtons.OK);
                     }
                     else
                     {

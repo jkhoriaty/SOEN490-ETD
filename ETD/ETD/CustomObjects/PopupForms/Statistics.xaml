@@ -3,6 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:properties="clr-namespace:ETD.Properties"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
 	Title="Statistics">
@@ -16,12 +17,12 @@
             <ColumnDefinition Width="Auto"></ColumnDefinition>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Label Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" FontWeight="Bold">Statistics</Label>
+        <Label x:Uid="Label_Statistics" Content="{Binding Path=Label_Statistics, Source={StaticResource Resources}}"  Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" FontWeight="Bold" />
         <StackPanel Name="LabelStackPanel" Grid.Row="1" Grid.Column="0">
-            <Label Name="Label_averageResponseTime" Content="Average Response Time:"></Label>
-            <Label Name="Label_averageDurationTime" Content="Average Duration Time:"></Label>
-            <Label Name="Label_noOngoingInterventions" Content="Number Of Ongoing Interventions:"></Label>
-            <Label Name="Label_noCompletedInterventions" Content="Number Of Completed Interventions:"></Label>
+            <Label Name="Label_averageResponseTime" Content="{Binding Path=Label_averageResponseTime, Source={StaticResource Resources}}"></Label>
+            <Label Name="Label_averageDurationTime" Content="{Binding Path=Label_averageDurationTime, Source={StaticResource Resources}}"></Label>
+            <Label Name="Label_noOngoingInterventions" Content="{Binding Path=Label_noOngoingInterventions, Source={StaticResource Resources}}"></Label>
+            <Label Name="Label_noCompletedInterventions" Content="{Binding Path=Label_noCompletedInterventions, Source={StaticResource Resources}}"></Label>
         </StackPanel>
         <StackPanel Name="InfoStackPanel" Grid.Row="1" Grid.Column="1">
             <Label Name="Label_avgResponseTime" Content="0"></Label>

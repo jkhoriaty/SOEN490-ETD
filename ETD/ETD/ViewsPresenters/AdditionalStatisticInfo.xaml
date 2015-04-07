@@ -1,6 +1,7 @@
 ﻿<Window x:Class="ETD.ViewsPresenters.AdditionalStatisticInfo"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:properties="clr-namespace:ETD.Properties"
         Closed="SavingInformation"
         Title="Additional Statistic Information" Height="550" Width="700">
     <Grid>

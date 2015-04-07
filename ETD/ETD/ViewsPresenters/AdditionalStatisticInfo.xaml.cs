@@ -38,7 +38,7 @@ namespace ETD.ViewsPresenters
 
             //pushing changes to the db file for extra information at the end of the operation
             StaticDBConnection.NonQueryDatabase("UPDATE [Operations] SET VolunteerFollowUp= '" + VolunteerFollowUpText + "', Finance= '" + FinanceText + "', Vehicle= '" + VehicleText + "', ParticularSituation= '" + ParticularSituationText + "', OrganizationFollowUp= '" + OrganizationFollowUpText + "', SupervisorFollowUp= '" + SupervisorFollowUpText + "' WHERE Operation_ID =" + id + ";");
-            MessageBox.Show("The information have been saved!");
+            MessageBox.Show(Properties.Resources.MessageBox_InformationSaved);
         }
     }
 }

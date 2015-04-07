@@ -105,6 +105,15 @@ namespace ETD.Properties {
         }
         
         /// <summary>
+        /// Looks up a localized string similar to 'Add Supervisor/Operation Manager'.
+        /// </summary>
+        public static string Button_AddSupervisorManager {
+            get {
+                return ResourceManager.GetString(ResourceNames.Button_AddSupervisorManager, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Looks up a localized string similar to 'Cancel'.
         /// </summary>
         public static string Button_Cancel {
@@ -141,6 +150,15 @@ namespace ETD.Properties {
         }
         
         /// <summary>
+        /// Looks up a localized string similar to 'GPS Setup'.
+        /// </summary>
+        public static string Button_GPSSetup {
+            get {
+                return ResourceManager.GetString(ResourceNames.Button_GPSSetup, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Looks up a localized string similar to 'Load Map'.
         /// </summary>
         public static string Button_LoadMap {
@@ -150,11 +168,38 @@ namespace ETD.Properties {
         }
         
         /// <summary>
+        /// Looks up a localized string similar to 'OK'.
+        /// </summary>
+        public static string Button_Okay {
+            get {
+                return ResourceManager.GetString(ResourceNames.Button_Okay, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Looks up a localized string similar to 'Remove Member'.
         /// </summary>
         public static string Button_RemoveMember {
             get {
                 return ResourceManager.GetString(ResourceNames.Button_RemoveMember, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Shifts'.
+        /// </summary>
+        public static string Button_Shifts {
+            get {
+                return ResourceManager.GetString(ResourceNames.Button_Shifts, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Statistics'.
+        /// </summary>
+        public static string Button_Statistics {
+            get {
+                return ResourceManager.GetString(ResourceNames.Button_Statistics, _resourceCulture);
             }
         }
         
@@ -173,6 +218,69 @@ namespace ETD.Properties {
         public static string CheckBox_Disoriented {
             get {
                 return ResourceManager.GetString(ResourceNames.CheckBox_Disoriented, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Camp'.
+        /// </summary>
+        public static string ComboBoxItem_AI_Camp {
+            get {
+                return ResourceManager.GetString(ResourceNames.ComboBoxItem_AI_Camp, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Circle'.
+        /// </summary>
+        public static string ComboBoxItem_AI_Circle {
+            get {
+                return ResourceManager.GetString(ResourceNames.ComboBoxItem_AI_Circle, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Line'.
+        /// </summary>
+        public static string ComboBoxItem_AI_Line {
+            get {
+                return ResourceManager.GetString(ResourceNames.ComboBoxItem_AI_Line, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Ramp'.
+        /// </summary>
+        public static string ComboBoxItem_AI_Ramp {
+            get {
+                return ResourceManager.GetString(ResourceNames.ComboBoxItem_AI_Ramp, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Rectangle'.
+        /// </summary>
+        public static string ComboBoxItem_AI_Rectangle {
+            get {
+                return ResourceManager.GetString(ResourceNames.ComboBoxItem_AI_Rectangle, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Stairs'.
+        /// </summary>
+        public static string ComboBoxItem_AI_Stairs {
+            get {
+                return ResourceManager.GetString(ResourceNames.ComboBoxItem_AI_Stairs, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Text'.
+        /// </summary>
+        public static string ComboBoxItem_AI_Text {
+            get {
+                return ResourceManager.GetString(ResourceNames.ComboBoxItem_AI_Text, _resourceCulture);
             }
         }
         
@@ -236,24 +344,6 @@ namespace ETD.Properties {
         public static string ComboBoxItem_Breathing_Normal {
             get {
                 return ResourceManager.GetString(ResourceNames.ComboBoxItem_Breathing_Normal, _resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        /// Looks up a localized string similar to 'Camp'.
-        /// </summary>
-        public static string ComboBoxItem_Camp {
-            get {
-                return ResourceManager.GetString(ResourceNames.ComboBoxItem_Camp, _resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        /// Looks up a localized string similar to 'Circle'.
-        /// </summary>
-        public static string ComboBoxItem_Circle {
-            get {
-                return ResourceManager.GetString(ResourceNames.ComboBoxItem_Circle, _resourceCulture);
             }
         }
         
@@ -672,15 +762,6 @@ namespace ETD.Properties {
         }
         
         /// <summary>
-        /// Looks up a localized string similar to 'Line'.
-        /// </summary>
-        public static string ComboBoxItem_Line {
-            get {
-                return ResourceManager.GetString(ResourceNames.ComboBoxItem_Line, _resourceCulture);
-            }
-        }
-        
-        /// <summary>
         /// Looks up a localized string similar to 'Medicine'.
         /// </summary>
         public static string ComboBoxItem_Medicine {
@@ -699,15 +780,6 @@ namespace ETD.Properties {
         }
         
         /// <summary>
-        /// Looks up a localized string similar to 'Rectangle'.
-        /// </summary>
-        public static string ComboBoxItem_Rectangle {
-            get {
-                return ResourceManager.GetString(ResourceNames.ComboBoxItem_Rectangle, _resourceCulture);
-            }
-        }
-        
-        /// <summary>
         /// Looks up a localized string similar to 'Regular Mode'.
         /// </summary>
         public static string ComboBoxItem_RegularMode {
@@ -722,15 +794,6 @@ namespace ETD.Properties {
         public static string ComboBoxItem_SittingCart {
             get {
                 return ResourceManager.GetString(ResourceNames.ComboBoxItem_SittingCart, _resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        /// Looks up a localized string similar to 'Stairs'.
-        /// </summary>
-        public static string ComboBoxItem_Stairs {
-            get {
-                return ResourceManager.GetString(ResourceNames.ComboBoxItem_Stairs, _resourceCulture);
             }
         }
         
@@ -785,6 +848,24 @@ namespace ETD.Properties {
         public static string Label_Ambulance {
             get {
                 return ResourceManager.GetString(ResourceNames.Label_Ambulance, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Average Duration Time:'.
+        /// </summary>
+        public static string Label_averageDurationTime {
+            get {
+                return ResourceManager.GetString(ResourceNames.Label_averageDurationTime, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Average Response Time:'.
+        /// </summary>
+        public static string Label_averageResponseTime {
+            get {
+                return ResourceManager.GetString(ResourceNames.Label_averageResponseTime, _resourceCulture);
             }
         }
         
@@ -870,6 +951,24 @@ namespace ETD.Properties {
         }
         
         /// <summary>
+        /// Looks up a localized string similar to 'Number Of Completed Interventions:'.
+        /// </summary>
+        public static string Label_noCompletedInterventions {
+            get {
+                return ResourceManager.GetString(ResourceNames.Label_noCompletedInterventions, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Number Of Ongoing Interventions:'.
+        /// </summary>
+        public static string Label_noOngoingInterventions {
+            get {
+                return ResourceManager.GetString(ResourceNames.Label_noOngoingInterventions, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Looks up a localized string similar to 'Operation Name'.
         /// </summary>
         public static string Label_OperationName {
@@ -929,6 +1028,15 @@ namespace ETD.Properties {
         public static string Label_ShiftStartTime {
             get {
                 return ResourceManager.GetString(ResourceNames.Label_ShiftStartTime, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Statistics'.
+        /// </summary>
+        public static string Label_Statistics {
+            get {
+                return ResourceManager.GetString(ResourceNames.Label_Statistics, _resourceCulture);
             }
         }
         
@@ -1019,6 +1127,150 @@ namespace ETD.Properties {
         public static string MenuItem_TeamPin_Unavailable {
             get {
                 return ResourceManager.GetString(ResourceNames.MenuItem_TeamPin_Unavailable, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'The application has been closed successfully.'.
+        /// </summary>
+        public static string MessageBox_ClosedSuccessfully_Message {
+            get {
+                return ResourceManager.GetString(ResourceNames.MessageBox_ClosedSuccessfully_Message, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Close Application'.
+        /// </summary>
+        public static string MessageBox_ClosedSuccessfully_Title {
+            get {
+                return ResourceManager.GetString(ResourceNames.MessageBox_ClosedSuccessfully_Title, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Would you like to end the operation?'.
+        /// </summary>
+        public static string MessageBox_EndOperation_Message {
+            get {
+                return ResourceManager.GetString(ResourceNames.MessageBox_EndOperation_Message, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Close Application'.
+        /// </summary>
+        public static string MessageBox_EndOperation_Title {
+            get {
+                return ResourceManager.GetString(ResourceNames.MessageBox_EndOperation_Title, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Entering setup, please refrain from creating new teams, equipements and interventions while in the setup phase (while the &apos;GPS Setup&apos; button is red).\nClick on the &apos;GPS Setup&apos; button to exit setup.'.
+        /// </summary>
+        public static string MessageBox_EnteringSetup {
+            get {
+                return ResourceManager.GetString(ResourceNames.MessageBox_EnteringSetup, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Please enter a user name.'.
+        /// </summary>
+        public static string MessageBox_EnterName {
+            get {
+                return ResourceManager.GetString(ResourceNames.MessageBox_EnterName, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Would you like to fill out the additional information form?'.
+        /// </summary>
+        public static string MessageBox_FillAdditionalInformation_Message {
+            get {
+                return ResourceManager.GetString(ResourceNames.MessageBox_FillAdditionalInformation_Message, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Close Application'.
+        /// </summary>
+        public static string MessageBox_FillAdditionalInformation_Title {
+            get {
+                return ResourceManager.GetString(ResourceNames.MessageBox_FillAdditionalInformation_Title, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'From the teams that remain on the map, select one of them that will be used for the setup by right-clicking on the team and selecting \&quot;Use this team for setup\&quot;.'.
+        /// </summary>
+        public static string MessageBox_GPS_ChooseTeam {
+            get {
+                return ResourceManager.GetString(ResourceNames.MessageBox_GPS_ChooseTeam, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Connection lost. Aborting GPS setup.'.
+        /// </summary>
+        public static string MessageBox_GPS_ConnectionLost {
+            get {
+                return ResourceManager.GetString(ResourceNames.MessageBox_GPS_ConnectionLost, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Connection to server is unsuccessful, cannot enter setup.'.
+        /// </summary>
+        public static string MessageBox_GPS_ConnectionUnsuccessful {
+            get {
+                return ResourceManager.GetString(ResourceNames.MessageBox_GPS_ConnectionUnsuccessful, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'No teams are associated with a GPS location. Please associate a team to a GPS location before entering the GPS setup.'.
+        /// </summary>
+        public static string MessageBox_GPS_NoAssociation {
+            get {
+                return ResourceManager.GetString(ResourceNames.MessageBox_GPS_NoAssociation, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Please load a map before entering setup.'.
+        /// </summary>
+        public static string MessageBox_GPS_NoMap {
+            get {
+                return ResourceManager.GetString(ResourceNames.MessageBox_GPS_NoMap, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'No positions from volunteer have been received yet.'.
+        /// </summary>
+        public static string MessageBox_GPS_NoPositions {
+            get {
+                return ResourceManager.GetString(ResourceNames.MessageBox_GPS_NoPositions, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'No teams are created. Please create teams in order to associate them with GPS locations.'.
+        /// </summary>
+        public static string MessageBox_GPS_NoTeams {
+            get {
+                return ResourceManager.GetString(ResourceNames.MessageBox_GPS_NoTeams, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'The information have been saved!'.
+        /// </summary>
+        public static string MessageBox_InformationSaved {
+            get {
+                return ResourceManager.GetString(ResourceNames.MessageBox_InformationSaved, _resourceCulture);
             }
         }
         
@@ -1176,6 +1428,42 @@ namespace ETD.Properties {
         }
         
         /// <summary>
+        /// Looks up a localized string similar to 'Recovery attempt failed. Restarting operation.'.
+        /// </summary>
+        public static string MessageBox_Recovery_FailedRecovery {
+            get {
+                return ResourceManager.GetString(ResourceNames.MessageBox_Recovery_FailedRecovery, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Partial recovery made.'.
+        /// </summary>
+        public static string MessageBox_Recovery_PartialRecovery {
+            get {
+                return ResourceManager.GetString(ResourceNames.MessageBox_Recovery_PartialRecovery, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Recovery files found. Would you like to attempt to recover?'.
+        /// </summary>
+        public static string MessageBox_Recovery_RecoveryFound {
+            get {
+                return ResourceManager.GetString(ResourceNames.MessageBox_Recovery_RecoveryFound, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Looks up a localized string similar to 'Operation Recovery'.
+        /// </summary>
+        public static string MessageBox_Recovery_RecoveryFound_Title {
+            get {
+                return ResourceManager.GetString(ResourceNames.MessageBox_Recovery_RecoveryFound_Title, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Looks up a localized string similar to 'ABC'.
         /// </summary>
         public static string TabItem_ABC {
@@ -1311,6 +1599,15 @@ namespace ETD.Properties {
         }
         
         /// <summary>
+        /// Looks up a localized string similar to 'Duration (min):'.
+        /// </summary>
+        public static string TextBlock_Duration {
+            get {
+                return ResourceManager.GetString(ResourceNames.TextBlock_Duration, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Looks up a localized string similar to 'Finance and Meals'.
         /// </summary>
         public static string TextBlock_Finance {
@@ -1419,6 +1716,15 @@ namespace ETD.Properties {
         }
         
         /// <summary>
+        /// Looks up a localized string similar to 'Sectors / Hours'.
+        /// </summary>
+        public static string TextBlock_SectorsHours {
+            get {
+                return ResourceManager.GetString(ResourceNames.TextBlock_SectorsHours, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Looks up a localized string similar to 'Supervisor/Responsible Invidual Followup'.
         /// </summary>
         public static string TextBlock_SupervisorFollowUp {
@@ -1500,6 +1806,15 @@ namespace ETD.Properties {
         }
         
         /// <summary>
+        /// Looks up a localized string similar to 'Enter Text'.
+        /// </summary>
+        public static string TextBox_EnterText {
+            get {
+                return ResourceManager.GetString(ResourceNames.TextBox_EnterText, _resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Looks up a localized string similar to 'Location'.
         /// </summary>
         public static string TextBox_Location {
@@ -1551,6 +1866,11 @@ namespace ETD.Properties {
             public const string Button_AddMember = "Button_AddMember";
             
             /// <summary>
+            /// Stores the resource name 'Button_AddSupervisorManager'.
+            /// </summary>
+            public const string Button_AddSupervisorManager = "Button_AddSupervisorManager";
+            
+            /// <summary>
             /// Stores the resource name 'Button_Cancel'.
             /// </summary>
             public const string Button_Cancel = "Button_Cancel";
@@ -1571,14 +1891,34 @@ namespace ETD.Properties {
             public const string Button_GPSLocations = "Button_GPSLocations";
             
             /// <summary>
+            /// Stores the resource name 'Button_GPSSetup'.
+            /// </summary>
+            public const string Button_GPSSetup = "Button_GPSSetup";
+            
+            /// <summary>
             /// Stores the resource name 'Button_LoadMap'.
             /// </summary>
             public const string Button_LoadMap = "Button_LoadMap";
             
             /// <summary>
+            /// Stores the resource name 'Button_Okay'.
+            /// </summary>
+            public const string Button_Okay = "Button_Okay";
+            
+            /// <summary>
             /// Stores the resource name 'Button_RemoveMember'.
             /// </summary>
             public const string Button_RemoveMember = "Button_RemoveMember";
+            
+            /// <summary>
+            /// Stores the resource name 'Button_Shifts'.
+            /// </summary>
+            public const string Button_Shifts = "Button_Shifts";
+            
+            /// <summary>
+            /// Stores the resource name 'Button_Statistics'.
+            /// </summary>
+            public const string Button_Statistics = "Button_Statistics";
             
             /// <summary>
             /// Stores the resource name 'Button_Submit'.
@@ -1589,6 +1929,41 @@ namespace ETD.Properties {
             /// Stores the resource name 'CheckBox_Disoriented'.
             /// </summary>
             public const string CheckBox_Disoriented = "CheckBox_Disoriented";
+            
+            /// <summary>
+            /// Stores the resource name 'ComboBoxItem_AI_Camp'.
+            /// </summary>
+            public const string ComboBoxItem_AI_Camp = "ComboBoxItem_AI_Camp";
+            
+            /// <summary>
+            /// Stores the resource name 'ComboBoxItem_AI_Circle'.
+            /// </summary>
+            public const string ComboBoxItem_AI_Circle = "ComboBoxItem_AI_Circle";
+            
+            /// <summary>
+            /// Stores the resource name 'ComboBoxItem_AI_Line'.
+            /// </summary>
+            public const string ComboBoxItem_AI_Line = "ComboBoxItem_AI_Line";
+            
+            /// <summary>
+            /// Stores the resource name 'ComboBoxItem_AI_Ramp'.
+            /// </summary>
+            public const string ComboBoxItem_AI_Ramp = "ComboBoxItem_AI_Ramp";
+            
+            /// <summary>
+            /// Stores the resource name 'ComboBoxItem_AI_Rectangle'.
+            /// </summary>
+            public const string ComboBoxItem_AI_Rectangle = "ComboBoxItem_AI_Rectangle";
+            
+            /// <summary>
+            /// Stores the resource name 'ComboBoxItem_AI_Stairs'.
+            /// </summary>
+            public const string ComboBoxItem_AI_Stairs = "ComboBoxItem_AI_Stairs";
+            
+            /// <summary>
+            /// Stores the resource name 'ComboBoxItem_AI_Text'.
+            /// </summary>
+            public const string ComboBoxItem_AI_Text = "ComboBoxItem_AI_Text";
             
             /// <summary>
             /// Stores the resource name 'ComboBoxItem_Airways_Clear'.
@@ -1624,16 +1999,6 @@ namespace ETD.Properties {
             /// Stores the resource name 'ComboBoxItem_Breathing_Normal'.
             /// </summary>
             public const string ComboBoxItem_Breathing_Normal = "ComboBoxItem_Breathing_Normal";
-            
-            /// <summary>
-            /// Stores the resource name 'ComboBoxItem_Camp'.
-            /// </summary>
-            public const string ComboBoxItem_Camp = "ComboBoxItem_Camp";
-            
-            /// <summary>
-            /// Stores the resource name 'ComboBoxItem_Circle'.
-            /// </summary>
-            public const string ComboBoxItem_Circle = "ComboBoxItem_Circle";
             
             /// <summary>
             /// Stores the resource name 'ComboBoxItem_Circulation_ChestPain'.
@@ -1866,11 +2231,6 @@ namespace ETD.Properties {
             public const string ComboBoxItem_GeneralFA = "ComboBoxItem_GeneralFA";
             
             /// <summary>
-            /// Stores the resource name 'ComboBoxItem_Line'.
-            /// </summary>
-            public const string ComboBoxItem_Line = "ComboBoxItem_Line";
-            
-            /// <summary>
             /// Stores the resource name 'ComboBoxItem_Medicine'.
             /// </summary>
             public const string ComboBoxItem_Medicine = "ComboBoxItem_Medicine";
@@ -1881,11 +2241,6 @@ namespace ETD.Properties {
             public const string ComboBoxItem_MountedStretcher = "ComboBoxItem_MountedStretcher";
             
             /// <summary>
-            /// Stores the resource name 'ComboBoxItem_Rectangle'.
-            /// </summary>
-            public const string ComboBoxItem_Rectangle = "ComboBoxItem_Rectangle";
-            
-            /// <summary>
             /// Stores the resource name 'ComboBoxItem_RegularMode'.
             /// </summary>
             public const string ComboBoxItem_RegularMode = "ComboBoxItem_RegularMode";
@@ -1894,11 +2249,6 @@ namespace ETD.Properties {
             /// Stores the resource name 'ComboBoxItem_SittingCart'.
             /// </summary>
             public const string ComboBoxItem_SittingCart = "ComboBoxItem_SittingCart";
-            
-            /// <summary>
-            /// Stores the resource name 'ComboBoxItem_Stairs'.
-            /// </summary>
-            public const string ComboBoxItem_Stairs = "ComboBoxItem_Stairs";
             
             /// <summary>
             /// Stores the resource name 'ComboBoxItem_TransportStretcher'.
@@ -1929,6 +2279,16 @@ namespace ETD.Properties {
             /// Stores the resource name 'Label_Ambulance'.
             /// </summary>
             public const string Label_Ambulance = "Label_Ambulance";
+            
+            /// <summary>
+            /// Stores the resource name 'Label_averageDurationTime'.
+            /// </summary>
+            public const string Label_averageDurationTime = "Label_averageDurationTime";
+            
+            /// <summary>
+            /// Stores the resource name 'Label_averageResponseTime'.
+            /// </summary>
+            public const string Label_averageResponseTime = "Label_averageResponseTime";
             
             /// <summary>
             /// Stores the resource name 'Label_Call'.
@@ -1976,6 +2336,16 @@ namespace ETD.Properties {
             public const string Label_Interventions = "Label_Interventions";
             
             /// <summary>
+            /// Stores the resource name 'Label_noCompletedInterventions'.
+            /// </summary>
+            public const string Label_noCompletedInterventions = "Label_noCompletedInterventions";
+            
+            /// <summary>
+            /// Stores the resource name 'Label_noOngoingInterventions'.
+            /// </summary>
+            public const string Label_noOngoingInterventions = "Label_noOngoingInterventions";
+            
+            /// <summary>
             /// Stores the resource name 'Label_OperationName'.
             /// </summary>
             public const string Label_OperationName = "Label_OperationName";
@@ -2009,6 +2379,11 @@ namespace ETD.Properties {
             /// Stores the resource name 'Label_ShiftStartTime'.
             /// </summary>
             public const string Label_ShiftStartTime = "Label_ShiftStartTime";
+            
+            /// <summary>
+            /// Stores the resource name 'Label_Statistics'.
+            /// </summary>
+            public const string Label_Statistics = "Label_Statistics";
             
             /// <summary>
             /// Stores the resource name 'Label_Teams'.
@@ -2059,6 +2434,86 @@ namespace ETD.Properties {
             /// Stores the resource name 'MenuItem_TeamPin_Unavailable'.
             /// </summary>
             public const string MenuItem_TeamPin_Unavailable = "MenuItem_TeamPin_Unavailable";
+            
+            /// <summary>
+            /// Stores the resource name 'MessageBox_ClosedSuccessfully_Message'.
+            /// </summary>
+            public const string MessageBox_ClosedSuccessfully_Message = "MessageBox_ClosedSuccessfully_Message";
+            
+            /// <summary>
+            /// Stores the resource name 'MessageBox_ClosedSuccessfully_Title'.
+            /// </summary>
+            public const string MessageBox_ClosedSuccessfully_Title = "MessageBox_ClosedSuccessfully_Title";
+            
+            /// <summary>
+            /// Stores the resource name 'MessageBox_EndOperation_Message'.
+            /// </summary>
+            public const string MessageBox_EndOperation_Message = "MessageBox_EndOperation_Message";
+            
+            /// <summary>
+            /// Stores the resource name 'MessageBox_EndOperation_Title'.
+            /// </summary>
+            public const string MessageBox_EndOperation_Title = "MessageBox_EndOperation_Title";
+            
+            /// <summary>
+            /// Stores the resource name 'MessageBox_EnteringSetup'.
+            /// </summary>
+            public const string MessageBox_EnteringSetup = "MessageBox_EnteringSetup";
+            
+            /// <summary>
+            /// Stores the resource name 'MessageBox_EnterName'.
+            /// </summary>
+            public const string MessageBox_EnterName = "MessageBox_EnterName";
+            
+            /// <summary>
+            /// Stores the resource name 'MessageBox_FillAdditionalInformation_Message'.
+            /// </summary>
+            public const string MessageBox_FillAdditionalInformation_Message = "MessageBox_FillAdditionalInformation_Message";
+            
+            /// <summary>
+            /// Stores the resource name 'MessageBox_FillAdditionalInformation_Title'.
+            /// </summary>
+            public const string MessageBox_FillAdditionalInformation_Title = "MessageBox_FillAdditionalInformation_Title";
+            
+            /// <summary>
+            /// Stores the resource name 'MessageBox_GPS_ChooseTeam'.
+            /// </summary>
+            public const string MessageBox_GPS_ChooseTeam = "MessageBox_GPS_ChooseTeam";
+            
+            /// <summary>
+            /// Stores the resource name 'MessageBox_GPS_ConnectionLost'.
+            /// </summary>
+            public const string MessageBox_GPS_ConnectionLost = "MessageBox_GPS_ConnectionLost";
+            
+            /// <summary>
+            /// Stores the resource name 'MessageBox_GPS_ConnectionUnsuccessful'.
+            /// </summary>
+            public const string MessageBox_GPS_ConnectionUnsuccessful = "MessageBox_GPS_ConnectionUnsuccessful";
+            
+            /// <summary>
+            /// Stores the resource name 'MessageBox_GPS_NoAssociation'.
+            /// </summary>
+            public const string MessageBox_GPS_NoAssociation = "MessageBox_GPS_NoAssociation";
+            
+            /// <summary>
+            /// Stores the resource name 'MessageBox_GPS_NoMap'.
+            /// </summary>
+            public const string MessageBox_GPS_NoMap = "MessageBox_GPS_NoMap";
+            
+            /// <summary>
+            /// Stores the resource name 'MessageBox_GPS_NoPositions'.
+            /// </summary>
+            public const string MessageBox_GPS_NoPositions = "MessageBox_GPS_NoPositions";
+            
+            /// <summary>
+            /// Stores the resource name 'MessageBox_GPS_NoTeams'.
+            /// </summary>
+            public const string MessageBox_GPS_NoTeams = "MessageBox_GPS_NoTeams";
+            
+            /// <summary>
+            /// Stores the resource name 'MessageBox_InformationSaved'.
+            /// </summary>
+            public const string MessageBox_InformationSaved = "MessageBox_InformationSaved";
             
             /// <summary>
             /// Stores the resource name 'MessageBox_Notification_DeadlineChanged'.
@@ -2146,6 +2601,26 @@ namespace ETD.Properties {
             public const string MessageBox_Notification_Warning = "MessageBox_Notification_Warning";
             
             /// <summary>
+            /// Stores the resource name 'MessageBox_Recovery_FailedRecovery'.
+            /// </summary>
+            public const string MessageBox_Recovery_FailedRecovery = "MessageBox_Recovery_FailedRecovery";
+            
+            /// <summary>
+            /// Stores the resource name 'MessageBox_Recovery_PartialRecovery'.
+            /// </summary>
+            public const string MessageBox_Recovery_PartialRecovery = "MessageBox_Recovery_PartialRecovery";
+            
+            /// <summary>
+            /// Stores the resource name 'MessageBox_Recovery_RecoveryFound'.
+            /// </summary>
+            public const string MessageBox_Recovery_RecoveryFound = "MessageBox_Recovery_RecoveryFound";
+            
+            /// <summary>
+            /// Stores the resource name 'MessageBox_Recovery_RecoveryFound_Title'.
+            /// </summary>
+            public const string MessageBox_Recovery_RecoveryFound_Title = "MessageBox_Recovery_RecoveryFound_Title";
+            
+            /// <summary>
             /// Stores the resource name 'TabItem_ABC'.
             /// </summary>
             public const string TabItem_ABC = "TabItem_ABC";
@@ -2221,6 +2696,11 @@ namespace ETD.Properties {
             public const string TextBlock_Deadlines = "TextBlock_Deadlines";
             
             /// <summary>
+            /// Stores the resource name 'TextBlock_Duration'.
+            /// </summary>
+            public const string TextBlock_Duration = "TextBlock_Duration";
+            
+            /// <summary>
             /// Stores the resource name 'TextBlock_Finance'.
             /// </summary>
             public const string TextBlock_Finance = "TextBlock_Finance";
@@ -2281,6 +2761,11 @@ namespace ETD.Properties {
             public const string TextBlock_Resources = "TextBlock_Resources";
             
             /// <summary>
+            /// Stores the resource name 'TextBlock_SectorsHours'.
+            /// </summary>
+            public const string TextBlock_SectorsHours = "TextBlock_SectorsHours";
+            
+            /// <summary>
             /// Stores the resource name 'TextBlock_SupervisorFollowUp'.
             /// </summary>
             public const string TextBlock_SupervisorFollowUp = "TextBlock_SupervisorFollowUp";
@@ -2324,6 +2809,11 @@ namespace ETD.Properties {
             /// Stores the resource name 'TextBox_CallerName'.
             /// </summary>
             public const string TextBox_CallerName = "TextBox_CallerName";
+            
+            /// <summary>
+            /// Stores the resource name 'TextBox_EnterText'.
+            /// </summary>
+            public const string TextBox_EnterText = "TextBox_EnterText";
             
             /// <summary>
             /// Stores the resource name 'TextBox_Location'.

@@ -185,12 +185,8 @@
     <value>Normal</value>
     <comment>ABCForm</comment>
   </data>
-  <data name="ComboBoxItem_Camp" xml:space="preserve">
+  <data name="ComboBoxItem_AI_Camp" xml:space="preserve">
     <value>Camp</value>
-    <comment>MainWindow</comment>
-  </data>
-  <data name="ComboBoxItem_Circle" xml:space="preserve">
-    <value>Circle</value>
     <comment>MainWindow</comment>
   </data>
   <data name="ComboBoxItem_Circulation_ChestPain" xml:space="preserve">
@@ -377,7 +373,7 @@
     <value>General First Aid</value>
     <comment>TeamForm</comment>
   </data>
-  <data name="ComboBoxItem_Line" xml:space="preserve">
+  <data name="ComboBoxItem_AI_Line" xml:space="preserve">
     <value>Line</value>
     <comment>MainWindow</comment>
   </data>
@@ -389,7 +385,7 @@
     <value>Mounted Stretcher</value>
     <comment>MainWindow</comment>
   </data>
-  <data name="ComboBoxItem_Rectangle" xml:space="preserve">
+  <data name="ComboBoxItem_AI_Rectangle" xml:space="preserve">
     <value>Rectangle</value>
     <comment>MainWindow</comment>
   </data>
@@ -401,7 +397,7 @@
     <value>Sitting Cart</value>
     <comment>MainWindow</comment>
   </data>
-  <data name="ComboBoxItem_Stairs" xml:space="preserve">
+  <data name="ComboBoxItem_AI_Stairs" xml:space="preserve">
     <value>Stairs</value>
     <comment>MainWindow</comment>
   </data>
@@ -760,5 +756,57 @@
   <data name="TextBlock_VolunteerFollowUp" xml:space="preserve">
     <value>Volunteer Followup</value>
     <comment>AdditionalStatisticInfo</comment>
+  </data>
+  <data name="Button_GPSSetup" xml:space="preserve">
+    <value>GPS Setup</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="Button_Shifts" xml:space="preserve">
+    <value>Shifts</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="Button_Statistics" xml:space="preserve">
+    <value>Statistics</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="ComboBoxItem_AI_Circle" xml:space="preserve">
+    <value>Circle</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="ComboBoxItem_AI_Ramp" xml:space="preserve">
+    <value>Ramp</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="ComboBoxItem_AI_Text" xml:space="preserve">
+    <value>Text</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="MessageBox_ClosedSuccessfully_Message" xml:space="preserve">
+    <value>The application has been closed successfully.</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="MessageBox_ClosedSuccessfully_Title" xml:space="preserve">
+    <value>Close Application</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="MessageBox_EndOperation_Message" xml:space="preserve">
+    <value>Would you like to end the operation?</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="MessageBox_EndOperation_Title" xml:space="preserve">
+    <value>Close Application</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="MessageBox_FillAdditionalInformation_Message" xml:space="preserve">
+    <value>Would you like to fill out the additional information form?</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="MessageBox_FilleAdditionalInformation_Title" xml:space="preserve">
+    <value>Close Application</value>
+    <comment>MainWindow</comment>
+  </data>
+  <data name="TextBox_EnterText" xml:space="preserve">
+    <value>Enter Text</value>
+    <comment>MainWindow</comment>
   </data>
 </root>

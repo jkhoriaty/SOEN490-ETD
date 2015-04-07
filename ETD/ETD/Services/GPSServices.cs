@@ -136,8 +136,7 @@ namespace ETD.Services
 		{
 			setupOngoing = true;
 
-			MessageBox.Show("Entering setup, please refrain from creating new teams, equipements and interventions while in the setup phase (while the GPS setup button is red).\n"
-				+ "Click on the GPS setup button to exit setup, if normal operation of the software is required.");
+			MessageBox.Show(Properties.Resources.MessageBox_EnteringSetup);
 
 			mapSection = mapSectionInstance;
 

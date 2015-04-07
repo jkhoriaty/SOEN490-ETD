@@ -15,6 +15,7 @@ using System.Text.RegularExpressions;
 using ETD.Services;
 using ETD.Services.Database;
 using System.Data.SQLite;
+using ETD.Properties;
 
 namespace ETD.ViewsPresenters
 {
@@ -36,23 +37,24 @@ namespace ETD.ViewsPresenters
         public InitialSetup()
         {
             InitializeComponent();
+            CultureResources.ChangeCulture(Properties.Settings.Default.DefaultCulture.NativeName);
             
             //Check and Attempt to recover
             Serializer serializer = Serializer.Instance;
             if(serializer.Recoverable())
             {
-                if (MessageBox.Show("Recovery files found. Would you like to attempt to recover?", "Operation Recovery", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                if (MessageBox.Show(Properties.Resources.MessageBox_Recovery_RecoveryFound, Properties.Resources.MessageBox_Recovery_RecoveryFound_Title, MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
                     MainWindow mw = new MainWindow();
                     mw.Show();
                     switch(serializer.PerformRecovery())
                     {
-                        case RecoveryResults.Partial: MessageBox.Show("Partial recovery made.");
+                        case RecoveryResults.Partial: MessageBox.Show(Properties.Resources.MessageBox_Recovery_PartialRecovery);
                             goto case RecoveryResults.Success;
                         case RecoveryResults.Success: serializer.StartBackUp();
                             this.Close();
                             break;
-                        case RecoveryResults.Failure: MessageBox.Show("Recovery attempt failed. Restarting operation.");
+                        case RecoveryResults.Failure: MessageBox.Show(Properties.Resources.MessageBox_Recovery_FailedRecovery);
                             mw.ForceClose();
                             serializer.CleanUp();
                             break;
@@ -280,7 +282,7 @@ namespace ETD.ViewsPresenters
 		{
 			if(Textbox_DispatcherName.Text == "")
 			{
-				MessageBox.Show("Please enter a user name.");
+				MessageBox.Show(Properties.Resources.MessageBox_EnterName);
 			}
 			else
 			{
@@ -310,7 +312,7 @@ namespace ETD.ViewsPresenters
 		{
 			if (Textbox_SupervisorName.Text == "")
 			{
-				MessageBox.Show("Please enter a user name.");
+				MessageBox.Show(Properties.Resources.MessageBox_EnterName);
 			}
 			else
 			{

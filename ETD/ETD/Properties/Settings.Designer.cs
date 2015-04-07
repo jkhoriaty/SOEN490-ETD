@@ -29,7 +29,7 @@ namespace ETD.Properties
 
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("English")]
+        [global::System.Configuration.DefaultSettingValueAttribute("fr")]
         public global::System.Globalization.CultureInfo DefaultCulture
         {
             get
