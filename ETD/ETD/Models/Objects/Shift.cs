@@ -36,11 +36,13 @@ namespace ETD.Models.Objects
             return shiftsList;
         }
 
+		//Returns the team's name
         public String getTeamName()
         {
             return team;
         }
 
+		//Returns the sector's name
         public String getSector()
         {
             return sector;
@@ -52,6 +54,12 @@ namespace ETD.Models.Objects
             return shiftInfo;
         }
 
+		//Returns the shift's duration
+		public int getShiftDuration()
+		{
+			return shiftDuration;
+		}
+
         //Mutators
 
         //Sets the shift's information
@@ -60,9 +68,6 @@ namespace ETD.Models.Objects
             this.shiftInfo[position] = shiftInfo;
         }
 
-		public int getShiftDuration()
-		{
-			return shiftDuration;
-		}
+	
     }
 }

@@ -20,7 +20,7 @@ namespace ETD.ViewsPresenters.MapSection
 	/// <summary>
 	/// Interaction logic for AdditionnalInfoPage.xaml
 	/// </summary>
-	public partial class AdditionalInfoPage : Page, Observer
+	public partial class AdditionalInfoPage : Page
 	{
 		MainWindow mainWindow;
 		ImageBrush imgbrush;//Used for loading the map
@@ -31,7 +31,7 @@ namespace ETD.ViewsPresenters.MapSection
 		private System.Windows.Point NewPt1, NewPt2;
 		private List<Line> Lines = new List<Line>();
 		private Line newline;
-		private bool ContainsLine = false;
+		private bool ContainsLine = false; 
 		private static object slock = new object();
 
 		//Drawing shapes variables
@@ -40,15 +40,14 @@ namespace ETD.ViewsPresenters.MapSection
 		private int _startX, _startY;
 		private String mapModName;
 		private String textInput = "Default";
+		private System.Drawing.SizeF textSize;
 
 		//Creates a new Additional map information page
 		public AdditionalInfoPage(MainWindow mainWindow)
 		{
 			InitializeComponent();
 			this.mainWindow = mainWindow;
-
 			AdditionalMap.Focus();
-			Observable.RegisterClassObserver(typeof(MapMod), this);
 		}
 
 		//Loading the map 
@@ -205,40 +204,10 @@ namespace ETD.ViewsPresenters.MapSection
 			}
 		}
 
-
-		internal void DeleteLine(object sender, MouseEventArgs e)
-		{
-			bool isEmpty = !objectList.Any();//Checks if the list of map modification object is empty
-
-			//When the mouse is moving and the escape key is pressed, remove the most recently added map modification item
-			if (Keyboard.IsKeyDown(Key.Escape) && !isEmpty)
-			{
-				try
-				{
-					int objectIndex = objectList.Count - 1;
-					AdditionalMap.Children.RemoveAt(objectList.Count);
-					//    MessageBox.Show("");
-					if (objectIndex == 0 && objectList[0] != null)
-					{
-						objectList.RemoveAt(0);
-					}
-					else
-					{
-						objectList.RemoveAt(objectIndex);
-					}
-
-				}
-				catch (Exception ex)
-				{
-
-				}
-			}
-		}
-
 		//Fix asynchronous error when deleting shapes and lines
 		void ThreadProc()
 		{
-			MessageBox.Show("Deleting");
+			MessageBox.Show("Deleting..");
 		}
 
 		//When the mouse is moving, get its position to create the selected map modification item
@@ -329,6 +298,7 @@ namespace ETD.ViewsPresenters.MapSection
 			MapMod mapMod = new MapMod("line");
 			MapModPin lineMapModPin = new MapModPin(mapMod, this, this.ActualWidth, this.ActualHeight);
 			this.Cursor = Cursors.Pen;
+			//Only one map modification pin will be created. It will contain all shapes and lines drawn on the map. Thus it only needs to be created once.
 			if (!ContainsLine)
 			{
 				AdditionalMap.Children.Add(lineMapModPin);
@@ -343,7 +313,6 @@ namespace ETD.ViewsPresenters.MapSection
 			{
 				bitmap.Save(memory, System.Drawing.Imaging.ImageFormat.Png);
 				memory.Position = 0;
-
 				var bitmapImage = new BitmapImage();
 				bitmapImage.BeginInit();
 				bitmapImage.StreamSource = memory;
@@ -354,15 +323,14 @@ namespace ETD.ViewsPresenters.MapSection
 			}
 		}
 
-		System.Drawing.SizeF textSize;
 		//Draw text on the map
 		private System.Drawing.Bitmap DrawText(String text, System.Drawing.Font font, System.Drawing.Color textColor, System.Drawing.Color backColor)
 		{
-			//Create a dummy bitmap just to get a graphics object
+			//Create a dummy bitmap to get a graphics object
 			System.Drawing.Bitmap img = new System.Drawing.Bitmap(1, 1);
 			System.Drawing.Graphics drawing = System.Drawing.Graphics.FromImage(img);
 
-			//measure the string to see how big the image needs to be
+			//Measure the string to see how big the image needs to be
 			 textSize = drawing.MeasureString(text, font);
 
 			//free up the dummy image and old graphics object
@@ -384,30 +352,5 @@ namespace ETD.ViewsPresenters.MapSection
 
 			return img;
 		}
-
-
-		//Notifies its observables
-		public void Update()
-		{
-			/*    
-			//Creating all map line modification pins and adding the map to their previous or a new position 
-			foreach (MapMod mapLineModification in MapMod.getMapModList())
-			{
-                
-					MapModPin mapLinePin = new MapModPin(mapLineModification, this, this.ActualWidth, this.ActualHeight);
-					AdditionalMap.Children.Add(mapLinePin);
-
-					//Setting the pin to it's previous position, if it exists, or to the top-left corner
-					double[] previousPinPosition = Pin.getPreviousPinPosition(mapLineModification);
-					if (previousPinPosition == null)
-					{
-						previousPinPosition = new double[] { this.ActualWidth - (mapLinePin.Width / 2), (mapLinePin.Height / 2) }; //Top-right corner
-					}
-					mapLinePin.setPinPosition(previousPinPosition[0], previousPinPosition[1]);
- 
-			}  
-			*/
-		}
-
 	}
 }

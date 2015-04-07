@@ -71,70 +71,79 @@ namespace ETD.Models.Objects
 		{
 			return requestList;
 		}
-        
+
+		//Mutators
+
+		//Sets the request's information
+		public void setFollowupInfo(int position, Request followupInfo)
+		{
+			this.followupInfo[position] = followupInfo;
+		}
+
         //Returns the request's information
 	    public Request[] getFollowUpInfo()
 		{
 			return followupInfo;
 		}
 
+		//Set up the request's time hours
         public void setTimeHH(String timeHH)
         {
             this.timeHH = timeHH;
         }
 
+		//Set up the request's time minutes
         public void setTimeMM(String timeMM)
         {
             this.timeMM = timeMM;
         }
 
+		//Set up the request's client
         public void setClient(String client)
         {
             this.client = client;
         }
 
+		//Set up the request's description
         public void setRequest(String request)
         {
             this.request = request;
         }
 
+		//Set up the request's recipient
         public void setRecipient(String recipient)
         {
             this.recipient = recipient;
         }
 
+		//Set up who handled the request
         public void setHandledBy(String handledBy)
         {
             this.handledBy = handledBy;
         }
 
+		//Set up the request's follow up time (hours)
         public void setFollowUpHH(String followupHH)
         {
             this.followupHH = followupHH;
         }
 
+		//Set up the request's follow up time(minutes)
         public void setFollowUpMM(String followupMM)
         {
             this.followupMM = followupMM;
         }
 
+		//Set up the request's completion time(hours)
         public void setCompletionHH(String completionHH)
         {
             this.completionHH = completionHH;
         }
 
+		//Set up the request's completion time(minutes)
         public void setCompletionMM(String completionMM)
         {
             this.completionMM = completionMM;
         }
-        //Mutators
-
-        //Sets the request's information
-		public void setFollowupInfo(int position, Request followupInfo)
-		{
-            this.followupInfo[position] = followupInfo;
-		}
-
-	
 	}
 }

@@ -78,6 +78,7 @@ namespace ETD.CustomObjects.CustomUIObjects
         private Dictionary<String, TextBox[]> completionTimestampMap = new Dictionary<String, TextBox[]>();//Contains all completion time stamps
         private static List<RequestLine> requestLineList = new List<RequestLine>();
 
+		//create a new request line
         public void doRequestLine(FollowUpSectionForm followupsection)
         {
             followupPage = followupsection;
@@ -85,6 +86,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 
         }
 
+		//Populate the new request line with values
         public void populateRequestForm()
         {
             BuildLine();
@@ -94,7 +96,6 @@ namespace ETD.CustomObjects.CustomUIObjects
             request = new Request(init, init, init, init, init, init, init, init, init, init);
             requestline = new RequestLine();
 
-
             RowDefinition sectorRowDefinition = new RowDefinition();
             sectorRowDefinition.Height = new GridLength(40);
             followupPage.getRequestGrid().RowDefinitions.Add(sectorRowDefinition);
@@ -103,7 +104,6 @@ namespace ETD.CustomObjects.CustomUIObjects
             followupPage.getRequestGrid().Children.Add(this.getTimeBorder());
             Grid.SetColumn(this.getTimeBorder(), 0);
             Grid.SetRow(this.getTimeBorder(), rowNumber);
-
 
             timestampMap.Add("Time" + rowNumber, TextBoxHandler.textboxArray(this.getTimeHHTextBox(), this.getTimeMMTextBox()));
 
@@ -161,8 +161,7 @@ namespace ETD.CustomObjects.CustomUIObjects
             requestLineList.Add(this);
         }
 
-
-        //Create a new request row
+        //Create a new request row if the user clicked on enter
         public void NewRequest(object sender, KeyEventArgs e)
         {
             if (Keyboard.IsKeyDown(Key.Enter))
@@ -171,9 +170,10 @@ namespace ETD.CustomObjects.CustomUIObjects
                 populateRequestForm();
             }
         }
+
+		//Set up the content of the grid containing the new request
         private void BuildLine()
         {
-
             //time
             timeBorder = new Border();
             timeBorder.BorderBrush = new SolidColorBrush(Colors.Black);
@@ -500,6 +500,7 @@ namespace ETD.CustomObjects.CustomUIObjects
             return completionButton;
         }
 
+		//Set up default values for a new request
         private void PopulateLine()
         {
             //time
@@ -538,21 +539,22 @@ namespace ETD.CustomObjects.CustomUIObjects
         {
             TextBoxHandler.LostFocus(sender, e);
 
-            //If the textbox is for the resource name, update the resource
+            //If the textbox is for the a request field, update the request
             if ((TextBox)sender == requestTextBox)
             {
                 UpdateRequest();
             }
         }
 
+		//Update the request when its text boxes have been modified
         private void UpdateRequest()
         {
-            request.setClient(clientTextBox.Text);
-            request.setHandledBy(handledByTextBox.Text);
-            request.setRecipient(recipientTextBox.Text);
-            request.setRequest(requestTextBox.Text);
+            request.setClient(clientTextBox.Text);//Update the request's client
+            request.setHandledBy(handledByTextBox.Text);//Update who handled the request
+            request.setRecipient(recipientTextBox.Text);//Update who the request is for
+            request.setRequest(requestTextBox.Text);//Update the request information
 
-            if (!timeHHTextBox.Text.Equals("hh") && !timeMMTextBox.Text.Equals("mm"))
+            if (!timeHHTextBox.Text.Equals("hh") && !timeMMTextBox.Text.Equals("mm"))//Update time of request
             {
                 try
                 {
@@ -565,7 +567,7 @@ namespace ETD.CustomObjects.CustomUIObjects
                 }
             }
 
-            if (!followUpHHTextBox.Text.Equals("hh") && !followUpMMTextBox.Text.Equals("mm"))
+            if (!followUpHHTextBox.Text.Equals("hh") && !followUpMMTextBox.Text.Equals("mm"))//Update time of request follow up
             {
                 try
                 {
@@ -578,7 +580,7 @@ namespace ETD.CustomObjects.CustomUIObjects
                 }
             }
 
-            if (!completionHHTextBox.Text.Equals("hh") && !completionMMTextBox.Text.Equals("mm"))
+            if (!completionHHTextBox.Text.Equals("hh") && !completionMMTextBox.Text.Equals("mm"))//Update time of request completion
             {
                 try
                 {
