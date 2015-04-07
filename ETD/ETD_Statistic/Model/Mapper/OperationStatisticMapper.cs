@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using ETD.Services.Database;
 using System.Data.SQLite;
 
+//Class to retrieve operation statistic from database
+
 namespace ETD_Statistic.Model
 {
     public class OperationStatisticMapper
@@ -41,16 +43,20 @@ namespace ETD_Statistic.Model
 
         }
 
+        //retrieve list of operation statistics
         public List<OperationStatistic> getList()
         {
             return operationStatisticList;
         }
+
 
         public void ClearList()
         {
             operationStatisticList.Clear();
         }
 
+
+        //retrieve the total number of teams in operations
         public int getTeamCountFromDB()
         {
             int teamCount = 0;
@@ -64,6 +70,8 @@ namespace ETD_Statistic.Model
  
         }
 
+
+        //retrieve the total number of volunteers in operations
         public int getVolunteerCountFromDB()
         {
             int volunteerCount = 0;

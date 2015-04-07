@@ -8,6 +8,8 @@ using ETD_Statistic.Model;
 using ETD.Services.Database;
 using System.Collections;
 
+//class to store volunteer statistic objects and basic setters and getters
+
 namespace ETD_Statistic.Model
 {
     public class VolunteerStatistic

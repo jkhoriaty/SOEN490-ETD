@@ -7,10 +7,15 @@ using ETD.Services.Database;
 using System.Data.SQLite;
 using ETD_Statistic.Model;
 
+//class to retrieve intervention statistics from database
+
 namespace ETD_Statistic.Model
 {
     public class InterventionStatisticMapper
     {
+
+        //stores the list of each type of intervention in a list
+
         List<String> chiefComplaint = new List<String>();
         List<int> interventionChildrenWAList = new List<int>();
         List<int> interventionAdultWAList = new List<int>();

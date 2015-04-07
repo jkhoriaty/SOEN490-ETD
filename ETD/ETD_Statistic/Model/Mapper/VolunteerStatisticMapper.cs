@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using ETD.Services.Database;
 using System.Data.SQLite;
 
-
+//class to retrieve the data on statistic for volunteer from database
 namespace ETD_Statistic.Model
 {
     public class VolunteerStatisticMapper
@@ -42,6 +42,8 @@ namespace ETD_Statistic.Model
             volunteerStatisticList.Clear();
         }
 
+
+        //order the list according to alphabetical order
         private void orderList()
         {
             volunteerStatisticList = volunteerStatisticList.OrderBy(VolunteerStatistic => VolunteerStatistic.getName()).ToList();
