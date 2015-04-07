@@ -251,29 +251,9 @@ namespace ETD.CustomObjects.CustomUIObjects
 				//Creating team as a duplicate of the initial team, name it using the number of the intervention it is assigned to
 				Team team2 = new Team(team);
 				team2.setName(team.getName() + splitIntervention.getInterventionNumber());
-				team2.setStatus("moving"); //REMOVE
-
-				//Find the duplicate teams' pin
-				Pin team2Pin = null;
-				foreach(Pin pin in pinList)
-				{
-					if(pin.relatedObject == team2)
-					{
-						team2Pin = pin;
-						break;
-					}
-				}
-
-				//Setting the pins in their appropriate places so that the initial team is still on the intervention it was assigned and the duplicate assigned to the second intervention
-				team2Pin.setPinPosition(getX(), getY());
-				setPinPosition(startX, startY);
-
-				//Calling collision detection on the duplicate teams' pin so that it gets added to the intervention it is placed on
-				team2Pin.CollisionDetectionAndResolution(false);
-				
-				//Ensuring that the initial team is still intervening
-				team.setStatus("intervening");
-				mapSection.Update();
+				splitIntervention.AddInterveningTeam(team2); //Assigning split team onto the second intervention
+				mapSection.Update(); //Redrawing map so that the split team pin gets recreated with a pointer to the interventionPin it is assigned to
+				return;
 			}
 			else if (interventionPin != null && interventionPin.getInterventionContainer() != null) //Handling the case when the team was in an intervention, choose between keeping it on the intervention (for an accidental drag-and-drop) or removing it from the intervention
 			{
@@ -292,6 +272,7 @@ namespace ETD.CustomObjects.CustomUIObjects
                     if (interventionPin.getInterveningTeamsPin().Count == 0)
                     {
                         mapSection.Update();
+						return;
                     }
 
                     interventionPin = null;

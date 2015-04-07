@@ -70,6 +70,8 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.ResourcesInt
 				if (position == 1 && resourceLine.getResourceNameTextBox().Text.Equals(""))
 				{
 					resourceLine.getResourceNameTextBox().Text = "Prise en charge";
+					resource.setResourceName("Prise en charge");
+					intervention.ResourceModified();
 				}
 
 				position++;
