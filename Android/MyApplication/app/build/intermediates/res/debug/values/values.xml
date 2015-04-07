@@ -239,7 +239,7 @@
     <string name="common_signin_button_text_long">Sign in with Google</string>
     <!-- From: file:/D:/Users/jadk9_000/Desktop/Dropbox/Concordia%20-%20Winter%202015/SOEN%20490/Project%20Repository/Android/MyApplication/app/src/main/res/values/strings.xml -->
     <eat-comment/>
-    <string name="connection_stauts">Connected to Google Maps?</string>
+    <string name="connection_status">Connected to Google Maps?</string>
     <!-- From: file:/D:/Users/jadk9_000/Desktop/Dropbox/Concordia%20-%20Winter%202015/SOEN%20490/Project%20Repository/Android/MyApplication/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values/admob_strings.xml -->
     <eat-comment/>
     <string name="create_calendar_message">Allow Ad to create a calendar event?</string>
@@ -248,7 +248,7 @@
     <!-- From: file:/D:/Users/jadk9_000/Desktop/Dropbox/Concordia%20-%20Winter%202015/SOEN%20490/Project%20Repository/Android/MyApplication/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="hello">Please Enter your information.</string>
-    <string name="login">Login.</string>
+    <string name="login">Login</string>
     <string name="name">Name: </string>
     <string name="send">Start Transmitting Location</string>
     <!-- From: file:/D:/Users/jadk9_000/Desktop/Dropbox/Concordia%20-%20Winter%202015/SOEN%20490/Project%20Repository/Android/MyApplication/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values/admob_strings.xml -->
@@ -261,6 +261,9 @@
     <!-- From: file:/D:/Users/jadk9_000/Desktop/Dropbox/Concordia%20-%20Winter%202015/SOEN%20490/Project%20Repository/Android/MyApplication/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/res/values/wallet_strings.xml -->
     <eat-comment/>
     <string name="wallet_buy_button_place_holder" translation_description="Text on a button that allows a user to make a payment with Google Wallet [CHAR LIMIT=30]">Buy with Google</string>
+    <!-- From: file:/D:/Users/jadk9_000/Desktop/Dropbox/Concordia%20-%20Winter%202015/SOEN%20490/Project%20Repository/Android/MyApplication/app/src/main/res/values/strings.xml -->
+    <eat-comment/>
+    <string name="welcome">Welcome to the Emergency Dispatcher Software\'s Android Companion</string>
     <!-- From: file:/D:/Users/jadk9_000/Desktop/Dropbox/Concordia%20-%20Winter%202015/SOEN%20490/Project%20Repository/Android/MyApplication/app/src/main/res/values/styles.xml -->
     <eat-comment/>
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">

@@ -13,27 +13,9 @@
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_centerHorizontal="true"
+        android:layout_centerInParent="true"
 		android:layout_marginBottom="94dp"
 		android:text="@string/send"/>
-
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/checkBox1"
-        android:layout_marginTop="90dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:text="Is Connected?"/>
-
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Back"
-        android:id="@+id/backButton"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:onClick="Back"/>
 
 </RelativeLayout>
 <!-- From: file:/D:/Users/jadk9_000/Desktop/Dropbox/Concordia%20-%20Winter%202015/SOEN%20490/Project%20Repository/Android/MyApplication/app/src/main/res/layout/activity_location_transmission.xml -->
