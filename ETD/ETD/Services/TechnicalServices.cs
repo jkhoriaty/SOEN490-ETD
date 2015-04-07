@@ -179,11 +179,6 @@ namespace ETD.Services
         //The map is saved when the window is closed
         public static void saveMap(AdditionalInfoPage AIPmapSection)
         {
-            /* Absolute path doesnt work..
-             Saving to desktop directory for now
-            String AbsolutePath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase);
-             * */
-
             Rect AIbounds = VisualTreeHelper.GetDescendantBounds(AIPmapSection);
             var AIFileName = "MapModification_" + DateTime.Now.ToString("yyyyMMdd_hhss");
             var desktopFolder = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
@@ -193,6 +188,7 @@ namespace ETD.Services
             //If a map was loaded and modifications were made, save the map 
             if (AIbounds.ToString() != "Empty" && isMapLoaded)
             {
+				//Check the bound of the map
                 RenderTargetBitmap rtb = new RenderTargetBitmap((int)AIbounds.Width, (int)AIbounds.Height, dpi, dpi, System.Windows.Media.PixelFormats.Default);
                 DrawingVisual dv = new DrawingVisual();
 
@@ -211,7 +207,7 @@ namespace ETD.Services
                     System.IO.MemoryStream ms = new System.IO.MemoryStream();
                     pngEncoder.Save(ms);
                     ms.Close();
-                    System.IO.File.WriteAllBytes(desktopFolder + "\\" + AIFileName + ".png", ms.ToArray());//Save the modified map as an image 
+                    System.IO.File.WriteAllBytes(desktopFolder + "\\" + AIFileName + ".png", ms.ToArray());//Save the modified map as an image based on bounds of the map
                 }
                 catch (Exception err)
                 {

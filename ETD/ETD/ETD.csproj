@@ -164,12 +164,6 @@
     <Compile Include="ViewsPresenters\MapSection\MapSectionPage.xaml.cs">
       <DependentUpon>MapSectionPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewsPresenters\ScheduleSection\ScheduleSectionPage.xaml.cs">
-      <DependentUpon>ScheduleSectionPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ViewsPresenters\ScheduleSection\SectorsTable\SectorsTablePage.xaml.cs">
-      <DependentUpon>SectorsTablePage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ViewsPresenters\TeamsSection\TeamInfo\TeamInfoPage.xaml.cs">
       <DependentUpon>TeamInfoPage.xaml</DependentUpon>
     </Compile>
@@ -329,14 +323,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="ViewsPresenters\MapSection\MapSectionPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ViewsPresenters\ScheduleSection\ScheduleSectionPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ViewsPresenters\ScheduleSection\SectorsTable\SectorsTablePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

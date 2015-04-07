@@ -24,6 +24,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.ABCIntervent
 		private InterventionFormPage interventionForm;
 		private ABC abc;
 
+		//constructor
 		public ABCInterventionFormPage(InterventionFormPage interventionForm, ABC abc)
 		{
 			InitializeComponent();
@@ -32,6 +33,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.ABCIntervent
             FillForm(this.abc);
 		}
 
+		//Set up default values
         public void FillForm(ABC abc)
         {
             String consciousness = abc.getConsciousness();
@@ -96,61 +98,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.ABCIntervent
             CirculationFrequency.Text = (abc.getCirculationFrequency() >= 0) ? abc.getCirculationFrequency().ToString() : "";
         }
 
-        //No longer needed
-/*		public void PersistencyUpdate()
-		{
-            
-			String consciousness;
-			if(ConsciousnessBox.SelectedIndex == -1)
-			{
-			    consciousness = "notSet";
-			}
-			else
-			{
-				consciousness = ConsciousnessBox.Text;
-			}
-			bool disoriented = (bool)Disoriented.IsChecked;
-
-			String airways;
-			if(AirwaysBox.SelectedIndex == -1)
-			{
-				airways = "notSet";
-			}
-			else
-			{
-                airways = AirwaysBox.Text;
-			}
-
-			String breathing;
-			if (BreathingBox.SelectedIndex == -1)
-			{
-				breathing = "notSet";
-			}
-			else
-			{
-                breathing = BreathingBox.Text;
-			}
-			int breathingFrequency = -1;
-			try { breathingFrequency = int.Parse(BreathingFrequency.Text); }
-			catch (Exception e) { }
-            
-			String circulation;
-			if(CirculationBox.SelectedIndex == -1)
-			{
-				circulation = "notSet";
-			}
-			else
-			{
-                circulation = CirculationBox.Text;
-			}
-			int circulationFrequency = -1;
-			try { circulationFrequency = int.Parse(CirculationFrequency.Text); }
-			catch (Exception e) { }
-
-			//intervention.setABC(new ABC(consciousness, disoriented, airways, breathing, breathingFrequency, circulation, circulationFrequency));
-            //FillForm(abc);
-		}
-		*/
+		//Update the consciousnessBox 
         private void ConsciousnessBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             String consciousness;
@@ -167,11 +115,13 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.ABCIntervent
             abc.setConsciousness(consciousness);
         }
 
+		//Update disoriented checkbox
         private void Disoriented_Checked(object sender, RoutedEventArgs e)
         {
             abc.setDisoriented((bool)((CheckBox)sender).IsChecked);
         }
 
+		//Update Airway condition
         private void AirwaysBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             String airways;
@@ -188,6 +138,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.ABCIntervent
             abc.setAirways(airways);
         }
 
+		//Update breathing condition
         private void BreathingBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             String breathing;
@@ -204,6 +155,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.ABCIntervent
             abc.setBreathing(breathing);
         }
 
+		//Update breathing frequency
         private void BreathingFrequency_LostFocus(object sender, RoutedEventArgs e)
         {
             int breathingFrequency = -1;
@@ -212,6 +164,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.ABCIntervent
             abc.setBreathingFrequency(breathingFrequency);
         }
 
+		//Update circulation condition
         private void CirculationBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             String circulation;
@@ -228,6 +181,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.ABCIntervent
             abc.setCirculation(circulation);
         }
 
+		//Update circulation frequency
         private void CirculationFrequency_LostFocus(object sender, RoutedEventArgs e)
         {
             int circulationFrequency = -1;

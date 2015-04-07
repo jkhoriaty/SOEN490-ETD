@@ -42,6 +42,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.TimersInterv
 		private static int interventionDeadline = 30;
 		private static int movingDeadline = 5;
 
+		//Constructor
 		public TimersInterventionFormPage(InterventionFormPage interventionForm, Intervention intervention)
 		{
 			InitializeComponent();
@@ -210,6 +211,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.TimersInterv
 			interventionStatus = status;
 		}
 
+		//Creates resource timers
 		private void CreateResourcesTimers()
 		{
 			int rowNumber = 1;
@@ -344,6 +346,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.TimersInterv
 			}
 		}
 
+		//Set the timer intervention status
 		public void setStatus(Label statusLabel, String status)
 		{
 			statusLabel.Content = status;
@@ -364,11 +367,13 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.TimersInterv
 			}
 		}
 
+		//Sets the intervention deadline
 		internal static void setInterventionDeadline(int deadline)
 		{
 			interventionDeadline = deadline;
 		}
 
+		//Sets the moving deadline for an intervention
 		internal static void setMovingDeadline(int deadline)
 		{
 			movingDeadline = deadline;

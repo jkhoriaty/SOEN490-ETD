@@ -52,15 +52,10 @@ namespace ETD.Models.Objects
         }
 
         //Accessors
-
+		//Return volunteer is
         public int getID()
         {
             return volunteerID;
-        }
-
-        public int getParentID()
-        {
-            return teamID;
         }
 
         //Returns team member departure time

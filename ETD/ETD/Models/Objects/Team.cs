@@ -93,12 +93,7 @@ namespace ETD.Models.Objects
 			DeleteTeam(team, teamList);
 		}
 
-		//Delete a fragment of a team when it was split and keep the initial team
-		public static void DeleteSplitTeam(Team team)
-		{
-			DeleteTeam(team, splitTeamList);
-		}
-
+		//Deletes a team from the team list
 		private static void DeleteTeam(Team team, List<Team> list)
 		{
 			list.Remove(team);
@@ -166,18 +161,6 @@ namespace ETD.Models.Objects
             return false;
         }
 
-        private bool RemoveMember(TeamMember member)
-        {
-            if (memberList.Contains(member))
-            {
-                memberList.Remove(member);
-                StaticDBConnection.NonQueryDatabase("UPDATE [Team_Members] SET Disbanded='" + StaticDBConnection.DateTimeSQLite(DateTime.Now) + "' WHERE Volunteer_ID=" + member.getID() + ";");
-                InstanceModifiedNotification();
-                return true;
-            }
-            return false;
-        }
-
 		//Adds a maximum of 3 equipments to the team
 		public bool AddEquipment(Equipment equipment)
         {
@@ -213,7 +196,13 @@ namespace ETD.Models.Objects
 			InstanceModifiedNotification();
         }
 
-        //Seets the team's status
+		//Increment the intervention count
+		public void incrementInterventionCount()
+		{
+			interventionCount++;
+		}
+
+        //Sets the team's status
         public void setStatus(String s)
         {
 			this.status = (Statuses)Enum.Parse(typeof(Statuses), s);
@@ -293,18 +282,18 @@ namespace ETD.Models.Objects
 			return memberList;
 		}
 
-
+		//Return the list of fragments for a team
         public static List<Team> getSplitTeamList()
         {
             return splitTeamList;
         }
 
+		//Remove a team fragment 
         public static void removeSplitTeam(Team team)
         {
             if (splitTeamList.Contains(team))
             {
                 splitTeamList.Remove(team);
-                //StaticDBConnection.NonQueryDatabase("UPDATE [Assigned_Equipment] SET Removed_Time='" + StaticDBConnection.DateTimeSQLite(DateTime.Now) + "' WHERE Equipment_ID=" + equipment.getID() + " AND Team_ID=" + teamID + ";");
                 ClassModifiedNotification(typeof(Team));
             }
         }
@@ -325,27 +314,13 @@ namespace ETD.Models.Objects
             return null;
         }
 
-		public void incrementInterventionCount()
-		{
-			interventionCount++;
-		}
-
-		public int getInterventionCount()
-		{
-			return interventionCount;
-		}
-
-
+		//Return the team's id
         public int getID()
         {
             return teamID;
         }
 
-        public int getParentID()
-        {
-            return operationID;
-        }
-
+		//Return GPS location
 		public GPSLocation getGPSLocation()
 		{
 			return gpsLocation;
@@ -388,6 +363,7 @@ namespace ETD.Models.Objects
             }
         }
 
+		//Insert newly created team in the list of teams
         public static void InsertTeam(Team team)
         {
             teamList.Add(team);

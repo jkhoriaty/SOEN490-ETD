@@ -243,12 +243,6 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 			{
 				textboxFailedValidation.Add(teamName);
 			}
-			
-			//Team Member 1
-			//if (teamMember1.Text.Equals("Team Member Name"))
-			//{
-			//	textboxFailedValidation.Add(teamMember1);
-			//}
 
 			if(TimeValidation(departurehh1.Text, true) == false)
 			{
@@ -267,10 +261,6 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 			//Team Member 2
 			if (currentNumberOfMembers >= 2)
 			{
-				//if (teamMember2.Text.Equals("Team Member Name"))
-				//{
-				//	textboxFailedValidation.Add(teamMember2);
-				//}
 
 				if (TimeValidation(departurehh2.Text, true) == false)
 				{
@@ -290,10 +280,6 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamForm
 			//Team Member 3
 			if (currentNumberOfMembers >= 3)
 			{
-				//if (teamMember3.Text.Equals("Team Member Name"))
-				//{
-				//	textboxFailedValidation.Add(teamMember3);
-				//}
 
 				if (TimeValidation(departurehh3.Text, true) == false)
 				{

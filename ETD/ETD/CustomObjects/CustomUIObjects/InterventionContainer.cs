@@ -106,6 +106,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 			}
 		}
 
+		//Set the position of the border for the intervention container
 		private void setBorderPosition(double interventionPin_X, double interventionPin_Y)
 		{
 			Canvas.SetLeft(this, interventionPin_X - (this.Width/2));

@@ -25,6 +25,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.DetailsInter
         private InterventionFormPage interventionForm;
         private Intervention intervention;
 
+		//Constructor
         public DetailsInterventionFormPage(InterventionFormPage interventionForm, Intervention intervention)
         {
             InitializeComponent();
@@ -33,6 +34,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.DetailsInter
             //MessageBox.Show(intervention.getCallerName());
             FillForm(intervention);
         }
+		//Setup initial form
         private void FillForm(Intervention intervention)
         {
             if (intervention.getCallerName() != null)
@@ -86,11 +88,12 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.DetailsInter
                 TextBoxHandler.setTime(Callhh, Callmm, intervention.getTimeOfCall().Hour, intervention.getTimeOfCall().Minute);
             }
         }
+		//Called when we get focus on text boxxes
         private void TextBoxes_GotFocus(object sender, RoutedEventArgs e)
         {
             TextBoxHandler.GotFocus(sender, e);
         }
-
+		//Called when we lose focus on text boxes
         private void TextBoxes_LostFocus(object sender, RoutedEventArgs e)
         {
             TextBoxHandler.LostFocus(sender, e);
@@ -124,6 +127,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.DetailsInter
             }
         }
 
+		//Called when the priority of an intervention was modified
         private void Priority_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ComboBox comboBox = (ComboBox)sender;
@@ -139,12 +143,15 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.DetailsInter
 			}
         }
 
+		//Called when the gender was modified
         private void Gender_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ComboBox comboBox = (ComboBox)sender;
             ComboBoxItem item = (ComboBoxItem)comboBox.SelectedItem;
             intervention.setGender(item.Content.ToString());
         }
+
+		//Called when the complaint was modified
         private void Complaint_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ComboBox comboBox = (ComboBox)sender;
@@ -163,61 +170,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.DetailsInter
 			interventionForm.interventionType.Text = intervention.getChiefComplaint();
         }
 
-/*        public void PersistencyUpdate()
-        {
-            try
-            {
-                DateTime callTime = intervention.getTimeOfCall();
-                int hours = int.Parse(Callhh.Text);
-                int minutes = int.Parse(Callmm.Text);
-                callTime = callTime.Date + (new TimeSpan(hours, minutes, callTime.Second));
-                intervention.setTimeOfCall(DateTime.Now);
-            }
-            catch (Exception e) { }
-
-            if (!TextBoxHandler.isDefaultText(CallerName))
-            {
-                intervention.setCallerName(CallerName.Text);
-            }
-            if (!TextBoxHandler.isDefaultText(Location))
-            {
-                intervention.setLocation(Location.Text);
-            }
-            if (!TextBoxHandler.isDefaultText(NatureOfCall))
-            {
-                intervention.setNatureOfCall(NatureOfCall.Text);
-            }
-
-            try
-            {
-                ComboBoxItem priorityItem = (ComboBoxItem)Priority.SelectedItem;
-                int code = int.Parse("" + priorityItem.Content);
-                intervention.setCode(code);
-            }
-            catch (Exception e) { }
-
-            try
-            {
-                ComboBoxItem genderItem = (ComboBoxItem)Gender.SelectedItem;
-                intervention.setGender("" + genderItem.Content);
-            }
-            catch (Exception e) { }
-
-            intervention.setAge("" + Age.Text);
-
-            try
-            {
-                ComboBoxItem chiefComplaint = (ComboBoxItem)Complaint.SelectedItem;
-                String complaint = "" + chiefComplaint.Content;
-                intervention.setChiefComplaint(complaint);
-                if (complaint.Equals("Other"))
-                {
-                    intervention.setOtherChiefComplaint(OtherChiefComplaint.Text);
-                }
-            }
-            catch (Exception e) { }
-        }
-*/
+		//Sets the time of call of an intervention when the : button is clicked
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             try

@@ -37,6 +37,7 @@ namespace ETD.ViewsPresenters.TeamsSection
         int elementIndex = 0;
         int count = 0;
 
+		//Constructor
 		public TeamsSectionPage(MainWindow mainWindow)
 		{
 			InitializeComponent();
@@ -124,24 +125,6 @@ namespace ETD.ViewsPresenters.TeamsSection
 			}
 		}
 
-		//Registering the team equipment StackPanel to be able to add equipment to each team
-		public void RegisterStackPanel(String teamName, StackPanel equipmentStack)
-		{
-			//teamEquipmentStacks.Add(teamName, equipmentStack);
-		}
-
-		//Right clicking on an equipment in a team description removew the equipment from the stack and adds it back to the map
-		public void RemoveTeamEquipment(object sender, RoutedEventArgs e)
-		{
-			Rectangle equipment = (Rectangle)sender;
-            //Type equipType = Type.GetType(equipment.Name.ToString());
-            //Equipment equip = new Equipment((Equipments)Enum.Parse(typeof(Equipments), equipment.Name.ToString()));
-			StackPanel equipmentStackPanel = (StackPanel)equipment.Parent;
-			//Team.teamList["" + equipment.Tag].RemoveEquipment(equip);
-			equipmentStackPanel.Children.Remove(equipment);          
-
-		}
-       
         //handling keyboard up/down arrow event
         internal void FrameKeyDown(object sender, KeyEventArgs e)
         {

@@ -64,7 +64,6 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamInfo
 			teamTraining.Fill = img;
 
             List<Equipment> equipmentList = team.getEquipmentList();
-            //MessageBox.Show(equipmentList.Count().ToString());
 
             foreach (Equipment eq in equipmentList)
             {
@@ -103,6 +102,7 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamInfo
             relatedTeam.RemoveEquipment(relatedEquipment);
         }
 
+		//Returns the departure time as a string
 		private String DepartureTimeToString(TeamMember member)
 		{
 			String departurehh = member.getDeparture().Hour.ToString();
@@ -120,11 +120,13 @@ namespace ETD.ViewsPresenters.TeamsSection.TeamInfo
 			Team.DeleteTeam(team);
 		}
 
+		//Returns the team
         internal Team getTeam()
         {
             return team;
         }
 
+		//Deregister observer
         public void DeregisterInstanceObserver()
         {
             team.DeregisterInstanceObserver(this);
