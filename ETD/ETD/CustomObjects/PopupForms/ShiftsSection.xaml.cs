@@ -23,10 +23,9 @@ namespace ETD.CustomObjects.PopupForms
     /// <summary>
     /// Interaction logic for ShiftsSection.xaml
     /// </summary>
-    public partial class ShiftsSection : Page, Observer
+    public partial class ShiftsSection : Page
     {
-
-        ShiftsSection shiftsSectionForm;
+		//Variables used to predict the next shift time and team rotation
         Shift currentShift;
         ShiftLine shiftline;
         int teamNumber = 1;
@@ -46,6 +45,7 @@ namespace ETD.CustomObjects.PopupForms
             PopulateShiftForm();
         }
 
+		//Initialize the shift form
         private void PopulateShiftForm()
         {
             //Set up default shift properties
@@ -84,6 +84,7 @@ namespace ETD.CustomObjects.PopupForms
 
         }
 
+		//Predict the next shift time and team rotation
         public void NextShiftTime(object sender, RoutedEventArgs e)
         {
             rowPosition++;
@@ -110,36 +111,43 @@ namespace ETD.CustomObjects.PopupForms
             //Predict next shift
             String newShiftHH = shiftStartTimeMap["Start Time " + (columnPosition -1).ToString()][0].Text.ToString();
             String newShiftMM = shiftStartTimeMap["Start Time " + (columnPosition -1).ToString()][1].Text.ToString();
- 
-            if (!newShiftHH.Equals("hh") && !newShiftMM.Equals("mm")) 
-            {
-                if ((Convert.ToInt32(newShiftMM) + shiftDuration) >= 60)//Loop back to 0min plus the difference between the minutes fromt he old and new shift
-                {
-                    int newMM = (Convert.ToInt32(newShiftMM) + shiftDuration) - 60;
-                    newShift.getStartTimeMMTextBox().Text = Convert.ToString(newMM);
 
-                    if(Convert.ToInt32(newShiftHH) == 12)//Loop back to 1am
-                    {
-                        newShift.getStartTimeHHTextBox().Text = "1";
-                    }
-                    else
-                    {
-                            newShift.getStartTimeHHTextBox().Text = Convert.ToString(Convert.ToInt32(newShiftHH)+1);
-                    }
-                       
-                }
-                else
-                {
-                    newShift.getStartTimeMMTextBox().Text = Convert.ToString(Convert.ToInt32(newShiftMM) + shiftDuration);
-                    newShift.getStartTimeHHTextBox().Text = Convert.ToString(Convert.ToInt32(newShiftHH));
-                }          
+			bool isallDigitsNewShiftsHH = newShiftHH.All(char.IsDigit);
+			bool isallDigitsNewShiftsMM = newShiftMM.All(char.IsDigit);
+
+            if (!newShiftHH.Equals("hh") && !newShiftMM.Equals("mm"))
+			{
+				if (isallDigitsNewShiftsHH && isallDigitsNewShiftsMM)//If the time input is a number, predict next shift time
+				{
+					if ((Convert.ToInt32(newShiftMM) + shiftDuration) >= 60)//If the next shift time is higher than 60,Loop back to 0min plus the difference between the minutes fromt he old and new shift
+					{
+						int newMM = (Convert.ToInt32(newShiftMM) + shiftDuration) - 60;
+						newShift.getStartTimeMMTextBox().Text = Convert.ToString(newMM);
+
+						if (Convert.ToInt32(newShiftHH) == 12)//Loop back to 1am
+						{
+							newShift.getStartTimeHHTextBox().Text = "1";
+						}
+						else
+						{
+							newShift.getStartTimeHHTextBox().Text = Convert.ToString(Convert.ToInt32(newShiftHH) + 1);
+						}
+
+					}
+					else//Shift time is equal to the input time plus the shift duration
+					{
+						newShift.getStartTimeMMTextBox().Text = Convert.ToString(Convert.ToInt32(newShiftMM) + shiftDuration);
+						newShift.getStartTimeHHTextBox().Text = Convert.ToString(Convert.ToInt32(newShiftHH));
+					}  
+				}      
             }
 
-            //Team rotation
+            /*Team rotation
+			The next team to be assigned a sector(eg: sector 1) is the one that was responsible for the other sector (eg : sector 2)*/
             int originalshiftpos = 2;
             int sector = 2;
            
-            if (sectorMap.Count() == 1)
+            if (sectorMap.Count() == 1)//if there is only one sector and one team, no team rotation
             {
                 ShiftLine newShift2 = new ShiftLine(currentShift);
                 Shifts_grid.Children.Add(newShift2.getTeamNameTextBox());
@@ -149,7 +157,7 @@ namespace ETD.CustomObjects.PopupForms
                 teamMap.Add("Team" + (teamNumber).ToString() + "Sector" + (sectorRowPosition - 1).ToString(), newShift2.getTeamNameTextBox());
             }
 
-            for (int i = 0; i < sectorMap.Count() && sectorMap.Count()>1 ; i++)
+            for (int i = 0; i < sectorMap.Count() && sectorMap.Count()>1 ; i++)//if there is more than one sector, predict the next team that will be replacing the team currently assigned in that sector
             {
                 ShiftLine newShift2 = new ShiftLine(currentShift);
                 String rotatedTeam;
@@ -160,12 +168,12 @@ namespace ETD.CustomObjects.PopupForms
 
                 teamMap.Add("Team" + (teamNumber).ToString() + "Sector" + (sectorRowPosition - 1).ToString(), newShift2.getTeamNameTextBox());
 
-                if ((sectorMap.Count()) == (sectorRowPosition - 1))
-                    {
-                        rotatedTeam = teamMap["Team" + (teamNumber - 1) + "Sector" + 1.ToString()].Text.ToString();
-                        teamMap["Team" + (teamNumber).ToString() + "Sector" + (sectorRowPosition - 1).ToString()].Text = rotatedTeam;
-                    }
-                else
+                if ((sectorMap.Count()) == (sectorRowPosition - 1))//If the number of sectors is the same as the its row position, the next team assigned to the sector is the one that was responsible for the first sector
+                {
+                    rotatedTeam = teamMap["Team" + (teamNumber - 1) + "Sector" + 1.ToString()].Text.ToString();
+                    teamMap["Team" + (teamNumber).ToString() + "Sector" + (sectorRowPosition - 1).ToString()].Text = rotatedTeam;
+                }
+                else//The next team assigned to the sector is the one that was responsible for the one under it. eg: team A on sector 1 will be responsible for sector 2 and team B sector 2 will be responsible for sector 1
                 {
                     rotatedTeam = teamMap["Team" + (teamNumber - 1) + "Sector" + (sector).ToString()].Text.ToString();
                     teamMap["Team" + (teamNumber).ToString() + "Sector" + (sectorRowPosition - 1).ToString()].Text = rotatedTeam;     
@@ -177,6 +185,7 @@ namespace ETD.CustomObjects.PopupForms
             }  
         }
 
+		//Create a new sector when the user clicks the enter key
         public void NewSector(object sender, KeyEventArgs e)
         {
             if (Keyboard.IsKeyDown(Key.Enter))
@@ -214,11 +223,6 @@ namespace ETD.CustomObjects.PopupForms
                     teamMap.Add("Team" + (teamNumber).ToString() + "Sector" + (sectorPosition - 1).ToString(), newShift3.getTeamNameTextBox());
                 }
             }
-        }
-
-        public void Update()
-        {
-           // buildshiftcomponent();
         }
 
         //Focus on the follow up or completion time stamp text box
