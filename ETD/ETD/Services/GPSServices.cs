@@ -229,12 +229,6 @@ namespace ETD.Services
 			{
 				MessageBox.Show("Setup completed");
 
-				//CONCORDIA TESTING - debug
-				//List<GPSLocation> list = new List<GPSLocation>();
-				//list.Add(new GPSLocation(45.497401, -73.578224, 179, 313));
-				//list.Add(new GPSLocation(45.495637, -73.579325, 580, 473));
-				//GPSLocation.referencePoints = list;
-
 				GPSLocation.setConfigured(true); //Change flag to signify that the setup is successfully done
 				mapSection.Update(); //Readding all the pins to the map
 				setupOngoing = false;
