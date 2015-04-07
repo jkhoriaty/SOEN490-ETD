@@ -14,6 +14,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 {
     class ShiftLine
     {
+		//Variables used to create a new shift
         private Shift shift;
         private Border sectorBorder;
         private StackPanel sectorStackPanel;
@@ -37,7 +38,7 @@ namespace ETD.CustomObjects.CustomUIObjects
             PopulateLine();
         }
 
-
+		//Create a new shift line 
         private void BuildLine()
         {
             //sector
@@ -106,7 +107,6 @@ namespace ETD.CustomObjects.CustomUIObjects
             startTimeButton.Width = 52;
             startTimeButton.Height = 50;
             startTimeButton.Content = ":";
-           // startTimeButton.Click += startTime_Click;
             startTimeButton.HorizontalContentAlignment = HorizontalAlignment.Center;
             startTimeButton.VerticalContentAlignment = VerticalAlignment.Center;
             startTimeButton.Name = "StartTime";
@@ -124,6 +124,7 @@ namespace ETD.CustomObjects.CustomUIObjects
             startTimeStackPanel.Children.Add(startTimeMMTextBox);
         }
 
+		//Set up default values of a shift
         private void PopulateLine()
         {
             teamNameTextBox.Text = "-";
@@ -146,25 +147,31 @@ namespace ETD.CustomObjects.CustomUIObjects
 
         }
 
+		//Returns the sector's border
         public Border getSectorNameBorder()
         {
             return sectorBorder;
         }
+
+		//Returns the sector's textbox
         public TextBox getSectorNameTextBox()
         {
             return sectorTextBox;
         }
 
+		//Returns the team's textbox
         public TextBox getTeamNameTextBox()
         {
             return teamNameTextBox;
         }
 
+		//Returns the start time border for the hours
         public Border getStartTimeBorder()
         {
             return startTimeBorder;
         }
 
+		//Returns the start time border for the minutes
         public TextBox getStartTimeHHTextBox()
         {
             return startTimeHHTextBox;
