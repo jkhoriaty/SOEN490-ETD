@@ -14,6 +14,10 @@ using ETD.CustomObjects.CustomUIObjects;
 namespace ETD.Services
 {
     public enum RecoveryResults {Failure, Partial, Success};
+    
+    /// <summary>
+    /// Serializes the model instances used in the current session.
+    /// </summary>
     class Serializer : Observer
     {
         //Singleton variable
@@ -35,7 +39,10 @@ namespace ETD.Services
         private BinaryFormatter serializer;
         private bool partial;
         
-
+        
+        /// <summary>
+        /// Initializes a new instance of Serializer object
+        /// </summary>
         private Serializer()
         {
             teams = new List<Team>();
@@ -55,6 +62,9 @@ namespace ETD.Services
             partial = false;
         }
 
+        /// <summary>
+        /// Retrieves the singleton instance of the Serializer class.
+        /// </summary>
         public static Serializer Instance
         {
             get
@@ -67,10 +77,18 @@ namespace ETD.Services
             }
         }
 
+        /// <summary>
+        /// Event that backs up the necessary data after each interval.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BackUpEvent(object sender, ElapsedEventArgs e)
         {
                 BackUp();
         }
+        /// <summary>
+        /// Begins the back up process.
+        /// </summary>
         private void BackUp()
         {
             CleanUp();
@@ -91,6 +109,10 @@ namespace ETD.Services
 
             StartBackUp();
         }
+
+        /// <summary>
+        /// Backs up the Operation instance.
+        /// </summary>
         private void BackUpOperation()
         {
             Operation operation = Operation.currentOperation;
@@ -108,6 +130,10 @@ namespace ETD.Services
                 }
             }
         }
+
+        /// <summary>
+        /// Backs up all tracked instances of the Team class.
+        /// </summary>
         private void BackUpTeams()
         {
             foreach (Team t in teams)
@@ -124,6 +150,10 @@ namespace ETD.Services
                 }
             }
         }
+
+        /// <summary>
+        /// Backs up all tracked instances of the Intervention class that are currently active.
+        /// </summary>
         private void BackUpActiveInterventions()
         {
             foreach (Intervention i in activeInterventions)
@@ -140,6 +170,10 @@ namespace ETD.Services
                 }
             }
         }
+
+        /// <summary>
+        /// Backs up all tracked instances of the Intervention class that are completed.
+        /// </summary>
         private void BackUpCompletedInterventions()
         {
             foreach (Intervention i in completedInterventions)
@@ -156,6 +190,9 @@ namespace ETD.Services
                 }
             }
         }
+        /// <summary>
+        /// Backs up all tracked instances of the Equipment class.
+        /// </summary>
         private void BackUpEquipments()
         {
             foreach (Equipment e in equipments)
@@ -172,6 +209,10 @@ namespace ETD.Services
                 }
             }
         }
+
+        /// <summary>
+        /// Backs up all tracked instances of the Request class.
+        /// </summary>
         private void BackUpRequests()
         {
             List<Request> requests = new List<Request>(Request.getRequestList());
@@ -190,10 +231,13 @@ namespace ETD.Services
                 }
             }
         }
+
+        /// <summary>
+        ///  Backs up all tracked instances of the MapMod class.
+        /// </summary>
         private void BackUpMapMods()
         {
             List<MapMod> mods = new List<MapMod>(MapMod.getMapModList());
-            int count = 1;
             foreach (MapMod mm in mods)
             {
                 try
@@ -208,6 +252,10 @@ namespace ETD.Services
                 }
             }
         }
+
+        /// <summary>
+        /// Backs up the map position of all instances of the Pin class.
+        /// </summary>
         private void BackUpPinPositions()
         {
             try
@@ -248,6 +296,9 @@ namespace ETD.Services
             }
         }
         
+        /// <summary>
+        /// Removes temporary files from storage location.
+        /// </summary>
         public void CleanUp()
         {
             StopBackUp();
@@ -264,11 +315,19 @@ namespace ETD.Services
             }
         }
 
+        /// <summary>
+        /// Checks whether recovery files exists.
+        /// </summary>
+        /// <returns></returns>
         public bool Recoverable()
         {
             return Directory.Exists(outputDirectory);
         }
 
+        /// <summary>
+        /// Begins the recovery process.
+        /// </summary>
+        /// <returns></returns>
         public RecoveryResults PerformRecovery()
         {
             RecoverOperation();
@@ -293,6 +352,9 @@ namespace ETD.Services
             }
         }
 
+        /// <summary>
+        /// Recovers backed up Operation instance.
+        /// </summary>
         private void RecoverOperation()
         {
             if (Recoverable())
@@ -313,6 +375,9 @@ namespace ETD.Services
                 }
             }
         }
+        /// <summary>
+        /// Recovers backed up Team instances.
+        /// </summary>
         private void RecoverTeams()
         {
             if (Recoverable())
@@ -336,6 +401,9 @@ namespace ETD.Services
                 }
             }
         }
+        /// <summary>
+        /// Recovers backed up Intervention instances that were active.
+        /// </summary>
         private void RecoverActiveInterventions()
         {
             if (Recoverable())
@@ -364,6 +432,9 @@ namespace ETD.Services
                 }
             }
         }
+        /// <summary>
+        /// Recovers backed up Intervention instances that were completed.
+        /// </summary>
         private void RecoverCompletedInterventions()
         {
             if (Recoverable())
@@ -387,6 +458,9 @@ namespace ETD.Services
                 }
             }
         }
+        /// <summary>
+        /// Recovers backed up Equipment instances.
+        /// </summary>
         private void RecoverEquipments()
         {
             if (Recoverable())
@@ -410,6 +484,9 @@ namespace ETD.Services
                 }
             }
         }
+        /// <summary>
+        /// Recovers backed up Request instances.
+        /// </summary>
         private void RecoverRequests()
         {
             if (Recoverable())
@@ -434,6 +511,9 @@ namespace ETD.Services
             }
             
         }
+        /// <summary>
+        /// Recovers backed up MapMod instances.
+        /// </summary>
         private void RecoverMapMods()
         {
             if (Recoverable())
@@ -458,6 +538,9 @@ namespace ETD.Services
             }
 
         }
+        /// <summary>
+        /// Replaces pins at their saved positions.
+        /// </summary>
         private void RecoverPinPositions()
         {
             if (Recoverable())
@@ -490,6 +573,9 @@ namespace ETD.Services
             }
         }
 
+        /// <summary>
+        /// Updates lists of objects to back up.
+        /// </summary>
         public void Update()
         {
             teams = new List<Team>(Team.getTeamList());
@@ -499,16 +585,24 @@ namespace ETD.Services
         }
 
         //Mutators
-
+        /// <summary>
+        /// Enables back ups at regular intervals.
+        /// </summary>
         public void StartBackUp()
         {
             timer.Start();
         }
+        /// <summary>
+        /// Disables back ups.
+        /// </summary>
         public void StopBackUp()
         {
             timer.Stop();
         } 
-
+        /// <summary>
+        /// Log errors encountered while saving or restoring objects.
+        /// </summary>
+        /// <param name="ex"></param>
         public void LogException(Exception ex)
         {
             partial = true;
