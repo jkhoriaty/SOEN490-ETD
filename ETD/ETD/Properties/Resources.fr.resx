@@ -901,4 +901,28 @@
     <value>Parmi les équipes qui restent sur la carte, sélectionnez l'une d'entre elles qui sera utilisée</value>
     <comment>GPSService</comment>
   </data>
+  <data name="Label_Status_Completed" xml:space="preserve">
+    <value>Complété</value>
+    <comment>TimersInterventionFormPage</comment>
+  </data>
+  <data name="Label_Status_Ongoing" xml:space="preserve">
+    <value>En cours</value>
+    <comment>TimersInterventionFormPage</comment>
+  </data>
+  <data name="Label_Status_Overtime" xml:space="preserve">
+    <value>En Retard</value>
+    <comment>TimersInterventionFormPage</comment>
+  </data>
+  <data name="Label_Timers_Ambulance" xml:space="preserve">
+    <value>Ambulance</value>
+    <comment>TimersInterventionFormPage</comment>
+  </data>
+  <data name="Label_Timers_Name_911" xml:space="preserve">
+    <value>Appel 911</value>
+    <comment>TimersInterventionFormPage</comment>
+  </data>
+  <data name="Label_Timers_PR" xml:space="preserve">
+    <value>Premiers Répondant</value>
+    <comment>TimersInterventionFormPage</comment>
+  </data>
 </root>

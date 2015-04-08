@@ -150,7 +150,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.TimersInterv
 
 				if (ongoing && elapsed.TotalMinutes > deadline)
 				{
-					setStatus(status, "Overtime");
+					setStatus(status, Properties.Resources.Label_Status_Overtime);
 					if (elapsed.Seconds < 15 && elapsed.Seconds % 2 == 0)
 					{
 						Brush backgroundColor = status.Background;
@@ -160,11 +160,11 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.TimersInterv
 				}
 				else if(ongoing)
 				{
-					setStatus(status, "Ongoing");
+					setStatus(status, Properties.Resources.Label_Status_Ongoing);
 				}
 				else
 				{
-					setStatus(status, "Completed");
+					setStatus(status, Properties.Resources.Label_Status_Completed);
 				}
 			}
 			catch
@@ -230,7 +230,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.TimersInterv
 					timersList.Children.Add(fr911);
 
 					Label nameFR = new Label();
-					nameFR.Content = "First Responders";
+					nameFR.Content = Properties.Resources.Label_Timers_PR;
 					Grid.SetColumn(nameFR, 1);
 					Grid.SetRow(nameFR, rowNumber);
 					timersList.Children.Add(nameFR);
@@ -261,7 +261,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.TimersInterv
 					timersList.Children.Add(ambulance911);
 
 					Label nameAmb = new Label();
-					nameAmb.Content = "Ambulance";
+					nameAmb.Content = Properties.Resources.Label_Timers_Ambulance;
 					Grid.SetColumn(nameAmb, 1);
 					Grid.SetRow(nameAmb, rowNumber);
 					timersList.Children.Add(nameAmb);
@@ -287,7 +287,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.TimersInterv
 					timersList.RowDefinitions.Add(rowDef911);
 
 					Label name911 = new Label();
-					name911.Content = "911 Call";
+					name911.Content = Properties.Resources.Label_Timers_Name_911;
 					Grid.SetColumn(name911, 0);
 					Grid.SetRow(name911, rowNumber);
 					timersList.Children.Add(name911);
@@ -350,17 +350,17 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.TimersInterv
 		public void setStatus(Label statusLabel, String status)
 		{
 			statusLabel.Content = status;
-			if(status.Equals("Ongoing"))
+			if(status.Equals(Properties.Resources.Label_Status_Ongoing))
 			{
 				statusLabel.Background = new SolidColorBrush(Colors.Yellow);
 				statusLabel.Foreground = new SolidColorBrush(Colors.Black);
 			}
-			else if(status.Equals("Completed"))
+			else if(status.Equals(Properties.Resources.Label_Status_Completed))
 			{
 				statusLabel.Background = new SolidColorBrush(Colors.Green);
 				statusLabel.Foreground = new SolidColorBrush(Colors.White);
 			}
-			else if(status.Equals("Overtime"))
+			else if(status.Equals(Properties.Resources.Label_Status_Overtime))
 			{
 				statusLabel.Background = new SolidColorBrush(Colors.Red);
 				statusLabel.Foreground = new SolidColorBrush(Colors.White);

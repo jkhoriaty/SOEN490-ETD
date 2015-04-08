@@ -901,4 +901,28 @@
     <value>From the teams that remain on the map, select one of them that will be used for the setup by right-clicking on the team and selecting \"Use this team for setup\".</value>
     <comment>GPSService</comment>
   </data>
+  <data name="Label_Status_Completed" xml:space="preserve">
+    <value>Completed</value>
+    <comment>TimersInterventionFormPage</comment>
+  </data>
+  <data name="Label_Status_Ongoing" xml:space="preserve">
+    <value>Ongoing</value>
+    <comment>TimersInterventionFormPage</comment>
+  </data>
+  <data name="Label_Status_Overtime" xml:space="preserve">
+    <value>Overtime</value>
+    <comment>TimersInterventionFormPage</comment>
+  </data>
+  <data name="Label_Timers_Ambulance" xml:space="preserve">
+    <value>Ambulance</value>
+    <comment>TimersInterventionFormPage</comment>
+  </data>
+  <data name="Label_Timers_Name_911" xml:space="preserve">
+    <value>911 Call</value>
+    <comment>TimersInterventionFormPage</comment>
+  </data>
+  <data name="Label_Timers_PR" xml:space="preserve">
+    <value>First Responders</value>
+    <comment>TimersInterventionFormPage</comment>
+  </data>
 </root>
