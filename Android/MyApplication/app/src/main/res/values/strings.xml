@@ -5,8 +5,9 @@
     <string name="action_settings">Settings</string>
     <string name="hello">Please Enter your information.</string>
     <string name="name">Name: </string>
-    <string name="login">Login.</string>
+    <string name="login">Login</string>
     <string name="send">Start Transmitting Location</string>
     <string name="title_activity_location_transmission">Location Transmission</string>
-    <string name="connection_stauts">Connected to Google Maps?</string>
+    <string name="connection_status">Connected to Google Maps?</string>
+    <string name="welcome">Welcome to the Emergency Dispatcher Software\'s Android Companion</string>
 </resources>
