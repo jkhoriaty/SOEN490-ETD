@@ -127,7 +127,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
 				{
 					ComboBoxItem conclusion = (ComboBoxItem)ConclusionBox.SelectedItem;
 
-					if (Grid.GetColumnSpan(ComboBoxBorder) == 1 && TextBoxHandler.isDefaultText(AdditionalInformation))
+					if (Grid.GetColumnSpan(ComboBoxBorder) == 1 && AdditionalInformation.Text.Equals(""))
 					{
 						MessageBox.Show(ETD.Properties.Resources.MessageBox_Notification_NoConclusion);
 					}
