@@ -58,7 +58,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
             {              
                 TextBoxHandler.setTime(Endhh, Endmm, intervention.getConclusionTime().Hour, intervention.getConclusionTime().Minute);
             }
-            if (intervention.getConclusion() == "911 called")
+            if (intervention.getConclusion() == Properties.Resources.ComboBoxItem_Conclusion_911)
             {
                 if (intervention.getCall911Time().Hour != 0 && intervention.getCall911Time().Minute != 0)
                 {                  
