@@ -19,7 +19,6 @@ using ETD.ViewsPresenters.InterventionsSection;
 using ETD.Models.Objects;
 using System.Windows.Threading;
 using System.Drawing;
-using ETD.ViewsPresenters.ScheduleSection;
 using ETD.Services;
 using System.Threading;
 using System.Windows.Controls.Primitives;

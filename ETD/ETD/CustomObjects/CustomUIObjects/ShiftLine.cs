@@ -38,7 +38,7 @@ namespace ETD.CustomObjects.CustomUIObjects
             PopulateLine();
         }
 
-		//Create a new shift line 
+		//Create all controls for the shift line and set their attributes
         private void BuildLine()
         {
             //sector

@@ -19,7 +19,6 @@ using ETD.ViewsPresenters.InterventionsSection;
 using ETD.Models.Objects;
 using System.Windows.Threading;
 using System.Drawing;
-using ETD.ViewsPresenters.ScheduleSection;
 using ETD.Services;
 using System.Threading;
 using System.Windows.Controls.Primitives;
@@ -261,7 +260,7 @@ namespace ETD.ViewsPresenters
                 if (mi.Content.Equals(ETD.Properties.Resources.ComboBoxItem_RegularMode) && (mi.IsSelected))//lock the map modification section
                 {
                     mapSection.Page_mapSection.Background = new SolidColorBrush(Colors.Transparent);
-
+					AdditionalIntoTextStackPanel.Visibility = Visibility.Collapsed;
                     AI.Visibility = Visibility.Collapsed;
                     mapModificationSection.IsEnabled = false;
                     mapSection.IsEnabled = true;
@@ -269,7 +268,7 @@ namespace ETD.ViewsPresenters
                 else if (mi.Content.Equals(ETD.Properties.Resources.ComboBoxItem_EditMode) && (mi.IsSelected))//lock the map section
                 {
                     mapSection.Page_mapSection.ClearValue(Page.BackgroundProperty);
-
+					AdditionalIntoTextStackPanel.Visibility = Visibility.Visible;
                     AI.Visibility = Visibility.Visible;
                     mapModificationSection.IsEnabled = true;
                     mapSection.IsEnabled = false;
@@ -321,6 +320,7 @@ namespace ETD.ViewsPresenters
             }
 		}
 
+		//close GPS window
         public void CloseGPSWindow()
         {
             subWindow = null;
@@ -436,17 +436,12 @@ namespace ETD.ViewsPresenters
         private void ComboBox_Languages_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             String selected_NativeName = ComboBox_Languages.SelectedItem as String;
-            //CultureInfo selected_culture = ComboBox_Languages.SelectedItem as CultureInfo;
 
             //if not current language
             //could check here whether the culture we want to change to is available in order to provide feedback / action
             if (Properties.Resources.Culture != null && !Properties.Resources.Culture.NativeName.Equals(selected_NativeName))
             {
                 Debug.WriteLine(string.Format("Change Current Culture to [{0}]", selected_NativeName));
-
-                //save language in settings
-                //Properties.Settings.Default.CultureDefault = selected_culture;
-                //Properties.Settings.Default.Save();
 
                 //change resources to new culture
                 CultureResources.ChangeCulture(selected_NativeName);
@@ -493,6 +488,7 @@ namespace ETD.ViewsPresenters
             }
         }
 
+		//Close initial setup
         public void ForceClose()
         {
             forceClose = true;

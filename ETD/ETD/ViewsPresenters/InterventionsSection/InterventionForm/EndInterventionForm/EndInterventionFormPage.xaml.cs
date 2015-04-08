@@ -26,6 +26,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
 		private Intervention intervention;
 		private bool selectionChanged = false;
 
+		//Constructor
 		public EndInterventionFormPage(InterventionFormPage interventionForm, Intervention intervention)
 		{
 			InitializeComponent();
@@ -34,6 +35,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
             FillForm(intervention);
 		}
 
+		//Setup initial form
         private void FillForm(Intervention intervention)
         {
 
@@ -82,12 +84,13 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
             }
         }
 
-
+		//Called When we get focus on text boxes
 		private void TextBoxes_GotFocus(object sender, RoutedEventArgs e)
 		{
 			TextBoxHandler.GotFocus(sender, e);
 		}
 
+		//Called When we lost focus on text boxes
 		private void TextBoxes_LostFocus(object sender, RoutedEventArgs e)
 		{
 			
@@ -116,19 +119,6 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
 				int offset = (int)DateTime.Now.Subtract(endTime).TotalMinutes;
                 
                 List<Resource> resources = this.intervention.getResourceList();
-                            
-                /*for (int i = 0; i < TeamsSection.TeamForm.TeamFormPage.activeTeamsList.Count; i++)
-                {
-                    try
-                    {
-                        //Team.teamList[TeamsSection.TeamForm.TeamFormPage.activeTeamsList[i]].getTeamGrid().ChangeStatus("unavailable");
-                    }
-                    catch (ArgumentNullException)
-                    {
-
-                    }
-                   
-                }*/
 
 				if (offset < 0)
 				{
@@ -162,6 +152,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
 			}
 		}
 
+		//Update fields 
 		private void SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
 			//By default, for all selections, the ambulance form is hidden
@@ -204,92 +195,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
 			}
 			selectionChanged = true;
 		}
-/*
-		public void PersistencyUpdate()
-		{
-			String conclusion;
-			if (ConclusionBox.SelectedIndex == -1)
-			{
-				conclusion = "notSet";
-			}
-			else
-			{
-				conclusion = ConclusionBox.SelectedItem.ToString();
-			}
-			intervention.setConclusion(conclusion);
-
-			int conclusionhh = 0;
-			int conclusionmm = 0;
-			if(!Endhh.Text.Equals("hh") && !Endmm.Text.Equals("mm"))
-			{
-				conclusionhh = int.Parse(Endhh.Text);
-				conclusionmm = int.Parse(Endmm.Text);
-			}
-			DateTime conclusionTime = DateTime.Now;
-			conclusionTime = conclusionTime.Date + new TimeSpan(conclusionhh, conclusionmm, conclusionTime.Second);
-			intervention.setConclusionTime(conclusionTime);
-
-			if(selectionChanged)
-			{
-				ComboBoxItem item = (ComboBoxItem)ConclusionBox.SelectedItem;
-				if (item.Name.Equals("call911"))
-				{
-					intervention.setConclusionAdditionalInfo(AdditionalInformation.Text);
-					int call911hh = 0;
-					int call911mm = 0;
-					if (!Call911hh.Text.Equals("hh") && !Call911mm.Text.Equals("mm"))
-					{
-						call911hh = int.Parse(Call911hh.Text);
-						call911mm = int.Parse(Call911mm.Text);
-					}
-					DateTime call911Time = DateTime.Now;
-					call911Time = call911Time.Date + new TimeSpan(call911hh, call911mm, 0);
-					intervention.setCall911Time(call911Time);
-
-                    intervention.setMeetingPoint(MeetingPoint.Text);
-
-					intervention.setFirstResponderCompany(FirstResponderCompany.Text);
-					intervention.setFirstResponderVehicle(FirstResponderVehicle.Text);
-					int firstResponderArrivalhh = 0;
-					int firstResponderArrivalmm = 0;
-					if (!FirstResponderArrivalhh.Text.Equals("hh") && !FirstResponderArrivalmm.Text.Equals("mm"))
-					{
-						firstResponderArrivalhh = int.Parse(FirstResponderArrivalhh.Text);
-						firstResponderArrivalmm = int.Parse(FirstResponderArrivalmm.Text);
-					}
-					DateTime firstResponderArrival = DateTime.Now;
-					firstResponderArrival = firstResponderArrival.Date + new TimeSpan(firstResponderArrivalhh, firstResponderArrivalmm, 0);
-					intervention.setFirstResponderArrivalTime(firstResponderArrival);
-
-					intervention.setAmbulanceCompany(AmbulanceCompany.Text);
-					intervention.setAmbulanceVehicle(AmbulanceVehicle.Text);
-					int ambulanceArrivalhh = 0;
-					int ambulanceArrivalmm = 0;
-					if (!AmbulanceArrivalhh.Text.Equals("hh") && !AmbulanceArrivalmm.Text.Equals("mm"))
-					{
-						ambulanceArrivalhh = int.Parse(AmbulanceArrivalhh.Text);
-						ambulanceArrivalmm = int.Parse(AmbulanceArrivalmm.Text);
-					}
-					DateTime ambulanceArrivalTime = DateTime.Now;
-					ambulanceArrivalTime = ambulanceArrivalTime.Date + new TimeSpan(ambulanceArrivalhh, ambulanceArrivalmm, 0);
-					intervention.setAmbulanceArrivalTime(ambulanceArrivalTime);
-				}
-				else if (item.Name.Equals("other"))
-				{
-					intervention.setConclusionAdditionalInfo(AdditionalInformation.Text);
-				}
-				else if (item.Name.Equals("doctor"))
-				{
-					if(!TextBoxHandler.isDefaultText(AdditionalInformation))
-					{
-						intervention.setConclusionAdditionalInfo(AdditionalInformation.Text);
-					}
-				}
-			}
-			intervention.ResourceModified();
-			
-		}
-*/
+		//Set conclusion time of an intervention
 		private void End_Click(object sender, RoutedEventArgs e)
 		{
 			TextBoxHandler.setNow(Endhh, Endmm);
@@ -304,6 +210,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
             catch { }
 		}
 
+		//Set 911 call time
 		private void Call_Click(object sender, RoutedEventArgs e)
 		{
 			TextBoxHandler.setNow(Call911hh, Call911mm);
@@ -322,7 +229,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
                 }
                 else
                 {
-                    //interventionForm.CreateTimer(11, "911", "Call", offset);
+
                 }
 
             }
@@ -333,11 +240,9 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
             
 		}
 
+		//Set first responder arrival time
 		private void FirstResponder_Click(object sender, RoutedEventArgs e)
 		{
-			
-            //if (interventionForm.IsTimerRunning(11))
-            //{
 			TextBoxHandler.setNow(FirstResponderArrivalhh, FirstResponderArrivalmm);
 
             try
@@ -363,10 +268,9 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
             
 		}
 
+		//Set ambulance arrival time
 		private void Ambulance_Click(object sender, RoutedEventArgs e)
 		{
-            //if (interventionForm.IsTimerRunning(11) || interventionForm.IsTimerRunning(12))
-            //{
             TextBoxHandler.setNow(AmbulanceArrivalhh, AmbulanceArrivalmm);              
             try
             {

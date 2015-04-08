@@ -16,15 +16,7 @@ namespace ETD.Services.Database
 
        public DBConnection()
        {
-           /*
-           if (!File.Exists(@".\Resources\EDT.sqlite3"))
-           {
-               CreateDatabase();
-           }
-            else
-           {
-               m_dbConnection = new SQLiteConnection(@"Data Source='.\Resources\EDT.sqlite3';Version=3;");
-           }*/
+
            if (!File.Exists("c:\\EDT.sqlite3"))
            {
                CreateDatabase();
@@ -37,12 +29,9 @@ namespace ETD.Services.Database
 
         private void CreateDatabase()
         {
-            //SQLiteConnection.CreateFile(@".\Resources\EDT.sqlite3");
             SQLiteConnection.CreateFile("c:\\EDT.sqlite3");
-            //m_dbConnection = new SQLiteConnection(@"Data Source='.\Resources\EDT.sqlite3';Version=3;");
             m_dbConnection = new SQLiteConnection(@"Data Source='c:\EDT.sqlite3';Version=3;");
-            m_dbConnection.Open();
-            //String query = File.ReadAllText(@".\Resources\db.sql");
+            m_dbConnection.Open(); 
             String query = File.ReadAllText("c:\\db.sql");
             SQLiteCommand command = new SQLiteCommand(query, m_dbConnection);
             command.ExecuteNonQuery();
@@ -186,16 +175,10 @@ namespace ETD.Services.Database
             return NonQueryDatabase(query.GetQuery());
         }
 
-        
-
-        
-
         public int UpdateABC(UpdateABCQuery query)
         {
             return NonQueryDatabase(query.GetQuery());
         }
-
-
 
         public void testConnection()
         {

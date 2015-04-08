@@ -33,6 +33,8 @@ namespace ETD_Statistic.ViewsPresenters
             InitializeComponent();
         }
 
+
+        //load statistic button
         public void LoadStatistic(object sender, RoutedEventArgs e)
         {
             statisticView.Children.Clear();
@@ -42,6 +44,7 @@ namespace ETD_Statistic.ViewsPresenters
             statisticView.Children.Add(statsView);
         }
 
+        //load previous statistic button
         public void LoadPreviousOperations(object sender, RoutedEventArgs e)
         {
             statisticView.Children.Clear();
@@ -52,6 +55,8 @@ namespace ETD_Statistic.ViewsPresenters
             statisticView.Children.Add(operationView);
         }
 
+
+        //function to export all WPF documents as a fixed document
         public void ExportWPF()
         {
             StatisticView sv = new StatisticView();
@@ -121,7 +126,6 @@ namespace ETD_Statistic.ViewsPresenters
                 MemoryStream ms = new MemoryStream();
                 Package pkg = Package.Open(ms, FileMode.Create);
                 FixedDocument doc = (FixedDocument)docViewer.Document;
-                //XpsDocument xpsDoc = new XpsDocument(fileName, FileAccess.ReadWrite);
                 XpsDocument xpsDoc = new XpsDocument(pkg);
                 System.Windows.Xps.XpsDocumentWriter xpsWriter = XpsDocument.CreateXpsDocumentWriter(xpsDoc);
                 xpsWriter.Write(doc);
@@ -132,37 +136,6 @@ namespace ETD_Statistic.ViewsPresenters
             }
         }
 
-
-        private FixedDocument PageSplitter(StatisticView page)
-        {
-            FixedDocument fd = new FixedDocument();
-            double y = 0;
-            Size size = page.DesiredSize;
-            double width = 96 * 8.5;
-            double height = 96 * 11; 
-            while(y < size.Height)
-            {
-                VisualBrush vb = new VisualBrush(page);
-                vb.Stretch = Stretch.None;
-                vb.AlignmentX = AlignmentX.Left;
-                vb.AlignmentY = AlignmentY.Top;
-                vb.ViewboxUnits = BrushMappingMode.Absolute;
-                vb.TileMode = TileMode.None;
-                //vb.Viewbox = new Rect { 0, y, width, height};
-                PageContent pc = new PageContent();
-                FixedPage fp = new FixedPage();
-                ((IAddChild)pc).AddChild(page);
-                fd.Pages.Add(pc);
-                //fp.Width = width;
-                //fp.Height = height;
-                //Canvas canvas = new Canvas();
-
-                y += height;
-
-            }
-            return fd;
- 
-        }
 
         public void ExportToPDF(object sender, RoutedEventArgs e)
         {

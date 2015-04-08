@@ -34,6 +34,7 @@ namespace ETD_Statistic.ViewsPresenters
             PopulateOperations();
         }
 
+        //display the views for all operations that were completed
         private void PopulateOperations()
         {
             Statistic.clearOperationsList();
@@ -51,7 +52,6 @@ namespace ETD_Statistic.ViewsPresenters
                 DateTime startDate = Convert.ToDateTime(reader["Shift_Start"].ToString());
                 DateTime endDate = Convert.ToDateTime(reader["Shift_End"].ToString());
                 cb.Content = "Operation ID: " + reader["Operation_ID"] + " Operation Name: " + reader["Name"] + " Start: " + startDate.ToString("g") + " End: " + endDate.ToString("g");
-                //cb.MouseLeftButtonDown += new MouseButtonEventHandler(OperationClicked);
                 previousOperation.Children.Add(cb);
             }
             StaticDBConnection.CloseConnection();

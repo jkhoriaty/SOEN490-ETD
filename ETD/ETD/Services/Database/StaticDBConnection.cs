@@ -22,7 +22,7 @@ namespace ETD.Services.Database
                CreateDatabase();
            }
            else
-           {
+           { 
                m_dbConnection = new SQLiteConnection(@"Data Source='..\CommonResources\EDT.sqlite3';Version=3;datetimeformat=CurrentCulture;");
            }
        }

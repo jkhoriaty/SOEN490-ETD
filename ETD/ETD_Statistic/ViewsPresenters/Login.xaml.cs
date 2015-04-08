@@ -24,6 +24,7 @@ namespace ETD_Statistic.ViewsPresenters
             InitializeComponent();
         }
 
+        //submit button 
         private void Submit_Click(object sender, RoutedEventArgs e)
         {
             if (IsFormValid()) //if the form is valid, create an instance of mainwindow
@@ -34,6 +35,8 @@ namespace ETD_Statistic.ViewsPresenters
             }
         }
 
+
+        //form validation for the login
         private bool IsFormValid()
         {
             if ((username.Text.Equals("admin")) && (password.Password.Equals("admin")))

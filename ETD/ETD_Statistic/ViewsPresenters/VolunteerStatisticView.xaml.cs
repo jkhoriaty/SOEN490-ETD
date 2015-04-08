@@ -32,7 +32,6 @@ namespace ETD_Statistic
 
         private void GenerateVolunteerHours()
         {
-            //SELECT Volunteers.Name as Name, Joined, Departure FROM Team_Members JOIN Teams ON Teams.Team_ID = Team_Members.Team_ID JOIN Volunteers ON Team_Members.Volunteer_ID = Volunteers.Volunteer_ID WHERE Operation_ID IN (4)
             foreach(VolunteerStatistic vs in vsm.getList())
             {
                 //Creation of row for each new volunteer

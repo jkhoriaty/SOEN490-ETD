@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Collections;
 
+//class to store statistic objects and basic getters
+
 namespace ETD_Statistic.Model
 {
     public static class Statistic
@@ -20,6 +22,8 @@ namespace ETD_Statistic.Model
             operationList.Add(operationID);
         }
 
+
+        //display the operation IDs as a (ID1, ID2, ID3.. ) string to be used for database extraction
         public static String getOperationID()
         {
             operationString = string.Join(",", operationList.ToArray());

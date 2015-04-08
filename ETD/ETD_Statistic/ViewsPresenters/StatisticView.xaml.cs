@@ -41,6 +41,7 @@ namespace ETD_Statistic.ViewsPresenters
             GenerateStatisticSummary();
         }
 
+        //generate the view for all the selected statistics
         private void GenerateStatisticSummary()
         {
             getOperationInformationFromDatabase();
@@ -77,6 +78,7 @@ namespace ETD_Statistic.ViewsPresenters
             }
         }
 
+        //set the data that's extracted from database into strings
         private void getOperationInformationFromDatabase()
         {
             foreach(OperationStatistic os in osm.getList())
@@ -104,6 +106,7 @@ namespace ETD_Statistic.ViewsPresenters
             volunteerCount = osm.getVolunteerCountFromDB();
         }
 
+        //set the data that's extracted from database into strings for multi-day statistics
         private void GenerateViewForMultiDayStatistic()
         {
             MultiDayOperationID.Text = "Operations: " + Statistic.getOperationID();

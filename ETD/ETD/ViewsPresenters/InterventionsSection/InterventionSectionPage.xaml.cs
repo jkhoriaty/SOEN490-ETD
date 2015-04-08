@@ -95,42 +95,21 @@ namespace ETD.ViewsPresenters.InterventionsSection
 				}
 			}
 		}
-
-		private InterventionFormPage getInterventionPage(String interventionName)
-		{
-			foreach (Frame intervention in InterventionsList.Children)
-			{
-				if (intervention.Name.Equals(interventionName))
-				{
-					InterventionFormPage interventionFormPage = (InterventionFormPage)intervention.Content;
-					return interventionFormPage;
-				}
-			}
-			return null;
-		}
-        
+		//Mutators
+		//Sets the intervention deadline
 		public static void setInterventionDeadline(int deadline)
 		{
 			InterventionFormPage.setInterventionDeadline(deadline);
 		}
 
+		//Sets the moving deadline for an intervention
 		public static void setMovingDeadline(int deadline)
 		{
 			InterventionFormPage.setMovingDeadline(deadline);
 		}
-		
-        private string getInterventionName(InterventionFormPage caller)
-        {
-            foreach (Frame intervention in InterventionsList.Children)
-            {
-                if (intervention.Content.Equals(caller))
-                {
-                    return intervention.Name;
-                }
-            }
-            return null;
-        }
+	
 
+		//Called when a field on the intervention page was modified
         public void Update()
         {
             foreach(InterventionFormPage form in pages)
@@ -159,7 +138,6 @@ namespace ETD.ViewsPresenters.InterventionsSection
             {
                 Frame frame = new Frame();
                 InterventionFormPage form = new InterventionFormPage(this, intervention);
-                //form.CompleteIntervention(0);
                 frame.Content = form;
                 frame.Name = "Intervention_" + form.getInterventionNumber();
                 frame.Tag = "Completed";

@@ -29,6 +29,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.AdditionalIn
 		private Dictionary<String, String> equivalentKeyMap = new Dictionary<String, String>();
         private bool changed;
 
+		//Constructor
 		public AdditionalInfoInterventionFormPage(InterventionFormPage interventionForm, Intervention intervention)
 		{
 			InitializeComponent();
@@ -42,6 +43,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.AdditionalIn
             FillForm();
 		}
 
+		//Set up additional info list
 		private void setupAdditionnalInformationMap()
 		{
 			additionnalInformationMap.Add("AdditionalInformation0", AdditionalInformation0);
@@ -56,6 +58,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.AdditionalIn
 			additionnalInformationMap.Add("AdditionalInformation9", AdditionalInformation9);
 		}
 
+		//Setup additional info timestamp list
 		private void setupTimestampMap()
 		{
 			timestampMap.Add("Timestamp0", TextBoxHandler.textboxArray(Timestamphh0, Timestampmm0));
@@ -70,6 +73,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.AdditionalIn
 			timestampMap.Add("Timestamp9", TextBoxHandler.textboxArray(Timestamphh9, Timestampmm9));
 		}
 
+		//Setup equivalent key map list
 		private void setupEquivalentKeyMap()
 		{
 			equivalentKeyMap.Add("AdditionalInformation0", "Timestamp0");
@@ -84,6 +88,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.AdditionalIn
 			equivalentKeyMap.Add("AdditionalInformation9", "Timestamp9");
 		}
 
+		//Setup initial form
         private void FillForm()
         {
             InterventionAdditionalInfo[] interventionAI = intervention.getAllAdditionalInfo();
@@ -101,59 +106,8 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.AdditionalIn
             
         }
 
-/*		public void PersistencyUpdate()
-		{
-			if(!AdditionalInformation0.Text.Equals(""))
-			{
-				UpdateAdditionalInformation(0, AdditionalInformation0, Timestamphh0, Timestampmm0);
-			}
 
-			if (!AdditionalInformation1.Text.Equals(""))
-			{
-				UpdateAdditionalInformation(1, AdditionalInformation1, Timestamphh1, Timestampmm1);
-			}
-
-			if (!AdditionalInformation2.Text.Equals(""))
-			{
-				UpdateAdditionalInformation(2, AdditionalInformation2, Timestamphh2, Timestampmm2);
-			}
-
-			if (!AdditionalInformation3.Text.Equals(""))
-			{
-				UpdateAdditionalInformation(3, AdditionalInformation3, Timestamphh3, Timestampmm3);
-			}
-
-			if (!AdditionalInformation4.Text.Equals(""))
-			{
-				UpdateAdditionalInformation(4, AdditionalInformation4, Timestamphh4, Timestampmm4);
-			}
-
-			if (!AdditionalInformation5.Text.Equals(""))
-			{
-				UpdateAdditionalInformation(5, AdditionalInformation5, Timestamphh5, Timestampmm5);
-			}
-
-			if (!AdditionalInformation6.Text.Equals(""))
-			{
-				UpdateAdditionalInformation(6, AdditionalInformation6, Timestamphh6, Timestampmm6);
-			}
-
-			if (!AdditionalInformation7.Text.Equals(""))
-			{
-				UpdateAdditionalInformation(7, AdditionalInformation7, Timestamphh7, Timestampmm7);
-			}
-
-			if (!AdditionalInformation8.Text.Equals(""))
-			{
-				UpdateAdditionalInformation(8, AdditionalInformation8, Timestamphh8, Timestampmm8);
-			}
-
-			if (!AdditionalInformation9.Text.Equals(""))
-			{
-				UpdateAdditionalInformation(9, AdditionalInformation9, Timestamphh9, Timestampmm9);
-			}
-		}
-*/
+		//Update form when fields are modified
 		private void UpdateAdditionalInformation(int position, TextBox AdditionalInformation, TextBox TimestamphhBox, TextBox TimestampmmBox)
 		{
 			int timestamphh = 0;
@@ -169,6 +123,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.AdditionalIn
 			intervention.setAdditionalInfo(position, new InterventionAdditionalInfo(intervention, AdditionalInformation.Text, timestamp));
 		}
 
+		//Called on additional info text box lost focus
 		private void AdditionalInformation_GotFocus(object sender, RoutedEventArgs e)
 		{
 			TextBox tb = (TextBox)sender;
@@ -179,27 +134,28 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.AdditionalIn
 			}
 		}
 
+		//Called on text box got focus
 		private void TextBoxes_GotFocus(object sender, RoutedEventArgs e)
 		{
 			TextBoxHandler.GotFocus(sender, e);
 		}
-
+		//Called on text box lost focus
 		private void TextBoxes_LostFocus(object sender, RoutedEventArgs e)
 		{
 			TextBoxHandler.LostFocus(sender, e);
 		}
-
+		//Set up time to current time
 		public void Timestamp_Click(object sender, RoutedEventArgs e)
 		{
 			Button bt = (Button)sender;
 			TextBoxHandler.setNow(timestampMap[bt.Name][0], timestampMap[bt.Name][1]);
 		}
-
+		//Called when the additional textbox info was changed
         private void AdditionalInformation_TextChanged(object sender, TextChangedEventArgs e)
         {
             changed = true;
         }
-
+		//Called we lose focus on  additional info textbox
         private void AdditionalInformation_LostFocus(object sender, RoutedEventArgs e)
         {
             if(changed)

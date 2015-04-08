@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+//class to store operation statistic objects and basic getters
 namespace ETD_Statistic.Model
 {
     public class OperationStatistic

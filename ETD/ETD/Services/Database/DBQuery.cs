@@ -13,8 +13,6 @@ namespace ETD.Services.Database
         protected DBQuery(){}
         public DBQuery(string query)
         {
-            
-            //this.sql = query;
             this.sql = "";
         }
 

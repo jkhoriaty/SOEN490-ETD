@@ -25,6 +25,7 @@ namespace ETD.Models.Objects
         private DateTime arrival;
 		private bool arrivedBool;
 
+		//Constructors
 		public Resource(String resourceName, Team team, bool intervening, DateTime moving, DateTime arrival)
 		{
 			this.resourceName = resourceName;
@@ -53,33 +54,61 @@ namespace ETD.Models.Objects
             this.resourceID = StaticDBConnection.NonQueryDatabaseWithID("INSERT INTO [Resources] (Intervention_ID, Team_ID) VALUES (" + interventionID + ", " + team.getID() + ")");
         }
 
+		//Accessors
+
+		//Returns resource name
         public String getResourceName()
         {
             return resourceName;
         }
 
+		//Returns the team
+        public Team getTeam()
+        {
+            return team;
+        }
+
+		//Checks if the team is intervening
+		public bool getIntervening()
+		{
+			return intervening;
+		}
+	
+		//Returns moving time
+        public DateTime getMovingTime()
+        {
+            return moving;
+        }
+
+		//Checks if the resource has arrived
+		public bool hasArrived()
+		{
+			return arrivedBool;
+		}
+
+		//Returns arrival time
+        public DateTime getArrivalTime()
+        {
+            return arrival;
+        }
+
+		//Mutators
+
+		//Set resource name
 		public void setResourceName(string resourceName)
 		{
 			this.resourceName = resourceName;
             StaticDBConnection.NonQueryDatabase("UPDATE [Resources] SET Name='" + resourceName.Replace("'", "''") + "'WHERE Resource_ID=" + resourceID + ";");
 		}
 
-        public Team getTeam()
-        {
-            return team;
-        }
-
-		public bool getIntervening()
-		{
-			return intervening;
-		}
-
+		//Set status of intervening
 		public void setIntervening(bool intervening)
 		{
 			this.intervening = intervening;
             StaticDBConnection.NonQueryDatabase("UPDATE [Resources] SET Intervening='" + intervening + "' WHERE Resource_ID=" + resourceID + ";");
 		}
 
+		//Set status of moving
 		public void setMoving(DateTime moving)
 		{
 			this.moving = moving;
@@ -87,16 +116,7 @@ namespace ETD.Models.Objects
             StaticDBConnection.NonQueryDatabase("UPDATE [Resources] SET Moving='" + StaticDBConnection.DateTimeSQLite(moving) + "', HasArrived='TRUE' WHERE Resource_ID=" + resourceID + ";");
 		}
 
-		public bool isMoving()
-		{
-			return movingBool;
-		}
-
-        public DateTime getMovingTime()
-        {
-            return moving;
-        }
-
+		//Set arrival time
         public void setArrival(DateTime arrival)
         {
             this.arrival = arrival;
@@ -104,24 +124,5 @@ namespace ETD.Models.Objects
             StaticDBConnection.NonQueryDatabase("UPDATE [Resources] SET Arrival='" + StaticDBConnection.DateTimeSQLite(arrival) + "', HasArrived='TRUE' WHERE Resource_ID=" + resourceID + ";");
         }
 
-		public bool hasArrived()
-		{
-			return arrivedBool;
-		}
-
-        public DateTime getArrivalTime()
-        {
-            return arrival;
-        }
-
-        public int getID()
-        {
-            return resourceID;
-        }
-
-        public int getParentID()
-        {
-            return interventionID;
-        }
     }
 }

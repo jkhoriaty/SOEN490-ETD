@@ -60,6 +60,7 @@ namespace ETD.CustomObjects.CustomUIObjects
 			return false;
 		}
 
+		//Returns the equipment
         public Equipment getEquipment()
         {
             return equipment;

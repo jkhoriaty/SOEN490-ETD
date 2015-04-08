@@ -40,11 +40,13 @@ namespace ETD.Models.Objects
         }
 
         //Accessors
+		//Returns the additional info id
         public int getID()
         {
             return additionalInfoID;
         }
 
+		//Returns the parent id
         public int getParentID()
         {
             return interventionID;

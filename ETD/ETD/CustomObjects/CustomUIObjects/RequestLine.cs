@@ -64,6 +64,7 @@ namespace ETD.CustomObjects.CustomUIObjects
         private Button completionButton;
         private TextBox completionMMTextBox;
 
+		//Variables used to create a new request
         Request request;
         RequestLine requestline;
         int rowNumber = 1;
@@ -76,7 +77,7 @@ namespace ETD.CustomObjects.CustomUIObjects
         private Dictionary<String, TextBox> handledbyMap = new Dictionary<String, TextBox>();//Contains all handledby
         private Dictionary<String, TextBox[]> followupTimestampMap = new Dictionary<String, TextBox[]>();//Contains all follow up time stamps
         private Dictionary<String, TextBox[]> completionTimestampMap = new Dictionary<String, TextBox[]>();//Contains all completion time stamps
-        private static List<RequestLine> requestLineList = new List<RequestLine>();
+        private static List<RequestLine> requestLineList = new List<RequestLine>();//Contains the list of request lines
 
 		//create a new request line
         public void doRequestLine(FollowUpSectionForm followupsection)
@@ -89,8 +90,8 @@ namespace ETD.CustomObjects.CustomUIObjects
 		//Populate the new request line with values
         public void populateRequestForm()
         {
-            BuildLine();
-            PopulateLine();
+            BuildLine();//Set up the grid content of the follow up form
+            PopulateLine();//Set up default values of the follow up contents
 
             //Set up default shift properties
             request = new Request(init, init, init, init, init, init, init, init, init, init);
@@ -148,7 +149,6 @@ namespace ETD.CustomObjects.CustomUIObjects
             Grid.SetColumn(this.getFollowUpBorder(), 5);
             Grid.SetRow(this.getFollowUpBorder(), rowNumber);
 
-
             followupTimestampMap.Add("FollowUpTimestamp" + rowNumber, TextBoxHandler.textboxArray(this.getFollowUpHHTextBox(), this.getFollowUpMMTextBox()));
 
             //populate completion
@@ -171,7 +171,7 @@ namespace ETD.CustomObjects.CustomUIObjects
             }
         }
 
-		//Set up the content of the grid containing the new request
+		//Create all controls for the request line and set their attributes
         private void BuildLine()
         {
             //time
@@ -260,6 +260,7 @@ namespace ETD.CustomObjects.CustomUIObjects
             recipientTextBox.BorderBrush = new SolidColorBrush(Colors.Black);
             recipientTextBox.BorderThickness = new Thickness(1, 0, 1, 1);
             recipientTextBox.KeyDown += NewRequest;
+
             //request
             requestBorder = new Border();
             requestBorder.BorderBrush = new SolidColorBrush(Colors.Black);
