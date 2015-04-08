@@ -21,7 +21,7 @@ namespace ETD.Services
 
         //Settings variables
         private const string outputDirectory = ".\\Temp\\";
-        private const int backupRate = 15000; //interval of backups, in milliseconds
+        private const int backupRate = 5000; //interval of backups, in milliseconds
 
         //Objects to backup
         private List<Team> teams;
@@ -348,7 +348,12 @@ namespace ETD.Services
                         try
                         {
                             fileStream = File.OpenRead(fn);
-                            Intervention.AddActiveIntervention((Intervention)serializer.Deserialize(fileStream));
+                            Intervention temp = (Intervention)serializer.Deserialize(fileStream);
+                            if(temp.getInterveningTeamList().Count >= 1)
+                            {
+                                throw(new Exception());
+                            }
+                            Intervention.AddActiveIntervention(temp);
                             fileStream.Close();
                         }
                         catch (Exception ex)
