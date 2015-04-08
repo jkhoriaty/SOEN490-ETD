@@ -38,7 +38,6 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
 		//Setup initial form
         private void FillForm(Intervention intervention)
         {
-
             AdditionalInformation.Text = intervention.getConclusionAdditionalInfo();
          
             if (intervention.getConclusion() != null)
@@ -74,13 +73,12 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
                 {            
                     TextBoxHandler.setTime(AmbulanceArrivalhh, AmbulanceArrivalmm, intervention.getAmbulanceArrivalTime().Hour, intervention.getAmbulanceArrivalTime().Minute);
                 }
-                
+
                 AmbulanceCompany.Text = intervention.getAmbulanceCompany();
                 AmbulanceVehicle.Text = intervention.getAmbulanceVehicle();
                 FirstResponderCompany.Text = intervention.getFirstResponderCompany();
                 FirstResponderVehicle.Text = intervention.getFirstResponderVehicle();
-                MeetingPoint.Text = intervention.getMeetingPoint();
-                
+                MeetingPoint.Text = intervention.getMeetingPoint();     
             }
         }
 
@@ -100,6 +98,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
 				intervention.setConclusionTime(concTime);
 			}
             catch { }
+			intervention.setConclusionAdditionalInfo(AdditionalInformation.Text);
             intervention.setAmbulanceCompany(AmbulanceCompany.Text);
             intervention.setAmbulanceVehicle(AmbulanceVehicle.Text);
             intervention.setFirstResponderCompany(FirstResponderCompany.Text);
@@ -170,8 +169,7 @@ namespace ETD.ViewsPresenters.InterventionsSection.InterventionForm.EndIntervent
 				AdditionalInformationBorder.Visibility = Visibility.Visible;
 				if (item.Name.Equals("call911"))
 				{
-					AdditionalInformation.Text = ETD.Properties.Resources.TextBox_AdditionalInformation_Hospital;
-
+					AdditionalInformation.Text = intervention.getConclusionAdditionalInfo();
 					//If the ambulance requires an ambulance, show the ambulance form
 					MainGrid.RowDefinitions[1].Height = new GridLength(1, GridUnitType.Star);
 					MainGrid.RowDefinitions[2].Height = new GridLength(1, GridUnitType.Star);
