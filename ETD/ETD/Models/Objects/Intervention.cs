@@ -72,7 +72,6 @@ namespace ETD.Models.Objects
 			this.isConcludedBool = false;
 			this.firstTeamArrivalTime = DateTime.MinValue;
 			this.callID = -1;
-			this.conclusion = ETD.Properties.Resources.TextBox_AdditionalInformation_Hospital;
 
 			activeInterventionList.Add(this);
 			ClassModifiedNotification(typeof(Intervention));
