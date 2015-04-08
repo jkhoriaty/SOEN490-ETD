@@ -32,6 +32,12 @@ namespace ETD_Statistic
 
         private void GenerateVolunteerHours()
         {
+            //if more than one operation selected, add a new column with operation ID
+            if (Statistic.getListSize() > 1)
+            {
+                CreateOperationIDColumn();
+            }
+
             foreach(VolunteerStatistic vs in vsm.getList())
             {
                 //Creation of row for each new volunteer
@@ -118,7 +124,6 @@ namespace ETD_Statistic
                 //When more than one operation
                 if (Statistic.getListSize() > 1)
                 {
-                    CreateOperationIDColumn();
                     //Creation of new column for operationID
                     Border operationBorder = new Border();
                     operationBorder.BorderThickness = new Thickness(0, 0, 1, 1);
