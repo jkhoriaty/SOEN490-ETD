@@ -43,8 +43,8 @@ public class LocationTransmission extends ActionBarActivity
 		serverPort = intent.getIntExtra("serverPort", -1);
 
         locationTransmission = (Button) findViewById(R.id.button1);
-        checkBox = (CheckBox) findViewById(R.id.checkBox1);
-        backToLogin = (Button) findViewById(R.id.backButton);
+        //checkBox = (CheckBox) findViewById(R.id.checkBox1);
+        //backToLogin = (Button) findViewById(R.id.backButton);
 
         locationTransmission.setOnClickListener(new View.OnClickListener() {
             public void onClick (View v){
@@ -71,12 +71,10 @@ public class LocationTransmission extends ActionBarActivity
     private void startTransmitting() {
         try{
             startService(serviceIntent);
-            checkBox.setChecked(true);
         }
         catch (Exception e)
         {
             e.printStackTrace();
-            checkBox.setChecked(false);
             Toast.makeText(getApplicationContext(), e.getClass().getName() + " " + e.getMessage(), Toast.LENGTH_LONG).show();
         }
     }

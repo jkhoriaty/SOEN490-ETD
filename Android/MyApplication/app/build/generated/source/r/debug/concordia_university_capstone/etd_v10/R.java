@@ -1705,19 +1705,17 @@ containing a value of this type.
         public static final int action_mode_bar=0x7f090042;
         public static final int action_mode_bar_stub=0x7f090041;
         public static final int action_mode_close_button=0x7f090034;
-        public static final int action_settings=0x7f090059;
+        public static final int action_settings=0x7f090058;
         public static final int activity_chooser_view_content=0x7f090035;
         public static final int adjust_height=0x7f090016;
         public static final int adjust_width=0x7f090017;
         public static final int always=0x7f09001b;
-        public static final int backButton=0x7f090055;
         public static final int beginning=0x7f090013;
         public static final int book_now=0x7f09002b;
         public static final int button1=0x7f090053;
         public static final int buyButton=0x7f090028;
         public static final int buy_now=0x7f09002c;
         public static final int buy_with_google=0x7f09002d;
-        public static final int checkBox1=0x7f090054;
         public static final int checkbox=0x7f09003d;
         public static final int classic=0x7f09002f;
         public static final int collapseActionView=0x7f09001c;
@@ -1727,7 +1725,7 @@ containing a value of this type.
         public static final int disableHome=0x7f09000c;
         public static final int donate_with_google=0x7f09002e;
         public static final int dropdown=0x7f090021;
-        public static final int editText1=0x7f090058;
+        public static final int editText1=0x7f090057;
         public static final int edit_query=0x7f090047;
         public static final int end=0x7f090014;
         public static final int expand_activities_button=0x7f090036;
@@ -1775,8 +1773,9 @@ containing a value of this type.
         public static final int submit_area=0x7f090050;
         public static final int tabMode=0x7f09000b;
         public static final int terrain=0x7f09001a;
-        public static final int textView1=0x7f090056;
-        public static final int textView2=0x7f090057;
+        public static final int textView1=0x7f090055;
+        public static final int textView2=0x7f090056;
+        public static final int textViewWelcome=0x7f090054;
         public static final int title=0x7f09003b;
         public static final int up=0x7f090008;
         public static final int useLogo=0x7f090012;
@@ -1870,7 +1869,7 @@ containing a value of this type.
         public static final int common_open_on_phone=0x7f0b002c;
         public static final int common_signin_button_text=0x7f0b002d;
         public static final int common_signin_button_text_long=0x7f0b002e;
-        public static final int connection_stauts=0x7f0b002f;
+        public static final int connection_status=0x7f0b002f;
         public static final int create_calendar_message=0x7f0b0030;
         public static final int create_calendar_title=0x7f0b0031;
         public static final int decline=0x7f0b0032;
@@ -1882,6 +1881,7 @@ containing a value of this type.
         public static final int store_picture_title=0x7f0b0038;
         public static final int title_activity_location_transmission=0x7f0b0039;
         public static final int wallet_buy_button_place_holder=0x7f0b003a;
+        public static final int welcome=0x7f0b003b;
     }
     public static final class style {
         /**  Customize your theme here. 
